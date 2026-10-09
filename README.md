@@ -45,11 +45,8 @@ do trabalho é uma de duas coisas:
 Neste projeto, o texto do livro foi copiado por um script, direto da versão digital, e é
 conferido por script contra ela, sem leitura por IA. A IA entrou na escrita e na
 adaptação dos scripts e confere, figura por figura, o texto de dentro das figuras, que foi
-lido por OCR, antes do tique de uma pessoa. A escrita dos documentos e dos cartões ainda
-não começou. O que é mecânico e o que é julgamento em cada etapa está explicado na
-seção 11 ("Confira: primeiro o script, depois a pessoa") da
-[metodologia](metodologia-de-conteudo.md#11-confira-primeiro-o-script-depois-a-pessoa),
-que veio com o modelo `modelo-recorte-disciplina` e está na pasta principal deste projeto.
+lido por OCR, antes da verificação feita por uma pessoa; como esse texto foi escrito está
+em [`docs/texto-das-figuras.md`](docs/texto-das-figuras.md).
 
 ## Origem do conteúdo
 
@@ -63,13 +60,13 @@ O material de base é o recorte de bacteriologia — os capítulos 12 a 17, p. 1
 livro *Microbiologia médica*, de Patrick R. Murray, Ken S. Rosenthal e Michael A. Pfaller
 (9. ed., Guanabara Koogan, 2022), lido na versão digital. Ele não foi produzido por quem
 mantém o projeto e não está coberto pela licença deste projeto. Por isso esse material
-nunca é publicado nem repassado: fica só no computador de quem mantém o projeto. O mesmo
+nunca é publicado nem repassado. O mesmo
 vale para a transcrição dele, a base de trechos do material de fora e a prova de cada
 cartão, em `docs/material-base/gerados-ocr/`: são cópias de material de terceiros, usadas
 só para conferir o que se escreve.
 
-Ainda não há material de fora: ele só entra onde o recorte não cobre o que algum eixo da
-ficha pede, e a ficha ainda não existe. Quando entrar, as cópias dele ficam em
+Material de fora só entra onde o recorte não cobre o que algum eixo da
+ficha vier a pedir. Quando entrar, as cópias dele ficam em
 `docs/material-base/fontes-externas/`, também sem publicar, e as referências, em
 `docs/REFERENCIAS.md`.
 
@@ -87,41 +84,12 @@ para duas partes diferentes, mais uma exceção — os detalhes estão em
 
 ## Onde fica cada coisa
 
-| Arquivo | O que é |
-|---|---|
-| `docs/material-gerado/` | Os documentos de teoria, dicionário e ficha, e as planilhas de pergunta — ainda não escritos |
-| `docs/REFERENCIAS.md` | As referências, conforme a ABNT, de todas as fontes citadas nos documentos e nos cartões — geradas a partir de `dados/fontes.json` quando o formato da disciplina existir |
-| [`dados/fontes.json`](dados/fontes.json) | Os dados de cada fonte (autoria, título, local, editora, data, endereço), de onde saem as referências |
-| `dados/formato.json` | O formato da disciplina: curso, nível, itens, eixos, elos e colunas dos cartões — ainda não decidido |
-| `dados/bases/` | Um arquivo por item: o que foi lido do material de fora, a decisão sobre cada frase e a cobertura de cada subtópico (só códigos e decisões; o texto das fontes nunca é publicado) — ainda não há material de fora |
-| [`dados/estilo-cartao.css`](dados/estilo-cartao.css) | A aparência dos cartões no Anki |
-| [`projeto.json`](projeto.json) | O mapa do projeto: onde fica cada coisa; os scripts tiram todo caminho daqui |
-| [`metodologia-de-conteudo.md`](metodologia-de-conteudo.md) | A metodologia: o método inteiro, do material de aula ao cartão, com o que é mecânico e o que é julgamento em cada etapa (veio com o modelo) |
-| [`DESCUBRA-SEU-MODELO.md`](DESCUBRA-SEU-MODELO.md) | As perguntas que decidem o formato da disciplina; as respostas deste projeto vão para `dados/formato.json` (veio com o modelo) |
-| [`regras-abnt.md`](regras-abnt.md) | O que as normas da ABNT de citação e de referência pedem, item por item, e quem cuida de cada regra (veio com o modelo) |
-| [`trabalhar-com-ia.md`](trabalhar-com-ia.md) | O guia de trabalho com IA: o que pedir em cada etapa, o que conferir depois e as regras que a IA segue sempre (veio com o modelo) |
-| [`modelo-dados/`](modelo-dados/) | Os modelos em branco dos arquivos de dados e do estilo dos cartões, de onde foram copiados o `projeto.json` e os arquivos de `dados/` (veio com o modelo) |
-| [`modelo-dados/fluxo-ia.json`](modelo-dados/fluxo-ia.json) | O método em dados: as etapas na ordem, com o que entra e o que sai de cada uma, que a IA recebe junto do guia de trabalho com IA (veio com o modelo e fica como está) |
-| [`INDICE.md`](INDICE.md) | O índice, com um link para cada documento; os itens ficam no índice do topo de cada um |
-| [`MANUAL.md`](MANUAL.md) | O guia rápido de como estudar com o material e como ajudar a corrigi-lo |
-| [`LICENSE`](LICENSE) | O texto completo da GPL-3.0 (programas) |
-| [`LICENSE-CONTENT.txt`](LICENSE-CONTENT.txt) | O texto completo da CC BY-NC-SA 4.0 (conteúdo) |
-| [`NOTICE.md`](NOTICE.md) | Qual licença vale pra qual arquivo, e a exceção do material de terceiros |
-| [`.gitignore`](.gitignore) | Pra quem guarda o projeto no GitHub: a lista do que nunca vai pra lá (o material de terceiros e arquivos temporários) |
-| [`.githooks/`](.githooks/README.md) | Pra quem guarda o projeto no GitHub: a proteção das fontes, que barra a versão que levar material de terceiros, e a conferência das mensagens de cada versão (veio com o modelo) |
-| [`scripts/`](scripts/README.md) | Os pequenos programas que fazem a parte mecânica do método — o README deles diz, em palavras simples, pra que serve cada um e como rodar |
-| `anki-decks/` | Os baralhos prontos pra importar no Anki (os arquivos `.apkg`) — ainda não gerados |
+Consultar [INDICE](INDICE.md)
 
 ## Como usar
 
-Ainda não há documentos nem baralhos para estudar: por enquanto, o projeto tem a
-transcrição da fonte, que nunca é publicada. Quando houver, importe no Anki os baralhos de
-`anki-decks/` (os arquivos `.apkg`), ou leia os documentos direto em
-`docs/material-gerado/` (ver o [MANUAL.md](MANUAL.md)). Para achar um item, abra o
-documento pelo [`INDICE.md`](INDICE.md) e use o índice do topo dele. Para mudar o
-conteúdo, mude o documento e a planilha correspondente em `docs/material-gerado/` e gere
-os baralhos de novo com o script `montar_deck.py` (o
-[README dos scripts](scripts/README.md) diz como rodar).
+Consultar [MANUAL](MANUAL.md)
+
 
 ## Referências
 

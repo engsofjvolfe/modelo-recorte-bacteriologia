@@ -150,7 +150,8 @@ script: a conferência compara, página por página, as letras, os números e os
 transcrição com os da mesma página na fonte, na mesma ordem, e também o número impresso e
 as imagens de cada página, e aponta como erro o que não bate. À mão, confere-se só o
 texto de dentro de cada imagem, que veio do OCR: cada imagem aparece com esse texto e com
-as duas caixas de tique.
+as duas caixas de tique. Se esse texto mudar depois do tique, ainda que só na divisão em
+linhas, o tique é retirado.
 
 ---
 

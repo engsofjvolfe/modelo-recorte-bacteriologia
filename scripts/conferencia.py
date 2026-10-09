@@ -33,7 +33,8 @@ Pagina sem texto nenhum fica com a secao e a marca "[sem texto]".
 
 Os tiques ficam no proprio arquivo gerado, com a assinatura do que foi conferido. Ao
 gerar de novo, o tique volta se a assinatura e a mesma; se o texto ou a fonte mudou, o
-tique e retirado, e a parte diz isso.
+tique e retirado, e a parte diz isso. No texto de uma imagem, mudar so a divisao em
+linhas tambem retira o tique.
 
 As pastas, o arquivo gerado, a pasta das imagens e a resolucao delas vem do projeto.json
 ("gerados", "conferencia_imagens", "material_base", "imagens" e "resolucao_imagens").
@@ -45,6 +46,7 @@ Uso (de qualquer pasta dentro do projeto):
 """
 
 import argparse
+import json
 import re
 import sys
 import unicodedata
@@ -240,7 +242,9 @@ def partes_html(nome, arq, texto, fonte, situacao, anteriores):
         imgs = []
         for j, (alvo, linhas) in enumerate(figuras, 1):
             arquivo = arquivo_da_imagem(arq.parent, alvo)
-            sig = assinatura(impressao(arquivo) if isinstance(arquivo, Path) else alvo, n, j, "\n".join(linhas))
+            # a divisao em linhas conta (um rotulo por linha); o resto do espaco, nao
+            texto = json.dumps([" ".join(linha.split()) for linha in linhas if linha.strip()], ensure_ascii=False)
+            sig = assinatura(impressao(arquivo) if isinstance(arquivo, Path) else alvo, n, j, texto)
             tiques, retirado = tiques_da_parte(anteriores, nome, f"{n}.{j}", sig)
             imgs.append({"j": j, "arquivo": arquivo, "linhas": linhas, "sig": sig, "tiques": tiques,
                          "retirado": retirado})
