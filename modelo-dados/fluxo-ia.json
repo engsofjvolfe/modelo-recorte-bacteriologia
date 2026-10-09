@@ -1,0 +1,85 @@
+{
+  "versao_schema": 1,
+  "etapas": [
+    {
+      "id": "preparar",
+      "entradas": [],
+      "saidas": ["licenca_conteudo", "material_base", "estilo_cartao"],
+      "scripts": ["validar_dados.py"],
+      "conferencias": []
+    },
+    {
+      "id": "formato",
+      "entradas": ["formato", "material_base"],
+      "saidas": ["formato"],
+      "scripts": ["validar_dados.py"],
+      "conferencias": []
+    },
+    {
+      "id": "transcricao",
+      "entradas": ["formato", "fontes", "material_base", "gerados", "conferencia_imagens",
+                   "conferencia_referencias"],
+      "saidas": ["referencias", "material_base", "gerados", "conferencia_imagens", "conferencia_referencias",
+                 "imagens"],
+      "scripts": ["transcrever_html.py", "registrar_fonte.py", "conferencia.py"],
+      "conferencias": ["conferencia_imagens"]
+    },
+    {
+      "id": "referencias",
+      "entradas": ["formato", "fontes", "material_base", "gerados", "conferencia_referencias"],
+      "saidas": ["fontes", "referencias", "conferencia_referencias", "imagens"],
+      "scripts": ["validar_dados.py", "referencias.py"],
+      "conferencias": ["conferencia_referencias"]
+    },
+    {
+      "id": "material-de-fora",
+      "entradas": ["formato", "fontes", "fontes_externas", "gerados", "conferencia_imagens", "conferencia_referencias",
+                   "bases", "conferencia_trechos"],
+      "saidas": ["referencias", "fontes_externas", "conferencia_referencias", "bases", "base_externa",
+                 "conferencia_trechos", "imagens"],
+      "scripts": ["base_externa.py"],
+      "conferencias": ["conferencia_trechos"]
+    },
+    {
+      "id": "documentos",
+      "entradas": ["formato", "gerados", "conferencia_imagens", "conferencia_referencias", "material_gerado",
+                   "base_externa", "conferencia_trechos"],
+      "saidas": ["material_gerado"],
+      "scripts": [],
+      "conferencias": []
+    },
+    {
+      "id": "cartoes",
+      "entradas": ["formato", "fontes", "gerados", "conferencia_imagens", "material_gerado", "base_externa",
+                   "conferencia_trechos", "provas", "conferencia_cartoes"],
+      "saidas": ["material_gerado", "provas", "conferencia_cartoes"],
+      "scripts": ["confere_cartoes.py"],
+      "conferencias": ["conferencia_cartoes"]
+    },
+    {
+      "id": "baralho",
+      "entradas": ["formato", "material_gerado", "estilo_cartao"],
+      "saidas": ["baralhos"],
+      "scripts": ["montar_deck.py"],
+      "conferencias": []
+    },
+    {
+      "id": "raiz",
+      "entradas": ["formato", "referencias", "material_gerado"],
+      "saidas": [],
+      "scripts": [],
+      "conferencias": []
+    },
+    {
+      "id": "auditoria",
+      "entradas": ["formato", "fontes", "material_base", "fontes_externas", "gerados", "conferencia_imagens",
+                   "conferencia_referencias", "material_gerado", "bases", "base_externa", "conferencia_trechos",
+                   "provas", "conferencia_cartoes"],
+      "saidas": ["referencias", "fontes_externas", "conferencia_imagens", "conferencia_referencias", "bases",
+                 "base_externa", "conferencia_trechos", "conferencia_cartoes", "imagens"],
+      "scripts": ["validar_dados.py", "conferencia.py", "referencias.py", "base_externa.py", "confere_cartoes.py",
+                  "protege_fontes.py"],
+      "conferencias": ["conferencia_imagens", "conferencia_referencias", "conferencia_trechos", "conferencia_cartoes"]
+    }
+  ]
+}

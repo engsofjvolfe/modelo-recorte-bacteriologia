@@ -1,0 +1,11 @@
+{
+  "versao_schema": 1,
+  "iso_639_2": {
+    "pt": "por",
+    "es": "spa",
+    "it": "ita",
+    "fr": "fra",
+    "en": "eng",
+    "de": "deu"
+  }
+}

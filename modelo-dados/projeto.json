@@ -1,0 +1,28 @@
+{
+  "versao_schema": 1,
+  "prefixo_planilhas": "perguntas-",
+  "resolucao_imagens": 80,
+  "nome_licenca_conteudo": "CC BY-NC-SA 4.0",
+  "colunas_ocultas": ["ordem"],
+  "coluna_subdecks": null,
+  "caminhos": {
+    "formato": "dados/formato.json",
+    "fontes": "dados/fontes.json",
+    "referencias": "docs/REFERENCIAS.md",
+    "licenca_conteudo": "LICENSE-CONTENT.txt",
+    "material_base": "docs/material-base",
+    "fontes_externas": "docs/material-base/fontes-externas",
+    "gerados": "docs/material-base/gerados-ocr",
+    "conferencia_imagens": "docs/material-base/gerados-ocr/CONFERENCIA-COM-IMAGEM.md",
+    "conferencia_referencias": "docs/material-base/gerados-ocr/CONFERENCIA-REFERENCIAS.md",
+    "material_gerado": "docs/material-gerado",
+    "baralhos": "anki-decks",
+    "bases": "dados/bases/{item}.json",
+    "base_externa": "docs/material-base/gerados-ocr/{item}-fontes-externas.md",
+    "conferencia_trechos": "docs/material-base/gerados-ocr/CONFERENCIA-TRECHOS.md",
+    "provas": "docs/material-base/gerados-ocr/provas/{planilha}.json",
+    "conferencia_cartoes": "docs/material-base/gerados-ocr/CONFERENCIA-CARTOES.md",
+    "imagens": "docs/material-base/gerados-ocr/imagens",
+    "estilo_cartao": "dados/estilo-cartao.css"
+  }
+}

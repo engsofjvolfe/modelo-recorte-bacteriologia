@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fluxo-ia.schema.json",
+  "type": "object",
+  "required": ["versao_schema", "etapas"],
+  "additionalProperties": true,
+  "properties": {
+    "versao_schema": { "const": 1 },
+    "etapas": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/etapa" } }
+  },
+  "$defs": {
+    "chave_do_projeto": { "type": "string", "pattern": "^[a-z_]+$" },
+    "chaves_do_projeto": { "type": "array", "items": { "$ref": "#/$defs/chave_do_projeto" } },
+    "etapa": {
+      "type": "object",
+      "required": ["id", "entradas", "saidas", "scripts", "conferencias"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z-]+$" },
+        "entradas": { "$ref": "#/$defs/chaves_do_projeto" },
+        "saidas": { "$ref": "#/$defs/chaves_do_projeto" },
+        "scripts": { "type": "array", "items": { "type": "string", "pattern": "^[a-z_]+\\.py$" } },
+        "conferencias": { "$ref": "#/$defs/chaves_do_projeto" }
+      }
+    }
+  }
+}

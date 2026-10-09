@@ -1,0 +1,11 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright do codigo sob GPL-3.0 -- ver LICENSE e NOTICE.md na raiz do projeto.
+#
+# Antes de cada versao gravada pelo git, confere que nenhuma fonte vai junto (ver
+# scripts/protege_fontes.py). O git roda este arquivo na pasta principal do projeto.
+
+if command -v python3 >/dev/null 2>&1; then
+    exec python3 scripts/protege_fontes.py --versao
+fi
+exec python scripts/protege_fontes.py --versao

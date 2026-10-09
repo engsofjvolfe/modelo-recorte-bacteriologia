@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "base.schema.json",
+  "type": "object",
+  "required": ["versao_schema", "item", "lugares", "classes", "cobertura"],
+  "additionalProperties": true,
+  "properties": {
+    "versao_schema": { "const": 1 },
+    "item": { "$ref": "#/$defs/texto" },
+    "lugares": { "type": "array", "items": { "$ref": "#/$defs/lugar" } },
+    "classes": { "type": "object", "additionalProperties": { "$ref": "#/$defs/classe" } },
+    "juntar": {
+      "type": "array",
+      "items": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/texto" } }
+    },
+    "cobertura": { "type": "object", "additionalProperties": { "enum": ["aula", "fonte", "lacuna"] } }
+  },
+  "$defs": {
+    "texto": { "type": "string", "minLength": 1 },
+    "lugar": {
+      "type": "object",
+      "required": ["fonte", "arquivo"],
+      "additionalProperties": true,
+      "properties": {
+        "fonte": { "type": "string", "pattern": "^\\S+$" },
+        "arquivo": { "$ref": "#/$defs/texto" },
+        "paginas": { "type": "array", "minItems": 1, "items": { "type": "integer" } },
+        "desloca": { "type": "integer" },
+        "impressas": { "type": "object", "additionalProperties": { "$ref": "#/$defs/texto" } }
+      }
+    },
+    "classe": {
+      "type": "object",
+      "required": ["classe"],
+      "additionalProperties": true,
+      "properties": {
+        "classe": { "enum": ["usa", "outro-item", "repetida", "fora-do-recorte", "nao-e-conteudo"] },
+        "subtopico": { "$ref": "#/$defs/texto" },
+        "afirmacao": { "enum": ["categorica", "possibilidade"] },
+        "de": { "$ref": "#/$defs/texto" }
+      },
+      "allOf": [
+        { "if": { "properties": { "classe": { "const": "usa" } } }, "then": { "required": ["subtopico", "afirmacao"] } },
+        { "if": { "properties": { "classe": { "const": "repetida" } } }, "then": { "required": ["de"] } }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "versao_schema": 1,
+  "et_al": false,
+  "fontes": [
+    {
+      "chave": "MURRAY-2022",
+      "tipo": "monografia",
+      "idioma": "pt-BR",
+      "autores": [
+        { "sobrenome": "Murray", "prenomes": "Patrick R." },
+        { "sobrenome": "Rosenthal", "prenomes": "Ken S." },
+        { "sobrenome": "Pfaller", "prenomes": "Michael A." }
+      ],
+      "titulo": "Microbiologia médica",
+      "edicao": "9. ed.",
+      "local": "Rio de Janeiro",
+      "editora": "Guanabara Koogan",
+      "data": "2022",
+      "descricao_fisica": "E-book",
+      "notas": ["Tradução de: Medical microbiology."],
+      "isbn": "9788595158245",
+      "url": "https://integrada.minhabiblioteca.com.br/reader/books/9788595159662",
+      "acesso": "2026-10-08"
+    }
+  ]
+}

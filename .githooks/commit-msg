@@ -1,0 +1,50 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright do codigo sob GPL-3.0 -- ver LICENSE e NOTICE.md na raiz do projeto.
+#
+# Verifica só a estrutura da mensagem de commit, nunca o conteúdo/qualidade dela:
+# título (1ª linha) + linha em branco + descrição em prosa corrida, sem bullets/lista.
+# Ver .githooks/README.md para o porquê e como ativar.
+
+msg_file="$1"
+
+# Não se aplica a merge/revert/squash automáticos.
+if grep -qE '^(Merge |Revert )' "$msg_file"; then
+    exit 0
+fi
+
+subject=$(sed -n '1p' "$msg_file")
+second_line=$(sed -n '2p' "$msg_file")
+body=$(sed -n '3,$p' "$msg_file" | grep -vE '^[[:space:]]*#')
+
+if [ -z "$(printf '%s' "$subject" | tr -d '[:space:]')" ]; then
+    echo "commit-msg: falta o título (primeira linha da mensagem)." >&2
+    exit 1
+fi
+
+if printf '%s' "$subject" | grep -qE '^[[:space:]]*([-*•]|[0-9]+[.)])[[:space:]]'; then
+    echo "commit-msg: título não pode ser um bullet/item de lista." >&2
+    exit 1
+fi
+
+total_lines=$(wc -l < "$msg_file")
+if [ "$total_lines" -ge 2 ] && [ -n "$(printf '%s' "$second_line" | tr -d '[:space:]')" ]; then
+    echo "commit-msg: precisa de uma linha em branco entre o título e a descrição." >&2
+    exit 1
+fi
+
+bullet_line=$(printf '%s\n' "$body" | grep -nE '^[[:space:]]*([-*•]|[0-9]+[.)])[[:space:]]' | head -n 1)
+if [ -n "$bullet_line" ]; then
+    echo "commit-msg: descrição não pode usar bullets/lista — escreva em prosa corrida." >&2
+    echo "  linha problemática: $bullet_line" >&2
+    exit 1
+fi
+
+# O template (commit-template.txt) pré-preenche a mensagem com marcadores fixos.
+# Se algum sobreviver até aqui, o título/descrição não foi de fato substituído.
+if grep -qE 'SUBSTITUA-EST[AE]-' "$msg_file"; then
+    echo "commit-msg: substitua os marcadores do template (SUBSTITUA-...) pelo título e pela descrição reais." >&2
+    exit 1
+fi
+
+exit 0

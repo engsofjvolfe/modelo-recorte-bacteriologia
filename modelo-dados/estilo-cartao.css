@@ -1,0 +1,11 @@
+/* Estilo dos cartões do Anki que o scripts/montar_deck.py gera. Licença: CC BY-NC-SA 4.0
+   (LICENSE-CONTENT.txt). O cartão usa estas classes: .card (o cartão inteiro), .meta e
+   .meta-item (a linha de cima da pergunta), .pergunta, .resposta e .fonte (a citação, no
+   verso). Mude cores e tamanhos à vontade; as classes precisam continuar com esses nomes. */
+
+.card { font-family: Arial, sans-serif; font-size: 18px; text-align: center; color: #1a1a1a; }
+.meta { color: #888; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+.meta-item:not(:last-child)::after { content: " • "; }
+.pergunta { font-weight: 600; }
+.resposta { margin-top: 10px; }
+.fonte { color: #888; font-size: 13px; margin-top: 12px; }

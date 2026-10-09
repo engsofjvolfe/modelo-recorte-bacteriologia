@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "idiomas.schema.json",
+  "type": "object",
+  "required": ["versao_schema", "iso_639_2"],
+  "additionalProperties": true,
+  "properties": {
+    "versao_schema": { "const": 1 },
+    "iso_639_2": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "pattern": "^[a-z]{3}$" }
+    }
+  }
+}

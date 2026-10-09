@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "formato.schema.json",
+  "type": "object",
+  "required": ["versao_schema", "curso", "disciplina", "nivel", "idioma", "itens", "elos", "eixos", "colunas_extras"],
+  "additionalProperties": true,
+  "properties": {
+    "versao_schema": { "const": 1 },
+    "curso": { "type": "string", "minLength": 1 },
+    "disciplina": { "type": "string", "minLength": 1 },
+    "nivel": { "type": "string", "minLength": 1 },
+    "idioma": { "type": "string", "minLength": 2 },
+    "itens": { "type": "array", "items": { "$ref": "#/$defs/rotulo" } },
+    "elos": { "type": "array", "items": { "$ref": "#/$defs/rotulo" } },
+    "eixos": { "type": "array", "items": { "$ref": "#/$defs/eixo" } },
+    "colunas_extras": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "not": { "enum": ["pergunta", "resposta", "fonte"] } }
+    }
+  },
+  "$defs": {
+    "rotulo": {
+      "type": "object",
+      "required": ["id", "nome"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "nome": { "type": "string", "minLength": 1 }
+      }
+    },
+    "eixo": {
+      "type": "object",
+      "required": ["id", "nome", "subtopicos"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "nome": { "type": "string", "minLength": 1 },
+        "subtopicos": { "type": "array", "items": { "$ref": "#/$defs/rotulo" } }
+      }
+    }
+  }
+}
