@@ -1,8 +1,8 @@
 # Trabalhar com uma IA
 
-O método deste modelo usa IA em quase todas as etapas: propor o formato da disciplina,
-transcrever as aulas, preencher os dados das fontes, escrever os documentos, gerar os
-cartões. Este guia diz, etapa por etapa, o que pedir à IA, o que entregar a ela, o que
+O método deste modelo usa IA em quase todas as etapas: transcrever as aulas, preencher os
+dados das fontes, pesquisar e analisar a matéria pra propor o formato da disciplina,
+escrever os documentos, gerar os cartões. Este guia diz, etapa por etapa, o que pedir à IA, o que entregar a ela, o que
 conferir depois e o que é sempre seu, e também as regras que a IA segue em todas as
 etapas. Por isso ele é pra você e pra IA: você lê e entrega a ela. Serve pra qualquer
 assistente de IA: o modelo não depende de nenhum.
@@ -154,40 +154,28 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 - **Sempre seu:** autorizar a IA a fazer a cópia do modelo e a mover uma fonte pra pasta
   protegida, quando um script perguntar.
 
-### 2. Formato da disciplina (`formato`)
+### 2. Transcrição da aula (`transcricao`)
 
 - **A IA lê antes:** a
-  [seção 1 da metodologia](metodologia-de-conteudo.md#1-descubra-o-formato-da-disciplina)
-  e o [Descubra seu modelo](DESCUBRA-SEU-MODELO.md).
-- **Entregue:** o curso, a disciplina, o nível de estudo, o material de aula e, se
-  tiver, a ementa.
-- **Peça:** que proponha cada resposta do Descubra seu modelo, dizendo na conversa por
-  que ela cabe, ou não, nesse curso e nesse nível; depois, que grave as respostas
-  aceitas no arquivo de formato e o confira com o `validar_dados.py`.
-- **Confira depois:** se o arquivo de formato (`formato.json`) tem só as respostas que
-  você aceitou, sem a justificativa.
-- **Sempre seu:** cada resposta. A IA propõe; você decide.
-
-### 3. Transcrição da aula (`transcricao`)
-
-- **A IA lê antes:** a
-  [seção 2 da metodologia](metodologia-de-conteudo.md#2-trate-as-fontes-da-aula).
+  [seção 1 da metodologia](metodologia-de-conteudo.md#1-trate-as-fontes-da-aula).
 - **Entregue:** o material de aula.
 - **Peça:** a transcrição de cada página, só com o que está escrito, no padrão da seção
-  2; o registro de cada transcrição com o `registrar_fonte.py`, com a chave da
+  1; o registro de cada transcrição com o `registrar_fonte.py`, com a chave da
   referência da fonte; e a conferência delas, com o `conferencia.py`. Se o material é
   um documento HTML que marca as páginas impressas, como um livro digital, a transcrição
-  sai do script `transcrever_html.py`, e o que a IA confere é só o texto de dentro de
-  cada imagem, contra a própria imagem.
+  sai do script `transcrever_html.py`; se é uma apresentação em pptx, do
+  `transcrever_pptx.py`. Nos dois, o que a IA confere é só o texto de dentro de cada
+  imagem, contra a própria imagem.
 - **Confira depois:** cada página, na conferência das transcrições, contra a imagem; num
-  documento HTML, que o script não aponta erro em nenhuma página, e o texto de cada
-  imagem.
-- **Sempre seu:** o tique de cada página (num documento HTML, o de cada imagem).
+  documento HTML ou numa apresentação em pptx, que o script não aponta erro em nenhuma
+  página, e o texto de cada imagem.
+- **Sempre seu:** o tique de cada página (num documento HTML ou numa apresentação em
+  pptx, o de cada imagem).
 
-### 4. Referências das fontes (`referencias`)
+### 3. Referências das fontes (`referencias`)
 
 - **A IA lê antes:** a
-  [seção 3 da metodologia](metodologia-de-conteudo.md#3-cite-cada-fonte-conforme-a-abnt)
+  [seção 2 da metodologia](metodologia-de-conteudo.md#2-cite-cada-fonte-conforme-a-abnt)
   e as [regras da ABNT](regras-abnt.md).
 - **Peça:** que preencha os dados de cada fonte no arquivo de fontes (`fontes.json`), como
   estão na folha de rosto ou na página do documento, confira o arquivo com o
@@ -195,6 +183,29 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 - **Confira depois:** cada referência e a chamada dela, na conferência das referências,
   contra a fonte. As regras da ABNT dizem o que cada informação leva.
 - **Sempre seu:** a escolha do *et al.* e o tique de cada referência.
+
+### 4. Formato da disciplina (`formato`)
+
+- **A IA lê antes:** a
+  [seção 3 da metodologia](metodologia-de-conteudo.md#3-descubra-o-formato-da-disciplina),
+  o [Descubra seu modelo](DESCUBRA-SEU-MODELO.md) e as [regras da ABNT](regras-abnt.md).
+- **Entregue:** o curso, a disciplina e o nível de estudo.
+- **Peça:** que olhe os tiques na conferência das transcrições, pra saber o que já tem o
+  seu tique; que pesquise as três bases da seção 3 em fontes acadêmicas robustas, lendo
+  cada uma inteira, guardando nas evidências da pesquisa o trecho literal que sustenta
+  cada ponto e preenchendo os dados de cada fonte no arquivo de fontes; que leia inteira
+  cada transcrição e analise cada parte do material com as perguntas da seção 3, sem
+  deixar trecho de fora; que escreva a análise da matéria, com a chamada de cada fonte como
+  a conferência das referências mostra; e só então proponha cada resposta do Descubra seu
+  modelo, dizendo na conversa por que ela cabe, ou não, nesse curso e nesse nível. Depois,
+  que grave as respostas aceitas no arquivo de formato, confira os dados com o
+  `validar_dados.py` e refaça as referências com o `referencias.py`.
+- **Confira depois:** na análise da matéria, se cada parte do material está nela, trecho
+  por trecho, e se cada ponto da pesquisa tem a chamada e o trecho literal que o sustenta;
+  na conferência das referências, cada fonte da pesquisa; e se o arquivo de formato
+  (`formato.json`) tem só as respostas que você aceitou.
+- **Sempre seu:** as formas de estudo escolhidas, cada resposta do formato e o tique de
+  cada referência. A IA propõe; você decide.
 
 ### 5. Material de fora (`material-de-fora`)
 
@@ -214,10 +225,10 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 
 - **A IA lê antes:** as seções 5 a 8 e 12 da [metodologia](metodologia-de-conteudo.md).
 - **Peça:** que olhe os tiques nas conferências das transcrições, dos trechos e das
-  referências, pra saber o que já tem o seu tique; que leia inteiras as transcrições e as
-  bases conferidas e só então escreva, na grade do formato, primeiro a teoria
-  fundamental e depois o dicionário e a ficha de cada item, com a chamada de cada fato
-  como a conferência das referências mostra.
+  referências, pra saber o que já tem o seu tique; que leia inteiras a análise da matéria,
+  as transcrições e as bases conferidas e só então escreva, nas formas de estudo que a
+  análise escolheu e na grade do formato, primeiro a teoria fundamental e depois os outros
+  documentos, com a chamada de cada fato como a conferência das referências mostra.
 - **Confira depois:** cada documento contra as fontes, com a auditoria da
   [seção 16 da metodologia](metodologia-de-conteudo.md#16-checklist-auditando-uma-disciplina-existente).
 - **Sempre seu:** o recorte — o que entra, o quão fundo e o que é mais importante.

@@ -1,7 +1,10 @@
 # Descubra o formato da sua disciplina
 
-Este documento ajuda a decidir a estrutura de conteúdo de uma disciplina nova. O método
-monta, pra cada assunto que se estuda um por um (os *itens*), dois documentos: o
+Este documento ajuda a decidir a parte do formato de uma disciplina nova que pede uma
+grade fixa. O formato nasce da análise da matéria (ver `metodologia-de-conteudo.md`, seção
+3): que tipos de conhecimento cada parte do material traz e que forma de estudo serve a
+cada um. Dois desses tipos pedem uma grade: pra cada assunto que se estuda um por um (os
+*itens*), o método monta dois documentos: o
 *dicionário*, que conta o item como uma história dividida em partes, os *elos*; e a
 *ficha*, uma tabela seca com uma linha pra cada tipo de fato que todo item tem, os
 *eixos*. Os cartões de pergunta saem de uma *planilha*, uma tabela com uma coluna pra
@@ -16,6 +19,8 @@ cada disciplina responde essas perguntas pra si mesma, a partir do próprio mate
 - Quando existe um item que se repete e que alguém precisa aprender individualmente,
   contar esse item de dois jeitos — uma história em cadeia, e uma tabela seca com os
   mesmos fatos — permite estudar de duas formas sem duplicar o trabalho de escrever.
+- Os outros tipos de conhecimento que a análise da matéria acha ganham as formas de estudo
+  que ela escolheu (ver `metodologia-de-conteudo.md`, seções 3 e 8).
 
 O resto (quantos elos, quantos eixos, que nomes, se existem itens repetidos ou não) é
 decisão de cada disciplina.
@@ -27,17 +32,20 @@ prova, uma base pra disciplinas seguintes, um aprofundamento). Tudo o que vem de
 depende disso: o mesmo assunto pede itens, eixos e profundidade diferentes em cursos e
 níveis diferentes.
 
-Você pode responder às perguntas abaixo com ajuda de uma IA. Passe a ela o curso, a
-disciplina, o nível e o material de aula — e, se tiver, a ementa ou o plano de ensino
-da disciplina, que é a referência mais firme do que ela cobre — e peça que proponha
-cada resposta dizendo por que ela cabe, ou não cabe, nesse curso e nesse nível. A
-decisão é sua; no arquivo de formato vai só a resposta, não a justificativa.
+As perguntas abaixo se respondem com a análise da matéria na mão: é nela que estão a
+pesquisa sobre como a matéria é estudada e cobrada nas áreas e o que cada parte do
+material traz. A ementa ou o plano de ensino de uma oferta da disciplina mostra o que
+aquela oferta cobre, não como a matéria é estudada nas áreas. Você pode responder com
+ajuda de uma IA: passe a ela a análise da matéria e o material de aula e peça que proponha
+cada resposta dizendo por que ela cabe, ou não cabe, nesse curso e nesse nível. A decisão
+é sua; a justificativa fica na análise da matéria, e no arquivo de formato vai só a
+resposta.
 
 ## Perguntas para decidir o formato
 
 1. **Existem itens que se repetem no seu material** — coisas que alguém aprende uma por
-   uma? Se não existem, sua disciplina provavelmente só precisa do documento de teoria
-   fundamental, sem dicionário nem ficha por item.
+   uma? Se não existem, sua disciplina não precisa de dicionário nem de ficha: o que ela
+   traz vai pra teoria fundamental e pras formas de estudo que a análise escolheu.
 2. **Se existem itens: quais fatos diferentes alguém precisa saber pra conhecer um item
    por completo?** Liste com suas próprias palavras, a partir do seu material — não a
    partir do que outra disciplina já usou. Esses são os eixos da ficha. Se um eixo se
@@ -124,7 +132,7 @@ mudança na metodologia (seção 17), pra que o formato cresça no modelo també
 O script que monta os cartões do Anki (`montar_deck.py`) só exige duas colunas com nome
 certo na planilha: uma chamada `pergunta` e outra `resposta`. A metodologia pede mais
 uma em toda planilha, a `fonte`, com a citação de onde veio cada fato, que aparece atrás
-do cartão, embaixo da resposta (seções 3 e 9 da metodologia). Qualquer outra coluna que
+do cartão, embaixo da resposta (seções 2 e 9 da metodologia). Qualquer outra coluna que
 você criar vira parte do cartão automaticamente, com o nome que você escolheu; no Anki,
 o nome aparece sem o sublinhado e com cada palavra em maiúscula (`tipo_pergunta` vira
 `TipoPergunta`).

@@ -24,7 +24,8 @@
       "type": "object",
       "additionalProperties": true,
       "required": ["formato", "fontes", "referencias", "licenca_conteudo", "material_base", "fontes_externas",
-                   "gerados", "conferencia_imagens", "conferencia_referencias", "material_gerado", "baralhos",
+                   "gerados", "conferencia_imagens", "conferencia_referencias", "analise", "pesquisa",
+                   "material_gerado", "baralhos",
                    "bases", "base_externa", "conferencia_trechos", "provas", "conferencia_cartoes", "imagens",
                    "estilo_cartao"],
       "properties": {
@@ -37,6 +38,8 @@
         "gerados": { "$ref": "#/$defs/protegido" },
         "conferencia_imagens": { "$ref": "#/$defs/protegido" },
         "conferencia_referencias": { "$ref": "#/$defs/protegido" },
+        "analise": { "$ref": "#/$defs/texto" },
+        "pesquisa": { "$ref": "#/$defs/protegido" },
         "material_gerado": { "$ref": "#/$defs/texto" },
         "baralhos": { "$ref": "#/$defs/texto" },
         "bases": { "$ref": "#/$defs/modelo_por_item" },

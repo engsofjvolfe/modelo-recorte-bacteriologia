@@ -44,20 +44,26 @@ Você precisa de três coisas. Faça uma vez só, no seu computador.
    você pode mudá-la ali. A pasta `scripts/` já está no projeto, que é uma cópia do
    modelo inteiro, com as subpastas `esquemas/` e `normas/`: são os próprios scripts e os
    arquivos que eles leem. Não mude o nome dela nem de nada lá dentro.
-3. **Três complementos**, só pra alguns scripts:
+3. **Quatro complementos**, só pra alguns scripts:
    - pro `montar_deck.py`, a biblioteca `genanki`, um complemento do Python que sabe
      montar os arquivos do Anki: no terminal, digite
      `pip install genanki` (ou `pip3 install genanki`) e aperte Enter;
    - pro `conferencia.py` e o `base_externa.py`, e pro `referencias.py` e o
      `registrar_fonte.py` quando a fonte é PDF, o Poppler, que é o que lê o texto de uma
-     página de PDF e a transforma em imagem: no Linux, `sudo apt install poppler-utils`;
+     página de PDF e a transforma em imagem (a conferência também o usa pra imagem dos
+     slides de uma apresentação): no Linux, `sudo apt install poppler-utils`;
      no Mac, `brew install poppler`; no Windows, siga as instruções do Poppler pra
      Windows, ou peça à IA que você usa o passo a passo pro seu computador;
-   - pro `transcrever_html.py`, quando o documento tem imagem, o Tesseract, que lê o
-     texto de uma imagem (o OCR), com os dados do idioma da fonte: no Linux, `sudo apt
-     install tesseract-ocr tesseract-ocr-por` (troque o `por` do fim pelo código do
-     idioma: `spa` pro espanhol, `eng` pro inglês); no Mac, `brew install tesseract
-     tesseract-lang`; no Windows, peça à IA o passo a passo.
+   - pro `transcrever_html.py` e o `transcrever_pptx.py`, quando a fonte tem imagem, o
+     Tesseract, que lê o texto de uma imagem (o OCR), com os dados do idioma da fonte: no
+     Linux, `sudo apt install tesseract-ocr tesseract-ocr-por` (troque o `por` do fim pelo
+     código do idioma: `spa` pro espanhol, `eng` pro inglês); no Mac, `brew install
+     tesseract tesseract-lang`; no Windows, peça à IA o passo a passo;
+   - pro `transcrever_pptx.py`, quando a apresentação tem imagem num formato que o
+     Tesseract não lê (EMF, WMF, SVG), e pro `conferencia.py`, quando a fonte é uma
+     apresentação em pptx, o LibreOffice, que converte a imagem e faz a imagem de cada
+     slide: no Linux, `sudo apt install libreoffice`; no Mac e no Windows, o instalador
+     do site [libreoffice.org](https://www.libreoffice.org/download/).
 
 ## Como rodar um script
 
@@ -86,6 +92,7 @@ como `dados/formato.json`, são os do modelo; no seu projeto, valem os do `proje
 | --- | --- |
 | Depois de responder o Descubra seu modelo | `validar_dados.py` |
 | Pra transcrever uma fonte em HTML que marca as páginas impressas, como um livro digital | `transcrever_html.py` |
+| Pra transcrever uma apresentação de slides em pptx | `transcrever_pptx.py` |
 | Assim que cada transcrição é criada | `registrar_fonte.py`, que já roda o `referencias.py` |
 | Sempre que mudar os dados das fontes | `referencias.py` |
 | Com as transcrições prontas, antes de escrever o material | `conferencia.py` |
@@ -128,7 +135,7 @@ Usa só o Python: não precisa instalar nada.
 **Pra que serve.** Alguns materiais são documentos HTML que marcam onde começa cada página
 impressa: é o caso do capítulo de um livro digital (EPUB), lido no computador ou num site.
 Neles o texto é texto de verdade, e este script faz a transcrição sozinho, no padrão da
-seção 2 da metodologia: copia o texto de cada página, sem ler nada, com o título que diz o
+seção 1 da metodologia: copia o texto de cada página, sem ler nada, com o título que diz o
 número impresso e a posição dela, que aqui é a ordem da página no documento, como
 `## p. 117 (arquivo p. 2)`. Parágrafo vira uma linha; título, `###` ou menos; tabela,
 tabela do Markdown (a que passa pra página seguinte continua lá depois de
@@ -175,13 +182,62 @@ da cópia que já existe com outro conteúdo.
 
 Precisa do Tesseract, com o idioma, quando o documento tem imagem.
 
+## `transcrever_pptx.py` — transcreve uma apresentação de slides em pptx
+
+**Pra que serve.** Numa apresentação em pptx (o formato do PowerPoint, que o LibreOffice
+e o Google Apresentações também gravam), o texto de cada slide é texto de verdade, guardado
+dentro do arquivo. Este script faz a transcrição sozinho, no padrão da seção 1 da
+metodologia: copia o texto de cada slide, sem ler nada, com o título que diz a posição
+dele no arquivo, que é também o lugar que a citação usa, como `## slide 3 (arquivo p. 3)`.
+Dentro do slide, o texto vem na ordem do arquivo, que é a ordem em que o PowerPoint o lê
+em voz alta. O título do slide vira `###`; cada tópico, uma linha com `- ` (ou o número,
+na lista numerada), recuada conforme o nível; tabela, tabela do Markdown; índice e
+expoente, os caracteres próprios (CO₂, 10⁻⁶); o símbolo escrito com uma fonte de símbolos,
+como a Symbol, o caractere de verdade (μ, ±), pela tabela de
+`scripts/normas/simbolos.json`. Cada imagem entra no lugar dela, como no
+`transcrever_html.py`: `![imagem](caminho)`, seguida do texto escrito dentro dela, lido
+por OCR, e de `[fim da imagem]`. As imagens saem do pptx pra uma pasta ao lado dele, com
+o nome dele. As notas do apresentador, se houver, vêm depois do slide, a partir de
+`[notas do apresentador]`; o slide oculto começa com `[slide oculto]`.
+
+**Quando usar.** Pra começar a transcrição de uma apresentação. Depois, registre a
+transcrição com o `registrar_fonte.py` e rode o `conferencia.py`.
+
+**Como rodar.** O caminho da apresentação, já na pasta protegida, e, com `--idioma`, o
+idioma do texto das imagens, no código do Tesseract — `por`, `eng`, ou vários juntos, como
+`por+eng`, quando as figuras misturam idiomas:
+
+    python scripts/transcrever_pptx.py docs/material-base/AULA-1.pptx --idioma por+eng
+
+O idioma é sempre dito assim, porque o que o pptx marca no texto é o idioma do corretor
+ortográfico, que muitas vezes não é o do texto. O script não grava por cima de uma
+transcrição que já existe; pra fazer de novo, acrescente `--substituir` (o registro da
+fonte, no topo, continua).
+
+**O que aparece.** A transcrição gravada, com quantos slides e quantas imagens tem.
+`FALTA` lembra de registrar a transcrição. `CONFERIR` avisa o que o script não conseguiu
+fazer sozinho: um índice ou expoente sem caractere próprio (fica na linha), um símbolo de
+uma fonte que não está na tabela (fica como está), uma imagem recortada no slide (o OCR lê
+a imagem inteira, inclusive o que o slide não mostra), um gráfico ou um objeto sem imagem
+(aparecem só na imagem do slide, na conferência), uma imagem que é só um link. `ERRO`
+aponta o que impediu a transcrição: o arquivo que não se lê como pptx (um download
+incompleto, por exemplo) ou uma imagem que já existe na pasta com outro conteúdo.
+
+A tabela da fonte Symbol é o mapeamento oficial dela pro Unicode, publicado pelo
+consórcio Unicode (`VENDORS/ADOBE/symbol.txt`), sem os códigos de uso corporativo da
+Adobe; quando um código tem dois caracteres, fica o que já está na forma normal (NFKC) e,
+entre dois assim, o de menor código.
+
+Precisa do Tesseract, com o idioma, quando a apresentação tem imagem, e do LibreOffice
+quando alguma imagem está num formato que o Tesseract não lê.
+
 ## `registrar_fonte.py` — liga a transcrição à fonte dela
 
 **Pra que serve.** Grava, no topo da transcrição (ou de outro documento gerado de uma
 fonte), de qual arquivo ela veio: a chave da fonte, o caminho do arquivo e a impressão
 digital dele — um código que muda se o arquivo mudar. É assim que os outros scripts sabem
-qual PDF corresponde a qual transcrição: pelo registro, não pelo nome dos arquivos, que
-pode ter erro de digitação.
+qual arquivo de fonte corresponde a qual transcrição: pelo registro, não pelo nome dos
+arquivos, que pode ter erro de digitação.
 
 **Quando usar.** Assim que uma transcrição é criada.
 
@@ -255,13 +311,17 @@ Precisa do Poppler quando alguma fonte é PDF, pra mostrar a primeira página.
 página por página. Se a fonte é PDF, cada página aparece com a imagem dela no PDF, ao lado
 do que a transcrição tem pra ela, e duas caixas de tique, uma pra IA e outra pra pessoa: o
 script não julga nada, só mostra, e quem confere é quem tica. Se a fonte é um documento
-HTML (ver o `transcrever_html.py`), o texto da transcrição é cópia do documento, e quem o
-confere é o próprio script: em cada página, as letras, os números e os sinais da
-transcrição têm de ser os da mesma página na fonte, na mesma ordem, e também o número
-impresso e as imagens. Não contam os espaços, as marcas da transcrição (o `#` dos títulos,
-as barras das tabelas, o `<br>`) e a forma dos índices e expoentes. À mão, só o texto de
-dentro de cada imagem: ela aparece com esse texto e com as duas caixas de tique. A pessoa
-é sempre o último elo.
+HTML (ver o `transcrever_html.py`) ou uma apresentação em pptx (ver o
+`transcrever_pptx.py`), o texto da transcrição é cópia da fonte, e quem o confere é o
+próprio script: em cada página, ou slide, as letras, os números e os sinais da
+transcrição têm de ser os da mesma página na fonte, na mesma ordem, e também o título da
+página e as imagens. Não contam os espaços, as marcas da transcrição (o `#` dos títulos,
+as barras das tabelas, o `<br>`, `[slide oculto]`, `[notas do apresentador]`), a forma
+dos índices e expoentes e a diferença entre o hífen e o sinal de menos. À mão, só o texto
+de dentro de cada imagem: ela aparece com esse texto e com as duas caixas de tique. Na
+apresentação, cada slide aparece também inteiro, como imagem, feita pelo LibreOffice, pra
+ver o que só o desenho mostra; essa imagem não tem tique. A pessoa é sempre o último
+elo.
 
 **Quando usar.** Com as transcrições prontas e registradas, antes de escrever qualquer
 material, e de novo sempre que uma transcrição mudar.
@@ -271,15 +331,17 @@ material, e de novo sempre que uma transcrição mudar.
     python scripts/conferencia.py
 
 **O que aparece.** Quantas páginas há, quantas têm erro do script, quantas partes há pra
-ticar (as páginas de PDF e as imagens dos documentos HTML) e quantas ainda estão sem o
-tique da pessoa. Uma linha `ERRO` aparece pra transcrição sem registro, com mais de uma
-fonte registrada ou cuja fonte mudou ou não existe; pra PDF da pasta do material de base
-que não é a fonte de nenhuma transcrição; e, num documento HTML, pra página cujo texto,
-número impresso ou imagens não batem com a fonte, com o trecho onde começa a diferença. O
-arquivo gerado (no modelo, `CONFERENCIA-COM-IMAGEM.md`, na pasta das transcrições) fica
-melhor de ler na visualização do VSCode: abra o arquivo e aperte `Ctrl+Shift+V`.
+ticar (as páginas de PDF e as imagens dos documentos HTML e das apresentações) e quantas
+ainda estão sem o tique da pessoa. Uma linha `ERRO` aparece pra transcrição sem
+registro, com mais de uma fonte registrada ou cuja fonte mudou ou não existe; pra PDF da
+pasta do material de base que não é a fonte de nenhuma transcrição; e, num documento HTML
+ou numa apresentação, pra página cujo texto, título ou imagens não batem com a fonte, com
+o trecho onde começa a diferença. O arquivo gerado (no modelo, `CONFERENCIA-COM-IMAGEM.md`,
+na pasta das transcrições) fica melhor de ler na visualização do VSCode: abra o arquivo e
+aperte `Ctrl+Shift+V`.
 
-Precisa do Poppler quando alguma fonte é PDF.
+Precisa do Poppler quando alguma fonte é PDF ou apresentação, e do LibreOffice quando
+alguma fonte é apresentação.
 
 ## `base_externa.py` — monta a base do material de fora
 
@@ -543,7 +605,8 @@ Precisa da biblioteca `genanki`.
 
 Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json` e as
 planilhas de pergunta, ler o formato da disciplina e conferi-lo contra o molde dele, ler
-o registro da fonte, guardar os tiques).
+o registro da fonte, guardar os tiques, ler as páginas de um documento HTML e os slides
+de uma apresentação, e o que os transcritores fazem do mesmo jeito).
 
 ---
 

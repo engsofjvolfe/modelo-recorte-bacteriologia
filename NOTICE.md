@@ -26,14 +26,21 @@ Texto completo em [`LICENSE-CONTENT.txt`](LICENSE-CONTENT.txt). Esse conteúdo p
 usado, adaptado e repassado, desde que se dê o crédito, não se use para fins comerciais,
 e qualquer versão adaptada mantenha a mesma licença.
 
+A tabela [`scripts/normas/simbolos.json`](scripts/normas/simbolos.json), que troca os
+caracteres da fonte Symbol pelos do Unicode, foi feita a partir do arquivo *Adobe Symbol
+Encoding to Unicode* (`VENDORS/ADOBE/symbol.txt`), publicado pelo Unicode Consortium
+(Copyright © 1991-2011 Unicode, Inc.), que permite o uso livre das informações dele.
+
 ## 3. Material de terceiros — fora de qualquer licença deste projeto
 
 Os arquivos em [`docs/material-base/`](docs/material-base/) — o material de aula, a
-transcrição dele, as cópias do material de fora em `fontes-externas/`, a base de trechos
-do material de fora e a prova dos cartões — não são cobertos por nenhuma das licenças
-acima. O material de base é um recorte do livro *Microbiologia médica*, de Patrick R.
-Murray, Ken S. Rosenthal e Michael A. Pfaller, publicado pela Guanabara Koogan, de que
-quem mantém o projeto não é autor; ainda não há material de fora. Por isso:
+transcrição dele, as evidências da pesquisa, as cópias do material de fora em
+`fontes-externas/`, a base de trechos do material de fora e a prova dos cartões — não são
+cobertos por nenhuma das licenças acima. O material de base são as aulas da disciplina de
+Microbiologia da Universidade Federal do Triângulo Mineiro, do Prof. Kennio Ferreira Paim,
+e um recorte do livro *Microbiologia médica*, de Patrick R. Murray, Ken S. Rosenthal e
+Michael A. Pfaller, publicado pela Guanabara Koogan, de que quem mantém o projeto não é
+autor; ainda não há material de fora. Por isso:
 
 - Esse material nunca é publicado nem repassado — fica só no computador de quem mantém o
   projeto. Se o projeto é guardado no GitHub, a lista do que nunca vai pra lá (o arquivo

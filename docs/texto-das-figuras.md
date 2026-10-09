@@ -2,7 +2,7 @@
 
 Como o texto de dentro das figuras foi escrito na transcrição (quem lê e quem confere
 esse texto está em "Como este material foi feito", no [README](../README.md)). Vale
-para este projeto e esta fonte; não é regra do método.
+para este projeto e para as figuras revisadas; não é regra do método.
 
 ## Como o texto foi escrito
 

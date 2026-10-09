@@ -15,6 +15,8 @@
     "gerados": "docs/material-base/gerados-ocr",
     "conferencia_imagens": "docs/material-base/gerados-ocr/CONFERENCIA-COM-IMAGEM.md",
     "conferencia_referencias": "docs/material-base/gerados-ocr/CONFERENCIA-REFERENCIAS.md",
+    "analise": "docs/analise-da-materia.md",
+    "pesquisa": "docs/material-base/gerados-ocr/pesquisa",
     "material_gerado": "docs/material-gerado",
     "baralhos": "anki-decks",
     "bases": "dados/bases/{item}.json",

@@ -21,12 +21,17 @@ numero impresso no titulo da pagina e as imagens dela, na ordem. O que nao bate 
 texto de dentro de cada imagem, que veio do OCR, e o que se confere a mao: cada imagem
 aparece com esse texto e as duas caixas de tique.
 
+Fonte em pptx (ver transcrever_pptx.py): como a fonte em HTML, slide por slide, contra o
+texto do slide lido do proprio pptx (comum.Apresentacao), com o titulo "slide <posicao>"
+e as imagens comparadas pela impressao digital. Cada slide aparece tambem com a imagem
+dele inteiro, feita pelo LibreOffice, so pra ver: ela nao tem tique.
+
 A transcricao e ligada a fonte pelo registro no topo dela (ver registrar_fonte.py), nunca
 pelo nome dos arquivos: uma transcricao registra uma fonte so. O arquivo gerado diz, para
 cada transcricao, se a fonte registrada ainda e a mesma, se mudou depois do registro ou
 se nao existe.
 
-Convencao da transcricao (secao 2 da metodologia): o registro da fonte no topo e uma
+Convencao da transcricao (secao 1 da metodologia): o registro da fonte no topo e uma
 secao por pagina, com o titulo "## <como a citacao chama a pagina> (arquivo p. <posicao
 no arquivo>)" -- por exemplo, "## p. 12 (arquivo p. 14)" ou "## slide 3 (arquivo p. 3)".
 Pagina sem texto nenhum fica com a secao e a marca "[sem texto]".
@@ -38,7 +43,8 @@ linhas tambem retira o tique.
 
 As pastas, o arquivo gerado, a pasta das imagens e a resolucao delas vem do projeto.json
 ("gerados", "conferencia_imagens", "material_base", "imagens" e "resolucao_imagens").
-Precisa dos comandos pdfinfo e pdftoppm (pacote Poppler) quando ha fonte em PDF.
+Precisa dos comandos pdfinfo e pdftoppm (pacote Poppler) quando ha fonte em PDF ou em
+pptx, e do LibreOffice pra imagem dos slides.
 
 Uso (de qualquer pasta dentro do projeto):
     python scripts/conferencia.py
@@ -49,21 +55,23 @@ import argparse
 import json
 import re
 import sys
-import unicodedata
+from collections import namedtuple
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from comum import (EXTENSOES_HTML, FIM_FIGURA, LINHA_CONTINUACAO, LINHA_FIGURA, ROTULO_PAGINA, SEM_TEXTO,  # noqa: E402
-                   TITULO_PAGINA, acha_projeto, ancora, assinatura, caixas, caminho_do_alvo, fontes_registradas,
-                   imagem, impressao, link, marca, numero_de_paginas, paginas_html, situacao_da_copia,
-                   tiques_anteriores, tiques_da_parte)
+from comum import (EXTENSOES_HTML, EXTENSOES_PPTX, FIM_FIGURA, LINHA_CONTINUACAO, LINHA_FIGURA,  # noqa: E402
+                   MARCAS_DE_LINHA, ROTULO_PAGINA, ROTULO_SLIDE, TITULO_PAGINA, Apresentacao, FonteIlegivel,
+                   acha_projeto, ancora, assinatura, caixas, caminho_do_alvo, comparavel, fontes_registradas, imagem,
+                   impressao, impressao_de, link, marca, numero_de_paginas, paginas_html, pdf_dos_slides,
+                   situacao_da_copia, texto_do_slide, tiques_anteriores, tiques_da_parte)
 
 CERCA = "````"  # cerca de 4 crases: a transcricao pode ter blocos de 3
 SEPARADOR = re.compile(r"^\|(?:\s*:?-{3,}:?\s*\|)+$")
 TITULO_DE_SECAO = re.compile(r"^#{3,6} ")
 FIGURA_NA_LINHA = re.compile(r"!\[imagem\]\([^)]*\)")
 CONTEXTO = 30  # caracteres mostrados em volta da primeira diferenca
+PaginaDaFonte = namedtuple("PaginaDaFonte", "rotulo texto imagens ancora")  # rotulo inteiro ("p. 12", "slide 3")
 
 SITUACAO = {
     "confere": "é o mesmo do registro",
@@ -157,13 +165,7 @@ def bloco_pdf(nome, pdf, parte, saida):
     return out + caixas(parte["tiques"])
 
 
-# ---------- fonte em HTML ----------
-
-def comparavel(texto):
-    """O texto so com as letras, numeros e sinais, na forma unica do Unicode (NFKC, que
-    tambem desfaz indice e expoente: CO₂ fica CO2)."""
-    return "".join(unicodedata.normalize("NFKC", texto).split())
-
+# ---------- fonte com texto: HTML e pptx ----------
 
 def le_pagina(conteudo):
     """(texto comparavel, [(alvo, linhas do texto)] das imagens, imagem sem fim): o que a
@@ -182,7 +184,7 @@ def le_pagina(conteudo):
         if m:
             figura = (caminho_do_alvo(m.group(1)), [])
             continue
-        if linha == SEM_TEXTO or LINHA_CONTINUACAO.match(linha) or SEPARADOR.match(linha):
+        if linha in MARCAS_DE_LINHA or LINHA_CONTINUACAO.match(linha) or SEPARADOR.match(linha):
             continue
         linha = FIGURA_NA_LINHA.sub("", TITULO_DE_SECAO.sub("", linha))
         if linha.startswith("|"):
@@ -210,10 +212,32 @@ def arquivo_da_imagem(pasta, alvo):
     return alvo
 
 
-def partes_html(nome, arq, texto, fonte, situacao, anteriores):
-    """[pagina], cada uma com o resultado do script ("erros") e as imagens, com os tiques."""
-    com_fonte = situacao in ("confere", "mudou")
-    da_fonte = paginas_html(fonte.read_text(encoding="utf-8")) if com_fonte else []
+def identidade(arquivo):
+    """O que identifica uma imagem: a impressao digital do arquivo, se ele existe; senao, o
+    proprio endereco."""
+    return impressao(arquivo) if isinstance(arquivo, Path) else arquivo
+
+
+def paginas_da_fonte(fonte):
+    """[PaginaDaFonte] da fonte em HTML ou em pptx, pela mesma leitura de quem transcreve."""
+    if fonte.suffix.lower() in EXTENSOES_PPTX:
+        apresentacao = Apresentacao(fonte)
+        return [PaginaDaFonte(ROTULO_SLIDE.format(s.numero), texto_do_slide(s),
+                              [impressao_de(apresentacao.bytes(b.conteudo.parte)) for b in s.blocos
+                               if b.tipo == "imagem"], None) for s in apresentacao.slides()]
+    return [PaginaDaFonte(ROTULO_PAGINA.format(p.rotulo) if p.rotulo is not None else None, p.texto,
+                          [identidade(arquivo_da_imagem(fonte.parent, src)) for src in p.imagens], p.ancora)
+            for p in paginas_html(fonte.read_text(encoding="utf-8"))]
+
+
+def partes_texto(nome, arq, texto, fonte, situacao, anteriores):
+    """([pagina], quantas paginas a fonte tem): cada pagina com o resultado do script
+    ("erros") e as imagens, com os tiques."""
+    com_fonte, erros_da_fonte = situacao in ("confere", "mudou"), []
+    try:
+        da_fonte = paginas_da_fonte(fonte) if com_fonte else []
+    except FonteIlegivel as e:
+        da_fonte, com_fonte, erros_da_fonte = [], False, [f"a fonte não se lê: {e}"]
     paginas = por_pagina(texto)
     out = []
     for n in sorted(set(range(1, len(da_fonte) + 1)) | set(paginas)):
@@ -221,22 +245,21 @@ def partes_html(nome, arq, texto, fonte, situacao, anteriores):
         rotulo = " / ".join(r for r, _ in secs) or f"arquivo p. {n}"
         conteudo = "\n\n".join(c for _, c in secs)
         lido, figuras, sem_fim = le_pagina(conteudo)
-        erros = []
+        erros = list(erros_da_fonte)
         if com_fonte and n > len(da_fonte):
             erros.append("a fonte não tem esta página")
         elif com_fonte:
             pagina = da_fonte[n - 1]
             if not secs:
                 erros.append("a transcrição não tem esta página")
-            elif pagina.rotulo is not None and rotulo != ROTULO_PAGINA.format(pagina.rotulo):
-                erros.append(f"na fonte, esta é a {ROTULO_PAGINA.format(pagina.rotulo)}")
+            elif pagina.rotulo is not None and rotulo != pagina.rotulo:
+                erros.append(f"na fonte, o título desta página é \"{pagina.rotulo}\"")
             esperado = comparavel(pagina.texto)
             if secs and lido != esperado:
                 erros.append("o texto não é o da fonte: " + primeira_diferenca(esperado, lido))
-            imagens = [arquivo_da_imagem(fonte.parent, src) for src in pagina.imagens]
-            if [arquivo_da_imagem(arq.parent, alvo) for alvo, _ in figuras] != imagens:
-                erros.append(f"as imagens não são as da fonte, na ordem (a fonte tem {len(imagens)}, a transcrição, "
-                             f"{len(figuras)})")
+            if [identidade(arquivo_da_imagem(arq.parent, alvo)) for alvo, _ in figuras] != pagina.imagens:
+                erros.append(f"as imagens não são as da fonte, na ordem (a fonte tem {len(pagina.imagens)}, a "
+                             f"transcrição, {len(figuras)})")
         if sem_fim:
             erros.append(f"uma imagem não tem a linha \"{FIM_FIGURA}\"")
         imgs = []
@@ -249,16 +272,32 @@ def partes_html(nome, arq, texto, fonte, situacao, anteriores):
             imgs.append({"j": j, "arquivo": arquivo, "linhas": linhas, "sig": sig, "tiques": tiques,
                          "retirado": retirado})
         out.append({"n": n, "rotulo": rotulo, "ancora": da_fonte[n - 1].ancora if n <= len(da_fonte) else None,
-                    "erros": erros, "imagens": imgs})
-    return out
+                    "erros": erros, "imagens": imgs, "pagina_inteira": None})
+    return out, len(da_fonte)
 
 
-def bloco_html(nome, fonte, pagina, saida):
+def imagens_dos_slides(partes, slides, fonte, pasta_img, nome, resolucao):
+    """Poe em cada parte a imagem do slide inteiro, de um PDF da apresentacao feito pelo
+    LibreOffice; devolve o problema, se nao deu."""
+    pdf, problema = pdf_dos_slides(fonte, pasta_img / f"{nome}.pdf")
+    if pdf is None:
+        return problema
+    if numero_de_paginas(pdf) != slides:
+        return "o PDF feito pelo LibreOffice não tem uma página por slide"
+    for parte in partes:
+        if parte["n"] <= slides:
+            parte["pagina_inteira"] = imagem(pdf, parte["n"], pasta_img, nome, resolucao)
+    return None
+
+
+def bloco_texto(nome, fonte, pagina, saida):
     n = pagina["n"]
     out = ["", f"### {nome} — {pagina['rotulo']} (arquivo p. {n})", ""]
     if fonte is not None and fonte.exists():
         out += [f"[original, arquivo p. {n}]({link(fonte, saida)}{'#' + pagina['ancora'] if pagina['ancora'] else ''})",
                 ""]
+    if pagina["pagina_inteira"]:
+        out += [f"![{nome}, {pagina['rotulo']}]({link(pagina['pagina_inteira'], saida)})", ""]
     out += [f"ERRO: {e}" for e in pagina["erros"]] or ["Texto: o mesmo da fonte."]
     for img in pagina["imagens"]:
         j, arquivo = img["j"], img["arquivo"]
@@ -286,14 +325,18 @@ def gera(transcricoes, saida, raiz, pasta_img, resolucao):
             problemas_de_registro.append((arq, situacao))
         corpo += ["", "---", "", f"## {nome}", "", f"Transcrição: `{link(arq, saida)}`",
                   f"Fonte registrada: {chave or '—'}, `{link(fonte, saida) if fonte else '—'}` ({SITUACAO[situacao]})"]
-        if fonte is not None and fonte.suffix.lower() in EXTENSOES_HTML:
-            ps = partes_html(nome, arq, texto, fonte, situacao, anteriores)
+        if fonte is not None and fonte.suffix.lower() in EXTENSOES_HTML + EXTENSOES_PPTX:
+            ps, paginas_da_fonte_lidas = partes_texto(nome, arq, texto, fonte, situacao, anteriores)
+            if fonte.suffix.lower() in EXTENSOES_PPTX and paginas_da_fonte_lidas:
+                problema = imagens_dos_slides(ps, paginas_da_fonte_lidas, fonte, pasta_img, nome, resolucao)
+                if problema:
+                    corpo += ["", f"Imagem dos slides: nenhuma ({problema})"]
             tiques = [i["tiques"] for p in ps for i in p["imagens"]]
             com_erro = [p for p in ps if p["erros"]]
             diferencas += [(arq, p["rotulo"], e) for p in com_erro for e in p["erros"]]
             cont = [len(ps), len(com_erro)]
             for p in ps:
-                corpo += bloco_html(nome, fonte, p, saida)
+                corpo += bloco_texto(nome, fonte, p, saida)
         else:
             ps = partes_pdf(nome, texto, fonte, situacao, anteriores, pasta_img, resolucao)
             tiques = [p["tiques"] for p in ps]
@@ -307,7 +350,8 @@ def gera(transcricoes, saida, raiz, pasta_img, resolucao):
                       + " | ".join("—" if x is None else str(x) for x in cont) + " |")
     cabecalho = ["# Conferência das transcrições das fontes", "",
                  "Fonte em PDF: cada página tem a imagem e os tiques. Fonte em HTML: o texto de cada página é "
-                 "conferido pelo script contra a fonte, e cada imagem tem os tiques.", "",
+                 "conferido pelo script contra a fonte, e cada imagem tem os tiques. Fonte em pptx: como em HTML, "
+                 "slide por slide, com a imagem do slide inteiro, só pra ver.", "",
                  "| Transcrição | Chave da fonte | Fonte registrada | Páginas | Páginas com erro do script | "
                  "A ticar | Tique da IA | Tique da pessoa | Sem tique da pessoa |",
                  "| :--- | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: |"] + resumo

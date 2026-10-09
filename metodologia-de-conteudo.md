@@ -29,31 +29,19 @@ publicado — no GitHub, um site que guarda projetos na internet, ou em qualquer
 lugar. O material de terceiros (as aulas, a transcrição delas, as cópias do material de
 fora e tudo o que traz texto delas) nunca é publicado; o resto pode ser.
 
-As seções seguem a ordem do trabalho, que é uma cadeia: o formato da disciplina dá a
-grade de tudo (seção 1); cada fonte vira uma transcrição conferida e uma referência
-(seções 2 a 4); das transcrições e da base do material de fora nascem os documentos
-(seções 5 a 8) e, dos documentos, os cartões (seções 9 e 10); e tudo passa primeiro por
-uma análise mecânica, feita por script, e depois pela análise humana (seção 11). Cada
-etapa nasce da anterior, nunca direto da fonte, e a pessoa é sempre o último elo da
-conferência.
+As seções seguem a ordem do trabalho, que é uma cadeia: cada fonte vira uma transcrição
+conferida e uma referência (seções 1 e 2); da leitura delas e de uma pesquisa sobre a
+matéria nasce o formato da disciplina, que dá a grade de tudo o que vem depois (seção 3);
+onde a aula não chega, entra o material de fora (seção 4); das transcrições e da base do
+material de fora nascem os documentos, nas formas de estudo que a análise da matéria
+escolheu (seções 5 a 8), e, dos documentos, os cartões (seções 9 e 10); e tudo passa
+primeiro por uma análise mecânica, feita por script, e depois pela análise humana (seção
+11). Cada etapa nasce da anterior, nunca direto da fonte, e a pessoa é sempre o último elo
+da conferência.
 
 ---
 
-## 1. Descubra o formato da disciplina
-
-Antes de qualquer material, decida o formato da disciplina: o curso, a disciplina e o
-nível de estudo; os itens; os eixos da ficha e os subtópicos de cada um; os elos do
-dicionário; e as colunas dos cartões. O [Descubra seu modelo](DESCUBRA-SEU-MODELO.md) traz
-as perguntas, e as respostas vão para o arquivo de formato, `dados/formato.json`, que se
-confere com `python scripts/validar_dados.py dados/formato.json`. Uma IA pode propor cada
-resposta, dizendo por que ela cabe naquele curso e naquele nível; a decisão é da pessoa.
-
-Esse arquivo é a grade de tudo o que vem depois: é por ele que se sabe o que cada item
-precisa ter, o que a aula cobre e onde falta, antes de qualquer material ser escrito.
-
----
-
-## 2. Trate as fontes da aula
+## 1. Trate as fontes da aula
 
 Guarde o material de aula original da disciplina — slides, apostila, ou o que for — na
 pasta do material de base, `docs/material-base/`. É a pasta protegida: tudo o que é de
@@ -77,9 +65,9 @@ ferramenta que corte ou resuma automaticamente o texto antes dessa leitura compl
 acontecer. Nunca invente ou deduza um fato que não esteja escrito no material — se um
 dado parecer faltar ou for ambíguo, pergunte a alguém, não adivinhe.
 
-Faça todo fato relevante do material original aparecer em algum dos três documentos da
-[seção 5](#5-escreva-três-documentos-de-conteúdo). Você pode deixar de fora elementos
-puramente decorativos (piadas, mascotes, créditos de imagem) que não carregam
+Faça todo fato relevante do material original aparecer em algum dos documentos de
+conteúdo da [seção 5](#5-escreva-os-documentos-de-conteúdo). Você pode deixar de fora
+elementos puramente decorativos (piadas, mascotes, créditos de imagem) que não carregam
 informação nenhuma — a linha é "isto é um fato" contra "isto é só enfeite", não "isto
 parece pouco importante".
 
@@ -107,7 +95,7 @@ ela mostra. Guarde a transcrição em
 qual arquivo veio, com `python scripts/registrar_fonte.py [transcrição] [arquivo
 original] [chave]` — se o arquivo original estiver fora da pasta protegida, o script
 oferece levá-lo pra lá antes de registrar. A chave é a mesma da referência dessa fonte (ver a
-[seção 3](#3-cite-cada-fonte-conforme-a-abnt)); o script grava a chave, o caminho do
+[seção 2](#2-cite-cada-fonte-conforme-a-abnt)); o script grava a chave, o caminho do
 arquivo e a impressão digital dele — um código calculado a partir do conteúdo do
 arquivo, que muda se o arquivo mudar —, e em seguida atualiza as referências. É esse
 registro que liga a transcrição ao original, não o nome dos arquivos.
@@ -130,6 +118,13 @@ apagada. Nesse documento, cada figura é um arquivo próprio, e a marca dela tra
 imagem, no lugar dela: `![imagem]([caminho da imagem])`, seguida do texto escrito dentro
 dela, lido por OCR, e de `[fim da imagem]`, que fecha a marca sempre, mesmo sem texto.
 
+Quando o material é uma apresentação de slides em pptx, a transcrição também sai do
+próprio arquivo, sem leitura nenhuma: `python scripts/transcrever_pptx.py [apresentação]
+--idioma [idioma do texto das imagens]` copia o texto de cada slide, com o título
+`## slide [posição] (arquivo p. [posição])`, e marca cada imagem como no documento HTML,
+com o texto de dentro dela lido por OCR. As imagens saem do pptx pra uma pasta ao lado
+dele, dentro da pasta protegida.
+
 Um fato que só a imagem mostra, sem texto, não está na transcrição. Se ele precisar
 entrar no material, a prova dele é a própria imagem, conferida por uma pessoa, ou uma
 fonte de fora que o diga por escrito.
@@ -145,20 +140,22 @@ sempre o último elo, e nenhuma página vale como conferida sem o tique dela. Se
 de uma página ou o arquivo original mudar depois do tique, o tique é retirado. Até essa
 conferência, a transcrição não prova nada.
 
-Na transcrição de um documento HTML, o texto é cópia do documento, e quem o confere é o
-script: a conferência compara, página por página, as letras, os números e os sinais da
-transcrição com os da mesma página na fonte, na mesma ordem, e também o número impresso e
-as imagens de cada página, e aponta como erro o que não bate. À mão, confere-se só o
+Na transcrição de um documento HTML ou de uma apresentação em pptx, o texto é cópia da
+fonte, e quem o confere é o script: a conferência compara, página por página (ou slide
+por slide), as letras, os números e os sinais da transcrição com os da mesma página na
+fonte, na mesma ordem, e também o título da página e as imagens dela, e aponta como erro
+o que não bate. Na apresentação, cada slide aparece também inteiro, como imagem, pra ver
+o que só o desenho mostra, como as setas de um esquema. À mão, confere-se só o
 texto de dentro de cada imagem, que veio do OCR: cada imagem aparece com esse texto e com
 as duas caixas de tique. Se esse texto mudar depois do tique, ainda que só na divisão em
 linhas, o tique é retirado.
 
 ---
 
-## 3. Cite cada fonte, conforme a ABNT
+## 2. Cite cada fonte, conforme a ABNT
 
-Todo documento que escreve algo tirado de uma fonte — teoria fundamental, dicionário,
-ficha, planilha de perguntas — cita essa fonte ali mesmo, junto do fato, segundo a norma
+Todo documento que escreve algo tirado de uma fonte — análise da matéria, teoria
+fundamental, dicionário, ficha, planilha de perguntas — cita essa fonte ali mesmo, junto do fato, segundo a norma
 de citações (no Brasil, a ABNT NBR 10520, no sistema autor-data): a mesma entrada da
 referência (o autor, a instituição ou, sem autor, o começo do título), o ano e o local
 do trecho: a página impressa no documento ou, se ela não tiver número impresso, a
@@ -170,7 +167,8 @@ o nome e o ano, já com o *et al.* e as letras de desempate quando a norma pede 
 pronta na conferência das referências; o que cada norma pede, item por item, e o que cabe
 ao script, aos dados e a quem escreve, está nas [Regras da ABNT](regras-abnt.md).
 
-As referências completas de todas as fontes citadas — as aulas e o material de fora —
+As referências completas de todas as fontes citadas — as aulas, as fontes da pesquisa e
+o material de fora —
 ficam num documento só, `docs/REFERENCIAS.md`, como a lista de referências do fim de um
 trabalho: em ordem alfabética, segundo a norma de referências (ABNT NBR 6023), e nada
 além delas. Ele não diz onde cada fonte foi usada, porque isso é o papel da citação em
@@ -200,10 +198,99 @@ tique é retirado.
 
 ---
 
+## 3. Descubra o formato da disciplina
+
+Com as fontes transcritas, conferidas e citáveis, decida o formato da disciplina: o curso,
+a disciplina e o nível de estudo; que tipos de conhecimento o material traz e que forma de
+estudo serve a cada um; e, pros tipos que pedem uma grade fixa, os itens, os eixos da
+ficha e os subtópicos de cada um, os elos do dicionário e as colunas dos cartões. O
+formato nasce da própria matéria, não de um molde: os itens, os eixos e os elos (seções 5
+a 7) são a resposta que serve a dois tipos de conhecimento, não a forma de toda
+disciplina.
+
+### Pesquise
+
+O formato se apoia em três bases, pesquisadas em fontes acadêmicas robustas e confiáveis
+— artigos revisados por pares, diretrizes de sociedades científicas e de órgãos oficiais,
+livros de referência da área:
+
+- como a matéria é conhecida, ensinada e cobrada nas áreas a que o material serve, no
+  nível delas;
+- o que a ciência da aprendizagem mostra sobre a forma de estudo que serve a cada tipo de
+  conhecimento;
+- o que a própria fonte e os autores dela dizem da abordagem: a quem ela se dirige, o que
+  trata como essencial, até onde vai.
+
+Cada fonte da pesquisa é lida inteira, sem ferramenta que corte ou resuma, e citada como
+diz a [seção 2](#2-cite-cada-fonte-conforme-a-abnt); os dados dela vão pro arquivo de
+fontes, como os de qualquer outra. A ementa ou o plano de ensino de uma oferta da
+disciplina mostra o que aquela oferta cobre, não como a matéria é estudada e cobrada nas
+áreas: isso vem da pesquisa. Os exercícios da própria fonte não são base do formato.
+
+### Analise cada parte do material
+
+Leia inteira a transcrição conferida de cada parte do material — capítulo, aula, unidade —
+e analise cada uma por si, sempre com as mesmas perguntas:
+
+1. Que tipos de conhecimento esta parte traz, e em que trecho está cada um?
+2. Quanto de cada tipo ela traz?
+3. Que forma de estudo serve a cada tipo, segundo a pesquisa?
+4. O que liga esta parte às outras: um conceito, um exemplo ou um processo que volta com
+   outro papel?
+
+Todo trecho da parte — parágrafo, tabela, figura, boxe, lista — entra em algum tipo: é isso
+que mostra que nada ficou de fora. Só o que não traz fato nenhum vai pro tipo "não é
+conteúdo de estudo", pela mesma linha da [seção 1](#1-trate-as-fontes-da-aula): fato
+contra enfeite, não importante contra pouco importante. Partes diferentes podem pesar
+muito diferente: uma pode ser quase toda de um tipo que outra nem tem. Os tipos saem do
+material, e a lista abaixo é ponto de partida, não limite: um trecho com um tipo que ela
+não tem ganha um tipo novo, com nome e definição, acrescentado aqui.
+
+| Tipo de conhecimento | O que é |
+|---|---|
+| Conceito e vocabulário | um termo, o que ele quer dizer e como se usa |
+| Classificação | grupos, categorias ou hierarquias, e o critério que separa cada um |
+| Contraste | duas ou mais coisas que diferem nos mesmos pontos |
+| Parte e função | um componente, o que ele faz e o que isso significa pro todo |
+| Processo em ordem | etapas em sequência, e o que acontece quando uma falha ou é bloqueada |
+| Causa e efeito | um fato explicado por outro: o porquê |
+| Item com os mesmos tipos de fato | coisas da mesma espécie que se aprendem uma a uma, cada uma com os mesmos tipos de fato: os itens e os eixos da ficha (seção 5C) |
+| História em cadeia | fatos ligados em sequência, cada um levando ao seguinte: os elos do dicionário (seção 5B) |
+| Exemplo recorrente | um caso, um agente ou um exemplo que volta em vários trechos, mostrando a cada vez uma coisa |
+| Exceção | o caso que foge de uma regra, e por quê |
+| Número com sentido | uma quantidade, um limite, um tempo ou uma dose, com a razão dele |
+| Relação nos dois sentidos | uma associação que se pede de um lado pro outro e de volta, como da causa aos efeitos e do efeito às causas |
+| Figura e esquema | o que está onde num desenho e como as partes dele se ligam |
+| Aplicação na prática | uma situação da área que pede uma decisão tirada do conteúdo |
+| Analogia e história | a comparação ou o episódio que a própria fonte usa pra fixar um ponto |
+| Não é conteúdo de estudo | o que não traz fato nenhum: bibliografia, créditos, enfeite |
+
+### Documente a análise
+
+A pesquisa e a análise vão pra análise da matéria (`docs/analise-da-materia.md`), escrita
+antes de qualquer material de estudo: o que se sabe das três bases, com a chamada de cada
+fonte; cada parte do material, trecho por trecho, com os tipos de conhecimento dela; o que
+liga as partes entre si; e a forma de estudo escolhida pra cada tipo, com o porquê. O
+trecho literal que sustenta cada ponto da pesquisa fica nas evidências da pesquisa
+(`docs/material-base/gerados-ocr/pesquisa/`), dentro da pasta protegida, porque é texto de
+terceiros: é contra ele que se confere a análise.
+
+### Grave o formato
+
+Da análise saem as respostas do [Descubra seu modelo](DESCUBRA-SEU-MODELO.md), que vão pro
+arquivo de formato, `dados/formato.json`, e se conferem com `python scripts/validar_dados.py
+dados/formato.json`. Uma IA pode propor cada resposta, dizendo por que ela cabe naquele
+curso e naquele nível; a decisão é da pessoa.
+
+Esse arquivo é a grade do que vem depois: é por ele que se sabe o que cada item precisa
+ter, o que a aula cobre e onde falta, antes de qualquer material ser escrito.
+
+---
+
 ## 4. Complete a aula com material de fora
 
 Se o material de aula não trouxer o que algum eixo da ficha pede pra um item (ver
-[seção 5](#5-escreva-três-documentos-de-conteúdo)), busque esse fato num material de fora
+[seção 5](#5-escreva-os-documentos-de-conteúdo)), busque esse fato num material de fora
 — de preferência um documento oficial ou de referência da área. O material de fora
 completa a aula, não a substitui: use-o só onde a aula não chega. Vale a mesma regra da
 aula: o fato tem de estar escrito nesse material, nunca deduzido.
@@ -234,11 +321,17 @@ no material com a ressalva escrita, nunca como certeza.
 
 ---
 
-## 5. Escreva três documentos de conteúdo
+## 5. Escreva os documentos de conteúdo
 
-Escreva, no mínimo, três documentos pra cada disciplina, cada um com uma função própria
-e exclusiva. Nos três, todo fato tirado de uma fonte leva a citação dela, como diz a
-[seção 3](#3-cite-cada-fonte-conforme-a-abnt):
+Os documentos de conteúdo seguem a análise da matéria
+([seção 3](#3-descubra-o-formato-da-disciplina)): cada tipo de conhecimento que ela acha
+ganha a forma de estudo que ela escolheu. Três documentos servem a tipos que aparecem em
+muitas disciplinas, cada um com uma função própria e exclusiva: a teoria fundamental, pro
+que vem antes de qualquer item; o dicionário, pra história em cadeia; e a ficha, pro item
+com os mesmos tipos de fato. Os outros tipos ganham o documento que os serve, como diz a
+[seção 8](#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova). Em todos, todo fato
+tirado de uma fonte leva a citação dela, como diz a
+[seção 2](#2-cite-cada-fonte-conforme-a-abnt):
 
 ### A) Teoria fundamental
 
@@ -320,7 +413,7 @@ conceito pelo nome em nenhum documento desse item, corrija — isso é uma lacun
 ## 8. Escreva um arquivo novo só quando a função for nova
 
 Antes de criar um documento novo, pergunte a si mesmo: que função esse conteúdo cumpre,
-e algum dos três tipos da [seção 5](#5-escreva-três-documentos-de-conteúdo) já cumpre
+e algum dos três tipos da [seção 5](#5-escreva-os-documentos-de-conteúdo) já cumpre
 essa função?
 
 Se o conteúdo for teoria geral — não a história de um item específico (dicionário), nem
@@ -329,7 +422,9 @@ de teoria fundamental, mesmo que essa teoria tenha vindo de uma parte separada d
 material de aula original; não crie um arquivo à parte só por isso. Só crie um arquivo
 novo quando a função em si for genuinamente nova, sem nenhum dos três tipos cobrindo
 ela — e nesse caso, descreva esse quarto tipo aqui também, porque ele passa a valer pra
-qualquer disciplina futura que usar este documento.
+qualquer disciplina futura que usar este documento. Um tipo de conhecimento da análise da
+matéria ([seção 3](#3-descubra-o-formato-da-disciplina)) que nenhum dos três documentos
+serve é o caso típico de função nova.
 
 ---
 
@@ -466,7 +561,7 @@ uma primeira passada, e a da pessoa, que é sempre o último elo.
 
 | O que se confere | Contra o quê | Script | Arquivo de conferência (no modelo) |
 |---|---|---|---|
-| Cada página da transcrição (de um documento HTML: o texto de cada imagem, e o resto, só pelo script) | A imagem da página no original (de um documento HTML: a própria imagem, e o texto da fonte) | `conferencia.py` | `CONFERENCIA-COM-IMAGEM.md` |
+| Cada página da transcrição (de um documento HTML ou de uma apresentação em pptx: o texto de cada imagem, e o resto, só pelo script) | A imagem da página no original (de um documento HTML ou de uma apresentação em pptx: a própria imagem, e o texto da fonte) | `conferencia.py` | `CONFERENCIA-COM-IMAGEM.md` |
 | Cada referência e a chamada dela | A folha de rosto ou a página da fonte | `referencias.py` | `CONFERENCIA-REFERENCIAS.md` |
 | Cada frase do material de fora e a classe dela | A página da fonte | `base_externa.py` | `CONFERENCIA-TRECHOS.md` |
 | Cada cartão | O trecho da prova, no lugar que a citação diz | `confere_cartoes.py` | `CONFERENCIA-CARTOES.md` |
@@ -482,9 +577,9 @@ sem o tique da pessoa, e o tique sai sozinho se a parte mudar depois dele.
 ## 12. Documente o recorte que você escolheu
 
 Não tente cobrir um tema por completo e de forma objetiva. Escolha quais itens entram,
-o quão fundo cada um vai, e o que é mais importante — geralmente em torno de uma grade
-curricular específica — e diga isso claramente no guia não técnico da disciplina, sem
-esconder que é um julgamento seu.
+o quão fundo cada um vai, e o que é mais importante — com base na análise da matéria
+([seção 3](#3-descubra-o-formato-da-disciplina)) — e diga isso claramente no guia não
+técnico da disciplina, sem esconder que é um julgamento seu.
 
 Densidades diferentes entre tipos de documento não são, por si só, inconsistência: é
 esperado que os cartões de revisão de um item específico
@@ -537,12 +632,13 @@ Trate cada uma dessas três categorias com um papel fixo, independente de discip
 
 - **Código** (os scripts): escolha uma licença de código aberto que exija que qualquer
   trabalho derivado também seja aberto.
-- **Conteúdo gerado** (teoria fundamental, dicionário, ficha, planilhas, a lista de
-  referências, e os documentos de metodologia): escolha uma licença de conteúdo que exija
-  dar crédito.
+- **Conteúdo gerado** (a análise da matéria, teoria fundamental, dicionário, ficha,
+  planilhas, a lista de referências e os documentos de metodologia): escolha uma licença
+  de conteúdo que exija dar crédito.
 - **Material de terceiros** (o material de aula original, sua transcrição literal, as
-  cópias do material de fora, a base de trechos dele e a prova dos cartões — ver as
-  seções [2](#2-trate-as-fontes-da-aula), [4](#4-complete-a-aula-com-material-de-fora) e
+  evidências da pesquisa, as cópias do material de fora, a base de trechos dele e a prova
+  dos cartões — ver as seções [1](#1-trate-as-fontes-da-aula),
+  [3](#3-descubra-o-formato-da-disciplina), [4](#4-complete-a-aula-com-material-de-fora) e
   [9](#9-cartões-de-revisão-espaçada)), tudo na pasta protegida:
   não coloque sob nenhuma licença deste projeto, porque quem mantém o projeto não é
   quem escreveu esse material. Nunca publique, de forma permanente — não "por
@@ -597,21 +693,23 @@ ou a uma fonte entra neles.
    mudanças dele), sem o histórico do modelo; ative também a conferência das mensagens e
    a proteção das fontes: é opcional, mas é ela que barra uma fonte que ia pro GitHub por
    engano (ver o [README dela](.githooks/README.md)).
-2. Guarde o material de aula original por convenção e decida o formato da disciplina
-   (seção 1): o nome do elo central do dicionário e os nomes dos eixos da ficha — tome
-   essa decisão de forma explícita, sem herdar de outra disciplina — gravados em
-   `dados/formato.json`, como diz o `DESCUBRA-SEU-MODELO.md`.
-3. Transcreva o material de aula por inteiro, literalmente, e confira a transcrição,
-   página por página, no arquivo de conferência (seção 2); grave os dados da referência
-   de cada aula em `dados/fontes.json` (seção 3) e leia tudo antes de escrever qualquer
-   coisa.
+2. Guarde o material de aula original por convenção, transcreva-o por inteiro,
+   literalmente, e confira a transcrição, página por página, no arquivo de conferência
+   (seção 1); grave os dados da referência de cada aula em `dados/fontes.json` (seção 2).
+3. Leia tudo, pesquise as três bases da seção 3, analise cada parte do material e escreva
+   a análise da matéria, com as evidências da pesquisa guardadas; só então decida o
+   formato da disciplina (seção 3) — as formas de estudo de cada tipo de conhecimento e,
+   se houver, o nome do elo central do dicionário e os nomes dos eixos da ficha, decididos
+   de forma explícita, sem herdar de outra disciplina —, gravado em `dados/formato.json`,
+   como diz o `DESCUBRA-SEU-MODELO.md`.
 4. Marque, item por item, o que a aula cobre de cada subtópico da grade; onde não
    cobrir, complete com material de fora, guardado, com base de trechos e citado (seções
-   3 e 4).
+   2 e 4).
 5. Escreva o documento de teoria fundamental primeiro — é onde as categorias que os
    itens específicos vão citar precisam estar definidas (seção 5).
 6. Escreva dicionário e ficha por item, citando os termos de teoria fundamental que se
-   aplicam a cada um (seções 5 a 7).
+   aplicam a cada um, e os documentos das outras formas de estudo da análise (seções 5 a
+   8).
 7. Gere as planilhas a partir do dicionário/ficha, com a prova de cada cartão, rode a
    conferência dos cartões e confira se as planilhas cobrem tudo que deveriam cobrir
    (seção 9).
@@ -635,7 +733,7 @@ ou a uma fonte entra neles.
    principais, sem contradição entre eles.
 3. Procure um termo definido em teoria fundamental que algum item usa implicitamente
    sem citar pelo nome em nenhum documento desse item.
-4. Procure um arquivo cujo nome não corresponda a nenhuma das funções da seção 5.
+4. Procure um arquivo cujo nome não corresponda a nenhuma das funções das seções 5 e 8.
 5. Confira se os quatro documentos de apresentação têm as mesmas seções que outras
    disciplinas já cobertas, mesmo que o conteúdo ainda seja "isto não foi feito ainda".
 6. Procure um fato do material original que não apareça em nenhum documento gerado.
@@ -650,9 +748,12 @@ ou a uma fonte entra neles.
    `docs/material-base/fontes-externas/`.
 9. Confira a base literal: a transcrição de cada página tem só o que está escrito nela,
    com a posição no arquivo e o número impresso, e tem o tique da pessoa no arquivo de
-   conferência (num documento HTML, cada imagem tem o tique da pessoa, e nenhuma página
-   tem erro do script); o arquivo de base de cada item não deixa frase sem classe nem subtópico
+   conferência (num documento HTML ou numa apresentação em pptx, cada imagem tem o tique
+   da pessoa, e nenhuma página tem erro do script); o arquivo de base de cada item não deixa frase sem classe nem subtópico
    sem marca, e cada página da conferência dos trechos tem o tique da pessoa.
+10. Confira a análise da matéria: cada parte do material está nela, trecho por trecho;
+    cada ponto da pesquisa tem a chamada da fonte e o trecho literal que o sustenta, nas
+    evidências da pesquisa; e cada forma de estudo escolhida diz por quê.
 
 ---
 

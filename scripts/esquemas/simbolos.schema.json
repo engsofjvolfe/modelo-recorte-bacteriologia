@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "simbolos.schema.json",
+  "type": "object",
+  "required": ["versao_schema", "fontes"],
+  "additionalProperties": true,
+  "properties": {
+    "versao_schema": { "const": 1 },
+    "fontes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -12,16 +12,17 @@ guia rápido de como estudar com o material. Este README apresenta o projeto: o 
 o recorte, como o material foi feito, de onde ele veio, as licenças e onde fica cada
 arquivo.
 
-Por enquanto, o projeto tem só a fonte transcrita: os documentos de estudo, as planilhas
-de pergunta e os baralhos ainda não foram escritos.
+Por enquanto, o projeto tem só as fontes transcritas: os documentos de estudo, as
+planilhas de pergunta e os baralhos ainda não foram escritos.
 
 ## Aviso importante — leia antes de usar
 
-Este conteúdo é construído a partir de um recorte de um livro-texto de Microbiologia (ver
-[Origem do conteúdo](#origem-do-conteúdo) abaixo), escolhido por quem mantém o projeto:
+Este conteúdo é construído a partir das aulas de uma disciplina de Microbiologia e de um
+recorte de um livro-texto da área (ver [Origem do conteúdo](#origem-do-conteúdo) abaixo),
+escolhido por quem mantém o projeto:
 
 - A seleção de quais itens entram, qual fato é "o mais importante" e qual resposta é "a
-  resposta esperada" reflete essa escolha e esse livro — não é a cobertura completa da
+  resposta esperada" reflete essa escolha, essas aulas e esse livro — não é a cobertura completa da
   literatura da área.
 - Simplificações são feitas pra organizar o conteúdo em histórias de causa e efeito, ou outros moldes, conforme o material se desenvolve, e
   em fichas secas, com uma resposta só pra cada tipo de fato, o que pode deixar de fora
@@ -36,17 +37,20 @@ Parte do trabalho é feita por processos automáticos, e parte com ajuda de IA. 
 do trabalho é uma de duas coisas:
 
 - **Mecânica:** feita por um programa, sempre do mesmo jeito, sem julgar o conteúdo —
-  copiar o texto do livro, página por página, conferir se a cópia é igual ao original,
+  copiar o texto das aulas, slide por slide, e o do livro, página por página, conferir
+  se a cópia é igual ao original,
   montar as referências, conferir se cada trecho citado está na fonte, montar os cartões
   do Anki.
 - **Julgamento:** de uma pessoa, contra a fonte — escolher o recorte, decidir cada fato
   e conferir, por último, o texto das figuras, cada referência e cada cartão.
 
-Neste projeto, o texto do livro foi copiado por um script, direto da versão digital, e é
-conferido por script contra ela, sem leitura por IA. A IA entrou na escrita e na
-adaptação dos scripts e confere, figura por figura, o texto de dentro das figuras, que foi
-lido por OCR, antes da verificação feita por uma pessoa; como esse texto foi escrito está
-em [`docs/texto-das-figuras.md`](docs/texto-das-figuras.md).
+Neste projeto, o texto das aulas e o do livro foram copiados por script, direto dos
+arquivos dos slides e da versão digital do livro, e são conferidos por script contra eles,
+sem leitura por IA. A IA entrou na escrita e na adaptação dos scripts. O texto de dentro
+das figuras foi lido por OCR. Nas figuras dos capítulos 12 a 17 do livro, a IA confere
+esse texto, figura por figura, antes da verificação feita por uma pessoa, e como ele foi
+escrito está em [`docs/texto-das-figuras.md`](docs/texto-das-figuras.md). Nas figuras dos
+capítulos 18 a 35 e nas das aulas, ele ficou como o OCR leu, sem revisão.
 
 ## Origem do conteúdo
 
@@ -56,13 +60,16 @@ fato, a fonte de onde ele veio, no sistema autor-data da ABNT; as referências c
 ficam em `docs/REFERENCIAS.md`, que o script `referencias.py` gera a partir dos dados de
 [`dados/fontes.json`](dados/fontes.json) assim que o formato da disciplina existir.
 
-O material de base é o recorte de bacteriologia — os capítulos 12 a 17, p. 116 a 181 — do
-livro *Microbiologia médica*, de Patrick R. Murray, Ken S. Rosenthal e Michael A. Pfaller
-(9. ed., Guanabara Koogan, 2022), lido na versão digital. Ele não foi produzido por quem
-mantém o projeto e não está coberto pela licença deste projeto. Por isso esse material
-nunca é publicado nem repassado. O mesmo
-vale para a transcrição dele, a base de trechos do material de fora e a prova de cada
-cartão, em `docs/material-base/gerados-ocr/`: são cópias de material de terceiros, usadas
+O material de base são as aulas da disciplina de Microbiologia do Departamento de
+Microbiologia, Imunologia e Parasitologia da Universidade Federal do Triângulo Mineiro, do
+Prof. Kennio Ferreira Paim — 15 apresentações de slides, das aulas 1 a 17 —, e o recorte de
+bacteriologia — os capítulos 12 a 35, p. 116 a 374 — do livro *Microbiologia médica*, de
+Patrick R. Murray, Ken S. Rosenthal e Michael A. Pfaller (9. ed., Guanabara Koogan, 2022),
+lido na versão digital. As aulas são a base principal, e o livro as respalda. Esse
+material não foi produzido por quem mantém o projeto e não está coberto pela licença deste
+projeto. Por isso ele nunca é publicado nem repassado. O mesmo
+vale para a transcrição dele, as evidências da pesquisa, a base de trechos do material de
+fora e a prova de cada cartão, em `docs/material-base/gerados-ocr/`: são cópias de material de terceiros, usadas
 só para conferir o que se escreve.
 
 Material de fora só entra onde o recorte não cobre o que algum eixo da
@@ -93,8 +100,8 @@ Consultar [MANUAL](MANUAL.md)
 
 ## Referências
 
-As referências de todas as fontes citadas no projeto — o livro do recorte e o material de
-fora (ver [Origem do conteúdo](#origem-do-conteúdo)) —, conforme a ABNT NBR 6023, ficam em
+As referências de todas as fontes citadas no projeto — as aulas, o livro do recorte e o
+material de fora (ver [Origem do conteúdo](#origem-do-conteúdo)) —, conforme a ABNT NBR 6023, ficam em
 `docs/REFERENCIAS.md`, gerado a partir de [`dados/fontes.json`](dados/fontes.json) quando o
 formato da disciplina existir.
 

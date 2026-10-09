@@ -1,7 +1,7 @@
 # Material de base (nunca publicado)
 
-Esta é a pasta protegida. Ela recebe o material de aula original da disciplina (PDFs de
-slides, um livro digital ou equivalente) e, na subpasta `fontes-externas/`, as cópias do material de fora
+Esta é a pasta protegida. Ela recebe o material de aula original da disciplina (slides,
+em PDF ou pptx, um livro digital ou equivalente) e, na subpasta `fontes-externas/`, as cópias do material de fora
 usado onde a aula não cobre um eixo (ver seção 4 da metodologia). Ela nunca muda de nome
 nem de lugar: é assim que a lista do que nunca vai pro GitHub e os scripts sabem sempre
 onde está o material de terceiros. É uma regra permanente, não uma pendência a resolver
@@ -11,19 +11,22 @@ depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteu
   mantém o projeto. Se você guarda o projeto no GitHub, a lista do que nunca vai pra lá
   (o arquivo `.gitignore`, na pasta principal do projeto) já deixa de fora tudo o que
   está aqui dentro, menos este README.
-- A referência de cada material — as aulas e o de fora — sai do arquivo de fontes
-  (`dados/fontes.json`) e vai pra lista de referências (`docs/REFERENCIAS.md`), que podem
-  ser publicados: o que fica de fora é a cópia, não a referência.
+- A referência de cada material — as aulas, as fontes da pesquisa e o de fora — sai do
+  arquivo de fontes (`dados/fontes.json`) e vai pra lista de referências
+  (`docs/REFERENCIAS.md`), que podem ser publicados: o que fica de fora é a cópia, não a
+  referência.
 - A transcrição do material de aula, letra por letra, e a base de trechos do material de
   fora ficam em `gerados-ocr/` — são a base contra a qual se confere tudo o que se
-  escreve, e também nunca são publicadas (ver as seções 2 e 4 da metodologia). Ali ficam
+  escreve, e também nunca são publicadas (ver as seções 1 e 4 da metodologia). Ali ficam
   também:
+  - as evidências da pesquisa da análise da matéria, na subpasta `pesquisa/`: o trecho
+    literal de cada fonte que sustenta um ponto da pesquisa (ver seção 3 da metodologia);
   - a base de cada item, `[item]-fontes-externas.md`;
   - a prova dos cartões de cada planilha, na subpasta `provas/` (ver seção 9 da
     metodologia);
   - os quatro arquivos de conferência, com as imagens deles na subpasta `imagens/`: o das
     transcrições contra a imagem de cada página, ou contra o texto e as imagens de um
-    documento HTML (`CONFERENCIA-COM-IMAGEM.md`, feito pelo
+    documento HTML ou de uma apresentação em pptx (`CONFERENCIA-COM-IMAGEM.md`, feito pelo
     script `conferencia.py`); o das referências contra a cópia de cada fonte
     (`CONFERENCIA-REFERENCIAS.md`, feito pelo `referencias.py`); o das frases do material
     de fora (`CONFERENCIA-TRECHOS.md`, feito pelo `base_externa.py`); e o dos cartões
@@ -37,7 +40,7 @@ depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteu
 - As subpastas daqui são as do modelo. Em cada projeto, quem diz onde fica cada coisa
   dentro desta pasta é o mapa do projeto, o `projeto.json` da pasta principal.
 - Antes de escrever qualquer coisa em `docs/material-gerado/`, leia este material
-  inteiro, sem ferramenta que corte ou resuma automaticamente o texto (ver seção 2 da
+  inteiro, sem ferramenta que corte ou resuma automaticamente o texto (ver seção 1 da
   metodologia).
 
 Este arquivo (`README.md`) é o único desta pasta que pode ser publicado — ele existe só

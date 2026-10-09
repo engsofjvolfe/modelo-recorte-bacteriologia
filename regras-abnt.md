@@ -72,7 +72,7 @@ Tudo nesta seção vem da NBR 10520 (Associação Brasileira de Normas Técnicas
   localização que ele tiver, como o slide (6.1.3, 7.1.4). Quando o texto diz o fato com
   outras palavras, a norma deixa o lugar opcional (7.2), mas o método pede o lugar sempre:
   é por ele que se confere o fato na fonte (ver a
-  [seção 3 da metodologia](metodologia-de-conteudo.md#3-cite-cada-fonte-conforme-a-abnt)). *O texto.*
+  [seção 2 da metodologia](metodologia-de-conteudo.md#2-cite-cada-fonte-conforme-a-abnt)). *O texto.*
 - Volume, tomo ou seção, quando houver, vêm antes da página, abreviados: (Silva, 2020,
   v. 2, p. 30) (7.1.3). *O texto.*
 
@@ -119,7 +119,7 @@ O método pede o fato com palavras próprias. Quando for preciso copiar:
 - O que foi só dito, numa palestra, numa conversa ou numa entrevista, e não está
   publicado é indicado no texto ou em nota, e não entra na lista (5.3, 7.1.7). O método,
   de todo jeito, não usa como fonte o que não está escrito no material (ver a
-  [seção 2 da metodologia](metodologia-de-conteudo.md#2-trate-as-fontes-da-aula)); o material
+  [seção 1 da metodologia](metodologia-de-conteudo.md#1-trate-as-fontes-da-aula)); o material
   escrito da aula, como os slides, é documento e tem referência. *O texto.*
 
 ## Referência (NBR 6023:2025)

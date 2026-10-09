@@ -4,7 +4,7 @@
 """
 Transcreve uma fonte em HTML que marca as paginas impressas -- como o capitulo de um livro
 digital (EPUB) -- e grava na pasta das transcricoes (no projeto.json, "gerados") no padrao
-da secao 2 da metodologia: uma secao por pagina impressa, com o titulo "## p. <numero
+da secao 1 da metodologia: uma secao por pagina impressa, com o titulo "## p. <numero
 impresso> (arquivo p. <ordem da pagina no documento>)". O texto e o do proprio documento,
 copiado sem leitura nenhuma; so o texto de dentro das imagens e lido, por OCR.
 
@@ -61,40 +61,22 @@ import json
 import os
 import posixpath
 import sys
-import unicodedata
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from comum import (CONTINUACAO, EXTENSOES_HTML, FIGURA, FIM_FIGURA, PASTA_NORMAS, ROTULO_PAGINA,  # noqa: E402
-                   SEM_TEXTO, acha_projeto, alvo_markdown, comando, dentro, le_html, lingua, paginas_html, percorre,
-                   separa_registro)
+                   SEM_TEXTO, acha_projeto, bloco_da_figura, confere_idioma_do_ocr, dentro, em_indice, escapa,
+                   grava_transcricao, junta, le_html, lembra_registro, lingua, paginas_html, percorre,
+                   registro_da_transcricao, tabela_markdown, texto_da_imagem)
 from validar_dados import esquema, le_dados  # noqa: E402
 
-MODO_OCR = "11"  # Tesseract --psm 11: texto esparso, cada pedaco numa linha, como os rotulos de uma figura
 ARQUIVO_IDIOMAS = PASTA_NORMAS / "idiomas.json"  # lingua (ISO 639-1) -> codigo do Tesseract (ISO 639-2)
 TITULOS = {f"h{n}": n for n in range(1, 7)}
 BLOCOS = {"address", "article", "aside", "blockquote", "body", "caption", "dd", "div", "dl", "dt", "figcaption",
           "figure", "footer", "header", "hr", "html", "li", "main", "nav", "ol", "p", "pre", "section", "ul", *TITULOS}
 
-
-def _indices(normais, especiais):
-    """Os caracteres que tem a versao de indice ou de expoente no Unicode, so os que voltam
-    ao normal pela normalizacao NFKC (e por ela que a conferencia compara o texto)."""
-    return {c: e for c, e in zip(normais, especiais) if unicodedata.normalize("NFKC", e) == c}
-
-
-INDICES = {"sup": _indices("0123456789+−=()in", "⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ⁱⁿ"),
-           "sub": _indices("0123456789+−=()aehijklmnoprstuvx", "₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ")}
-
-
-def escapa(texto):
-    texto = texto.replace("|", "\\|")
-    return "\\" + texto if texto.startswith("#") else texto
-
-
-def junta(partes):
-    return " ".join("".join(partes).split())
+INDICES = ("sub", "sup")  # as marcas de indice e de expoente
 
 
 class Tabela:
@@ -171,8 +153,6 @@ class Tabela:
         legenda = junta(self.legenda)
         if not grade:
             return [(self.pagina, escapa(legenda))] if legenda else []
-        linha = lambda cs: "| " + " | ".join(cs) + " |"  # noqa: E731
-        separador = "|" + "|".join("---" for _ in range(colunas)) + "|"
         grupos = []
         for (pagina, _), cs in zip(self.linhas, grade):
             if grupos and grupos[-1][0] == pagina:
@@ -183,10 +163,10 @@ class Tabela:
         out = [(grupos[0][0], escapa(legenda))] if legenda else []
         for k, (pagina, linhas) in enumerate(grupos):
             if k == 0:
-                out.append((pagina, "\n".join([linha(linhas[0]), separador] + [linha(l) for l in linhas[1:]])))
+                out.append((pagina, tabela_markdown(linhas, colunas)))
             else:
                 out.append((pagina, CONTINUACAO.format(ROTULO_PAGINA.format(inicio if inicio is not None else "?"))))
-                out.append((pagina, "\n".join([linha([""] * colunas), separador] + [linha(l) for l in linhas])))
+                out.append((pagina, tabela_markdown([[""] * colunas] + linhas, colunas)))
         return out
 
 
@@ -288,8 +268,9 @@ class Transcricao:
                 tipo, partes, _ = self.indice
                 self.indice = None
                 bruto = "".join(partes)
-                if all(c in INDICES[tipo] or c.isspace() for c in bruto):
-                    self.texto("".join(INDICES[tipo].get(c, c) for c in bruto))
+                convertido = em_indice(tipo, bruto)
+                if convertido is not None:
+                    self.texto(convertido)
                 else:
                     self.aviso(f"{'expoente' if tipo == 'sup' else 'índice'} sem caractere Unicode, ficou na linha: "
                                f"\"{junta(partes)}\"")
@@ -348,14 +329,6 @@ def nivel_mais_alto(arvore):
     return min(niveis, default=1)
 
 
-def idiomas_instalados():
-    try:
-        saida = comando(["tesseract", "--list-langs"])
-    except FileNotFoundError:
-        raise SystemExit("ERRO: o Tesseract não está instalado -- veja \"Antes da primeira vez\" no README dos scripts")
-    return {l.strip() for l in saida.split("\n")[1:] if l.strip()}
-
-
 def idioma_do_ocr(arvore, escolhido):
     """O idioma do texto das imagens, no codigo do Tesseract: o escolhido com --idioma ou,
     sem ele, o que o documento declara (lang ou xml:lang do elemento html), pela tabela da
@@ -382,20 +355,17 @@ def leitor_de_figuras(documento, saida, idioma):
         arquivo = (documento.parent / unquote(partes.path)).resolve() if src and not partes.scheme else None
         if arquivo is None or not arquivo.is_file():
             aviso(f"a imagem {src or '(sem endereço)'} não está na cópia da fonte: ficou sem o texto dela")
-            return [FIGURA.format(alvo_markdown(src)), FIM_FIGURA]
+            return bloco_da_figura(src, [])
         if not conferido:
             if idioma is None:
                 raise SystemExit(f"ERRO: {documento.name} não declara o idioma (lang), ou ele não está na tabela "
                                  f"{ARQUIVO_IDIOMAS.name}: diga o idioma do texto das imagens com --idioma")
-            faltam = [i for i in idioma.split("+") if i not in idiomas_instalados()]
-            if faltam:
-                raise SystemExit("ERRO: o Tesseract não tem os dados do idioma " + ", ".join(faltam) + " -- no Linux: "
-                                 + " ".join(f"sudo apt install tesseract-ocr-{i}" for i in faltam))
+            confere_idioma_do_ocr(idioma)
             conferido.append(True)
-        lido = comando(["tesseract", str(arquivo), "stdout", "-l", idioma, "--psm", MODO_OCR]).replace("\f", "")
-        caminho = Path(os.path.relpath(arquivo, saida.parent)).as_posix()
-        return [FIGURA.format(alvo_markdown(caminho))] + [escapa(l.strip()) for l in lido.split("\n") if l.strip()] \
-            + [FIM_FIGURA]
+        linhas, problema = texto_da_imagem(arquivo, idioma)
+        if problema:
+            aviso(problema)
+        return bloco_da_figura(Path(os.path.relpath(arquivo, saida.parent)).as_posix(), linhas)
 
     return figura
 
@@ -404,13 +374,9 @@ def transcreve(documento, pasta, idioma, substituir):
     """Grava a transcricao do documento; devolve (caminho dela, se ela ja tinha o registro
     da fonte), ou None se ela ja existia e ficou como estava."""
     saida = pasta / f"{documento.stem}.md"
-    registro = []
-    if saida.exists():
-        if not substituir:
-            print(f"Já existe: {saida} (pode ter o texto das imagens conferido; pra fazer de novo por cima, use "
-                  "--substituir)")
-            return None
-        registro, _ = separa_registro(saida.read_text(encoding="utf-8"))
+    registro = registro_da_transcricao(saida, substituir)
+    if registro is None:
+        return None
     arvore = le_html(documento.read_text(encoding="utf-8"))
     t = Transcricao(nivel_mais_alto(arvore), leitor_de_figuras(documento, saida, idioma_do_ocr(arvore, idioma)))
     for ev in percorre(arvore):
@@ -419,8 +385,7 @@ def transcreve(documento, pasta, idioma, substituir):
     if not any(p.rotulo is not None for p in paginas_html(documento.read_text(encoding="utf-8"))):
         print(f"CONFERIR: {documento.name} não tem nenhuma marca de página: a transcrição ficou numa página só, "
               "\"p. ?\"")
-    saida.parent.mkdir(parents=True, exist_ok=True)
-    saida.write_text("\n".join(["---"] + registro + ["---", "", ""] if registro else []) + texto, encoding="utf-8")
+    grava_transcricao(saida, registro, texto)
     print(f"{saida}: {paginas} página(s), {texto.count(FIM_FIGURA)} imagem(ns)")
     for rotulo, aviso in avisos:
         print(f"CONFERIR: {saida.name}, {rotulo}: {aviso}")
@@ -553,12 +518,10 @@ def main(argv=None):
     else:
         raise SystemExit(f"ERRO: {a.origem.name} não é HTML (.xhtml, .html, .htm) nem captura (.har)")
 
-    relativo = lambda c: Path(os.path.relpath(Path(c).resolve(), projeto.raiz)).as_posix()  # noqa: E731
     for documento in documentos:
         feito = transcreve(documento, projeto.caminho("gerados"), a.idioma, a.substituir)
         if feito and not feito[1]:
-            print(f"FALTA: registrar de qual arquivo a transcrição veio: python scripts/registrar_fonte.py "
-                  f"{relativo(feito[0])} {relativo(documento)} [chave]")
+            lembra_registro(projeto, feito[0], documento)
     for erro in erros:
         print(f"ERRO: {erro}")
     if a.origem.suffix.lower() == ".har" and documentos:
