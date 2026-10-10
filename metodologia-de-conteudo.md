@@ -370,8 +370,13 @@ com os mesmos tipos de fato. Os outros tipos ganham o documento que os serve, co
 palavras próprias e de forma didática, ensinando: claros, explicados e instrutivos, sem
 jargão solto, nunca um texto que se lê como o livro de onde o fato veio — um termo técnico vem
 explicado onde aparece pela primeira vez, ou citado pela categoria que o define
-([seção 7](#7-cite-uma-categoria-em-vez-de-redefinir)). Em todos, todo fato tirado de uma
-fonte leva a citação dela, como diz a [seção 2](#2-cite-cada-fonte-conforme-a-abnt):
+([seção 7](#7-cite-uma-categoria-em-vez-de-redefinir)). Escreva como quem ensina a matéria a
+alguém que nunca a viu: cada fato se apoia no que o leitor já sabe ou no que o documento
+ensinou antes, o nome técnico chega depois do que ele nomeia, e o básico vem antes do que
+depende dele. Ensinar não é mostrar: nenhum fato fica só listado ou apontado numa figura,
+numa página ou numa fonte — o que a figura mostra é escrito e explicado no documento. E o
+texto é o mais enxuto que dá sem perder o tom, a explicação nem o conteúdo. Em todos, todo
+fato tirado de uma fonte leva a citação dela, como diz a [seção 2](#2-cite-cada-fonte-conforme-a-abnt):
 
 ### A) Teoria fundamental
 

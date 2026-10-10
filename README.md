@@ -50,7 +50,8 @@ sem leitura por IA. A IA entrou na escrita e na adaptação dos scripts. O texto
 das figuras foi lido por OCR. Nas figuras dos capítulos 12 a 17 do livro, a IA confere
 esse texto, figura por figura, antes da verificação feita por uma pessoa, e como ele foi
 escrito está em [`docs/texto-das-figuras.md`](docs/texto-das-figuras.md). Nas figuras dos
-capítulos 18 a 35 e nas das aulas, ele ficou como o OCR leu, sem revisão.
+capítulos 18 a 35 e nas das aulas, ele é o que o OCR leu, e só uma pessoa, olhando a imagem,
+o corrige.
 
 ## Origem do conteúdo
 
