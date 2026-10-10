@@ -71,7 +71,7 @@ documento:
 
 - **Dicionário de gatilhos** — conta cada item como uma história em cadeia. Bom pra
   entender o porquê.
-- **Ficha determinística** — os mesmos itens, em tabela seca e direta. Bom pra revisão
+- **Ficha determinística** — os mesmos itens, em tabela direta. Bom pra revisão
   de véspera de prova.
 - **Teoria fundamental** — os conceitos gerais que vêm antes de entrar em item
   específico.

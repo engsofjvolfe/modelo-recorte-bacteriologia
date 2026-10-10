@@ -92,8 +92,7 @@ dela e de `[fim da imagem]` (figura sem texto fica só com `[imagem]`); a legend
 fora da figura, vem no lugar dela na página. A marca diz onde a figura está, nunca o que
 ela mostra. Guarde a transcrição em
 `docs/material-base/gerados-ocr/` e, assim que ela for criada, registre no topo dela de
-qual arquivo veio, com `python scripts/registrar_fonte.py [transcrição] [arquivo
-original] [chave]` — se o arquivo original estiver fora da pasta protegida, o script
+qual arquivo veio, com `python scripts/registrar_fonte.py [transcrição] [arquivo original] [chave]` — se o arquivo original estiver fora da pasta protegida, o script
 oferece levá-lo pra lá antes de registrar. A chave é a mesma da referência dessa fonte (ver a
 [seção 2](#2-cite-cada-fonte-conforme-a-abnt)); o script grava a chave, o caminho do
 arquivo e a impressão digital dele — um código calculado a partir do conteúdo do
@@ -119,8 +118,7 @@ imagem, no lugar dela: `![imagem]([caminho da imagem])`, seguida do texto escrit
 dela, lido por OCR, e de `[fim da imagem]`, que fecha a marca sempre, mesmo sem texto.
 
 Quando o material é uma apresentação de slides em pptx, a transcrição também sai do
-próprio arquivo, sem leitura nenhuma: `python scripts/transcrever_pptx.py [apresentação]
---idioma [idioma do texto das imagens]` copia o texto de cada slide, com o título
+próprio arquivo, sem leitura nenhuma: `python scripts/transcrever_pptx.py [apresentação] --idioma [idioma do texto das imagens]` copia o texto de cada slide, com o título
 `## slide [posição] (arquivo p. [posição])`, e marca cada imagem como no documento HTML,
 com o texto de dentro dela lido por OCR. As imagens saem do pptx pra uma pasta ao lado
 dele, dentro da pasta protegida.
@@ -186,8 +184,7 @@ cópia do material, não a referência a ele.
 
 Ninguém escreve esse documento à mão. Os dados de cada fonte — autoria, título, local,
 editora, data, endereço, data de acesso, com uma chave curta — ficam no arquivo de
-fontes, `dados/fontes.json` (copiado de `modelo-dados/fontes.json`), e `python
-scripts/referencias.py` monta cada referência pela norma, em ordem alfabética, e grava o
+fontes, `dados/fontes.json` (copiado de `modelo-dados/fontes.json`), e `python scripts/referencias.py` monta cada referência pela norma, em ordem alfabética, e grava o
 `docs/REFERENCIAS.md`. O mês de cada data sai abreviado como manda a tabela do Anexo A da
 ABNT NBR 6023, edição de 2025; o modelo guarda essa tabela em `scripts/normas/meses.json`.
 Junto, o script gera a conferência das referências: cada referência e a chamada dela como
@@ -208,23 +205,41 @@ formato nasce da própria matéria, não de um molde: os itens, os eixos e os el
 a 7) são a resposta que serve a dois tipos de conhecimento, não a forma de toda
 disciplina.
 
+O formato tem duas bases, que não se substituem: a análise do material, que mostra o que
+ele traz e garante que nada dele fica de fora, e a pesquisa, que mostra o que a
+disciplina precisa cobrir nas áreas a que serve e com que profundidade. Uma divisão feita
+só com a lista de tipos de conhecimento é um inventário do material, não o formato.
+
 ### Pesquise
 
-O formato se apoia em três bases, pesquisadas em fontes acadêmicas robustas e confiáveis
+O formato se pode se apoiar em três bases, pesquisadas em fontes acadêmicas robustas e confiáveis
 — artigos revisados por pares, diretrizes de sociedades científicas e de órgãos oficiais,
-livros de referência da área:
+livros de referência da área (não é uma busca extensiva, apenas o suficiente para compreender como pode ser cobrada ou como deve ser  a disciplina):
 
 - como a matéria é conhecida, ensinada e cobrada nas áreas a que o material serve, no
-  nível delas;
+  nível delas — as diretrizes curriculares dos cursos, os documentos das associações de
+  ensino e dos conselhos da área, as provas oficiais que avaliam os cursos e os
+  documentos que dizem o que elas cobram. É daqui que sai o nível de cobrança: ele é
+  resultado de pesquisa, não uma escolha;
 - o que a ciência da aprendizagem mostra sobre a forma de estudo que serve a cada tipo de
   conhecimento;
 - o que a própria fonte e os autores dela dizem da abordagem: a quem ela se dirige, o que
   trata como essencial, até onde vai.
 
-Cada fonte da pesquisa é lida inteira, sem ferramenta que corte ou resuma, e citada como
-diz a [seção 2](#2-cite-cada-fonte-conforme-a-abnt); os dados dela vão pro arquivo de
-fontes, como os de qualquer outra. A ementa ou o plano de ensino de uma oferta da
-disciplina mostra o que aquela oferta cobre, não como a matéria é estudada e cobrada nas
+A pesquisa é sobre a forma, não sobre o conteúdo: como a matéria é pedida nas áreas, em
+que nível, e que forma de estudo serve a cada tipo. O conteúdo vem do material. Quando o
+material serve a mais de uma área, a pesquisa faz as mesmas perguntas a cada uma, sem
+deixar nenhuma de fora, na ordem que se decidir.
+
+A pesquisa é mecânica onde dá pra ser. Cada busca fica registrada nas evidências, com
+onde foi feita, os termos e o que trouxe. O texto de cada fonte é tirado por programa,
+direto do arquivo oficial, sem IA lendo ou resumindo no meio, e é lido inteiro, sem
+corte. Fonte da qual não se tira o texto assim, como uma imagem ou um arquivo escaneado,
+não é lida; entre duas fontes, fica a de texto oficial que se lê sem extração nenhuma.
+Nenhum ponto da pesquisa é deduzido ou adivinhado: cada um tem o trecho literal que o
+diz. Cada fonte é citada como diz a [seção 2](#2-cite-cada-fonte-conforme-a-abnt), e os
+dados dela vão pro arquivo de fontes, como os de qualquer outra. A ementa ou o plano de
+ensino de uma oferta da disciplina mostra o que aquela oferta cobre, não como a matéria é estudada e cobrada nas
 áreas: isso vem da pesquisa. Os exercícios da própria fonte não são base do formato.
 
 ### Analise cada parte do material
@@ -237,6 +252,8 @@ e analise cada uma por si, sempre com as mesmas perguntas:
 3. Que forma de estudo serve a cada tipo, segundo a pesquisa?
 4. O que liga esta parte às outras: um conceito, um exemplo ou um processo que volta com
    outro papel?
+5. Por que caminhos esta parte se estuda: de cada item para os efeitos dele, dos efeitos
+   para os itens que podem causá-los, ou outro que a própria fonte use?
 
 Todo trecho da parte — parágrafo, tabela, figura, boxe, lista — entra em algum tipo: é isso
 que mostra que nada ficou de fora. Só o que não traz fato nenhum vai pro tipo "não é
@@ -246,31 +263,50 @@ muito diferente: uma pode ser quase toda de um tipo que outra nem tem. Os tipos 
 material, e a lista abaixo é ponto de partida, não limite: um trecho com um tipo que ela
 não tem ganha um tipo novo, com nome e definição, acrescentado aqui.
 
-| Tipo de conhecimento | O que é |
-|---|---|
-| Conceito e vocabulário | um termo, o que ele quer dizer e como se usa |
-| Classificação | grupos, categorias ou hierarquias, e o critério que separa cada um |
-| Contraste | duas ou mais coisas que diferem nos mesmos pontos |
-| Parte e função | um componente, o que ele faz e o que isso significa pro todo |
-| Processo em ordem | etapas em sequência, e o que acontece quando uma falha ou é bloqueada |
-| Causa e efeito | um fato explicado por outro: o porquê |
-| Item com os mesmos tipos de fato | coisas da mesma espécie que se aprendem uma a uma, cada uma com os mesmos tipos de fato: os itens e os eixos da ficha (seção 5C) |
-| História em cadeia | fatos ligados em sequência, cada um levando ao seguinte: os elos do dicionário (seção 5B) |
-| Exemplo recorrente | um caso, um agente ou um exemplo que volta em vários trechos, mostrando a cada vez uma coisa |
-| Exceção | o caso que foge de uma regra, e por quê |
-| Número com sentido | uma quantidade, um limite, um tempo ou uma dose, com a razão dele |
-| Relação nos dois sentidos | uma associação que se pede de um lado pro outro e de volta, como da causa aos efeitos e do efeito às causas |
-| Figura e esquema | o que está onde num desenho e como as partes dele se ligam |
-| Aplicação na prática | uma situação da área que pede uma decisão tirada do conteúdo |
-| Analogia e história | a comparação ou o episódio que a própria fonte usa pra fixar um ponto |
-| Não é conteúdo de estudo | o que não traz fato nenhum: bibliografia, créditos, enfeite |
+| Tipo de conhecimento             | O que é                                                                                                                                                                                                   |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Conceito e vocabulário          | um termo, o que ele quer dizer e como se usa                                                                                                                                                               |
+| Classificação                  | grupos, categorias ou hierarquias, e o critério que separa cada um                                                                                                                                        |
+| Contraste                        | duas ou mais coisas que diferem nos mesmos pontos                                                                                                                                                          |
+| Parte e função                 | um componente, o que ele faz e o que isso significa pro todo                                                                                                                                               |
+| Processo em ordem                | etapas em sequência, e o que acontece quando uma falha ou é bloqueada                                                                                                                                    |
+| Causa e efeito                   | um fato explicado por outro: o porquê                                                                                                                                                                     |
+| Item com os mesmos tipos de fato | coisas da mesma espécie que se aprendem uma a uma, cada uma com os mesmos tipos de fato: os itens e os eixos da ficha (seção 5C)                                                                        |
+| História em cadeia              | fatos ligados em sequência, cada um levando ao seguinte: os elos do dicionário (seção 5B)                                                                                                              |
+| Exemplo recorrente               | um caso, um agente ou um exemplo que volta em vários trechos, mostrando a cada vez uma coisa                                                                                                              |
+| Exceção                        | o caso que foge de uma regra, e por quê                                                                                                                                                                   |
+| Número com sentido              | uma quantidade, um limite, um tempo ou uma dose, com a razão dele                                                                                                                                         |
+| Relação nos dois sentidos      | uma associação que se pede de um lado pro outro e de volta, como da causa aos efeitos e do efeito às causas                                                                                             |
+| Figura e esquema                 | o que está onde num desenho e como as partes dele se ligam                                                                                                                                                |
+| Aplicação na prática          | uma situação da área que pede uma decisão tirada do conteúdo                                                                                                                                          |
+| Analogia e história             | a comparação ou o episódio que a própria fonte usa pra fixar um ponto                                                                                                                                  |
+| Mnemônico da fonte              | o recurso de memorização que a própria fonte dá pra guardar um fato — uma frase, uma sigla, um jogo de letras —, sem ser comparação nem episódio                                                  |
+| Marco histórico                 | um fato situado no tempo da história da matéria: quando ou por quem algo foi descoberto ou introduzido, o primeiro de uma classe, como o uso de algo mudou com o tempo, sem que um fato leve ao seguinte |
+| Não é conteúdo de estudo      | o que não traz fato nenhum: bibliografia, créditos, enfeite                                                                                                                                              |
+
+Na análise, da figura entram a legenda, o texto escrito em volta dela e o texto lido por
+OCR dentro dela, quando trazem fato; a imagem em si não é lida nem descrita. O fato de
+dentro da figura entra com as palavras lidas e marcado como vindo da figura; texto
+ilegível não entra e, quando parece esconder um fato, fica anotado como dúvida.
+
+Leia todas as partes antes de dividir a matéria. Cada parte se analisa por si, com as
+mesmas perguntas, mas a divisão em grupos sai depois, com todas lidas: o que se repete
+entre as partes forma um grupo, e cada grupo ganha uma abordagem — não uma por página,
+por slide ou por parte. Como cada grupo se divide por dentro é uma decisão à parte.
+
+Quando a matéria se estuda por mais de um caminho (pergunta 5), cada caminho é parte do
+formato, com a forma de estudo dele, e não só um tipo de fato: a relação nos dois
+sentidos é um fato que se pede de um lado e do outro; o caminho é um jeito de organizar a
+matéria inteira. A própria fonte pode dizer quais caminhos usa, ao explicar a abordagem
+dela.
 
 ### Documente a análise
 
 A pesquisa e a análise vão pra análise da matéria (`docs/analise-da-materia.md`), escrita
 antes de qualquer material de estudo: o que se sabe das três bases, com a chamada de cada
 fonte; cada parte do material, trecho por trecho, com os tipos de conhecimento dela; o que
-liga as partes entre si; e a forma de estudo escolhida pra cada tipo, com o porquê. O
+liga as partes entre si; os grupos em que a matéria se divide e os caminhos por que ela se
+estuda; e a forma de estudo escolhida pra cada tipo e cada caminho, com o porquê. O
 trecho literal que sustenta cada ponto da pesquisa fica nas evidências da pesquisa
 (`docs/material-base/gerados-ocr/pesquisa/`), dentro da pasta protegida, porque é texto de
 terceiros: é contra ele que se confere a análise.
@@ -278,8 +314,7 @@ terceiros: é contra ele que se confere a análise.
 ### Grave o formato
 
 Da análise saem as respostas do [Descubra seu modelo](DESCUBRA-SEU-MODELO.md), que vão pro
-arquivo de formato, `dados/formato.json`, e se conferem com `python scripts/validar_dados.py
-dados/formato.json`. Uma IA pode propor cada resposta, dizendo por que ela cabe naquele
+arquivo de formato, `dados/formato.json`, e se conferem com `python scripts/validar_dados.py dados/formato.json`. Uma IA pode propor cada resposta, dizendo por que ela cabe naquele
 curso e naquele nível; a decisão é da pessoa.
 
 Esse arquivo é a grade do que vem depois: é por ele que se sabe o que cada item precisa
@@ -292,7 +327,9 @@ ter, o que a aula cobre e onde falta, antes de qualquer material ser escrito.
 Se o material de aula não trouxer o que algum eixo da ficha pede pra um item (ver
 [seção 5](#5-escreva-os-documentos-de-conteúdo)), busque esse fato num material de fora
 — de preferência um documento oficial ou de referência da área. O material de fora
-completa a aula, não a substitui: use-o só onde a aula não chega. Vale a mesma regra da
+completa a aula, não a substitui: use-o só onde a aula não chega. Uma aula em slides
+costuma trazer os pontos da matéria, não o conteúdo de cada um: aí a aula não chega ao
+conteúdo, e entra tudo o que o material de fora diz sobre cada ponto dela. Vale a mesma regra da
 aula: o fato tem de estar escrito nesse material, nunca deduzido.
 
 Guarde uma cópia de cada material de fora junto do material de aula, na subpasta das
@@ -329,9 +366,12 @@ ganha a forma de estudo que ela escolheu. Três documentos servem a tipos que ap
 muitas disciplinas, cada um com uma função própria e exclusiva: a teoria fundamental, pro
 que vem antes de qualquer item; o dicionário, pra história em cadeia; e a ficha, pro item
 com os mesmos tipos de fato. Os outros tipos ganham o documento que os serve, como diz a
-[seção 8](#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova). Em todos, todo fato
-tirado de uma fonte leva a citação dela, como diz a
-[seção 2](#2-cite-cada-fonte-conforme-a-abnt):
+[seção 8](#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova). Todos são escritos com
+palavras próprias e de forma didática, ensinando: claros, explicados e instrutivos, sem
+jargão solto, nunca um texto que se lê como o livro de onde o fato veio — um termo técnico vem
+explicado onde aparece pela primeira vez, ou citado pela categoria que o define
+([seção 7](#7-cite-uma-categoria-em-vez-de-redefinir)). Em todos, todo fato tirado de uma
+fonte leva a citação dela, como diz a [seção 2](#2-cite-cada-fonte-conforme-a-abnt):
 
 ### A) Teoria fundamental
 
@@ -364,7 +404,7 @@ documento de teoria fundamental, cite essa categoria pelo nome (ver
 
 ### C) Ficha determinística
 
-Reorganize os mesmos itens do dicionário numa tabela seca e direta. Use sempre o mesmo
+Reorganize os mesmos itens do dicionário numa tabela direta. Use sempre o mesmo
 conjunto de linhas — que você vai chamar de **eixos** — pra todo item da disciplina.
 Isso é o que faz a ficha boa pra revisão rápida, ao contrário do dicionário, que é bom
 pra entender o porquê.
@@ -444,21 +484,22 @@ Assim, o script da [seção 10](#10-gere-o-baralho-com-o-script-do-modelo) sabe 
 arquivos são planilhas de pergunta só pelo nome, sem que ninguém precise listar cada
 arquivo um por um dentro do código.
 
-Você não precisa extrair essas perguntas à mão. Envie o dicionário e a ficha (já
-escritos, seção 5) pra um assistente de IA, com uma instrução como esta:
+Você não precisa extrair essas perguntas à mão. Envie os documentos de conteúdo (já
+escritos, seção 5) e a análise da matéria (seção 3) pra um assistente de IA, com uma
+instrução como esta:
 
-> A partir do dicionário de gatilhos e da ficha determinística em anexo, gere uma
-> planilha CSV de perguntas e respostas de revisão espaçada. Use uma coluna `pergunta`,
-> uma `resposta`, escrita com palavras próprias, e uma `fonte`, com a citação que o fato
-> já tem no dicionário ou na ficha (as três obrigatórias), mais as colunas [nomeie as
-> que fizerem sentido pra sua disciplina — por exemplo, o que identifica o item, o tipo
-> de pergunta]. Para cada item específico, gere uma quantidade pequena e fixa de perguntas (a
-> mesma quantidade pra todo item da disciplina), cobrindo os fatos de maior valor de
-> revisão espalhados pelos diferentes elos/eixos daquele item — não repita sempre o
-> mesmo tipo de pergunta pra todos os itens se isso deixar de fora um fato importante e
-> específico de um item em particular. Para a teoria fundamental, gere uma pergunta pra
-> cada conceito testável, já que cada conceito aparece uma única vez. Não invente
-> nenhum fato que não esteja no texto do dicionário/ficha fornecido. Na coluna `fonte`,
+> A partir dos documentos de conteúdo em anexo, gere uma planilha CSV de perguntas e
+> respostas de revisão espaçada. Use uma coluna `pergunta`, uma `resposta`, escrita com
+> palavras próprias, e uma `fonte`, com a citação que o fato já tem no documento (as três
+> obrigatórias), mais as colunas [nomeie as que fizerem sentido pra sua disciplina — por
+> exemplo, o que identifica o item, o tipo de pergunta]. Cada cartão pergunta um fato só,
+> com uma resposta curta. Todo fato dos documentos ganha pelo menos um cartão: eles só
+> têm o que a aula traz e o que o material de fora diz sobre os pontos dela, e tudo isso
+> pode ser cobrado. Um fato pode dar mais de um cartão: uma associação pedida nos dois sentidos
+> ganha um cartão em cada sentido, e uma lista vira cartões menores — um por elemento, ou
+> um por posição quando a ordem importa —, em vez de um cartão que pede a lista inteira.
+> Escreva a pergunta e a resposta de forma clara, explicada e sem jargão solto. Não
+> invente nenhum fato que não esteja no texto dos documentos fornecidos. Na coluna `fonte`,
 > ponha só as chamadas, cada uma com a página ou o slide. Gere também a prova de cada
 > pergunta, no arquivo de prova: a pergunta igual à da planilha, o trecho da
 > transcrição ou da base do material de fora que diz o fato, copiado letra por letra, e
@@ -473,9 +514,9 @@ prova — se o trecho está, letra por letra, no lugar que a citação do cartã
 não falta prova pra nenhum cartão nem cartão pra nenhuma prova — e gera a conferência dos
 cartões, com tique da IA e da pessoa.
 
-Depois, confira a planilha lado a lado com o dicionário e a ficha, e cada cartão na
-conferência dos cartões: a planilha cobre tudo que deveria cobrir, sem inventar nem
-perder nada? A resposta de cada cartão diz o que o trecho diz, com a ressalva quando a
+Depois, confira a planilha lado a lado com os documentos de conteúdo, e cada cartão na
+conferência dos cartões: cada fato dos documentos tem cartão, sem inventar nem perder
+nada? A resposta de cada cartão diz o que o trecho diz, com a ressalva quando a
 fonte trata como possibilidade? Essa conferência é sua, não da IA — é o que garante que
 nada ficou de fora.
 
@@ -514,6 +555,7 @@ conteúdo, um assistente de IA integrado ao editor de código, ou um assistente 
 na internet. Ela descreve o que o script do modelo faz, e o novo tem de fazer o mesmo.
 
 > Escreva um script em Python que:
+>
 > 1. Encontre sozinho, na pasta do material gerado que o `projeto.json` do projeto
 >    indica, todos os arquivos CSV cujo nome comece com o prefixo que o mesmo arquivo
 >    indica (ex.: `perguntas-`) — sem que ninguém precise listar nomes de arquivo ou de
@@ -559,12 +601,12 @@ cada arquivo de dados está bem preenchido, e cada um dos scripts abaixo grava u
 de conferência, que nunca é publicado, com duas caixas de tique em cada parte: a da IA,
 uma primeira passada, e a da pessoa, que é sempre o último elo.
 
-| O que se confere | Contra o quê | Script | Arquivo de conferência (no modelo) |
-|---|---|---|---|
-| Cada página da transcrição (de um documento HTML ou de uma apresentação em pptx: o texto de cada imagem, e o resto, só pelo script) | A imagem da página no original (de um documento HTML ou de uma apresentação em pptx: a própria imagem, e o texto da fonte) | `conferencia.py` | `CONFERENCIA-COM-IMAGEM.md` |
-| Cada referência e a chamada dela | A folha de rosto ou a página da fonte | `referencias.py` | `CONFERENCIA-REFERENCIAS.md` |
-| Cada frase do material de fora e a classe dela | A página da fonte | `base_externa.py` | `CONFERENCIA-TRECHOS.md` |
-| Cada cartão | O trecho da prova, no lugar que a citação diz | `confere_cartoes.py` | `CONFERENCIA-CARTOES.md` |
+| O que se confere                                                                                                                          | Contra o quê                                                                                                                  | Script                 | Arquivo de conferência (no modelo) |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------------------------------- |
+| Cada página da transcrição (de um documento HTML ou de uma apresentação em pptx: o texto de cada imagem, e o resto, só pelo script) | A imagem da página no original (de um documento HTML ou de uma apresentação em pptx: a própria imagem, e o texto da fonte) | `conferencia.py`     | `CONFERENCIA-COM-IMAGEM.md`       |
+| Cada referência e a chamada dela                                                                                                         | A folha de rosto ou a página da fonte                                                                                         | `referencias.py`     | `CONFERENCIA-REFERENCIAS.md`      |
+| Cada frase do material de fora e a classe dela                                                                                            | A página da fonte                                                                                                             | `base_externa.py`    | `CONFERENCIA-TRECHOS.md`          |
+| Cada cartão                                                                                                                              | O trecho da prova, no lugar que a citação diz                                                                                | `confere_cartoes.py` | `CONFERENCIA-CARTOES.md`          |
 
 Uma linha `ERRO` ou `FALTA` de um script se resolve antes de ticar: ela diz o que falta
 ou não bate nos dados. O script nunca diz se um conteúdo está certo — isso é a análise humana, parte
@@ -581,11 +623,9 @@ o quão fundo cada um vai, e o que é mais importante — com base na análise d
 ([seção 3](#3-descubra-o-formato-da-disciplina)) — e diga isso claramente no guia não
 técnico da disciplina, sem esconder que é um julgamento seu.
 
-Densidades diferentes entre tipos de documento não são, por si só, inconsistência: é
-esperado que os cartões de revisão de um item específico
-([seção 9](#9-cartões-de-revisão-espaçada)) tenham uma quantidade pequena e fixa,
-enquanto os cartões de teoria fundamental sejam completos por conceito — desde que você
-siga cada regra de forma consistente dentro dela mesma.
+Densidades diferentes entre partes não são, por si só, inconsistência: o número de
+cartões de cada item, conceito ou caso segue os fatos que ele tem
+([seção 9](#9-cartões-de-revisão-espaçada)), e um pode ter muito mais cartões que outro — desde que a mesma regra valha pra todos.
 
 Não pule um fato do material original sem tocar nele em nenhum documento, e não deixe
 dois documentos mostrarem o mesmo fato central de formas contraditórias — nenhuma das
@@ -600,12 +640,12 @@ fixos que não mudam de disciplina pra disciplina — só o conteúdo dentro de 
 muda (veja o `LEIA-ME.md` da pasta dos esqueletos deles, logo abaixo, antes de
 adicionar os documentos):
 
-| Documento | Papel fixo |
-|---|---|
-| `README.md` | Apresentação do projeto: o que é, aviso sobre o recorte, como o material foi feito (o que é mecânico e o que é julgamento), origem do material, licença, onde fica cada arquivo, como usar, referências. |
-| `INDICE.md` | Índice do projeto: lista e linka os documentos que existem (teoria fundamental, dicionário, ficha, planilhas, fontes), sem explicação. |
-| `MANUAL.md` (ou equivalente não técnico) | Guia em níveis, sem jargão, pra quem só quer estudar. Abra com o aviso do recorte e tenha um canal pra reportar erro. |
-| `NOTICE.md` | Mapa de licenciamento: qual licença cobre qual categoria de arquivo, e a exceção do material de terceiros. |
+| Documento                                    | Papel fixo                                                                                                                                                                                                       |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `README.md`                                | Apresentação do projeto: o que é, aviso sobre o recorte, como o material foi feito (o que é mecânico e o que é julgamento), origem do material, licença, onde fica cada arquivo, como usar, referências. |
+| `INDICE.md`                                | Índice do projeto: lista e linka os documentos que existem (teoria fundamental, dicionário, ficha, planilhas, fontes), sem explicação.                                                                       |
+| `MANUAL.md` (ou equivalente não técnico) | Guia em níveis, sem jargão, pra quem só quer estudar. Abra com o aviso do recorte e tenha um canal pra reportar erro.                                                                                         |
+| `NOTICE.md`                                | Mapa de licenciamento: qual licença cobre qual categoria de arquivo, e a exceção do material de terceiros.                                                                                                    |
 
 O índice do projeto lista documentos, não itens de dentro deles: cada documento de
 conteúdo (teoria fundamental, dicionário, ficha) mantém seu próprio índice interno, no
@@ -696,8 +736,8 @@ ou a uma fonte entra neles.
 2. Guarde o material de aula original por convenção, transcreva-o por inteiro,
    literalmente, e confira a transcrição, página por página, no arquivo de conferência
    (seção 1); grave os dados da referência de cada aula em `dados/fontes.json` (seção 2).
-3. Leia tudo, pesquise as três bases da seção 3, analise cada parte do material e escreva
-   a análise da matéria, com as evidências da pesquisa guardadas; só então decida o
+3. Leia tudo, pesquise as três bases da seção 3, analise cada parte do material, junte o
+   que se repete entre as partes e escreva a análise da matéria, com as evidências da pesquisa guardadas; só então decida o
    formato da disciplina (seção 3) — as formas de estudo de cada tipo de conhecimento e,
    se houver, o nome do elo central do dicionário e os nomes dos eixos da ficha, decididos
    de forma explícita, sem herdar de outra disciplina —, gravado em `dados/formato.json`,
@@ -710,8 +750,8 @@ ou a uma fonte entra neles.
 6. Escreva dicionário e ficha por item, citando os termos de teoria fundamental que se
    aplicam a cada um, e os documentos das outras formas de estudo da análise (seções 5 a
    8).
-7. Gere as planilhas a partir do dicionário/ficha, com a prova de cada cartão, rode a
-   conferência dos cartões e confira se as planilhas cobrem tudo que deveriam cobrir
+7. Gere as planilhas a partir dos documentos de conteúdo, com a prova de cada cartão,
+   rode a conferência dos cartões e confira se cada fato que deve ter cartão tem
    (seção 9).
 8. Gere o baralho com o script do modelo (seção 10).
 9. Atualize as seções correspondentes nos quatro documentos de apresentação (seção 13).
@@ -737,9 +777,9 @@ ou a uma fonte entra neles.
 5. Confira se os quatro documentos de apresentação têm as mesmas seções que outras
    disciplinas já cobertas, mesmo que o conteúdo ainda seja "isto não foi feito ainda".
 6. Procure um fato do material original que não apareça em nenhum documento gerado.
-7. Confira a planilha de perguntas linha por linha contra o dicionário/ficha de origem
-   — procure um fato inventado que não está na fonte, ou um fato da fonte que ficou de
-   fora — e veja se cada cartão tem prova, sem erro e com o tique da pessoa, na
+7. Confira a planilha de perguntas linha por linha contra o documento de origem —
+   procure um fato inventado que não está na fonte, ou um fato que devia ter cartão e
+   ficou sem — e veja se cada cartão tem prova, sem erro e com o tique da pessoa, na
    conferência dos cartões.
 8. Confira as citações: todo fato tirado de uma fonte, em qualquer documento ou cartão,
    cita essa fonte; toda citação tem a referência em `docs/REFERENCIAS.md`; toda
@@ -752,8 +792,9 @@ ou a uma fonte entra neles.
    da pessoa, e nenhuma página tem erro do script); o arquivo de base de cada item não deixa frase sem classe nem subtópico
    sem marca, e cada página da conferência dos trechos tem o tique da pessoa.
 10. Confira a análise da matéria: cada parte do material está nela, trecho por trecho;
-    cada ponto da pesquisa tem a chamada da fonte e o trecho literal que o sustenta, nas
-    evidências da pesquisa; e cada forma de estudo escolhida diz por quê.
+    cada busca da pesquisa está registrada, e cada ponto dela tem a chamada da fonte e o
+    trecho literal que o sustenta, nas evidências da pesquisa; e cada forma de estudo
+    escolhida diz por quê.
 
 ---
 

@@ -25,7 +25,7 @@ escolhido por quem mantém o projeto:
   resposta esperada" reflete essa escolha, essas aulas e esse livro — não é a cobertura completa da
   literatura da área.
 - Simplificações são feitas pra organizar o conteúdo em histórias de causa e efeito, ou outros moldes, conforme o material se desenvolve, e
-  em fichas secas, com uma resposta só pra cada tipo de fato, o que pode deixar de fora
+  em fichas, com uma resposta só pra cada tipo de fato, o que pode deixar de fora
   nuances e controvérsias que um material de referência completo traria.
 - Este material serve como ferramenta de revisão, não como fonte principal de estudo —
   fatos importantes devem ser conferidos com a bibliografia oficial de cada disciplina

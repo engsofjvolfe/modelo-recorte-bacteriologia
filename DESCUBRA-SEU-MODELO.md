@@ -6,7 +6,7 @@ grade fixa. O formato nasce da análise da matéria (ver `metodologia-de-conteud
 cada um. Dois desses tipos pedem uma grade: pra cada assunto que se estuda um por um (os
 *itens*), o método monta dois documentos: o
 *dicionário*, que conta o item como uma história dividida em partes, os *elos*; e a
-*ficha*, uma tabela seca com uma linha pra cada tipo de fato que todo item tem, os
+*ficha*, uma tabela direta com uma linha pra cada tipo de fato que todo item tem, os
 *eixos*. Os cartões de pergunta saem de uma *planilha*, uma tabela com uma coluna pra
 cada informação do cartão. Aqui você decide quantos elos o dicionário tem, quantos eixos
 a ficha tem e que colunas a planilha precisa. Nenhum desses números é fornecido aqui —
@@ -17,7 +17,7 @@ cada disciplina responde essas perguntas pra si mesma, a partir do próprio mate
 - Existe conteúdo que é teoria geral, sem ligação com um item específico — isso é
   sempre um documento próprio (ver `metodologia-de-conteudo.md`, seção 5A).
 - Quando existe um item que se repete e que alguém precisa aprender individualmente,
-  contar esse item de dois jeitos — uma história em cadeia, e uma tabela seca com os
+  contar esse item de dois jeitos — uma história em cadeia, e uma tabela direta com os
   mesmos fatos — permite estudar de duas formas sem duplicar o trabalho de escrever.
 - Os outros tipos de conhecimento que a análise da matéria acha ganham as formas de estudo
   que ela escolheu (ver `metodologia-de-conteudo.md`, seções 3 e 8).

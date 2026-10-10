@@ -195,7 +195,7 @@ tique que vale é o seu: nada está conferido sem ele (ver a
   cada uma inteira, guardando nas evidências da pesquisa o trecho literal que sustenta
   cada ponto e preenchendo os dados de cada fonte no arquivo de fontes; que leia inteira
   cada transcrição e analise cada parte do material com as perguntas da seção 3, sem
-  deixar trecho de fora; que escreva a análise da matéria, com a chamada de cada fonte como
+  deixar trecho de fora, e junte o que se repete entre as partes; que escreva a análise da matéria, com a chamada de cada fonte como
   a conferência das referências mostra; e só então proponha cada resposta do Descubra seu
   modelo, dizendo na conversa por que ela cabe, ou não, nesse curso e nesse nível. Depois,
   que grave as respostas aceitas no arquivo de formato, confira os dados com o
@@ -238,8 +238,9 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 - **A IA lê antes:** a
   [seção 9 da metodologia](metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada).
 - **Peça:** que olhe os tiques nas conferências das transcrições e dos trechos, pra saber
-  o que já tem o seu tique, e só então faça as planilhas de pergunta a partir do
-  dicionário e da ficha, com a coluna `fonte` só com as chamadas e o lugar; a prova de
+  o que já tem o seu tique, e só então faça as planilhas de pergunta a partir dos
+  documentos de conteúdo, um ou mais cartões, cada um com um fato só, pra cada fato dos
+  documentos, com a coluna `fonte` só com as chamadas e o lugar; a prova de
   cada cartão, com a pergunta igual à da planilha, os trechos copiados letra por letra
   das transcrições e das bases conferidas e a afirmação (se a fonte afirma o fato ou o
   trata como possibilidade); e a conferência dos cartões, com o `confere_cartoes.py`.
