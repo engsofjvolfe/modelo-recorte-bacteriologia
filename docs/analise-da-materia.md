@@ -1,18 +1,42 @@
 # Análise da matéria
 
-Esta é a análise de onde sai o formato do material de Bacteriologia. Ela junta as duas
-bases do formato: a pesquisa, que mostra o que os cursos pedem da matéria e que forma de
-estudo serve a cada tipo de conhecimento, e a análise das 15 aulas, que mostra o que o
-material traz. As aulas são as do Prof. Kennio Ferreira Paim, do Departamento de
-Microbiologia, Imunologia e Parasitologia da UFTM. O livro de apoio é a Microbiologia
-médica de Murray, Rosenthal e Pfaller (2022). Os cursos são Fisioterapia e Enfermagem.
+Este documento é a [análise da matéria](../metodologia-de-conteudo.md#documente-a-análise)
+de Bacteriologia: o estudo de onde sai o formato do material, feito antes de qualquer
+material de estudo. Ele junta as duas bases do formato. A primeira é a pesquisa: o que os
+cursos de Fisioterapia e de Enfermagem pedem da matéria, o que a ciência da aprendizagem
+mostra sobre como estudar cada tipo de conhecimento e o que o livro-texto diz da própria
+abordagem. A segunda é a análise das 15 aulas, slide por slide. As aulas são as do Prof.
+Kennio Ferreira Paim, do Departamento de Microbiologia, Imunologia e Parasitologia da
+UFTM. O livro-texto é a Microbiologia médica de Murray, Rosenthal e Pfaller (2022),
+chamado aqui de livro-texto (Murray).
 
-## 1. As três bases da pesquisa
+As partes 1 a 5 trazem as bases. A parte 6 tira delas a forma de estudo, e cada decisão
+dela diz de que parte veio.
 
-O que cada base diz, com a chamada da fonte em cada ponto. Os códigos entre colchetes são
-os dos trechos literais que sustentam o ponto, nas evidências da pesquisa
-(`docs/material-base/gerados-ocr/pesquisa/`). Um código vale só dentro do próprio arquivo;
-por isso cada seção diz de que arquivo vêm os trechos dela.
+- [1. A pesquisa](#1-a-pesquisa) — o que cada fonte pesquisada diz, com a citação.
+- [2. As aulas, slide por slide](#2-as-aulas-slide-por-slide) — os tipos de conhecimento
+  de cada slide e quanto de cada tipo cada aula traz.
+- [3. O que liga as aulas](#3-o-que-liga-as-aulas) — o que volta de uma aula em outra.
+- [4. Os grupos](#4-os-grupos) — as cinco partes em que a matéria se divide.
+- [5. Os caminhos](#5-os-caminhos) — os dois sentidos em que bactéria e doença se estudam.
+- [6. A forma de estudo](#6-a-forma-de-estudo) — onde e como o material ensina e treina
+  cada tipo e cada caminho, e o molde de cada documento.
+
+## 1. A pesquisa
+
+Esta parte é a primeira base do formato: o que a pesquisa achou, em quatro seções. As duas
+primeiras dizem como a Fisioterapia e a Enfermagem pedem a matéria, nas diretrizes
+curriculares, na prova do Enade e na literatura. A terceira diz o que a ciência da
+aprendizagem mostra sobre formas de estudo. A quarta diz o que o livro-texto (Murray) e os
+autores dele dizem da abordagem. A parte 6 usa estes itens para decidir a forma de estudo.
+
+Cada item termina com a
+[chamada](../metodologia-de-conteudo.md#2-cite-cada-fonte-conforme-a-abnt) da fonte e,
+entre colchetes, os códigos dos trechos literais que o sustentam. Os trechos ficam nas
+[evidências da pesquisa](../metodologia-de-conteudo.md#documente-a-análise), em
+`docs/material-base/gerados-ocr/pesquisa/`, que não se publicam por serem texto de
+terceiros. Cada código vale só dentro do próprio arquivo de evidências. Por isso, cada
+seção diz, logo abaixo do título, de que arquivo vêm os trechos dela.
 
 ### Como a Fisioterapia pede a matéria
 Trechos: `docs/material-base/gerados-ocr/pesquisa/areas-fisioterapia.md`.
@@ -31,9 +55,9 @@ Trechos: `docs/material-base/gerados-ocr/pesquisa/areas-fisioterapia.md`.
 
 **O que diz a prova do Enade**
 
-- A prova de Fisioterapia se apoia nas diretrizes curriculares do curso, na Resolução
-  CNE/CES n. 4/2002 e na legislação profissional (Brasil, 2023b, art. 3º, p. 1)
-  [BRASIL-2023-FIS-3].
+- A prova de Fisioterapia do Enade (Exame Nacional de Desempenho de Estudantes) se apoia
+  nas diretrizes curriculares do curso, na Resolução CNE/CES n. 4/2002 e na legislação
+  profissional (Brasil, 2023b, art. 3º, p. 1) [BRASIL-2023-FIS-3].
 - O componente específico tem 30 questões, 1 discursiva e 29 de múltipla escolha, e as
   questões envolvem situações-problema e estudos de caso (Brasil, 2023b, art. 2º, p. 1)
   [BRASIL-2023-FIS-2].
@@ -46,12 +70,13 @@ Trechos: `docs/material-base/gerados-ocr/pesquisa/areas-fisioterapia.md`.
 
 **O que diz a literatura**
 
-- As fontes se dirigem a cursos de enfermagem e de "allied health". A fisioterapia aparece
-  uma vez, como exemplo de programa de "allied health" em que a microbiologia é comum, e o
-  artigo da ASM trata sobretudo da enfermagem (Norman-McKay; ASM MINAH Undergraduate
-  Curriculum Guidelines Committee, 2018, resumo, par. 1, e seção Overview, par. 2; McCall;
-  Pacitti; Forster, 2019, resumo) [NORMAN-MCKAY-2018-1, NORMAN-MCKAY-2018-6,
-  MCCALL-2019-1].
+- As fontes se dirigem a cursos de enfermagem e de "allied health" (as outras profissões
+  da saúde). A fisioterapia aparece uma vez, como exemplo de programa de "allied health"
+  em que a microbiologia é comum, e o artigo da Sociedade Americana de Microbiologia
+  (American Society for Microbiology, ASM) trata sobretudo da enfermagem (Norman-McKay;
+  ASM MINAH Undergraduate Curriculum Guidelines Committee, 2018, resumo, par. 1, e seção
+  Overview, par. 2; McCall; Pacitti; Forster, 2019, resumo) [NORMAN-MCKAY-2018-1,
+  NORMAN-MCKAY-2018-6, MCCALL-2019-1].
 - A ASM tem a microbiologia por "an essential part of a healthcare worker’s training". A
   equipe de saúde precisa limitar as doenças infecciosas emergentes, proteger os pacientes
   imunodeficientes e lidar com os micróbios resistentes, e as precauções de transmissão e
@@ -59,17 +84,17 @@ Trechos: `docs/material-base/gerados-ocr/pesquisa/areas-fisioterapia.md`.
   ASM MINAH Undergraduate Curriculum Guidelines Committee, 2018, seção Introduction, par.
   1, e seção Microbiology is an essential course, par. 1) [NORMAN-MCKAY-2018-3,
   NORMAN-MCKAY-2018-4].
-- As diretrizes MINAH dizem os tópicos a enfatizar, entre eles: microbioma e disbiose,
-  grupos taxonômicos e onde os micróbios colonizam o corpo, biofilmes, o uso de
-  microrganismos para fazer fármacos, fatores de virulência, identificação por coloração e
-  meios bioquímicos, vacinas, infecções relacionadas à assistência e suas precauções,
-  estratégias para quebrar o triângulo epidemiológico e evitar a transmissão,
-  esterilização e desinfecção, e uso responsável dos antimicrobianos (Norman-McKay; ASM
-  MINAH Undergraduate Curriculum Guidelines Committee, 2018, seção Factor 1, par. 6, e
-  supl., p. 2-6) [NORMAN-MCKAY-2018-10, NORMAN-MCKAY-2018-17, NORMAN-MCKAY-2018-18,
-  NORMAN-MCKAY-2018-19, NORMAN-MCKAY-2018-21, NORMAN-MCKAY-2018-22, NORMAN-MCKAY-2018-25,
-  NORMAN-MCKAY-2018-26, NORMAN-MCKAY-2018-27, NORMAN-MCKAY-2018-29, NORMAN-MCKAY-2018-31,
-  NORMAN-MCKAY-2018-33].
+- As diretrizes MINAH (Microbiology in Nursing and Allied Health) da ASM dizem os tópicos
+  a enfatizar, entre eles: microbioma e disbiose, grupos taxonômicos e onde os micróbios
+  colonizam o corpo, biofilmes, o uso de microrganismos para fazer fármacos, fatores de
+  virulência, identificação por coloração e meios bioquímicos, vacinas, infecções
+  relacionadas à assistência e suas precauções, estratégias para quebrar o triângulo
+  epidemiológico e evitar a transmissão, esterilização e desinfecção, e uso responsável
+  dos antimicrobianos (Norman-McKay; ASM MINAH Undergraduate Curriculum Guidelines
+  Committee, 2018, seção Factor 1, par. 6, e supl., p. 2-6) [NORMAN-MCKAY-2018-10,
+  NORMAN-MCKAY-2018-17, NORMAN-MCKAY-2018-18, NORMAN-MCKAY-2018-19, NORMAN-MCKAY-2018-21,
+  NORMAN-MCKAY-2018-22, NORMAN-MCKAY-2018-25, NORMAN-MCKAY-2018-26, NORMAN-MCKAY-2018-27,
+  NORMAN-MCKAY-2018-29, NORMAN-MCKAY-2018-31, NORMAN-MCKAY-2018-33].
 - Sobre a profundidade, as metas contra as infecções relacionadas à assistência pedem
   compreensão firme da assepsia, apreciação da fisiopatologia das doenças infecciosas,
   domínio dos princípios básicos de epidemiologia e controle de infecção e "a solid
@@ -131,9 +156,10 @@ Trechos: `docs/material-base/gerados-ocr/pesquisa/areas-enfermagem.md`.
 
 **O que dizem as diretrizes curriculares**
 
-- A DCN de 2026 nomeia as bases "microbiológicas" entre os conhecimentos de Ciências
-  Biológicas e da Saúde que o curso "deve prover", para que sirvam à compreensão da vida e
-  da saúde no plano coletivo e individual (Brasil, 2026, art. 15, inc. I) [BRASIL-2026-6].
+- As diretrizes curriculares nacionais (DCN) de 2026 nomeiam as bases "microbiológicas"
+  entre os conhecimentos de Ciências Biológicas e da Saúde que o curso "deve prover", para
+  que sirvam à compreensão da vida e da saúde no plano coletivo e individual (Brasil,
+  2026, art. 15, inc. I) [BRASIL-2026-6].
 - As atividades teóricas e teórico-práticas vêm integradas desde o primeiro semestre, e as
   teórico-práticas se fazem em laboratórios das ciências biológicas e da saúde, de
   habilidades e de simulação e no mundo do trabalho; a segurança do paciente está entre os
@@ -464,17 +490,22 @@ Trechos: `docs/material-base/gerados-ocr/pesquisa/fonte-e-autores.md`.
 
 ## 2. As aulas, slide por slide
 
-Cada trecho das aulas (texto do slide, tabela, figura) é um ou mais pontos. Um ponto de
-estudo é um fato que o material ensina, com o tipo de conhecimento dele, o grupo ([parte
-4](#4-os-grupos)) e o caminho ([parte 5](#5-os-caminhos)). Os tipos são os da
-[metodologia](../metodologia-de-conteudo.md#analise-cada-parte-do-material). A análise de
-cada aula, ponto por ponto, fica em `docs/material-base/gerados-ocr/analise/`, junto do
-texto do professor. Aqui ficam os tipos de cada slide e quanto de cada tipo cada aula
-traz.
+Esta parte é a segunda base do formato: o que as aulas trazem. Cada aula foi lida inteira,
+e cada fato de cada slide (uma frase, um item de lista, uma linha de tabela, o texto de
+uma figura) virou uma linha da análise da aula, com o tipo de conhecimento dele, o
+[grupo](#4-os-grupos) e o [caminho](#5-os-caminhos). Cada uma dessas linhas é um
+<dfn>trecho das aulas</dfn>. Os tipos são os da [metodologia do
+projeto](../metodologia-de-conteudo.md#analise-cada-parte-do-material). As análises das
+aulas, trecho por trecho, ficam na pasta protegida, junto do texto do professor
+(`docs/material-base/gerados-ocr/analise/`). Aqui ficam as contagens: primeiro, os trechos
+de cada tipo em todas as aulas; depois, para cada aula, os trechos por tipo, por grupo e
+por caminho, e os tipos de cada slide. Os trechos de vírus e de fungo ficam fora das
+contagens: os de vírus estão fora do foco do material, e os de fungo só entram como
+comparação com uma bactéria.
 
 ### Os tipos em todas as aulas
 
-Pontos de estudo de cada tipo, por aula. Um ponto conta em cada tipo que tem.
+Trechos das aulas de cada tipo, por aula. Um trecho conta em cada tipo que tem.
 
 | Tipo | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9-10 | 11-12 | 13 | 14 | 15 | 16 | 17 | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -495,14 +526,14 @@ Pontos de estudo de cada tipo, por aula. Um ponto conta em cada tipo que tem.
 | Exceção | 1 | 2 | · | · | · | · | 2 | 1 | 3 | · | · | 1 | · | 1 | · | 11 |
 | Analogia e história | 1 | · | · | · | · | · | · | · | · | · | · | · | 1 | 1 | · | 3 |
 | Mnemônico da fonte | · | · | · | · | · | · | · | · | · | · | · | · | · | · | · | 0 |
-| **Pontos de estudo** | 51 | 84 | 67 | 71 | 110 | 67 | 112 | 92 | 241 | 236 | 110 | 162 | 134 | 116 | 222 | **1875** |
+| **Trechos das aulas** | 51 | 84 | 67 | 71 | 110 | 67 | 112 | 92 | 241 | 236 | 110 | 162 | 134 | 116 | 222 | **1875** |
 
 ### Aula 1 — Introdução a Microbiologia
 
-36 slides, 16 com pontos de estudo. 51 pontos de estudo; além deles, 10 de vírus fora do
-foco e 21 linhas que não são conteúdo de estudo.
+36 slides, 16 deles com trechos das aulas. 51 trechos das aulas; além deles, 10 de vírus
+fora do foco e 21 linhas que não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Marco histórico | 25 |
 | Conceito e vocabulário | 14 |
@@ -514,14 +545,14 @@ foco e 21 linhas que não são conteúdo de estudo.
 | Exceção | 1 |
 | Analogia e história | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 2 |
 | 2 Fundamentos | 22 |
 | 3 Famílias de itens | 1 |
 | 5 Marcos históricos | 26 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 2 |
 | quadro → bactérias | 1 |
@@ -568,10 +599,10 @@ foco e 21 linhas que não são conteúdo de estudo.
 
 ### Aula 2 — Morfologia e Citologia Bacteriana
 
-35 slides, 26 com pontos de estudo. 84 pontos de estudo; além deles, 31 linhas que não são
-conteúdo de estudo.
+35 slides, 26 deles com trechos das aulas. 84 trechos das aulas; além deles, 31 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Conceito e vocabulário | 44 |
 | Exemplo recorrente | 18 |
@@ -584,14 +615,14 @@ conteúdo de estudo.
 | Processo em ordem | 1 |
 | Marco histórico | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 3 |
 | 2 Fundamentos | 25 |
 | 3 Famílias de itens | 55 |
 | 5 Marcos históricos | 1 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 7 |
 | sem caminho | 77 |
@@ -636,10 +667,10 @@ conteúdo de estudo.
 
 ### Aula 3 — Fisiologia Bacteriana
 
-27 slides, 18 com pontos de estudo. 67 pontos de estudo; além deles, 1 de fungo, só como
-comparação e 10 linhas que não são conteúdo de estudo.
+27 slides, 18 deles com trechos das aulas. 67 trechos das aulas; além deles, 1 de fungo,
+só como comparação e 10 linhas que não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Conceito e vocabulário | 28 |
 | Classificação | 24 |
@@ -652,12 +683,12 @@ comparação e 10 linhas que não são conteúdo de estudo.
 | Parte e função | 4 |
 | Figura e esquema | 3 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 7 |
 | 2 Fundamentos | 60 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 7 |
 | sem caminho | 60 |
@@ -694,10 +725,10 @@ comparação e 10 linhas que não são conteúdo de estudo.
 
 ### Aula 4 — Genética Bacteriana
 
-25 slides, 16 com pontos de estudo. 71 pontos de estudo; além deles, 15 linhas que não são
-conteúdo de estudo.
+25 slides, 16 deles com trechos das aulas. 71 trechos das aulas; além deles, 15 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Conceito e vocabulário | 53 |
 | Classificação | 36 |
@@ -708,13 +739,13 @@ conteúdo de estudo.
 | Número com sentido | 2 |
 | Processo em ordem | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 16 |
 | 2 Fundamentos | 53 |
 | 3 Famílias de itens | 2 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 16 |
 | sem caminho | 55 |
@@ -749,10 +780,10 @@ conteúdo de estudo.
 
 ### Aula 5 — Microbiota Residente do Corpo
 
-27 slides, 17 com pontos de estudo. 110 pontos de estudo; além deles, 10 linhas que não
-são conteúdo de estudo.
+27 slides, 17 deles com trechos das aulas. 110 trechos das aulas; além deles, 10 linhas
+que não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Relação nos dois sentidos | 59 |
 | Classificação | 25 |
@@ -764,13 +795,13 @@ são conteúdo de estudo.
 | Exemplo recorrente | 2 |
 | Figura e esquema | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 8 |
 | 2 Fundamentos | 32 |
 | 3 Famílias de itens | 70 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | quadro → bactérias | 70 |
 | bactéria → doença | 7 |
@@ -808,10 +839,10 @@ são conteúdo de estudo.
 
 ### Aula 6 — Patogenicidade bacteriana
 
-33 slides, 23 com pontos de estudo. 67 pontos de estudo; além deles, 10 linhas que não são
-conteúdo de estudo.
+33 slides, 23 deles com trechos das aulas. 67 trechos das aulas; além deles, 10 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Contraste | 24 |
 | Classificação | 19 |
@@ -825,7 +856,7 @@ conteúdo de estudo.
 | Exemplo recorrente | 1 |
 | Marco histórico | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 7 |
 | 2 Fundamentos | 65 |
@@ -833,7 +864,7 @@ conteúdo de estudo.
 | 4 Prática em saúde | 1 |
 | 5 Marcos históricos | 1 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 7 |
 | quadro → bactérias | 1 |
@@ -877,10 +908,10 @@ conteúdo de estudo.
 
 ### Aula 7 — Controle dos microrganismos
 
-25 slides, 20 com pontos de estudo. 112 pontos de estudo; além deles, 5 linhas que não são
-conteúdo de estudo.
+25 slides, 20 deles com trechos das aulas. 112 trechos das aulas; além deles, 5 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Item com os mesmos tipos de fato | 66 |
 | Contraste | 25 |
@@ -893,14 +924,14 @@ conteúdo de estudo.
 | Exceção | 2 |
 | Figura e esquema | 2 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 1 |
 | 2 Fundamentos | 25 |
 | 3 Famílias de itens | 86 |
 | 4 Prática em saúde | 11 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | quadro → bactérias (transmissão por alimento e água: enlatados) | 1 |
 | sem caminho | 111 |
@@ -935,10 +966,10 @@ conteúdo de estudo.
 
 ### Aula 8 — Resistência aos antimicrobianos
 
-39 slides, 26 com pontos de estudo. 92 pontos de estudo; além deles, 23 linhas que não são
-conteúdo de estudo.
+39 slides, 26 deles com trechos das aulas. 92 trechos das aulas; além deles, 23 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Classificação | 48 |
 | Item com os mesmos tipos de fato | 18 |
@@ -953,7 +984,7 @@ conteúdo de estudo.
 | Marco histórico | 2 |
 | Exceção | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 4 |
 | 2 Fundamentos | 25 |
@@ -961,7 +992,7 @@ conteúdo de estudo.
 | 4 Prática em saúde | 5 |
 | 5 Marcos históricos | 2 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 4 |
 | sem caminho | 88 |
@@ -1010,10 +1041,10 @@ conteúdo de estudo.
 
 ### Aula 9-10 — BGN
 
-80 slides, 70 com pontos de estudo. 241 pontos de estudo; além deles, 1 de vírus fora do
-foco, 2 de fungo, só como comparação e 30 linhas que não são conteúdo de estudo.
+80 slides, 70 deles com trechos das aulas. 241 trechos das aulas; além deles, 1 de vírus
+fora do foco, 2 de fungo, só como comparação e 30 linhas que não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Item com os mesmos tipos de fato | 162 |
 | Relação nos dois sentidos | 52 |
@@ -1030,7 +1061,7 @@ foco, 2 de fungo, só como comparação e 30 linhas que não são conteúdo de e
 | Exceção | 3 |
 | Marco histórico | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 166 |
 | 2 Fundamentos | 33 |
@@ -1038,7 +1069,7 @@ foco, 2 de fungo, só como comparação e 30 linhas que não são conteúdo de e
 | 4 Prática em saúde | 10 |
 | 5 Marcos históricos | 1 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 163 |
 | quadro → bactérias (ITU) | 13 |
@@ -1135,10 +1166,10 @@ foco, 2 de fungo, só como comparação e 30 linhas que não são conteúdo de e
 
 ### Aula 11-12 — CGP
 
-67 slides, 62 com pontos de estudo. 236 pontos de estudo; além deles, 3 de vírus fora do
-foco e 31 linhas que não são conteúdo de estudo.
+67 slides, 62 deles com trechos das aulas. 236 trechos das aulas; além deles, 3 de vírus
+fora do foco e 31 linhas que não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Item com os mesmos tipos de fato | 141 |
 | Figura e esquema | 50 |
@@ -1155,7 +1186,7 @@ foco e 31 linhas que não são conteúdo de estudo.
 | História em cadeia | 1 |
 | Marco histórico | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 206 |
 | 2 Fundamentos | 20 |
@@ -1163,7 +1194,7 @@ foco e 31 linhas que não são conteúdo de estudo.
 | 4 Prática em saúde | 35 |
 | 5 Marcos históricos | 1 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 194 |
 | quadro → bactérias (pneumonia adquirida na comunidade) | 16 |
@@ -1252,10 +1283,10 @@ foco e 31 linhas que não são conteúdo de estudo.
 
 ### Aula 13 — Cocos Gram negativos
 
-28 slides, 24 com pontos de estudo. 110 pontos de estudo; além deles, 1 de vírus fora do
-foco e 4 linhas que não são conteúdo de estudo.
+28 slides, 24 deles com trechos das aulas. 110 trechos das aulas; além deles, 1 de vírus
+fora do foco e 4 linhas que não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Item com os mesmos tipos de fato | 82 |
 | Causa e efeito | 14 |
@@ -1271,7 +1302,7 @@ foco e 4 linhas que não são conteúdo de estudo.
 | Conceito e vocabulário | 2 |
 | Processo em ordem | 2 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 104 |
 | 2 Fundamentos | 3 |
@@ -1279,7 +1310,7 @@ foco e 4 linhas que não são conteúdo de estudo.
 | 4 Prática em saúde | 26 |
 | 5 Marcos históricos | 4 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 98 |
 | quadro → bactérias | 17 |
@@ -1318,10 +1349,10 @@ foco e 4 linhas que não são conteúdo de estudo.
 
 ### Aula 14 — Bactérias Anaeróbias
 
-36 slides, 31 com pontos de estudo. 162 pontos de estudo; além deles, 5 linhas que não são
-conteúdo de estudo.
+36 slides, 31 deles com trechos das aulas. 162 trechos das aulas; além deles, 5 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Item com os mesmos tipos de fato | 73 |
 | Classificação | 38 |
@@ -1337,14 +1368,14 @@ conteúdo de estudo.
 | Aplicação na prática | 3 |
 | Exceção | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 104 |
 | 2 Fundamentos | 38 |
 | 3 Famílias de itens | 7 |
 | 4 Prática em saúde | 13 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 26 |
 | quadro → bactérias | 16 |
@@ -1392,10 +1423,10 @@ conteúdo de estudo.
 
 ### Aula 15 — IRAS
 
-35 slides, 33 com pontos de estudo. 134 pontos de estudo; além deles, 3 de vírus fora do
-foco e 7 linhas que não são conteúdo de estudo.
+35 slides, 33 deles com trechos das aulas. 134 trechos das aulas; além deles, 3 de vírus
+fora do foco e 7 linhas que não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Causa e efeito | 35 |
 | Item com os mesmos tipos de fato | 34 |
@@ -1412,7 +1443,7 @@ foco e 7 linhas que não são conteúdo de estudo.
 | Marco histórico | 3 |
 | Analogia e história | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 28 |
 | 2 Fundamentos | 33 |
@@ -1420,7 +1451,7 @@ foco e 7 linhas que não são conteúdo de estudo.
 | 4 Prática em saúde | 55 |
 | 5 Marcos históricos | 3 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 28 |
 | quadro → bactérias | 11 |
@@ -1467,10 +1498,10 @@ foco e 7 linhas que não são conteúdo de estudo.
 
 ### Aula 16 — Mycobacterium
 
-38 slides, 33 com pontos de estudo. 116 pontos de estudo; além deles, 6 linhas que não são
-conteúdo de estudo.
+38 slides, 33 deles com trechos das aulas. 116 trechos das aulas; além deles, 6 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Item com os mesmos tipos de fato | 36 |
 | Número com sentido | 21 |
@@ -1489,7 +1520,7 @@ conteúdo de estudo.
 | Exceção | 1 |
 | Analogia e história | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 102 |
 | 2 Fundamentos | 2 |
@@ -1497,7 +1528,7 @@ conteúdo de estudo.
 | 4 Prática em saúde | 16 |
 | 5 Marcos históricos | 13 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 85 |
 | sem caminho | 31 |
@@ -1545,10 +1576,10 @@ conteúdo de estudo.
 
 ### Aula 17 — Bactérias Espiraladas e clamídias
 
-64 slides, 60 com pontos de estudo. 222 pontos de estudo; além deles, 9 linhas que não são
-conteúdo de estudo.
+64 slides, 60 deles com trechos das aulas. 222 trechos das aulas; além deles, 9 linhas que
+não são conteúdo de estudo.
 
-| Tipo | Pontos |
+| Tipo | Trechos |
 | --- | ---: |
 | Item com os mesmos tipos de fato | 154 |
 | Relação nos dois sentidos | 43 |
@@ -1563,7 +1594,7 @@ conteúdo de estudo.
 | Parte e função | 3 |
 | Marco histórico | 1 |
 
-| Grupo | Pontos |
+| Grupo | Trechos |
 | --- | ---: |
 | 1 Organismos | 218 |
 | 2 Fundamentos | 5 |
@@ -1571,7 +1602,7 @@ conteúdo de estudo.
 | 4 Prática em saúde | 6 |
 | 5 Marcos históricos | 1 |
 
-| Caminho | Pontos |
+| Caminho | Trechos |
 | --- | ---: |
 | bactéria → doença | 213 |
 | quadro → bactérias | 6 |
@@ -1647,10 +1678,12 @@ conteúdo de estudo.
 
 ## 3. O que liga as aulas
 
-O que volta de uma aula em outra. Cada ligação aparece uma vez, no par de aulas, com os
-slides das duas pontas e o tipo dela: volta com outro papel (o mesmo conceito ou exemplo,
-com outra função), mesmo organismo, mesma síndrome por bactérias diferentes, ou repete (o
-mesmo conteúdo outra vez).
+Esta parte mostra o que volta de uma aula em outra: um conceito, um exemplo ou uma
+bactéria que aparece de novo. A parte 6 usa essas ligações para dizer onde um assunto se
+ensina por inteiro e onde ele só volta. Cada ligação aparece uma vez, no par de aulas, com
+os slides das duas pontas e o tipo dela. Os <dfn>tipos de ligação</dfn> são quatro: volta
+com outro papel (o mesmo conceito ou exemplo, com outra função), mesmo organismo, mesma
+síndrome por bactérias diferentes e repete (o mesmo conteúdo outra vez).
 
 751 ligações em 86 pares de aulas. Uma ligação com dois tipos conta nos dois.
 
@@ -3479,12 +3512,12 @@ mesmo conteúdo outra vez).
 
 ## 4. Os grupos
 
-A matéria se divide em cinco grupos, formados pelo que se repete entre as aulas. Cada
-ponto de estudo da parte 2 está em um grupo ou em mais de um. Ficam fora dos grupos os
-pontos de vírus, que estão fora do foco do material, e os de fungo, que só entram como
-comparação com uma bactéria.
+Esta parte divide a matéria. Com todas as aulas lidas, o que se repete entre elas formou
+cinco [grupos](../metodologia-de-conteudo.md#analise-cada-parte-do-material), e a parte 6
+dá a cada grupo a sua abordagem. Cada trecho das aulas está em um grupo ou em mais de um.
+Os trechos de vírus e de fungo ficam fora dos grupos, pelo motivo dito na parte 2.
 
-Pontos de estudo de cada grupo, por aula. Um ponto conta em cada grupo que tem.
+Trechos das aulas de cada grupo, por aula. Um trecho conta em cada grupo que tem.
 
 | Grupo | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9-10 | 11-12 | 13 | 14 | 15 | 16 | 17 | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3511,8 +3544,9 @@ estrutura e função, processos e números com sentido.
 
 ### 3 Famílias de itens
 
-Dentro dos fundamentos, coisas da mesma espécie que se aprendem uma a uma, como as
-bactérias do grupo 1, mas cada família com os seus próprios eixos:
+Uma <dfn>família de itens</dfn> é um conjunto, dentro dos fundamentos, de coisas da mesma
+espécie que se aprendem uma a uma, como as bactérias do grupo 1, mas cada família com os
+seus próprios eixos:
 
 - as estruturas da célula bacteriana;
 - os antimicrobianos;
@@ -3534,26 +3568,30 @@ outras aulas.
 
 ## 5. Os caminhos
 
-O que liga bactérias e doenças se estuda por dois caminhos. Os pontos sem caminho (a maior
-parte, dos fundamentos; os outros, de marcos históricos, de prática em saúde e de fichas)
-se estudam pelo tipo de conhecimento de cada um (parte 2), não por um caminho.
+Esta parte diz por que
+[caminhos](../metodologia-de-conteudo.md#analise-cada-parte-do-material) a matéria se
+estuda: os dois sentidos em que bactéria e doença se ligam. A parte 6 dá a cada caminho o
+seu documento e a sua forma de estudo. Os trechos sem caminho (a maior parte, dos
+fundamentos; os outros, de marcos históricos, de prática em saúde e de fichas) se estudam
+pelo tipo de conhecimento de cada um.
 
-**Da bactéria para a doença.** Cada bactéria, com as doenças que ela causa. É o caminho
-das fichas do grupo 1 e a abordagem geral do livro: estudar os organismos e aprender a
-biologia deles junto com a capacidade de causar doença, porque isso dá base para entender
-o processo patológico (Murray; Rosenthal; Pfaller, 2022, p. 155).
+**<dfn>Da bactéria para a doença</dfn>.** Cada bactéria, com as doenças que ela causa. É o
+caminho das fichas do grupo 1 e a abordagem geral do livro-texto: estudar os organismos e
+aprender a biologia deles junto com a capacidade de causar doença, porque isso dá base
+para entender o processo patológico (Murray; Rosenthal; Pfaller, 2022, p. 155).
 
-**Do quadro para as bactérias.** De uma síndrome, de um local do corpo ou de uma via de
-transmissão para as bactérias que podem causá-la. O livro diz que o paciente chega com uma
-síndrome e que o estudante precisa lembrar quais organismos podem ser os responsáveis. Diz
-também que o manejo clínico das infecções depende de um diagnóstico diferencial preciso:
-saber quais organismos se associam mais a cada processo infeccioso. Por isso o livro traz
-uma tabela das doenças para as bactérias, ao lado da tabela das bactérias para as doenças
-(Murray; Rosenthal; Pfaller, 2022, p. 155). No material, este caminho fica nos quadros e
-casos. Os quadros trazem só o que as próprias aulas agrupam, com o capítulo 15 do livro
-como apoio, e os casos vêm depois dos fatos.
+**<dfn>Do quadro para as bactérias</dfn>.** De um <dfn>quadro</dfn> (uma síndrome, um
+local do corpo ou uma via de transmissão) para as bactérias que podem causá-lo. O
+livro-texto diz que o paciente chega com uma síndrome e que o estudante precisa lembrar
+quais organismos podem ser os responsáveis. Diz também que o manejo clínico das infecções
+depende de um diagnóstico diferencial preciso: saber quais organismos se associam mais a
+cada processo infeccioso. Por isso o livro-texto traz uma tabela das doenças para as
+bactérias, ao lado da tabela das bactérias para as doenças (Murray; Rosenthal; Pfaller,
+2022, p. 155). No material, este caminho fica nos quadros e casos. Os quadros trazem só o
+que as próprias aulas agrupam, com o capítulo 15 do livro-texto como apoio, e os casos vêm
+depois dos fatos.
 
-Pontos de estudo de cada caminho, por aula. Um ponto nos dois caminhos conta nos dois.
+Trechos das aulas de cada caminho, por aula. Um trecho nos dois caminhos conta nos dois.
 
 | Caminho | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9-10 | 11-12 | 13 | 14 | 15 | 16 | 17 | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -3582,239 +3620,372 @@ Os quadros que as aulas agrupam:
 
 ## 6. A forma de estudo
 
-Esta parte diz onde o material ensina cada tipo de conhecimento e cada caminho, como ele
-treina o estudante, que molde tem cada documento e por quê. O porquê vem da pesquisa
-([parte 1](#1-as-três-bases-da-pesquisa)) quando ela trata do tipo; quando não trata, do
-livro, onde ele fala do assunto, ou das aulas, pela ordem em que elas dão o assunto;
-quando nenhum deles fala, da definição do tipo na
-[metodologia](../metodologia-de-conteudo.md#analise-cada-parte-do-material); e, quando nem
-ela basta, de uma escolha do projeto, dita como tal.
+Esta parte tira das partes 1 a 5 a forma de estudo do material: onde e como ele ensina
+cada tipo de conhecimento e cada caminho, que cartões de memorização (Anki) cada um gera e
+que molde tem cada documento. Cada decisão diz de onde veio: das pesquisas da [parte
+1](#1-a-pesquisa), quando elas tratam do tipo; quando não tratam, do livro-texto (Murray),
+onde ele fala do assunto, ou das aulas, pela ordem em que elas dão o assunto; quando
+nenhum deles fala, da definição do tipo na [metodologia do
+projeto](../metodologia-de-conteudo.md#analise-cada-parte-do-material); e, quando nem ela
+basta, de uma escolha do projeto, dita como tal.
 
 ### O que o estudante precisa saber fazer
 
-- Saber o conteúdo de cada ponto dos slides e o porquê dele, nos dois sentidos em que ele
+- Saber o conteúdo de cada trecho das aulas e o porquê dele, nos dois sentidos em que ele
   pode ser pedido, e escrevê-lo com as próprias palavras. Repetir as palavras do slide não
   é o que se pede: os termos do slide se ensinam como vocabulário, e nenhum cartão
-  pergunta a redação do slide. Por quê: as normas não dizem em que profundidade a
+  pergunta a redação do slide. De onde veio: as normas não dizem em que profundidade a
   microbiologia é pedida (parte 1); a literatura põe o nível em verbos como entender ("A
   general understanding of these diverse groups is essential") (Norman-McKay; ASM MINAH
   Undergraduate Curriculum Guidelines Committee, 2018, supl., p. 2-3), e a prova do Enade
   cobra por situações-problema e estudos de caso (Brasil, 2023a, art. 2º, p. 1; Brasil,
   2023b, art. 2º, p. 1). Entender e aplicar pedem o conteúdo e o porquê, não a frase.
-- Tudo o que o livro diz sobre um ponto dos slides entra no material; o que o livro diz
+- Tudo o que o livro-texto diz sobre um trecho das aulas entra no material; o que ele diz
   sobre um assunto que nenhum slide traz fica fora, menos os fatores de risco de cada
-  bactéria (abaixo). Por quê: os slides trazem os pontos, não o conteúdo de cada um, e o
-  material de fora completa a aula onde ela não chega ([metodologia, seção
-  4](../metodologia-de-conteudo.md#4-complete-a-aula-com-material-de-fora)); a pesquisa
-  decide a forma, não acrescenta assunto.
+  bactéria (abaixo). De onde veio: os slides dizem quais são os assuntos, não o conteúdo
+  de cada um, e o material de fora completa a aula onde ela não chega ([metodologia do
+  projeto, seção
+  4](../metodologia-de-conteudo.md#4-complete-a-aula-com-material-de-fora)); as pesquisas
+  decidem a forma, não acrescentam assunto.
 
 ### Ensinar primeiro, treinar depois
 
-- Os documentos ensinam; os cartões e as perguntas de prova treinam. Cada documento ensina
-  como um professor a quem nunca viu a matéria: o que um termo nomeia vem antes do nome, o
-  básico antes do que depende dele, e todo fato, inclusive o de uma figura, é escrito e
-  explicado, nunca só apontado ([metodologia, seção
-  5](../metodologia-de-conteudo.md#5-escreva-os-documentos-de-conteúdo)).
-- Os documentos não são outro livro. São 1.874 pontos, e cada um, com tudo o que o livro
-  diz dele, se escreve como um gatilho rápido de estudo: poucas frases, sem repetir o que
-  outro documento já ensina e sem textos longos. Curto não quer dizer solto: cada ponto
-  continua ensinado a quem nada sabe da matéria, como no item acima, e o equilíbrio entre
-  as duas coisas pede cuidado em cada frase. O texto ensina o fato direto, sem "o livro
-  diz" nem "a figura mostra": o material se basta, e a fonte fica só na citação. Por quê:
-  os autores do livro apresentam os conceitos básicos de forma clara e sucinta, e Murray
-  diz que a informação deve vir de modo seletivo e conciso (Murray; Rosenthal; Pfaller,
-  2022, p. vii; Murray; Rosenthal; Pfaller, [2025 ou 2026], resposta de Murray à 1.ª
-  pergunta); e a metodologia pede o texto mais enxuto que dá sem perder o tom, a
-  explicação nem o conteúdo ([metodologia, seção
+- Os documentos de estudo ensinam; os cartões de memorização (Anki) e as perguntas de
+  prova treinam. Cada documento ensina como um professor a quem nunca viu a matéria: o que
+  um termo nomeia vem antes do nome, o básico antes do que depende dele, e todo fato,
+  inclusive o de uma figura, é escrito e explicado, nunca só apontado ([metodologia do
+  projeto, seção 5](../metodologia-de-conteudo.md#5-escreva-os-documentos-de-conteúdo)).
+- Os documentos não são outro livro. São 1.874 trechos das aulas, e cada um, com tudo o
+  que o livro-texto diz dele, se escreve como um gatilho rápido de estudo: poucas frases,
+  sem repetir o que outro documento já ensina e sem textos longos. Curto não quer dizer
+  solto: cada trecho continua ensinado a quem nada sabe da matéria, como no item acima, e
+  o equilíbrio entre as duas coisas pede cuidado em cada frase. O texto ensina o fato
+  direto, sem "o livro diz" nem "a figura mostra": o material se basta, e a fonte fica só
+  na citação. De onde veio: os autores do livro-texto apresentam os conceitos básicos de
+  forma clara e sucinta, e Murray diz que a informação deve vir de modo seletivo e conciso
+  (Murray; Rosenthal; Pfaller, 2022, p. vii; Murray; Rosenthal; Pfaller, [2025 ou 2026],
+  resposta de Murray à 1.ª pergunta); e a metodologia do projeto pede o texto mais enxuto
+  que dá sem perder o tom, a explicação nem o conteúdo ([seção
   5](../metodologia-de-conteudo.md#5-escreva-os-documentos-de-conteúdo)).
 - Treinar é tentar lembrar a resposta, não reler. Todo cartão pede que o estudante produza
-  a resposta antes de ver o verso, e nenhum é de múltipla escolha. Por quê: testar-se tem
-  alta utilidade e deve tomar o lugar da releitura, e rende mais quando pede gerar a
+  a resposta antes de ver o verso, e nenhum é de múltipla escolha. De onde veio: testar-se
+  tem alta utilidade e deve tomar o lugar da releitura, e rende mais quando pede gerar a
   resposta e quando há retorno (Dunlosky; Rawson; Marsh; Nathan; Willingham, 2013, p. 5,
   31 e 35; Agarwal; Nunes; Blunt, 2021, p. 39).
 - Os cartões não imitam perguntas de prova: são uma ferramenta que ensina o conteúdo, para
   que o estudante responda qualquer pergunta sobre ele. Os cartões de fato vêm antes dos
   de porquê do mesmo assunto, e o que pede explicar, comparar ou aplicar vem depois dos
-  fatos que usa. Por quê: as perguntas profundas costumam ser mais úteis quando o básico
-  factual já está dominado, e a aprendizagem por problemas serve ao entendimento profundo
-  quando já há base (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe, 2007,
-  p. 30; Donoghue; Hattie, 2021, p. 8).
+  fatos que usa. De onde veio: as perguntas profundas costumam ser mais úteis quando o
+  básico factual já está dominado, e a aprendizagem por problemas serve ao entendimento
+  profundo quando já há base (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel;
+  Metcalfe, 2007, p. 30; Donoghue; Hattie, 2021, p. 8).
 - O verso do cartão traz a resposta curta, a fonte e, quando o documento explica o fato, o
   porquê em poucas palavras, curto como a resposta. O cartão pede um fato só; a explicação
-  inteira fica no documento. Por quê: para o treino servir a perguntas novas, o retorno
-  precisa trazer mais que a resposta certa, como uma explicação (Pan; Rickard, 2018, p. 37
-  e 40); e cada cartão pergunta um fato só, com uma resposta curta ([metodologia, seção
+  inteira fica no documento. De onde veio: para o treino servir a perguntas novas, o
+  retorno precisa trazer mais que a resposta certa, como uma explicação (Pan; Rickard,
+  2018, p. 37 e 40); e cada cartão pergunta um fato só, com uma resposta curta
+  ([metodologia do projeto, seção
   9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
 - Os cartões se estudam como o Anki orienta: ele decide quando cada cartão volta e espaça
-  as revisões. Por quê: espaçar tem alta utilidade, e testar-se em sessões espaçadas rende
-  mais que reestudar espaçado (Dunlosky; Rawson; Marsh; Nathan; Willingham, 2013, p. 37 e
-  39).
-- Os cartões se ligam aos documentos pelo conteúdo, não pelo momento do estudo: o Anki
-  traz cada cartão quando é a vez dele, e essa hora raramente coincide com a hora em que
-  se lê o assunto do cartão. Por isso, em todos os tipos e caminhos abaixo, dizer como um
-  conteúdo se treina é dizer que cartões ele gera, e dizer que um cartão vem depois de
-  outro é dizer a ordem em que os cartões novos entram no baralho. As perguntas de prova,
-  uma por aula, a pessoa usa quando quiser.
+  as revisões. De onde veio: espaçar tem alta utilidade, e testar-se em sessões espaçadas
+  rende mais que reestudar espaçado (Dunlosky; Rawson; Marsh; Nathan; Willingham, 2013, p.
+  37 e 39).
+- **Os cartões e os documentos não se estudam lado a lado.** Eles tratam do mesmo
+  conteúdo, mas o Anki traz cada cartão quando é a vez dele, e essa hora raramente
+  coincide com a hora em que se lê o assunto. Por isso, nos tipos e caminhos abaixo, "Como
+  os textos ensinam" e "Que cartões gera" dizem como o mesmo conteúdo aparece em cada
+  lugar, não uma ordem de estudo; e dizer que um cartão vem depois de outro é dizer a
+  ordem em que os cartões novos entram no baralho. As perguntas de prova, uma por aula, a
+  pessoa usa quando quiser.
 
 ### A forma de cada tipo
 
-Cada tipo se ensina e se treina do mesmo jeito em todos os documentos. Cada ponto vai para
-o documento de cada grupo e de cada caminho que tem ([Os documentos](#os-documentos)) e,
-dentro dele, para a parte do seu tipo ou, nas fichas, para o eixo do fato que dá ([Os
-moldes](#os-moldes)). Um marco histórico só do grupo 5 vai para o documento do assunto
-dele. Exceção, Exemplo recorrente, Figura e esquema e Analogia e história não têm parte
-própria: ficam junto do ponto ou do assunto que acompanham.
+Cada fato das aulas é um tipo de coisa para aprender: uma palavra e o que ela quer dizer,
+uma divisão em grupos, uma comparação, uma sequência de passos. Esse é o tipo de
+conhecimento do fato, e cada tipo se aprende melhor de um jeito. As análises das aulas
+deram a cada trecho o seu tipo (parte 2), com os tipos definidos na [metodologia do
+projeto](../metodologia-de-conteudo.md#analise-cada-parte-do-material). Aqui fica, para
+cada tipo, o que ele é nesta matéria, como os textos de estudo o ensinam, que cartões de
+memorização (Anki) ele gera e de onde veio essa decisão. Os tipos vêm do que tem mais
+trechos para o que tem menos.
 
-Os tipos vêm na ordem da quantidade de pontos (parte 2).
+Cada tipo se ensina e se treina do mesmo jeito em todos os documentos. Cada trecho das
+aulas vai para o documento de cada grupo e de cada caminho que tem ([Os
+documentos](#os-documentos)) e, dentro dele, para a parte do seu tipo ou, nas fichas, para
+o eixo do fato que dá ([Os moldes](#os-moldes)). Um marco histórico só do grupo 5 vai para
+o documento do assunto dele. Exceção, Exemplo recorrente, Figura e esquema e Analogia e
+história não têm parte própria: ficam junto do trecho ou do assunto que acompanham.
 
-- **Item com os mesmos tipos de fato** (787 pontos). Ensina-se numa tabela com as mesmas
-  linhas, os eixos, para todos os itens que ela junta. Cada bactéria tem a sua ficha; cada
-  família do grupo 3 tem a sua, com os eixos dela, e cada item da família é uma entrada. A
-  ficha de cada bactéria começa pelas três a cinco palavras-chave que a distinguem,
-  escolhidas entre os pontos dos slides. Os eixos da ficha da bactéria são os tipos de
-  fato do grupo 1 ([parte 4](#4-os-grupos)) e os fatores de risco: os que os slides dão
-  vêm deles, e, onde os slides não dão, o livro completa. Treina-se com um cartão para
-  cada fato de cada eixo. Por quê: a pesquisa da aprendizagem não trata deste tipo. O
-  livro pede, para cada microrganismo, aprender de três a cinco palavras-chave e organizar
-  os fatos num quadro lógico (Murray; Rosenthal; Pfaller, 2022, p. viii); a ficha, com os
-  mesmos eixos para todos os itens, é esse quadro ([metodologia, seção
-  5C](../metodologia-de-conteudo.md#c-ficha-determinística)). Os fatores de risco entram
-  em toda ficha porque a literatura os põe entre as características de cada agente que se
-  pede entender, ao lado do reservatório, da transmissão e do tratamento (Norman-McKay;
-  ASM MINAH Undergraduate Curriculum Guidelines Committee, 2018, supl., p. 2-3), e o livro
-  põe quem está em risco entre as perguntas a fazer sobre cada infecção (Murray;
-  Rosenthal; Pfaller, 2022, p. vii-viii).
-- **Classificação** (382 pontos). Ensina-se primeiro o critério que separa os grupos,
-  depois o que cai em cada grupo e por quê. Treina-se nos dois sentidos, do grupo para os
-  membros, com um cartão por membro, e do membro para o grupo, e com um cartão para o
-  critério. Por quê: quem treinou com testes classificou aves novas com mais acerto que
-  quem só reestudou (Dunlosky; Rawson; Marsh; Nathan; Willingham, 2013, p. 34), e uma
-  lista vira cartões menores, um por elemento ([metodologia, seção
-  9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
-- **Relação nos dois sentidos** (314 pontos). Treina-se com um cartão em cada sentido. Por
-  quê: testar um fato num sentido pouco ajuda a responder no sentido inverso, e um guia
-  sugere perguntar pelo outro lado (Pan; Rickard, 2018, p. 19 e 32; Pashler; Bain; Bottge;
-  Graesser; Koedinger; McDaniel; Metcalfe, 2007, p. 20).
-- **Conceito e vocabulário** (270 pontos). Ensina-se primeiro a coisa, depois o nome, e o
-  termo ligado a um exemplo dos slides. Treina-se nos dois sentidos, do termo para o que
-  ele quer dizer e do que ele quer dizer para o termo, com a resposta nas palavras do
-  documento. Por quê: quem decora termos e definições sem ligá-los a nada pode ficar com
-  um saber "inert" (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe, 2007,
-  p. 17); e o exemplo de Pan e Rickard é de termo e definição: treinar "WHAT is the
-  ability to see?" pouco ajuda a responder "Vision is WHAT?" (Pan; Rickard, 2018, p. 19 e
-  32).
-- **Número com sentido** (223 pontos). Ensina-se sempre com a razão do número, quando a
-  fonte a dá: o que ele mede e por que é aquele. Treina-se com um cartão que pede o número
-  e, depois, outro que pede a razão. Por quê: a pesquisa não trata deste tipo; a forma vem
-  da definição dele na metodologia, uma quantidade com a razão dela.
-- **Causa e efeito** (212 pontos). Ensina-se como explicação, a causa antes do efeito.
-  Treina-se com cartões de porquê, depois dos de fato, e com perguntas de prova que pedem
-  explicar. Por quê: o conhecimento profundo aparece quando se responde "why" e se
-  descrevem relações causais entre fatos (Pashler; Bain; Bottge; Graesser; Koedinger;
-  McDaniel; Metcalfe, 2007, p. 29); explicar por que um fato é verdadeiro serve mais a
-  quem já sabe do tema (Dunlosky; Rawson; Marsh; Nathan; Willingham, 2013, p. 9), daí o
-  porquê depois do fato. O livro diz que a matéria tem uma lógica: a doença depende de
-  como o microrganismo interage com o hospedeiro (Murray; Rosenthal; Pfaller, 2022, p.
-  vii).
-- **Contraste** (196 pontos). Ensina-se numa tabela lado a lado, com as coisas comparadas
-  nas colunas e os pontos de comparação nas linhas, cada diferença explicada. Treina-se
-  com um cartão por ponto de diferença e, depois, com a pergunta de prova que pede
-  comparar. Por quê: "how does X compare to Y" está entre as perguntas que levam a
-  explicações profundas (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe,
-  2007, p. 29), e o treino transfere mais quando pede distinguir conceitos (Pan; Rickard,
-  2018, p. 39-40).
-- **Figura e esquema** (182 pontos). Ensina-se junto do assunto da figura, só em palavras:
-  o que está onde, como as partes se ligam e, num processo, cada passo. Nenhuma imagem
-  entra no material gerado: nem as dos slides ou do livro, nem uma feita pelo projeto.
-  Treina-se com cartões que perguntam, em palavras, o que está onde e o que vem depois de
-  quê. Cada cartão tem dois campos de imagem, um na frente e um no verso, que saem vazios
-  e só aparecem quando preenchidos: neles a pessoa pode pôr uma imagem, no lado que a
-  pergunta pedir, pela planilha ou direto no Anki. A imagem posta direto no Anki não
-  sobrevive quando o baralho é gerado de novo e importado ([metodologia, seção
-  9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)). Por quê: o material
-  sem imagens e os campos de imagem nos cartões são escolha do projeto; e testar-se também
-  serve a material visual ou espacial (Dunlosky; Rawson; Marsh; Nathan; Willingham, 2013,
-  p. 33).
-- **Exemplo recorrente** (153 pontos). Ensina-se por inteiro onde aparece primeiro; a cada
-  volta, o documento diz o que ele mostra daquela vez e liga à primeira, pelas ligações da
-  [parte 3](#3-o-que-liga-as-aulas). Treina-se com um cartão para o que ele mostra em cada
-  volta. Por quê: a pesquisa não trata deste tipo; a forma vem da definição dele na
-  metodologia, um exemplo que volta mostrando a cada vez uma coisa.
-- **Parte e função** (141 pontos). Ensina-se a parte, o que ela faz e o que isso significa
-  para a bactéria ou para a doença, nessa ordem. Treina-se nos dois sentidos, da parte
-  para a função e da função para a parte, e com um cartão de porquê para o que ela
-  significa. Por quê: a pesquisa não trata deste tipo; a forma vem da definição dele na
-  metodologia, um componente, o que ele faz e o que isso significa para o todo.
-- **Aplicação na prática** (114 pontos). Ensina-se depois dos fatos que usa. Os casos se
-  montam só com fatos dos documentos, como o paciente que o livro propõe criar para cada
-  infecção. Treina-se com cartões de caso, depois dos de fato, e com perguntas de prova de
-  situação. Por quê: o que se aprende testando transfere para perguntas de aplicação e
-  para problemas de diagnóstico médico (Pan; Rickard, 2018, p. 1); a aprendizagem por
-  problemas serve ao entendimento profundo quando já há base (Donoghue; Hattie, 2021, p.
-  8); a prova do Enade cobra por situações-problema e estudos de caso (Brasil, 2023a, art.
-  2º, p. 1; Brasil, 2023b, art. 2º, p. 1); e o livro propõe criar um paciente para cada
-  infecção e comparar os pacientes (Murray; Rosenthal; Pfaller, 2022, p. vii-viii).
-- **Processo em ordem** (108 pontos). Ensina-se em etapas numeradas, cada uma com o que
-  ela faz e, quando a fonte diz, o que acontece quando ela falha ou é bloqueada. Treina-se
-  com um cartão por posição, quando a ordem importa, e com cartões do que acontece quando
-  uma etapa falha. Por quê: os estudos de figura com texto trataram sobretudo de
-  processos, e o texto deve descrever os passos (Pashler; Bain; Bottge; Graesser;
-  Koedinger; McDaniel; Metcalfe, 2007, p. 13 e 14); uma lista em ordem vira um cartão por
-  posição ([metodologia, seção
-  9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
-- **Marco histórico** (51 pontos). Ensina-se sempre com o que ele mudou, quando a fonte
-  diz; a história geral da matéria, na teoria fundamental, vem em ordem de data. Treina-se
-  com cartões simples: quem, o quê, quando. Por quê: a pesquisa não trata deste tipo; os
-  cartões simples são escolha do projeto.
-- **História em cadeia** (17 pontos). Ensina-se como uma história em elos, cada elo
-  explicando por que leva ao seguinte. Os slides contam poucas cadeias, mas o dicionário
-  conta assim cada bactéria, para que se possa chegar a ela de qualquer ponto da história
-  ([metodologia, seção 5B](../metodologia-de-conteudo.md#b-dicionário-de-gatilhos)).
-  Treina-se com cartões que pedem o elo seguinte e o porquê de cada passagem. Por quê: a
-  pesquisa não trata deste tipo; o livro diz que a matéria não é só memória, há uma lógica
-  nela, e que a doença depende de como o microrganismo interage com o hospedeiro (Murray;
-  Rosenthal; Pfaller, 2022, p. vii).
-- **Exceção** (11 pontos). Ensina-se logo depois da regra que ela quebra, com o porquê,
-  quando a fonte diz. Treina-se com um cartão que pede a exceção a partir da regra e outro
-  que pede o porquê. Por quê: a pesquisa não trata deste tipo; a forma vem da definição
-  dele na metodologia, o caso que foge de uma regra, e por quê.
-- **Analogia e história** (3 pontos). Ensina-se junto do ponto que ela fixa. Treina-se
-  pelo ponto, e a história pode ser a pista da pergunta. Por quê: ancorar ideias novas em
-  histórias interessantes e familiares dá motivação e uma base para voltar depois
-  (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe, 2007, p. 17).
+- **[Item com os mesmos tipos de
+  fato](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (787 trechos das
+  aulas)
+  - **O que é:** várias coisas da mesma espécie que se aprendem respondendo sempre às
+    mesmas perguntas. Para cada bactéria: onde vive, como se transmite, que doença causa,
+    como se trata. Por exemplo, onde vive o Staphylococcus epidermidis: na pele e nas
+    mucosas (aula 11-12, slide 19). As famílias de itens ([parte 4](#4-os-grupos)), como
+    os antimicrobianos, também são assim, cada uma com as suas perguntas.
+  - **Como os textos ensinam:** numa ficha, uma tabela com as mesmas linhas, os eixos,
+    para todos os itens. A ficha da bactéria começa por 3 a 5 palavras-chave que a
+    distinguem, tiradas dos slides. As linhas são as do grupo 1 (parte 4) mais os fatores
+    de risco; onde os slides não respondem a uma linha, o livro-texto completa.
+  - **Que cartões gera:** um para cada fato de cada linha, como "Onde vive o
+    Staphylococcus epidermidis?".
+  - **De onde veio:** as pesquisas da ciência da aprendizagem não tratam deste tipo. O
+    livro-texto pede aprender de 3 a 5 palavras-chave de cada microrganismo e organizar os
+    fatos num quadro lógico (aqui, uma forma fixa de arrumar os fatos), em vez de decorar
+    página após página (Murray; Rosenthal; Pfaller, 2022, p. viii); a ficha é essa forma
+    ([metodologia do projeto, seção
+    5C](../metodologia-de-conteudo.md#c-ficha-determinística)). Os fatores de risco entram
+    porque a literatura da parte 1 os põe entre o que se pede entender de cada agente, ao
+    lado do reservatório, da transmissão e do tratamento (Norman-McKay; ASM MINAH
+    Undergraduate Curriculum Guidelines Committee, 2018, supl., p. 2-3), e o livro-texto
+    põe quem está em risco entre as perguntas a fazer sobre cada infecção (Murray;
+    Rosenthal; Pfaller, 2022, p. vii-viii).
+- **[Classificação](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (382
+  trechos das aulas)
+  - **O que é:** separar coisas em grupos por um critério. Por exemplo, os cocos
+    Gram-positivos se dividem em três famílias: Micrococcaceae, Streptococcaceae e
+    Peptococcaceae (aula 11-12, slide 2).
+  - **Como os textos ensinam:** primeiro o critério, o que separa um grupo do outro;
+    depois o que cai em cada grupo e por quê.
+  - **Que cartões gera:** do membro para o grupo, como "De que família é o
+    Staphylococcus?"; do grupo para cada membro, um cartão por membro; e um cartão para o
+    critério.
+  - **De onde veio:** estudos mostram que quem treinou com testes classificou aves novas
+    com mais acerto do que quem só reestudou (Dunlosky; Rawson; Marsh; Nathan; Willingham,
+    2013, p. 34); e a metodologia do projeto faz de uma lista cartões menores, um por
+    elemento ([seção 9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
+- **[Relação nos dois
+  sentidos](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (314 trechos
+  das aulas)
+  - **O que é:** uma ligação entre duas coisas que pode ser pedida de um lado ou do outro.
+    Por exemplo, a pele e o Staphylococcus epidermidis, que predomina nela (aula 5, slide
+    10).
+  - **Como os textos ensinam:** na parte das relações de cada tema e de cada quadro ([Os
+    moldes](#os-moldes)).
+  - **Que cartões gera:** um em cada sentido, como "Em que local do corpo o Staphylococcus
+    epidermidis predomina?" e "Cite um microrganismo que predomina na pele.".
+  - **De onde veio:** estudos mostram que testar um fato num sentido pouco ajuda a
+    responder no sentido inverso, e um guia sugere perguntar pelo outro lado (Pan;
+    Rickard, 2018, p. 19 e 32; Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel;
+    Metcalfe, 2007, p. 20).
+- **[Conceito e
+  vocabulário](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (270
+  trechos das aulas)
+  - **O que é:** uma palavra da matéria e o que ela quer dizer. Por exemplo,
+    microbiologia, a "ciência que estuda os microrganismos e suas atividades" (aula 1,
+    slide 2).
+  - **Como os textos ensinam:** primeiro a coisa, depois o nome, com um exemplo dos
+    slides.
+  - **Que cartões gera:** um em cada sentido, como "O que é microbiologia?" e "Como se
+    chama a ciência que estuda os microrganismos e suas atividades?", com a resposta nas
+    palavras do documento.
+  - **De onde veio:** estudos mostram que quem decora termos e definições sem ligá-los a
+    nada pode ficar com um saber "inert" (inerte) (Pashler; Bain; Bottge; Graesser;
+    Koedinger; McDaniel; Metcalfe, 2007, p. 17); e que treinar do termo para a definição
+    pouco ajuda a responder da definição para o termo: treinar "WHAT is the ability to
+    see?" pouco ajuda a responder "Vision is WHAT?" (Pan; Rickard, 2018, p. 19 e 32).
+- **[Número com sentido](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
+  (223 trechos das aulas)
+  - **O que é:** um número que se aprende junto com o que ele quer dizer: uma quantidade,
+    um limite, um tempo, uma dose. Por exemplo, as infecções respiratórias são de 15% a
+    18% das infecções relacionadas à assistência à saúde, as IRAS (aula 15, slide 22).
+  - **Como os textos ensinam:** sempre com o que o número mede e, quando a aula ou o
+    livro-texto diz, por que ele é aquele.
+  - **Que cartões gera:** um que pede o número, como "Que parte das IRAS são infecções
+    respiratórias?", e, quando há razão, outro que pede a razão.
+  - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
+    definição dele na metodologia do projeto, uma quantidade com a razão dela.
+- **[Causa e efeito](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (212
+  trechos das aulas)
+  - **O que é:** um fato que explica outro: o porquê. Por exemplo, as IRAS aumentam o
+    tempo de internação (aula 15, slide 3).
+  - **Como os textos ensinam:** como explicação, a causa antes do efeito.
+  - **Que cartões gera:** cartões de porquê, que entram no baralho depois dos cartões do
+    fato, como "O que uma IRAS faz com o tempo de internação?". Nas perguntas de prova, as
+    que pedem explicar.
+  - **De onde veio:** estudos mostram que o conhecimento profundo aparece quando se
+    responde "why" e se descrevem relações causais entre fatos (Pashler; Bain; Bottge;
+    Graesser; Koedinger; McDaniel; Metcalfe, 2007, p. 29), e que explicar por que um fato
+    é verdadeiro serve mais a quem já sabe do tema (Dunlosky; Rawson; Marsh; Nathan;
+    Willingham, 2013, p. 9), daí o porquê depois do fato. O livro-texto diz que a matéria
+    tem uma lógica: a doença depende de como o microrganismo interage com o hospedeiro
+    (Murray; Rosenthal; Pfaller, 2022, p. vii).
+- **[Contraste](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (196
+  trechos das aulas)
+  - **O que é:** duas ou mais coisas comparadas nos mesmos pontos. Por exemplo, infecção e
+    doença: a infecção pode existir sem doença que se perceba (aula 6, slide 4).
+  - **Como os textos ensinam:** numa tabela lado a lado, com as coisas comparadas nas
+    colunas e os pontos de comparação nas linhas, cada diferença explicada.
+  - **Que cartões gera:** um por diferença, como "Pode haver infecção sem doença?". Nas
+    perguntas de prova, a que pede diferenciar.
+  - **De onde veio:** "how does X compare to Y" está entre as perguntas que levam a
+    explicações profundas (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe,
+    2007, p. 29), e o treino transfere mais para perguntas novas quando pede distinguir
+    conceitos (Pan; Rickard, 2018, p. 39-40).
+- **[Figura e esquema](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
+  (182 trechos das aulas)
+  - **O que é:** o que está onde num desenho e como as partes dele se ligam. Por exemplo,
+    o esquema da superfície da Neisseria meningitidis, com cápsula, pili e LPS (aula 13,
+    slide 10).
+  - **Como os textos ensinam:** só em palavras, junto do assunto da figura: o que está
+    onde, como as partes se ligam e, num processo, cada passo. Nenhuma imagem entra no
+    material gerado: nem as dos slides ou do livro-texto, nem uma feita pelo projeto.
+  - **Que cartões gera:** perguntas em palavras, como "Que estruturas há na superfície da
+    Neisseria meningitidis?". Todo cartão tem dois campos de imagem, um na frente e um no
+    verso, que ficam vazios e escondidos até a pessoa pôr uma imagem, no lado que a
+    pergunta pedir, pela planilha ou direto no Anki. A imagem posta direto no Anki se
+    perde quando o baralho é gerado de novo e importado ([metodologia do projeto, seção
+    9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
+  - **De onde veio:** o material sem imagens e os campos de imagem são escolha do projeto;
+    e estudos mostram que testar-se também serve a material visual ou espacial (Dunlosky;
+    Rawson; Marsh; Nathan; Willingham, 2013, p. 33).
+- **[Exemplo recorrente](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
+  (153 trechos das aulas)
+  - **O que é:** um exemplo que volta em várias aulas, mostrando cada vez uma coisa. Por
+    exemplo, o Clostridium difficile aparece como infecção oportunista (aula 5, slide 20)
+    e volta pelos esporos que sobrevivem meses nas superfícies (aula 15, slide 30).
+  - **Como os textos ensinam:** por inteiro onde aparece primeiro; a cada volta, o texto
+    diz o que ele mostra daquela vez e liga à primeira, pelas ligações da [parte
+    3](#3-o-que-liga-as-aulas).
+  - **Que cartões gera:** um para o que ele mostra em cada volta, como "Quanto tempo os
+    esporos do Clostridium difficile sobrevivem nas superfícies?".
+  - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
+    definição dele na metodologia do projeto.
+- **[Parte e função](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (141
+  trechos das aulas)
+  - **O que é:** uma parte da bactéria, o que ela faz e o que isso muda para a bactéria ou
+    para a doença. Por exemplo, a cápsula, que protege a bactéria contra a fagocitose
+    (aula 14, slide 16).
+  - **Como os textos ensinam:** a parte, o que ela faz e o que isso significa, nessa
+    ordem.
+  - **Que cartões gera:** um em cada sentido, como "O que a cápsula faz?" e "Que estrutura
+    protege a bactéria contra a fagocitose?", e um cartão de porquê para o que isso
+    significa.
+  - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
+    definição dele na metodologia do projeto.
+- **[Aplicação na prática](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
+  (114 trechos das aulas)
+  - **O que é:** uma situação da área da saúde que pede uma decisão tirada da matéria. Por
+    exemplo, o escarro para o diagnóstico da tuberculose se coleta em frasco de boca larga
+    (aula 16, slide 31).
+  - **Como os textos ensinam:** depois dos fatos que usa, em casos montados só com fatos
+    dos documentos, como o paciente que o livro-texto propõe criar para cada infecção.
+  - **Que cartões gera:** cartões de caso, que entram no baralho depois dos cartões de
+    fato, como "Um paciente com suspeita de tuberculose vai coletar escarro: em que
+    frasco?". Nas perguntas de prova, as de situação.
+  - **De onde veio:** o que se aprende testando transfere para perguntas de aplicação e
+    para problemas de diagnóstico médico (Pan; Rickard, 2018, p. 1); a aprendizagem por
+    problemas serve ao entendimento profundo quando já há base (Donoghue; Hattie, 2021, p.
+    8); a prova do Enade cobra por situações-problema e estudos de caso (Brasil, 2023a,
+    art. 2º, p. 1; Brasil, 2023b, art. 2º, p. 1); e o livro-texto propõe criar um paciente
+    para cada infecção e comparar os pacientes (Murray; Rosenthal; Pfaller, 2022, p.
+    vii-viii).
+- **[Processo em ordem](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
+  (108 trechos das aulas)
+  - **O que é:** etapas em sequência, e o que acontece quando uma falha. Por exemplo, a
+    infecção urinária: a bactéria coloniza a uretra, sobe para a bexiga, depois para os
+    rins, e chega ao sangue (aula 15, slide 25).
+  - **Como os textos ensinam:** em etapas numeradas, cada uma com o que ela faz e, quando
+    a aula ou o livro-texto diz, o que acontece quando ela falha ou é bloqueada.
+  - **Que cartões gera:** um por etapa, quando a ordem importa, como "Na infecção
+    urinária, para onde a bactéria vai depois da bexiga?", e cartões do que acontece
+    quando uma etapa falha.
+  - **De onde veio:** os estudos de figura com texto trataram sobretudo de processos, e o
+    texto deve descrever os passos (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel;
+    Metcalfe, 2007, p. 13 e 14); e a metodologia do projeto faz de uma lista em ordem um
+    cartão por posição ([seção
+    9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
+- **[Marco histórico](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (51
+  trechos das aulas)
+  - **O que é:** um fato da história da matéria: quem descobriu o quê, e quando. Por
+    exemplo, Robert Koch descreveu o agente da tuberculose em 1882 (aula 1, slide 16).
+  - **Como os textos ensinam:** sempre com o que ele mudou, quando a aula ou o livro-texto
+    diz; a história geral da matéria vem em ordem de data, na teoria fundamental.
+  - **Que cartões gera:** cartões simples, de quem, o quê e quando, como "Quem descreveu o
+    agente da tuberculose?".
+  - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; os cartões simples
+    são escolha do projeto.
+- **[História em cadeia](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
+  (17 trechos das aulas)
+  - **O que é:** fatos em sequência em que cada um causa o seguinte; é isso que a separa
+    do Processo em ordem. Por exemplo, a gonorreia: contato sexual, aderência à mucosa,
+    entrada nas células e multiplicação, destruição do tecido, disseminação (aula 13,
+    slide 23).
+  - **Como os textos ensinam:** como uma história em elos, cada elo explicando por que
+    leva ao seguinte. Os slides contam poucas cadeias, mas o dicionário conta assim cada
+    bactéria, para que se possa chegar a ela de qualquer ponto da história ([metodologia
+    do projeto, seção 5B](../metodologia-de-conteudo.md#b-dicionário-de-gatilhos)).
+  - **Que cartões gera:** o elo seguinte e o porquê de cada passagem, como "Na gonorreia,
+    o que vem depois da aderência à mucosa?".
+  - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; o livro-texto diz que
+    a matéria não é só memória, há uma lógica nela, e que a doença depende de como o
+    microrganismo interage com o hospedeiro (Murray; Rosenthal; Pfaller, 2022, p. vii).
+- **[Exceção](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (11 trechos
+  das aulas)
+  - **O que é:** o caso que foge de uma regra, e por quê. Por exemplo, o Mycoplasma
+    pneumoniae, uma bactéria sem parede celular (aula 2, slide 11).
+  - **Como os textos ensinam:** logo depois da regra que ele quebra, com o porquê, quando
+    a aula ou o livro-texto diz.
+  - **Que cartões gera:** um que pede a exceção a partir da regra, como "Que bactéria não
+    tem parede celular?", e outro que pede o porquê.
+  - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
+    definição dele na metodologia do projeto.
+- **[Analogia e história](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
+  (3 trechos das aulas)
+  - **O que é:** uma comparação ou um episódio que a aula usa para ajudar a lembrar um
+    fato. Por exemplo, Robert Koch "cresceu sonhando em ser médico de navio" (aula 1,
+    slide 16).
+  - **Como os textos ensinam:** junto do fato que ela ajuda a lembrar.
+  - **Que cartões gera:** nenhum só dela; ela pode ser a pista na pergunta do fato.
+  - **De onde veio:** ancorar ideias novas em histórias interessantes e familiares dá
+    motivação e uma base para voltar depois (Pashler; Bain; Bottge; Graesser; Koedinger;
+    McDaniel; Metcalfe, 2007, p. 17).
 
 ### A forma de cada caminho
 
-- **Da bactéria para a doença** (857 pontos). Ensina-se na ficha e no dicionário de cada
-  bactéria, que vão dos traços dela às doenças que ela causa. Treina-se com os cartões da
-  ficha e do dicionário. Por quê: é o caminho principal do livro, que apresenta os
-  organismos na ordem taxonômica, a maneira que os autores consideram mais fácil de
-  introduzi-los (Murray; Rosenthal; Pfaller, 2022, p. viii).
-- **Do quadro para as bactérias** (223 pontos). Ensina-se nos quadros e casos: um quadro
-  para cada entrada da lista da [parte 5](#5-os-caminhos), com as bactérias que as aulas
-  juntam sob ele e, para cada uma, o que a distingue das outras do mesmo quadro. Treina-se
-  do quadro para cada bactéria, com um cartão por bactéria, do traço que distingue para a
-  bactéria e, depois, com casos. Por quê: o livro pede tomar um tipo de doença e listar os
-  organismos que a compartilham, e o resumo do início de cada seção dos organismos serve
-  para refinar o diagnóstico diferencial e classificar os organismos em quadros lógicos
-  (Murray; Rosenthal; Pfaller, 2022, p. viii); e o treino num sentido pouco serve ao outro
-  (Pan; Rickard, 2018, p. 32).
-- **Sem caminho** (882 pontos). Os pontos que não ligam bactéria e doença se estudam pela
-  forma do tipo de cada um, acima.
+- **[Da bactéria para a doença](#5-os-caminhos)** (857 trechos das aulas)
+  - **O que é:** partir de uma bactéria e chegar às doenças que ela causa. Por exemplo, o
+    Staphylococcus aureus e as infecções de pele que ele causa, como furúnculo e
+    foliculite (aula 11-12, slide 13).
+  - **Como os textos ensinam:** na ficha e no dicionário de cada bactéria, que vão dos
+    traços dela às doenças que ela causa.
+  - **Que cartões gera:** os da ficha e do dicionário, como "Que infecções de pele o
+    Staphylococcus aureus causa?".
+  - **De onde veio:** é o caminho principal do livro-texto, que apresenta os
+    microrganismos um a um, na ordem taxonômica, a maneira que os autores consideram mais
+    fácil de introduzi-los (Murray; Rosenthal; Pfaller, 2022, p. viii).
+- **[Do quadro para as bactérias](#5-os-caminhos)** (223 trechos das aulas)
+  - **O que é:** partir de uma doença, de um local do corpo ou de uma via de transmissão e
+    chegar às bactérias que podem estar por trás. Por exemplo, a meningite e as bactérias
+    que a causam em cada idade (aulas 9-10, 11-12 e 13).
+  - **Como os textos ensinam:** nos quadros e casos: um quadro para cada entrada da lista
+    da [parte 5](#5-os-caminhos), com as bactérias que as aulas juntam ali e, para cada
+    uma, o que a distingue das outras do mesmo quadro.
+  - **Que cartões gera:** do quadro para cada bactéria, um cartão por bactéria, como "Cite
+    uma bactéria que causa meningite."; do traço que distingue para a bactéria; e, depois,
+    cartões de caso.
+  - **De onde veio:** o livro-texto pede tomar um tipo de doença e listar os organismos
+    que a compartilham, e o resumo do início de cada seção dos organismos serve para
+    refinar o diagnóstico diferencial e classificar os organismos em quadros lógicos
+    (Murray; Rosenthal; Pfaller, 2022, p. viii); e o treino num sentido pouco serve ao
+    outro (Pan; Rickard, 2018, p. 32).
+- **Sem caminho** (882 trechos das aulas): os trechos que não ligam bactéria e doença,
+  como o que é microbiologia, se estudam pela forma do tipo de cada um, acima.
 
 ### Os documentos
 
 | Documento | O que ensina |
 | --- | --- |
-| Teoria fundamental, por tema | os fundamentos (grupo 2) e a história geral da matéria |
-| Ficha e dicionário de cada bactéria | as bactérias (grupo 1), no caminho da bactéria para a doença |
+| [Teoria fundamental](../MANUAL.md#nível-2--de-onde-isso-veio), por tema | os fundamentos (grupo 2) e a história geral da matéria |
+| [Ficha](../MANUAL.md#nível-2--de-onde-isso-veio) e [dicionário](../MANUAL.md#nível-2--de-onde-isso-veio) de cada bactéria | as bactérias (grupo 1), no caminho da bactéria para a doença |
 | Ficha de cada família | as famílias de itens (grupo 3), cada uma com os seus eixos |
-| Quadros e casos | o caminho do quadro para as bactérias e a prática em saúde (grupo 4) |
-| Perguntas de prova, uma por aula | a resposta escrita inteira, para todos os pontos da aula |
+| <dfn>Quadros e casos</dfn> | o caminho do quadro para as bactérias e a prática em saúde (grupo 4) |
+| <dfn>Perguntas de prova</dfn>, uma por aula | a resposta escrita inteira, para todos os trechos da aula |
 
 Os quadros e casos e as perguntas de prova têm função nova: nenhum dos três documentos da
-metodologia ensina a partir de um quadro clínico nem treina a resposta escrita
-([metodologia, seção
+metodologia do projeto ensina a partir de um quadro clínico nem treina a resposta escrita
+([seção
 8](../metodologia-de-conteudo.md#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova)).
 
 ### As perguntas de prova
@@ -3822,42 +3993,41 @@ metodologia ensina a partir de um quadro clínico nem treina a resposta escrita
 - Uma por aula, com perguntas na forma de uma prova escrita (cite e explique, diferencie,
   descreva, aplique a uma situação) e, para cada uma, uma resposta-modelo feita só com o
   que os documentos ensinam, com as citações deles. O estudante escreve a resposta e
-  depois a compara com a resposta-modelo. As perguntas pedem o conteúdo de cada ponto da
+  depois a compara com a resposta-modelo. As perguntas pedem o conteúdo de cada trecho da
   aula, nos dois sentidos, e as listas e os contrastes como a aula os dá. Algumas podem
-  partir das questões e dos casos do livro.
-- Por quê: a prova escrita é escolha do projeto. Na pesquisa, o efeito do treino foi maior
-  quando o formato dele casou com o da prova (Agarwal; Nunes; Blunt, 2021, p. 35); um guia
-  diz que os testes de resposta curta e dissertativos, mais que os de múltipla escolha,
-  promovem a aprendizagem (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe,
-  2007, p. 21); e o mesmo guia recomenda fazer perguntas profundas e mostrar
-  respostas-modelo a elas (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe,
-  2007, p. 29).
+  partir das questões e dos casos do livro-texto.
+- De onde veio: a prova escrita é escolha do projeto. Nas pesquisas da parte 1, o efeito
+  do treino foi maior quando o formato dele casou com o da prova (Agarwal; Nunes; Blunt,
+  2021, p. 35); um guia diz que os testes de resposta curta e dissertativos, mais que os
+  de múltipla escolha, promovem a aprendizagem (Pashler; Bain; Bottge; Graesser;
+  Koedinger; McDaniel; Metcalfe, 2007, p. 21); e o mesmo guia recomenda fazer perguntas
+  profundas e mostrar respostas-modelo a elas (Pashler; Bain; Bottge; Graesser; Koedinger;
+  McDaniel; Metcalfe, 2007, p. 29).
 
 ### Os moldes
 
-Todo documento tem um molde: as mesmas partes, na mesma ordem, para tudo o que ele traz.
-Na ficha, as partes são os eixos, as linhas da tabela; num tema da teoria, num quadro, num
-caso e numa pergunta de prova, são partes do texto. Uma parte só falta quando o assunto
-não tem aquele conteúdo, e nenhuma muda de lugar. Por quê: a metodologia fixa os eixos da
-ficha e os elos do dicionário ([metodologia, seções
+Todo documento tem um <dfn>molde</dfn>: as mesmas partes, na mesma ordem, para tudo o que
+ele traz. Na ficha, as partes são os eixos, as linhas da tabela; num tema da teoria, num
+quadro, num caso e numa pergunta de prova, são partes do texto. Uma parte só falta quando
+o assunto não tem aquele conteúdo, e nenhuma muda de lugar. De onde veio: a metodologia do
+projeto fixa os eixos da ficha e os elos do dicionário ([seções
 5B](../metodologia-de-conteudo.md#b-dicionário-de-gatilhos) e
 [5C](../metodologia-de-conteudo.md#c-ficha-determinística)); estender a regra a todos os
 documentos, para que todo o material se estude com a mesma consistência, é escolha do
 projeto.
 
-Os números são os pontos de estudo das análises das aulas (parte 2) que caem em cada
-parte; um ponto com mais de um tipo, ou com lugar em mais de uma ficha, conta em cada uma.
-Os moldes dão lugar a 1.874 pontos. O que falta para os 1.875 da parte 2 é o do
-Cryptococcus (aula 5, slide 25), que a análise marca como fungo, só como comparação, mas
-com o grupo 1: como os outros pontos de fungo, ele só entra como comparação com uma
-bactéria ([parte 4](#4-os-grupos)).
+Os números são os trechos das aulas (parte 2) que caem em cada parte; um trecho com mais
+de um tipo, ou com lugar em mais de uma ficha, conta em cada uma. Os moldes dão lugar a
+1.874 trechos. O que falta para os 1.875 da parte 2 é o do Cryptococcus (aula 5, slide
+25), que a análise marca como fungo, só como comparação, mas com o grupo 1: como os outros
+trechos de fungo, ele só entra como comparação com uma bactéria ([parte 4](#4-os-grupos)).
 
-**A sequência das partes.** Cada tema da teoria e cada quadro é um texto em blocos, um
-para cada tipo de ponto, sempre na mesma ordem. Abre com os nomes e o que eles querem
-dizer; segue com como as coisas se agrupam, o que se liga a quê, os itens lado a lado, as
-estruturas e o que fazem, as etapas, os números e os marcos da história; e fecha com o
-porquê, as comparações e a prática. Bloco sem ponto ali não aparece. Os blocos são as
-partes da tabela abaixo, com os pontos de cada uma na teoria e nos quadros, e a mesma
+**A <dfn>sequência das partes</dfn>.** Cada tema da teoria e cada quadro é um texto em
+blocos, um para cada tipo de trecho, sempre na mesma ordem. Abre com os nomes e o que eles
+querem dizer; segue com como as coisas se agrupam, o que se liga a quê, os itens lado a
+lado, as estruturas e o que fazem, as etapas, os números e os marcos da história; e fecha
+com o porquê, as comparações e a prática. Bloco sem trecho ali não aparece. Os blocos são
+as partes da tabela abaixo, com os trechos de cada uma na teoria e nos quadros, e a mesma
 ordem vale para os fatos dentro de cada eixo das fichas, para as perguntas de prova de
 cada aula e para os cartões novos.
 
@@ -3875,15 +4045,15 @@ cada aula e para os cartões novos.
 | 10. Comparações | Contraste | 77 | 18 |
 | 11. Na prática | Aplicação na prática | 3 | 102 |
 
-Os pontos só de Exceção, Exemplo recorrente, Figura e esquema ou Analogia e história ficam
-junto do assunto deles: 12 na teoria e 4 nos quadros. A ordem vem de quatro bases:
+Os trechos só de Exceção, Exemplo recorrente, Figura e esquema ou Analogia e história
+ficam junto do assunto deles: 12 na teoria e 4 nos quadros. A ordem vem de quatro bases:
 
 - Os conceitos abrem porque o básico vem antes do que depende dele; o porquê, as
   comparações e a prática fecham, nessa ordem, porque o que pede explicar, comparar ou
   aplicar vem depois dos fatos que usa ([Ensinar primeiro, treinar
   depois](#ensinar-primeiro-treinar-depois)).
 - As classificações vêm antes das partes e funções, e estas antes dos processos, como nos
-  capítulos básicos do livro, que tratam de classificação e estrutura, depois de
+  capítulos básicos do livro-texto, que tratam de classificação e estrutura, depois de
   metabolismo e genética e de patogênese (Murray; Rosenthal; Pfaller, 2022, p. vii e xi).
 - As relações vêm logo depois das classificações, e os itens logo depois delas, como no
   quadro: o quadro, as bactérias que as aulas juntam sob ele e o que distingue cada uma
@@ -3892,7 +4062,7 @@ junto do assunto deles: 12 na teoria e 4 nos quadros. A ordem vem de quatro base
   mede e com o que o marco mudou ([A forma de cada tipo](#a-forma-de-cada-tipo)).
 
 **Ficha e dicionário de cada bactéria.** A ficha abre com as três a cinco palavras-chave
-da bactéria e tem dez eixos, nesta ordem: características gerais (227 pontos), habitat
+da bactéria e tem dez eixos, nesta ordem: características gerais (227 trechos), habitat
 (29), transmissão (47), fatores de risco (17), fatores de virulência (92), patogênese em
 sequência (80), doenças e formas clínicas (289), diagnóstico (123), tratamento (63) e
 prevenção (26). A frequência da doença e os lugares onde ela ocorre ficam em doenças e
@@ -3906,7 +4076,7 @@ Guidelines Committee, 2018, supl., p. 2-3).
 
 O dicionário conta cada bactéria em sete elos, cada um com os fatos de eixos da ficha:
 
-| Elo | Eixos da ficha | Pontos desses eixos |
+| Elo | Eixos da ficha | Trechos desses eixos |
 | --- | --- | ---: |
 | 1. Quem é e onde vive | características gerais; habitat | 256 |
 | 2. Como chega ao hospedeiro | transmissão; fatores de risco | 64 |
@@ -3921,31 +4091,31 @@ hospedeiro à instalação, ao avanço, ao dano e à doença: no gonococo (aula 
 24), na infecção urinária (aula 9-10, slide 20), no meningococo (aula 13, slide 12), na
 Salmonella (aula 9-10, slides 26 e 27), na sífilis (aula 17, slide 6), na leptospirose
 (aula 17, slide 29), no botulismo (aula 14, slide 26) e no pneumococo (aula 11-12, slide
-51). O elo 1 segue o prefácio do livro, para o qual o primeiro passo é conhecer o vilão, e
-os microrganismos se estabelecem num nicho do corpo (Murray; Rosenthal; Pfaller, 2022, p.
-vii). O elo 7 é a pergunta a que o prefácio reduz a matéria: como diagnosticar e tratar um
-paciente infectado (Murray; Rosenthal; Pfaller, 2022, p. vii).
+51). O elo 1 segue o prefácio do livro-texto, para o qual o primeiro passo é conhecer o
+vilão, e os microrganismos se estabelecem num nicho do corpo (Murray; Rosenthal; Pfaller,
+2022, p. vii). O elo 7 é a pergunta a que o prefácio reduz a matéria: como diagnosticar e
+tratar um paciente infectado (Murray; Rosenthal; Pfaller, 2022, p. vii).
 
 **Ficha de cada família.** A ficha de cada família abre com a própria família, o que reúne
-os itens e como eles se dividem (18 pontos: estruturas 1, controle 8, provas 2 e
+os itens e como eles se dividem (18 trechos: estruturas 1, controle 8, provas 2 e
 microbiota 7; nos antimicrobianos, nenhum). Depois vem uma entrada por item, com os eixos
 da família. A abertura vem antes dos itens como na forma de Classificação, acima: primeiro
-o critério, depois o que cai em cada grupo. Os eixos de cada família, com os pontos de
+o critério, depois o que cai em cada grupo. Os eixos de cada família, com os trechos de
 cada um, e de onde vem a ordem deles:
 
-- **Estruturas da célula bacteriana** (81 pontos): o que é (13), composição (14), função
+- **Estruturas da célula bacteriana** (81 trechos): o que é (13), composição (14), função
   (12), tipos (12), em que bactérias aparece e como é nelas (20) e o que age sobre ela
   (9). A ordem é a forma de Parte e função, acima: a parte (o que é, composição), o que
   ela faz (função) e o que isso significa para a bactéria e para a doença (os tipos dela,
   as bactérias em que aparece e o que age sobre ela).
-- **Antimicrobianos** (115 pontos): classe e membros (30), origem (4), alvo e mecanismo de
-  ação (20), bactericida ou bacteriostático (4), espectro (3), uso clínico (28), meia-vida
-  e absorção (5) e resistência (21). A ordem junta a dos parágrafos das classes no livro:
-  o dos macrolídios começa pela classe, pelos membros e pela origem deles e segue para o
-  mecanismo; o das tetraciclinas põe o efeito e o espectro junto do mecanismo e termina
-  pelo uso, pela absorção e meia-vida e pela resistência (Murray; Rosenthal; Pfaller,
-  2022, p. 179).
-- **Métodos e agentes de controle** (93 pontos): categoria e exemplos (10), mecanismo de
+- **Antimicrobianos** (115 trechos): classe e membros (30), origem (4), alvo e mecanismo
+  de ação (20), bactericida ou bacteriostático (4), espectro (3), uso clínico (28),
+  meia-vida e absorção (5) e resistência (21). A ordem junta a dos parágrafos das classes
+  no livro-texto: o dos macrolídios começa pela classe, pelos membros e pela origem deles
+  e segue para o mecanismo; o das tetraciclinas põe o efeito e o espectro junto do
+  mecanismo e termina pelo uso, pela absorção e meia-vida e pela resistência (Murray;
+  Rosenthal; Pfaller, 2022, p. 179).
+- **Métodos e agentes de controle** (93 trechos): categoria e exemplos (10), mecanismo de
   ação (21), condições de uso (14), uso preferencial (21), espectro e efetividade (17) e
   limitações e cuidados (2). A ordem segue a aula 7: a tabela dos agentes químicos (slides
   19 e 20) dá, em cada linha, o agente, o mecanismo de ação, o uso preferencial e um
@@ -3953,8 +4123,8 @@ cada um, e de onde vem a ordem deles:
   os comentários e o slide 23 dão o espectro, a efetividade e as limitações. As condições
   de uso (tempo, temperatura, pressão, concentração), que a tabela não traz, vêm logo
   depois do mecanismo, por escolha do projeto.
-- **Provas de identificação** (89 pontos): tipo de prova (6), o que detecta (6), amostra e
-  situação de uso (7), como se faz (6), como se lê o resultado (12) e que bactéria o
+- **Provas de identificação** (89 trechos): tipo de prova (6), o que detecta (6), amostra
+  e situação de uso (7), como se faz (6), como se lê o resultado (12) e que bactéria o
   resultado indica (50). A prova e o que ela detecta abrem a entrada, no primeiro dos dois
   sentidos em que as provas se pedem, da prova ao que ela mostra ([parte
   4](#4-os-grupos)). Os eixos seguintes vão da coleta da amostra ao resultado, como no
@@ -3963,51 +4133,51 @@ cada um, e de onde vem a ordem deles:
   resultados implicam para o diagnóstico e o tratamento (Norman-McKay; ASM MINAH
   Undergraduate Curriculum Guidelines Committee, 2018, supl., p. 7-8). O último eixo é o
   segundo sentido, do resultado à bactéria.
-- **Microbiota de cada local do corpo** (90 pontos): estéril ou colonizado (6),
+- **Microbiota de cada local do corpo** (90 trechos): estéril ou colonizado (6),
   microrganismos do local (73) e Gram que predomina (4). A ordem é a da aula 5: o slide 3
   separa os locais estéreis dos colonizados, e os slides 10 a 16 dão, local por local, os
   microrganismos predominantes e os menos frequentes; a legenda da imagem de quatro deles
   dá o Gram que predomina.
 
-**Quadros e casos.** Cada quadro tem as partes da sequência acima, com os pontos da coluna
-dos quadros. Assim ele cumpre a forma do caminho do quadro para as bactérias: o quadro, as
-bactérias que as aulas juntam sob ele e o que distingue cada uma ([A forma de cada
-caminho](#a-forma-de-cada-caminho)). Depois dos fatos do quadro vêm os casos, cada um com
-quatro partes: o cenário (o paciente, onde e quando, o que ele apresenta), a pergunta, a
-resposta-modelo e as citações. O cenário vem do livro, que propõe criar um paciente para
-cada infecção e fazer as sete perguntas, quem, onde, quando, por quê, qual, o quê e como
-(Murray; Rosenthal; Pfaller, 2022, p. vii-viii), e das atividades de McCall e colegas, que
-mostram ao estudante os sinais e sintomas de um paciente fictício e pedem um tratamento
-(McCall; Pacitti; Forster, 2019, seção Procedure, par. 4, e supl., p. 14-16). A pergunta,
-a resposta-modelo e as citações são as partes da pergunta de prova: o caso é uma pergunta
-de prova com cenário, como as situações-problema e os estudos de caso da prova do Enade
-(Brasil, 2023a, art. 2º, p. 1; Brasil, 2023b, art. 2º, p. 1).
+**Quadros e casos.** Cada quadro tem as partes da sequência acima, com os trechos da
+coluna dos quadros. Assim ele cumpre a forma do caminho do quadro para as bactérias: o
+quadro, as bactérias que as aulas juntam sob ele e o que distingue cada uma ([A forma de
+cada caminho](#a-forma-de-cada-caminho)). Depois dos fatos do quadro vêm os casos, cada um
+com quatro partes: o cenário (o paciente, onde e quando, o que ele apresenta), a pergunta,
+a resposta-modelo e as citações. O cenário vem do livro-texto, que propõe criar um
+paciente para cada infecção e fazer as sete perguntas, quem, onde, quando, por quê, qual,
+o quê e como (Murray; Rosenthal; Pfaller, 2022, p. vii-viii), e das atividades de McCall e
+colegas, que mostram ao estudante os sinais e sintomas de um paciente fictício e pedem um
+tratamento (McCall; Pacitti; Forster, 2019, seção Procedure, par. 4, e supl., p. 14-16). A
+pergunta, a resposta-modelo e as citações são as partes da pergunta de prova: o caso é uma
+pergunta de prova com cenário, como as situações-problema e os estudos de caso da prova do
+Enade (Brasil, 2023a, art. 2º, p. 1; Brasil, 2023b, art. 2º, p. 1).
 
 **Perguntas de prova.** Cada pergunta tem a pergunta, a resposta-modelo e as citações ([As
 perguntas de prova](#as-perguntas-de-prova)), e as de cada aula seguem a sequência das
-partes. A forma de cada pergunta vem do tipo do ponto; um ponto conta em cada forma dos
+partes. A forma de cada pergunta vem do tipo do trecho; um trecho conta em cada forma dos
 seus tipos:
 
 - **cite e explique**, para Conceito e vocabulário, Classificação, Relação nos dois
   sentidos, Item com os mesmos tipos de fato, Número com sentido, Marco histórico, Exemplo
-  recorrente, Exceção e Analogia e história (1.575 pontos): o estudante precisa saber o
-  conteúdo de cada ponto e o porquê dele e escrevê-lo com as próprias palavras ([O que o
+  recorrente, Exceção e Analogia e história (1.575 trechos): o estudante precisa saber o
+  conteúdo de cada trecho e o porquê dele e escrevê-lo com as próprias palavras ([O que o
   estudante precisa saber fazer](#o-que-o-estudante-precisa-saber-fazer)).
-- **descreva**, para Parte e função, Processo em ordem e Figura e esquema (376 pontos): a
+- **descreva**, para Parte e função, Processo em ordem e Figura e esquema (376 trechos): a
   forma desses tipos é descrever a parte e o que ela faz, as etapas em ordem e o que está
   onde.
-- **cite e explique**, para Causa e efeito e História em cadeia (225 pontos): a forma
+- **cite e explique**, para Causa e efeito e História em cadeia (225 trechos): a forma
   desses tipos pede explicar o porquê.
-- **diferencie**, para Contraste (196 pontos): a forma do tipo pede comparar.
-- **aplique a uma situação**, para Aplicação na prática (114 pontos): a forma do tipo pede
-  perguntas de situação.
+- **diferencie**, para Contraste (196 trechos): a forma do tipo pede comparar.
+- **aplique a uma situação**, para Aplicação na prática (114 trechos): a forma do tipo
+  pede perguntas de situação.
 
 **Cartões.** A frente traz a pergunta e um campo de imagem; o verso, a resposta, o porquê,
 a fonte e outro campo de imagem. A pergunta, a resposta e a fonte são as colunas que a
-metodologia pede ([metodologia, seção
+metodologia do projeto pede ([seção
 9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)), o porquê é o do verso
 ([Ensinar primeiro, treinar depois](#ensinar-primeiro-treinar-depois)), e os campos de
-imagem são os de Figura e esquema, acima. Cada um dos 1.874 pontos gera ao menos um
+imagem são os de Figura e esquema, acima. Cada um dos 1.874 trechos gera ao menos um
 cartão, como diz a forma do tipo dele, e os cartões novos entram no baralho na ordem da
 sequência das partes.
 
