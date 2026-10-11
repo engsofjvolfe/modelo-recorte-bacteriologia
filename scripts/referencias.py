@@ -61,7 +61,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from comum import (PASTA_NORMAS, acha_projeto, ancora, assinatura, caixas, fontes_registradas, imagem,  # noqa: E402
-                   le_formato, lingua, link, marca, situacao_da_copia, tiques_anteriores, tiques_da_parte)
+                   le_formato, lingua, link, marca, rodape_da_licenca, situacao_da_copia, tiques_anteriores,
+                   tiques_da_parte)
 from validar_dados import esquema, le_dados  # noqa: E402
 
 ARQUIVO_MESES = PASTA_NORMAS / "meses.json"
@@ -282,7 +283,7 @@ def copias_registradas(transcricoes, raiz):
 
 def grava_fontes_md(refs, saida, licenca, nome_licenca):
     corpo = ["# Referências", ""] + [linha for _, r in refs for linha in (r, "")]
-    corpo += ["---", "", f"*Este documento está licenciado sob [{nome_licenca}]({link(licenca, saida)}).*"]
+    corpo += rodape_da_licenca(licenca, nome_licenca, saida)
     saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text("\n".join(corpo) + "\n", encoding="utf-8")
 

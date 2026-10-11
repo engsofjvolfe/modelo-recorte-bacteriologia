@@ -45,8 +45,8 @@
       "id": "documentos",
       "entradas": ["formato", "gerados", "conferencia_imagens", "conferencia_referencias", "analise",
                    "material_gerado", "base_externa", "conferencia_trechos"],
-      "saidas": ["material_gerado"],
-      "scripts": [],
+      "saidas": ["material_gerado", "glossario"],
+      "scripts": ["glossario.py"],
       "conferencias": []
     },
     {
@@ -66,20 +66,20 @@
     },
     {
       "id": "raiz",
-      "entradas": ["formato", "referencias", "analise", "material_gerado"],
-      "saidas": [],
-      "scripts": [],
+      "entradas": ["formato", "referencias", "indice", "analise", "material_gerado"],
+      "saidas": ["indice"],
+      "scripts": ["confere_indice.py"],
       "conferencias": []
     },
     {
       "id": "auditoria",
       "entradas": ["formato", "fontes", "material_base", "fontes_externas", "gerados", "conferencia_imagens",
                    "conferencia_referencias", "pesquisa", "analise", "material_gerado", "bases", "base_externa",
-                   "conferencia_trechos", "provas", "conferencia_cartoes"],
+                   "conferencia_trechos", "provas", "conferencia_cartoes", "indice", "glossario"],
       "saidas": ["referencias", "fontes_externas", "conferencia_imagens", "conferencia_referencias", "bases",
                  "base_externa", "conferencia_trechos", "conferencia_cartoes", "imagens"],
       "scripts": ["validar_dados.py", "conferencia.py", "referencias.py", "base_externa.py", "confere_cartoes.py",
-                  "protege_fontes.py"],
+                  "glossario.py", "confere_indice.py", "protege_fontes.py"],
       "conferencias": ["conferencia_imagens", "conferencia_referencias", "conferencia_trechos", "conferencia_cartoes"]
     }
   ]

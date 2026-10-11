@@ -228,7 +228,9 @@ tique que vale é o seu: nada está conferido sem ele (ver a
   referências, pra saber o que já tem o seu tique; que leia inteiras a análise da matéria,
   as transcrições e as bases conferidas e só então escreva, nas formas de estudo que a
   análise escolheu e na grade do formato, primeiro a teoria fundamental e depois os outros
-  documentos, com a chamada de cada fato como a conferência das referências mostra.
+  documentos, com a chamada de cada fato como a conferência das referências mostra, e
+  marque cada termo que um documento define, como diz a seção 13 da metodologia; depois,
+  que grave o glossário com o `glossario.py`.
 - **Confira depois:** cada documento contra as fontes, com a auditoria da
   [seção 16 da metodologia](metodologia-de-conteudo.md#16-checklist-auditando-uma-disciplina-existente).
 - **Sempre seu:** o recorte — o que entra, o quão fundo e o que é mais importante.
@@ -262,7 +264,8 @@ tique que vale é o seu: nada está conferido sem ele (ver a
   `LEIA-ME.md` da pasta `modelo-documentos-raiz/`, que vem com o modelo.
 - **Peça:** que copie os quatro documentos de `modelo-documentos-raiz/` pra pasta
   principal do projeto, no lugar dos documentos do modelo que têm o mesmo nome (o
-  `README.md` e o `NOTICE.md`), e preencha cada trecho entre colchetes.
+  `README.md` e o `NOTICE.md`), preencha cada trecho entre colchetes e confira o índice com
+  o `confere_indice.py`.
 - **Sempre seu:** o aviso do recorte, a origem do material e o contato pra relatar erros.
 
 ### 10. Conferência final (`auditoria`)

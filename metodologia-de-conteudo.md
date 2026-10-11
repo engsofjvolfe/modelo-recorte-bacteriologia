@@ -370,7 +370,9 @@ com os mesmos tipos de fato. Os outros tipos ganham o documento que os serve, co
 palavras próprias e de forma didática, ensinando: claros, explicados e instrutivos, sem
 jargão solto, nunca um texto que se lê como o livro de onde o fato veio — um termo técnico vem
 explicado onde aparece pela primeira vez, ou citado pela categoria que o define
-([seção 7](#7-cite-uma-categoria-em-vez-de-redefinir)). Escreva como quem ensina a matéria a
+([seção 7](#7-cite-uma-categoria-em-vez-de-redefinir)), e onde é explicado leva a marca de
+definição da [seção 13](#13-escreva-os-quatro-documentos-de-apresentação). Escreva como
+quem ensina a matéria a
 alguém que nunca a viu: cada fato se apoia no que o leitor já sabe ou no que o documento
 ensinou antes, o nome técnico chega depois do que ele nomeia, e o básico vem antes do que
 depende dele. Ensinar não é mostrar: nenhum fato fica só listado ou apontado numa figura,
@@ -648,9 +650,21 @@ adicionar os documentos):
 | Documento                                    | Papel fixo                                                                                                                                                                                                       |
 | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `README.md`                                | Apresentação do projeto: o que é, aviso sobre o recorte, como o material foi feito (o que é mecânico e o que é julgamento), origem do material, licença, onde fica cada arquivo, como usar, referências. |
-| `INDICE.md`                                | Índice do projeto: lista e linka os documentos que existem (teoria fundamental, dicionário, ficha, planilhas, fontes), sem explicação.                                                                       |
+| `INDICE.md`                                | Índice do projeto: todos os documentos que existem (teoria fundamental, dicionário, ficha, planilhas, fontes), na ordem de leitura, cada um com o link e uma linha dizendo o que ele é. |
 | `MANUAL.md` (ou equivalente não técnico) | Guia em níveis, sem jargão, pra quem só quer estudar. Abra com o aviso do recorte e tenha um canal pra reportar erro.                                                                                         |
 | `NOTICE.md`                                | Mapa de licenciamento: qual licença cobre qual categoria de arquivo, e a exceção do material de terceiros.                                                                                                    |
+
+Um documento do projeto é cada arquivo `.md` que vai com ele: tudo, menos o que a lista do
+que nunca vai pro GitHub deixa de fora. O `confere_indice.py` confere que cada um, menos o
+próprio índice, está nele uma vez só (o [README dos scripts](scripts/README.md) diz como
+rodar).
+
+Todo documento do projeto que define um termo, dizendo o que uma palavra quer dizer, marca
+o termo no lugar da definição com `<dfn>termo</dfn>`, a marca do HTML pra "aqui este termo
+é definido". Cada termo é definido num lugar só. Ninguém escreve o glossário
+(`GLOSSARIO.md`) à mão: o `glossario.py` recolhe as marcas e grava cada termo, em ordem
+alfabética, com o link pro lugar onde ele é definido. O glossário é um documento do projeto
+como os outros, e por isso está no índice.
 
 O índice do projeto lista documentos, não itens de dentro deles: cada documento de
 conteúdo (teoria fundamental, dicionário, ficha) mantém seu próprio índice interno, no
@@ -767,8 +781,9 @@ ou a uma fonte entra neles.
 ### Análise mecânica
 
 1. Rode `python scripts/validar_dados.py` em cada arquivo de dados do projeto, e
-   `conferencia.py`, `referencias.py`, `base_externa.py`, `confere_cartoes.py` e
-   `protege_fontes.py`: nenhum deles pode deixar linha `ERRO` nem `FALTA` (ver a
+   `conferencia.py`, `referencias.py`, `base_externa.py`, `confere_cartoes.py`,
+   `glossario.py --conferir`, `confere_indice.py` e `protege_fontes.py`: nenhum deles pode
+   deixar linha `ERRO` nem `FALTA` (ver a
    [seção 11](#11-confira-primeiro-o-script-depois-a-pessoa)).
 
 ### Análise humana

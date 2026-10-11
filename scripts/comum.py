@@ -63,6 +63,11 @@ MARCA_PARTE = re.compile(r"^<!-- parte: ([^|]+)\|([^|]+)\|([0-9a-f]+) -->$")
 TIQUE = re.compile(r"^- \[([ xX])\] (IA|pessoa)\s*$")
 VARIAVEL = re.compile(r"\{[^{}]+\}")
 
+# documentos do projeto, em Markdown
+EXTENSAO_DOCUMENTO = ".md"
+CERCA = re.compile(r"^ {0,3}(`{3,}|~{3,})")  # abre ou fecha um bloco de codigo
+CODIGO_NA_LINHA = re.compile(r"(`+).+?\1")
+
 # marcas da transcricao (secao 1 da metodologia)
 TITULO_PAGINA = re.compile(r"^## (.+?) \(arquivo p\. (\d+)\)\s*$")
 SEM_TEXTO = "[sem texto]"
@@ -249,6 +254,41 @@ def ignorado_pelo_git(raiz, caminho):
     return None if ignorados is None else Path(caminho).resolve() in ignorados
 
 
+def documentos_do_projeto(raiz):
+    """Os documentos do projeto: os arquivos .md que o git guarda ou guardaria (os
+    versionados e os novos que a lista do que nao vai ao GitHub nao deixa de fora) e que
+    existem, com o caminho inteiro; None se o projeto nao usa o git ou se o git nao esta
+    instalado."""
+    try:
+        r = subprocess.run(["git", "-C", str(raiz), "ls-files", "--cached", "--others", "--exclude-standard", "-z",
+                            "--", "*" + EXTENSAO_DOCUMENTO], capture_output=True)
+    except FileNotFoundError:
+        return None
+    if r.returncode != 0:
+        return None
+    return {(raiz / n).resolve() for n in r.stdout.decode("utf-8").split("\0") if n and (raiz / n).is_file()}
+
+
+def linhas_fora_de_codigo(texto):
+    """(numero da linha, a partir de 1, e a linha) de cada linha de um documento Markdown
+    fora dos blocos de codigo. O codigo de dentro da linha fica: quem nao o quer usa
+    sem_codigo_na_linha."""
+    cerca = None
+    for n, linha in enumerate(texto.splitlines(), 1):
+        m = CERCA.match(linha)
+        if cerca is None and m:
+            cerca = m.group(1)
+        elif cerca is not None:
+            if re.fullmatch(rf" {{0,3}}{re.escape(cerca[0])}{{{len(cerca)},}}\s*", linha):
+                cerca = None
+        else:
+            yield n, linha
+
+
+def sem_codigo_na_linha(linha):
+    return CODIGO_NA_LINHA.sub("", linha)
+
+
 def registros(projeto):
     """[(documento, chave, caminho do arquivo da fonte, sha256)] de todos os documentos
     gerados que registram fonte: as transcricoes e as bases do material de fora."""
@@ -363,6 +403,12 @@ def link(alvo, saida):
 
 def ancora(texto):
     return re.sub(r"[^\w-]", "", texto.lower().replace(" ", "-"))
+
+
+def rodape_da_licenca(licenca, nome_licenca, saida):
+    """As linhas do fim de um documento gerado: o traco e a licenca do conteudo, com o link
+    pro arquivo dela a partir do documento."""
+    return ["---", "", f"*Este documento está licenciado sob [{nome_licenca}]({link(licenca, saida)}).*"]
 
 
 # ---------- fonte em HTML, com as marcas das paginas impressas ----------

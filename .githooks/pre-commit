@@ -3,9 +3,15 @@
 # Copyright do codigo sob GPL-3.0 -- ver LICENSE e NOTICE.md na raiz do projeto.
 #
 # Antes de cada versao gravada pelo git, confere que nenhuma fonte vai junto (ver
-# scripts/protege_fontes.py). O git roda este arquivo na pasta principal do projeto.
+# scripts/protege_fontes.py), que o glossario e o que os documentos definem (ver
+# scripts/glossario.py) e que cada documento esta no indice uma vez so (ver
+# scripts/confere_indice.py). O git roda este arquivo na pasta principal do projeto.
 
 if command -v python3 >/dev/null 2>&1; then
-    exec python3 scripts/protege_fontes.py --versao
+    PYTHON=python3
+else
+    PYTHON=python
 fi
-exec python scripts/protege_fontes.py --versao
+"$PYTHON" scripts/protege_fontes.py --versao || exit 1
+"$PYTHON" scripts/glossario.py --conferir || exit 1
+exec "$PYTHON" scripts/confere_indice.py

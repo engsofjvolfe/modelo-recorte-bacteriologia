@@ -10,10 +10,13 @@ Pra mandar uma mudança ao GitHub, você grava uma versão do projeto no seu com
 programa que faz isso, o *git*, chama cada versão gravada de *commit* — e escreve uma
 mensagem dizendo o que mudou. Esta pasta traz três coisas que entram em ação nessa hora:
 
-- **Uma proteção das fontes** (o arquivo `pre-commit`): antes de aceitar a versão, ela
-  roda o script `protege_fontes.py` e barra a versão que levar um arquivo da pasta
-  protegida (a do material de base) ou uma cópia de uma fonte, mesmo com outro nome e em
-  outra pasta. Assim, nenhum material de terceiros vai pro GitHub por engano (ver o
+- **Uma proteção das fontes, do glossário e do índice** (o arquivo `pre-commit`): antes de
+  aceitar a versão, ela roda o script `protege_fontes.py` e barra a versão que levar um
+  arquivo da pasta protegida (a do material de base) ou uma cópia de uma fonte, mesmo com
+  outro nome e em outra pasta. Assim, nenhum material de terceiros vai pro GitHub por
+  engano. Depois, roda o `glossario.py --conferir`, que barra a versão enquanto o glossário
+  não for o que os documentos definem, e o `confere_indice.py`, que barra a versão enquanto
+  algum documento do projeto não estiver no índice uma vez só (ver o
   [README dos scripts](../scripts/README.md)).
 
 As outras duas ajudam a escrever a mensagem sempre do mesmo jeito:

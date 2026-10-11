@@ -9,6 +9,8 @@
     "formato": "dados/formato.json",
     "fontes": "dados/fontes.json",
     "referencias": "docs/REFERENCIAS.md",
+    "indice": "INDICE.md",
+    "glossario": "GLOSSARIO.md",
     "licenca_conteudo": "LICENSE-CONTENT.txt",
     "material_base": "docs/material-base",
     "fontes_externas": "docs/material-base/fontes-externas",

@@ -99,6 +99,8 @@ como `dados/formato.json`, são os do modelo; no seu projeto, valem os do `proje
 | Quando a aula não cobre um eixo de um item | `base_externa.py`, que também roda o `referencias.py` |
 | Com as planilhas de pergunta e as provas dos cartões prontas | `confere_cartoes.py` |
 | Com as planilhas de pergunta prontas e conferidas | `montar_deck.py` |
+| Sempre que um documento define um termo novo, ou deixa de definir (e sozinho, com `--conferir`, antes de cada versão mandada ao GitHub, se a conferência das mensagens estiver ativa) | `glossario.py` |
+| Sempre que um documento entra no projeto, sai dele ou muda de lugar (e sozinho, antes de cada versão mandada ao GitHub, se a conferência das mensagens estiver ativa) | `confere_indice.py` |
 | Antes de publicar o projeto (e sozinho, antes de cada versão mandada ao GitHub, se a conferência das mensagens estiver ativa) | `protege_fontes.py` |
 
 ## `validar_dados.py` — confere um arquivo de dados
@@ -600,6 +602,64 @@ baralho é gerado. Pra usar, abra o Anki e arraste o arquivo `.apkg` pra dentro 
 use o menu **Arquivo → Importar**).
 
 Precisa da biblioteca `genanki`.
+
+## `confere_indice.py` — confere que cada documento está no índice
+
+**Pra que serve.** O índice do projeto (no modelo, `INDICE.md`) lista os documentos na
+ordem de leitura, cada um com o link e uma linha dizendo o que ele é (ver a seção 13 da
+metodologia). Este script confere que cada documento do projeto está nele uma vez só. Um
+documento é cada arquivo `.md` que vai com o projeto: os que o git já guarda e os novos
+que a lista do que nunca vai pro GitHub (o `.gitignore`) não deixa de fora, menos o
+próprio índice. Do índice contam os links pra arquivos `.md`; a parte do link depois de
+`#`, que aponta uma seção, não conta, e um link dentro de um trecho de código também não.
+
+**Quando usar.** Sempre que um documento entra no projeto, sai dele ou muda de lugar. Se
+a conferência das mensagens estiver ativa (ver o [README dela](../.githooks/README.md)),
+ele também roda sozinho antes de cada versão gravada pra mandar ao GitHub, e barra a
+versão enquanto houver `FALTA` ou `ERRO`.
+
+**Como rodar.**
+
+    python scripts/confere_indice.py
+
+**O que aparece.** Quantos documentos há, se cada um está no índice uma vez só. Senão, uma
+linha `FALTA` pra cada documento que não está no índice e uma linha `ERRO` pra documento
+que está mais de uma vez — também num link do rodapé — e pra link a um `.md` que não
+existe, ao próprio índice ou a um arquivo que o `.gitignore` deixa de fora. Se o projeto
+não usa o git, o script diz isso numa linha `ERRO` e para: sem o git, não há como saber o
+que vai com o projeto.
+
+Usa só o Python e o git.
+
+## `glossario.py` — monta o glossário
+
+**Pra que serve.** Um documento que define um termo marca o termo, no lugar da definição,
+com `<dfn>termo</dfn>` (ver a seção 13 da metodologia). Este script recolhe essas marcas
+de todos os documentos do projeto — os mesmos que o `confere_indice.py` confere —, fora
+dos trechos de código, e grava o glossário (no modelo, `GLOSSARIO.md`): cada termo numa
+linha, em ordem alfabética, sem contar acentos nem maiúsculas, com o link pra seção onde
+ele é definido. O glossário não copia a definição: só aponta pra ela. A mesma marca, nos
+mesmos lugares, dá sempre o mesmo glossário.
+
+**Quando usar.** Sempre que um documento define um termo novo ou deixa de definir. Se a
+conferência das mensagens estiver ativa (ver o [README dela](../.githooks/README.md)), ele
+também roda sozinho, com `--conferir`, antes de cada versão gravada pra mandar ao GitHub, e
+barra a versão enquanto o glossário gravado não for o que os documentos definem.
+
+**Como rodar.**
+
+    python scripts/glossario.py
+    python scripts/glossario.py --conferir
+
+O `--conferir` não grava nada: só diz se o glossário gravado está em dia.
+
+**O que aparece.** Quantos termos foram gravados. Uma linha `ERRO`, e nada gravado, pra
+termo definido em mais de um lugar (sem contar maiúsculas), com cada lugar, e pra marca
+vazia. Com `--conferir`, `FALTA` quando o glossário gravado não é o que os documentos
+definem. Se o projeto não usa o git, o script diz isso numa linha `ERRO` e para, como o
+`confere_indice.py`.
+
+Usa só o Python e o git.
 
 ## `comum.py`
 
