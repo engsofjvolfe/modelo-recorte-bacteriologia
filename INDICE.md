@@ -8,6 +8,7 @@
 - [Regras da ABNT para citar e referenciar](regras-abnt.md)
 - [Trabalhar com uma IA](trabalhar-com-ia.md)
 - [Texto das figuras](docs/texto-das-figuras.md)
+- [Análise da matéria](docs/analise-da-materia.md)
 - [Material de base](docs/material-base/README.md)
 - [Scripts](scripts/README.md)
 - [Conferência das mensagens e proteção das fontes](.githooks/README.md)
