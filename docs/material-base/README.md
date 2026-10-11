@@ -1,16 +1,17 @@
 # Material de base (nunca publicado)
 
-Esta é a pasta protegida. Ela recebe o material de aula original da disciplina (slides,
-em PDF ou pptx, um livro digital ou equivalente) e, na subpasta `fontes-externas/`, as cópias do material de fora
+Esta é a [pasta protegida](../../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula).
+Ela recebe o material de aula original da disciplina (slides, em PDF ou pptx, um livro
+digital ou equivalente) e, na subpasta `fontes-externas/`, as cópias do material de fora
 usado onde a aula não cobre um eixo (ver seção 4 da metodologia). Ela nunca muda de nome
 nem de lugar: é assim que a lista do que nunca vai pro GitHub e os scripts sabem sempre
 onde está o material de terceiros. É uma regra permanente, não uma pendência a resolver
 depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteudo.md)):
 
 - **Nada daqui é publicado nem repassado**, em lugar nenhum: esse material não é de quem
-  mantém o projeto. Se você guarda o projeto no GitHub, a lista do que nunca vai pra lá
-  (o arquivo `.gitignore`, na pasta principal do projeto) já deixa de fora tudo o que
-  está aqui dentro, menos este README.
+  mantém o projeto. Se você guarda o projeto no GitHub, a [lista do que nunca vai pro
+  GitHub](../../NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto)
+  já deixa de fora tudo o que está aqui dentro, menos este README.
 - A referência de cada material — as aulas, as fontes da pesquisa e o de fora — sai do
   arquivo de fontes (`dados/fontes.json`) e vai pra lista de referências
   (`docs/REFERENCIAS.md`), que podem ser publicados: o que fica de fora é a cópia, não a
@@ -19,8 +20,8 @@ depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteu
   fora ficam em `gerados-ocr/` — são a base contra a qual se confere tudo o que se
   escreve, e também nunca são publicadas (ver as seções 1 e 4 da metodologia). Ali ficam
   também:
-  - as evidências da pesquisa da análise da matéria, na subpasta `pesquisa/`: o trecho
-    literal de cada fonte que sustenta um ponto da pesquisa (ver seção 3 da metodologia);
+  - as [evidências da pesquisa](../../metodologia-de-conteudo.md#documente-a-análise), na
+    subpasta `pesquisa/`;
   - a base de cada item, `[item]-fontes-externas.md`;
   - a prova dos cartões de cada planilha, na subpasta `provas/` (ver seção 9 da
     metodologia);
@@ -30,15 +31,14 @@ depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteu
     script `conferencia.py`); o das referências contra a cópia de cada fonte
     (`CONFERENCIA-REFERENCIAS.md`, feito pelo `referencias.py`); o das frases do material
     de fora (`CONFERENCIA-TRECHOS.md`, feito pelo `base_externa.py`); e o dos cartões
-    contra a prova deles (`CONFERENCIA-CARTOES.md`, feito pelo `confere_cartoes.py`). Os
-    scripts são os pequenos programas do modelo; o
-    [README deles](../../scripts/README.md) diz como rodar cada um.
+    contra a prova deles (`CONFERENCIA-CARTOES.md`, feito pelo `confere_cartoes.py`). O
+    [README dos scripts](../../scripts/README.md) diz como rodar cada um.
 - Se uma fonte estiver em outro lugar, o script que a registra (o `registrar_fonte.py`,
   pras aulas) ou o da base do material de fora (o `base_externa.py`) pergunta se pode
   trazê-la pra cá; e o `protege_fontes.py` confere que nenhuma fonte registrada ficou de
   fora.
 - As subpastas daqui são as do modelo. Em cada projeto, quem diz onde fica cada coisa
-  dentro desta pasta é o mapa do projeto, o `projeto.json` da pasta principal.
+  dentro desta pasta é o [mapa do projeto](../../metodologia-de-conteudo.md).
 - Antes de escrever qualquer coisa em `docs/material-gerado/`, leia este material
   inteiro, sem ferramenta que corte ou resuma automaticamente o texto (ver seção 1 da
   metodologia).

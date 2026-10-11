@@ -1,13 +1,14 @@
 # Regras da ABNT para citar e referenciar
 
 Todo fato que o material tira de uma fonte é citado ali mesmo, junto do fato, e a fonte
-aparece inteira na lista de referências. As duas coisas seguem normas da ABNT, a
-Associação Brasileira de Normas Técnicas:
+aparece inteira na lista de referências. As duas coisas seguem normas da <dfn>ABNT</dfn>,
+a Associação Brasileira de Normas Técnicas:
 
-- a **NBR 10520**, edição de 2023, para a **citação**: a indicação curta, no meio do
-  texto, de onde veio o fato, como (Silva, 2020, p. 12);
-- a **NBR 6023**, edição de 2025, para a **referência**: a descrição completa da fonte, na
-  lista do fim, como SILVA, Ana. **Título do livro**. São Paulo: Editora, 2020.
+- a **NBR 10520**, edição de 2023, para a **<dfn>citação</dfn>**: a indicação curta, no
+  meio do texto, de onde veio o fato, como (Silva, 2020, p. 12);
+- a **NBR 6023**, edição de 2025, para a **<dfn>referência</dfn>**: a descrição completa
+  da fonte, na lista do fim, como SILVA, Ana. **Título do livro**. São Paulo: Editora,
+  2020.
 
 As normas são vendidas pela ABNT e protegidas por direito autoral, por isso este
 documento não as copia: diz com outras palavras o que cada uma pede, com o número do item
@@ -16,8 +17,8 @@ costuma dar acesso). Os exemplos daqui são inventados.
 
 Cada regra diz também quem cuida dela:
 
-- **o script**: o `referencias.py`, um pequeno programa que vem pronto no modelo, faz
-  sozinho, a partir dos dados;
+- **o script**: o `referencias.py`, que vem pronto no modelo, faz sozinho, a partir dos
+  dados;
 - **os dados**: você, ou a IA, escreve do jeito certo no arquivo de fontes (o
   `fontes.json`, explicado no fim deste documento), e o script usa como está;
 - **o texto**: quem escreve o material segue a regra ao citar.
@@ -32,8 +33,8 @@ Tudo nesta seção vem da NBR 10520 (Associação Brasileira de Normas Técnicas
 
 ### O sistema
 
-- O método usa o sistema **autor-data**: a citação diz quem responde pela fonte e o ano.
-  Um trabalho usa um sistema só, do começo ao fim (6). *O texto.*
+- O método usa o sistema **<dfn>autor-data</dfn>**: a citação diz quem responde pela fonte
+  e o ano. Um trabalho usa um sistema só, do começo ao fim (6). *O texto.*
 - Notas de rodapé não são usadas pra citar: a citação vai no próprio texto (8). *O texto.*
 - A citação tem de levar à referência certa na lista: ela começa pela mesma entrada da
   referência (5.1). A conferência das referências mostra a chamada de cada fonte já
@@ -136,8 +137,8 @@ substituiu a edição de 2018.
 - A mesma pontuação e o mesmo destaque em todas: no método, o título vai em **negrito**
   (6.4, 6.7). *O script.*
 - Os elementos seguem uma ordem fixa pra cada tipo de documento (6.1, 6.2). *O script.*
-- Um elemento complementar (número de páginas, ISBN, série...) usado numa referência
-  entra em todas as do mesmo tipo (6.8). *Os dados.*
+- Um <dfn>elemento complementar</dfn> (número de páginas, ISBN, série...) usado numa
+  referência entra em todas as do mesmo tipo (6.8). *Os dados.*
 - O que você acrescenta vai no idioma do seu texto, não no da fonte (6.5). As expressões
   "Disponível em:" e "Acesso em:" são as da própria norma e saem sempre assim (6.6); o
   mês da data de acesso sai no idioma do formato da disciplina. *O script.* As notas vão
@@ -234,9 +235,9 @@ substituiu a edição de 2018.
 
 ## Como preencher o `fontes.json`
 
-O arquivo de fontes, `fontes.json`, é um arquivo de texto com os dados de cada fonte,
-organizados de um jeito que o script consegue ler: cada informação tem um nome entre
-aspas, dois-pontos e o valor. Copie o modelo dele, `modelo-dados/fontes.json`, e
+O <dfn>arquivo de fontes</dfn>, `fontes.json`, é um arquivo de texto com os dados de cada
+fonte, organizados de um jeito que o script consegue ler: cada informação tem um nome
+entre aspas, dois-pontos e o valor. Copie o modelo dele, `modelo-dados/fontes.json`, e
 preencha; a IA que você usa pode preencher pra você, e você confere depois. O arquivo
 começa com o `versao_schema`, a versão do molde que ele segue, que fica como está; a
 escolha do `et_al`, que no modelo vem `false`; e a lista `fontes`, que no modelo vem

@@ -13,21 +13,23 @@ Siga isto por padrão, mas corrija quando sua disciplina expuser um caso que nã
 coberto aqui. Quando isso acontecer, atualize este documento também, não só o conteúdo
 da sua disciplina.
 
-Algumas partes do trabalho são feitas por *scripts*: pequenos programas que vêm prontos no
-modelo e fazem sempre o mesmo trabalho, do mesmo jeito. Quando este guia diz pra rodar um
-deles — um comando como `python scripts/conferencia.py` —, o
-[README dos scripts](scripts/README.md) explica, passo a passo, como abrir o terminal (a
-janela onde se digita o comando) e o que aparece na tela. Você não precisa saber
-programar.
+Algumas partes do trabalho são feitas por [scripts](NOTICE.md#1-programas--gpl-30), que
+vêm prontos no modelo. Quando este guia diz pra rodar um deles — um comando como
+`python scripts/conferencia.py` —, o [README dos scripts](scripts/README.md) explica,
+passo a passo, como abrir o
+[terminal](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) e o que aparece
+na tela. Você não precisa saber programar.
 
-Os caminhos de pasta e de arquivo citados aqui são os do modelo. Em cada projeto, quem
-diz onde fica cada coisa é o mapa do projeto, o arquivo `projeto.json`, na pasta
+Os caminhos de pasta e de arquivo citados aqui são os do modelo. Em cada projeto, quem diz
+onde fica cada coisa é o <dfn>mapa do projeto</dfn>, o arquivo `projeto.json`, na pasta
 principal dele: é dali que os scripts tiram todo caminho.
 
-Uma palavra que aparece muito aqui: *publicar*. O projeto de uma disciplina pode ser
-publicado — no GitHub, um site que guarda projetos na internet, ou em qualquer outro
-lugar. O material de terceiros (as aulas, a transcrição delas, as cópias do material de
-fora e tudo o que traz texto delas) nunca é publicado; o resto pode ser.
+Uma palavra que aparece muito aqui: <dfn>publicar</dfn>. O projeto de uma disciplina pode
+ser publicado — no <dfn>GitHub</dfn>, um site que guarda projetos na internet e o
+histórico de cada mudança deles, ou em qualquer outro lugar. O <dfn>material de
+terceiros</dfn> (as aulas, a transcrição delas, as evidências da pesquisa, as cópias do
+material de fora, a base de trechos dele, a prova dos cartões e tudo o que traz texto
+deles) nunca é publicado; o resto pode ser.
 
 As seções seguem a ordem do trabalho, que é uma cadeia: cada fonte vira uma transcrição
 conferida e uma referência (seções 1 e 2); da leitura delas e de uma pesquisa sobre a
@@ -44,18 +46,19 @@ da conferência.
 ## 1. Trate as fontes da aula
 
 Guarde o material de aula original da disciplina — slides, apostila, ou o que for — na
-pasta do material de base, `docs/material-base/`. É a pasta protegida: tudo o que é de
-terceiros fica nela, e ela nunca é publicada nem muda de nome ou de lugar. Ela carrega um
-arquivo pequeno e próprio dela, `docs/material-base/README.md`, que só explica como a
-pasta funciona. Quem olha o projeto de fora normalmente não vai ver o conteúdo dela nem
-saber o que tem lá — ela existe só no seu computador, pra você, enquanto organiza aquela
-disciplina. O `protege_fontes.py` confere que nenhuma fonte registrada ficou fora dela.
+pasta do material de base, `docs/material-base/`. É a <dfn>pasta protegida</dfn>: tudo o
+que é de terceiros fica nela, e ela nunca é publicada nem muda de nome ou de lugar. Ela
+carrega um arquivo pequeno e próprio dela, `docs/material-base/README.md`, que só explica
+como a pasta funciona. Quem olha o projeto de fora normalmente não vai ver o conteúdo dela
+nem saber o que tem lá — ela existe só no seu computador, pra você, enquanto organiza
+aquela disciplina. O `protege_fontes.py` confere que nenhuma fonte registrada ficou fora
+dela.
 
 Faça uma transcrição integral e literal desse material, usando OCR se ele estiver
-digitalizado como imagem ou PDF escaneado (OCR é uma tecnologia que lê o texto de uma
-imagem e devolve como texto comum). Essa transcrição não é opcional, com ou sem ajuda
-de IA: ela é o que permite conferir, depois, que nada do material ficou de fora do que
-você escreveu — texto literal e completo é mais fácil de conferir contra o que foi
+digitalizado como imagem ou PDF escaneado (<dfn>OCR</dfn> é uma tecnologia que lê o texto
+de uma imagem e devolve como texto comum). Essa transcrição não é opcional, com ou sem
+ajuda de IA: ela é o que permite conferir, depois, que nada do material ficou de fora do
+que você escreveu — texto literal e completo é mais fácil de conferir contra o que foi
 escrito do que voltar num PDF escaneado toda vez. Guarde essa transcrição também sem
 publicar, no padrão de *Como transcrever*, logo abaixo.
 
@@ -78,26 +81,27 @@ errado.
 ### Como transcrever
 
 Transcreva página por página (ou slide por slide), marcando duas coisas em cada uma: a
-posição dela no arquivo, que é por onde se acha a imagem pra conferir, e o número
-impresso na própria página, que é o que a citação usa. Os dois costumam ser diferentes
-(capa, ficha técnica e páginas em algarismos romanos contam no arquivo, mas não na
-numeração impressa). Quando a página não tem número impresso, como costuma acontecer
-com slides, a citação usa a posição dela no arquivo, como slide. Entra todo texto que
-está escrito na página, inclusive o de dentro de figuras, tabelas e esquemas, e cada
-item junto do rótulo que lhe dá contexto (o título da lista, a legenda, o cabeçalho da
-coluna), porque um item solto pode mudar de sentido. Não entra nada que não esteja
-escrito: nem descrição de imagem, nem explicação, nem correção. Onde há uma figura, a
-transcrição só marca que ela existe, com `[imagem]`, seguida do texto escrito dentro
-dela e de `[fim da imagem]` (figura sem texto fica só com `[imagem]`); a legenda, escrita
-fora da figura, vem no lugar dela na página. A marca diz onde a figura está, nunca o que
-ela mostra. Guarde a transcrição em
+posição dela no arquivo, que é por onde se acha a imagem pra conferir, e o número impresso
+na própria página, que é o que a citação usa. Os dois costumam ser diferentes (capa, ficha
+técnica e páginas em algarismos romanos contam no arquivo, mas não na numeração impressa).
+Quando a página não tem número impresso, como costuma acontecer com slides, a citação usa
+a posição dela no arquivo, como slide. Entra todo texto que está escrito na página,
+inclusive o de dentro de figuras, tabelas e esquemas, e cada item junto do rótulo que lhe
+dá contexto (o título da lista, a legenda, o cabeçalho da coluna), porque um item solto
+pode mudar de sentido. Não entra nada que não esteja escrito: nem descrição de imagem, nem
+explicação, nem correção. Onde há uma figura, a transcrição só marca que ela existe, com
+`[imagem]`, seguida do texto escrito dentro dela e de `[fim da imagem]` (figura sem texto
+fica só com `[imagem]`); a legenda, escrita fora da figura, vem no lugar dela na página. A
+marca diz onde a figura está, nunca o que ela mostra. Guarde a transcrição em
 `docs/material-base/gerados-ocr/` e, assim que ela for criada, registre no topo dela de
-qual arquivo veio, com `python scripts/registrar_fonte.py [transcrição] [arquivo original] [chave]` — se o arquivo original estiver fora da pasta protegida, o script
-oferece levá-lo pra lá antes de registrar. A chave é a mesma da referência dessa fonte (ver a
-[seção 2](#2-cite-cada-fonte-conforme-a-abnt)); o script grava a chave, o caminho do
-arquivo e a impressão digital dele — um código calculado a partir do conteúdo do
-arquivo, que muda se o arquivo mudar —, e em seguida atualiza as referências. É esse
-registro que liga a transcrição ao original, não o nome dos arquivos.
+qual arquivo veio, com
+`python scripts/registrar_fonte.py [transcrição] [arquivo original] [chave]` — se o
+arquivo original estiver fora da pasta protegida, o script oferece levá-lo pra lá antes de
+registrar. A chave é a mesma da referência dessa fonte (ver a [seção
+2](#2-cite-cada-fonte-conforme-a-abnt)); o script grava a chave, o caminho do arquivo e a
+<dfn>impressão digital</dfn> dele — um código calculado a partir do conteúdo do arquivo,
+que muda se o arquivo mudar —, e em seguida atualiza as referências. É esse registro que
+liga a transcrição ao original, não o nome dos arquivos.
 
 Cada página vira uma parte da transcrição, que começa com uma linha de título escrita
 assim: `## [como a citação chama a página] (arquivo p. [posição no arquivo])` — por
@@ -127,15 +131,15 @@ Um fato que só a imagem mostra, sem texto, não está na transcrição. Se ele 
 entrar no material, a prova dele é a própria imagem, conferida por uma pessoa, ou uma
 fonte de fora que o diga por escrito.
 
-Antes de usar a transcrição como base, ela é conferida contra a imagem de cada página:
-OCR e IA trocam letras, pulam linhas e às vezes escrevem o que não está lá. Com a
-transcrição pronta, gere o arquivo de conferência (`python scripts/conferencia.py`). Ele
+Antes de usar a transcrição como base, ela é conferida contra a imagem de cada página: OCR
+e IA trocam letras, pulam linhas e às vezes escrevem o que não está lá. Com a transcrição
+pronta, gere o <dfn>arquivo de conferência</dfn> (`python scripts/conferencia.py`). Ele
 nasce das transcrições, não do PDF, e mostra, página por página, a imagem da página no
 arquivo registrado e o que a transcrição tem pra ela — se não tem nada, aparece vazio —,
 com duas caixas de tique, uma pra IA e outra pra pessoa. O script não julga o conteúdo:
 quem confere é quem tica. A IA pode ticar primeiro, como uma primeira passada; a pessoa é
-sempre o último elo, e nenhuma página vale como conferida sem o tique dela. Se o texto
-de uma página ou o arquivo original mudar depois do tique, o tique é retirado. Até essa
+sempre o último elo, e nenhuma página vale como conferida sem o tique dela. Se o texto de
+uma página ou o arquivo original mudar depois do tique, o tique é retirado. Até essa
 conferência, a transcrição não prova nada.
 
 Na transcrição de um documento HTML ou de uma apresentação em pptx, o texto é cópia da
@@ -153,17 +157,18 @@ linhas, o tique é retirado.
 ## 2. Cite cada fonte, conforme a ABNT
 
 Todo documento que escreve algo tirado de uma fonte — análise da matéria, teoria
-fundamental, dicionário, ficha, planilha de perguntas — cita essa fonte ali mesmo, junto do fato, segundo a norma
-de citações (no Brasil, a ABNT NBR 10520, no sistema autor-data): a mesma entrada da
-referência (o autor, a instituição ou, sem autor, o começo do título), o ano e o local
-do trecho: a página impressa no documento ou, se ela não tiver número impresso, a
-posição do slide no arquivo. Diga o fato com suas palavras; se precisar transcrever
-literalmente, use aspas e só um trecho curto, como a norma manda. Na planilha, a
-citação vai numa coluna `fonte`, que aparece no cartão, e a resposta é sempre com
-palavras próprias ([seção 9](#9-cartões-de-revisão-espaçada)). A chamada de cada fonte —
-o nome e o ano, já com o *et al.* e as letras de desempate quando a norma pede — sai
-pronta na conferência das referências; o que cada norma pede, item por item, e o que cabe
-ao script, aos dados e a quem escreve, está nas [Regras da ABNT](regras-abnt.md).
+fundamental, dicionário, ficha, planilha de perguntas — cita essa fonte ali mesmo, junto
+do fato, segundo a norma de citações (no Brasil, a ABNT NBR 10520, no sistema autor-data):
+a mesma entrada da referência (o autor, a instituição ou, sem autor, o começo do título),
+o ano e o local do trecho: a página impressa no documento ou, se ela não tiver número
+impresso, a posição do slide no arquivo. Diga o fato com suas palavras; se precisar
+transcrever literalmente, use aspas e só um trecho curto, como a norma manda. Na planilha,
+a citação vai numa coluna `fonte`, que aparece no cartão, e a resposta é sempre com
+palavras próprias ([seção 9](#9-cartões-de-revisão-espaçada)). A <dfn>chamada</dfn> de
+cada fonte — o nome e o ano, já com o *et al.* e as letras de desempate quando a norma
+pede — sai pronta na conferência das referências; o que cada norma pede, item por item, e
+o que cabe ao script, aos dados e a quem escreve, está nas [Regras da
+ABNT](regras-abnt.md).
 
 As referências completas de todas as fontes citadas — as aulas, as fontes da pesquisa e
 o material de fora —
@@ -197,13 +202,13 @@ tique é retirado.
 
 ## 3. Descubra o formato da disciplina
 
-Com as fontes transcritas, conferidas e citáveis, decida o formato da disciplina: o curso,
-a disciplina e o nível de estudo; que tipos de conhecimento o material traz e que forma de
-estudo serve a cada um; e, pros tipos que pedem uma grade fixa, os itens, os eixos da
-ficha e os subtópicos de cada um, os elos do dicionário e as colunas dos cartões. O
-formato nasce da própria matéria, não de um molde: os itens, os eixos e os elos (seções 5
-a 7) são a resposta que serve a dois tipos de conhecimento, não a forma de toda
-disciplina.
+Com as fontes transcritas, conferidas e citáveis, decida o <dfn>formato da
+disciplina</dfn>: o curso, a disciplina e o nível de estudo; que tipos de conhecimento o
+material traz e que forma de estudo serve a cada um; e, pros tipos que pedem uma grade
+fixa, os itens, os eixos da ficha e os subtópicos de cada um, os elos do dicionário e as
+colunas dos cartões. O formato nasce da própria matéria, não de um molde: os itens, os
+eixos e os elos (seções 5 a 7) são a resposta que serve a dois tipos de conhecimento, não
+a forma de toda disciplina.
 
 O formato tem duas bases, que não se substituem: a análise do material, que mostra o que
 ele traz e garante que nada dele fica de fora, e a pesquisa, que mostra o que a
@@ -265,24 +270,24 @@ não tem ganha um tipo novo, com nome e definição, acrescentado aqui.
 
 | Tipo de conhecimento             | O que é                                                                                                                                                                                                   |
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Conceito e vocabulário          | um termo, o que ele quer dizer e como se usa                                                                                                                                                               |
-| Classificação                  | grupos, categorias ou hierarquias, e o critério que separa cada um                                                                                                                                        |
-| Contraste                        | duas ou mais coisas que diferem nos mesmos pontos                                                                                                                                                          |
-| Parte e função                 | um componente, o que ele faz e o que isso significa pro todo                                                                                                                                               |
-| Processo em ordem                | etapas em sequência, e o que acontece quando uma falha ou é bloqueada                                                                                                                                    |
-| Causa e efeito                   | um fato explicado por outro: o porquê                                                                                                                                                                     |
-| Item com os mesmos tipos de fato | coisas da mesma espécie que se aprendem uma a uma, cada uma com os mesmos tipos de fato: os itens e os eixos da ficha (seção 5C)                                                                        |
-| História em cadeia              | fatos ligados em sequência, cada um levando ao seguinte: os elos do dicionário (seção 5B)                                                                                                              |
-| Exemplo recorrente               | um caso, um agente ou um exemplo que volta em vários trechos, mostrando a cada vez uma coisa                                                                                                              |
-| Exceção                        | o caso que foge de uma regra, e por quê                                                                                                                                                                   |
-| Número com sentido              | uma quantidade, um limite, um tempo ou uma dose, com a razão dele                                                                                                                                         |
-| Relação nos dois sentidos      | uma associação que se pede de um lado pro outro e de volta, como da causa aos efeitos e do efeito às causas                                                                                             |
-| Figura e esquema                 | o que está onde num desenho e como as partes dele se ligam                                                                                                                                                |
-| Aplicação na prática          | uma situação da área que pede uma decisão tirada do conteúdo                                                                                                                                          |
-| Analogia e história             | a comparação ou o episódio que a própria fonte usa pra fixar um ponto                                                                                                                                  |
-| Mnemônico da fonte              | o recurso de memorização que a própria fonte dá pra guardar um fato — uma frase, uma sigla, um jogo de letras —, sem ser comparação nem episódio                                                  |
-| Marco histórico                 | um fato situado no tempo da história da matéria: quando ou por quem algo foi descoberto ou introduzido, o primeiro de uma classe, como o uso de algo mudou com o tempo, sem que um fato leve ao seguinte |
-| Não é conteúdo de estudo      | o que não traz fato nenhum: bibliografia, créditos, enfeite                                                                                                                                              |
+| <dfn>Conceito e vocabulário</dfn>          | um termo, o que ele quer dizer e como se usa                                                                                                                                                               |
+| <dfn>Classificação</dfn>                  | grupos, categorias ou hierarquias, e o critério que separa cada um                                                                                                                                        |
+| <dfn>Contraste</dfn>                        | duas ou mais coisas que diferem nos mesmos pontos                                                                                                                                                          |
+| <dfn>Parte e função</dfn>                 | um componente, o que ele faz e o que isso significa pro todo                                                                                                                                               |
+| <dfn>Processo em ordem</dfn>                | etapas em sequência, e o que acontece quando uma falha ou é bloqueada                                                                                                                                    |
+| <dfn>Causa e efeito</dfn>                   | um fato explicado por outro: o porquê                                                                                                                                                                     |
+| <dfn>Item com os mesmos tipos de fato</dfn> | coisas da mesma espécie que se aprendem uma a uma, cada uma com os mesmos tipos de fato: os itens e os eixos da ficha (seção 5C)                                                                        |
+| <dfn>História em cadeia</dfn>              | fatos ligados em sequência, cada um levando ao seguinte: os elos do dicionário (seção 5B)                                                                                                              |
+| <dfn>Exemplo recorrente</dfn>               | um caso, um agente ou um exemplo que volta em vários trechos, mostrando a cada vez uma coisa                                                                                                              |
+| <dfn>Exceção</dfn>                        | o caso que foge de uma regra, e por quê                                                                                                                                                                   |
+| <dfn>Número com sentido</dfn>              | uma quantidade, um limite, um tempo ou uma dose, com a razão dele                                                                                                                                         |
+| <dfn>Relação nos dois sentidos</dfn>      | uma associação que se pede de um lado pro outro e de volta, como da causa aos efeitos e do efeito às causas                                                                                             |
+| <dfn>Figura e esquema</dfn>                 | o que está onde num desenho e como as partes dele se ligam                                                                                                                                                |
+| <dfn>Aplicação na prática</dfn>          | uma situação da área que pede uma decisão tirada do conteúdo                                                                                                                                          |
+| <dfn>Analogia e história</dfn>             | a comparação ou o episódio que a própria fonte usa pra fixar um ponto                                                                                                                                  |
+| <dfn>Mnemônico da fonte</dfn>              | o recurso de memorização que a própria fonte dá pra guardar um fato — uma frase, uma sigla, um jogo de letras —, sem ser comparação nem episódio                                                  |
+| <dfn>Marco histórico</dfn>                 | um fato situado no tempo da história da matéria: quando ou por quem algo foi descoberto ou introduzido, o primeiro de uma classe, como o uso de algo mudou com o tempo, sem que um fato leve ao seguinte |
+| <dfn>Não é conteúdo de estudo</dfn>      | o que não traz fato nenhum: bibliografia, créditos, enfeite                                                                                                                                              |
 
 Na análise, da figura entram a legenda, o texto escrito em volta dela e o texto lido por
 OCR dentro dela, quando trazem fato; a imagem em si não é lida nem descrita. O fato de
@@ -291,31 +296,34 @@ ilegível não entra e, quando parece esconder um fato, fica anotado como dúvid
 
 Leia todas as partes antes de dividir a matéria. Cada parte se analisa por si, com as
 mesmas perguntas, mas a divisão em grupos sai depois, com todas lidas: o que se repete
-entre as partes forma um grupo, e cada grupo ganha uma abordagem — não uma por página,
-por slide ou por parte. Como cada grupo se divide por dentro é uma decisão à parte.
+entre as partes forma um <dfn>grupo</dfn>, e cada grupo ganha uma abordagem — não uma por
+página, por slide ou por parte. Como cada grupo se divide por dentro é uma decisão à
+parte.
 
 Quando a matéria se estuda por mais de um caminho (pergunta 5), cada caminho é parte do
-formato, com a forma de estudo dele, e não só um tipo de fato: a relação nos dois
-sentidos é um fato que se pede de um lado e do outro; o caminho é um jeito de organizar a
-matéria inteira. A própria fonte pode dizer quais caminhos usa, ao explicar a abordagem
+formato, com a forma de estudo dele, e não só um tipo de fato: a relação nos dois sentidos
+é um fato que se pede de um lado e do outro; o <dfn>caminho</dfn> é um jeito de organizar
+a matéria inteira. A própria fonte pode dizer quais caminhos usa, ao explicar a abordagem
 dela.
 
 ### Documente a análise
 
-A pesquisa e a análise vão pra análise da matéria (`docs/analise-da-materia.md`), escrita
-antes de qualquer material de estudo: o que se sabe das três bases, com a chamada de cada
-fonte; cada parte do material, trecho por trecho, com os tipos de conhecimento dela; o que
-liga as partes entre si; os grupos em que a matéria se divide e os caminhos por que ela se
-estuda; e a forma de estudo escolhida pra cada tipo e cada caminho, com o porquê. O
-trecho literal que sustenta cada ponto da pesquisa fica nas evidências da pesquisa
+A pesquisa e a análise vão pra <dfn>análise da matéria</dfn>
+(`docs/analise-da-materia.md`), escrita antes de qualquer material de estudo: o que se
+sabe das três bases, com a chamada de cada fonte; cada parte do material, trecho por
+trecho, com os tipos de conhecimento dela; o que liga as partes entre si; os grupos em que
+a matéria se divide e os caminhos por que ela se estuda; e a forma de estudo escolhida pra
+cada tipo e cada caminho, com o porquê. O trecho literal que sustenta cada ponto da
+pesquisa fica nas <dfn>evidências da pesquisa</dfn>
 (`docs/material-base/gerados-ocr/pesquisa/`), dentro da pasta protegida, porque é texto de
 terceiros: é contra ele que se confere a análise.
 
 ### Grave o formato
 
 Da análise saem as respostas do [Descubra seu modelo](DESCUBRA-SEU-MODELO.md), que vão pro
-arquivo de formato, `dados/formato.json`, e se conferem com `python scripts/validar_dados.py dados/formato.json`. Uma IA pode propor cada resposta, dizendo por que ela cabe naquele
-curso e naquele nível; a decisão é da pessoa.
+<dfn>arquivo de formato</dfn>, `dados/formato.json`, e se conferem com
+`python scripts/validar_dados.py dados/formato.json`. Uma IA pode propor cada resposta,
+dizendo por que ela cabe naquele curso e naquele nível; a decisão é da pessoa.
 
 Esse arquivo é a grade do que vem depois: é por ele que se sabe o que cada item precisa
 ter, o que a aula cobre e onde falta, antes de qualquer material ser escrito.
@@ -339,22 +347,22 @@ protegida, o `base_externa.py` oferece levá-la pra lá. Dê a cada cópia
 um nome que comece pela entrada e pelo ano da referência dela, pra achar o arquivo a
 partir da citação.
 
-Do material de fora, faça também uma base literal, item por item — e ninguém copia
-trecho à mão. No arquivo de dados do item (`dados/bases/[item].json`, copiado de
-`modelo-dados/base.json`), declare quais páginas de quais fontes foram lidas e marque
-cada subtópico da grade do formato como coberto pela aula, pelo material de fora ou como
-lacuna. `python scripts/base_externa.py` recolhe todo o texto dessas páginas, sem
-filtro, separado em frases, cada uma com um código; a IA classifica cada frase — usada
-(com o subtópico e se a fonte afirma ou trata como possibilidade), de outro item,
-repetida, fora do recorte ou não é conteúdo —, e o script grava a base do item, só com
-as frases usadas, letra por letra, com a citação e a página. Ele recusa frase sem classe,
-subtópico sem marca, subtópico do material de fora sem frase nenhuma e frase usada onde
-a aula já cobre ou num subtópico marcado como lacuna, e não grava a base enquanto houver
-erro. A base e a conferência dela — cada página com as frases e a classe de
-cada uma, com tique da IA e da pessoa — nunca são publicadas; o arquivo de dados, que só
-tem códigos e decisões, pode ser publicado com o projeto. É contra essa base que se confere
-cada fato tirado do material de fora, e frase que a fonte trata como possibilidade entra
-no material com a ressalva escrita, nunca como certeza.
+Do material de fora, faça também uma base literal, a <dfn>base de trechos</dfn>, item por
+item — e ninguém copia trecho à mão. No arquivo de dados do item
+(`dados/bases/[item].json`, copiado de `modelo-dados/base.json`), declare quais páginas de
+quais fontes foram lidas e marque cada subtópico da grade do formato como coberto pela
+aula, pelo material de fora ou como lacuna. `python scripts/base_externa.py` recolhe todo
+o texto dessas páginas, sem filtro, separado em frases, cada uma com um código; a IA
+classifica cada frase — usada (com o subtópico e se a fonte afirma ou trata como
+possibilidade), de outro item, repetida, fora do recorte ou não é conteúdo —, e o script
+grava a base do item, só com as frases usadas, letra por letra, com a citação e a página.
+Ele recusa frase sem classe, subtópico sem marca, subtópico do material de fora sem frase
+nenhuma e frase usada onde a aula já cobre ou num subtópico marcado como lacuna, e não
+grava a base enquanto houver erro. A base e a conferência dela — cada página com as frases
+e a classe de cada uma, com tique da IA e da pessoa — nunca são publicadas; o arquivo de
+dados, que só tem códigos e decisões, pode ser publicado com o projeto. É contra essa base
+que se confere cada fato tirado do material de fora, e frase que a fonte trata como
+possibilidade entra no material com a ressalva escrita, nunca como certeza.
 
 ---
 
@@ -393,9 +401,9 @@ ramo claramente distinto de conteúdo introdutório.
 ### B) Dicionário de gatilhos
 
 Escreva uma entrada por item específico, contando o item como uma história contínua,
-dividida em partes que você vai chamar de **elos**. Em cada elo, explique o motivo que
-leva ao elo seguinte — de forma que dê pra deduzir o item a partir de qualquer ponto da
-história, em vez de decorar fatos soltos.
+dividida em partes que você vai chamar de **<dfn>elos</dfn>**. Em cada elo, explique o
+motivo que leva ao elo seguinte — de forma que dê pra deduzir o item a partir de qualquer
+ponto da história, em vez de decorar fatos soltos.
 
 Decida quantos elos usar (a mesma quantidade pra todo item da sua disciplina) e dê um
 nome a cada um. O processo central que um item passa muda completamente conforme o
@@ -411,10 +419,10 @@ documento de teoria fundamental, cite essa categoria pelo nome (ver
 
 ### C) Ficha determinística
 
-Reorganize os mesmos itens do dicionário numa tabela direta. Use sempre o mesmo
-conjunto de linhas — que você vai chamar de **eixos** — pra todo item da disciplina.
-Isso é o que faz a ficha boa pra revisão rápida, ao contrário do dicionário, que é bom
-pra entender o porquê.
+Reorganize os mesmos itens do dicionário numa tabela direta. Use sempre o mesmo conjunto
+de linhas — que você vai chamar de **<dfn>eixos</dfn>** — pra todo item da disciplina.
+Isso é o que faz a ficha boa pra revisão rápida, ao contrário do dicionário, que é bom pra
+entender o porquê.
 
 Decida quantos eixos usar e o nome de cada um, do mesmo jeito que decidiu os elos do
 dicionário. Dentro da sua disciplina, todo item tem a mesma quantidade de eixos — mas
@@ -477,19 +485,19 @@ serve é o caso típico de função nova.
 
 ## 9. Cartões de revisão espaçada
 
-Um cartão de revisão espaçada é uma técnica de estudo: uma pergunta de um lado, uma
-resposta do outro, revisada em intervalos crescentes de tempo, num programa como o
-Anki (gratuito, disponível pra computador e celular). Isso é opcional — nem toda
+Um <dfn>cartão de revisão espaçada</dfn> é uma técnica de estudo: uma pergunta de um lado,
+uma resposta do outro, revisada em intervalos crescentes de tempo, num programa como o
+[Anki](MANUAL.md#nível-1--só-quero-estudar-agora). Isso é opcional — nem toda
 disciplina precisa ter cartões, mas quem tiver, siga o resto desta seção.
 
-As perguntas ficam guardadas numa planilha CSV: um arquivo de texto simples,
-organizado em linhas e colunas como uma tabela (abre e edita no Excel, no Google
-Sheets, ou como texto comum), com uma pergunta por linha. Nomeie o arquivo começando
-sempre com a mesma primeira parte, em toda planilha do projeto — por exemplo,
-`perguntas-` no início de `perguntas-fundamentos.csv` e de `perguntas-nucleo.csv`.
-Assim, o script da [seção 10](#10-gere-o-baralho-com-o-script-do-modelo) sabe quais
-arquivos são planilhas de pergunta só pelo nome, sem que ninguém precise listar cada
-arquivo um por um dentro do código.
+As perguntas ficam guardadas numa
+[planilha](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) CSV, com uma
+pergunta por linha. Nomeie o arquivo começando sempre com a mesma primeira parte, em toda
+planilha do projeto — por exemplo, `perguntas-` no início de `perguntas-fundamentos.csv` e
+de `perguntas-nucleo.csv`. Assim, o script da [seção
+10](#10-gere-o-baralho-com-o-script-do-modelo) sabe quais arquivos são planilhas de
+pergunta só pelo nome, sem que ninguém precise listar cada arquivo um por um dentro do
+código.
 
 Você não precisa extrair essas perguntas à mão. Envie os documentos de conteúdo (já
 escritos, seção 5) e a análise da matéria (seção 3) pra um assistente de IA, com uma
@@ -512,7 +520,8 @@ instrução como esta:
 > transcrição ou da base do material de fora que diz o fato, copiado letra por letra, e
 > se a fonte afirma (`categorica`) ou trata como possibilidade (`possibilidade`).
 
-A prova fica num arquivo por planilha, copiado de `modelo-dados/prova.json`. Como ela
+A <dfn>prova</dfn> de um cartão é o trecho da fonte que diz o fato dele, copiado letra por
+letra. Ela fica num arquivo por planilha, copiado de `modelo-dados/prova.json`. Como ela
 tem texto de terceiros, fica com o material de base e nunca é publicada
 (`docs/material-base/gerados-ocr/provas/`, por convenção). Quando a fonte trata o fato
 como possibilidade, a resposta do cartão diz isso: nenhum cartão apresenta como certo o
@@ -544,11 +553,10 @@ confira o que ela fez). Em seguida, gere o baralho de novo com o script.
 ## 10. Gere o baralho com o script do modelo
 
 Depois que a planilha da seção 9 existe, falta um último passo mecânico: ler cada linha
-dela e montar o arquivo `.apkg` que o Anki importa. Esse passo é sempre o mesmo tipo de
-trabalho, não importa a disciplina — por isso é feito por um script (um programa de
-computador que faz um trabalho automático e repetitivo), em vez de à mão: rodando o
-script de novo, o baralho inteiro é reconstruído em segundos toda vez que a planilha
-mudar.
+dela e montar o arquivo [`.apkg`](MANUAL.md#nível-1--só-quero-estudar-agora) do Anki. Esse
+passo é sempre o mesmo tipo de trabalho, não importa a disciplina — por isso é feito por
+um script, em vez de à mão: rodando o script de novo, o baralho inteiro é reconstruído em
+segundos toda vez que a planilha mudar.
 
 O modelo já traz esse script, o `scripts/montar_deck.py`: use-o sem editar (o
 [README dos scripts](scripts/README.md) diz como rodar). No Anki, os cartões aparecem
@@ -600,13 +608,15 @@ cartões saírem certos mesmo assim, está funcionando do jeito certo.
 
 ## 11. Confira: primeiro o script, depois a pessoa
 
-Tudo o que a IA produz passa por duas análises antes de valer. A primeira é mecânica:
-um script confere, sempre do mesmo jeito, o que dá pra conferir sem julgar — se o dado
-tem a forma certa, se o trecho está na fonte, se nada falta dos dois lados. A segunda é
-humana: a pessoa confere o conteúdo contra a fonte. O `validar_dados.py` confere se
-cada arquivo de dados está bem preenchido, e cada um dos scripts abaixo grava um arquivo
-de conferência, que nunca é publicado, com duas caixas de tique em cada parte: a da IA,
-uma primeira passada, e a da pessoa, que é sempre o último elo.
+Tudo o que a IA produz passa por duas análises antes de valer, as duas partes do trabalho
+que o [README](README.md#como-este-material-foi-feito) chama de mecânica e de julgamento.
+A primeira é a <dfn>análise mecânica</dfn>: um script confere, sempre do mesmo jeito, o
+que dá pra conferir sem julgar — se o dado tem a forma certa, se o trecho está na fonte,
+se nada falta dos dois lados. A segunda é a <dfn>análise humana</dfn>: a pessoa confere o
+conteúdo contra a fonte. O `validar_dados.py` confere se cada arquivo de dados está bem
+preenchido, e cada um dos scripts abaixo grava um [arquivo de
+conferência](#como-transcrever), que nunca é publicado, com duas caixas de tique em cada
+parte: a da IA, uma primeira passada, e a da pessoa, que é sempre o último elo.
 
 | O que se confere                                                                                                                          | Contra o quê                                                                                                                  | Script                 | Arquivo de conferência (no modelo) |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------------------------------- |
@@ -654,17 +664,17 @@ adicionar os documentos):
 | `MANUAL.md` (ou equivalente não técnico) | Guia em níveis, sem jargão, pra quem só quer estudar. Abra com o aviso do recorte e tenha um canal pra reportar erro.                                                                                         |
 | `NOTICE.md`                                | Mapa de licenciamento: qual licença cobre qual categoria de arquivo, e a exceção do material de terceiros.                                                                                                    |
 
-Um documento do projeto é cada arquivo `.md` que vai com ele: tudo, menos o que a lista do
-que nunca vai pro GitHub deixa de fora. O `confere_indice.py` confere que cada um, menos o
-próprio índice, está nele uma vez só (o [README dos scripts](scripts/README.md) diz como
-rodar).
+Um <dfn>documento do projeto</dfn> é cada arquivo `.md` que vai com ele: tudo, menos o que
+a lista do que nunca vai pro GitHub deixa de fora. O `confere_indice.py` confere que cada
+um, menos o próprio índice, está nele uma vez só (o [README dos
+scripts](scripts/README.md) diz como rodar).
 
 Todo documento do projeto que define um termo, dizendo o que uma palavra quer dizer, marca
-o termo no lugar da definição com `<dfn>termo</dfn>`, a marca do HTML pra "aqui este termo
-é definido". Cada termo é definido num lugar só. Ninguém escreve o glossário
-(`GLOSSARIO.md`) à mão: o `glossario.py` recolhe as marcas e grava cada termo, em ordem
-alfabética, com o link pro lugar onde ele é definido. O glossário é um documento do projeto
-como os outros, e por isso está no índice.
+o termo no lugar da definição com `<dfn>termo</dfn>`, a <dfn>marca de definição</dfn> do
+HTML, que quer dizer "aqui este termo é definido". Cada termo é definido num lugar só.
+Ninguém escreve o glossário (`GLOSSARIO.md`) à mão: o `glossario.py` recolhe as marcas e
+grava cada termo, em ordem alfabética, com o link pro lugar onde ele é definido. O
+glossário é um documento do projeto como os outros, e por isso está no índice.
 
 O índice do projeto lista documentos, não itens de dentro deles: cada documento de
 conteúdo (teoria fundamental, dicionário, ficha) mantém seu próprio índice interno, no
@@ -689,14 +699,13 @@ equivalente pronto (nesse caso, deixe a seção dizendo isso).
 
 Trate cada uma dessas três categorias com um papel fixo, independente de disciplina:
 
-- **Código** (os scripts): escolha uma licença de código aberto que exija que qualquer
-  trabalho derivado também seja aberto.
-- **Conteúdo gerado** (a análise da matéria, teoria fundamental, dicionário, ficha,
-  planilhas, a lista de referências e os documentos de metodologia): escolha uma licença
-  de conteúdo que exija dar crédito.
-- **Material de terceiros** (o material de aula original, sua transcrição literal, as
-  evidências da pesquisa, as cópias do material de fora, a base de trechos dele e a prova
-  dos cartões — ver as seções [1](#1-trate-as-fontes-da-aula),
+- **<dfn>Código</dfn>** (os scripts): escolha uma licença de código aberto que exija que
+  qualquer trabalho derivado também seja aberto.
+- **<dfn>Conteúdo gerado</dfn>** (a análise da matéria, teoria fundamental, dicionário,
+  ficha, planilhas, a lista de referências e os documentos de metodologia): escolha uma
+  licença de conteúdo que exija dar crédito.
+- **[Material de terceiros](#metodologia-de-conteúdo)** (ver as seções
+  [1](#1-trate-as-fontes-da-aula),
   [3](#3-descubra-o-formato-da-disciplina), [4](#4-complete-a-aula-com-material-de-fora) e
   [9](#9-cartões-de-revisão-espaçada)), tudo na pasta protegida:
   não coloque sob nenhuma licença deste projeto, porque quem mantém o projeto não é
@@ -704,27 +713,28 @@ Trate cada uma dessas três categorias com um papel fixo, independente de discip
   enquanto".
 
 Em todo arquivo de código e todo documento de conteúdo, indique de forma breve qual
-licença o cobre — um comentário de uma ou duas linhas no topo do código, uma linha no
-fim do documento de conteúdo. Deixe as planilhas e os arquivos de dados (os `.json`, que
-guardam informação pros scripts e pra IA) fora dessa regra: um comentário quebraria a
-leitura de quem abre a planilha como tabela, e o arquivo `.json` nem aceita comentário.
+licença o cobre — um comentário de uma ou duas linhas no topo do código, uma linha no fim
+do documento de conteúdo. Deixe as planilhas e os <dfn>arquivos de dados</dfn> (os
+`.json`, que guardam informação pros scripts e pra IA) fora dessa regra: um comentário
+quebraria a leitura de quem abre a planilha como tabela, e o arquivo `.json` nem aceita
+comentário.
 
-Todo arquivo `.json`, do modelo ou do projeto, é só dado: chaves e valores. Nele não entra
-texto escrito pra quem abre o arquivo — texto corrido, explicação, instrução, exemplo ou
-marcador entre colchetes — nem referência a documento: uma seção desta metodologia, o nome
-de um arquivo `.md`, o item de uma norma. Vale, sim, o texto que é o próprio dado, mesmo
-corrido: o título de uma fonte, uma nota da referência, a pergunta e o trecho literal de
-uma prova. O que a regra proíbe é o texto escrito pra explicar, instruir ou narrar. Nos
-modelos de `modelo-dados/`, o lugar de uma instrução ou de um exemplo fica vazio: `""`,
-`[]` ou `{}`. Nos moldes de `scripts/esquemas/`, ficam só os identificadores técnicos
-(`$schema` e `$id`) e o que os scripts conferem em cada arquivo. O caminho de um arquivo
-no mapa do projeto é dado, mesmo quando aponta pra um documento `.md`: é onde o script lê
-ou grava aquele arquivo. A variável entre chaves de um caminho, como `{item}` e
-`{planilha}`, também é dado: ninguém escreve no lugar dela, é o script que a troca pelo
-valor, o id do item ou o nome da planilha. Os documentos podem citar os `.json`; nenhum
-`.json` depende de um documento. O que explica um arquivo de dados fica nos documentos, e
-a informação que sai de um `.json` não se perde: ou já está num documento, ou passa pra
-esta metodologia.
+Todo arquivo `.json`, do modelo ou do projeto, é só dado: <dfn>chaves e valores</dfn>, o
+nome de cada informação e o valor dela. Nele não entra texto escrito pra quem abre o
+arquivo — texto corrido, explicação, instrução, exemplo ou marcador entre colchetes — nem
+referência a documento: uma seção desta metodologia, o nome de um arquivo `.md`, o item de
+uma norma. Vale, sim, o texto que é o próprio dado, mesmo corrido: o título de uma fonte,
+uma nota da referência, a pergunta e o trecho literal de uma prova. O que a regra proíbe é
+o texto escrito pra explicar, instruir ou narrar. Nos modelos de `modelo-dados/`, o lugar
+de uma instrução ou de um exemplo fica vazio: `""`, `[]` ou `{}`. Nos moldes de
+`scripts/esquemas/`, ficam só os identificadores técnicos (`$schema` e `$id`) e o que os
+scripts conferem em cada arquivo. O caminho de um arquivo no mapa do projeto é dado, mesmo
+quando aponta pra um documento `.md`: é onde o script lê ou grava aquele arquivo. A
+variável entre chaves de um caminho, como `{item}` e `{planilha}`, também é dado: ninguém
+escreve no lugar dela, é o script que a troca pelo valor, o id do item ou o nome da
+planilha. Os documentos podem citar os `.json`; nenhum `.json` depende de um documento. O
+que explica um arquivo de dados fica nos documentos, e a informação que sai de um `.json`
+não se perde: ou já está num documento, ou passa pra esta metodologia.
 
 Os modelos de `modelo-dados/` e os moldes de `scripts/esquemas/` são genéricos: servem a
 qualquer disciplina e podem crescer, mas nunca se ajustam a um projeto só. Quando uma
@@ -739,19 +749,21 @@ ou a uma fonte entra neles.
 
 1. Prepare o projeto: faça uma cópia do modelo inteiro, com o nome do projeto. Ela é a
    pasta principal do projeto e já traz a pasta `scripts/` (sem mudar o nome de nada
-   dela), os dois arquivos de licença (`LICENSE` e `LICENSE-CONTENT.txt`), a lista do que
-   nunca vai pro GitHub (`.gitignore`) e o método em dados, o
-   `modelo-dados/fluxo-ia.json`, que a IA recebe dali mesmo, sem cópia (ver
-   [Trabalhar com uma IA](trabalhar-com-ia.md)). Dentro dela, copie de `modelo-dados/` o
-   mapa do projeto (`projeto.json`) pra pasta principal e o estilo dos cartões
-   (`estilo-cartao.css`) pra pasta `dados/`, junto dos outros dados do projeto. É do mapa
-   do projeto que os scripts tiram todo caminho; só a pasta do material de base nunca
-   muda, e por isso a lista do que nunca vai pro GitHub a deixa sempre de fora. Se travar
-   em algum passo, peça ajuda à IA que você usa. Se você guarda o projeto no GitHub, ele
-   ganha um repositório próprio (o lugar onde o GitHub guarda o projeto e o histórico das
-   mudanças dele), sem o histórico do modelo; ative também a conferência das mensagens e
-   a proteção das fontes: é opcional, mas é ela que barra uma fonte que ia pro GitHub por
-   engano (ver o [README dela](.githooks/README.md)).
+   dela), os dois arquivos de licença (`LICENSE` e `LICENSE-CONTENT.txt`), a [lista do que
+   nunca vai pro
+   GitHub](NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto) e o
+   <dfn>método em dados</dfn>, o `modelo-dados/fluxo-ia.json`, com as etapas na ordem e,
+   de cada uma, o que entra, o que sai, os scripts e as conferências; a IA o recebe dali
+   mesmo, sem cópia (ver [Trabalhar com uma IA](trabalhar-com-ia.md)). Dentro dela, copie
+   de `modelo-dados/` o mapa do projeto (`projeto.json`) pra pasta principal e o estilo
+   dos cartões (`estilo-cartao.css`) pra pasta `dados/`, junto dos outros dados do
+   projeto. Só a pasta do material de base nunca muda, e por isso a lista do que nunca vai
+   pro GitHub a deixa sempre de fora. Se travar em algum passo, peça ajuda à IA que você
+   usa. Se você guarda o projeto no GitHub, ele ganha um <dfn>repositório</dfn> próprio (o
+   lugar onde o GitHub guarda o projeto e o histórico das mudanças dele), sem o histórico
+   do modelo; ative também a conferência das mensagens e a proteção das fontes: é
+   opcional, mas é ela que barra uma fonte que ia pro GitHub por engano (ver o [README
+   dela](.githooks/README.md)).
 2. Guarde o material de aula original por convenção, transcreva-o por inteiro,
    literalmente, e confira a transcrição, página por página, no arquivo de conferência
    (seção 1); grave os dados da referência de cada aula em `dados/fontes.json` (seção 2).

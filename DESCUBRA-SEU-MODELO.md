@@ -4,13 +4,16 @@ Este documento ajuda a decidir a parte do formato de uma disciplina nova que ped
 grade fixa. O formato nasce da análise da matéria (ver `metodologia-de-conteudo.md`, seção
 3): que tipos de conhecimento cada parte do material traz e que forma de estudo serve a
 cada um. Dois desses tipos pedem uma grade: pra cada assunto que se estuda um por um (os
-*itens*), o método monta dois documentos: o
-*dicionário*, que conta o item como uma história dividida em partes, os *elos*; e a
-*ficha*, uma tabela direta com uma linha pra cada tipo de fato que todo item tem, os
-*eixos*. Os cartões de pergunta saem de uma *planilha*, uma tabela com uma coluna pra
-cada informação do cartão. Aqui você decide quantos elos o dicionário tem, quantos eixos
-a ficha tem e que colunas a planilha precisa. Nenhum desses números é fornecido aqui —
-cada disciplina responde essas perguntas pra si mesma, a partir do próprio material.
+[itens](metodologia-de-conteudo.md#analise-cada-parte-do-material)), o método monta dois
+documentos, o [dicionário de gatilhos](MANUAL.md#nível-2--de-onde-isso-veio), dividido em
+[elos](metodologia-de-conteudo.md#b-dicionário-de-gatilhos), e a [ficha
+determinística](MANUAL.md#nível-2--de-onde-isso-veio), dividida em
+[eixos](metodologia-de-conteudo.md#c-ficha-determinística). Os cartões de pergunta saem de
+uma [planilha](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas), com uma
+coluna pra cada informação do cartão. Aqui você decide quantos elos o dicionário tem,
+quantos eixos a ficha tem e que colunas a planilha precisa. Nenhum desses números é
+fornecido aqui — cada disciplina responde essas perguntas pra si mesma, a partir do
+próprio material.
 
 ## O que é estável entre disciplinas
 
@@ -50,7 +53,7 @@ resposta.
    por completo?** Liste com suas próprias palavras, a partir do seu material — não a
    partir do que outra disciplina já usou. Esses são os eixos da ficha. Se um eixo se
    divide em partes menores que todo item também tem, liste essas partes: são os
-   subtópicos dele.
+   <dfn>subtópicos</dfn> dele.
 3. **Existe uma cadeia de causa e efeito natural conectando esses fatos**? Se sim,
    quantos passos ela tem, de verdade, no seu material?
 4. **Que colunas uma pergunta de revisão sobre um item precisa?** Escreva os nomes você
@@ -60,9 +63,8 @@ resposta.
 
 ## Depois de responder
 
-Grave as respostas no arquivo de formato da disciplina, `dados/formato.json`. É um
-arquivo de texto com as respostas organizadas de um jeito que os scripts (os pequenos
-programas do modelo) conseguem ler. Copie
+Grave as respostas no [arquivo de formato](metodologia-de-conteudo.md#grave-o-formato) da
+disciplina, `dados/formato.json`. Copie
 [`modelo-dados/formato.json`](modelo-dados/formato.json) pra lá e preencha. Ele vem só
 com o nome de cada informação, entre aspas, e, depois dos dois-pontos, o lugar da
 resposta: aspas vazias, `""`, esperam um texto, escrito entre elas; colchetes vazios,

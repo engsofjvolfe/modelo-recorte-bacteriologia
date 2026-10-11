@@ -24,15 +24,16 @@ Nos dois casos, quem decide e quem dá a palavra final é você.
 
 ## Entregue o método à IA
 
-O método chega à IA em duas partes. Uma é este guia: o que fazer em cada etapa e as
-regras que valem sempre. A outra é o arquivo
-[`modelo-dados/fluxo-ia.json`](modelo-dados/fluxo-ia.json), o método em dados: as etapas
-na ordem e, de cada uma, o que entra, o que sai, os scripts e as conferências. Você não
+O método chega à IA em duas partes. Uma é este guia: o que fazer em cada etapa e as regras
+que valem sempre. A outra é o arquivo
+[`modelo-dados/fluxo-ia.json`](modelo-dados/fluxo-ia.json), o [método em
+dados](metodologia-de-conteudo.md#15-checklist-adicionando-uma-disciplina-nova). Você não
 precisa ler esse arquivo; basta entregá-lo.
 
 1. O `fluxo-ia.json` não se copia: o projeto da sua disciplina é uma cópia do modelo
-   inteiro, e o arquivo fica onde já está, em `modelo-dados/`. O `projeto.json` (o mapa
-   de onde fica cada coisa) fica na pasta principal do projeto.
+   inteiro, e o arquivo fica onde já está, em `modelo-dados/`. O
+   [mapa do projeto](metodologia-de-conteudo.md), o `projeto.json`, fica na pasta
+   principal do projeto.
 2. Na primeira conversa, entregue os dois arquivos e este guia, e peça: "Leia o
    `modelo-dados/fluxo-ia.json` e o `trabalhar-com-ia.md` inteiros e guarde os dois na
    sua memória ou nas instruções do projeto."
@@ -103,22 +104,25 @@ Valem sempre, junto do tique (ver [Etapa por etapa](#etapa-por-etapa)) e do que 
 - Nenhum caminho é escrito de memória: todo caminho sai do `projeto.json`.
 - Nunca se renomeia a pasta `scripts/`, nada dentro dela nem o `projeto.json`: é por
   esses nomes que os scripts se acham.
-- A pasta do material de base é a pasta protegida: nunca muda de nome nem de lugar, e
-  toda fonte fica dentro dela. Se uma fonte estiver fora, os scripts oferecem levá-la; a
-  IA só usa o `--mover` depois que você autorizar.
+- A [pasta protegida](metodologia-de-conteudo.md#1-trate-as-fontes-da-aula) nunca muda de
+  nome nem de lugar, e toda fonte fica dentro dela. Se uma fonte estiver fora, os scripts
+  oferecem levá-la; a IA só usa o `--mover` depois que você autorizar.
 - Nada de disciplina vai pro código dos scripts: o que muda de um projeto pra outro fica
   nos arquivos de dados.
-- Todo arquivo JSON (os `.json`, que guardam os dados) que a IA gerar é só dado: chaves e
-  valores, ou seja, o nome de cada informação e o valor dela. Nada de texto corrido,
-  explicação, instrução, exemplo ou marcador entre colchetes, e nenhuma referência a
-  documento (seção da metodologia, nome de arquivo `.md`, item de norma). Vale, sim, o
-  texto que é o próprio dado, mesmo corrido: o título de uma fonte, uma nota da
-  referência, a pergunta e o trecho literal de uma prova. O que a regra proíbe é o texto
-  escrito pra explicar, instruir ou narrar. Também é dado o caminho de um arquivo no
-  `projeto.json`, mesmo quando aponta pra um `.md`, e a variável entre chaves de um
-  caminho, como `{item}` e `{planilha}`, que os scripts trocam pelo valor. Um documento
-  (os `.md`, como este guia) pode citar um JSON; nenhum JSON depende de documento. A
-  informação que sai de um JSON não se perde: ou já está num documento, ou passa pra um.
+- Todo arquivo JSON (um [arquivo de
+  dados](metodologia-de-conteudo.md#14-licencie-código-conteúdo-e-material-de-terceiros-separadamente))
+  que a IA gerar é só dado: [chaves e
+  valores](metodologia-de-conteudo.md#14-licencie-código-conteúdo-e-material-de-terceiros-separadamente).
+  Nada de texto corrido, explicação, instrução, exemplo ou marcador entre colchetes, e
+  nenhuma referência a documento (seção da metodologia, nome de arquivo `.md`, item de
+  norma). Vale, sim, o texto que é o próprio dado, mesmo corrido: o título de uma fonte,
+  uma nota da referência, a pergunta e o trecho literal de uma prova. O que a regra proíbe
+  é o texto escrito pra explicar, instruir ou narrar. Também é dado o caminho de um
+  arquivo no `projeto.json`, mesmo quando aponta pra um `.md`, e a variável entre chaves
+  de um caminho, como `{item}` e `{planilha}`, que os scripts trocam pelo valor. Um
+  documento (os `.md`, como este guia) pode citar um JSON; nenhum JSON depende de
+  documento. A informação que sai de um JSON não se perde: ou já está num documento, ou
+  passa pra um.
 - O script recolhe e confere o que é mecânico, a IA julga na curadoria e você julga na
   aceitação.
 - Uma linha `ERRO` ou `FALTA` de script se resolve antes de ticar.
@@ -140,17 +144,18 @@ tique que vale é o seu: nada está conferido sem ele (ver a
   [seção 15 da metodologia](metodologia-de-conteudo.md#15-checklist-adicionando-uma-disciplina-nova)
   e o [README da conferência das mensagens](.githooks/README.md).
 - **Peça:** que faça o projeto: uma cópia do modelo inteiro, com o nome do projeto. Nela
-  já vêm a pasta `scripts/`, a lista do que nunca vai pro GitHub (`.gitignore`), os dois
-  arquivos de licença (`LICENSE` e `LICENSE-CONTENT.txt`) e o `fluxo-ia.json`, que fica
-  em `modelo-dados/`. Dentro da cópia, que copie de `modelo-dados/` o mapa do projeto
+  já vêm a pasta `scripts/`, a [lista do que nunca vai pro
+  GitHub](NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto), os
+  dois arquivos de licença (`LICENSE` e `LICENSE-CONTENT.txt`) e o `fluxo-ia.json`, que
+  fica em `modelo-dados/`. Dentro da cópia, que copie de `modelo-dados/` o mapa do projeto
   (`projeto.json`) pra pasta principal e o estilo dos cartões (`estilo-cartao.css`) pra
   pasta `dados/`. Depois, que confira o mapa do projeto com o script `validar_dados.py`.
 - **Confira depois:** se as pastas que o mapa do projeto indica são as que você quer.
-- **Se você guarda o projeto no GitHub:** o projeto ganha um repositório próprio (o lugar
-  onde o GitHub guarda o projeto e o histórico das mudanças dele), sem o histórico do
-  modelo. Ative também a conferência das mensagens e a proteção das fontes. É opcional,
-  mas é ela que barra uma fonte que ia pro GitHub por engano (ver o
-  [README dela](.githooks/README.md)).
+- **Se você guarda o projeto no GitHub:** o projeto ganha um
+  [repositório](metodologia-de-conteudo.md#15-checklist-adicionando-uma-disciplina-nova)
+  próprio, sem o histórico do modelo. Ative também a conferência das mensagens e a
+  proteção das fontes. É opcional, mas é ela que barra uma fonte que ia pro GitHub por
+  engano (ver o [README dela](.githooks/README.md)).
 - **Sempre seu:** autorizar a IA a fazer a cópia do modelo e a mover uma fonte pra pasta
   protegida, quando um script perguntar.
 

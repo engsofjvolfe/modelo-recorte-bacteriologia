@@ -1,74 +1,75 @@
 # Scripts
 
-## O que é um script, e por que o método usa
+## Por que o método usa scripts
 
-Um script é um programa pequeno que faz sozinho um trabalho repetitivo, sempre do mesmo
-jeito, não importa quem rode nem quantas vezes. É por isso que o método confia neles pra
-parte mecânica: montar as referências, as conferências e o baralho sem esquecer nada e
-sem inventar nada. O que um script não faz é julgar se um conteúdo está certo — isso é
-sempre de uma pessoa.
+Um [script](../NOTICE.md#1-programas--gpl-30) trabalha do mesmo jeito, não importa quem
+rode nem quantas vezes. É por isso que o método confia neles pra parte mecânica: montar as
+referências, as conferências e o baralho sem esquecer nada e sem inventar nada. O que um
+script não faz é julgar se um conteúdo está certo — isso é sempre de uma pessoa.
 
 Nenhum script tem nada de disciplina dentro dele, nem caminho de pasta: o que muda de um
 projeto pra outro fica nos arquivos de dados do projeto. Os únicos nomes fixos são os do
 próprio motor — a pasta `scripts/`, tudo o que está dentro dela e o `projeto.json` — e
-eles nunca se mudam: é por esses nomes que os scripts se acham uns aos outros. A pasta do
-material de base, `docs/material-base`, também nunca muda de nome nem de lugar: é a pasta
-protegida, onde fica todo o material de terceiros (ver o `protege_fontes.py`, abaixo).
+eles nunca se mudam: é por esses nomes que os scripts se acham uns aos outros. A
+[pasta protegida](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula),
+`docs/material-base`, também nunca muda de nome nem de lugar (ver o `protege_fontes.py`,
+abaixo).
 
 ## Antes da primeira vez
 
 Você precisa de três coisas. Faça uma vez só, no seu computador.
 
-1. **O Python**, o programa que roda os scripts. Pra saber se já tem, abra o terminal
-   (veja abaixo como) e digite `python --version`. Se aparecer algo como
+1. **O <dfn>Python</dfn>**, o programa que roda os scripts. Pra saber se já tem, abra o
+   terminal (veja abaixo como) e digite `python --version`. Se aparecer algo como
    `Python 3.12.1`, está pronto. Se aparecer erro, tente `python3 --version`; se as duas
    derem erro, instale o Python pelo site [python.org](https://www.python.org/downloads/).
    Se no seu computador o que funcionou foi `python3`, use `python3` no lugar de
    `python` em todos os comandos deste guia.
-2. **O mapa do projeto**, o arquivo `projeto.json`. Copie
+2. **O [mapa do projeto](../metodologia-de-conteudo.md)**, o arquivo `projeto.json`. Copie
    [`modelo-dados/projeto.json`](../modelo-dados/projeto.json) pra pasta principal do
-   projeto da sua disciplina. Ele diz aos scripts onde fica cada coisa: onde estão as
-   aulas, onde ficam as transcrições, onde sai o baralho. Se um dia você mudar uma pasta
-   de lugar, muda só nesse arquivo — nenhum script precisa ser mexido. A única que não
-   muda é a do material de base, `docs/material-base`, onde fica tudo o que tem texto de
-   terceiros: é por ter nome e lugar fixos que a lista do que nunca vai pro GitHub (o
-   arquivo `.gitignore`) a deixa sempre de fora. Os caminhos ficam em `caminhos`; entre
-   eles, `imagens` é a pasta onde as conferências gravam as imagens das páginas; e
-   `licenca_conteudo`, o arquivo da licença do conteúdo. Fora dos caminhos ficam: `prefixo_planilhas`, o começo do nome de toda
-   planilha de pergunta (no modelo, `perguntas-`); `resolucao_imagens`, a resolução das
-   imagens das conferências, em pontos por polegada; `nome_licenca_conteudo`, o nome da
-   licença do conteúdo, que sai no rodapé da lista de referências; e `colunas_ocultas` e
-   `coluna_subdecks`, que o `montar_deck.py` usa (ver a seção dele, mais abaixo). Copie
-   também o [`modelo-dados/estilo-cartao.css`](../modelo-dados/estilo-cartao.css) pra pasta
-   `dados/` do projeto: é a aparência dos cartões do Anki (cores, tamanho da letra), e
-   você pode mudá-la ali. A pasta `scripts/` já está no projeto, que é uma cópia do
+   projeto da sua disciplina. Se um dia você mudar uma pasta de lugar, muda só nesse
+   arquivo — nenhum script precisa ser mexido. A única que não muda é a pasta protegida,
+   `docs/material-base`: é por ter nome e lugar fixos que a [lista do que nunca vai pro
+   GitHub](../NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto) a
+   deixa sempre de fora. Os caminhos ficam em `caminhos`; entre eles, `imagens` é a pasta
+   onde as conferências gravam as imagens das páginas; e `licenca_conteudo`, o arquivo da
+   licença do conteúdo. Fora dos caminhos ficam: `prefixo_planilhas`, o começo do nome de
+   toda planilha de pergunta (no modelo, `perguntas-`); `resolucao_imagens`, a resolução
+   das imagens das conferências, em pontos por polegada; `nome_licenca_conteudo`, o nome
+   da licença do conteúdo, que sai no rodapé da lista de referências; e `colunas_ocultas`
+   e `coluna_subdecks`, que o `montar_deck.py` usa (ver a seção dele, mais abaixo). Copie
+   também o [`modelo-dados/estilo-cartao.css`](../modelo-dados/estilo-cartao.css) pra
+   pasta `dados/` do projeto: é a aparência dos cartões do Anki (cores, tamanho da letra),
+   e você pode mudá-la ali. A pasta `scripts/` já está no projeto, que é uma cópia do
    modelo inteiro, com as subpastas `esquemas/` e `normas/`: são os próprios scripts e os
    arquivos que eles leem. Não mude o nome dela nem de nada lá dentro.
 3. **Quatro complementos**, só pra alguns scripts:
-   - pro `montar_deck.py`, a biblioteca `genanki`, um complemento do Python que sabe
-     montar os arquivos do Anki: no terminal, digite
-     `pip install genanki` (ou `pip3 install genanki`) e aperte Enter;
+   - pro `montar_deck.py`, a biblioteca <dfn>genanki</dfn>, um complemento do Python que
+     sabe montar os arquivos do Anki: no terminal, digite `pip install genanki` (ou
+     `pip3 install genanki`) e aperte Enter;
    - pro `conferencia.py` e o `base_externa.py`, e pro `referencias.py` e o
-     `registrar_fonte.py` quando a fonte é PDF, o Poppler, que é o que lê o texto de uma
-     página de PDF e a transforma em imagem (a conferência também o usa pra imagem dos
-     slides de uma apresentação): no Linux, `sudo apt install poppler-utils`;
+     `registrar_fonte.py` quando a fonte é PDF, o <dfn>Poppler</dfn>, que é o que lê o
+     texto de uma página de PDF e a transforma em imagem (a conferência também o usa pra
+     imagem dos slides de uma apresentação): no Linux, `sudo apt install poppler-utils`;
      no Mac, `brew install poppler`; no Windows, siga as instruções do Poppler pra
      Windows, ou peça à IA que você usa o passo a passo pro seu computador;
    - pro `transcrever_html.py` e o `transcrever_pptx.py`, quando a fonte tem imagem, o
-     Tesseract, que lê o texto de uma imagem (o OCR), com os dados do idioma da fonte: no
-     Linux, `sudo apt install tesseract-ocr tesseract-ocr-por` (troque o `por` do fim pelo
-     código do idioma: `spa` pro espanhol, `eng` pro inglês); no Mac, `brew install
-     tesseract tesseract-lang`; no Windows, peça à IA o passo a passo;
+     <dfn>Tesseract</dfn>, que faz o
+     [OCR](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula), com os dados do
+     idioma da fonte: no Linux, `sudo apt install tesseract-ocr tesseract-ocr-por` (troque
+     o `por` do fim pelo código do idioma: `spa` pro espanhol, `eng` pro inglês); no Mac,
+     `brew install tesseract tesseract-lang`; no Windows, peça à IA o passo a passo;
    - pro `transcrever_pptx.py`, quando a apresentação tem imagem num formato que o
      Tesseract não lê (EMF, WMF, SVG), e pro `conferencia.py`, quando a fonte é uma
-     apresentação em pptx, o LibreOffice, que converte a imagem e faz a imagem de cada
-     slide: no Linux, `sudo apt install libreoffice`; no Mac e no Windows, o instalador
-     do site [libreoffice.org](https://www.libreoffice.org/download/).
+     apresentação em pptx, o <dfn>LibreOffice</dfn>, que converte a imagem e faz a imagem
+     de cada slide: no Linux, `sudo apt install libreoffice`; no Mac e no Windows, o
+     instalador do site [libreoffice.org](https://www.libreoffice.org/download/).
 
 ## Como rodar um script
 
-1. **Abra o terminal.** O terminal é a janela onde se digita um comando em vez de clicar.
-   No VSCode (um editor gratuito, onde se abre a pasta do projeto): menu
+1. **Abra o
+   [terminal](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas).** No
+   [VSCode](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas): menu
    **Terminal → Novo Terminal** (ou as teclas `` Ctrl+` ``). Ele abre embaixo, já dentro
    da pasta do projeto. Se você usa outro programa, peça à IA o passo a passo pra abrir o
    terminal na pasta do projeto no seu computador.
@@ -106,11 +107,10 @@ como `dados/formato.json`, são os do modelo; no seu projeto, valem os do `proje
 ## `validar_dados.py` — confere um arquivo de dados
 
 **Pra que serve.** Os arquivos de dados do projeto (o `projeto.json`, o `formato.json`, o
-`fontes.json`, o arquivo de base de cada item, o de prova de cada
-planilha e o `fluxo-ia.json`) têm uma forma certa, descrita num molde —
-o *schema* — que fica em `scripts/esquemas/`. Este script confere se o arquivo segue o
-molde: se não falta campo obrigatório, se nada está no tipo errado, se nenhum código (id
-ou chave) se repete.
+`fontes.json`, o arquivo de base de cada item, o de prova de cada planilha e o
+`fluxo-ia.json`) têm uma forma certa, descrita num molde — o <dfn>schema</dfn> — que fica
+em `scripts/esquemas/`. Este script confere se o arquivo segue o molde: se não falta campo
+obrigatório, se nada está no tipo errado, se nenhum código (id ou chave) se repete.
 
 **Quando usar.** Depois de preencher qualquer um desses arquivos, e sempre que mexer
 neles.
@@ -152,12 +152,12 @@ transcrição com o `registrar_fonte.py` e rode o `conferencia.py`.
 **Como guardar a fonte.** Se você tem o documento, guarde-o na pasta protegida com as
 imagens dele, nas mesmas pastas para onde ele aponta. Se ele só se lê num site, salve a
 captura do que o navegador recebeu enquanto você o lia: abra o documento, aperte F12 (as
-ferramentas do desenvolvedor), vá na aba Rede, marque a opção de não usar o cache e
-deixe o filtro em "Tudo"; recarregue a página (F5), passe pelo documento inteiro, até o
-fim, pra que tudo seja carregado, e clique com o botão direito na lista pra salvar tudo
-como HAR, na pasta protegida. A captura guarda também os dados da sua sessão no site (os
-cookies): o script nunca os lê, e a captura pode ser apagada depois que o script fizer a
-cópia do documento.
+<dfn>ferramentas do desenvolvedor</dfn>), vá na aba Rede, marque a opção de não usar o
+cache e deixe o filtro em "Tudo"; recarregue a página (F5), passe pelo documento inteiro,
+até o fim, pra que tudo seja carregado, e clique com o botão direito na lista pra salvar
+tudo como HAR, na pasta protegida. A captura guarda também os dados da sua sessão no site
+(os <dfn>cookies</dfn>): o script nunca os lê, e a captura pode ser apagada depois que o
+script fizer a cópia do documento.
 
 **Como rodar.** O caminho do documento, ou o da captura com `--pasta`, a pasta dentro da
 pasta protegida onde fica a cópia:
@@ -186,20 +186,20 @@ Precisa do Tesseract, com o idioma, quando o documento tem imagem.
 
 ## `transcrever_pptx.py` — transcreve uma apresentação de slides em pptx
 
-**Pra que serve.** Numa apresentação em pptx (o formato do PowerPoint, que o LibreOffice
-e o Google Apresentações também gravam), o texto de cada slide é texto de verdade, guardado
-dentro do arquivo. Este script faz a transcrição sozinho, no padrão da seção 1 da
-metodologia: copia o texto de cada slide, sem ler nada, com o título que diz a posição
-dele no arquivo, que é também o lugar que a citação usa, como `## slide 3 (arquivo p. 3)`.
-Dentro do slide, o texto vem na ordem do arquivo, que é a ordem em que o PowerPoint o lê
-em voz alta. O título do slide vira `###`; cada tópico, uma linha com `- ` (ou o número,
-na lista numerada), recuada conforme o nível; tabela, tabela do Markdown; índice e
-expoente, os caracteres próprios (CO₂, 10⁻⁶); o símbolo escrito com uma fonte de símbolos,
-como a Symbol, o caractere de verdade (μ, ±), pela tabela de
+**Pra que serve.** Numa apresentação em <dfn>pptx</dfn> (o formato do PowerPoint, que o
+LibreOffice e o Google Apresentações também gravam), o texto de cada slide é texto de
+verdade, guardado dentro do arquivo. Este script faz a transcrição sozinho, no padrão da
+seção 1 da metodologia: copia o texto de cada slide, sem ler nada, com o título que diz a
+posição dele no arquivo, que é também o lugar que a citação usa, como
+`## slide 3 (arquivo p. 3)`. Dentro do slide, o texto vem na ordem do arquivo, que é a
+ordem em que o PowerPoint o lê em voz alta. O título do slide vira `###`; cada tópico, uma
+linha com `- ` (ou o número, na lista numerada), recuada conforme o nível; tabela, tabela
+do Markdown; índice e expoente, os caracteres próprios (CO₂, 10⁻⁶); o símbolo escrito com
+uma fonte de símbolos, como a Symbol, o caractere de verdade (μ, ±), pela tabela de
 `scripts/normas/simbolos.json`. Cada imagem entra no lugar dela, como no
 `transcrever_html.py`: `![imagem](caminho)`, seguida do texto escrito dentro dela, lido
-por OCR, e de `[fim da imagem]`. As imagens saem do pptx pra uma pasta ao lado dele, com
-o nome dele. As notas do apresentador, se houver, vêm depois do slide, a partir de
+por OCR, e de `[fim da imagem]`. As imagens saem do pptx pra uma pasta ao lado dele, com o
+nome dele. As notas do apresentador, se houver, vêm depois do slide, a partir de
 `[notas do apresentador]`; o slide oculto começa com `[slide oculto]`.
 
 **Quando usar.** Pra começar a transcrição de uma apresentação. Depois, registre a
@@ -236,10 +236,10 @@ quando alguma imagem está num formato que o Tesseract não lê.
 ## `registrar_fonte.py` — liga a transcrição à fonte dela
 
 **Pra que serve.** Grava, no topo da transcrição (ou de outro documento gerado de uma
-fonte), de qual arquivo ela veio: a chave da fonte, o caminho do arquivo e a impressão
-digital dele — um código que muda se o arquivo mudar. É assim que os outros scripts sabem
-qual arquivo de fonte corresponde a qual transcrição: pelo registro, não pelo nome dos
-arquivos, que pode ter erro de digitação.
+fonte), de qual arquivo ela veio: a chave da fonte, o caminho do arquivo e a [impressão
+digital](../metodologia-de-conteudo.md#como-transcrever) dele. É assim que os outros
+scripts sabem qual arquivo de fonte corresponde a qual transcrição: pelo registro, não
+pelo nome dos arquivos, que pode ter erro de digitação.
 
 **Quando usar.** Assim que uma transcrição é criada.
 
@@ -248,10 +248,11 @@ ela veio e a chave da fonte — a mesma chave da referência dela no `fontes.jso
 
     python scripts/registrar_fonte.py docs/material-base/gerados-ocr/AULA-1.md docs/material-base/AULA-1.pdf AULA-1
 
-Se o arquivo da fonte estiver fora da pasta protegida (a do material de base, que nunca
-é publicada), o script mostra pra onde ele iria e pergunta: digite `s` pra mover. Se ele
-não for, nada é registrado. Pra mover sem a pergunta — por exemplo, quando é a IA que
-roda o script e você já autorizou —, acrescente `--mover` no fim do comando.
+Se o arquivo da fonte estiver fora da [pasta
+protegida](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula), o script mostra pra
+onde ele iria e pergunta: digite `s` pra mover. Se ele não for, nada é registrado. Pra
+mover sem a pergunta — por exemplo, quando é a IA que roda o script e você já autorizou —,
+acrescente `--mover` no fim do comando.
 
 **O que aparece.** A linha gravada e, logo depois, o resultado do `referencias.py`, que
 este script roda sozinho no fim: se a chave ainda não tem referência, aparece
@@ -266,9 +267,10 @@ primeira página dela.
 autoria, título, local, editora, data, endereço, data de acesso. O script escreve cada
 referência no padrão da ABNT (NBR 6023), coloca em ordem alfabética e grava o arquivo de
 referências do projeto (no modelo, `docs/REFERENCIAS.md`). Ninguém digita a referência à
-mão. Ele monta também a chamada de cada fonte, o que vai no meio do texto, como
-`(Silva, 2020)`, pela norma de citações (NBR 10520). As [Regras da ABNT](../regras-abnt.md)
-explicam cada campo do `fontes.json` e o que cada norma pede.
+mão. Ele monta também a
+[chamada](../metodologia-de-conteudo.md#2-cite-cada-fonte-conforme-a-abnt) de cada fonte,
+como `(Silva, 2020)`, pela norma de citações (NBR 10520). As [Regras da
+ABNT](../regras-abnt.md) explicam cada campo do `fontes.json` e o que cada norma pede.
 
 Junto, ele monta a conferência das referências (no modelo, `CONFERENCIA-REFERENCIAS.md`,
 na pasta das transcrições): cada referência e a chamada dela como ficaram, ao lado da
@@ -347,12 +349,11 @@ alguma fonte é apresentação.
 
 ## `base_externa.py` — monta a base do material de fora
 
-**Pra que serve.** Quando a aula não traz o que algum eixo pede pra um item, o fato vem
-de um material de fora — um guia oficial, um livro, uma página da internet. Este script
-monta a base desse material: um arquivo só com as frases que o item usa, copiadas letra
-por letra da fonte, com a página de cada uma. Ninguém copia trecho à mão: o script
-recolhe todo o texto das páginas que você declarar, a IA decide o que cada frase é, e a
-pessoa confere.
+**Pra que serve.** Quando a aula não traz o que algum eixo pede pra um item, o fato vem de
+um material de fora — um guia oficial, um livro, uma página da internet. Este script monta
+a [base de trechos](../metodologia-de-conteudo.md#4-complete-a-aula-com-material-de-fora)
+desse material. Ninguém copia trecho à mão: o script recolhe todo o texto das páginas que
+você declarar, a IA decide o que cada frase é, e a pessoa confere.
 
 **Como funciona, passo a passo.**
 
@@ -464,11 +465,10 @@ Precisa do Poppler quando alguma fonte é PDF.
 
 ## `protege_fontes.py` — confere que nenhuma fonte pode ser publicada
 
-**Pra que serve.** O material de terceiros — as aulas, as transcrições, as cópias do
-material de fora e tudo o que traz texto delas — fica numa pasta só, a pasta protegida
-(`docs/material-base`), que nunca é publicada e nunca muda de nome nem de lugar. Este
-script confere se alguma fonte registrada ficou fora dela e, se você usa o GitHub, se a
-lista do que nunca vai pra lá deixa a pasta de fora.
+**Pra que serve.** O [material de terceiros](../metodologia-de-conteudo.md) fica numa
+pasta só, a [pasta protegida](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula)
+(`docs/material-base`). Este script confere se alguma fonte registrada ficou fora dela e,
+se você usa o GitHub, se a lista do que nunca vai pra lá deixa a pasta de fora.
 
 Se a conferência das mensagens estiver ativa (ver o
 [README dela](../.githooks/README.md)), ele também roda sozinho antes de cada versão
@@ -487,8 +487,8 @@ ativa, ele roda sozinho a cada versão.
 problema, dizendo o que fazer. Quando é ele que barra uma versão, a mensagem diz como
 tirar o arquivo dela sem apagá-lo do seu computador.
 
-Usa só o Python; a parte do GitHub usa o git, o programa que guarda as versões, que quem
-usa o GitHub já tem.
+Usa só o Python; a parte do GitHub usa o <dfn>git</dfn>, o programa que guarda as versões,
+que quem usa o GitHub já tem.
 
 ## Como ticar uma conferência
 
@@ -506,12 +506,12 @@ novo já foi conferido. Mudar a pasta do projeto de lugar não tira nenhum tique
 ## `confere_cartoes.py` — confere cada cartão contra a prova dele
 
 **Pra que serve.** Cada cartão diz um fato com palavras próprias e traz, atrás, a citação
-da fonte, na coluna `fonte`. A prova do cartão é o trecho da fonte que diz esse fato,
-copiado letra por letra. Ela fica num arquivo à parte, um por planilha, fora do GitHub,
-porque é texto de terceiros. Este script confere, cartão por cartão, se o trecho está
-mesmo no lugar que a citação diz — a página ou o slide da transcrição da aula, ou uma
-frase da base do material de fora — e monta a conferência dos cartões, com os tiques da
-IA e da pessoa.
+da fonte, na coluna `fonte`. A
+[prova](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada) do cartão fica num
+arquivo à parte, um por planilha, fora do GitHub, porque é texto de terceiros. Este script
+confere, cartão por cartão, se o trecho está mesmo no lugar que a citação diz — a página
+ou o slide da transcrição da aula, ou uma frase da base do material de fora — e monta a
+conferência dos cartões, com os tiques da IA e da pessoa.
 
 **Como funciona, passo a passo.**
 
@@ -607,11 +607,11 @@ Precisa da biblioteca `genanki`.
 
 **Pra que serve.** O índice do projeto (no modelo, `INDICE.md`) lista os documentos na
 ordem de leitura, cada um com o link e uma linha dizendo o que ele é (ver a seção 13 da
-metodologia). Este script confere que cada documento do projeto está nele uma vez só. Um
-documento é cada arquivo `.md` que vai com o projeto: os que o git já guarda e os novos
-que a lista do que nunca vai pro GitHub (o `.gitignore`) não deixa de fora, menos o
-próprio índice. Do índice contam os links pra arquivos `.md`; a parte do link depois de
-`#`, que aponta uma seção, não conta, e um link dentro de um trecho de código também não.
+metodologia). Este script confere que cada [documento do
+projeto](../metodologia-de-conteudo.md#13-escreva-os-quatro-documentos-de-apresentação),
+menos o próprio índice, está nele uma vez só. Do índice contam os links pra arquivos
+`.md`; a parte do link depois de `#`, que aponta uma seção, não conta, e um link dentro de
+um trecho de código também não.
 
 **Quando usar.** Sempre que um documento entra no projeto, sai dele ou muda de lugar. Se
 a conferência das mensagens estiver ativa (ver o [README dela](../.githooks/README.md)),

@@ -31,23 +31,23 @@ O manual está organizado em níveis, do mais simples ao mais detalhado.
 Os baralhos ainda não existem: os documentos e os cartões deste recorte ainda vão ser
 escritos. Quando existirem:
 
-1. Abra o Anki no computador ou celular (programa gratuito de revisão espaçada —
-   disponível em [apps.ankiweb.net](https://apps.ankiweb.net)).
-2. Importe os arquivos de `anki-decks/` — são arquivos `.apkg`, o formato que o Anki
-   usa para empacotar um baralho pronto. Arraste o arquivo pra dentro da janela do
+1. Abra o <dfn>Anki</dfn> no computador ou celular (programa gratuito de revisão espaçada
+   — disponível em [apps.ankiweb.net](https://apps.ankiweb.net)).
+2. Importe os arquivos de `anki-decks/` — são arquivos <dfn>.apkg</dfn>, o formato que o
+   Anki usa para empacotar um baralho pronto. Arraste o arquivo pra dentro da janela do
    Anki, ou use o menu Arquivo > Importar dentro do Anki.
 3. No Anki, os cartões aparecem numa pasta com o nome da disciplina, e dentro dela uma
    pasta pra cada arquivo.
 
 ### Atualizando o baralho depois de editar as planilhas
 
-As perguntas de cada cartão ficam guardadas em planilhas (arquivos `.csv`, texto
-simples com colunas separadas por vírgula) dentro de `docs/material-gerado/` — dá pra
-mudar no Excel, no Google Sheets ou num editor de texto, como o VSCode (um editor
-gratuito, onde se abre a pasta do projeto). Depois de mudar:
+As perguntas de cada cartão ficam guardadas em <dfn>planilhas</dfn> (arquivos `.csv`,
+texto simples com colunas separadas por vírgula) dentro de `docs/material-gerado/` — dá
+pra mudar no Excel, no Google Sheets ou num editor de texto, como o <dfn>VSCode</dfn> (um
+editor gratuito, onde se abre a pasta do projeto). Depois de mudar:
 
-1. No VSCode, abra o terminal, a janela onde se digita um comando: menu
-   **Terminal → Novo Terminal** (ou o atalho `` Ctrl+` ``).
+1. No VSCode, abra o <dfn>terminal</dfn>, a janela onde se digita um comando em vez de
+   clicar: menu **Terminal → Novo Terminal** (ou o atalho `` Ctrl+` ``).
 2. Digite `python scripts/montar_deck.py` e aperte Enter.
 3. Os arquivos `.apkg` dentro de `anki-decks/` são substituídos pelos novos; basta
    importar de novo no Anki para ver as mudanças.
@@ -69,11 +69,11 @@ reorganizado em texto corrido, mais claro. É material de estudo completo por si
 dá pra estudar só lendo os documentos, sem depender do baralho. Tem três tipos de
 documento:
 
-- **Dicionário de gatilhos** — conta cada item como uma história em cadeia. Bom pra
-  entender o porquê.
-- **Ficha determinística** — os mesmos itens, em tabela direta. Bom pra revisão
+- **<dfn>Dicionário de gatilhos</dfn>** — conta cada item como uma história em cadeia. Bom
+  pra entender o porquê.
+- **<dfn>Ficha determinística</dfn>** — os mesmos itens, em tabela direta. Bom pra revisão
   de véspera de prova.
-- **Teoria fundamental** — os conceitos gerais que vêm antes de entrar em item
+- **<dfn>Teoria fundamental</dfn>** — os conceitos gerais que vêm antes de entrar em item
   específico.
 
 Todo fato, nos documentos e nos cartões, traz a citação da fonte de onde veio; as

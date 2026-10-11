@@ -1,13 +1,13 @@
 # Conferência das mensagens e proteção das fontes (opcional, pra quem usa o GitHub)
 
-Você só precisa disto se guarda o projeto no GitHub, um site que guarda o projeto na
-internet e o histórico de cada mudança nele. Quem não usa o GitHub pode ignorar esta
-pasta.
+Você só precisa disto se guarda o projeto no [GitHub](../metodologia-de-conteudo.md). Quem
+não usa o GitHub pode ignorar esta pasta.
 
 ## O que é
 
 Pra mandar uma mudança ao GitHub, você grava uma versão do projeto no seu computador — o
-programa que faz isso, o *git*, chama cada versão gravada de *commit* — e escreve uma
+[git](../scripts/README.md#protege_fontespy--confere-que-nenhuma-fonte-pode-ser-publicada)
+chama cada versão gravada de <dfn>commit</dfn> — e escreve uma
 mensagem dizendo o que mudou. Esta pasta traz três coisas que entram em ação nessa hora:
 
 - **Uma proteção das fontes, do glossário e do índice** (o arquivo `pre-commit`): antes de
@@ -37,11 +37,12 @@ As outras duas ajudam a escrever a mensagem sempre do mesmo jeito:
 ## Como ativar
 
 Esta pasta já está no projeto da sua disciplina, porque ele é uma cópia do modelo
-inteiro. No GitHub, o projeto tem um repositório próprio (o lugar onde ficam ele e o
-histórico das mudanças dele), sem o histórico do modelo. Abra o terminal (a janela onde
-se digita um comando — o [README dos scripts](../scripts/README.md) mostra como) dentro
-da pasta do projeto e digite estas duas linhas, uma de cada vez, apertando Enter depois
-de cada uma:
+inteiro. No GitHub, o projeto tem um
+[repositório](../metodologia-de-conteudo.md#15-checklist-adicionando-uma-disciplina-nova)
+próprio, sem o histórico do modelo. Abra o
+[terminal](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) (o
+[README dos scripts](../scripts/README.md) mostra como) dentro da pasta do projeto e
+digite estas duas linhas, uma de cada vez, apertando Enter depois de cada uma:
 
     git config core.hooksPath .githooks
     git config commit.template .githooks/commit-template.txt

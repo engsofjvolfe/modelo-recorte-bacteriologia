@@ -36,13 +36,12 @@ escolhido por quem mantém o projeto:
 Parte do trabalho é feita por processos automáticos, e parte com ajuda de IA. Cada parte
 do trabalho é uma de duas coisas:
 
-- **Mecânica:** feita por um programa, sempre do mesmo jeito, sem julgar o conteúdo —
-  copiar o texto das aulas, slide por slide, e o do livro, página por página, conferir
-  se a cópia é igual ao original,
-  montar as referências, conferir se cada trecho citado está na fonte, montar os cartões
-  do Anki.
-- **Julgamento:** de uma pessoa, contra a fonte — escolher o recorte, decidir cada fato
-  e conferir, por último, o texto das figuras, cada referência e cada cartão.
+- **<dfn>Mecânica</dfn>:** feita por um programa, sempre do mesmo jeito, sem julgar o
+  conteúdo — copiar o texto das aulas, slide por slide, e o do livro, página por página,
+  conferir se a cópia é igual ao original, montar as referências, conferir se cada trecho
+  citado está na fonte, montar os cartões do Anki.
+- **<dfn>Julgamento</dfn>:** de uma pessoa, contra a fonte — escolher o recorte, decidir
+  cada fato e conferir, por último, o texto das figuras, cada referência e cada cartão.
 
 Neste projeto, o texto das aulas e o do livro foram copiados por script, direto dos
 arquivos dos slides e da versão digital do livro, e são conferidos por script contra eles,
@@ -80,9 +79,9 @@ ficha vier a pedir. Quando entrar, as cópias dele ficam em
 
 ## Licença
 
-Uma licença diz o que cada pessoa pode fazer com um trabalho. Este projeto usa duas,
-para duas partes diferentes, mais uma exceção — os detalhes estão em
-[`NOTICE.md`](NOTICE.md):
+Uma <dfn>licença</dfn> diz o que cada pessoa pode fazer com um trabalho: usar, mudar,
+repassar. Este projeto usa duas, para duas partes diferentes, mais uma exceção — os
+detalhes estão em [`NOTICE.md`](NOTICE.md):
 
 | Parte | Licença | Significa que... |
 |---|---|---|
