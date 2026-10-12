@@ -269,6 +269,12 @@ def documentos_do_projeto(raiz):
     return {(raiz / n).resolve() for n in r.stdout.decode("utf-8").split("\0") if n and (raiz / n).is_file()}
 
 
+def fecha_a_cerca(abertura, linha):
+    """Se a linha fecha o bloco de codigo aberto pela cerca dada (o grupo 1 de CERCA): o
+    mesmo sinal, pelo menos tantas vezes quanto na abertura, e nada mais."""
+    return re.fullmatch(rf" {{0,3}}{re.escape(abertura[0])}{{{len(abertura)},}}\s*", linha) is not None
+
+
 def linhas_fora_de_codigo(texto):
     """(numero da linha, a partir de 1, e a linha) de cada linha de um documento Markdown
     fora dos blocos de codigo. O codigo de dentro da linha fica: quem nao o quer usa
@@ -279,7 +285,7 @@ def linhas_fora_de_codigo(texto):
         if cerca is None and m:
             cerca = m.group(1)
         elif cerca is not None:
-            if re.fullmatch(rf" {{0,3}}{re.escape(cerca[0])}{{{len(cerca)},}}\s*", linha):
+            if fecha_a_cerca(cerca, linha):
                 cerca = None
         else:
             yield n, linha
@@ -523,6 +529,13 @@ def escapa(texto):
     return "\\" + texto if texto.startswith("#") else texto
 
 
+def sem_escape(texto):
+    """O texto de uma linha sem o escape de escapa(): escapa(sem_escape(linha)) devolve a
+    linha escapada, tenha ela o escape ou nao."""
+    texto = texto[1:] if texto.startswith("\\#") else texto
+    return texto.replace("\\|", "|")
+
+
 def junta(partes):
     """Os pedacos de texto numa linha so, com os espacos juntados."""
     return " ".join("".join(partes).split())
@@ -596,6 +609,30 @@ def converte(arquivo, formato, pasta, filtro=None):
                        capture_output=True)
     saida = Path(pasta) / f"{Path(arquivo).stem}.{formato}"
     return saida if saida.is_file() else None
+
+
+def copia_da_imagem(arquivo, copia):
+    """(copia, problema): a imagem copiada no caminho dado, no formato da extensao dele, feita
+    so se ele nao existe. O GraphicsMagick converte sem mudar o tamanho; a imagem que ele nao
+    le passa pelo LibreOffice, que a desenha numa folha, e sai com fundo branco e sem a margem
+    da folha."""
+    if copia.exists():
+        return copia, None
+    gm = shutil.which("gm")
+    if gm is None:
+        return None, "o GraphicsMagick não está instalado"
+    with tempfile.TemporaryDirectory() as temporaria:
+        feita = Path(temporaria) / copia.name
+        if subprocess.run([gm, "convert", str(arquivo), str(feita)], capture_output=True).returncode != 0:
+            desenhada = converte(arquivo, copia.suffix.lstrip("."), Path(temporaria) / "libreoffice")
+            if desenhada is not None:
+                subprocess.run([gm, "convert", str(desenhada), "-background", "white", "-flatten", "-trim",
+                                str(feita)], capture_output=True)
+        if not feita.is_file():
+            return None, "nem o GraphicsMagick nem o LibreOffice converteram a imagem"
+        copia.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(feita), str(copia))
+    return copia, None
 
 
 def idiomas_do_ocr():

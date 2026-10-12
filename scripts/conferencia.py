@@ -26,6 +26,9 @@ texto do slide lido do proprio pptx (comum.Apresentacao), com o titulo "slide <p
 e as imagens comparadas pela impressao digital. Cada slide aparece tambem com a imagem
 dele inteiro, feita pelo LibreOffice, so pra ver: ela nao tem tique.
 
+Na fonte em HTML e em pptx, a imagem que nao esta em PNG aparece numa copia em PNG, que a
+visualizacao do Markdown mostra, com o link para o original (comum.copia_da_imagem).
+
 A transcricao e ligada a fonte pelo registro no topo dela (ver registrar_fonte.py), nunca
 pelo nome dos arquivos: uma transcricao registra uma fonte so. O arquivo gerado diz, para
 cada transcricao, se a fonte registrada ainda e a mesma, se mudou depois do registro ou
@@ -41,14 +44,27 @@ gerar de novo, o tique volta se a assinatura e a mesma; se o texto ou a fonte mu
 tique e retirado, e a parte diz isso. No texto de uma imagem, mudar so a divisao em
 linhas tambem retira o tique.
 
+Com --levar-correcoes, o texto das imagens corrigido no proprio arquivo de conferencia vai
+para as transcricoes antes de o arquivo ser gerado de novo: cada imagem cujo texto entre
+as cercas ficou diferente do da transcricao recebe esse texto como esta, com o escape da
+transcricao (comum.escapa); sem cerca, a imagem fica sem texto. A cerca e lida como no
+Markdown, de qualquer tamanho (um formatador pode trocar a que o script escreve). O tique
+da pessoa fica, porque ela ticou o texto que escreveu; o da IA sai. Nada e gravado se
+alguma correcao nao pode ser levada: a imagem ou o texto dela mudou na transcricao depois
+que o arquivo foi gerado, a parte nao existe mais na transcricao, o texto de uma pagina de
+PDF mudou (esse se corrige na transcricao), uma cerca nao tem fim, uma imagem tem mais de
+uma cerca ou uma linha de tique nao se le.
+
 As pastas, o arquivo gerado, a pasta das imagens e a resolucao delas vem do projeto.json
 ("gerados", "conferencia_imagens", "material_base", "imagens" e "resolucao_imagens").
 Precisa dos comandos pdfinfo e pdftoppm (pacote Poppler) quando ha fonte em PDF ou em
-pptx, e do LibreOffice pra imagem dos slides.
+pptx, do LibreOffice pra imagem dos slides e pra copia da imagem que o GraphicsMagick nao
+le, e do GraphicsMagick (comando gm) pra copia em PNG.
 
 Uso (de qualquer pasta dentro do projeto):
     python scripts/conferencia.py
     python scripts/conferencia.py --projeto projeto.json
+    python scripts/conferencia.py --levar-correcoes
 """
 
 import argparse
@@ -61,16 +77,19 @@ from urllib.parse import unquote, urlsplit
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from comum import (EXTENSOES_HTML, EXTENSOES_PPTX, FIM_FIGURA, LINHA_CONTINUACAO, LINHA_FIGURA,  # noqa: E402
-                   MARCAS_DE_LINHA, ROTULO_PAGINA, ROTULO_SLIDE, TITULO_PAGINA, Apresentacao, FonteIlegivel,
-                   acha_projeto, ancora, assinatura, caixas, caminho_do_alvo, comparavel, fontes_registradas, imagem,
-                   impressao, impressao_de, link, marca, numero_de_paginas, paginas_html, pdf_dos_slides,
-                   situacao_da_copia, texto_do_slide, tiques_anteriores, tiques_da_parte)
+                   MARCA_PARTE, MARCAS_DE_LINHA, ROTULO_PAGINA, ROTULO_SLIDE, TIQUE, TITULO_PAGINA, Apresentacao,
+                   FonteIlegivel, acha_projeto, alvo_markdown, ancora, assinatura, caixas, caminho_do_alvo, comparavel,
+                   copia_da_imagem, escapa, fecha_a_cerca, fontes_registradas, imagem, impressao, impressao_de, link,
+                   marca, numero_de_paginas, paginas_html, pdf_dos_slides, sem_escape, situacao_da_copia,
+                   texto_do_slide, tiques_anteriores, tiques_da_parte)
+from comum import CERCA as ABRE_CERCA  # noqa: E402  -- a cerca do Markdown, de qualquer tamanho
 
 CERCA = "````"  # cerca de 4 crases: a transcricao pode ter blocos de 3
 SEPARADOR = re.compile(r"^\|(?:\s*:?-{3,}:?\s*\|)+$")
 TITULO_DE_SECAO = re.compile(r"^#{3,6} ")
 FIGURA_NA_LINHA = re.compile(r"!\[imagem\]\([^)]*\)")
 CONTEXTO = 30  # caracteres mostrados em volta da primeira diferenca
+FORMATO_MOSTRADO = ".png"  # a visualizacao do Markdown mostra; a imagem em outro formato aparece numa copia nele
 PaginaDaFonte = namedtuple("PaginaDaFonte", "rotulo texto imagens ancora")  # rotulo inteiro ("p. 12", "slide 3")
 
 SITUACAO = {
@@ -151,8 +170,8 @@ def bloco_pdf(nome, pdf, parte, saida):
     n = parte["n"]
     out = ["", f"### {nome} — {parte['rotulo']} (arquivo p. {n})", "", marca(nome, n, parte["sig"]), ""]
     if parte["imagem"]:
-        out += [f"[original, arquivo p. {n}]({link(pdf, saida)}#page={n})", "",
-                f"![{nome}, arquivo p. {n}]({link(parte['imagem'], saida)})", ""]
+        out += [f"[original, arquivo p. {n}]({alvo_markdown(f'{link(pdf, saida)}#page={n}')})", "",
+                f"![{nome}, arquivo p. {n}]({alvo_markdown(link(parte['imagem'], saida))})", ""]
     else:
         out += ["Imagem: nenhuma (o PDF não tem esta página ou não está disponível)", ""]
     if parte["secoes"]:
@@ -218,6 +237,16 @@ def identidade(arquivo):
     return impressao(arquivo) if isinstance(arquivo, Path) else arquivo
 
 
+def texto_assinado(linhas):
+    """O texto de uma imagem como a assinatura o ve: a divisao em linhas conta (um rotulo por
+    linha); o resto do espaco, nao."""
+    return json.dumps([" ".join(linha.split()) for linha in linhas if linha.strip()], ensure_ascii=False)
+
+
+def assinatura_da_imagem(arquivo, n, j, linhas):
+    return assinatura(identidade(arquivo), n, j, texto_assinado(linhas))
+
+
 def paginas_da_fonte(fonte):
     """[PaginaDaFonte] da fonte em HTML ou em pptx, pela mesma leitura de quem transcreve."""
     if fonte.suffix.lower() in EXTENSOES_PPTX:
@@ -265,12 +294,10 @@ def partes_texto(nome, arq, texto, fonte, situacao, anteriores):
         imgs = []
         for j, (alvo, linhas) in enumerate(figuras, 1):
             arquivo = arquivo_da_imagem(arq.parent, alvo)
-            # a divisao em linhas conta (um rotulo por linha); o resto do espaco, nao
-            texto = json.dumps([" ".join(linha.split()) for linha in linhas if linha.strip()], ensure_ascii=False)
-            sig = assinatura(impressao(arquivo) if isinstance(arquivo, Path) else alvo, n, j, texto)
+            sig = assinatura_da_imagem(arquivo, n, j, linhas)
             tiques, retirado = tiques_da_parte(anteriores, nome, f"{n}.{j}", sig)
             imgs.append({"j": j, "arquivo": arquivo, "linhas": linhas, "sig": sig, "tiques": tiques,
-                         "retirado": retirado})
+                         "retirado": retirado, "copia": None, "sem_copia": None})
         out.append({"n": n, "rotulo": rotulo, "ancora": da_fonte[n - 1].ancora if n <= len(da_fonte) else None,
                     "erros": erros, "imagens": imgs, "pagina_inteira": None})
     return out, len(da_fonte)
@@ -290,20 +317,39 @@ def imagens_dos_slides(partes, slides, fonte, pasta_img, nome, resolucao):
     return None
 
 
+def copias_das_imagens(partes, pasta_img, nome):
+    """Poe em cada imagem que nao esta no FORMATO_MOSTRADO a copia dela nesse formato, ou o
+    problema, se nao deu. A copia tem no nome a impressao digital da imagem: a de uma imagem
+    que mudou nunca e usada no lugar da nova."""
+    for parte in partes:
+        for img in parte["imagens"]:
+            arquivo = img["arquivo"]
+            if isinstance(arquivo, Path) and arquivo.suffix.lower() != FORMATO_MOSTRADO:
+                img["copia"], img["sem_copia"] = copia_da_imagem(
+                    arquivo, pasta_img / f"{nome}-{impressao(arquivo)}{FORMATO_MOSTRADO}")
+
+
 def bloco_texto(nome, fonte, pagina, saida):
     n = pagina["n"]
     out = ["", f"### {nome} — {pagina['rotulo']} (arquivo p. {n})", ""]
     if fonte is not None and fonte.exists():
-        out += [f"[original, arquivo p. {n}]({link(fonte, saida)}{'#' + pagina['ancora'] if pagina['ancora'] else ''})",
-                ""]
+        fragmento = "#" + pagina["ancora"] if pagina["ancora"] else ""
+        out += [f"[original, arquivo p. {n}]({alvo_markdown(link(fonte, saida) + fragmento)})", ""]
     if pagina["pagina_inteira"]:
-        out += [f"![{nome}, {pagina['rotulo']}]({link(pagina['pagina_inteira'], saida)})", ""]
+        out += [f"![{nome}, {pagina['rotulo']}]({alvo_markdown(link(pagina['pagina_inteira'], saida))})", ""]
     out += [f"ERRO: {e}" for e in pagina["erros"]] or ["Texto: o mesmo da fonte."]
     for img in pagina["imagens"]:
         j, arquivo = img["j"], img["arquivo"]
         out += ["", f"#### {nome} — {pagina['rotulo']}, imagem {j}", "", marca(nome, f"{n}.{j}", img["sig"]), ""]
-        out += [f"![{nome}, {pagina['rotulo']}, imagem {j}]({link(arquivo, saida)})" if isinstance(arquivo, Path)
-                else f"Imagem: o arquivo {arquivo} não existe", ""]
+        if isinstance(arquivo, Path):
+            vista = img["copia"] or arquivo
+            out += [f"![{nome}, {pagina['rotulo']}, imagem {j}]({alvo_markdown(link(vista, saida))})", ""]
+            if img["copia"]:
+                out += [f"Imagem acima: cópia do original [{arquivo.name}]({alvo_markdown(link(arquivo, saida))})", ""]
+            elif img["sem_copia"]:
+                out += [f"Cópia da imagem: nenhuma ({img['sem_copia']})", ""]
+        else:
+            out += [f"Imagem: o arquivo {arquivo} não existe", ""]
         out += [CERCA, "\n".join(img["linhas"]), CERCA, ""] if img["linhas"] else ["Texto da imagem: nenhum", ""]
         if img["retirado"]:
             out += ["Tique retirado: a imagem ou o texto dela mudou depois do tique", ""]
@@ -311,10 +357,149 @@ def bloco_texto(nome, fonte, pagina, saida):
     return out
 
 
+# ---------- correcoes feitas no arquivo de conferencia ----------
+
+def textos_da_conferencia(saida):
+    """({(grupo, parte): [texto de cada cerca]}, [problema]): o texto entre as cercas de cada
+    parte do arquivo de conferencia como ele esta, e o que impede de le-lo -- cerca sem fim
+    e linha de tique que o script nao le. A cerca e lida como no Markdown, de qualquer
+    tamanho (um formatador pode ter trocado a que o script escreve)."""
+    textos, problemas, chave, cerca, abertura = {}, [], None, None, None
+    for linha in saida.read_text(encoding="utf-8").split("\n"):
+        if cerca is not None and fecha_a_cerca(abertura, linha):
+            textos[chave].append("\n".join(cerca))
+            cerca = None
+            continue
+        if cerca is not None and not MARCA_PARTE.match(linha):
+            cerca.append(linha)
+            continue
+        if cerca is not None:
+            problemas.append(f"{chave[0]}, parte {chave[1]}: a cerca {abertura} não tem fim")
+            cerca = None
+        m, aberta = MARCA_PARTE.match(linha), ABRE_CERCA.match(linha)
+        if m:
+            chave = (m.group(1), m.group(2))
+            textos[chave] = []
+        elif linha.startswith("#"):
+            chave = None
+        elif chave is not None and aberta:
+            cerca, abertura = [], aberta.group(1)
+        elif chave is not None and linha.startswith("- [") and not TIQUE.match(linha):
+            problemas.append(f"{chave[0]}, parte {chave[1]}: o script não lê o tique \"{linha}\"")
+    if cerca is not None:
+        problemas.append(f"{chave[0]}, parte {chave[1]}: a cerca {abertura} não tem fim")
+    return textos, problemas
+
+
+def linhas_da_cerca(conteudos):
+    """(linhas, problema): o texto de uma imagem no arquivo de conferencia, linha por linha,
+    sem as linhas vazias das pontas e com o escape da transcricao; sem cerca, nenhum texto."""
+    if len(conteudos) > 1:
+        return [], f"tem {len(conteudos)} cercas, e o texto de uma imagem fica numa só"
+    linhas = conteudos[0].split("\n") if conteudos else []
+    while linhas and not linhas[0].strip():
+        linhas.pop(0)
+    while linhas and not linhas[-1].strip():
+        linhas.pop()
+    return [escapa(sem_escape(linha)) for linha in linhas], None
+
+
+def com_textos_das_imagens(texto, novos):
+    """O texto da transcricao com as linhas de dentro de cada imagem {(pagina, j): [linhas]}
+    trocadas; o resto, como esta."""
+    out, n, conta, figura = [], None, {}, None  # figura: None fora de imagem; "fica" ou "troca" dentro
+    for linha in texto.split("\n"):
+        if figura is not None:
+            if linha == FIM_FIGURA:
+                figura = None
+            elif figura == "troca":
+                continue
+            out.append(linha)
+            continue
+        m = TITULO_PAGINA.match(linha)
+        if m:
+            n = int(m.group(2))
+        elif linha.startswith("## "):
+            n = None
+        elif n is not None and LINHA_FIGURA.match(linha):
+            conta[n] = conta.get(n, 0) + 1
+            figura = "troca" if (n, conta[n]) in novos else "fica"
+            if figura == "troca":
+                out += [linha] + novos[(n, conta[n])]
+                continue
+        out.append(linha)
+    return "\n".join(out)
+
+
+def so_mudou_o_texto_das_imagens(antes, depois, novos):
+    """Se, de uma transcricao para a outra, so mudou o texto das imagens {(pagina, j): [linhas]},
+    pela mesma leitura da conferencia."""
+    a, d = por_pagina(antes), por_pagina(depois)
+    if {n: [r for r, _ in s] for n, s in a.items()} != {n: [r for r, _ in s] for n, s in d.items()}:
+        return False
+    for n, secs in a.items():
+        lido, figuras, sem_fim = le_pagina("\n\n".join(c for _, c in secs))
+        esperado = [(alvo, novos.get((n, j), linhas)) for j, (alvo, linhas) in enumerate(figuras, 1)]
+        if le_pagina("\n\n".join(c for _, c in d[n])) != (lido, esperado, sem_fim):
+            return False
+    return True
+
+
+def leva_correcoes(transcricoes, saida, raiz):
+    """(tiques, levadas, recusas): leva para as transcricoes o texto das imagens corrigido no
+    arquivo de conferencia. Os tiques sao os do arquivo, com o da pessoa mantido e o da IA
+    retirado em cada imagem levada; com alguma recusa, nenhuma transcricao e gravada."""
+    tiques = tiques_anteriores(saida)
+    textos, recusas = textos_da_conferencia(saida)
+    vistas, gravar, levadas = set(), [], []
+    for arq, texto in transcricoes_da_pasta(transcricoes, saida):
+        nome = arq.stem
+        _, fonte, situacao = fonte_da_transcricao(texto, raiz)
+        if fonte is None or fonte.suffix.lower() not in EXTENSOES_HTML + EXTENSOES_PPTX:
+            paginas = por_pagina(texto)
+            recusas += [f"{nome}, arquivo p. {parte}: o texto de uma página de PDF se corrige na transcrição"
+                        for grupo, parte in textos if grupo == nome and "." not in parte
+                        and textos[(grupo, parte)] != [c for _, c in paginas.get(int(parte), [])]]
+            continue
+        novos = {}
+        for p in partes_texto(nome, arq, texto, fonte, situacao, tiques)[0]:
+            for img in p["imagens"]:
+                n, j, chave = p["n"], img["j"], (nome, f"{p['n']}.{img['j']}")
+                vistas.add(chave)
+                if chave not in textos:
+                    continue
+                onde = f"{nome}, {p['rotulo']}, imagem {j}"
+                linhas, problema = linhas_da_cerca(textos[chave])
+                if problema:
+                    recusas.append(f"{onde}: {problema}")
+                    continue
+                if texto_assinado(map(sem_escape, linhas)) == texto_assinado(map(sem_escape, img["linhas"])):
+                    continue
+                if tiques[chave][0] != img["sig"]:
+                    recusas.append(f"{onde}: a imagem ou o texto dela mudou na transcrição depois que o arquivo de "
+                                   "conferência foi gerado")
+                    continue
+                novos[(n, j)] = linhas
+                tiques[chave] = (assinatura_da_imagem(img["arquivo"], n, j, linhas),
+                                 {"IA": False, "pessoa": tiques[chave][1]["pessoa"]})
+                levadas.append(onde)
+        if novos:
+            novo = com_textos_das_imagens(texto, novos)
+            if not so_mudou_o_texto_das_imagens(texto, novo, novos):
+                recusas.append(f"{nome}: trocar o texto das imagens mudaria outra coisa na transcrição")
+            gravar.append((arq, novo))
+    recusas += [f"{grupo}, parte {parte}: não existe na transcrição" for grupo, parte in textos
+                if "." in parte and (grupo, parte) not in vistas]
+    if not recusas:
+        for arq, novo in gravar:
+            arq.write_text(novo, encoding="utf-8")
+    return tiques, levadas, recusas
+
+
 # ---------- arquivo de conferencia ----------
 
-def gera(transcricoes, saida, raiz, pasta_img, resolucao):
-    anteriores = tiques_anteriores(saida)
+def gera(transcricoes, saida, raiz, pasta_img, resolucao, anteriores=None):
+    anteriores = tiques_anteriores(saida) if anteriores is None else anteriores
     resumo, corpo, totais, problemas_de_registro, diferencas, registrados = [], [], [0] * 6, [], [], set()
     for arq, texto in transcricoes_da_pasta(transcricoes, saida):
         nome = arq.stem
@@ -327,6 +512,7 @@ def gera(transcricoes, saida, raiz, pasta_img, resolucao):
                   f"Fonte registrada: {chave or '—'}, `{link(fonte, saida) if fonte else '—'}` ({SITUACAO[situacao]})"]
         if fonte is not None and fonte.suffix.lower() in EXTENSOES_HTML + EXTENSOES_PPTX:
             ps, paginas_da_fonte_lidas = partes_texto(nome, arq, texto, fonte, situacao, anteriores)
+            copias_das_imagens(ps, pasta_img, nome)
             if fonte.suffix.lower() in EXTENSOES_PPTX and paginas_da_fonte_lidas:
                 problema = imagens_dos_slides(ps, paginas_da_fonte_lidas, fonte, pasta_img, nome, resolucao)
                 if problema:
@@ -364,13 +550,26 @@ def gera(transcricoes, saida, raiz, pasta_img, resolucao):
 def main(argv=None):
     p = argparse.ArgumentParser(description="Gera o arquivo de conferência das transcrições das fontes.")
     p.add_argument("--projeto", type=Path, help="projeto.json (padrao: o primeiro achado subindo a partir daqui)")
+    p.add_argument("--levar-correcoes", action="store_true",
+                   help="leva para as transcricoes o texto das imagens corrigido no arquivo de conferencia")
     a = p.parse_args(argv)
     projeto = acha_projeto(a.projeto)
     transcricoes, saida = projeto.caminho("gerados"), projeto.caminho("conferencia_imagens")
     if not transcricoes_da_pasta(transcricoes, saida):
         raise SystemExit(f"nenhuma transcricao em {transcricoes}")
+    anteriores = None
+    if a.levar_correcoes and saida.exists():
+        anteriores, levadas, recusas = leva_correcoes(transcricoes, saida, projeto.raiz)
+        for recusa in recusas:
+            print(f"ERRO: {recusa}")
+        if recusas:
+            print("nada foi gravado")
+            return 1
+        for levada in levadas:
+            print(f"levado para a transcrição: {levada}")
     (paginas, com_erro, a_ticar, ia, pessoa, sem_pessoa), problemas_de_registro, diferencas, registrados = gera(
-        transcricoes, saida, projeto.raiz, projeto.pasta_de_imagens(saida), projeto.valor("resolucao_imagens"))
+        transcricoes, saida, projeto.raiz, projeto.pasta_de_imagens(saida), projeto.valor("resolucao_imagens"),
+        anteriores)
     for arq, situacao in problemas_de_registro:
         print(f"ERRO: {arq.name} -- fonte registrada: {SITUACAO[situacao]}")
     for arq, rotulo, erro in diferencas:

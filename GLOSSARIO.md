@@ -47,6 +47,7 @@ As palavras que os documentos do projeto definem, em ordem alfabética, cada uma
 - **genanki** — [Scripts › Antes da primeira vez](scripts/README.md#antes-da-primeira-vez)
 - **git** — [Scripts › protege_fontes.py — confere que nenhuma fonte pode ser publicada](scripts/README.md#protege_fontespy--confere-que-nenhuma-fonte-pode-ser-publicada)
 - **GitHub** — [Metodologia de Conteúdo](metodologia-de-conteudo.md)
+- **GraphicsMagick** — [Scripts › Antes da primeira vez](scripts/README.md#antes-da-primeira-vez)
 - **grupo** — [Metodologia de Conteúdo › Analise cada parte do material](metodologia-de-conteudo.md#analise-cada-parte-do-material)
 - **História em cadeia** — [Metodologia de Conteúdo › Analise cada parte do material](metodologia-de-conteudo.md#analise-cada-parte-do-material)
 - **impressão digital** — [Metodologia de Conteúdo › Como transcrever](metodologia-de-conteudo.md#como-transcrever)

@@ -41,14 +41,13 @@ do trabalho é uma de duas coisas:
 - **<dfn>Julgamento</dfn>:** de uma pessoa, contra a fonte — escolher o recorte, decidir
   cada fato e conferir, por último, o texto das figuras, cada referência e cada cartão.
 
-Neste projeto, o texto das aulas e o do livro foram copiados por script, direto dos
-arquivos dos slides e da versão digital do livro, e são conferidos por script contra eles,
-sem leitura por IA. A IA entrou na escrita e na adaptação dos scripts. O texto de dentro
-das figuras foi lido por OCR. Nas figuras dos capítulos 12 a 17 do livro, a IA confere
-esse texto, figura por figura, antes da verificação feita por uma pessoa, e como ele foi
-escrito está em [`docs/texto-das-figuras.md`](docs/texto-das-figuras.md). Nas figuras dos
-capítulos 18 a 35 e nas das aulas, ele é o que o OCR leu, e só uma pessoa, olhando a imagem,
-o corrige.
+O texto das aulas e o do livro é copiado por script dos arquivos dos slides e da versão
+digital do livro e conferido por script contra eles, sem leitura por IA. Os scripts são
+escritos e adaptados com ajuda de IA. O texto de dentro das figuras é lido por OCR e
+conferido por uma pessoa, olhando a imagem. Nas figuras dos capítulos 12 a 17 do livro, a
+IA confere esse texto antes da pessoa, figura por figura, e
+[`docs/texto-das-figuras.md`](docs/texto-das-figuras.md) diz como ele é escrito; nas outras
+figuras, só a pessoa o corrige.
 
 ## Origem do conteúdo
 

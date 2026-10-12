@@ -148,8 +148,9 @@ fonte, na mesma ordem, e também o título da página e as imagens dela, e apont
 o que não bate. Na apresentação, cada slide aparece também inteiro, como imagem, pra ver
 o que só o desenho mostra, como as setas de um esquema. À mão, confere-se só o
 texto de dentro de cada imagem, que veio do OCR: cada imagem aparece com esse texto e com
-as duas caixas de tique. Se esse texto mudar depois do tique, ainda que só na divisão em
-linhas, o tique é retirado.
+as duas caixas de tique, e é ali mesmo, olhando a imagem, que esse texto se corrige. Como
+a correção vai pra transcrição, e quando um tique sai, está no [README dos
+scripts](scripts/README.md#conferenciapy--monta-a-conferência-das-transcrições).
 
 ---
 
@@ -620,7 +621,8 @@ Uma linha `ERRO` ou `FALTA` de um script se resolve antes de ticar: ela diz o qu
 ou não bate nos dados. O script nunca diz se um conteúdo está certo — isso é a análise humana, parte
 por parte nas conferências e, no fim, na auditoria da
 [seção 16](#16-checklist-auditando-uma-disciplina-existente). Nada vale como conferido
-sem o tique da pessoa, e o tique sai sozinho se a parte mudar depois dele.
+sem o tique da pessoa, e os casos em que o tique sai sozinho, porque a parte mudou depois
+dele, estão em [Como ticar uma conferência](scripts/README.md#como-ticar-uma-conferência).
 
 ---
 

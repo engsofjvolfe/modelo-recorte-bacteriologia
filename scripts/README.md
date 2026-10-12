@@ -32,7 +32,7 @@ Você precisa de três coisas. Faça uma vez só, no seu computador.
    `docs/material-base`: é por ter nome e lugar fixos que a [lista do que nunca vai pro
    GitHub](../NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto) a
    deixa sempre de fora. Os caminhos ficam em `caminhos`; entre eles, `imagens` é a pasta
-   onde as conferências gravam as imagens das páginas; e `licenca_conteudo`, o arquivo da
+   onde as conferências gravam as imagens que elas fazem; e `licenca_conteudo`, o arquivo da
    licença do conteúdo. Fora dos caminhos ficam: `prefixo_planilhas`, o começo do nome de
    toda planilha de pergunta (no modelo, `perguntas-`); `resolucao_imagens`, a resolução
    das imagens das conferências, em pontos por polegada; `nome_licenca_conteudo`, o nome
@@ -43,7 +43,7 @@ Você precisa de três coisas. Faça uma vez só, no seu computador.
    e você pode mudá-la ali. A pasta `scripts/` já está no projeto, que é uma cópia do
    modelo inteiro, com as subpastas `esquemas/` e `normas/`: são os próprios scripts e os
    arquivos que eles leem. Não mude o nome dela nem de nada lá dentro.
-3. **Quatro complementos**, só pra alguns scripts:
+3. **Cinco complementos**, só pra alguns scripts:
    - pro `montar_deck.py`, a biblioteca <dfn>genanki</dfn>, um complemento do Python que
      sabe montar os arquivos do Anki: no terminal, digite `pip install genanki` (ou
      `pip3 install genanki`) e aperte Enter;
@@ -61,9 +61,14 @@ Você precisa de três coisas. Faça uma vez só, no seu computador.
      `brew install tesseract tesseract-lang`; no Windows, peça à IA o passo a passo;
    - pro `transcrever_pptx.py`, quando a apresentação tem imagem num formato que o
      Tesseract não lê (EMF, WMF, SVG), e pro `conferencia.py`, quando a fonte é uma
-     apresentação em pptx, o <dfn>LibreOffice</dfn>, que converte a imagem e faz a imagem
-     de cada slide: no Linux, `sudo apt install libreoffice`; no Mac e no Windows, o
-     instalador do site [libreoffice.org](https://www.libreoffice.org/download/).
+     apresentação em pptx ou tem imagem num formato que o GraphicsMagick não lê, o
+     <dfn>LibreOffice</dfn>, que converte a imagem e faz a imagem de cada slide: no Linux, `sudo apt install libreoffice`; no Mac e no Windows, o
+     instalador do site [libreoffice.org](https://www.libreoffice.org/download/);
+   - pro `conferencia.py`, quando alguma imagem de documento HTML ou de apresentação não
+     está em PNG, o <dfn>GraphicsMagick</dfn>, que faz uma cópia dela em PNG, um formato
+     que a visualização do VSCode mostra: no Linux, `sudo apt install graphicsmagick`; no
+     Mac, `brew install graphicsmagick`; no Windows, o instalador indicado no site
+     [graphicsmagick.org](http://www.graphicsmagick.org/download.html).
 
 ## Como rodar um script
 
@@ -322,17 +327,33 @@ transcrição têm de ser os da mesma página na fonte, na mesma ordem, e també
 página e as imagens. Não contam os espaços, as marcas da transcrição (o `#` dos títulos,
 as barras das tabelas, o `<br>`, `[slide oculto]`, `[notas do apresentador]`), a forma
 dos índices e expoentes e a diferença entre o hífen e o sinal de menos. À mão, só o texto
-de dentro de cada imagem: ela aparece com esse texto e com as duas caixas de tique. Na
+de dentro de cada imagem: ela aparece com esse texto e com as duas caixas de tique, e
+mudar esse texto, mesmo só na divisão em linhas, é mudar a parte (ver [Como ticar uma
+conferência](#como-ticar-uma-conferência)). Na
 apresentação, cada slide aparece também inteiro, como imagem, feita pelo LibreOffice, pra
-ver o que só o desenho mostra; essa imagem não tem tique. A pessoa é sempre o último
-elo.
+ver o que só o desenho mostra; essa imagem não tem tique. A imagem que não está em PNG
+aparece numa cópia em PNG, com o link pro original, porque a visualização do VSCode não
+mostra todo formato (EMF, WMF, TIFF): o GraphicsMagick faz a cópia sem mudar o tamanho da
+imagem, e a que ele não lê o LibreOffice desenha, com fundo branco e sem margem. A pessoa
+é sempre o último elo.
 
 **Quando usar.** Com as transcrições prontas e registradas, antes de escrever qualquer
 material, e de novo sempre que uma transcrição mudar.
 
+**Corrigir o texto das imagens.** O texto de uma imagem pode ser corrigido no próprio
+arquivo de conferência, entre as cercas (` ```` `), olhando a imagem ao lado; o de uma
+página de PDF se corrige na transcrição. A cerca é lida como no Markdown, de qualquer
+tamanho, porque um formatador do editor pode trocá-la ao salvar. Com `--levar-correcoes`,
+o script leva cada texto corrigido para a transcrição, na mesma imagem, antes de gerar o
+arquivo de novo, e diz cada imagem levada. O tique da pessoa fica, e o da IA sai, porque a
+IA ticou o texto antigo. Quando alguma correção não pode ser levada, o script mostra cada
+caso numa linha `ERRO`, com o motivo, e não grava nada. Sem essa opção, o arquivo é gerado
+de novo a partir das transcrições, e o que foi escrito nele, fora os tiques, se perde.
+
 **Como rodar.**
 
     python scripts/conferencia.py
+    python scripts/conferencia.py --levar-correcoes
 
 **O que aparece.** Quantas páginas há, quantas têm erro do script, quantas partes há pra
 ticar (as páginas de PDF e as imagens dos documentos HTML e das apresentações) e quantas
@@ -344,8 +365,9 @@ o trecho onde começa a diferença. O arquivo gerado (no modelo, `CONFERENCIA-CO
 na pasta das transcrições) fica melhor de ler na visualização do VSCode: abra o arquivo e
 aperte `Ctrl+Shift+V`.
 
-Precisa do Poppler quando alguma fonte é PDF ou apresentação, e do LibreOffice quando
-alguma fonte é apresentação.
+Precisa do Poppler quando alguma fonte é PDF ou apresentação, do LibreOffice quando
+alguma fonte é apresentação ou tem imagem num formato que o GraphicsMagick não lê, e do
+GraphicsMagick quando alguma imagem de documento HTML ou de apresentação não está em PNG.
 
 ## `base_externa.py` — monta a base do material de fora
 
@@ -501,7 +523,9 @@ Pra ticar, abra o arquivo no VSCode, no modo de texto (não na visualização), 
 espaço entre os colchetes por um `x`: `- [x] pessoa`. Salve. Quando o script gerar o
 arquivo de novo, o tique continua lá — a não ser que o conteúdo daquela parte tenha
 mudado depois do tique: aí o tique sai, e a parte diz isso, pra ninguém achar que o texto
-novo já foi conferido. Mudar a pasta do projeto de lugar não tira nenhum tique.
+novo já foi conferido. A exceção é a correção que a própria pessoa leva com o
+`conferencia.py` (ver a seção dele), que mantém o tique dela. Mudar a pasta do projeto de
+lugar não tira nenhum tique.
 
 ## `confere_cartoes.py` — confere cada cartão contra a prova dele
 
