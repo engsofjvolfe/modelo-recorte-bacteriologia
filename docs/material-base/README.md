@@ -1,18 +1,19 @@
 # Material de base (nunca publicado)
 
-Esta é a [pasta protegida](../../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula).
-Ela guarda o material de base deste projeto (ver a [origem do
-conteúdo](../../README.md#origem-do-conteúdo)): em `pptx/`, as apresentações das aulas,
+Esta é a [pasta protegida](../../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição).
+Ela guarda o material de base deste projeto (ver o [material de outras
+pessoas](../../NOTICE.md)): em `pptx/`, as apresentações das aulas,
 cada uma com a pasta das imagens dela ao lado; em `MURRAY-2022/`, a cópia do livro-texto
 digital, com as imagens dele; e, na subpasta `fontes-externas/`, as cópias do material de
 fora usado onde nem as aulas nem o livro-texto chegam (ver seção 4 da metodologia). Ela
 nunca muda de nome nem de lugar: é assim que a lista do que nunca vai pro GitHub e os
 scripts sabem sempre onde está o material de terceiros. É uma regra permanente, não uma
-pendência a resolver depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteudo.md)):
+pendência a resolver depois (ver a seção 1 da
+[metodologia](../../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição)):
 
 - **Nada daqui é publicado nem repassado**, em lugar nenhum: esse material não é de quem
   mantém o projeto. Se você guarda o projeto no GitHub, a [lista do que nunca vai pro
-  GitHub](../../NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto)
+  GitHub](../../NOTICE.md#como-o-projeto-trata-esse-material)
   já deixa de fora tudo o que está aqui dentro, menos este README.
 - A referência de cada material — as aulas, o livro-texto, as fontes da pesquisa e o de
   fora — sai do arquivo de fontes (`dados/fontes.json`) e vai pra lista de referências
@@ -24,10 +25,10 @@ pendência a resolver depois (ver seção 14 da [metodologia de conteúdo](../..
   ficam também:
   - a análise de cada aula, trecho por trecho, na subpasta `analise/`, de onde saem as
     contagens da [análise da matéria](../analise-da-materia.md);
-  - as [evidências da pesquisa](../../metodologia-de-conteudo.md#documente-a-análise), na
+  - as [evidências da pesquisa](../../metodologia-de-conteudo.md#a-análise-da-matéria), na
     subpasta `pesquisa/`;
   - a base de cada item, `[item]-fontes-externas.md`;
-  - a prova dos cartões de cada planilha, na subpasta `provas/` (ver seção 9 da
+  - a prova dos cartões de cada planilha, na subpasta `provas/` (ver seção 6 da
     metodologia);
   - os quatro arquivos de conferência, com as imagens deles na subpasta `imagens/`: o das
     transcrições contra a imagem de cada página, ou contra o texto e as imagens de um
@@ -44,7 +45,7 @@ pendência a resolver depois (ver seção 14 da [metodologia de conteúdo](../..
 - Quem diz onde fica cada coisa dentro desta pasta é o [mapa do
   projeto](../../metodologia-de-conteudo.md).
 - Antes de escrever qualquer coisa em `docs/material-gerado/`, leia este material
-  inteiro, sem ferramenta que corte ou resuma automaticamente o texto (ver seção 1 da
+  inteiro, sem ferramenta que corte ou resuma automaticamente o texto (ver seção 5 da
   metodologia).
 
 Este arquivo (`README.md`) é o único desta pasta que pode ser publicado — ele existe só

@@ -37,9 +37,8 @@ As outras duas ajudam a escrever a mensagem sempre do mesmo jeito:
 ## Como ativar
 
 Esta pasta já está no projeto da sua disciplina, porque ele é uma cópia do modelo
-inteiro. No GitHub, o projeto tem um
-[repositório](../metodologia-de-conteudo.md#15-as-etapas-do-projeto)
-próprio, sem o histórico do modelo. Abra o
+inteiro. No GitHub, o projeto tem um <dfn>repositório</dfn> próprio, sem o histórico do modelo: o
+lugar onde o GitHub guarda o projeto e o histórico das mudanças dele. Abra o
 [terminal](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) (o
 [README dos scripts](../scripts/README.md) mostra como) dentro da pasta do projeto e
 digite estas duas linhas, uma de cada vez, apertando Enter depois de cada uma:

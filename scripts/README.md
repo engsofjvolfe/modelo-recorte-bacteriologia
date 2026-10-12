@@ -2,8 +2,9 @@
 
 ## Por que o método usa scripts
 
-Um [script](../NOTICE.md#1-programas--gpl-30) trabalha do mesmo jeito, não importa quem
-rode nem quantas vezes. É por isso que o método confia neles pra parte mecânica: montar as
+Um <dfn>script</dfn> é um programa pequeno que faz sozinho um trabalho repetitivo — os
+arquivos `.py` desta pasta. Ele trabalha do mesmo jeito, não importa quem rode nem quantas
+vezes. É por isso que o método confia neles pra parte mecânica: montar as
 referências, as conferências e o baralho sem esquecer nada e sem inventar nada. O que um
 script não faz é julgar se um conteúdo está certo — isso é sempre de uma pessoa.
 
@@ -11,7 +12,7 @@ Nenhum script tem nada de disciplina dentro dele, nem caminho de pasta: o que mu
 projeto pra outro fica nos arquivos de dados do projeto. Os únicos nomes fixos são os do
 próprio motor — a pasta `scripts/`, tudo o que está dentro dela e o `projeto.json` — e
 eles nunca se mudam: é por esses nomes que os scripts se acham uns aos outros. A
-[pasta protegida](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula),
+[pasta protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição),
 `docs/material-base`, também nunca muda de nome nem de lugar (ver o `protege_fontes.py`,
 abaixo).
 
@@ -30,7 +31,7 @@ Você precisa de três coisas. Faça uma vez só, no seu computador.
    projeto da sua disciplina. Se um dia você mudar uma pasta de lugar, muda só nesse
    arquivo — nenhum script precisa ser mexido. A única que não muda é a pasta protegida,
    `docs/material-base`: é por ter nome e lugar fixos que a [lista do que nunca vai pro
-   GitHub](../NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto) a
+   GitHub](../NOTICE.md#como-o-projeto-trata-esse-material) a
    deixa sempre de fora. Os caminhos ficam em `caminhos`; entre eles, `imagens` é a pasta
    onde as conferências gravam as imagens que elas fazem; e `licenca_conteudo`, o arquivo da
    licença do conteúdo. Fora dos caminhos ficam: `prefixo_planilhas`, o começo do nome de
@@ -55,7 +56,7 @@ Você precisa de três coisas. Faça uma vez só, no seu computador.
      Windows, ou peça à IA que você usa o passo a passo pro seu computador;
    - pro `transcrever_html.py` e o `transcrever_pptx.py`, quando a fonte tem imagem, o
      <dfn>Tesseract</dfn>, que faz o
-     [OCR](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula), com os dados do
+     [OCR](../metodologia-de-conteudo.md#o-texto-das-figuras), com os dados do
      idioma da fonte: no Linux, `sudo apt install tesseract-ocr tesseract-ocr-por` (troque
      o `por` do fim pelo código do idioma: `spa` pro espanhol, `eng` pro inglês); no Mac,
      `brew install tesseract tesseract-lang`; no Windows, peça à IA o passo a passo;
@@ -96,7 +97,7 @@ como `dados/formato.json`, são os do modelo; no seu projeto, valem os do `proje
 
 | Quando | Script |
 | --- | --- |
-| Depois de responder o Descubra seu modelo | `validar_dados.py` |
+| Depois de gravar ou mudar um arquivo de dados | `validar_dados.py` |
 | Pra transcrever uma fonte em HTML que marca as páginas impressas, como um livro digital | `transcrever_html.py` |
 | Pra transcrever uma apresentação de slides em pptx | `transcrever_pptx.py` |
 | Assim que cada transcrição é criada | `registrar_fonte.py`, que já roda o `referencias.py` |
@@ -108,6 +109,69 @@ como `dados/formato.json`, são os do modelo; no seu projeto, valem os do `proje
 | Sempre que um documento define um termo novo, ou deixa de definir (e sozinho, com `--conferir`, antes de cada versão mandada ao GitHub, se a conferência das mensagens estiver ativa) | `glossario.py` |
 | Sempre que um documento entra no projeto, sai dele ou muda de lugar (e sozinho, antes de cada versão mandada ao GitHub, se a conferência das mensagens estiver ativa) | `confere_indice.py` |
 | Antes de publicar o projeto (e sozinho, antes de cada versão mandada ao GitHub, se a conferência das mensagens estiver ativa) | `protege_fontes.py` |
+
+## O arquivo de formato
+
+O arquivo de formato (no `projeto.json`, o caminho `formato`) guarda, como dados, as
+decisões do formato da disciplina que os scripts usam ([metodologia, seção
+3](../metodologia-de-conteudo.md#onde-o-formato-fica-gravado)). Ele tem só nomes e listas,
+sem explicação. Cada informação:
+
+| Informação | O que guarda |
+| --- | --- |
+| `versao_schema` | a versão do molde que o arquivo segue |
+| `curso`, `disciplina` e `nivel` | para quem é o material |
+| `idioma` | o idioma do material gerado, como `pt-BR`, o português do Brasil |
+| `itens` | os itens que se estudam um por um; lista vazia, se não houver |
+| `eixos` e os `subtopicos` de cada eixo | as linhas da ficha e as partes menores de cada uma; lista vazia de subtópicos, se o eixo não se divide |
+| `elos` | as partes do dicionário; lista vazia, se não houver |
+| `colunas_extras` | as colunas do cartão além de `pergunta`, `resposta` e `fonte` |
+
+Cada item, elo, eixo e subtópico entra na lista dele entre chaves, `{ }`, com um `id`, um
+código curto, e um `nome`; um eixo tem também a lista `subtopicos`. Uma vírgula separa
+cada informação da seguinte e cada entrada da seguinte. O id vai entre aspas, mesmo
+quando é um número. Os elos e os eixos são numerados na ordem, `"1"`, `"2"`...; um
+subtópico leva o número do eixo, um ponto e o número dele, `"1.1"`, `"1.2"`. Assim nenhum
+id se repete na grade, e é pelo id que o arquivo de base de cada item marca a cobertura
+de cada subtópico. O id do item aparece no nome dos arquivos dele. Cada coluna extra é só
+o nome dela, entre aspas. O arquivo aceita informações novas, e os scripts ignoram o que
+não conhecem; o campo novo segue a regra dos modelos de `modelo-dados/` ([metodologia,
+seção 8](../metodologia-de-conteudo.md#8-os-documentos-e-os-arquivos-do-projeto)).
+
+Um exemplo inventado, com dois itens, dois elos e dois eixos, o primeiro dividido em dois
+subtópicos e o segundo sem divisão:
+
+```json
+{
+  "versao_schema": 1,
+  "curso": "Curso de Exemplo",
+  "disciplina": "Disciplina de Exemplo",
+  "nivel": "revisão para a prova",
+  "idioma": "pt-BR",
+  "itens": [
+    { "id": "A1", "nome": "Primeiro item" },
+    { "id": "A2", "nome": "Segundo item" }
+  ],
+  "elos": [
+    { "id": "1", "nome": "Primeiro elo" },
+    { "id": "2", "nome": "Segundo elo" }
+  ],
+  "eixos": [
+    {
+      "id": "1",
+      "nome": "Primeiro eixo",
+      "subtopicos": [
+        { "id": "1.1", "nome": "Primeira parte do primeiro eixo" },
+        { "id": "1.2", "nome": "Segunda parte do primeiro eixo" }
+      ]
+    },
+    { "id": "2", "nome": "Segundo eixo", "subtopicos": [] }
+  ],
+  "colunas_extras": ["item", "tipo_pergunta"]
+}
+```
+
+O `validar_dados.py` confere o arquivo contra o molde dele.
 
 ## `validar_dados.py` — confere um arquivo de dados
 
@@ -242,7 +306,7 @@ quando alguma imagem está num formato que o Tesseract não lê.
 
 **Pra que serve.** Grava, no topo da transcrição (ou de outro documento gerado de uma
 fonte), de qual arquivo ela veio: a chave da fonte, o caminho do arquivo e a [impressão
-digital](../metodologia-de-conteudo.md#como-transcrever) dele. É assim que os outros
+digital](../metodologia-de-conteudo.md#a-transcrição) dele. É assim que os outros
 scripts sabem qual arquivo de fonte corresponde a qual transcrição: pelo registro, não
 pelo nome dos arquivos, que pode ter erro de digitação.
 
@@ -254,7 +318,7 @@ ela veio e a chave da fonte — a mesma chave da referência dela no `fontes.jso
     python scripts/registrar_fonte.py docs/material-base/gerados-ocr/AULA-1.md docs/material-base/AULA-1.pdf AULA-1
 
 Se o arquivo da fonte estiver fora da [pasta
-protegida](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula), o script mostra pra
+protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição), o script mostra pra
 onde ele iria e pergunta: digite `s` pra mover. Se ele não for, nada é registrado. Pra
 mover sem a pergunta — por exemplo, quando é a IA que roda o script e você já autorizou —,
 acrescente `--mover` no fim do comando.
@@ -273,7 +337,7 @@ autoria, título, local, editora, data, endereço, data de acesso. O script escr
 referência no padrão da ABNT (NBR 6023), coloca em ordem alfabética e grava o arquivo de
 referências do projeto (no modelo, `docs/REFERENCIAS.md`). Ninguém digita a referência à
 mão. Ele monta também a
-[chamada](../metodologia-de-conteudo.md#2-cite-cada-fonte-conforme-a-abnt) de cada fonte,
+[chamada](../metodologia-de-conteudo.md#2-as-citações-e-as-referências) de cada fonte,
 como `(Silva, 2020)`, pela norma de citações (NBR 10520). As [Regras da
 ABNT](../regras-abnt.md) explicam cada campo do `fontes.json` e o que cada norma pede.
 
@@ -373,7 +437,7 @@ GraphicsMagick quando alguma imagem de documento HTML ou de apresentação não 
 
 **Pra que serve.** Quando a aula não traz o que algum eixo pede pra um item, o fato vem de
 um material de fora — um guia oficial, um livro, uma página da internet. Este script monta
-a [base de trechos](../metodologia-de-conteudo.md#4-complete-a-aula-com-material-de-fora)
+a [base de trechos](../metodologia-de-conteudo.md#o-material-de-fora)
 desse material. Ninguém copia trecho à mão: o script recolhe todo o texto das páginas que
 você declarar, a IA decide o que cada frase é, e a pessoa confere.
 
@@ -488,7 +552,7 @@ Precisa do Poppler quando alguma fonte é PDF.
 ## `protege_fontes.py` — confere que nenhuma fonte pode ser publicada
 
 **Pra que serve.** O [material de terceiros](../metodologia-de-conteudo.md) fica numa
-pasta só, a [pasta protegida](../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula)
+pasta só, a [pasta protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição)
 (`docs/material-base`). Este script confere se alguma fonte registrada ficou fora dela e,
 se você usa o GitHub, se a lista do que nunca vai pra lá deixa a pasta de fora.
 
@@ -531,7 +595,7 @@ lugar não tira nenhum tique.
 
 **Pra que serve.** Cada cartão diz um fato com palavras próprias e traz, atrás, a citação
 da fonte, na coluna `fonte`. A
-[prova](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada) do cartão fica num
+[prova](../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho) do cartão fica num
 arquivo à parte, um por planilha, fora do GitHub, porque é texto de terceiros. Este script
 confere, cartão por cartão, se o trecho está mesmo no lugar que a citação diz — a página
 ou o slide da transcrição da aula, ou uma frase da base do material de fora — e monta a
@@ -599,7 +663,9 @@ Usa só o Python: não precisa instalar nada.
 um arquivo `.apkg`, que aparece em `anki-decks/`. No Anki, os cartões ficam numa pasta
 com o nome da disciplina, que vem do formato da disciplina, e dentro dela uma pasta pra
 cada planilha: planilhas e disciplinas diferentes nunca se misturam. As colunas
-`pergunta` e `resposta` são obrigatórias; qualquer outra vira campo do cartão, e a
+`pergunta` e `resposta` são obrigatórias; qualquer outra vira campo do cartão, com o nome
+da coluna sem o sublinhado e com cada palavra em maiúscula (`tipo_pergunta` vira
+`TipoPergunta`), e a
 `fonte`, com a citação do fato, aparece atrás do cartão, embaixo da resposta. Duas coisas
 você escolhe no `projeto.json`: em `colunas_ocultas`, as colunas que ficam guardadas no
 cartão sem aparecer (no modelo, `ordem`); e em `coluna_subdecks`, uma coluna que separa
@@ -630,9 +696,9 @@ Precisa da biblioteca `genanki`.
 ## `confere_indice.py` — confere que cada documento está no índice
 
 **Pra que serve.** O índice do projeto (no modelo, `INDICE.md`) lista os documentos na
-ordem de leitura, cada um com o link e uma linha dizendo o que ele é (ver a seção 13 da
+ordem de leitura, cada um com o link e uma linha dizendo o que ele é (ver a seção 8 da
 metodologia). Este script confere que cada [documento do
-projeto](../metodologia-de-conteudo.md#13-escreva-os-quatro-documentos-de-apresentação),
+projeto](../metodologia-de-conteudo.md#8-os-documentos-e-os-arquivos-do-projeto),
 menos o próprio índice, está nele uma vez só. Do índice contam os links pra arquivos
 `.md`; a parte do link depois de `#`, que aponta uma seção, não conta, e um link dentro de
 um trecho de código também não.
@@ -658,7 +724,7 @@ Usa só o Python e o git.
 ## `glossario.py` — monta o glossário
 
 **Pra que serve.** Um documento que define um termo marca o termo, no lugar da definição,
-com `<dfn>termo</dfn>` (ver a seção 13 da metodologia). Este script recolhe essas marcas
+com `<dfn>termo</dfn>` (ver a seção 8 da metodologia). Este script recolhe essas marcas
 de todos os documentos do projeto — os mesmos que o `confere_indice.py` confere —, fora
 dos trechos de código, e grava o glossário (no modelo, `GLOSSARIO.md`): cada termo numa
 linha, em ordem alfabética, sem contar acentos nem maiúsculas, com o link pra seção onde

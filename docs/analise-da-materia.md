@@ -1,14 +1,15 @@
 # Análise da matéria
 
-Este documento é a [análise da matéria](../metodologia-de-conteudo.md#documente-a-análise)
-de Bacteriologia: o estudo de onde sai o formato do material, feito antes de qualquer
-material de estudo. Ele junta as duas bases do formato. A primeira é a pesquisa: o que os
-cursos de Fisioterapia e de Enfermagem pedem da matéria, o que a ciência da aprendizagem
-mostra sobre como estudar cada tipo de conhecimento e o que o livro-texto diz da própria
-abordagem. A segunda é a análise das 15 aulas, slide por slide. As aulas são as do Prof.
-Kennio Ferreira Paim, do Departamento de Microbiologia, Imunologia e Parasitologia da
-UFTM. O livro-texto é a Microbiologia médica de Murray, Rosenthal e Pfaller (2022),
-chamado aqui de livro-texto (Murray).
+Este documento é a [análise da
+matéria](../metodologia-de-conteudo.md#a-análise-da-matéria) de Bacteriologia: o estudo de
+onde sai o formato do material, feito antes de qualquer material de estudo. Ele junta as
+duas bases do formato. A primeira é a pesquisa: o que os cursos de Fisioterapia e de
+Enfermagem pedem da matéria, o que a ciência da aprendizagem mostra sobre como estudar
+cada tipo de conhecimento e o que o livro-texto diz da própria abordagem. A segunda é a
+análise das 15 aulas, slide por slide. As aulas são as do Prof. Kennio Ferreira Paim, do
+Departamento de Microbiologia, Imunologia e Parasitologia da UFTM. O livro-texto é a
+Microbiologia médica de Murray, Rosenthal e Pfaller (2022), chamado aqui de livro-texto
+(Murray).
 
 As partes 1 a 5 trazem as bases. A parte 6 tira delas a forma de estudo, e cada decisão
 dela diz de que parte veio.
@@ -31,9 +32,9 @@ aprendizagem mostra sobre formas de estudo. A quarta diz o que o livro-texto (Mu
 autores dele dizem da abordagem. A parte 6 usa estes itens para decidir a forma de estudo.
 
 Cada item termina com a
-[chamada](../metodologia-de-conteudo.md#2-cite-cada-fonte-conforme-a-abnt) da fonte e,
-entre colchetes, os códigos dos trechos literais que o sustentam. Os trechos ficam nas
-[evidências da pesquisa](../metodologia-de-conteudo.md#documente-a-análise), em
+[chamada](../metodologia-de-conteudo.md#2-as-citações-e-as-referências) da fonte e, entre
+colchetes, os códigos dos trechos literais que o sustentam. Os trechos ficam nas
+[evidências da pesquisa](../metodologia-de-conteudo.md#a-análise-da-matéria), em
 `docs/material-base/gerados-ocr/pesquisa/`, que não se publicam por serem texto de
 terceiros. Cada código vale só dentro do próprio arquivo de evidências. Por isso, cada
 seção diz, logo abaixo do título, de que arquivo vêm os trechos dela.
@@ -495,8 +496,8 @@ e cada fato de cada slide (uma frase, um item de lista, uma linha de tabela, o t
 uma figura) virou uma linha da análise da aula, com o tipo de conhecimento dele, o
 [grupo](#4-os-grupos) e o [caminho](#5-os-caminhos). Cada uma dessas linhas é um
 <dfn>trecho das aulas</dfn>. Os tipos são os da [metodologia do
-projeto](../metodologia-de-conteudo.md#analise-cada-parte-do-material). As análises das
-aulas, trecho por trecho, ficam na pasta protegida, junto do texto do professor
+projeto](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material). As análises
+das aulas, trecho por trecho, ficam na pasta protegida, junto do texto do professor
 (`docs/material-base/gerados-ocr/analise/`). Aqui ficam as contagens: primeiro, os trechos
 de cada tipo em todas as aulas; depois, para cada aula, os trechos por tipo, por grupo e
 por caminho, e os tipos de cada slide. Os trechos de vírus e de fungo ficam fora das
@@ -3513,9 +3514,9 @@ síndrome por bactérias diferentes e repete (o mesmo conteúdo outra vez).
 ## 4. Os grupos
 
 Esta parte divide a matéria. Com todas as aulas lidas, o que se repete entre elas formou
-cinco [grupos](../metodologia-de-conteudo.md#analise-cada-parte-do-material), e a parte 6
-dá a cada grupo a sua abordagem. Cada trecho das aulas está em um grupo ou em mais de um.
-Os trechos de vírus e de fungo ficam fora dos grupos, pelo motivo dito na parte 2.
+cinco [grupos](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material), e a
+parte 6 dá a cada grupo a sua abordagem. Cada trecho das aulas está em um grupo ou em mais
+de um. Os trechos de vírus e de fungo ficam fora dos grupos, pelo motivo dito na parte 2.
 
 Trechos das aulas de cada grupo, por aula. Um trecho conta em cada grupo que tem.
 
@@ -3569,7 +3570,7 @@ outras aulas.
 ## 5. Os caminhos
 
 Esta parte diz por que
-[caminhos](../metodologia-de-conteudo.md#analise-cada-parte-do-material) a matéria se
+[caminhos](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material) a matéria se
 estuda: os dois sentidos em que bactéria e doença se ligam. A parte 6 dá a cada caminho o
 seu documento e a sua forma de estudo. Os trechos sem caminho (a maior parte, dos
 fundamentos; os outros, de marcos históricos, de prática em saúde e de fichas) se estudam
@@ -3626,8 +3627,8 @@ que molde tem cada documento. Cada decisão diz de onde veio: das pesquisas da [
 1](#1-a-pesquisa), quando elas tratam do tipo; quando não tratam, do livro-texto (Murray),
 onde ele fala do assunto, ou das aulas, pela ordem em que elas dão o assunto; quando
 nenhum deles fala, da definição do tipo na [metodologia do
-projeto](../metodologia-de-conteudo.md#analise-cada-parte-do-material); e, quando nem ela
-basta, de uma escolha do projeto, dita como tal.
+projeto](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material); e, quando nem
+ela basta, de uma escolha do projeto, dita como tal.
 
 ### O que o estudante precisa saber fazer
 
@@ -3643,10 +3644,9 @@ basta, de uma escolha do projeto, dita como tal.
 - Tudo o que o livro-texto diz sobre um trecho das aulas entra no material; o que ele diz
   sobre um assunto que nenhum slide traz fica fora, menos os fatores de risco de cada
   bactéria (abaixo). De onde veio: os slides dizem quais são os assuntos, não o conteúdo
-  de cada um, e o material de fora completa a aula onde ela não chega ([metodologia do
-  projeto, seção
-  4](../metodologia-de-conteudo.md#4-complete-a-aula-com-material-de-fora)); as pesquisas
-  decidem a forma, não acrescentam assunto.
+  de cada um, e o livro-texto completa cada um deles ([metodologia do projeto, seção
+  4](../metodologia-de-conteudo.md#4-o-que-entra-no-material)); as pesquisas decidem a
+  forma, não acrescentam assunto.
 
 ### Ensinar primeiro, treinar depois
 
@@ -3654,7 +3654,7 @@ basta, de uma escolha do projeto, dita como tal.
   prova treinam. Cada documento ensina como um professor a quem nunca viu a matéria: o que
   um termo nomeia vem antes do nome, o básico antes do que depende dele, e todo fato,
   inclusive o de uma figura, é escrito e explicado, nunca só apontado ([metodologia do
-  projeto, seção 5](../metodologia-de-conteudo.md#5-escreva-os-documentos-de-conteúdo)).
+  projeto, seção 5](../metodologia-de-conteudo.md#5-os-documentos-de-estudo)).
 - Os documentos não são outro livro. São 1.874 trechos das aulas, e cada um, com tudo o
   que o livro-texto diz dele, se escreve como um gatilho rápido de estudo: poucas frases,
   sem repetir o que outro documento já ensina e sem textos longos. Curto não quer dizer
@@ -3666,7 +3666,7 @@ basta, de uma escolha do projeto, dita como tal.
   (Murray; Rosenthal; Pfaller, 2022, p. vii; Murray; Rosenthal; Pfaller, [2025 ou 2026],
   resposta de Murray à 1.ª pergunta); e a metodologia do projeto pede o texto mais enxuto
   que dá sem perder o tom, a explicação nem o conteúdo ([seção
-  5](../metodologia-de-conteudo.md#5-escreva-os-documentos-de-conteúdo)).
+  5](../metodologia-de-conteudo.md#5-os-documentos-de-estudo)).
 - Treinar é tentar lembrar a resposta, não reler. Todo cartão pede que o estudante produza
   a resposta antes de ver o verso, e nenhum é de múltipla escolha. De onde veio: testar-se
   tem alta utilidade e deve tomar o lugar da releitura, e rende mais quando pede gerar a
@@ -3685,7 +3685,7 @@ basta, de uma escolha do projeto, dita como tal.
   retorno precisa trazer mais que a resposta certa, como uma explicação (Pan; Rickard,
   2018, p. 37 e 40); e cada cartão pergunta um fato só, com uma resposta curta
   ([metodologia do projeto, seção
-  9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
+  6](../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho)).
 - Os cartões se estudam como o Anki orienta: ele decide quando cada cartão volta e espaça
   as revisões. De onde veio: espaçar tem alta utilidade, e testar-se em sessões espaçadas
   rende mais que reestudar espaçado (Dunlosky; Rawson; Marsh; Nathan; Willingham, 2013, p.
@@ -3704,9 +3704,9 @@ Cada fato das aulas é um tipo de coisa para aprender: uma palavra e o que ela q
 uma divisão em grupos, uma comparação, uma sequência de passos. Esse é o tipo de
 conhecimento do fato, e cada tipo se aprende melhor de um jeito. As análises das aulas
 deram a cada trecho o seu tipo (parte 2), com os tipos definidos na [metodologia do
-projeto](../metodologia-de-conteudo.md#analise-cada-parte-do-material). Aqui fica, para
-cada tipo, o que ele é nesta matéria, como os textos de estudo o ensinam, que cartões de
-memorização (Anki) ele gera e de onde veio essa decisão. Os tipos vêm do que tem mais
+projeto](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material). Aqui fica,
+para cada tipo, o que ele é nesta matéria, como os textos de estudo o ensinam, que cartões
+de memorização (Anki) ele gera e de onde veio essa decisão. Os tipos vêm do que tem mais
 trechos para o que tem menos.
 
 Cada tipo se ensina e se treina do mesmo jeito em todos os documentos. Cada trecho das
@@ -3717,8 +3717,8 @@ o documento do assunto dele. Exceção, Exemplo recorrente, Figura e esquema e A
 história não têm parte própria: ficam junto do trecho ou do assunto que acompanham.
 
 - **[Item com os mesmos tipos de
-  fato](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (787 trechos das
-  aulas)
+  fato](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (787 trechos
+  das aulas)
   - **O que é:** várias coisas da mesma espécie que se aprendem respondendo sempre às
     mesmas perguntas. Para cada bactéria: onde vive, como se transmite, que doença causa,
     como se trata. Por exemplo, onde vive o Staphylococcus epidermidis: na pele e nas
@@ -3741,8 +3741,8 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     Undergraduate Curriculum Guidelines Committee, 2018, supl., p. 2-3), e o livro-texto
     põe quem está em risco entre as perguntas a fazer sobre cada infecção (Murray;
     Rosenthal; Pfaller, 2022, p. vii-viii).
-- **[Classificação](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (382
-  trechos das aulas)
+- **[Classificação](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)**
+  (382 trechos das aulas)
   - **O que é:** separar coisas em grupos por um critério. Por exemplo, os cocos
     Gram-positivos se dividem em três famílias: Micrococcaceae, Streptococcaceae e
     Peptococcaceae (aula 11-12, slide 2).
@@ -3754,10 +3754,10 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
   - **De onde veio:** estudos mostram que quem treinou com testes classificou aves novas
     com mais acerto do que quem só reestudou (Dunlosky; Rawson; Marsh; Nathan; Willingham,
     2013, p. 34); e a metodologia do projeto faz de uma lista cartões menores, um por
-    elemento ([seção 9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
+    elemento ([seção 6](../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho)).
 - **[Relação nos dois
-  sentidos](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (314 trechos
-  das aulas)
+  sentidos](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (314
+  trechos das aulas)
   - **O que é:** uma ligação entre duas coisas que pode ser pedida de um lado ou do outro.
     Por exemplo, a pele e o Staphylococcus epidermidis, que predomina nela (aula 5, slide
     10).
@@ -3770,7 +3770,7 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     Rickard, 2018, p. 19 e 32; Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel;
     Metcalfe, 2007, p. 20).
 - **[Conceito e
-  vocabulário](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (270
+  vocabulário](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (270
   trechos das aulas)
   - **O que é:** uma palavra da matéria e o que ela quer dizer. Por exemplo,
     microbiologia, a "ciência que estuda os microrganismos e suas atividades" (aula 1,
@@ -3785,8 +3785,9 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     Koedinger; McDaniel; Metcalfe, 2007, p. 17); e que treinar do termo para a definição
     pouco ajuda a responder da definição para o termo: treinar "WHAT is the ability to
     see?" pouco ajuda a responder "Vision is WHAT?" (Pan; Rickard, 2018, p. 19 e 32).
-- **[Número com sentido](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
-  (223 trechos das aulas)
+- **[Número com
+  sentido](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (223
+  trechos das aulas)
   - **O que é:** um número que se aprende junto com o que ele quer dizer: uma quantidade,
     um limite, um tempo, uma dose. Por exemplo, as infecções respiratórias são de 15% a
     18% das infecções relacionadas à assistência à saúde, as IRAS (aula 15, slide 22).
@@ -3796,8 +3797,8 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     respiratórias?", e, quando há razão, outro que pede a razão.
   - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
     definição dele na metodologia do projeto, uma quantidade com a razão dela.
-- **[Causa e efeito](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (212
-  trechos das aulas)
+- **[Causa e efeito](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)**
+  (212 trechos das aulas)
   - **O que é:** um fato que explica outro: o porquê. Por exemplo, as IRAS aumentam o
     tempo de internação (aula 15, slide 3).
   - **Como os textos ensinam:** como explicação, a causa antes do efeito.
@@ -3811,7 +3812,7 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     Willingham, 2013, p. 9), daí o porquê depois do fato. O livro-texto diz que a matéria
     tem uma lógica: a doença depende de como o microrganismo interage com o hospedeiro
     (Murray; Rosenthal; Pfaller, 2022, p. vii).
-- **[Contraste](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (196
+- **[Contraste](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (196
   trechos das aulas)
   - **O que é:** duas ou mais coisas comparadas nos mesmos pontos. Por exemplo, infecção e
     doença: a infecção pode existir sem doença que se perceba (aula 6, slide 4).
@@ -3823,8 +3824,9 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     explicações profundas (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel; Metcalfe,
     2007, p. 29), e o treino transfere mais para perguntas novas quando pede distinguir
     conceitos (Pan; Rickard, 2018, p. 39-40).
-- **[Figura e esquema](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
-  (182 trechos das aulas)
+- **[Figura e
+  esquema](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (182
+  trechos das aulas)
   - **O que é:** o que está onde num desenho e como as partes dele se ligam. Por exemplo,
     o esquema da superfície da Neisseria meningitidis, com cápsula, pili e LPS (aula 13,
     slide 10).
@@ -3836,12 +3838,13 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     verso, que ficam vazios e escondidos até a pessoa pôr uma imagem, no lado que a
     pergunta pedir, pela planilha ou direto no Anki. A imagem posta direto no Anki se
     perde quando o baralho é gerado de novo e importado ([metodologia do projeto, seção
-    9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
+    6](../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho)).
   - **De onde veio:** o material sem imagens e os campos de imagem são escolha do projeto;
     e estudos mostram que testar-se também serve a material visual ou espacial (Dunlosky;
     Rawson; Marsh; Nathan; Willingham, 2013, p. 33).
-- **[Exemplo recorrente](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
-  (153 trechos das aulas)
+- **[Exemplo
+  recorrente](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (153
+  trechos das aulas)
   - **O que é:** um exemplo que volta em várias aulas, mostrando cada vez uma coisa. Por
     exemplo, o Clostridium difficile aparece como infecção oportunista (aula 5, slide 20)
     e volta pelos esporos que sobrevivem meses nas superfícies (aula 15, slide 30).
@@ -3852,8 +3855,8 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     esporos do Clostridium difficile sobrevivem nas superfícies?".
   - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
     definição dele na metodologia do projeto.
-- **[Parte e função](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (141
-  trechos das aulas)
+- **[Parte e função](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)**
+  (141 trechos das aulas)
   - **O que é:** uma parte da bactéria, o que ela faz e o que isso muda para a bactéria ou
     para a doença. Por exemplo, a cápsula, que protege a bactéria contra a fagocitose
     (aula 14, slide 16).
@@ -3864,8 +3867,9 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     significa.
   - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
     definição dele na metodologia do projeto.
-- **[Aplicação na prática](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
-  (114 trechos das aulas)
+- **[Aplicação na
+  prática](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (114
+  trechos das aulas)
   - **O que é:** uma situação da área da saúde que pede uma decisão tirada da matéria. Por
     exemplo, o escarro para o diagnóstico da tuberculose se coleta em frasco de boca larga
     (aula 16, slide 31).
@@ -3881,8 +3885,9 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     art. 2º, p. 1; Brasil, 2023b, art. 2º, p. 1); e o livro-texto propõe criar um paciente
     para cada infecção e comparar os pacientes (Murray; Rosenthal; Pfaller, 2022, p.
     vii-viii).
-- **[Processo em ordem](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
-  (108 trechos das aulas)
+- **[Processo em
+  ordem](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (108 trechos
+  das aulas)
   - **O que é:** etapas em sequência, e o que acontece quando uma falha. Por exemplo, a
     infecção urinária: a bactéria coloniza a uretra, sobe para a bexiga, depois para os
     rins, e chega ao sangue (aula 15, slide 25).
@@ -3895,9 +3900,9 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     texto deve descrever os passos (Pashler; Bain; Bottge; Graesser; Koedinger; McDaniel;
     Metcalfe, 2007, p. 13 e 14); e a metodologia do projeto faz de uma lista em ordem um
     cartão por posição ([seção
-    9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)).
-- **[Marco histórico](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (51
-  trechos das aulas)
+    6](../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho)).
+- **[Marco histórico](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)**
+  (51 trechos das aulas)
   - **O que é:** um fato da história da matéria: quem descobriu o quê, e quando. Por
     exemplo, Robert Koch descreveu o agente da tuberculose em 1882 (aula 1, slide 16).
   - **Como os textos ensinam:** sempre com o que ele mudou, quando a aula ou o livro-texto
@@ -3906,8 +3911,9 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     agente da tuberculose?".
   - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; os cartões simples
     são escolha do projeto.
-- **[História em cadeia](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
-  (17 trechos das aulas)
+- **[História em
+  cadeia](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (17 trechos
+  das aulas)
   - **O que é:** fatos em sequência em que cada um causa o seguinte; é isso que a separa
     do Processo em ordem. Por exemplo, a gonorreia: contato sexual, aderência à mucosa,
     entrada nas células e multiplicação, destruição do tecido, disseminação (aula 13,
@@ -3921,8 +3927,8 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
   - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; o livro-texto diz que
     a matéria não é só memória, há uma lógica nela, e que a doença depende de como o
     microrganismo interage com o hospedeiro (Murray; Rosenthal; Pfaller, 2022, p. vii).
-- **[Exceção](../metodologia-de-conteudo.md#analise-cada-parte-do-material)** (11 trechos
-  das aulas)
+- **[Exceção](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (11
+  trechos das aulas)
   - **O que é:** o caso que foge de uma regra, e por quê. Por exemplo, o Mycoplasma
     pneumoniae, uma bactéria sem parede celular (aula 2, slide 11).
   - **Como os textos ensinam:** logo depois da regra que ele quebra, com o porquê, quando
@@ -3931,8 +3937,9 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
     tem parede celular?", e outro que pede o porquê.
   - **De onde veio:** as pesquisas da parte 1 não tratam deste tipo; a forma segue a
     definição dele na metodologia do projeto.
-- **[Analogia e história](../metodologia-de-conteudo.md#analise-cada-parte-do-material)**
-  (3 trechos das aulas)
+- **[Analogia e
+  história](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (3
+  trechos das aulas)
   - **O que é:** uma comparação ou um episódio que a aula usa para ajudar a lembrar um
     fato. Por exemplo, Robert Koch "cresceu sonhando em ser médico de navio" (aula 1,
     slide 16).
@@ -3977,17 +3984,15 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
 
 | Documento | O que ensina |
 | --- | --- |
-| [Teoria fundamental](../MANUAL.md#nível-2--de-onde-isso-veio), por tema | os fundamentos (grupo 2) e a história geral da matéria |
-| [Ficha](../MANUAL.md#nível-2--de-onde-isso-veio) e [dicionário](../MANUAL.md#nível-2--de-onde-isso-veio) de cada bactéria | as bactérias (grupo 1), no caminho da bactéria para a doença |
+| [Teoria fundamental](../MANUAL.md#nível-2--os-documentos-de-estudo), por tema | os fundamentos (grupo 2) e a história geral da matéria |
+| [Ficha](../MANUAL.md#nível-2--os-documentos-de-estudo) e [dicionário](../MANUAL.md#nível-2--os-documentos-de-estudo) de cada bactéria | as bactérias (grupo 1), no caminho da bactéria para a doença |
 | Ficha de cada família | as famílias de itens (grupo 3), cada uma com os seus eixos |
 | <dfn>Quadros e casos</dfn> | o caminho do quadro para as bactérias e a prática em saúde (grupo 4) |
 | <dfn>Perguntas de prova</dfn>, uma por aula | a resposta escrita inteira, para todos os trechos da aula |
 
-Os quadros e casos e as perguntas de prova têm função nova: nenhum dos três documentos da
-[seção 5](../metodologia-de-conteudo.md#5-escreva-os-documentos-de-conteúdo) da
-metodologia do projeto ensina a partir de um quadro clínico nem treina a resposta escrita
-([seção
-8](../metodologia-de-conteudo.md#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova)).
+Os quadros e casos e as perguntas de prova têm função própria: a teoria fundamental, a
+ficha e o dicionário não ensinam a partir de um quadro clínico nem treinam a resposta
+escrita.
 
 ### As perguntas de prova
 
@@ -4176,7 +4181,7 @@ seus tipos:
 **Cartões.** A frente traz a pergunta e um campo de imagem; o verso, a resposta, o porquê,
 a fonte e outro campo de imagem. A pergunta, a resposta e a fonte são as colunas que a
 metodologia do projeto pede ([seção
-9](../metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada)), o porquê é o do verso
+6](../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho)), o porquê é o do verso
 ([Ensinar primeiro, treinar depois](#ensinar-primeiro-treinar-depois)), e os campos de
 imagem são os de Figura e esquema, acima. Cada um dos 1.874 trechos gera ao menos um
 cartão, como diz a forma do tipo dele, e os cartões novos entram no baralho na ordem da
@@ -4184,7 +4189,6 @@ sequência das partes.
 
 ---
 
-_Voltar ao [README.md](../README.md)_
+_Voltar ao [índice](../INDICE.md)_
 
-*Este documento está licenciado sob [CC BY-NC-SA 4.0](../LICENSE-CONTENT.txt). Ver
-[NOTICE.md](../NOTICE.md) para detalhes.*
+*Este documento está licenciado sob [CC BY-NC-SA 4.0](../LICENSE-CONTENT.txt).*

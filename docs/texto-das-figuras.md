@@ -1,8 +1,8 @@
 # Texto das figuras
 
 Como o texto de dentro das figuras foi escrito na transcrição (quem lê e quem confere
-esse texto está em "Como este material foi feito", no [README](../README.md)). Vale
-para as figuras revisadas, as que o README diz que a IA confere.
+esse texto está em [O texto das figuras](../metodologia-de-conteudo.md#o-texto-das-figuras),
+na metodologia). Vale para as figuras revisadas, as que a metodologia diz que a IA confere.
 
 ## Como o texto foi escrito
 
@@ -35,7 +35,6 @@ para as figuras revisadas, as que o README diz que a IA confere.
 
 ---
 
-_Voltar ao [README.md](../README.md)_
+_Voltar ao [índice](../INDICE.md)_
 
-*Este documento está licenciado sob [CC BY-NC-SA 4.0](../LICENSE-CONTENT.txt). Ver
-[NOTICE.md](../NOTICE.md) para detalhes.*
+*Este documento está licenciado sob [CC BY-NC-SA 4.0](../LICENSE-CONTENT.txt).*

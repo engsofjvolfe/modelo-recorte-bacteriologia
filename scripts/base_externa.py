@@ -385,7 +385,7 @@ def main(argv=None):
     projeto = acha_projeto(a.projeto)
     if not projeto.caminho("formato").exists():
         raise SystemExit(f"o formato da disciplina não existe: {projeto.caminho('formato')} -- "
-                         "responda o Descubra seu modelo e grave as respostas nele")
+                         "grave nele o formato da disciplina; o README dos scripts diz o que vai em cada campo")
     formato, erros = le_formato(projeto)
     if erros:
         # a grade, os itens e os titulos da base saem do formato: com erro nele, nada e

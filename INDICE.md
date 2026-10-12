@@ -1,37 +1,37 @@
 # Índice — Núcleo de Microbiologia: bacteriologia
 
-Os documentos do projeto na ordem de leitura, cada um com o que ele é.
+Os documentos do projeto na ordem de leitura que melhor o explica, para quem quiser lê-lo
+inteiro, cada um com o que ele é.
 
 ## O projeto
 
 1. [Núcleo de Microbiologia: bacteriologia](README.md) — o que é o projeto, o aviso sobre
-   o recorte, de onde vem o material e as licenças.
+   o recorte e as licenças.
 2. [Glossário](GLOSSARIO.md) — as palavras que os documentos do projeto definem, cada uma
    com o link para o lugar onde é definida.
 3. [Manual de Uso](MANUAL.md) — como estudar com o material, sem detalhe técnico.
-4. [Avisos de licença](NOTICE.md) — que licença cobre cada tipo de arquivo.
+4. [Material de outras pessoas](NOTICE.md) — de quem são as fontes do conteúdo e como o
+   projeto trata esse material.
 
-## O método
+## Como o material é feito
 
-5. [Metodologia de Conteúdo](metodologia-de-conteudo.md) — o método deste projeto, etapa
-   por etapa, da aula original ao cartão do Anki.
-6. [Trabalhar com uma IA](trabalhar-com-ia.md) — o que pedir à IA em cada etapa deste
-   projeto e o que conferir depois.
+5. [Metodologia de Conteúdo](metodologia-de-conteudo.md) — como o conteúdo deste projeto é
+   feito, da aula original ao cartão do Anki, e como cada parte é conferida.
+6. [Trabalhar com uma IA](trabalhar-com-ia.md) — o diário do projeto: os passos gerais que
+   ele percorreu com a ajuda de uma IA.
 7. [Regras da ABNT para citar e referenciar](regras-abnt.md) — como citar uma fonte no
    texto e montar a referência dela.
-8. [Descubra o formato da disciplina](DESCUBRA-SEU-MODELO.md) — as perguntas que decidem
-   o formato do material e a resposta deste projeto a cada uma.
-9. [Scripts](scripts/README.md) — o que faz cada programa do projeto e como rodar.
-10. [Conferência das mensagens e proteção das fontes](.githooks/README.md) — o que é
-    conferido antes de cada versão gravada no git.
+8. [Scripts](scripts/README.md) — o que faz cada programa do projeto e como rodar.
+9. [Conferência das mensagens e proteção das fontes](.githooks/README.md) — o que é
+   conferido antes de cada versão gravada no git.
 
-## Esta disciplina
+## As fontes e a matéria
 
-11. [Material de base](docs/material-base/README.md) — a pasta das aulas e do livro, que
+10. [Material de base](docs/material-base/README.md) — a pasta das aulas e do livro, que
     nunca é publicada.
-12. [Texto das figuras](docs/texto-das-figuras.md) — como o texto de dentro das figuras
+11. [Texto das figuras](docs/texto-das-figuras.md) — como o texto de dentro das figuras
     foi escrito na transcrição.
-13. [Análise da matéria](docs/analise-da-materia.md) — a pesquisa sobre como os cursos
+12. [Análise da matéria](docs/analise-da-materia.md) — a pesquisa sobre como os cursos
     pedem a matéria, a análise de cada aula e a forma de estudo de cada tipo de
     conhecimento.
 
