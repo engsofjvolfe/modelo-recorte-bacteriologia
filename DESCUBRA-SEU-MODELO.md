@@ -1,65 +1,61 @@
-# Descubra o formato da sua disciplina
+# Descubra o formato da disciplina
 
-Este documento ajuda a decidir a parte do formato de uma disciplina nova que pede uma
-grade fixa. O formato nasce da análise da matéria (ver `metodologia-de-conteudo.md`, seção
-3): que tipos de conhecimento cada parte do material traz e que forma de estudo serve a
-cada um. Dois desses tipos pedem uma grade: pra cada assunto que se estuda um por um (os
+Este documento traz as perguntas que decidem a parte do formato que pede uma grade fixa, e
+a resposta deste projeto a cada uma. O formato nasce da análise da matéria (ver
+`metodologia-de-conteudo.md`, seção 3): que tipos de conhecimento cada aula traz e que
+forma de estudo serve a cada um. Dois desses tipos pedem uma grade: pra cada assunto que
+se estuda um por um (os
 [itens](metodologia-de-conteudo.md#analise-cada-parte-do-material)), o método monta dois
 documentos, o [dicionário de gatilhos](MANUAL.md#nível-2--de-onde-isso-veio), dividido em
 [elos](metodologia-de-conteudo.md#b-dicionário-de-gatilhos), e a [ficha
 determinística](MANUAL.md#nível-2--de-onde-isso-veio), dividida em
 [eixos](metodologia-de-conteudo.md#c-ficha-determinística). Os cartões de pergunta saem de
 uma [planilha](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas), com uma
-coluna pra cada informação do cartão. Aqui você decide quantos elos o dicionário tem,
-quantos eixos a ficha tem e que colunas a planilha precisa. Nenhum desses números é
-fornecido aqui — cada disciplina responde essas perguntas pra si mesma, a partir do
-próprio material.
-
-## O que é estável entre disciplinas
-
-- Existe conteúdo que é teoria geral, sem ligação com um item específico — isso é
-  sempre um documento próprio (ver `metodologia-de-conteudo.md`, seção 5A).
-- Quando existe um item que se repete e que alguém precisa aprender individualmente,
-  contar esse item de dois jeitos — uma história em cadeia, e uma tabela direta com os
-  mesmos fatos — permite estudar de duas formas sem duplicar o trabalho de escrever.
-- Os outros tipos de conhecimento que a análise da matéria acha ganham as formas de estudo
-  que ela escolheu (ver `metodologia-de-conteudo.md`, seções 3 e 8).
-
-O resto (quantos elos, quantos eixos, que nomes, se existem itens repetidos ou não) é
-decisão de cada disciplina.
+coluna pra cada informação do cartão. Cada resposta abaixo aponta a parte da [análise da
+matéria](docs/analise-da-materia.md) que a sustenta; é lá que está o porquê.
 
 ## Antes das perguntas: para quem é o material
 
-Diga o curso, a disciplina e o nível de estudo de que você precisa (uma revisão pra
-prova, uma base pra disciplinas seguintes, um aprofundamento). Tudo o que vem depois
-depende disso: o mesmo assunto pede itens, eixos e profundidade diferentes em cursos e
-níveis diferentes.
+O curso, a disciplina e o nível de estudo decidem o resto: o mesmo assunto pede itens,
+eixos e profundidade diferentes em cursos e níveis diferentes.
 
-As perguntas abaixo se respondem com a análise da matéria na mão: é nela que estão a
-pesquisa sobre como a matéria é estudada e cobrada nas áreas e o que cada parte do
-material traz. A ementa ou o plano de ensino de uma oferta da disciplina mostra o que
-aquela oferta cobre, não como a matéria é estudada nas áreas. Você pode responder com
-ajuda de uma IA: passe a ela a análise da matéria e o material de aula e peça que proponha
-cada resposta dizendo por que ela cabe, ou não cabe, nesse curso e nesse nível. A decisão
-é sua; a justificativa fica na análise da matéria, e no arquivo de formato vai só a
-resposta.
+**Neste projeto:** Microbiologia, no recorte de bacteriologia, pros cursos da área da
+saúde que o [README](README.md#o-que-é-isto) nomeia. Como cada curso pede a matéria, e em
+que nível, sai da pesquisa ([análise da matéria, parte
+1](docs/analise-da-materia.md#1-a-pesquisa)); o que o estudante precisa saber fazer está
+em [O que o estudante precisa saber
+fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer).
 
 ## Perguntas para decidir o formato
 
-1. **Existem itens que se repetem no seu material** — coisas que alguém aprende uma por
-   uma? Se não existem, sua disciplina não precisa de dicionário nem de ficha: o que ela
+1. **Existem itens que se repetem no material** — coisas que alguém aprende uma por
+   uma? Se não existem, a disciplina não precisa de dicionário nem de ficha: o que ela
    traz vai pra teoria fundamental e pras formas de estudo que a análise escolheu.
+
+   **Neste projeto:** sim, as bactérias e os itens de cada família dos fundamentos
+   ([Os grupos](docs/analise-da-materia.md#4-os-grupos)). O resto vai pros outros
+   documentos ([Os documentos](docs/analise-da-materia.md#os-documentos)).
 2. **Se existem itens: quais fatos diferentes alguém precisa saber pra conhecer um item
-   por completo?** Liste com suas próprias palavras, a partir do seu material — não a
-   partir do que outra disciplina já usou. Esses são os eixos da ficha. Se um eixo se
-   divide em partes menores que todo item também tem, liste essas partes: são os
-   <dfn>subtópicos</dfn> dele.
+   por completo?** Esses são os eixos da ficha. Se um eixo se divide em partes menores que
+   todo item também tem, essas partes são os <dfn>subtópicos</dfn> dele.
+
+   **Neste projeto:** os eixos da ficha de cada bactéria e os de cada família estão em
+   [Os moldes](docs/analise-da-materia.md#os-moldes).
 3. **Existe uma cadeia de causa e efeito natural conectando esses fatos**? Se sim,
-   quantos passos ela tem, de verdade, no seu material?
-4. **Que colunas uma pergunta de revisão sobre um item precisa?** Escreva os nomes você
-   mesmo, a partir do que o item efetivamente é.
-5. **Seu material precisa de imagem, áudio ou outro anexo por item?** Se precisar, isso
-   ainda não tem um formato pronto neste modelo — precisa ser desenhado.
+   quantos passos ela tem, de verdade, no material?
+
+   **Neste projeto:** sim, nas bactérias: os elos do dicionário estão em [Os
+   moldes](docs/analise-da-materia.md#os-moldes).
+4. **Que colunas uma pergunta de revisão sobre um item precisa?**
+
+   **Neste projeto:** as do cartão em [Os moldes](docs/analise-da-materia.md#os-moldes),
+   no parágrafo dos cartões.
+5. **O material precisa de imagem, áudio ou outro anexo por item?**
+
+   **Neste projeto:** de imagem, só nos cartões: dois campos, um na frente e um no verso,
+   vazios até a pessoa pôr uma imagem; os documentos ensinam as figuras só em palavras
+   ([A forma de cada tipo](docs/analise-da-materia.md#a-forma-de-cada-tipo), em Figura e
+   esquema).
 
 ## Depois de responder
 
@@ -127,9 +123,9 @@ subtópicos e o segundo sem divisão:
 Depois, confira se o arquivo ficou bem preenchido com o script `validar_dados.py`: o
 [README dos scripts](scripts/README.md) diz, passo a passo, como rodar. É desse arquivo
 que sai a grade do que cada item precisa ter, antes de qualquer material ser escrito. Se
-a sua disciplina precisar de uma informação que o formato ainda não tem, acrescente: o
-arquivo aceita informações novas, e os scripts ignoram o que não conhecem. Registre a
-mudança na metodologia (seção 17), pra que o formato cresça no modelo também.
+o projeto precisar de uma informação que o formato não tem, acrescente: o arquivo aceita
+informações novas, e os scripts ignoram o que não conhecem. O campo novo segue a regra
+dos modelos de `modelo-dados/` (metodologia, seção 14).
 
 O script que monta os cartões do Anki (`montar_deck.py`) só exige duas colunas com nome
 certo na planilha: uma chamada `pergunta` e outra `resposta`. A metodologia pede mais

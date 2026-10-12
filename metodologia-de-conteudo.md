@@ -1,35 +1,29 @@
 # Metodologia de Conteúdo
 
-Guia prático de como montar e auditar o conteúdo de uma disciplina neste tipo de
-projeto: dado que você tem material de aula de uma disciplina disponível, o que fazer
-com ele pra chegar num material de estudo estruturado, de um jeito consistente entre
-disciplinas diferentes.
-
-Este documento é escrito sem amarrar a nenhuma disciplina específica — onde um exemplo
-ajuda a entender uma instrução, ele é descrito de forma abstrata, não com conteúdo real
-de nenhuma matéria.
-
-Siga isto por padrão, mas corrija quando sua disciplina expuser um caso que não está
-coberto aqui. Quando isso acontecer, atualize este documento também, não só o conteúdo
-da sua disciplina.
+O método deste projeto: como as aulas de Bacteriologia e o livro-texto que as completa
+(ver a [origem do conteúdo](README.md#origem-do-conteúdo)) viram material de estudo, da
+aula original ao cartão do Anki, e como esse trabalho se confere. Este documento diz o
+que se faz em cada etapa. O porquê de cada decisão sobre a forma do material — para quem
+ele é, que documentos ele tem e o molde de cada um — está na [análise da
+matéria](docs/analise-da-materia.md), e cada seção daqui aponta a parte dela que a
+cumpre.
 
 Algumas partes do trabalho são feitas por [scripts](NOTICE.md#1-programas--gpl-30), que
-vêm prontos no modelo. Quando este guia diz pra rodar um deles — um comando como
+ficam na pasta `scripts/`. Quando este guia diz pra rodar um deles — um comando como
 `python scripts/conferencia.py` —, o [README dos scripts](scripts/README.md) explica,
 passo a passo, como abrir o
 [terminal](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) e o que aparece
 na tela. Você não precisa saber programar.
 
-Os caminhos de pasta e de arquivo citados aqui são os do modelo. Em cada projeto, quem diz
-onde fica cada coisa é o <dfn>mapa do projeto</dfn>, o arquivo `projeto.json`, na pasta
-principal dele: é dali que os scripts tiram todo caminho.
+Quem diz onde fica cada coisa é o <dfn>mapa do projeto</dfn>, o arquivo `projeto.json`,
+na pasta principal: é dali que os scripts tiram todo caminho.
 
-Uma palavra que aparece muito aqui: <dfn>publicar</dfn>. O projeto de uma disciplina pode
-ser publicado — no <dfn>GitHub</dfn>, um site que guarda projetos na internet e o
-histórico de cada mudança deles, ou em qualquer outro lugar. O <dfn>material de
-terceiros</dfn> (as aulas, a transcrição delas, as evidências da pesquisa, as cópias do
-material de fora, a base de trechos dele, a prova dos cartões e tudo o que traz texto
-deles) nunca é publicado; o resto pode ser.
+Uma palavra que aparece muito aqui: <dfn>publicar</dfn>. O projeto pode ser publicado —
+no <dfn>GitHub</dfn>, um site que guarda projetos na internet e o histórico de cada
+mudança deles, ou em qualquer outro lugar. O <dfn>material de terceiros</dfn> (as aulas, o
+livro-texto, a transcrição deles, as evidências da pesquisa, as cópias do material de
+fora, a base de trechos dele, a prova dos cartões e tudo o que traz texto deles) nunca é
+publicado; o resto pode ser.
 
 As seções seguem a ordem do trabalho, que é uma cadeia: cada fonte vira uma transcrição
 conferida e uma referência (seções 1 e 2); da leitura delas e de uma pesquisa sobre a
@@ -53,6 +47,11 @@ como a pasta funciona. Quem olha o projeto de fora normalmente não vai ver o co
 nem saber o que tem lá — ela existe só no seu computador, pra você, enquanto organiza
 aquela disciplina. O `protege_fontes.py` confere que nenhuma fonte registrada ficou fora
 dela.
+
+Neste projeto, as aulas são apresentações de slides em pptx, e o livro-texto é lido na
+versão digital, um documento HTML que marca as páginas impressas. As duas transcrições
+saem dos próprios arquivos, por script, como dizem, em *Como transcrever*, os parágrafos
+do documento HTML e da apresentação em pptx.
 
 Faça uma transcrição integral e literal desse material, usando OCR se ele estiver
 digitalizado como imagem ou PDF escaneado (<dfn>OCR</dfn> é uma tecnologia que lê o texto
@@ -170,9 +169,8 @@ pede — sai pronta na conferência das referências; o que cada norma pede, ite
 o que cabe ao script, aos dados e a quem escreve, está nas [Regras da
 ABNT](regras-abnt.md).
 
-As referências completas de todas as fontes citadas — as aulas, as fontes da pesquisa e
-o material de fora —
-ficam num documento só, `docs/REFERENCIAS.md`, como a lista de referências do fim de um
+As referências completas de todas as fontes citadas — as aulas, o livro-texto, as fontes
+da pesquisa e o material de fora — ficam num documento só, `docs/REFERENCIAS.md`, como a lista de referências do fim de um
 trabalho: em ordem alfabética, segundo a norma de referências (ABNT NBR 6023), e nada
 além delas. Ele não diz onde cada fonte foi usada, porque isso é o papel da citação em
 cada documento, nem onde a cópia está guardada. Toda citação tem a referência ali, e
@@ -191,7 +189,7 @@ Ninguém escreve esse documento à mão. Os dados de cada fonte — autoria, tí
 editora, data, endereço, data de acesso, com uma chave curta — ficam no arquivo de
 fontes, `dados/fontes.json` (copiado de `modelo-dados/fontes.json`), e `python scripts/referencias.py` monta cada referência pela norma, em ordem alfabética, e grava o
 `docs/REFERENCIAS.md`. O mês de cada data sai abreviado como manda a tabela do Anexo A da
-ABNT NBR 6023, edição de 2025; o modelo guarda essa tabela em `scripts/normas/meses.json`.
+ABNT NBR 6023, edição de 2025; essa tabela fica em `scripts/normas/meses.json`.
 Junto, o script gera a conferência das referências: cada referência e a chamada dela como
 ficaram, ao lado da cópia registrada da fonte (a primeira página, se for PDF), com uma
 caixa de tique pra IA e outra pra pessoa. Confira cada referência contra a folha de rosto
@@ -215,11 +213,14 @@ ele traz e garante que nada dele fica de fora, e a pesquisa, que mostra o que a
 disciplina precisa cobrir nas áreas a que serve e com que profundidade. Uma divisão feita
 só com a lista de tipos de conhecimento é um inventário do material, não o formato.
 
+Neste projeto, as duas bases e o formato que sai delas estão na [análise da
+matéria](docs/analise-da-materia.md); cada subseção abaixo diz em que parte dela.
+
 ### Pesquise
 
-O formato se pode se apoiar em três bases, pesquisadas em fontes acadêmicas robustas e confiáveis
+O formato pode se apoiar em três bases, pesquisadas em fontes acadêmicas robustas e confiáveis
 — artigos revisados por pares, diretrizes de sociedades científicas e de órgãos oficiais,
-livros de referência da área (não é uma busca extensiva, apenas o suficiente para compreender como pode ser cobrada ou como deve ser  a disciplina):
+livros de referência da área (não é uma busca extensiva, apenas o suficiente para compreender como pode ser cobrada ou como deve ser a disciplina):
 
 - como a matéria é conhecida, ensinada e cobrada nas áreas a que o material serve, no
   nível delas — as diretrizes curriculares dos cursos, os documentos das associações de
@@ -246,6 +247,9 @@ diz. Cada fonte é citada como diz a [seção 2](#2-cite-cada-fonte-conforme-a-a
 dados dela vão pro arquivo de fontes, como os de qualquer outra. A ementa ou o plano de
 ensino de uma oferta da disciplina mostra o que aquela oferta cobre, não como a matéria é estudada e cobrada nas
 áreas: isso vem da pesquisa. Os exercícios da própria fonte não são base do formato.
+
+A pesquisa deste projeto, nas três bases, está na [parte 1 da análise da
+matéria](docs/analise-da-materia.md#1-a-pesquisa).
 
 ### Analise cada parte do material
 
@@ -306,6 +310,12 @@ formato, com a forma de estudo dele, e não só um tipo de fato: a relação nos
 a matéria inteira. A própria fonte pode dizer quais caminhos usa, ao explicar a abordagem
 dela.
 
+Neste projeto, cada parte do material é uma aula. Na análise da matéria, a análise de cada
+aula, slide por slide, está na [parte 2](docs/analise-da-materia.md#2-as-aulas-slide-por-slide);
+o que liga as aulas, na [parte 3](docs/analise-da-materia.md#3-o-que-liga-as-aulas); os
+grupos, na [parte 4](docs/analise-da-materia.md#4-os-grupos); e os caminhos, na [parte
+5](docs/analise-da-materia.md#5-os-caminhos).
+
 ### Documente a análise
 
 A pesquisa e a análise vão pra <dfn>análise da matéria</dfn>
@@ -317,6 +327,9 @@ cada tipo e cada caminho, com o porquê. O trecho literal que sustenta cada pont
 pesquisa fica nas <dfn>evidências da pesquisa</dfn>
 (`docs/material-base/gerados-ocr/pesquisa/`), dentro da pasta protegida, porque é texto de
 terceiros: é contra ele que se confere a análise.
+
+Neste projeto, a forma de estudo de cada tipo e de cada caminho, os documentos e o molde
+de cada um estão na [parte 6 da análise da matéria](docs/analise-da-materia.md#6-a-forma-de-estudo).
 
 ### Grave o formato
 
@@ -339,6 +352,14 @@ completa a aula, não a substitui: use-o só onde a aula não chega. Uma aula em
 costuma trazer os pontos da matéria, não o conteúdo de cada um: aí a aula não chega ao
 conteúdo, e entra tudo o que o material de fora diz sobre cada ponto dela. Vale a mesma regra da
 aula: o fato tem de estar escrito nesse material, nunca deduzido.
+
+Neste projeto, as aulas são slides, e quem completa cada ponto delas é o livro-texto, que é
+fonte transcrita como as aulas ([seção 1](#1-trate-as-fontes-da-aula)): entra tudo o que
+ele diz sobre cada ponto dos slides. O que ele diz sobre um assunto que nenhum slide traz
+fica fora, menos os fatores de risco de cada bactéria ([análise da matéria, O que o
+estudante precisa saber
+fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer)). O material de
+fora do resto desta seção entra onde nem as aulas nem o livro-texto chegam.
 
 Guarde uma cópia de cada material de fora junto do material de aula, na subpasta das
 cópias do material de fora, `docs/material-base/fontes-externas/`, dentro da pasta
@@ -374,8 +395,12 @@ ganha a forma de estudo que ela escolheu. Três documentos servem a tipos que ap
 muitas disciplinas, cada um com uma função própria e exclusiva: a teoria fundamental, pro
 que vem antes de qualquer item; o dicionário, pra história em cadeia; e a ficha, pro item
 com os mesmos tipos de fato. Os outros tipos ganham o documento que os serve, como diz a
-[seção 8](#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova). Todos são escritos com
-palavras próprias e de forma didática, ensinando: claros, explicados e instrutivos, sem
+[seção 8](#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova). Neste projeto, os
+documentos são a teoria fundamental, por tema; a ficha e o dicionário de cada bactéria; a
+ficha de cada família de itens; os quadros e casos; e as perguntas de prova, uma por aula
+([análise da matéria, Os documentos](docs/analise-da-materia.md#os-documentos)), e todo
+documento segue o molde dele ([Os moldes](docs/analise-da-materia.md#os-moldes)). Todos
+são escritos com palavras próprias e de forma didática, ensinando: claros, explicados e instrutivos, sem
 jargão solto, nunca um texto que se lê como o livro de onde o fato veio — um termo técnico vem
 explicado onde aparece pela primeira vez, ou citado pela categoria que o define
 ([seção 7](#7-cite-uma-categoria-em-vez-de-redefinir)), e onde é explicado leva a marca de
@@ -405,10 +430,9 @@ dividida em partes que você vai chamar de **<dfn>elos</dfn>**. Em cada elo, exp
 motivo que leva ao elo seguinte — de forma que dê pra deduzir o item a partir de qualquer
 ponto da história, em vez de decorar fatos soltos.
 
-Decida quantos elos usar (a mesma quantidade pra todo item da sua disciplina) e dê um
-nome a cada um. O processo central que um item passa muda completamente conforme o
-assunto, então o elo do meio — o que faz aquele item "funcionar" — vai precisar de um
-nome que só faz sentido pra sua disciplina; não herde o nome que outra disciplina usou.
+Todo item tem os mesmos elos, com os mesmos nomes. Neste projeto, o dicionário conta
+cada bactéria, e os elos dele, com os eixos da ficha que cada um conta, estão em [Os
+moldes](docs/analise-da-materia.md#os-moldes).
 
 Escreva num tom narrativo, em prosa corrida, sem tom pessoal e sem comentar sobre o
 próprio texto (não escreva algo como "isto é uma lista completa"). Citar a fonte de um
@@ -419,19 +443,18 @@ documento de teoria fundamental, cite essa categoria pelo nome (ver
 
 ### C) Ficha determinística
 
-Reorganize os mesmos itens do dicionário numa tabela direta. Use sempre o mesmo conjunto
-de linhas — que você vai chamar de **<dfn>eixos</dfn>** — pra todo item da disciplina.
-Isso é o que faz a ficha boa pra revisão rápida, ao contrário do dicionário, que é bom pra
-entender o porquê.
+Conte cada item numa tabela direta; quando o item tem dicionário, a ficha reorganiza os
+mesmos fatos dele. Use sempre o mesmo conjunto de linhas — que você vai chamar de
+**<dfn>eixos</dfn>** — pra todo item da mesma espécie. Isso é o que faz a ficha boa pra
+revisão rápida, ao contrário do dicionário, que é bom pra entender o porquê.
 
-Decida quantos eixos usar e o nome de cada um, do mesmo jeito que decidiu os elos do
-dicionário. Dentro da sua disciplina, todo item tem a mesma quantidade de eixos — mas
-esse número, e o nome de cada eixo, são uma escolha sua: outra disciplina pode escolher
-um número diferente e nomes completamente diferentes.
+Neste projeto, há a ficha de cada bactéria e a ficha de cada família de itens, cada
+família com os seus eixos; os eixos de todas estão em [Os
+moldes](docs/analise-da-materia.md#os-moldes).
 
-Cubra, na ficha, o mesmo conteúdo principal do dicionário — mas não se limite a ele:
-inclua aqui o detalhe que não cabe bem numa história corrida (números, listas
-completas, critérios exatos). Siga a mesma regra de tom e de citação de categorias do
+Cubra, na ficha, o mesmo conteúdo principal do dicionário, quando o item tem um — mas
+não se limite a ele: inclua aqui o detalhe que não cabe bem numa história corrida
+(números, listas completas, critérios exatos). Siga a mesma regra de tom e de citação de categorias do
 dicionário.
 
 ---
@@ -476,10 +499,18 @@ a tabela de um item específico (ficha) —, coloque-o como uma seção dentro d
 de teoria fundamental, mesmo que essa teoria tenha vindo de uma parte separada do
 material de aula original; não crie um arquivo à parte só por isso. Só crie um arquivo
 novo quando a função em si for genuinamente nova, sem nenhum dos três tipos cobrindo
-ela — e nesse caso, descreva esse quarto tipo aqui também, porque ele passa a valer pra
-qualquer disciplina futura que usar este documento. Um tipo de conhecimento da análise da
+ela — e nesse caso, descreva o tipo novo aqui também. Um tipo de conhecimento da análise da
 matéria ([seção 3](#3-descubra-o-formato-da-disciplina)) que nenhum dos três documentos
 serve é o caso típico de função nova.
+
+Neste projeto, são dois os documentos de função nova
+([análise da matéria, Os documentos](docs/analise-da-materia.md#os-documentos)):
+
+- os **quadros e casos**, que ensinam, a partir de um
+  [quadro](docs/analise-da-materia.md#5-os-caminhos), as bactérias que as aulas juntam sob
+  ele, e treinam com casos;
+- as **perguntas de prova**, uma por aula, que treinam a resposta escrita inteira, com uma
+  resposta-modelo pra cada pergunta.
 
 ---
 
@@ -487,15 +518,16 @@ serve é o caso típico de função nova.
 
 Um <dfn>cartão de revisão espaçada</dfn> é uma técnica de estudo: uma pergunta de um lado,
 uma resposta do outro, revisada em intervalos crescentes de tempo, num programa como o
-[Anki](MANUAL.md#nível-1--só-quero-estudar-agora). Isso é opcional — nem toda
-disciplina precisa ter cartões, mas quem tiver, siga o resto desta seção.
+[Anki](MANUAL.md#nível-1--só-quero-estudar-agora). Neste projeto, os campos de cada
+cartão e a ordem em que os cartões novos entram no baralho estão em [Os
+moldes](docs/analise-da-materia.md#os-moldes), no parágrafo dos cartões.
 
 As perguntas ficam guardadas numa
 [planilha](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) CSV, com uma
 pergunta por linha. Nomeie o arquivo começando sempre com a mesma primeira parte, em toda
 planilha do projeto — por exemplo, `perguntas-` no início de `perguntas-fundamentos.csv` e
 de `perguntas-nucleo.csv`. Assim, o script da [seção
-10](#10-gere-o-baralho-com-o-script-do-modelo) sabe quais arquivos são planilhas de
+10](#10-gere-o-baralho-com-o-script) sabe quais arquivos são planilhas de
 pergunta só pelo nome, sem que ninguém precise listar cada arquivo um por um dentro do
 código.
 
@@ -506,10 +538,10 @@ instrução como esta:
 > A partir dos documentos de conteúdo em anexo, gere uma planilha CSV de perguntas e
 > respostas de revisão espaçada. Use uma coluna `pergunta`, uma `resposta`, escrita com
 > palavras próprias, e uma `fonte`, com a citação que o fato já tem no documento (as três
-> obrigatórias), mais as colunas [nomeie as que fizerem sentido pra sua disciplina — por
-> exemplo, o que identifica o item, o tipo de pergunta]. Cada cartão pergunta um fato só,
+> obrigatórias), mais as colunas que a análise da matéria pede pro cartão (em Os moldes,
+> no parágrafo dos cartões). Cada cartão pergunta um fato só,
 > com uma resposta curta. Todo fato dos documentos ganha pelo menos um cartão: eles só
-> têm o que a aula traz e o que o material de fora diz sobre os pontos dela, e tudo isso
+> têm o que a aula traz e o que o livro-texto e o material de fora dizem sobre os pontos dela, e tudo isso
 > pode ser cobrado. Um fato pode dar mais de um cartão: uma associação pedida nos dois sentidos
 > ganha um cartão em cada sentido, e uma lista vira cartões menores — um por elemento, ou
 > um por posição quando a ordem importa —, em vez de um cartão que pede a lista inteira.
@@ -537,7 +569,7 @@ fonte trata como possibilidade? Essa conferência é sua, não da IA — é o qu
 nada ficou de fora.
 
 Uma vez com a planilha pronta e conferida, o baralho do Anki será gerado automaticamente
-pelo script do modelo, acionado por você (veja seção 10). Você pode editar um cartão
+pelo script, acionado por você (veja seção 10). Você pode editar um cartão
 direto dentro do Anki — mas se depois você mudar a planilha (ou o dicionário/ficha de
 origem) e gerar o baralho de novo, o cartão é refeito a partir da planilha, e a edição
 feita direto no Anki não sobrevive quando o baralho novo for importado. Ou seja: enquanto
@@ -550,7 +582,7 @@ confira o que ela fez). Em seguida, gere o baralho de novo com o script.
 
 ---
 
-## 10. Gere o baralho com o script do modelo
+## 10. Gere o baralho com o script
 
 Depois que a planilha da seção 9 existe, falta um último passo mecânico: ler cada linha
 dela e montar o arquivo [`.apkg`](MANUAL.md#nível-1--só-quero-estudar-agora) do Anki. Esse
@@ -558,51 +590,10 @@ passo é sempre o mesmo tipo de trabalho, não importa a disciplina — por isso
 um script, em vez de à mão: rodando o script de novo, o baralho inteiro é reconstruído em
 segundos toda vez que a planilha mudar.
 
-O modelo já traz esse script, o `scripts/montar_deck.py`: use-o sem editar (o
+O script é o `scripts/montar_deck.py`, usado sem editar (o
 [README dos scripts](scripts/README.md) diz como rodar). No Anki, os cartões aparecem
 numa pasta com o nome da disciplina, tirado do formato, e dentro dela uma pasta pra cada
 planilha, de modo que planilhas e disciplinas diferentes nunca se misturam.
-
-Se um dia você precisar de um script diferente, não precisa saber programar pra ter um,
-nem entender tecnicamente tudo que a instrução abaixo pede — ela é pra copiar e enviar,
-não pra decifrar. Envie-a pra um assistente de IA: o mesmo que te ajudou a escrever o
-conteúdo, um assistente de IA integrado ao editor de código, ou um assistente de IA comum
-na internet. Ela descreve o que o script do modelo faz, e o novo tem de fazer o mesmo.
-
-> Escreva um script em Python que:
->
-> 1. Encontre sozinho, na pasta do material gerado que o `projeto.json` do projeto
->    indica, todos os arquivos CSV cujo nome comece com o prefixo que o mesmo arquivo
->    indica (ex.: `perguntas-`) — sem que ninguém precise listar nomes de arquivo ou de
->    pasta dentro do código.
-> 2. Para cada arquivo encontrado, gere um baralho do Anki (`.apkg`) separado, com um
->    cartão por linha. Toda planilha tem uma coluna `pergunta` (frente do cartão) e uma
->    `resposta` (verso). Qualquer outra coluna que existir no arquivo também deve virar
->    um campo do cartão, com esse mesmo nome — os nomes dessas colunas variam de
->    planilha pra planilha, e o script não deve esperar nenhum nome específico. As
->    exceções: a coluna `fonte`, com a citação do fato, aparece no verso, abaixo da
->    resposta; as colunas que o `projeto.json` lista em `colunas_ocultas` ficam no
->    cartão sem aparecer; e a coluna que ele indica em `coluna_subdecks` separa os
->    cartões em pastas, uma pra cada valor.
-> 3. Não escreva, em nenhum lugar do código, o nome de uma disciplina, de um item
->    específico, um caminho de pasta ou uma quantidade de perguntas fixada — descubra
->    tudo a partir do `projeto.json` e do que
->    existir nos arquivos a cada execução, pra funcionar com uma planilha nova sem
->    precisar editar o código.
-> 4. Ponha os cartões num baralho com o nome da disciplina, que vem do formato da
->    disciplina, e dentro dele um baralho pra cada planilha, e gere o identificador de
->    cada um (o ID que o Anki usa internamente) automaticamente, a partir de um hash do
->    nome completo dele — nunca escolhido à mão.
-
-O que essa instrução garante, em termos simples: se você adicionar uma planilha nova,
-com colunas de nomes diferentes das que usa hoje, e rodar o script de novo, ele gera os
-cartões certos sem ninguém precisar abrir o código pra ajustar nada. E se duas
-disciplinas diferentes gerarem baralhos, o Anki nunca vai confundir um com o outro,
-mesmo que ninguém tenha escolhido os números de identificação à mão.
-
-Teste isso: peça pra rodar o script contra uma planilha de teste com nomes de coluna
-diferentes dos que sua disciplina usa (mantendo só `pergunta` e `resposta`) — se os
-cartões saírem certos mesmo assim, está funcionando do jeito certo.
 
 ---
 
@@ -618,7 +609,7 @@ preenchido, e cada um dos scripts abaixo grava um [arquivo de
 conferência](#como-transcrever), que nunca é publicado, com duas caixas de tique em cada
 parte: a da IA, uma primeira passada, e a da pessoa, que é sempre o último elo.
 
-| O que se confere                                                                                                                          | Contra o quê                                                                                                                  | Script                 | Arquivo de conferência (no modelo) |
+| O que se confere                                                                                                                          | Contra o quê                                                                                                                  | Script                 | Arquivo de conferência             |
 | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------------------------------- |
 | Cada página da transcrição (de um documento HTML ou de uma apresentação em pptx: o texto de cada imagem, e o resto, só pelo script) | A imagem da página no original (de um documento HTML ou de uma apresentação em pptx: a própria imagem, e o texto da fonte) | `conferencia.py`     | `CONFERENCIA-COM-IMAGEM.md`       |
 | Cada referência e a chamada dela                                                                                                         | A folha de rosto ou a página da fonte                                                                                         | `referencias.py`     | `CONFERENCIA-REFERENCIAS.md`      |
@@ -635,10 +626,15 @@ sem o tique da pessoa, e o tique sai sozinho se a parte mudar depois dele.
 
 ## 12. Documente o recorte que você escolheu
 
-Não tente cobrir um tema por completo e de forma objetiva. Escolha quais itens entram,
-o quão fundo cada um vai, e o que é mais importante — com base na análise da matéria
-([seção 3](#3-descubra-o-formato-da-disciplina)) — e diga isso claramente no guia não
-técnico da disciplina, sem esconder que é um julgamento seu.
+O recorte deste projeto é o que as aulas trazem, completado pelo livro-texto ([seção
+4](#4-complete-a-aula-com-material-de-fora)): entra todo trecho das aulas, menos os de
+vírus, que ficam fora do foco do material, e os de fungo, que só entram como comparação com
+uma bactéria ([análise da matéria, parte
+2](docs/analise-da-materia.md#2-as-aulas-slide-por-slide)). O quão fundo cada trecho vai é
+o que o livro-texto diz sobre ele, e a forma de estudo vem da análise da matéria ([seção
+3](#3-descubra-o-formato-da-disciplina)). O recorte fica dito claramente no
+[README](README.md#aviso-importante--leia-antes-de-usar) e no guia não técnico, o
+[MANUAL](MANUAL.md).
 
 Densidades diferentes entre partes não são, por si só, inconsistência: o número de
 cartões de cada item, conceito ou caso segue os fatos que ele tem
@@ -652,10 +648,8 @@ duas coisas é aceitável sob a desculpa do recorte.
 
 ## 13. Escreva os quatro documentos de apresentação
 
-Acompanhe toda disciplina de quatro documentos na pasta principal do projeto, com papéis
-fixos que não mudam de disciplina pra disciplina — só o conteúdo dentro de cada seção
-muda (veja o `LEIA-ME.md` da pasta dos esqueletos deles, logo abaixo, antes de
-adicionar os documentos):
+O projeto tem quatro documentos de apresentação na pasta principal, cada um com um papel
+fixo:
 
 | Documento                                    | Papel fixo                                                                                                                                                                                                       |
 | -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -682,16 +676,9 @@ topo do próprio arquivo, se tiver itens ou seções suficientes pra precisar de
 essa distinção, o índice do projeto cresce junto com o conteúdo e acaba repetindo a
 estrutura de cada documento dentro de si mesmo.
 
-Existe um esqueleto pronto desses quatro arquivos em `modelo-documentos-raiz/`, que vem
-com o modelo — copie-os pra pasta principal do projeto, no lugar dos documentos do modelo
-que têm o mesmo nome (o `README.md` e o `NOTICE.md`), e preencha os trechos entre
-colchetes, em vez de escrever cada um do zero (o `LEIA-ME.md` de dentro dessa pasta
-explica como, com mais detalhe).
-
-Ao adicionar uma disciplina nova a um projeto que já tem essa estrutura, edite as
-seções desses quatro documentos com o conteúdo novo — não crie uma segunda versão
-paralela deles, e não pule uma seção só porque a disciplina nova ainda não tem o
-equivalente pronto (nesse caso, deixe a seção dizendo isso).
+Quando o projeto muda, as seções desses quatro documentos mudam junto, sem uma segunda
+versão paralela deles, e cada uma diz o que o projeto é, sem frase de estado como "ainda
+não foi feito".
 
 ---
 
@@ -719,8 +706,8 @@ do documento de conteúdo. Deixe as planilhas e os <dfn>arquivos de dados</dfn> 
 quebraria a leitura de quem abre a planilha como tabela, e o arquivo `.json` nem aceita
 comentário.
 
-Todo arquivo `.json`, do modelo ou do projeto, é só dado: <dfn>chaves e valores</dfn>, o
-nome de cada informação e o valor dela. Nele não entra texto escrito pra quem abre o
+Todo arquivo `.json` do projeto é só dado: <dfn>chaves e valores</dfn>, o nome de cada
+informação e o valor dela. Nele não entra texto escrito pra quem abre o
 arquivo — texto corrido, explicação, instrução, exemplo ou marcador entre colchetes — nem
 referência a documento: uma seção desta metodologia, o nome de um arquivo `.md`, o item de
 uma norma. Vale, sim, o texto que é o próprio dado, mesmo corrido: o título de uma fonte,
@@ -739,52 +726,50 @@ não se perde: ou já está num documento, ou passa pra esta metodologia.
 Os modelos de `modelo-dados/` e os moldes de `scripts/esquemas/` são genéricos: servem a
 qualquer disciplina e podem crescer, mas nunca se ajustam a um projeto só. Quando uma
 disciplina precisa de uma informação que eles ainda não têm, o campo novo entra de um
-jeito que sirva a qualquer outra, com a mudança registrada na
-[seção 17](#17-isto-não-é-definitivo); nada que só sirva a uma disciplina, a um material
-ou a uma fonte entra neles.
+jeito que sirva a qualquer outra; nada que só sirva a uma disciplina, a um material ou a
+uma fonte entra neles.
 
 ---
 
-## 15. Checklist: adicionando uma disciplina nova
+## 15. As etapas do projeto
 
-1. Prepare o projeto: faça uma cópia do modelo inteiro, com o nome do projeto. Ela é a
-   pasta principal do projeto e já traz a pasta `scripts/` (sem mudar o nome de nada
+As etapas do trabalho, na ordem do <dfn>método em dados</dfn>, o
+`modelo-dados/fluxo-ia.json`, que traz, de cada etapa, o que entra, o que sai, os scripts e as conferências; a IA o
+recebe dali mesmo, sem cópia (ver [Trabalhar com uma IA](trabalhar-com-ia.md)).
+
+1. Prepare o projeto. A pasta principal traz a pasta `scripts/` (sem mudar o nome de nada
    dela), os dois arquivos de licença (`LICENSE` e `LICENSE-CONTENT.txt`), a [lista do que
    nunca vai pro
-   GitHub](NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto) e o
-   <dfn>método em dados</dfn>, o `modelo-dados/fluxo-ia.json`, com as etapas na ordem e,
-   de cada uma, o que entra, o que sai, os scripts e as conferências; a IA o recebe dali
-   mesmo, sem cópia (ver [Trabalhar com uma IA](trabalhar-com-ia.md)). Dentro dela, copie
-   de `modelo-dados/` o mapa do projeto (`projeto.json`) pra pasta principal e o estilo
-   dos cartões (`estilo-cartao.css`) pra pasta `dados/`, junto dos outros dados do
-   projeto. Só a pasta do material de base nunca muda, e por isso a lista do que nunca vai
-   pro GitHub a deixa sempre de fora. Se travar em algum passo, peça ajuda à IA que você
-   usa. Se você guarda o projeto no GitHub, ele ganha um <dfn>repositório</dfn> próprio (o
-   lugar onde o GitHub guarda o projeto e o histórico das mudanças dele), sem o histórico
-   do modelo; ative também a conferência das mensagens e a proteção das fontes: é
-   opcional, mas é ela que barra uma fonte que ia pro GitHub por engano (ver o [README
-   dela](.githooks/README.md)).
+   GitHub](NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto), o
+   mapa do projeto (`projeto.json`) e a pasta `dados/`, com os dados do projeto e o estilo
+   dos cartões (`estilo-cartao.css`). Só a pasta do material de base nunca muda, e por
+   isso a lista do que nunca vai pro GitHub a deixa sempre de fora. Se o projeto for
+   guardado no GitHub, ele é um <dfn>repositório</dfn> (o lugar onde o GitHub guarda o
+   projeto e o histórico das mudanças dele); em cada computador onde ele estiver, ative a
+   conferência das mensagens e a proteção das fontes: é opcional, mas é ela que barra uma
+   fonte que ia pro GitHub por engano (ver o [README dela](.githooks/README.md)). Se travar
+   em algum passo, peça ajuda à IA que você usa.
 2. Guarde o material de aula original por convenção, transcreva-o por inteiro,
    literalmente, e confira a transcrição, página por página, no arquivo de conferência
-   (seção 1); grave os dados da referência de cada aula em `dados/fontes.json` (seção 2).
+   (seção 1); grave os dados da referência de cada aula e do livro-texto em
+   `dados/fontes.json` (seção 2).
 3. Leia tudo, pesquise as três bases da seção 3, analise cada parte do material, junte o
-   que se repete entre as partes e escreva a análise da matéria, com as evidências da pesquisa guardadas; só então decida o
-   formato da disciplina (seção 3) — as formas de estudo de cada tipo de conhecimento e,
-   se houver, o nome do elo central do dicionário e os nomes dos eixos da ficha, decididos
-   de forma explícita, sem herdar de outra disciplina —, gravado em `dados/formato.json`,
-   como diz o `DESCUBRA-SEU-MODELO.md`.
-4. Marque, item por item, o que a aula cobre de cada subtópico da grade; onde não
-   cobrir, complete com material de fora, guardado, com base de trechos e citado (seções
-   2 e 4).
+   que se repete entre as partes e escreva a análise da matéria, com as evidências da
+   pesquisa guardadas; só então decida o formato da disciplina (seção 3) — as formas de
+   estudo de cada tipo de conhecimento, os documentos e o molde de cada um —, gravado em
+   `dados/formato.json`, como diz o `DESCUBRA-SEU-MODELO.md`.
+4. Complete cada ponto das aulas com o que o livro-texto diz sobre ele e, onde nem as
+   aulas nem o livro-texto chegam, com material de fora, guardado, com base de trechos e
+   citado (seções 2 e 4).
 5. Escreva o documento de teoria fundamental primeiro — é onde as categorias que os
    itens específicos vão citar precisam estar definidas (seção 5).
-6. Escreva dicionário e ficha por item, citando os termos de teoria fundamental que se
-   aplicam a cada um, e os documentos das outras formas de estudo da análise (seções 5 a
-   8).
+6. Escreva a ficha e o dicionário de cada bactéria, a ficha de cada família de itens, os
+   quadros e casos e as perguntas de prova, cada um no molde dele, citando os termos da
+   teoria fundamental que se aplicam a cada item (seções 5 a 8).
 7. Gere as planilhas a partir dos documentos de conteúdo, com a prova de cada cartão,
    rode a conferência dos cartões e confira se cada fato que deve ter cartão tem
    (seção 9).
-8. Gere o baralho com o script do modelo (seção 10).
+8. Gere o baralho com o script (seção 10).
 9. Atualize as seções correspondentes nos quatro documentos de apresentação (seção 13).
 10. Faça a auditoria de consistência (seção 16) antes de considerar a disciplina pronta.
 
@@ -806,8 +791,8 @@ ou a uma fonte entra neles.
 3. Procure um termo definido em teoria fundamental que algum item usa implicitamente
    sem citar pelo nome em nenhum documento desse item.
 4. Procure um arquivo cujo nome não corresponda a nenhuma das funções das seções 5 e 8.
-5. Confira se os quatro documentos de apresentação têm as mesmas seções que outras
-   disciplinas já cobertas, mesmo que o conteúdo ainda seja "isto não foi feito ainda".
+5. Confira se os quatro documentos de apresentação dizem o mesmo que os outros
+   documentos do projeto.
 6. Procure um fato do material original que não apareça em nenhum documento gerado.
 7. Confira a planilha de perguntas linha por linha contra o documento de origem —
    procure um fato inventado que não está na fonte, ou um fato que devia ter cartão e
@@ -827,15 +812,6 @@ ou a uma fonte entra neles.
     cada busca da pesquisa está registrada, e cada ponto dela tem a chamada da fonte e o
     trecho literal que o sustenta, nas evidências da pesquisa; e cada forma de estudo
     escolhida diz por quê.
-
----
-
-## 17. Isto não é definitivo
-
-Siga cada seção acima como o que já funcionou, não como uma imposição. Se sua
-disciplina tiver uma necessidade genuína que não se encaixa bem em algum ponto deste
-guia, mude o guia — e registre a mudança aqui, com o motivo, pra que a próxima pessoa
-se beneficie dela em vez de reabrir a mesma discussão.
 
 ---
 

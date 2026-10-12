@@ -13,14 +13,14 @@ Os documentos do projeto na ordem de leitura, cada um com o que ele é.
 
 ## O método
 
-5. [Metodologia de Conteúdo](metodologia-de-conteudo.md) — cada etapa do trabalho, da aula
-   original ao cartão do Anki.
-6. [Trabalhar com uma IA](trabalhar-com-ia.md) — o que pedir à IA em cada etapa e o que
-   conferir depois.
+5. [Metodologia de Conteúdo](metodologia-de-conteudo.md) — o método deste projeto, etapa
+   por etapa, da aula original ao cartão do Anki.
+6. [Trabalhar com uma IA](trabalhar-com-ia.md) — o que pedir à IA em cada etapa deste
+   projeto e o que conferir depois.
 7. [Regras da ABNT para citar e referenciar](regras-abnt.md) — como citar uma fonte no
    texto e montar a referência dela.
-8. [Descubra o formato da sua disciplina](DESCUBRA-SEU-MODELO.md) — as perguntas que
-   transformam a análise da matéria no formato da disciplina.
+8. [Descubra o formato da disciplina](DESCUBRA-SEU-MODELO.md) — as perguntas que decidem
+   o formato do material e a resposta deste projeto a cada uma.
 9. [Scripts](scripts/README.md) — o que faz cada programa do projeto e como rodar.
 10. [Conferência das mensagens e proteção das fontes](.githooks/README.md) — o que é
     conferido antes de cada versão gravada no git.

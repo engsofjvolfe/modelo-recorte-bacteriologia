@@ -1,11 +1,11 @@
 # Trabalhar com uma IA
 
-O método deste modelo usa IA em quase todas as etapas: transcrever as aulas, preencher os
+O método deste projeto usa IA em quase todas as etapas: transcrever as aulas, preencher os
 dados das fontes, pesquisar e analisar a matéria pra propor o formato da disciplina,
 escrever os documentos, gerar os cartões. Este guia diz, etapa por etapa, o que pedir à IA, o que entregar a ela, o que
 conferir depois e o que é sempre seu, e também as regras que a IA segue em todas as
 etapas. Por isso ele é pra você e pra IA: você lê e entrega a ela. Serve pra qualquer
-assistente de IA: o modelo não depende de nenhum.
+assistente de IA: o projeto não depende de nenhum.
 
 ## Antes de começar: escolha como usar a sua IA
 
@@ -27,13 +27,12 @@ Nos dois casos, quem decide e quem dá a palavra final é você.
 O método chega à IA em duas partes. Uma é este guia: o que fazer em cada etapa e as regras
 que valem sempre. A outra é o arquivo
 [`modelo-dados/fluxo-ia.json`](modelo-dados/fluxo-ia.json), o [método em
-dados](metodologia-de-conteudo.md#15-checklist-adicionando-uma-disciplina-nova). Você não
+dados](metodologia-de-conteudo.md#15-as-etapas-do-projeto). Você não
 precisa ler esse arquivo; basta entregá-lo.
 
-1. O `fluxo-ia.json` não se copia: o projeto da sua disciplina é uma cópia do modelo
-   inteiro, e o arquivo fica onde já está, em `modelo-dados/`. O
-   [mapa do projeto](metodologia-de-conteudo.md), o `projeto.json`, fica na pasta
-   principal do projeto.
+1. O `fluxo-ia.json` fica em `modelo-dados/`, e o
+   [mapa do projeto](metodologia-de-conteudo.md), o `projeto.json`, na pasta principal
+   do projeto; nenhum dos dois se copia.
 2. Na primeira conversa, entregue os dois arquivos e este guia, e peça: "Leia o
    `modelo-dados/fluxo-ia.json` e o `trabalhar-com-ia.md` inteiros e guarde os dois na
    sua memória ou nas instruções do projeto."
@@ -42,7 +41,7 @@ precisa ler esse arquivo; basta entregá-lo.
    "Releia os dois inteiros antes de continuar." Este guia pede isso à IA (ver
    [Para a IA](#para-a-ia)).
 
-Se a IA não consegue abrir os arquivos do modelo, entregue também, em cada etapa, o que
+Se a IA não consegue abrir os arquivos do projeto, entregue também, em cada etapa, o que
 a etapa diz que ela lê antes (a seção da metodologia, o Descubra seu modelo, as regras
 da ABNT).
 
@@ -65,7 +64,7 @@ etapas. Leia você também: é o que você pode esperar dela.
 - Ela segue as etapas na ordem. Se não estiver claro em que etapa o projeto está, ela
   pergunta a você.
 - Antes de cada etapa, ela lê inteiros os documentos e as seções da metodologia que a
-  etapa traz em **A IA lê antes**. Eles vêm com o modelo e, por isso, estão no projeto.
+  etapa traz em **A IA lê antes**. Todos estão no projeto.
 
 ### Como ler o método em dados
 
@@ -99,8 +98,9 @@ Valem sempre, junto do tique (ver [Etapa por etapa](#etapa-por-etapa)) e do que 
 - Fato que a fonte trata como possibilidade entra com a ressalva escrita, nunca como
   certeza.
 - O material de terceiros nunca entra nas versões gravadas do projeto, como as que vão
-  pro GitHub, nem é publicado: o material de aula, as transcrições, as cópias e a base do
-  material de fora, as provas dos cartões e os arquivos de conferência.
+  pro GitHub, nem é publicado: o material de aula, o livro-texto, as transcrições, as
+  cópias e a base do material de fora, as provas dos cartões e os arquivos de
+  conferência.
 - Nenhum caminho é escrito de memória: todo caminho sai do `projeto.json`.
 - Nunca se renomeia a pasta `scripts/`, nada dentro dela nem o `projeto.json`: é por
   esses nomes que os scripts se acham.
@@ -141,29 +141,26 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 ### 1. Preparar o projeto (`preparar`)
 
 - **A IA lê antes:** a
-  [seção 15 da metodologia](metodologia-de-conteudo.md#15-checklist-adicionando-uma-disciplina-nova)
+  [seção 15 da metodologia](metodologia-de-conteudo.md#15-as-etapas-do-projeto)
   e o [README da conferência das mensagens](.githooks/README.md).
-- **Peça:** que faça o projeto: uma cópia do modelo inteiro, com o nome do projeto. Nela
-  já vêm a pasta `scripts/`, a [lista do que nunca vai pro
-  GitHub](NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto), os
-  dois arquivos de licença (`LICENSE` e `LICENSE-CONTENT.txt`) e o `fluxo-ia.json`, que
-  fica em `modelo-dados/`. Dentro da cópia, que copie de `modelo-dados/` o mapa do projeto
-  (`projeto.json`) pra pasta principal e o estilo dos cartões (`estilo-cartao.css`) pra
-  pasta `dados/`. Depois, que confira o mapa do projeto com o script `validar_dados.py`.
+- **Peça:** que confira o mapa do projeto (`projeto.json`) com o script
+  `validar_dados.py`.
 - **Confira depois:** se as pastas que o mapa do projeto indica são as que você quer.
-- **Se você guarda o projeto no GitHub:** o projeto ganha um
-  [repositório](metodologia-de-conteudo.md#15-checklist-adicionando-uma-disciplina-nova)
-  próprio, sem o histórico do modelo. Ative também a conferência das mensagens e a
-  proteção das fontes. É opcional, mas é ela que barra uma fonte que ia pro GitHub por
-  engano (ver o [README dela](.githooks/README.md)).
-- **Sempre seu:** autorizar a IA a fazer a cópia do modelo e a mover uma fonte pra pasta
-  protegida, quando um script perguntar.
+- **Se você guarda o projeto no GitHub:** o projeto é um
+  [repositório](metodologia-de-conteudo.md#15-as-etapas-do-projeto). Em cada computador
+  onde ele estiver, ative a conferência das mensagens e a proteção das fontes. É
+  opcional, mas é ela que barra uma fonte que ia pro GitHub por engano (ver o
+  [README dela](.githooks/README.md)).
+- **Sempre seu:** autorizar a IA a mover uma fonte pra pasta protegida, quando um script
+  perguntar.
 
 ### 2. Transcrição da aula (`transcricao`)
 
 - **A IA lê antes:** a
   [seção 1 da metodologia](metodologia-de-conteudo.md#1-trate-as-fontes-da-aula).
-- **Entregue:** o material de aula.
+- **Entregue:** o material de aula. Neste projeto, as aulas são apresentações em pptx, e
+  o livro-texto, um documento HTML que marca as páginas impressas (ver a seção 1 da
+  metodologia).
 - **Peça:** a transcrição de cada página, só com o que está escrito, no padrão da seção
   1; o registro de cada transcrição com o `registrar_fonte.py`, com a chave da
   referência da fonte; e a conferência delas, com o `conferencia.py`. Se o material é
@@ -193,8 +190,10 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 
 - **A IA lê antes:** a
   [seção 3 da metodologia](metodologia-de-conteudo.md#3-descubra-o-formato-da-disciplina),
-  o [Descubra seu modelo](DESCUBRA-SEU-MODELO.md) e as [regras da ABNT](regras-abnt.md).
-- **Entregue:** o curso, a disciplina e o nível de estudo.
+  o [Descubra seu modelo](DESCUBRA-SEU-MODELO.md), as [regras da ABNT](regras-abnt.md) e
+  a [análise da matéria](docs/analise-da-materia.md).
+- **Entregue:** o curso e a disciplina. O nível de estudo não se entrega: ele sai da
+  pesquisa (seção 3 da metodologia).
 - **Peça:** que olhe os tiques na conferência das transcrições, pra saber o que já tem o
   seu tique; que pesquise as três bases da seção 3 em fontes acadêmicas robustas, lendo
   cada uma inteira, guardando nas evidências da pesquisa o trecho literal que sustenta
@@ -216,6 +215,8 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 
 - **A IA lê antes:** a
   [seção 4 da metodologia](metodologia-de-conteudo.md#4-complete-a-aula-com-material-de-fora).
+  Neste projeto, o livro-texto completa cada ponto das aulas, e o material de fora desta
+  etapa entra onde nem as aulas nem o livro-texto chegam.
 - **Peça:** que olhe os tiques na conferência das transcrições, pra saber quais páginas
   já têm o seu tique; que marque, item por item, a partir das transcrições conferidas,
   cada subtópico do formato como coberto pela aula, pelo material de fora ou como
@@ -228,22 +229,27 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 
 ### 6. Documentos de conteúdo (`documentos`)
 
-- **A IA lê antes:** as seções 5 a 8 e 12 da [metodologia](metodologia-de-conteudo.md).
+- **A IA lê antes:** as seções 5 a 8 e 12 da [metodologia](metodologia-de-conteudo.md) e
+  a [parte 6 da análise da matéria](docs/analise-da-materia.md#6-a-forma-de-estudo), com
+  os documentos e o molde de cada um.
 - **Peça:** que olhe os tiques nas conferências das transcrições, dos trechos e das
   referências, pra saber o que já tem o seu tique; que leia inteiras a análise da matéria,
   as transcrições e as bases conferidas e só então escreva, nas formas de estudo que a
-  análise escolheu e na grade do formato, primeiro a teoria fundamental e depois os outros
-  documentos, com a chamada de cada fato como a conferência das referências mostra, e
-  marque cada termo que um documento define, como diz a seção 13 da metodologia; depois,
-  que grave o glossário com o `glossario.py`.
+  análise escolheu e na grade do formato, cada documento no molde dele, primeiro a teoria
+  fundamental e depois os outros documentos, com a chamada de cada fato como a
+  conferência das referências mostra, e marque cada termo que um documento define, como
+  diz a seção 13 da metodologia; depois, que grave o glossário com o `glossario.py`.
 - **Confira depois:** cada documento contra as fontes, com a auditoria da
   [seção 16 da metodologia](metodologia-de-conteudo.md#16-checklist-auditando-uma-disciplina-existente).
-- **Sempre seu:** o recorte — o que entra, o quão fundo e o que é mais importante.
+- **Sempre seu:** o recorte — que aulas e que partes do livro-texto entram (ver a
+  [seção 12 da metodologia](metodologia-de-conteudo.md#12-documente-o-recorte-que-você-escolheu)).
 
 ### 7. Cartões (`cartoes`)
 
 - **A IA lê antes:** a
-  [seção 9 da metodologia](metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada).
+  [seção 9 da metodologia](metodologia-de-conteudo.md#9-cartões-de-revisão-espaçada) e
+  [Os moldes](docs/analise-da-materia.md#os-moldes), na análise da matéria, no parágrafo
+  dos cartões.
 - **Peça:** que olhe os tiques nas conferências das transcrições e dos trechos, pra saber
   o que já tem o seu tique, e só então faça as planilhas de pergunta a partir dos
   documentos de conteúdo, um ou mais cartões, cada um com um fato só, pra cada fato dos
@@ -258,19 +264,17 @@ tique que vale é o seu: nada está conferido sem ele (ver a
 ### 8. Baralho (`baralho`)
 
 - **A IA lê antes:** a
-  [seção 10 da metodologia](metodologia-de-conteudo.md#10-gere-o-baralho-com-o-script-do-modelo).
+  [seção 10 da metodologia](metodologia-de-conteudo.md#10-gere-o-baralho-com-o-script).
 - **Peça:** que gere os baralhos com o script `montar_deck.py`.
 - **Confira depois:** importe os baralhos no Anki e veja se os cartões aparecem como na
   planilha.
 
 ### 9. Documentos de apresentação (`raiz`)
 
-- **A IA lê antes:** as seções 13 e 14 da [metodologia](metodologia-de-conteudo.md) e o
-  `LEIA-ME.md` da pasta `modelo-documentos-raiz/`, que vem com o modelo.
-- **Peça:** que copie os quatro documentos de `modelo-documentos-raiz/` pra pasta
-  principal do projeto, no lugar dos documentos do modelo que têm o mesmo nome (o
-  `README.md` e o `NOTICE.md`), preencha cada trecho entre colchetes e confira o índice com
-  o `confere_indice.py`.
+- **A IA lê antes:** as seções 13 e 14 da [metodologia](metodologia-de-conteudo.md).
+- **Peça:** que ponha nos quatro documentos de apresentação o que mudou no projeto — um
+  documento novo no índice, o aviso do recorte, a origem do material — e confira o índice
+  com o `confere_indice.py`.
 - **Sempre seu:** o aviso do recorte, a origem do material e o contato pra relatar erros.
 
 ### 10. Conferência final (`auditoria`)

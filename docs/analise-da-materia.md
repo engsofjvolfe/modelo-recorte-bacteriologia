@@ -3984,6 +3984,7 @@ história não têm parte própria: ficam junto do trecho ou do assunto que acom
 | <dfn>Perguntas de prova</dfn>, uma por aula | a resposta escrita inteira, para todos os trechos da aula |
 
 Os quadros e casos e as perguntas de prova têm função nova: nenhum dos três documentos da
+[seção 5](../metodologia-de-conteudo.md#5-escreva-os-documentos-de-conteúdo) da
 metodologia do projeto ensina a partir de um quadro clínico nem treina a resposta escrita
 ([seção
 8](../metodologia-de-conteudo.md#8-escreva-um-arquivo-novo-só-quando-a-função-for-nova)).

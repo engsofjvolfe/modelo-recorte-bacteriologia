@@ -6,17 +6,18 @@ estrutura interna do projeto inteiro.
 
 ## Antes de tudo: isto foi feito por uma pessoa só
 
-Todo o material deste projeto — texto ou resposta — foi selecionado e conferido, de forma
-subjetiva, por quem organizou o projeto. Parte do trabalho foi feita por programas e com
+Todo o material deste projeto — texto ou resposta — foi selecionado e conferido por quem
+organizou o projeto. Parte do trabalho foi feita por programas e com
 ajuda de IA; o que foi mecânico e o que foi julgamento está explicado no
 [README.md](README.md#como-este-material-foi-feito). Não é uma revisão sistemática e não
 passou por banca revisora. Na prática:
 
 - Pode ter erro em qualquer parte — texto ou resposta.
-- A escolha de quais assuntos entraram, e a profundidade de cada um, foi um julgamento
-  pessoal de quem organizou o material.
-- É esperado que partes do material original não estejam representadas aqui. Faltar
-  alguma coisa não é necessariamente erro.
+- O recorte — que aulas e que partes do livro-texto entram — foi escolha de quem
+  organizou o material. Dentro dele, entra tudo o que as aulas trazem sobre bactérias,
+  com o que o livro-texto diz sobre cada ponto; a forma de estudo veio de pesquisas sobre
+  como os cursos pedem a matéria e sobre como se aprende (ver a [análise da
+  matéria](docs/analise-da-materia.md)).
 
 Este material é um apoio de revisão, não a fonte única de verdade — vale conferir com o
 material oficial da disciplina antes de uma prova. Erros e sugestões podem ser
@@ -27,9 +28,6 @@ O manual está organizado em níveis, do mais simples ao mais detalhado.
 ---
 
 ## Nível 1 — Só quero estudar agora
-
-Os baralhos ainda não existem: os documentos e os cartões deste recorte ainda vão ser
-escritos. Quando existirem:
 
 1. Abra o <dfn>Anki</dfn> no computador ou celular (programa gratuito de revisão espaçada
    — disponível em [apps.ankiweb.net](https://apps.ankiweb.net)).
@@ -59,22 +57,26 @@ peça ajuda a uma IA: diga o que você fez e o que apareceu na tela.
 
 O projeto tem duas pastas de conteúdo bem diferentes:
 
-**`docs/material-base/`** — o material de aula original e, onde a aula não cobre um
-ponto, as cópias do material de fora usado (as referências de tudo estão em
+**`docs/material-base/`** — as aulas originais, o livro-texto e, onde eles não chegam,
+as cópias do material de fora usado (as referências de tudo estão em
 `docs/REFERENCIAS.md`). Nunca é publicada nem repassada (ver [NOTICE.md](NOTICE.md)) —
 fica só localmente.
 
 **`docs/material-gerado/`** — todo o conteúdo do material original reescrito e
 reorganizado em texto corrido, mais claro. É material de estudo completo por si só —
-dá pra estudar só lendo os documentos, sem depender do baralho. Tem três tipos de
-documento:
+dá pra estudar só lendo os documentos, sem depender do baralho. Tem cinco tipos de
+documento ([análise da matéria, Os documentos](docs/analise-da-materia.md#os-documentos)):
 
-- **<dfn>Dicionário de gatilhos</dfn>** — conta cada item como uma história em cadeia. Bom
-  pra entender o porquê.
-- **<dfn>Ficha determinística</dfn>** — os mesmos itens, em tabela direta. Bom pra revisão
-  de véspera de prova.
 - **<dfn>Teoria fundamental</dfn>** — os conceitos gerais que vêm antes de entrar em item
-  específico.
+  específico, por tema.
+- **<dfn>Ficha determinística</dfn>** — cada bactéria, e cada item de uma família (como os
+  antimicrobianos), em tabela direta. Bom pra revisão de véspera de prova.
+- **<dfn>Dicionário de gatilhos</dfn>** — conta cada bactéria como uma história em cadeia.
+  Bom pra entender o porquê.
+- **Quadros e casos** — de um quadro, como uma síndrome ou um local do corpo, às bactérias
+  que podem causá-lo, com casos pra treinar.
+- **Perguntas de prova** — uma por aula, pra treinar a resposta escrita, com uma
+  resposta-modelo pra comparar.
 
 Todo fato, nos documentos e nos cartões, traz a citação da fonte de onde veio; as
 referências completas estão em `docs/REFERENCIAS.md`.

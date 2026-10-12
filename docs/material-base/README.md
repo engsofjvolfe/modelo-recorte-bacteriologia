@@ -1,25 +1,29 @@
 # Material de base (nunca publicado)
 
 Esta é a [pasta protegida](../../metodologia-de-conteudo.md#1-trate-as-fontes-da-aula).
-Ela recebe o material de aula original da disciplina (slides, em PDF ou pptx, um livro
-digital ou equivalente) e, na subpasta `fontes-externas/`, as cópias do material de fora
-usado onde a aula não cobre um eixo (ver seção 4 da metodologia). Ela nunca muda de nome
-nem de lugar: é assim que a lista do que nunca vai pro GitHub e os scripts sabem sempre
-onde está o material de terceiros. É uma regra permanente, não uma pendência a resolver
-depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteudo.md)):
+Ela guarda o material de base deste projeto (ver a [origem do
+conteúdo](../../README.md#origem-do-conteúdo)): em `pptx/`, as apresentações das aulas,
+cada uma com a pasta das imagens dela ao lado; em `MURRAY-2022/`, a cópia do livro-texto
+digital, com as imagens dele; e, na subpasta `fontes-externas/`, as cópias do material de
+fora usado onde nem as aulas nem o livro-texto chegam (ver seção 4 da metodologia). Ela
+nunca muda de nome nem de lugar: é assim que a lista do que nunca vai pro GitHub e os
+scripts sabem sempre onde está o material de terceiros. É uma regra permanente, não uma
+pendência a resolver depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteudo.md)):
 
 - **Nada daqui é publicado nem repassado**, em lugar nenhum: esse material não é de quem
   mantém o projeto. Se você guarda o projeto no GitHub, a [lista do que nunca vai pro
   GitHub](../../NOTICE.md#3-material-de-terceiros--fora-de-qualquer-licença-deste-projeto)
   já deixa de fora tudo o que está aqui dentro, menos este README.
-- A referência de cada material — as aulas, as fontes da pesquisa e o de fora — sai do
-  arquivo de fontes (`dados/fontes.json`) e vai pra lista de referências
+- A referência de cada material — as aulas, o livro-texto, as fontes da pesquisa e o de
+  fora — sai do arquivo de fontes (`dados/fontes.json`) e vai pra lista de referências
   (`docs/REFERENCIAS.md`), que podem ser publicados: o que fica de fora é a cópia, não a
   referência.
-- A transcrição do material de aula, letra por letra, e a base de trechos do material de
-  fora ficam em `gerados-ocr/` — são a base contra a qual se confere tudo o que se
-  escreve, e também nunca são publicadas (ver as seções 1 e 4 da metodologia). Ali ficam
-  também:
+- A transcrição das aulas e do livro-texto, letra por letra, e a base de trechos do
+  material de fora ficam em `gerados-ocr/` — são a base contra a qual se confere tudo o
+  que se escreve, e também nunca são publicadas (ver as seções 1 e 4 da metodologia). Ali
+  ficam também:
+  - a análise de cada aula, trecho por trecho, na subpasta `analise/`, de onde saem as
+    contagens da [análise da matéria](../analise-da-materia.md);
   - as [evidências da pesquisa](../../metodologia-de-conteudo.md#documente-a-análise), na
     subpasta `pesquisa/`;
   - a base de cada item, `[item]-fontes-externas.md`;
@@ -37,8 +41,8 @@ depois (ver seção 14 da [metodologia de conteúdo](../../metodologia-de-conteu
   pras aulas) ou o da base do material de fora (o `base_externa.py`) pergunta se pode
   trazê-la pra cá; e o `protege_fontes.py` confere que nenhuma fonte registrada ficou de
   fora.
-- As subpastas daqui são as do modelo. Em cada projeto, quem diz onde fica cada coisa
-  dentro desta pasta é o [mapa do projeto](../../metodologia-de-conteudo.md).
+- Quem diz onde fica cada coisa dentro desta pasta é o [mapa do
+  projeto](../../metodologia-de-conteudo.md).
 - Antes de escrever qualquer coisa em `docs/material-gerado/`, leia este material
   inteiro, sem ferramenta que corte ou resuma automaticamente o texto (ver seção 1 da
   metodologia).

@@ -39,11 +39,11 @@ cobertos por nenhuma das licenças acima. O material de base são as aulas da di
 Microbiologia da Universidade Federal do Triângulo Mineiro, do Prof. Kennio Ferreira Paim,
 e um recorte do livro *Microbiologia médica*, de Patrick R. Murray, Ken S. Rosenthal e
 Michael A. Pfaller, publicado pela Guanabara Koogan, de que quem mantém o projeto não é
-autor; ainda não há material de fora. Por isso:
+autor. Por isso:
 
-- Esse material nunca é publicado nem repassado — fica só no computador de quem mantém o
-  projeto. Se o projeto é guardado no GitHub, a <dfn>lista do que nunca vai pro
-  GitHub</dfn> (o arquivo [.gitignore](.gitignore)) já deixa essa pasta de fora.
+- Esse material nunca é publicado nem repassado. Se o projeto é guardado no GitHub, a
+  <dfn>lista do que nunca vai pro GitHub</dfn> (o arquivo [.gitignore](.gitignore)) já
+  deixa essa pasta de fora.
 - Quem receber uma cópia deste projeto com essa pasta preenchida deve tratá-la como
   material pessoal de estudo, não como parte do que se pode repassar.
 
