@@ -38,8 +38,9 @@ editor gratuito, onde se abre a pasta do projeto). Depois de mudar:
 3. Os arquivos `.apkg` dentro de `anki-decks/` são substituídos pelos novos; basta
    importar de novo no Anki para ver as mudanças.
 
-O [README dos scripts](scripts/README.md) explica esses passos com mais calma. Se travar,
-peça ajuda a uma IA: diga o que você fez e o que apareceu na tela.
+O que o script faz e o que ele mostra estão no [README dos
+scripts](scripts/README.md#montar_deckpy--das-planilhas-de-pergunta-ao-baralho-do-anki). Se
+travar, peça ajuda a uma IA: diga o que você fez e o que apareceu na tela.
 
 ## Nível 2 — Os documentos de estudo
 

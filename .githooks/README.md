@@ -1,73 +1,78 @@
-# Conferência das mensagens e proteção das fontes (opcional, pra quem usa o GitHub)
+# Conferência das mensagens e proteção das fontes
 
-Você só precisa disto se guarda o projeto no [GitHub](../metodologia-de-conteudo.md). Quem
-não usa o GitHub pode ignorar esta pasta.
+O <dfn>git</dfn> é o programa que guarda as versões do projeto. Cada versão gravada é um
+<dfn>commit</dfn>, com uma mensagem que diz o que mudou, e o projeto junto com o histórico
+dos commits é o <dfn>repositório</dfn>. Esta pasta tem os <dfn>ganchos</dfn> do projeto:
+programas que o git roda sozinho na hora de gravar um commit.
 
-## O que é
+## O que é conferido
 
-Pra mandar uma mudança ao GitHub, você grava uma versão do projeto no seu computador — o
-[git](../scripts/README.md#protege_fontespy--confere-que-nenhuma-fonte-pode-ser-publicada)
-chama cada versão gravada de <dfn>commit</dfn> — e escreve uma
-mensagem dizendo o que mudou. Esta pasta traz três coisas que entram em ação nessa hora:
-
-- **Uma proteção das fontes, do glossário e do índice** (o arquivo `pre-commit`): antes de
-  aceitar a versão, ela roda o script `protege_fontes.py` e barra a versão que levar um
-  arquivo da pasta protegida (a do material de base) ou uma cópia de uma fonte, mesmo com
-  outro nome e em outra pasta. Assim, nenhum material de terceiros vai pro GitHub por
-  engano. Depois, roda o `glossario.py --conferir`, que barra a versão enquanto o glossário
-  não for o que os documentos definem, e o `confere_indice.py`, que barra a versão enquanto
-  algum documento do projeto não estiver no índice uma vez só (ver o
-  [README dos scripts](../scripts/README.md)).
-
-As outras duas ajudam a escrever a mensagem sempre do mesmo jeito:
-
-- **Um esqueleto da mensagem** (o arquivo `commit-template.txt`): quando você vai gravar
-  uma versão, o editor já abre com o lugar do título e o lugar da explicação marcados,
-  com as palavras `SUBSTITUA-...`, pra você escrever por cima.
-- **Um verificador** (o arquivo `commit-msg`): antes de aceitar a versão, ele confere só
-  a forma da mensagem — nunca se ela está certa ou bem escrita, que é julgamento de quem
-  escreve. Ele recusa a mensagem que:
+- **`pre-commit`**, antes de aceitar o commit, roda três scripts e barra o commit quando
+  algum aponta um problema: o `protege_fontes.py --versao`, para que nenhum arquivo da
+  pasta protegida nem cópia de uma fonte vá no commit; o `glossario.py --conferir`, para
+  que o glossário seja o que os documentos definem; e o `confere_indice.py`, para que cada
+  documento esteja no índice uma vez só. O que cada um confere está na seção dele no
+  [README dos scripts](../scripts/README.md).
+- **`commit-msg`** confere a forma da mensagem, nunca o sentido dela. Recusa a mensagem
+  que:
   - não tem título (a primeira linha está vazia);
-  - tem um título que é um item de lista (`- corrigido X`, `1. corrigido X`...);
+  - tem um título que é item de lista (`- corrigido X`, `1. corrigido X`);
   - não tem uma linha em branco entre o título e a explicação;
-  - explica em lista (`-`, `*`, `•`, `1.`, `2)`...) em vez de texto corrido;
-  - ainda tem alguma palavra `SUBSTITUA-...` do esqueleto, ou seja, não foi escrita por
-    cima dele.
+  - explica em lista (`-`, `*`, `•`, `1.`, `2)`) em vez de texto corrido;
+  - ainda tem uma marca `SUBSTITUA-...` do esqueleto.
+
+  A mensagem de um merge ou de um revert não é conferida.
+- **`commit-template.txt`** é o esqueleto com que a mensagem abre no editor: o lugar do
+  título e o da explicação, marcados com `SUBSTITUA-...`, e uma linha que lembra que a
+  mensagem não põe a IA como coautora.
+
+Título e explicação em texto corrido fazem o histórico se ler como uma história; uma
+lista, um item por arquivo mudado, pede a cada commit uma decisão nova sobre quanto
+detalhe cabe. O esqueleto mostra a forma antes de o texto existir, e o `commit-msg` recusa
+o que foge dela depois de escrito. O sentido, nenhum dos dois confere: é de quem escreve.
+
+## Por que a IA não é coautora
+
+Algumas ferramentas de IA acrescentam à mensagem uma linha `Co-Authored-By:`, que põe a IA
+como coautora do commit. Neste projeto, essa linha não entra. Pela Lei de Direitos
+Autorais, "autor é a pessoa física criadora de obra literária, artística ou científica"
+(Brasil, 1998b, art. 11), e "não se considera co-autor quem simplesmente auxiliou o autor
+na produção da obra" (Brasil, 1998b, art. 15, § 1º); os scripts, que são programas, seguem
+o mesmo regime (Brasil, 1998a, art. 2º). A IA não é pessoa: não é autora nem coautora de
+nada aqui, nem titular dos direitos que as licenças do projeto repassam.
+
+O que a IA fez não se esconde: o projeto diz como ela foi usada, em vez de pôr o nome dela
+como autora. Quem responde pelo que está no projeto é a pessoa que o mantém, e quem lê
+precisa saber que parte foi feita pela IA para saber o que conferir. A
+[metodologia](../metodologia-de-conteudo.md#7-a-conferência) diz o que a IA faz e o que
+fica sempre com a pessoa, e o [diário do projeto](../trabalhar-com-ia.md) conta, passo a
+passo, como ela foi usada. As revistas médicas seguem o mesmo princípio: uma IA não entra
+como autora de um artigo, porque não pode responder pela exatidão, pela integridade e pela
+originalidade dele, e quem a usou diz como a usou (International Committee of Medical
+Journal Editors, 2026).
 
 ## Como ativar
 
-Esta pasta já está no projeto da sua disciplina, porque ele é uma cópia do modelo
-inteiro. No GitHub, o projeto tem um <dfn>repositório</dfn> próprio, sem o histórico do modelo: o
-lugar onde o GitHub guarda o projeto e o histórico das mudanças dele. Abra o
-[terminal](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) (o
-[README dos scripts](../scripts/README.md) mostra como) dentro da pasta do projeto e
-digite estas duas linhas, uma de cada vez, apertando Enter depois de cada uma:
+O git roda os ganchos desta pasta e abre o esqueleto no clone que tem estas duas
+configurações, digitadas no
+[terminal](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas), na pasta do
+projeto:
 
     git config core.hooksPath .githooks
     git config commit.template .githooks/commit-template.txt
 
-A primeira liga a proteção das fontes e o verificador; a segunda liga o esqueleto. A
-partir daí, toda vez que você gravar uma versão, as fontes são conferidas, o esqueleto
-aparece e a mensagem é conferida antes de a versão ser aceita. Isso vale só no seu
-computador: quem copiar o projeto do GitHub pra outro computador precisa digitar as duas
-linhas de novo lá. Se travar, peça ajuda à IA que você usa.
+A configuração fica no clone, não vai com o projeto: um clone novo só confere os commits
+depois dessas duas linhas.
 
-## Por que existe
+## Referências
 
-Uma mensagem escrita como lista, um item por arquivo mudado, parece organizada numa
-mudança pequena, mas não cresce bem: a cada mudança é preciso decidir de novo quanto
-detalhe cabe, e o histórico fica sem um padrão. Título mais explicação em texto corrido
-faz o histórico do projeto se ler como uma história.
+BRASIL. Lei nº 9.609, de 19 de fevereiro de 1998. Dispõe sobre a proteção da propriedade intelectual de programa de computador, sua comercialização no País, e dá outras providências. **Diário Oficial da União**, Brasília, DF, 20 fev. 1998. Disponível em: https://www.planalto.gov.br/ccivil_03/leis/l9609.htm. Acesso em: 12 out. 2026.
 
-O esqueleto guia quem escreve, mostrando a forma antes de qualquer texto existir; o
-verificador recusa o que foge da forma depois de escrito. Nenhum dos dois garante que o
-conteúdo está certo: uma frase cortada ao meio entre o título e a explicação ainda passa,
-porque isso é sentido, não forma, e sentido nenhum programa confere sozinho. O que o
-verificador confere é só o que dá pra conferir sem julgar: existe título, existe a linha
-em branco, não tem lista, o esqueleto foi substituído.
+BRASIL. Lei nº 9.610, de 19 de fevereiro de 1998. Altera, atualiza e consolida a legislação sobre direitos autorais e dá outras providências. **Diário Oficial da União**, Brasília, DF, 20 fev. 1998. Disponível em: https://www.planalto.gov.br/ccivil_03/leis/l9610.htm. Acesso em: 12 out. 2026.
+
+INTERNATIONAL COMMITTEE OF MEDICAL JOURNAL EDITORS. **Recommendations for the Conduct, Reporting, Editing, and Publication of Scholarly Work in Medical Journals**. [*S. l.*]: ICMJE, 2026. Disponível em: https://www.icmje.org/recommendations/browse/artificial-intelligence/ai-use-by-authors.html. Acesso em: 12 out. 2026.
 
 ---
 
-*Este documento está licenciado sob [CC BY-NC-SA 4.0](../LICENSE-CONTENT.txt); a
-proteção (`pre-commit`) e o verificador (`commit-msg`), que são programas, sob
-[GPL-3.0](../LICENSE).*
+*Este documento está licenciado sob [CC BY-NC-SA 4.0](../LICENSE-CONTENT.txt); os
+ganchos (`pre-commit` e `commit-msg`), que são programas, sob [GPL-3.0](../LICENSE).*

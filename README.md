@@ -28,6 +28,10 @@ mantém o projeto:
   de causa e efeito, fichas com uma resposta só pra cada tipo de fato, quadros e casos
   ([análise da matéria, Os moldes](docs/analise-da-materia.md#os-moldes)) —, o que pode
   deixar de fora nuances e controvérsias que um material de referência completo traria.
+- Este material é feito com a ajuda de ferramentas de inteligência artificial: elas
+  propõem, escrevem e conferem primeiro, e quem mantém o projeto decide e confere por
+  último. O [diário do projeto](trabalhar-com-ia.md) conta como elas foram usadas em cada
+  passo.
 - O material não passou por banca revisora e pode ter erro em qualquer parte — texto ou
   resposta.
 - Este material serve como ferramenta de revisão, não como fonte principal de estudo —
@@ -42,7 +46,7 @@ pessoas fica fora das duas:
 
 | Parte | Licença | Significa que... |
 |---|---|---|
-| Programas (os [scripts](scripts/README.md) de `scripts/` e os verificadores de `.githooks/`) | [GPL-3.0](LICENSE) | Pode usar, mudar e repassar, mas as versões mudadas também precisam ficar abertas pra todo mundo, com o código dos programas disponível |
+| Programas (os [scripts](scripts/README.md) de `scripts/` e os [ganchos](.githooks/README.md) de `.githooks/`) | [GPL-3.0](LICENSE) | Pode usar, mudar e repassar, mas as versões mudadas também precisam ficar abertas pra todo mundo, com o código dos programas disponível |
 | Conteúdo (tudo o que não é programa nem material de outras pessoas: documentos, planilhas, referências, dados) | [CC BY-NC-SA 4.0](LICENSE-CONTENT.txt) | Pode usar e adaptar dando o crédito, sem fins comerciais, mantendo a mesma licença |
 | Material de outras pessoas, em `docs/material-base/` (ver o [`NOTICE.md`](NOTICE.md)) | Nenhuma — não é deste projeto | Não publicar nem repassar |
 

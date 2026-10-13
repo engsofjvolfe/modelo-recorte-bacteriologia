@@ -1,11 +1,8 @@
 # === Material de terceiros — NUNCA versionar (ver NOTICE.md) ===
-# Material de aula de terceiros (PDFs de slides ou equivalente), a transcricao dele,
-# copias do material de fora que completa a aula e tudo o que se gera a partir deles:
-# tudo na pasta do material de base, menos o README dela. Nao e nosso para
-# redistribuir; fica so localmente. Essa pasta nunca muda de nome nem de lugar, e o
-# scripts/protege_fontes.py confere que nenhuma fonte fica fora dela. Isto nao e uma
-# pendencia a resolver depois — e uma regra de proveniencia permanente (ver secoes 2, 4
-# e 14 da metodologia de conteudo).
+# As aulas, o livro-texto, as copias do material de fora e tudo o que se gera a partir
+# deles: tudo na pasta protegida, menos o README dela. Nao e deste projeto; fica so
+# localmente. A pasta nunca muda de nome nem de lugar, e o scripts/protege_fontes.py
+# confere que nenhuma fonte fica fora dela (ver a secao 1 da metodologia de conteudo).
 docs/material-base/*
 !docs/material-base/README.md
 

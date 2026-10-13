@@ -1,10 +1,8 @@
 # Texto das figuras
 
-Como o texto de dentro das figuras foi escrito na transcrição (quem lê e quem confere
-esse texto está em [O texto das figuras](../metodologia-de-conteudo.md#o-texto-das-figuras),
-na metodologia). Vale para as figuras revisadas, as que a metodologia diz que a IA confere.
-
-## Como o texto foi escrito
+As regras do texto de dentro das figuras dos capítulos 12 a 17 do livro-texto, na
+transcrição: é por elas que a IA confere esse texto, figura por figura, antes da pessoa
+([O texto das figuras](../metodologia-de-conteudo.md#o-texto-das-figuras), na metodologia).
 
 - Só o que está escrito na figura: sem descrever o desenho, explicar, traduzir, corrigir
   erro do livro ou completar.
@@ -28,8 +26,8 @@ na metodologia). Vale para as figuras revisadas, as que a metodologia diz que a 
 - Espaço só onde o vão é do tamanho do vão entre palavras na mesma figura; vão menor
   fica junto (↑cAMP, na mesma figura que ↑ Permeabilidade).
 - Erro de impressão fica como impresso. Itálico e negrito viram texto puro.
-- O que não deu para ler, mesmo numa cópia do trecho ampliada 2 ou 3 vezes, ficou
-  "[ilegível]", nunca um palpite.
+- O que não se lê, mesmo numa cópia do trecho ampliada 2 ou 3 vezes, fica "[ilegível]",
+  nunca um palpite.
 - A figura de abertura de cada capítulo traz o número numa linha e o título inteiro na
   seguinte.
 

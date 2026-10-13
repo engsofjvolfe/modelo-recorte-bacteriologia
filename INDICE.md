@@ -23,14 +23,15 @@ inteiro, cada um com o que ele é.
    texto e montar a referência dela.
 8. [Scripts](scripts/README.md) — o que faz cada programa do projeto e como rodar.
 9. [Conferência das mensagens e proteção das fontes](.githooks/README.md) — o que é
-   conferido antes de cada versão gravada no git.
+   conferido antes de cada versão gravada no git, e por que a IA não aparece como
+   coautora.
 
 ## As fontes e a matéria
 
 10. [Material de base](docs/material-base/README.md) — a pasta das aulas e do livro, que
     nunca é publicada.
-11. [Texto das figuras](docs/texto-das-figuras.md) — como o texto de dentro das figuras
-    foi escrito na transcrição.
+11. [Texto das figuras](docs/texto-das-figuras.md) — as regras do texto de dentro das
+    figuras dos capítulos 12 a 17 do livro, na transcrição.
 12. [Análise da matéria](docs/analise-da-materia.md) — a pesquisa sobre como os cursos
     pedem a matéria, a análise de cada aula e a forma de estudo de cada tipo de
     conhecimento.
