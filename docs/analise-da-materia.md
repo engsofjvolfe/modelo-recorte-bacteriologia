@@ -3655,17 +3655,17 @@ ela basta, de uma escolha do projeto, dita como tal.
   um termo nomeia vem antes do nome, o básico antes do que depende dele, e todo fato,
   inclusive o de uma figura, é escrito e explicado, nunca só apontado ([metodologia do
   projeto, seção 5](../metodologia-de-conteudo.md#5-os-documentos-de-estudo)).
-- Os documentos não são outro livro. São 1.874 trechos das aulas, e cada um, com tudo o
-  que o livro-texto diz dele, se escreve como um gatilho rápido de estudo: poucas frases,
-  sem repetir o que outro documento já ensina e sem textos longos. Curto não quer dizer
-  solto: cada trecho continua ensinado a quem nada sabe da matéria, como no item acima, e
-  o equilíbrio entre as duas coisas pede cuidado em cada frase. O texto ensina o fato
-  direto, sem "o livro diz" nem "a figura mostra": o material se basta, e a fonte fica só
-  na citação. De onde veio: os autores do livro-texto apresentam os conceitos básicos de
-  forma clara e sucinta, e Murray diz que a informação deve vir de modo seletivo e conciso
-  (Murray; Rosenthal; Pfaller, 2022, p. vii; Murray; Rosenthal; Pfaller, [2025 ou 2026],
-  resposta de Murray à 1.ª pergunta); e a metodologia do projeto pede o texto mais enxuto
-  que dá sem perder o tom, a explicação nem o conteúdo ([seção
+- Os documentos não são outro livro. Cada trecho das aulas, com tudo o que o livro-texto
+  diz dele, se escreve como um gatilho rápido de estudo: poucas frases, sem repetir o que
+  outro documento já ensina e sem textos longos. Curto não quer dizer solto: cada trecho
+  continua ensinado a quem nada sabe da matéria, como no item acima, e o equilíbrio entre
+  as duas coisas pede cuidado em cada frase. O texto ensina o fato direto, sem "o livro
+  diz" nem "a figura mostra": o material se basta, e a fonte fica só na citação. De onde
+  veio: os autores do livro-texto apresentam os conceitos básicos de forma clara e
+  sucinta, e Murray diz que a informação deve vir de modo seletivo e conciso (Murray;
+  Rosenthal; Pfaller, 2022, p. vii; Murray; Rosenthal; Pfaller, [2025 ou 2026], resposta
+  de Murray à 1.ª pergunta); e a metodologia do projeto pede o texto mais enxuto que dá
+  sem perder o tom, a explicação nem o conteúdo ([seção
   5](../metodologia-de-conteudo.md#5-os-documentos-de-estudo)).
 - Treinar é tentar lembrar a resposta, não reler. Todo cartão pede que o estudante produza
   a resposta antes de ver o verso, e nenhum é de múltipla escolha. De onde veio: testar-se
