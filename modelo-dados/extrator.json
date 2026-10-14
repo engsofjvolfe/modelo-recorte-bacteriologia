@@ -1,0 +1,220 @@
+{
+  "versao_schema": 1,
+  "padrao": {
+    "titulo_pagina": "## {rotulo} (arquivo p. {arquivo})",
+    "rotulo_numerada": "p. {numero}",
+    "rotulo_sem_numero": "sem número",
+    "rotulo_sem_paginas": "sem paginação",
+    "sem_texto": "[sem texto]",
+    "escape": "\\",
+    "escapar": [
+      "\\",
+      "*",
+      "~",
+      "|"
+    ],
+    "escapar_no_comeco": [
+      "#"
+    ],
+    "destaques": {
+      "negrito": {
+        "abre": "**",
+        "fecha": "**"
+      },
+      "italico": {
+        "abre": "*",
+        "fecha": "*"
+      },
+      "riscado": {
+        "abre": "~~",
+        "fecha": "~~"
+      }
+    },
+    "tabela": {
+      "inicio": "| ",
+      "meio": " | ",
+      "fim": " |",
+      "separador": "---"
+    }
+  },
+  "trocas": {
+    "ﬀ": "ff",
+    "ﬁ": "fi",
+    "ﬂ": "fl",
+    "ﬃ": "ffi",
+    "ﬄ": "ffl"
+  },
+  "leitores": {
+    "pdf": {
+      "extensoes": [
+        ".pdf"
+      ],
+      "opcoes": {
+        "ocr": [],
+        "idioma_ocr": "",
+        "modo_ocr": "3",
+        "resolucao_ocr": 300,
+        "destaques": {}
+      }
+    },
+    "html": {
+      "modulo": "marcacao",
+      "extensoes": [
+        ".html",
+        ".htm",
+        ".xhtml"
+      ],
+      "opcoes": {
+        "codificacao": "declarada",
+        "blocos": [
+          "address",
+          "article",
+          "aside",
+          "blockquote",
+          "caption",
+          "center",
+          "dd",
+          "details",
+          "dialog",
+          "div",
+          "dl",
+          "dt",
+          "fieldset",
+          "figcaption",
+          "figure",
+          "footer",
+          "form",
+          "h1",
+          "h2",
+          "h3",
+          "h4",
+          "h5",
+          "h6",
+          "header",
+          "hgroup",
+          "li",
+          "main",
+          "nav",
+          "ol",
+          "p",
+          "pre",
+          "section",
+          "summary",
+          "ul"
+        ],
+        "quebras": [
+          "br",
+          "hr"
+        ],
+        "vazios": [
+          "area",
+          "base",
+          "br",
+          "col",
+          "embed",
+          "hr",
+          "img",
+          "input",
+          "link",
+          "meta",
+          "param",
+          "source",
+          "track",
+          "wbr"
+        ],
+        "ignorar": [
+          "head",
+          "script",
+          "style",
+          "template",
+          "noscript"
+        ],
+        "conteudo": null,
+        "tabela": {
+          "tabela": "table",
+          "linha": "tr",
+          "celulas": [
+            "td",
+            "th"
+          ]
+        },
+        "destaques": {
+          "del": "riscado",
+          "s": "riscado",
+          "strike": "riscado"
+        }
+      }
+    },
+    "jats": {
+      "modulo": "marcacao",
+      "extensoes": [
+        ".xml"
+      ],
+      "opcoes": {
+        "codificacao": "utf-8",
+        "blocos": [
+          "abstract",
+          "ack",
+          "aff",
+          "article-id",
+          "article-title",
+          "attrib",
+          "author-notes",
+          "caption",
+          "contrib",
+          "copyright-statement",
+          "corresp",
+          "def",
+          "disp-quote",
+          "element-citation",
+          "fn",
+          "journal-title",
+          "kwd",
+          "label",
+          "license-p",
+          "list-item",
+          "mixed-citation",
+          "p",
+          "pub-date",
+          "publisher-name",
+          "ref",
+          "sec",
+          "subtitle",
+          "term",
+          "title",
+          "trans-title",
+          "verse-line"
+        ],
+        "quebras": [
+          "break"
+        ],
+        "vazios": [],
+        "ignorar": [],
+        "conteudo": null,
+        "tabela": {
+          "tabela": "table",
+          "linha": "tr",
+          "celulas": [
+            "td",
+            "th"
+          ]
+        },
+        "destaques": {
+          "strike": "riscado"
+        }
+      }
+    },
+    "json": {
+      "extensoes": [
+        ".json"
+      ],
+      "opcoes": {
+        "codificacao": "utf-8",
+        "lista": [],
+        "antes": [],
+        "campos": [],
+        "leitor_do_texto": "html"
+      }
+    }
+  }
+}

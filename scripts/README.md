@@ -11,7 +11,8 @@ vezes; por isso a parte mecânica do projeto é deles: transcrever as fontes e m
 referências, as conferências, o glossário e o baralho, sem esquecer nem inventar nada.
 Nenhum script julga se um conteúdo está certo: isso é sempre de uma pessoa.
 
-Os scripts tiram todo caminho do [mapa do projeto](#o-mapa-do-projeto). Os únicos nomes
+Os scripts tiram os caminhos do [mapa do projeto](#o-mapa-do-projeto), menos os que se
+digitam no comando ([Como rodar](#como-rodar)). Os únicos nomes
 fixos são a pasta `scripts/`, tudo o que está dentro dela, o `projeto.json` e a [pasta
 protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição),
 `docs/material-base/`: é por eles que os scripts se acham uns aos outros e acham as fontes.
@@ -22,9 +23,9 @@ protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição),
 | --- | --- |
 | O <dfn>Python</dfn> 3 ([python.org](https://www.python.org/downloads/)) | roda todos os scripts; num computador em que ele se chama `python3`, é esse o nome no começo dos comandos |
 | A biblioteca <dfn>genanki</dfn> (`pip install genanki`) | monta o arquivo do Anki, no `montar_deck.py` |
-| O <dfn>Tesseract</dfn> ([tesseract-ocr](https://github.com/tesseract-ocr/tesseract)), com os dados de cada idioma do texto das figuras (`por`, o português) | faz o [OCR](../metodologia-de-conteudo.md#o-texto-das-figuras) do texto das figuras, no `transcrever_html.py` e no `transcrever_pptx.py` |
+| O <dfn>Tesseract</dfn> ([tesseract-ocr](https://github.com/tesseract-ocr/tesseract)), com os dados de cada idioma do texto das figuras (`por`, o português) | faz o [OCR](../metodologia-de-conteudo.md#o-texto-das-figuras) do texto das figuras, no `transcrever_html.py` e no `transcrever_pptx.py`, e das páginas de PDF que o `extrator.py` lê pelo OCR |
 | O <dfn>LibreOffice</dfn> ([libreoffice.org](https://www.libreoffice.org/download/)) | faz o PDF de cada aula, de onde sai a imagem de cada slide na conferência das transcrições, e converte as imagens que o Tesseract ou o GraphicsMagick não leem (EMF, WMF, SVG) |
-| O <dfn>Poppler</dfn> ([poppler.freedesktop.org](https://poppler.freedesktop.org/)) | lê PDF: faz a imagem de cada slide, do PDF da aula, e lê as fontes em PDF do material de fora, no `base_externa.py` e na conferência das referências |
+| O <dfn>Poppler</dfn> ([poppler.freedesktop.org](https://poppler.freedesktop.org/)) | lê PDF: faz a imagem de cada slide, do PDF da aula, lê as fontes em PDF do material de fora, no `base_externa.py` e na conferência das referências, e tira o texto, o negrito e o itálico das fontes em PDF, no `extrator.py` |
 | O <dfn>GraphicsMagick</dfn> ([graphicsmagick.org](http://www.graphicsmagick.org/download.html)) | faz a cópia em PNG de cada imagem que não está em PNG, na conferência das transcrições |
 | O [git](../.githooks/README.md) | diz o que vai com o projeto, no `protege_fontes.py`, no `confere_indice.py` e no `glossario.py` |
 
@@ -33,9 +34,10 @@ protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição),
 Cada script roda num
 [terminal](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) aberto em
 qualquer pasta do projeto, com o comando que a seção dele mostra: o script sobe de pasta
-em pasta até achar o `projeto.json` e tira todo caminho dali. A exceção é o
-`validar_dados.py`, que lê o arquivo pelo caminho digitado, a partir da pasta do terminal;
-os exemplos dele são para a pasta principal do projeto.
+em pasta até achar o `projeto.json` e tira todo caminho dali. A exceção são o
+`validar_dados.py`, o `extrator.py` e o `itens.py`, que leem os arquivos pelos caminhos
+digitados, a partir da pasta do terminal; os exemplos deles são para a pasta principal do
+projeto.
 
 O script sempre diz o que fez. Uma linha que começa com `ERRO`, `FALTA` ou `CONFERIR` pede
 alguma coisa e diz o quê.
@@ -47,6 +49,8 @@ alguma coisa e diz o quê.
 | Depois de gravar ou mudar um arquivo de dados | `validar_dados.py` |
 | Para transcrever um capítulo do livro-texto | `transcrever_html.py` |
 | Para transcrever uma aula | `transcrever_pptx.py` |
+| Para transcrever uma fonte em PDF, HTML, XML ou JSON, como uma norma ou um artigo | `extrator.py` |
+| Depois de transcrever um documento numerado, como uma norma | `itens.py` |
 | Assim que uma transcrição é criada | `registrar_fonte.py`, que roda o `referencias.py` |
 | Sempre que o arquivo de fontes muda | `referencias.py` |
 | Sempre que uma transcrição muda, e antes de escrever o material | `conferencia.py` |
@@ -132,7 +136,7 @@ subtópicos e o segundo sem divisão:
 
 ## `validar_dados.py` — confere um arquivo de dados
 
-**O que faz.** Cada arquivo de dados — o `projeto.json`, o arquivo de formato, o de
+**O que faz.** Cada arquivo de dados — como o `projeto.json`, o arquivo de formato, o de
 fontes, a base de cada item e a prova de cada planilha — tem uma forma certa, descrita num
 molde, o <dfn>schema</dfn>, em `scripts/esquemas/`. O script confere se o arquivo segue o
 molde: se não falta campo obrigatório, se nada está no tipo errado, se nenhum código (id ou
@@ -238,6 +242,58 @@ consórcio Unicode (`VENDORS/ADOBE/symbol.txt`), sem os códigos de uso corporat
 quando um código tem dois caracteres, fica o que já está na forma normal (NFKC) e, entre
 dois assim, o de menor código.
 
+## `extrator.py` — transcreve fontes em PDF, HTML, XML e JSON
+
+**O que faz.** Tira o texto de uma fonte por programa, sem ler nada, e grava a transcrição
+no padrão da [metodologia](../metodologia-de-conteudo.md#a-transcrição), página por página.
+De um PDF, tira o texto da camada de texto do próprio arquivo; a página cujo texto não se
+lê vai pelo OCR, quando a lista de extração pede. De uma página da internet, de um XML ou
+de um JSON, capta o texto, bloco por bloco, numa página só. Dois arquivos de dados dizem
+tudo. `dados/extrator.json` guarda o padrão da transcrição e os leitores de cada tipo de
+arquivo. A lista de extração, `docs/material-base/gerados-ocr/extracao.json`, tem as
+fontes, cada uma com a transcrição a gravar, as opções dela, a numeração das páginas e as
+correções da leitura, cada correção conferida na imagem da página; ela fica na pasta
+protegida porque as correções trazem texto da fonte. Os dois nascem de uma cópia dos modelos em branco,
+[`modelo-dados/extrator.json`](../modelo-dados/extrator.json) e
+[`modelo-dados/extracao.json`](../modelo-dados/extracao.json). Cada leitor é um
+`leitor_<tipo>.py`, e o começo de cada um diz as opções dele.
+
+**Como rodar.**
+
+    python scripts/extrator.py dados/extrator.json docs/material-base/gerados-ocr/extracao.json
+
+Com `--so` e o arquivo da fonte, só essa fonte. O script não grava por cima de uma
+transcrição que já existe; com `--substituir`, grava, e o registro da fonte, no topo,
+continua.
+
+**O que mostra.** Cada transcrição gravada, com quantas páginas tem, quantas sem texto,
+quantas lidas pelo OCR, quantas trocas e quantas correções. Com qualquer `ERRO` (uma
+correção cujo texto a leitura não dá mais, uma opção que falta), nada é gravado.
+
+## `itens.py` — lista e confere os itens numerados de uma transcrição
+
+**O que faz.** Num documento numerado, como uma norma, cada parte do texto tem um número:
+7, 7.1, 7.1.1. O script acha esses itens na transcrição, com o número, o título, a página e
+a linha de cada um, e confere a numeração: o número que salta, que se repete ou que sai de
+ordem, e a entrada do sumário que não tem, no texto, o item com o mesmo título. É assim que
+aparece o número que a extração leu errado. O script também divide os tópicos do sumário
+em grupos de um tamanho dado, para dividir o trabalho de quem lê o documento. O arquivo de
+dados `dados/itens-numerados.json` diz a forma de uma linha de item e a de uma entrada do
+sumário, o tamanho do grupo e, para cada transcrição, as páginas do sumário e as do texto.
+Ele nasce de uma cópia do modelo em branco,
+[`modelo-dados/itens-numerados.json`](../modelo-dados/itens-numerados.json). Do
+`dados/extrator.json`, o script usa o padrão da transcrição.
+
+**Como rodar.** A configuração do extrator, a dos itens e o arquivo da lista que o script
+grava:
+
+    python scripts/itens.py dados/extrator.json dados/itens-numerados.json docs/material-base/gerados-ocr/itens-das-normas.json
+
+**O que mostra.** Para cada transcrição, quantos itens, grupos e problemas tem, e uma linha
+`CONFERIR` para cada problema, com a linha da transcrição; a lista é gravada mesmo com
+problemas. Com qualquer `ERRO` (uma forma escrita errado, um campo que o molde não conhece,
+uma faixa fora das páginas), nada é gravado.
+
 ## `registrar_fonte.py` — liga a transcrição à fonte dela
 
 **O que faz.** Grava no topo da transcrição de qual arquivo ela veio: a chave da fonte, o
@@ -296,15 +352,24 @@ slide, as letras, os números e os sinais da transcrição têm de ser os da mes
 fonte, na mesma ordem, e também o título da página e as imagens. Não contam os espaços, as
 marcas da transcrição (o `#` dos títulos, as barras das tabelas, o `<br>`,
 `[slide oculto]`, `[notas do apresentador]`), a forma dos índices e expoentes e a diferença
-entre o hífen e o sinal de menos. À mão, só o texto de dentro de cada imagem: ela aparece
-com esse texto e com as duas caixas de tique, uma para a IA e outra para a pessoa, e mudar
-esse texto, mesmo só na divisão em linhas, é mudar a parte ([Como ticar uma
+entre o hífen e o sinal de menos. À mão, o texto de dentro de cada imagem e, na
+transcrição feita pelo extrator, a página lida pelo OCR ou corrigida (abaixo). A imagem
+aparece com esse texto e com as duas caixas de tique, uma para a IA e outra para a pessoa,
+e mudar esse texto, mesmo só na divisão em linhas, é mudar a parte ([Como ticar uma
 conferência](#como-ticar-uma-conferência)). Cada slide aparece também inteiro, como
 imagem, para ver o que só o desenho mostra; essa imagem não tem tique. A imagem que não
 está em PNG aparece numa cópia em PNG, com o link para o original, porque a visualização
 do VSCode não mostra todo formato (EMF, WMF, TIFF): o GraphicsMagick faz a cópia sem mudar
 o tamanho da imagem, e a que ele não lê o LibreOffice desenha, com fundo branco e sem
 margem.
+
+**Transcrição feita pelo extrator.** A transcrição que está na lista de extração é
+conferida contra o que o [`extrator.py`](#extratorpy--transcreve-fontes-em-pdf-html-xml-e-json)
+lê da fonte agora, com as trocas e as correções da lista: o texto de cada página tem de
+ser o mesmo, letra por letra, e o rótulo também. A página lida pelo OCR, que o script não
+lê de novo, e a página com correção aparecem com a imagem da página (na fonte em PDF), as
+correções dela e as duas caixas de tique. O texto dessas páginas não se corrige no arquivo
+de conferência: a correção vai para a lista de extração.
 
 **Corrigir o texto das imagens.** O texto de uma imagem se corrige no próprio arquivo de
 conferência, entre as cercas (` ```` `), olhando a imagem ao lado. A cerca é lida como no
@@ -321,10 +386,10 @@ nele, fora os tiques, se perde.
     python scripts/conferencia.py
     python scripts/conferencia.py --levar-correcoes
 
-**O que mostra.** Quantas páginas há, quantas têm erro do script, quantas imagens há para
-ticar e quantas estão sem o tique da pessoa. Uma linha `ERRO` aparece para a transcrição
-sem registro, com mais de uma fonte registrada ou cuja fonte mudou ou não existe, e para a
-página cujo texto, título ou imagens não batem com a fonte, com o trecho onde começa a
+**O que mostra.** Quantas páginas há, quantas têm erro do script, quantas partes há para
+ticar e quantas estão sem o tique da pessoa. Uma linha `ERRO` aparece para cada coisa que
+impede a conferência ou que não bate — o registro da fonte, o texto, o título ou as
+imagens de uma página —, com o motivo e, quando é o texto, o trecho onde começa a
 diferença. O arquivo fica melhor de ler na visualização do VSCode (`Ctrl+Shift+V`).
 
 ## `base_externa.py` — monta a base do material de fora
@@ -602,7 +667,10 @@ definem. Sem o git, o script diz isso numa linha `ERRO` e para, como o
 Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json` e as
 planilhas de pergunta, ler o arquivo de formato e conferi-lo contra o molde dele, ler o
 registro da fonte, guardar os tiques, ler as páginas de um documento HTML e os slides de
-uma apresentação, e o que os transcritores fazem do mesmo jeito).
+uma apresentação, e o que os transcritores fazem do mesmo jeito). O `extrator_comum.py` e
+os `leitor_<tipo>.py` também não se rodam: são as partes do `extrator.py`. O
+`extrator_comum.py` serve também ao `itens.py` e ao `conferencia.py`, que leem as
+transcrições do mesmo jeito que o extrator as escreve.
 
 ---
 

@@ -21,6 +21,15 @@ numero impresso no titulo da pagina e as imagens dela, na ordem. O que nao bate 
 texto de dentro de cada imagem, que veio do OCR, e o que se confere a mao: cada imagem
 aparece com esse texto e as duas caixas de tique.
 
+Transcricao feita pelo extrator (a que esta na lista de extracao do projeto, ver
+extrator.py): o texto de cada pagina e conferido pelo script contra o que o extrator le
+da fonte agora, com as trocas e as correcoes da lista -- o mesmo texto, letra por letra --,
+e o rotulo dela tambem. A pagina que o extrator leu pelo OCR, que o script nao le de novo,
+e a pagina com correcao, que alguem decidiu olhando a imagem, aparecem com a imagem da
+pagina (na fonte em PDF), as correcoes dela e as duas caixas de tique. O texto de uma
+pagina assim nao se corrige no arquivo de conferencia: a correcao vai para a lista de
+extracao.
+
 Fonte em pptx (ver transcrever_pptx.py): como a fonte em HTML, slide por slide, contra o
 texto do slide lido do proprio pptx (comum.Apresentacao), com o titulo "slide <posicao>"
 e as imagens comparadas pela impressao digital. Cada slide aparece tambem com a imagem
@@ -55,8 +64,11 @@ que o arquivo foi gerado, a parte nao existe mais na transcricao, o texto de uma
 PDF mudou (esse se corrige na transcricao), uma cerca nao tem fim, uma imagem tem mais de
 uma cerca ou uma linha de tique nao se le.
 
-As pastas, o arquivo gerado, a pasta das imagens e a resolucao delas vem do projeto.json
-("gerados", "conferencia_imagens", "material_base", "imagens" e "resolucao_imagens").
+As pastas, o arquivo gerado, a pasta das imagens e a resolucao delas, a configuracao do
+extrator e a lista de extracao vem do projeto.json ("gerados", "conferencia_imagens",
+"material_base", "imagens", "resolucao_imagens", "extrator" e "extracao"); a configuracao
+e a lista sao lidas pela leitura de todo arquivo de dados (validar_dados.le_dados), cada
+uma contra o molde dela.
 Precisa dos comandos pdfinfo e pdftoppm (pacote Poppler) quando ha fonte em PDF ou em
 pptx, do LibreOffice pra imagem dos slides e pra copia da imagem que o GraphicsMagick nao
 le, e do GraphicsMagick (comando gm) pra copia em PNG.
@@ -70,6 +82,7 @@ Uso (de qualquer pasta dentro do projeto):
 import argparse
 import json
 import re
+import subprocess
 import sys
 from collections import namedtuple
 from pathlib import Path
@@ -83,6 +96,9 @@ from comum import (EXTENSOES_HTML, EXTENSOES_PPTX, FIM_FIGURA, LINHA_CONTINUACAO
                    marca, numero_de_paginas, paginas_html, pdf_dos_slides, sem_escape, situacao_da_copia,
                    texto_do_slide, tiques_anteriores, tiques_da_parte)
 from comum import CERCA as ABRE_CERCA  # noqa: E402  -- a cerca do Markdown, de qualquer tamanho
+from extrator import le_documento, paginas_escritas  # noqa: E402
+from extrator_comum import ErroDeDados, como_padrao, paginas_da_transcricao  # noqa: E402
+from validar_dados import esquema, le_dados  # noqa: E402
 
 CERCA = "````"  # cerca de 4 crases: a transcricao pode ter blocos de 3
 SEPARADOR = re.compile(r"^\|(?:\s*:?-{3,}:?\s*\|)+$")
@@ -181,6 +197,99 @@ def bloco_pdf(nome, pdf, parte, saida):
         out += ["Transcrição: nenhuma seção para esta página", ""]
     if parte["retirado"]:
         out += ["Tique retirado: o texto desta página ou o PDF mudou depois do tique", ""]
+    return out + caixas(parte["tiques"])
+
+
+# ---------- transcricao feita pelo extrator ----------
+
+def documentos_extraidos(projeto):
+    """(configuracao do extrator, {transcricao: documento da lista de extracao}); sem a
+    lista, nenhum documento."""
+    lista = projeto.caminho("extracao")
+    if not lista.exists():
+        return None, {}
+    extracao, erros = le_dados(lista, esquema("extracao"))
+    configuracao, erros_da_configuracao = le_dados(projeto.caminho("extrator"), esquema("extrator"))
+    if erros or erros_da_configuracao:
+        raise ErroDeDados("; ".join(erros + erros_da_configuracao))
+    return configuracao, {(projeto.raiz / d["saida"]).resolve(): d for d in extracao["documentos"]}
+
+
+def paginas_transcritas(texto, padrao):
+    """{posicao no arquivo: (rotulo, texto)} da transcricao, pelo padrao do extrator."""
+    return {n: (rotulo, "\n".join(l for _, l in linhas).strip())
+            for rotulo, n, linhas in paginas_da_transcricao(texto, padrao["titulo_pagina"])}
+
+
+def paginas_lidas(doc, config, raiz):
+    """{posicao no arquivo: (rotulo, texto ou None)} do que o extrator le da fonte agora,
+    sem refazer o OCR: a pagina do OCR vem sem texto."""
+    titulo = como_padrao(config["padrao"]["titulo_pagina"])
+    paginas, _ = paginas_escritas(le_documento(doc, config, raiz, pular_ocr=True), doc, config)
+    return {n: (titulo.match(cabeca).group("rotulo"), None if corpo is None else "\n".join(corpo).strip())
+            for n, cabeca, corpo in paginas}
+
+
+def partes_extraidas(nome, texto, fonte, situacao, anteriores, pasta_img, resolucao, config, doc, raiz):
+    """As paginas de uma transcricao feita pelo extrator, cada uma com o resultado do
+    script ("erros"); a pagina do OCR e a pagina com correcao vao a ticar, com a imagem."""
+    com_fonte, lidas = situacao in ("confere", "mudou"), {}
+    erros_da_fonte = [] if com_fonte else [f"a fonte registrada: {SITUACAO[situacao]}; o texto não foi conferido"]
+    if com_fonte:
+        try:
+            lidas = paginas_lidas(doc, config, raiz)
+        except (ErroDeDados, KeyError, ValueError, TypeError, OSError, subprocess.CalledProcessError) as e:
+            erros_da_fonte = [f"o extrator não lê a fonte: {e}"]
+    transcritas = paginas_transcritas(texto, config["padrao"])
+    em_pdf = com_fonte and fonte.suffix.lower() == ".pdf"
+    hash_fonte, total = (impressao(fonte), numero_de_paginas(fonte) if em_pdf else 0) if com_fonte else ("", 0)
+    out = []
+    for n in sorted(set(lidas) | set(transcritas)):
+        rotulo, conteudo = transcritas.get(n, (f"arquivo p. {n}", ""))
+        erros, (rotulo_lido, lido) = list(erros_da_fonte), lidas.get(n, (None, None))
+        if lidas and n not in lidas:
+            erros.append("a fonte não tem esta página")
+        elif lidas and n not in transcritas:
+            erros.append("a transcrição não tem esta página")
+        elif lidas:
+            if rotulo != rotulo_lido:
+                erros.append(f"o extrator dá a esta página o rótulo \"{rotulo_lido}\"")
+            if lido is not None and lido != conteudo:
+                erros.append("o texto não é o que o extrator lê: " + primeira_diferenca(lido, conteudo))
+        correcoes = [c for c in doc.get("correcoes", []) if c["pagina"] == n]
+        parte = {"n": n, "rotulo": rotulo, "conteudo": conteudo, "erros": erros, "correcoes": correcoes,
+                 "ocr": n in lidas and lido is None, "a_ticar": (n in lidas and lido is None) or bool(correcoes)}
+        if parte["a_ticar"]:
+            parte["sig"] = assinatura(hash_fonte, n, rotulo, conteudo)
+            parte["tiques"], parte["retirado"] = tiques_da_parte(anteriores, nome, n, parte["sig"])
+            parte["imagem"] = imagem(fonte, n, pasta_img, nome, resolucao) if em_pdf and n <= total else None
+        out.append(parte)
+    return out
+
+
+def bloco_extraido(nome, fonte, parte, saida):
+    n = parte["n"]
+    out = ["", f"### {nome} — {parte['rotulo']} (arquivo p. {n})", ""]
+    if parte["a_ticar"]:
+        out += [marca(nome, n, parte["sig"]), ""]
+    if fonte is not None and fonte.exists():
+        alvo = link(fonte, saida) + (f"#page={n}" if fonte.suffix.lower() == ".pdf" else "")
+        out += [f"[original, arquivo p. {n}]({alvo_markdown(alvo)})", ""]
+    out += [f"ERRO: {e}" for e in parte["erros"]]
+    if not parte["a_ticar"]:
+        return out + ([] if parte["erros"] else ["Texto: o mesmo que o extrator lê da fonte."])
+    if parte["erros"]:
+        out.append("")
+    if parte["imagem"]:
+        out += [f"![{nome}, arquivo p. {n}]({alvo_markdown(link(parte['imagem'], saida))})", ""]
+    if parte["ocr"]:
+        out += ["Lida pelo OCR: o texto se confere com a imagem.", ""]
+    for c in parte["correcoes"]:
+        out += [f"Correção da leitura: {json.dumps(c['de'], ensure_ascii=False)} → "
+                f"{json.dumps(c['para'], ensure_ascii=False)}", ""]
+    out += [CERCA, parte["conteudo"], CERCA, ""]
+    if parte["retirado"]:
+        out += ["Tique retirado: o texto desta página ou a fonte mudou depois do tique", ""]
     return out + caixas(parte["tiques"])
 
 
@@ -445,16 +554,23 @@ def so_mudou_o_texto_das_imagens(antes, depois, novos):
     return True
 
 
-def leva_correcoes(transcricoes, saida, raiz):
+def leva_correcoes(transcricoes, saida, raiz, extraidos=(None, {})):
     """(tiques, levadas, recusas): leva para as transcricoes o texto das imagens corrigido no
     arquivo de conferencia. Os tiques sao os do arquivo, com o da pessoa mantido e o da IA
     retirado em cada imagem levada; com alguma recusa, nenhuma transcricao e gravada."""
     tiques = tiques_anteriores(saida)
     textos, recusas = textos_da_conferencia(saida)
     vistas, gravar, levadas = set(), [], []
+    config, documentos = extraidos
     for arq, texto in transcricoes_da_pasta(transcricoes, saida):
         nome = arq.stem
         _, fonte, situacao = fonte_da_transcricao(texto, raiz)
+        if arq.resolve() in documentos:
+            paginas = paginas_transcritas(texto, config["padrao"])
+            recusas += [f"{nome}, arquivo p. {parte}: o texto de uma página feita pelo extrator se corrige com uma "
+                        f"correção na lista de extração" for grupo, parte in textos if grupo == nome
+                        and textos[(grupo, parte)] != [paginas.get(int(parte), ("", ""))[1]]]
+            continue
         if fonte is None or fonte.suffix.lower() not in EXTENSOES_HTML + EXTENSOES_PPTX:
             paginas = por_pagina(texto)
             recusas += [f"{nome}, arquivo p. {parte}: o texto de uma página de PDF se corrige na transcrição"
@@ -498,8 +614,9 @@ def leva_correcoes(transcricoes, saida, raiz):
 
 # ---------- arquivo de conferencia ----------
 
-def gera(transcricoes, saida, raiz, pasta_img, resolucao, anteriores=None):
+def gera(transcricoes, saida, raiz, pasta_img, resolucao, anteriores=None, extraidos=(None, {})):
     anteriores = tiques_anteriores(saida) if anteriores is None else anteriores
+    config, documentos = extraidos
     resumo, corpo, totais, problemas_de_registro, diferencas, registrados = [], [], [0] * 6, [], [], set()
     for arq, texto in transcricoes_da_pasta(transcricoes, saida):
         nome = arq.stem
@@ -510,7 +627,16 @@ def gera(transcricoes, saida, raiz, pasta_img, resolucao, anteriores=None):
             problemas_de_registro.append((arq, situacao))
         corpo += ["", "---", "", f"## {nome}", "", f"Transcrição: `{link(arq, saida)}`",
                   f"Fonte registrada: {chave or '—'}, `{link(fonte, saida) if fonte else '—'}` ({SITUACAO[situacao]})"]
-        if fonte is not None and fonte.suffix.lower() in EXTENSOES_HTML + EXTENSOES_PPTX:
+        if arq.resolve() in documentos:
+            ps = partes_extraidas(nome, texto, fonte, situacao, anteriores, pasta_img, resolucao, config,
+                                  documentos[arq.resolve()], raiz)
+            tiques = [p["tiques"] for p in ps if p["a_ticar"]]
+            com_erro = [p for p in ps if p["erros"]]
+            diferencas += [(arq, p["rotulo"], e) for p in com_erro for e in p["erros"]]
+            cont = [len(ps), len(com_erro)]
+            for p in ps:
+                corpo += bloco_extraido(nome, fonte, p, saida)
+        elif fonte is not None and fonte.suffix.lower() in EXTENSOES_HTML + EXTENSOES_PPTX:
             ps, paginas_da_fonte_lidas = partes_texto(nome, arq, texto, fonte, situacao, anteriores)
             copias_das_imagens(ps, pasta_img, nome)
             if fonte.suffix.lower() in EXTENSOES_PPTX and paginas_da_fonte_lidas:
@@ -537,7 +663,9 @@ def gera(transcricoes, saida, raiz, pasta_img, resolucao, anteriores=None):
     cabecalho = ["# Conferência das transcrições das fontes", "",
                  "Fonte em PDF: cada página tem a imagem e os tiques. Fonte em HTML: o texto de cada página é "
                  "conferido pelo script contra a fonte, e cada imagem tem os tiques. Fonte em pptx: como em HTML, "
-                 "slide por slide, com a imagem do slide inteiro, só pra ver.", "",
+                 "slide por slide, com a imagem do slide inteiro, só pra ver. Transcrição feita pelo extrator: o "
+                 "texto de cada página é conferido pelo script contra o que o extrator lê da fonte, e a página lida "
+                 "pelo OCR ou corrigida tem a imagem e os tiques.", "",
                  "| Transcrição | Chave da fonte | Fonte registrada | Páginas | Páginas com erro do script | "
                  "A ticar | Tique da IA | Tique da pessoa | Sem tique da pessoa |",
                  "| :--- | :--- | :--- | ---: | ---: | ---: | ---: | ---: | ---: |"] + resumo
@@ -557,9 +685,12 @@ def main(argv=None):
     transcricoes, saida = projeto.caminho("gerados"), projeto.caminho("conferencia_imagens")
     if not transcricoes_da_pasta(transcricoes, saida):
         raise SystemExit(f"nenhuma transcricao em {transcricoes}")
-    anteriores = None
+    try:
+        anteriores, extraidos = None, documentos_extraidos(projeto)
+    except (ErroDeDados, KeyError) as e:
+        raise SystemExit(f"ERRO: a lista de extração ou a configuração do extrator não se lê: {e}")
     if a.levar_correcoes and saida.exists():
-        anteriores, levadas, recusas = leva_correcoes(transcricoes, saida, projeto.raiz)
+        anteriores, levadas, recusas = leva_correcoes(transcricoes, saida, projeto.raiz, extraidos)
         for recusa in recusas:
             print(f"ERRO: {recusa}")
         if recusas:
@@ -569,7 +700,7 @@ def main(argv=None):
             print(f"levado para a transcrição: {levada}")
     (paginas, com_erro, a_ticar, ia, pessoa, sem_pessoa), problemas_de_registro, diferencas, registrados = gera(
         transcricoes, saida, projeto.raiz, projeto.pasta_de_imagens(saida), projeto.valor("resolucao_imagens"),
-        anteriores)
+        anteriores, extraidos)
     for arq, situacao in problemas_de_registro:
         print(f"ERRO: {arq.name} -- fonte registrada: {SITUACAO[situacao]}")
     for arq, rotulo, erro in diferencas:

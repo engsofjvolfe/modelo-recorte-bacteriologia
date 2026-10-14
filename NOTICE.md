@@ -14,16 +14,18 @@ O material de estudo parte de duas fontes:
 - o livro *Microbiologia médica*, de Patrick R. Murray, Ken S. Rosenthal e Michael A.
   Pfaller, publicado pela Guanabara Koogan.
 
-Também são de outras pessoas as fontes da pesquisa sobre como os cursos pedem a matéria e
-sobre como se aprende, e o material de fora que completa um ponto onde nem as aulas nem o
-livro chegam. A referência completa de cada fonte está em `docs/REFERENCIAS.md`.
+Também são de outras pessoas as demais fontes que o projeto cita: as da pesquisa sobre
+como os cursos pedem a matéria e sobre como se aprende, as que os documentos do projeto
+citam, como as normas da ABNT de citação e de referência, e o material de fora que
+completa um ponto onde nem as aulas nem o livro chegam. A referência completa de cada
+fonte está em `docs/REFERENCIAS.md`.
 
 ## Como o projeto trata esse material
 
-- A cópia de cada fonte, e tudo o que traz texto dela, fica em
-  [`docs/material-base/`](docs/material-base/): as aulas e o livro, a transcrição deles,
-  as evidências da pesquisa, as cópias do material de fora em `fontes-externas/`, a base de
-  trechos dele e a prova de cada cartão. Nada disso está sob as licenças deste projeto.
+- A cópia de cada fonte, e tudo o que traz texto dela — a transcrição, as correções da
+  leitura, as evidências da pesquisa, a base de trechos do material de fora e a prova de
+  cada cartão —, fica em [`docs/material-base/`](docs/material-base/). Nada disso está sob
+  as licenças deste projeto.
 - Esse material nunca é publicado nem repassado. Se o projeto é guardado no GitHub, a
   <dfn>lista do que nunca vai pro GitHub</dfn> (o arquivo [.gitignore](.gitignore)) deixa
   essa pasta de fora.

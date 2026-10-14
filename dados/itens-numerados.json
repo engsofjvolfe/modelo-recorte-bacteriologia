@@ -1,0 +1,67 @@
+{
+  "versao_schema": 1,
+  "formas": {
+    "item": [
+      {
+        "expressao": "^(?P<numero>\\d{1,2}(?:\\.\\d{1,2})+)(?:\\s+(?P<titulo>[A-ZÀ-Ý].*))?$",
+        "serie": "secao",
+        "linhas_do_titulo": 1
+      },
+      {
+        "expressao": "^(?P<numero>\\d{1,2})\\s+(?P<titulo>\\S.*)$",
+        "serie": "secao",
+        "so_se_no_sumario": true
+      },
+      {
+        "expressao": "^Anexo (?P<numero>[A-Z])$",
+        "serie": "anexo",
+        "linhas_do_titulo": 2
+      }
+    ],
+    "sumario": [
+      {
+        "expressao": "^(?P<numero>\\d+(?:\\.\\d+)*)\\s*(?P<titulo>.+?)\\s*\\.{2,}",
+        "serie": "secao"
+      },
+      {
+        "expressao": "^Anexo (?P<numero>[A-Z])\\s+(?P<titulo>.+?)\\s*\\.{2,}",
+        "serie": "anexo"
+      }
+    ],
+    "numero_sozinho": "^\\d+(?:\\.\\d+)*$",
+    "separador": "."
+  },
+  "grupo": 3,
+  "documentos": [
+    {
+      "transcricao": "docs/material-base/gerados-ocr/abnt-nbr-6023-2025.md",
+      "sumario": [
+        {
+          "de": 3,
+          "ate": 4
+        }
+      ],
+      "corpo": [
+        {
+          "de": 7,
+          "ate": 61
+        }
+      ]
+    },
+    {
+      "transcricao": "docs/material-base/gerados-ocr/abnt-nbr-10520-2023.md",
+      "sumario": [
+        {
+          "de": 3,
+          "ate": 3
+        }
+      ],
+      "corpo": [
+        {
+          "de": 5,
+          "ate": 23
+        }
+      ]
+    }
+  ]
+}

@@ -7,6 +7,8 @@
   "coluna_subdecks": null,
   "caminhos": {
     "formato": "dados/formato.json",
+    "extrator": "dados/extrator.json",
+    "extracao": "docs/material-base/gerados-ocr/extracao.json",
     "fontes": "dados/fontes.json",
     "referencias": "docs/REFERENCIAS.md",
     "indice": "INDICE.md",

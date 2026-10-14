@@ -23,13 +23,15 @@
     "caminhos": {
       "type": "object",
       "additionalProperties": true,
-      "required": ["formato", "fontes", "referencias", "indice", "glossario", "licenca_conteudo",
-                   "material_base", "fontes_externas", "gerados", "conferencia_imagens", "conferencia_referencias",
+      "required": ["formato", "extrator", "extracao", "fontes", "referencias", "indice", "glossario",
+                   "licenca_conteudo", "material_base", "fontes_externas", "gerados", "conferencia_imagens", "conferencia_referencias",
                    "analise", "pesquisa", "material_gerado", "baralhos",
                    "bases", "base_externa", "conferencia_trechos", "provas", "conferencia_cartoes", "imagens",
                    "estilo_cartao"],
       "properties": {
         "formato": { "$ref": "#/$defs/texto" },
+        "extrator": { "$ref": "#/$defs/texto" },
+        "extracao": { "$ref": "#/$defs/texto" },
         "fontes": { "$ref": "#/$defs/texto" },
         "referencias": { "$ref": "#/$defs/texto" },
         "indice": { "$ref": "#/$defs/texto" },

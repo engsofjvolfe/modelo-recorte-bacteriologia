@@ -17,15 +17,15 @@ pessoa (seção 7). A seção 8 trata dos documentos e dos arquivos do próprio 
 Parte do trabalho é feita por [scripts](scripts/README.md), que ficam na pasta
 `scripts/`; o README deles diz o que cada um faz e como rodar. Quem diz onde fica cada
 coisa é o <dfn>mapa do projeto</dfn>, o arquivo `projeto.json`, na pasta principal: é dali
-que os scripts tiram todo caminho.
+que os scripts tiram os caminhos.
 
 O <dfn>material de terceiros</dfn> é o material de outras pessoas descrito no
-[NOTICE](NOTICE.md): as aulas, o livro-texto, a transcrição deles, as evidências da
-pesquisa, as cópias do material de fora, a base de trechos dele, a prova dos cartões e
-tudo o que traz texto deles. Ele nunca é publicado; <dfn>publicar</dfn> é pôr o projeto
-onde outras pessoas o vejam — no <dfn>GitHub</dfn>, um site que guarda projetos na
-internet e o histórico de cada mudança deles, ou em qualquer outro lugar. O resto do
-projeto pode ser publicado.
+[NOTICE](NOTICE.md): a cópia de cada fonte — as aulas, o livro-texto e as outras fontes
+que o projeto cita — e tudo o que traz texto dela: a transcrição, as correções da
+leitura, as evidências da pesquisa, a base de trechos do material de fora e a prova dos
+cartões. Ele nunca é publicado; <dfn>publicar</dfn> é pôr o projeto onde outras pessoas o
+vejam — no <dfn>GitHub</dfn>, um site que guarda projetos na internet e o histórico de
+cada mudança deles, ou em qualquer outro lugar. O resto do projeto pode ser publicado.
 
 ---
 
@@ -44,11 +44,16 @@ site: um documento HTML que marca as páginas impressas.
 Cada fonte tem uma transcrição integral e literal, feita por script a partir do próprio
 arquivo, sem leitura por IA: o `transcrever_pptx.py` copia o texto de cada slide, e o
 `transcrever_html.py`, o de cada página do livro, com o número impresso que o documento
-marca. O livro chega ao script pela captura que o navegador salva durante a leitura no
-site; o script guarda na pasta protegida uma cópia do documento e das imagens dele, que é
-o arquivo da fonte, e a captura, que tem os dados da sessão no site, não fica no projeto.
-A transcrição é a base contra a qual se confere tudo o que se escreve: texto literal e
-completo se confere com mais facilidade que o arquivo original.
+marca; as outras fontes, como um PDF ou uma página da internet, o `extrator.py`
+transcreve. De um PDF, ele tira o texto da camada de texto do próprio arquivo e, na página
+cujo texto não se lê, o que o OCR lê na imagem dela. O que a leitura de uma página dá
+errado, conferido na imagem da página, se corrige como dado, na lista de extração, e vale
+de novo a cada extração: ninguém corrige a transcrição à mão. O livro chega ao script pela
+captura que o navegador salva durante a leitura no site; o script guarda na pasta
+protegida uma cópia do documento e das imagens dele, que é o arquivo da fonte, e a
+captura, que tem os dados da sessão no site, não fica no projeto. A transcrição é a base
+contra a qual se confere tudo o que se escreve: texto literal e completo se confere com
+mais facilidade que o arquivo original.
 
 Cada página, ou cada slide, é uma parte da transcrição, que começa por um título com duas
 marcas: como a citação chama a página e a posição dela no arquivo — `## p. 12 (arquivo p.
@@ -99,14 +104,19 @@ diga por escrito.
 
 Até ser conferida, a transcrição não prova nada. Um <dfn>arquivo de conferência</dfn>
 mostra cada parte a conferir ao lado daquilo contra o que ela se confere, com duas caixas
-de tique, uma para a IA e outra para a pessoa. Como o texto das aulas e do livro é cópia
-do arquivo, quem o confere é o script: o `conferencia.py` compara cada página da
-transcrição com a mesma página na fonte e aponta o que não bate. À mão, confere-se só o
-texto de dentro de cada figura, que veio do OCR: no arquivo de conferência, cada imagem
-aparece ao lado desse texto, e é ali, olhando a imagem, que o texto se corrige. Nas aulas,
-cada slide aparece também inteiro, como imagem, para se ver o que só o desenho mostra,
-como as setas de um esquema. O que o script compara, como a correção chega à transcrição
-e quando um tique sai estão no [README dos
+de tique, uma para a IA e outra para a pessoa. Como o texto da transcrição é cópia do
+arquivo, quem o confere é o script: o `conferencia.py` compara cada página da transcrição
+com a mesma página na fonte, ou com o que o extrator lê dela, e aponta o que não bate. Num
+documento numerado, como uma norma, o
+[`itens.py`](scripts/README.md#itenspy--lista-e-confere-os-itens-numerados-de-uma-transcrição)
+confere também a numeração dos itens, em que aparece o número que a extração leu errado. À
+mão, confere-se o que veio do OCR ou de uma correção. O texto de dentro de cada figura
+aparece ao lado da imagem, e é ali, olhando a imagem, que ele se corrige. A página de PDF
+que o extrator leu pelo OCR, ou que tem correção, aparece ao lado da imagem dela, e o que
+estiver errado se corrige na lista de extração. Nas aulas, cada slide aparece também
+inteiro, como imagem, para se ver o que só o desenho mostra, como as setas de um esquema.
+O que o script compara, como a correção chega à transcrição e quando um tique sai estão no
+[README dos
 scripts](scripts/README.md#conferenciapy--monta-a-conferência-das-transcrições).
 
 ---
@@ -434,7 +444,7 @@ scripts abaixo grava um [arquivo de conferência](#a-conferência-da-transcriç�
 
 | O que se confere | Contra o quê | Script | Arquivo de conferência |
 | --- | --- | --- | --- |
-| Cada página da transcrição: o texto, pelo script, e o de dentro de cada figura, pela pessoa | O texto e as imagens da fonte | `conferencia.py` | `CONFERENCIA-COM-IMAGEM.md` |
+| Cada página da transcrição: o texto, pelo script; o de dentro de cada figura e a página lida pelo OCR ou corrigida, pela pessoa | O texto e as imagens da fonte | `conferencia.py` | `CONFERENCIA-COM-IMAGEM.md` |
 | Cada referência e a chamada dela | A folha de rosto ou a página da fonte | `referencias.py` | `CONFERENCIA-REFERENCIAS.md` |
 | Cada frase do material de fora e a classe dela | A página da fonte | `base_externa.py` | `CONFERENCIA-TRECHOS.md` |
 | Cada cartão | O trecho da prova, no lugar que a citação diz | `confere_cartoes.py` | `CONFERENCIA-CARTOES.md` |
@@ -467,7 +477,8 @@ Antes de o material valer, nenhum script deixa linha `ERRO` nem `FALTA`: o
    fonte; toda citação tem a referência em `docs/REFERENCIAS.md`; toda referência de lá é
    citada em algum lugar e tem o tique da pessoa na conferência das referências; e a cópia
    de cada material de fora está em `docs/material-base/fontes-externas/`;
-9. a base literal: cada figura da transcrição tem o tique da pessoa, e nenhuma página tem
+9. a base literal: cada parte a ticar da conferência das transcrições — cada figura e
+   cada página lida pelo OCR ou corrigida — tem o tique da pessoa, e nenhuma página tem
    erro do script; o arquivo de base de cada item não deixa frase sem classe nem subtópico
    sem marca, e cada página da conferência dos trechos tem o tique da pessoa;
 10. a análise da matéria: cada aula está nela, trecho por trecho; cada busca da pesquisa
