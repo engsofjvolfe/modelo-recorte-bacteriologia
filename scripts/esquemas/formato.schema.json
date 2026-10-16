@@ -2,41 +2,243 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "formato.schema.json",
   "type": "object",
-  "required": ["versao_schema", "curso", "disciplina", "nivel", "idioma", "itens", "elos", "eixos", "colunas_extras"],
-  "additionalProperties": true,
+  "required": [
+    "versao_schema", "cursos", "disciplina", "nivel", "idioma", "ultima_aula", "grupos", "partes_por_tipo",
+    "tipos_junto", "fora", "marcas", "onde_se_ensina", "documentos"
+  ],
+  "additionalProperties": false,
   "properties": {
     "versao_schema": { "const": 1 },
-    "curso": { "type": "string", "minLength": 1 },
-    "disciplina": { "type": "string", "minLength": 1 },
-    "nivel": { "type": "string", "minLength": 1 },
+    "cursos": { "$ref": "#/$defs/textos" },
+    "disciplina": { "$ref": "#/$defs/texto" },
+    "nivel": { "$ref": "#/$defs/texto" },
     "idioma": { "type": "string", "minLength": 2 },
-    "itens": { "type": "array", "items": { "$ref": "#/$defs/rotulo" } },
-    "elos": { "type": "array", "items": { "$ref": "#/$defs/rotulo" } },
-    "eixos": { "type": "array", "items": { "$ref": "#/$defs/eixo" } },
-    "colunas_extras": {
-      "type": "array",
-      "items": { "type": "string", "minLength": 1, "not": { "enum": ["pergunta", "resposta", "fonte"] } }
-    }
+    "ultima_aula": { "$ref": "#/$defs/texto" },
+    "grupos": { "type": "array", "items": { "$ref": "#/$defs/grupo" } },
+    "partes_por_tipo": { "type": "array", "items": { "$ref": "#/$defs/parte_por_tipo" } },
+    "tipos_junto": { "$ref": "#/$defs/textos" },
+    "fora": { "type": "array", "items": { "$ref": "#/$defs/fora" } },
+    "marcas": { "type": "array", "items": { "$ref": "#/$defs/marca" } },
+    "onde_se_ensina": { "type": "object", "additionalProperties": { "$ref": "#/$defs/textos_com_um" } },
+    "documentos": { "type": "array", "items": { "$ref": "#/$defs/documento" } }
   },
   "$defs": {
-    "rotulo": {
+    "texto": { "type": "string", "minLength": 1 },
+    "textos": { "type": "array", "items": { "$ref": "#/$defs/texto" } },
+    "textos_com_um": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/texto" } },
+    "ordem": { "enum": ["dada", "proposta"] },
+    "de_outro_molde": { "not": {} },
+    "grupo": {
       "type": "object",
       "required": ["id", "nome"],
-      "additionalProperties": true,
+      "additionalProperties": false,
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "nome": { "type": "string", "minLength": 1 }
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "pelo_assunto": { "type": "boolean" }
+      }
+    },
+    "parte_por_tipo": {
+      "type": "object",
+      "required": ["id", "nome", "tipos", "ordem"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "tipos": { "$ref": "#/$defs/textos_com_um" },
+        "ordem": { "$ref": "#/$defs/ordem" }
+      }
+    },
+    "fora": {
+      "type": "object",
+      "required": ["id", "nome", "tipos"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "tipos": { "$ref": "#/$defs/textos_com_um" }
+      }
+    },
+    "marca": {
+      "type": "object",
+      "required": ["id", "nome", "texto", "papeis"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "texto": { "$ref": "#/$defs/texto" },
+        "papeis": { "$ref": "#/$defs/textos_com_um" }
+      }
+    },
+    "parte": {
+      "type": "object",
+      "required": ["id", "nome", "ordem"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "ordem": { "$ref": "#/$defs/ordem" }
+      }
+    },
+    "abertura": {
+      "type": "object",
+      "required": ["id", "nome", "ordem", "recebe_trechos"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "ordem": { "$ref": "#/$defs/ordem" },
+        "recebe_trechos": { "type": "boolean" }
+      }
+    },
+    "subtopico": {
+      "type": "object",
+      "required": ["id", "nome"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" }
       }
     },
     "eixo": {
       "type": "object",
-      "required": ["id", "nome", "subtopicos"],
-      "additionalProperties": true,
+      "required": ["id", "nome", "ordem"],
+      "additionalProperties": false,
       "properties": {
-        "id": { "type": "string", "minLength": 1 },
-        "nome": { "type": "string", "minLength": 1 },
-        "subtopicos": { "type": "array", "items": { "$ref": "#/$defs/rotulo" } }
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "ordem": { "$ref": "#/$defs/ordem" },
+        "subtopicos": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/subtopico" } }
       }
+    },
+    "elo": {
+      "type": "object",
+      "required": ["id", "nome", "eixos", "ordem"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "eixos": { "$ref": "#/$defs/textos_com_um" },
+        "ordem": { "$ref": "#/$defs/ordem" }
+      }
+    },
+    "forma": {
+      "type": "object",
+      "required": ["verbo", "tipos", "ordem"],
+      "additionalProperties": false,
+      "properties": {
+        "verbo": { "$ref": "#/$defs/texto" },
+        "tipos": { "$ref": "#/$defs/textos_com_um" },
+        "ordem": { "$ref": "#/$defs/ordem" }
+      }
+    },
+    "coluna": {
+      "type": "object",
+      "required": ["id", "lado", "ordem"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "lado": { "enum": ["frente", "verso"] },
+        "ordem": { "$ref": "#/$defs/ordem" }
+      }
+    },
+    "unidade": {
+      "type": "object",
+      "required": ["id", "nome"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" }
+      }
+    },
+    "unidade_com_grade": {
+      "type": "object",
+      "required": ["id", "nome"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "eixos": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/eixo" } }
+      }
+    },
+    "documento": {
+      "type": "object",
+      "required": ["id", "nome", "unidade", "molde"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/texto" },
+        "nome": { "$ref": "#/$defs/texto" },
+        "unidade": { "$ref": "#/$defs/texto" },
+        "molde": { "enum": ["partes_por_tipo", "eixos", "formas", "colunas"] },
+        "grupos": { "$ref": "#/$defs/textos" },
+        "caminhos": { "$ref": "#/$defs/textos" },
+        "todos": { "type": "boolean" },
+        "unidades": { "type": "array", "minItems": 1 },
+        "casos": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/parte" } },
+        "abertura": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/abertura" } },
+        "eixos": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/eixo" } },
+        "elos": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/elo" } },
+        "pergunta": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/parte" } },
+        "formas": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/forma" } },
+        "colunas": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/coluna" } }
+      },
+      "allOf": [
+        {
+          "if": { "required": ["molde"], "properties": { "molde": { "const": "partes_por_tipo" } } },
+          "then": {
+            "properties": {
+              "unidades": { "items": { "$ref": "#/$defs/unidade" } },
+              "abertura": { "$ref": "#/$defs/de_outro_molde" },
+              "eixos": { "$ref": "#/$defs/de_outro_molde" },
+              "elos": { "$ref": "#/$defs/de_outro_molde" },
+              "pergunta": { "$ref": "#/$defs/de_outro_molde" },
+              "formas": { "$ref": "#/$defs/de_outro_molde" },
+              "colunas": { "$ref": "#/$defs/de_outro_molde" }
+            }
+          }
+        },
+        {
+          "if": { "required": ["molde"], "properties": { "molde": { "const": "eixos" } } },
+          "then": {
+            "properties": {
+              "unidades": { "items": { "$ref": "#/$defs/unidade_com_grade" } },
+              "casos": { "$ref": "#/$defs/de_outro_molde" },
+              "pergunta": { "$ref": "#/$defs/de_outro_molde" },
+              "formas": { "$ref": "#/$defs/de_outro_molde" },
+              "colunas": { "$ref": "#/$defs/de_outro_molde" }
+            }
+          }
+        },
+        {
+          "if": { "required": ["molde"], "properties": { "molde": { "const": "formas" } } },
+          "then": {
+            "required": ["pergunta", "formas"],
+            "properties": {
+              "unidades": { "items": { "$ref": "#/$defs/unidade" } },
+              "casos": { "$ref": "#/$defs/de_outro_molde" },
+              "abertura": { "$ref": "#/$defs/de_outro_molde" },
+              "eixos": { "$ref": "#/$defs/de_outro_molde" },
+              "elos": { "$ref": "#/$defs/de_outro_molde" },
+              "colunas": { "$ref": "#/$defs/de_outro_molde" }
+            }
+          }
+        },
+        {
+          "if": { "required": ["molde"], "properties": { "molde": { "const": "colunas" } } },
+          "then": {
+            "required": ["colunas"],
+            "properties": {
+              "unidades": { "items": { "$ref": "#/$defs/unidade" } },
+              "casos": { "$ref": "#/$defs/de_outro_molde" },
+              "abertura": { "$ref": "#/$defs/de_outro_molde" },
+              "eixos": { "$ref": "#/$defs/de_outro_molde" },
+              "elos": { "$ref": "#/$defs/de_outro_molde" },
+              "pergunta": { "$ref": "#/$defs/de_outro_molde" },
+              "formas": { "$ref": "#/$defs/de_outro_molde" }
+            }
+          }
+        }
+      ]
     }
   }
 }

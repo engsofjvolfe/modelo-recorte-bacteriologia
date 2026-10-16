@@ -87,6 +87,7 @@ As palavras que os documentos do projeto definem, em ordem alfabética, cada uma
 - **Tesseract** — [Scripts › O que precisa estar instalado](scripts/README.md#o-que-precisa-estar-instalado)
 - **tipos de ligação** — [Análise da matéria › 3. O que liga as aulas](docs/analise-da-materia.md#3-o-que-liga-as-aulas)
 - **trecho das aulas** — [Análise da matéria › 2. As aulas, slide por slide](docs/analise-da-materia.md#2-as-aulas-slide-por-slide)
+- **unidade** — [Metodologia de Conteúdo › Onde o formato fica gravado](metodologia-de-conteudo.md#onde-o-formato-fica-gravado)
 - **VSCode** — [Manual de Uso — Núcleo de Microbiologia: bacteriologia › Atualizando o baralho depois de editar as planilhas](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas)
 
 ---

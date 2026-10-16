@@ -1,0 +1,1494 @@
+id	documento	unidade	parte
+1/8/2/bacb	familia	microbiota	familia
+2/12/1/0d9b	familia	estruturas	familia
+2/13/1/c082	familia	estruturas	composicao
+2/13/2/6c04	familia	estruturas	definicao
+2/13/3/bb0e	familia	estruturas	definicao
+2/13/4/58f5	familia	estruturas	definicao
+2/14/1/3215	familia	estruturas	definicao
+2/14/2/db17	familia	estruturas	definicao
+2/14/3/1380	familia	estruturas	definicao
+2/14/4/9cbd	familia	estruturas	funcao
+2/14/5/21df	familia	estruturas	tipos
+2/16/1/147c	familia	estruturas	definicao
+2/16/2/6b25	familia	estruturas	tipos
+2/16/3/ce79	familia	estruturas	tipos
+2/16/4/d2d6	familia	estruturas	tipos
+2/17/1/ee6b	familia	estruturas	composicao
+2/17/2/87c6	familia	estruturas	funcao
+2/17/3/941d	familia	estruturas	alvo
+2/17/3/941d	familia	antimicrobianos	mecanismo
+2/17/4/5a83	familia	estruturas	alvo
+2/17/4/5a83	familia	antimicrobianos	mecanismo
+2/17/5/da3f	familia	estruturas	alvo
+2/17/5/da3f	familia	antimicrobianos	mecanismo
+2/17/6/3ab4	familia	estruturas	alvo
+2/17/6/3ab4	familia	antimicrobianos	mecanismo
+2/17/7/0414	familia	estruturas	alvo
+2/17/7/0414	familia	antimicrobianos	mecanismo
+2/18/1/4338	familia	estruturas	composicao
+2/18/2/d4a9	familia	estruturas	alvo
+2/18/2/d4a9	familia	controle	mecanismo
+2/18/3/fbb8	familia	estruturas	alvo
+2/18/3/fbb8	familia	antimicrobianos	mecanismo
+2/18/4/b2c2	familia	estruturas	funcao
+2/18/5/0f8d	familia	estruturas	funcao
+2/18/6/5fbf	familia	estruturas	funcao
+2/18/7/0363	familia	estruturas	alvo
+2/18/7/0363	familia	antimicrobianos	mecanismo
+2/20/1/6eef	familia	estruturas	composicao
+2/20/2/f433	familia	estruturas	funcao
+2/20/3/b73d	familia	estruturas	funcao
+2/20/4/99b1	familia	estruturas	funcao
+2/20/5/08cc	familia	estruturas	alvo
+2/20/5/08cc	familia	antimicrobianos	mecanismo
+2/21/1/dd62	familia	estruturas	composicao
+2/21/2/9602	familia	estruturas	composicao
+2/29/1/a72d	familia	estruturas	definicao
+2/29/2/3b4f	familia	estruturas	composicao
+2/29/3/c1ec	familia	estruturas	funcao
+2/29/4/56e3	familia	estruturas	funcao
+2/29/5/0868	familia	estruturas	funcao
+2/30/1/45e8	familia	estruturas	definicao
+2/30/2/5de5	familia	estruturas	composicao
+2/30/3/1061	familia	estruturas	funcao
+2/30/4/338b	familia	estruturas	tipos
+2/30/5/2ab8	familia	estruturas	tipos
+2/30/6/ba34	familia	estruturas	tipos
+2/31/1/2b38	familia	estruturas	definicao
+2/31/2/1eeb	familia	estruturas	composicao
+2/31/3/b0a6	familia	estruturas	tipos
+2/31/4/6de9	familia	estruturas	tipos
+2/33/1/1858	familia	estruturas	definicao
+2/33/2/d3f4	familia	estruturas	definicao
+2/33/3/0b5c	familia	estruturas	composicao
+2/33/4/ea12	familia	estruturas	tipos
+2/33/5/9d43	familia	estruturas	presenca
+4/2/4/406a	familia	estruturas	definicao
+4/12/2/b369	familia	estruturas	tipos
+5/3/1/9c7b	familia	microbiota	estado
+5/3/2/4db0	familia	microbiota	estado
+5/3/3/5b49	familia	microbiota	estado
+5/3/4/9394	familia	microbiota	estado
+5/3/5/3644	familia	microbiota	estado
+5/3/6/05df	familia	microbiota	estado
+5/10/1/e74c	familia	microbiota	microrganismos
+5/10/2/f9d0	familia	microbiota	microrganismos
+5/10/3/d750	familia	microbiota	microrganismos
+5/10/4/ad1a	familia	microbiota	microrganismos
+5/10/5/705a	familia	microbiota	microrganismos
+5/10/6/56a1	familia	microbiota	microrganismos
+5/10/7/7128	familia	microbiota	microrganismos
+5/10/8/d6fe	familia	microbiota	gram
+5/11/1/b8ae	familia	microbiota	microrganismos
+5/11/2/c3c6	familia	microbiota	microrganismos
+5/11/3/d086	familia	microbiota	microrganismos
+5/11/4/5819	familia	microbiota	microrganismos
+5/11/5/d31e	familia	microbiota	gram
+5/12/1/af81	familia	microbiota	microrganismos
+5/12/2/7389	familia	microbiota	microrganismos
+5/12/3/10a8	familia	microbiota	microrganismos
+5/12/4/9f1d	familia	microbiota	gram
+5/13/1/1129	familia	microbiota	microrganismos
+5/13/2/d057	familia	microbiota	microrganismos
+5/13/3/33d2	familia	microbiota	microrganismos
+5/13/4/5f21	familia	microbiota	microrganismos
+5/13/5/0a59	familia	microbiota	microrganismos
+5/13/6/d98f	familia	microbiota	microrganismos
+5/13/7/27b1	familia	microbiota	microrganismos
+5/13/8/14ba	familia	microbiota	microrganismos
+5/13/9/8a00	familia	microbiota	microrganismos
+5/13/10/c311	familia	microbiota	microrganismos
+5/13/11/49ed	familia	microbiota	microrganismos
+5/13/12/6388	familia	microbiota	microrganismos
+5/13/13/3142	familia	microbiota	microrganismos
+5/13/14/5131	familia	microbiota	microrganismos
+5/13/15/5935	familia	microbiota	microrganismos
+5/13/16/f534	familia	microbiota	microrganismos
+5/13/17/e23e	familia	microbiota	microrganismos
+5/14/1/ed36	familia	microbiota	microrganismos
+5/14/2/41fc	familia	microbiota	microrganismos
+5/14/3/aa8c	familia	microbiota	microrganismos
+5/14/4/9794	familia	microbiota	microrganismos
+5/14/5/f4a7	familia	microbiota	microrganismos
+5/14/6/5fd3	familia	microbiota	microrganismos
+5/14/7/04f9	familia	microbiota	microrganismos
+5/14/8/2c0e	familia	microbiota	microrganismos
+5/14/9/af4b	familia	microbiota	gram
+5/15/1/42ab	familia	microbiota	microrganismos
+5/15/2/02a3	familia	microbiota	microrganismos
+5/15/3/c67b	familia	microbiota	microrganismos
+5/15/4/c066	familia	microbiota	microrganismos
+5/15/5/2875	familia	microbiota	microrganismos
+5/15/6/a724	familia	microbiota	microrganismos
+5/15/7/0c1f	familia	microbiota	microrganismos
+5/15/8/5364	familia	microbiota	microrganismos
+5/15/9/7a4b	familia	microbiota	microrganismos
+5/15/10/246d	familia	microbiota	microrganismos
+5/15/11/5fad	familia	microbiota	microrganismos
+5/15/12/c5b9	familia	microbiota	microrganismos
+5/15/13/4488	familia	microbiota	microrganismos
+5/15/14/4182	familia	microbiota	microrganismos
+5/16/1/7793	familia	microbiota	microrganismos
+5/16/2/e087	familia	microbiota	microrganismos
+5/16/3/5b20	familia	microbiota	microrganismos
+5/16/4/1882	familia	microbiota	microrganismos
+5/16/5/a285	familia	microbiota	microrganismos
+5/16/6/7426	familia	microbiota	microrganismos
+5/16/7/c885	familia	microbiota	microrganismos
+6/23/4/ec5f	familia	controle	espectro
+7/9/1/c809	familia	controle	condicoes
+7/9/2/4320	familia	controle	uso
+7/9/3/0cc9	familia	controle	condicoes
+7/9/4/1666	familia	controle	condicoes
+7/9/5/3e88	familia	controle	condicoes
+7/11/1/0b33	familia	controle	condicoes
+7/11/2/5f58	familia	controle	uso
+7/11/3/0b8d	familia	controle	uso
+7/11/4/cb62	familia	controle	uso
+7/11/5/d6e2	familia	controle	uso
+7/12/1/7160	familia	controle	uso
+7/12/2/a848	familia	controle	condicoes
+7/13/1/05b3	familia	controle	mecanismo
+7/13/2/cf78	familia	controle	categoria
+7/14/1/6446	familia	controle	familia
+7/14/2/a20c	familia	controle	categoria
+7/14/3/d8c8	familia	controle	mecanismo
+7/14/4/29ca	familia	controle	mecanismo
+7/15/1/9821	familia	controle	categoria
+7/15/2/ab49	familia	controle	categoria
+7/15/3/4e94	familia	controle	mecanismo
+7/15/4/f0c8	familia	controle	condicoes
+7/16/1/e9d2	familia	controle	familia
+7/16/2/efa3	familia	controle	categoria
+7/16/3/990f	familia	controle	categoria
+7/17/1/2df1	familia	controle	uso
+7/17/2/abee	familia	controle	condicoes
+7/17/3/ada1	familia	controle	condicoes
+7/17/4/40e7	familia	controle	mecanismo
+7/18/1/afa1	familia	controle	familia
+7/18/2/ba3b	familia	controle	familia
+7/18/3/5f9e	familia	controle	familia
+7/18/4/a245	familia	controle	familia
+7/18/5/422f	familia	controle	familia
+7/19/1/c830	familia	controle	mecanismo
+7/19/2/8c5c	familia	controle	uso
+7/19/3/dee1	familia	controle	limitacoes
+7/19/4/4be3	familia	controle	mecanismo
+7/19/5/b46b	familia	controle	uso
+7/19/6/419a	familia	controle	mecanismo
+7/19/7/c849	familia	controle	uso
+7/19/8/00de	familia	controle	espectro
+7/19/9/8a29	familia	controle	mecanismo
+7/19/10/3471	familia	controle	uso
+7/19/11/4480	familia	controle	espectro
+7/19/12/be0b	familia	controle	mecanismo
+7/19/13/2aaf	familia	controle	uso
+7/19/14/f14e	familia	controle	categoria
+7/19/15/4fda	familia	controle	mecanismo
+7/19/16/9912	familia	controle	uso
+7/19/17/3c21	familia	controle	espectro
+7/19/18/b1c9	familia	controle	espectro
+7/19/19/58f0	familia	controle	categoria
+7/20/1/f586	familia	controle	mecanismo
+7/20/2/5acf	familia	controle	limitacoes
+7/20/3/69b2	familia	controle	uso
+7/20/4/2a17	familia	controle	espectro
+7/20/5/8f0f	familia	controle	mecanismo
+7/20/6/c738	familia	controle	uso
+7/20/7/fe47	familia	controle	categoria
+7/20/8/aafc	familia	controle	mecanismo
+7/20/9/1ae3	familia	controle	uso
+7/20/10/e924	familia	controle	categoria
+7/20/11/f6d7	familia	controle	mecanismo
+7/20/12/fc71	familia	controle	uso
+7/20/13/87e8	familia	controle	espectro
+7/20/14/f6f9	familia	controle	uso
+7/20/15/0f3e	familia	controle	espectro
+7/20/16/081d	familia	controle	mecanismo
+7/20/17/3c23	familia	controle	uso
+7/20/18/86fb	familia	controle	uso
+7/20/19/f001	familia	controle	espectro
+7/21/1/1c23	familia	controle	familia
+7/21/2/d057	familia	controle	condicoes
+7/21/3/cf42	familia	controle	condicoes
+7/21/4/d0ad	familia	controle	condicoes
+7/21/5/7ef5	familia	controle	condicoes
+7/21/6/3bde	familia	controle	condicoes
+7/23/1/c735	familia	controle	espectro
+7/23/2/fec7	familia	controle	espectro
+7/23/3/e4e9	familia	controle	espectro
+7/23/4/715e	familia	controle	espectro
+7/23/5/63bb	familia	controle	espectro
+7/23/6/cdee	familia	controle	espectro
+7/23/7/c111	familia	controle	espectro
+7/23/8/90a1	familia	controle	espectro
+8/7/1/c14a	familia	antimicrobianos	mecanismo
+8/7/3/774d	familia	antimicrobianos	origem
+8/8/1/5b7e	familia	antimicrobianos	classe
+8/8/2/e63d	familia	antimicrobianos	classe
+8/8/3/ae11	familia	antimicrobianos	classe
+8/8/4/5be2	familia	antimicrobianos	classe
+8/9/1/9e62	familia	antimicrobianos	classe
+8/9/2/ee7a	familia	antimicrobianos	classe
+8/9/3/b98c	familia	antimicrobianos	classe
+8/9/4/1402	familia	antimicrobianos	classe
+8/10/1/2ac3	familia	antimicrobianos	classe
+8/10/2/3c26	familia	antimicrobianos	classe
+8/10/3/a9ad	familia	antimicrobianos	classe
+8/10/4/c2b5	familia	antimicrobianos	classe
+8/10/5/1276	familia	antimicrobianos	classe
+8/11/1/dda9	familia	antimicrobianos	classe
+8/11/2/80a1	familia	antimicrobianos	espectro
+8/11/3/75aa	familia	antimicrobianos	classe
+8/11/4/f48b	familia	antimicrobianos	uso
+8/12/1/5be2	familia	antimicrobianos	classe
+8/14/1/6f7f	familia	estruturas	composicao
+8/14/1/6f7f	familia	antimicrobianos	mecanismo
+8/14/2/7338	familia	antimicrobianos	classe
+8/14/3/0023	familia	antimicrobianos	classe
+8/17/1/f772	familia	antimicrobianos	mecanismo
+8/17/2/2597	familia	antimicrobianos	mecanismo
+8/18/1/3620	familia	antimicrobianos	efeito
+8/18/2/b530	familia	antimicrobianos	classe
+8/18/3/6a31	familia	antimicrobianos	farmacocinetica
+8/18/4/9224	familia	antimicrobianos	classe
+8/18/5/f0f8	familia	antimicrobianos	classe
+8/18/6/fe73	familia	antimicrobianos	espectro
+8/19/1/52c9	familia	antimicrobianos	efeito
+8/19/2/42bb	familia	antimicrobianos	classe
+8/19/3/755f	familia	antimicrobianos	uso
+8/21/1/cf01	familia	antimicrobianos	efeito
+8/22/1/ac3a	familia	antimicrobianos	mecanismo
+8/22/2/0bed	familia	antimicrobianos	classe
+8/22/3/5eec	familia	antimicrobianos	classe
+8/22/4/c122	familia	antimicrobianos	classe
+8/22/5/05c0	familia	antimicrobianos	classe
+8/22/6/b062	familia	antimicrobianos	classe
+8/22/7/e4d0	familia	antimicrobianos	classe
+8/23/1/ac3a	familia	antimicrobianos	mecanismo
+8/24/1/5809	familia	antimicrobianos	mecanismo
+8/24/2/279d	familia	antimicrobianos	mecanismo
+8/24/3/afc7	familia	antimicrobianos	origem
+8/24/4/bf8a	familia	antimicrobianos	efeito
+8/24/5/20bd	familia	antimicrobianos	espectro
+8/24/6/c480	familia	antimicrobianos	resistencia
+8/24/7/c581	familia	antimicrobianos	uso
+8/25/1/8d66	familia	antimicrobianos	farmacocinetica
+8/25/2/dd1b	familia	antimicrobianos	farmacocinetica
+8/25/3/5c6f	familia	antimicrobianos	farmacocinetica
+8/25/4/1864	familia	antimicrobianos	farmacocinetica
+8/30/2/43e6	familia	antimicrobianos	resistencia
+8/30/4/8c50	familia	antimicrobianos	resistencia
+8/32/2/812f	familia	antimicrobianos	resistencia
+8/32/3/642c	familia	antimicrobianos	resistencia
+8/32/5/12ab	familia	antimicrobianos	resistencia
+8/32/7/7b3a	familia	antimicrobianos	resistencia
+8/32/9/0404	familia	antimicrobianos	resistencia
+9-10/6/2/cd58	familia	provas	leitura
+9-10/8/2/680e	familia	provas	indica
+9-10/8/4/53ac	familia	provas	leitura
+9-10/33/7/7ba2	familia	antimicrobianos	resistencia
+9-10/41/1/b7cb	familia	provas	indica
+9-10/53/1/7300	familia	provas	tipo
+9-10/53/2/97e3	familia	provas	leitura
+9-10/54/1/11ec	familia	provas	indica
+9-10/58/1/3ace	familia	provas	leitura
+9-10/59/2/5f15	familia	provas	principio
+9-10/60/1/be9e	familia	provas	tecnica
+9-10/61/1/d6b8	familia	provas	tipo
+9-10/61/2/989c	familia	provas	amostra
+9-10/61/3/150a	familia	provas	indica
+9-10/62/1/abd5	familia	provas	familia
+9-10/63/1/0bce	familia	provas	indica
+9-10/63/2/dcd8	familia	provas	indica
+9-10/63/3/1a54	familia	provas	indica
+9-10/64/1/138c	familia	provas	familia
+9-10/66/1/99cf	familia	provas	principio
+9-10/66/2/a401	familia	provas	leitura
+9-10/66/3/4a1d	familia	provas	indica
+9-10/68/1/5343	familia	provas	principio
+9-10/69/1/a5e7	familia	provas	tipo
+9-10/70/1/7319	familia	provas	leitura
+9-10/71/1/3b98	familia	provas	principio
+9-10/72/1/6f72	familia	provas	indica
+9-10/72/2/f184	familia	provas	indica
+9-10/72/3/c32d	familia	provas	indica
+9-10/72/4/8cf3	familia	provas	indica
+9-10/72/5/0e8c	familia	provas	indica
+9-10/72/6/9699	familia	provas	indica
+9-10/73/1/7f10	familia	provas	indica
+9-10/73/2/9445	familia	provas	indica
+9-10/77/1/6f81	familia	antimicrobianos	uso
+9-10/78/3/e0be	familia	antimicrobianos	uso
+11-12/2/5/561e	familia	provas	indica
+11-12/5/4/a1d6	familia	provas	indica
+11-12/6/1/645c	familia	microbiota	microrganismos
+11-12/7/1/2e94	familia	estruturas	presenca
+11-12/7/2/b26f	familia	estruturas	presenca
+11-12/17/1/e1d1	familia	antimicrobianos	resistencia
+11-12/17/2/39ae	familia	antimicrobianos	resistencia
+11-12/17/3/2f9d	familia	antimicrobianos	uso
+11-12/17/4/57dc	familia	antimicrobianos	resistencia
+11-12/18/1/cea5	familia	provas	indica
+11-12/18/2/b7f7	familia	provas	indica
+11-12/19/1/dc38	familia	microbiota	microrganismos
+11-12/21/1/3e48	familia	microbiota	microrganismos
+11-12/24/9/8602	familia	microbiota	microrganismos
+11-12/25/1/c67b	familia	provas	leitura
+11-12/26/1/0a40	familia	provas	leitura
+11-12/28/3/fff6	familia	estruturas	presenca
+11-12/39/3/3d79	familia	provas	indica
+11-12/39/4/175f	familia	provas	indica
+11-12/39/5/b0a8	familia	provas	principio
+11-12/39/7/69a2	familia	provas	indica
+11-12/40/1/c749	familia	provas	leitura
+11-12/40/2/54df	familia	provas	leitura
+11-12/41/1/f118	familia	antimicrobianos	uso
+11-12/41/2/8e46	familia	antimicrobianos	uso
+11-12/41/3/a7ea	familia	antimicrobianos	uso
+11-12/42/3/127c	familia	microbiota	microrganismos
+11-12/42/4/e41e	familia	estruturas	presenca
+11-12/42/5/7dd2	familia	provas	indica
+11-12/47/4/f804	familia	provas	indica
+11-12/47/5/2aa4	familia	provas	indica
+11-12/47/6/51e7	familia	provas	indica
+11-12/48/1/3b6c	familia	provas	leitura
+11-12/49/1/435c	familia	antimicrobianos	uso
+11-12/50/4/2c6c	familia	estruturas	presenca
+11-12/50/4/2c6c	familia	provas	principio
+11-12/59/1/4bd8	familia	provas	indica
+11-12/59/2/e8d2	familia	provas	indica
+11-12/60/1/3ba0	familia	antimicrobianos	uso
+11-12/61/2/83eb	familia	microbiota	microrganismos
+11-12/62/1/5326	familia	microbiota	familia
+11-12/62/2/3a36	familia	microbiota	familia
+11-12/63/1/51fd	familia	microbiota	familia
+11-12/63/2/f9f4	familia	microbiota	familia
+11-12/63/3/72ff	familia	microbiota	familia
+11-12/63/4/6064	familia	microbiota	familia
+11-12/64/2/d438	familia	microbiota	microrganismos
+11-12/64/3/ff07	familia	provas	indica
+11-12/65/1/0dab	familia	provas	indica
+11-12/65/2/995f	familia	provas	indica
+11-12/65/3/48a3	familia	provas	indica
+13/4/1/89e8	familia	provas	indica
+13/4/2/247a	familia	provas	indica
+13/4/3/9e12	familia	provas	indica
+13/5/2/1c5b	familia	microbiota	microrganismos
+13/9/1/cc78	familia	estruturas	presenca
+13/9/5/ffd6	familia	estruturas	presenca
+13/10/2/e455	familia	estruturas	presenca
+13/14/4/00cd	familia	provas	indica
+13/15/3/e18d	familia	provas	indica
+13/15/4/b531	familia	provas	indica
+13/16/1/bfb4	familia	antimicrobianos	uso
+13/16/2/1140	familia	antimicrobianos	resistencia
+13/16/3/e19f	familia	antimicrobianos	uso
+13/16/5/1f50	familia	antimicrobianos	uso
+13/21/1/aef6	familia	estruturas	presenca
+13/21/3/d23f	familia	antimicrobianos	resistencia
+13/25/2/7562	familia	provas	amostra
+13/25/4/0608	familia	provas	indica
+13/26/2/8646	familia	antimicrobianos	resistencia
+14/9/1/7c6c	familia	microbiota	microrganismos
+14/9/2/a885	familia	microbiota	microrganismos
+14/9/3/2af1	familia	microbiota	microrganismos
+14/9/4/c266	familia	microbiota	microrganismos
+14/9/5/ff41	familia	microbiota	microrganismos
+14/29/8/00e7	familia	estruturas	composicao
+14/34/1/a57f	familia	antimicrobianos	uso
+15/7/4/3386	familia	antimicrobianos	resistencia
+15/8/5/4624	familia	antimicrobianos	classe
+15/13/2/5a9a	familia	antimicrobianos	mecanismo
+15/16/1/702a	familia	antimicrobianos	mecanismo
+15/18/1/eb31	familia	antimicrobianos	resistencia
+15/18/2/2f7f	familia	antimicrobianos	resistencia
+15/18/3/09e0	familia	antimicrobianos	resistencia
+15/19/1/2018	familia	antimicrobianos	resistencia
+15/19/3/652c	familia	antimicrobianos	classe
+15/20/1/a271	familia	estruturas	composicao
+15/20/2/235f	familia	antimicrobianos	resistencia
+15/20/3/b513	familia	antimicrobianos	mecanismo
+15/32/1/e2f2	familia	controle	mecanismo
+15/32/2/9921	familia	controle	uso
+15/32/3/03a6	familia	controle	mecanismo
+15/32/4/87d3	familia	controle	mecanismo
+15/32/5/034d	familia	controle	mecanismo
+16/2/5/43d6	familia	provas	indica
+16/6/1/7852	familia	estruturas	tipos
+16/6/2/4b26	familia	estruturas	composicao
+16/7/1/9cb7	familia	estruturas	presenca
+16/7/2/c257	familia	estruturas	presenca
+16/8/1/5bd4	familia	estruturas	presenca
+16/8/2/d72c	familia	estruturas	presenca
+16/8/3/f44f	familia	estruturas	presenca
+16/8/4/da34	familia	estruturas	presenca
+16/8/5/d0b8	familia	estruturas	presenca
+16/8/6/6b76	familia	estruturas	presenca
+16/8/7/5af7	familia	estruturas	presenca
+16/8/8/ce84	familia	estruturas	presenca
+16/32/1/50aa	familia	provas	amostra
+16/32/2/1c0b	familia	provas	amostra
+16/35/2/ba2c	familia	provas	indica
+16/35/3/5774	familia	provas	indica
+16/35/4/dd9e	familia	provas	indica
+16/35/5/3018	familia	provas	indica
+16/36/1/7036	familia	antimicrobianos	uso
+16/36/2/3296	familia	antimicrobianos	uso
+16/36/3/edb6	familia	antimicrobianos	uso
+16/36/4/b75c	familia	antimicrobianos	uso
+16/37/1/d7a7	familia	antimicrobianos	uso
+16/37/2/bdb6	familia	antimicrobianos	mecanismo
+17/23/2/dca9	familia	provas	indica
+17/23/3/bfd2	familia	provas	amostra
+17/25/1/3b05	familia	antimicrobianos	uso
+17/25/2/d51b	familia	antimicrobianos	uso
+17/30/2/153a	familia	provas	amostra
+17/30/4/536c	familia	antimicrobianos	uso
+17/33/3/14ef	familia	provas	tecnica
+17/33/8/bec4	familia	antimicrobianos	uso
+17/37/1/edfd	familia	provas	indica
+17/39/4/959e	familia	provas	amostra
+17/40/1/c4b0	familia	provas	indica
+17/41/1/ad57	familia	provas	tecnica
+17/41/3/5170	familia	provas	tecnica
+17/41/4/077d	familia	provas	leitura
+17/42/1/d424	familia	provas	tipo
+17/42/2/2e89	familia	provas	tecnica
+17/42/3/02d6	familia	provas	tecnica
+17/43/1/2d24	familia	antimicrobianos	uso
+17/45/6/9841	familia	provas	indica
+17/61/1/cfa6	familia	provas	indica
+17/63/1/c154	familia	antimicrobianos	uso
+17/63/2/dbe3	familia	antimicrobianos	uso
+17/63/3/00bb	familia	antimicrobianos	uso
+1/20/2/a6c7	bacteria		doencas
+1/22/4/5937	bacteria		tratamento
+2/9/2/ce61	bacteria		caracteristicas
+2/9/3/51c7	bacteria		caracteristicas
+2/11/2/543b	bacteria		caracteristicas
+2/30/4/338b	bacteria		caracteristicas
+2/30/5/2ab8	bacteria		caracteristicas
+2/30/6/ba34	bacteria		caracteristicas
+2/33/5/9d43	bacteria		caracteristicas
+3/4/2/8fe5	bacteria		caracteristicas
+3/4/3/9b9f	bacteria		caracteristicas
+3/4/4/cb0c	bacteria		caracteristicas
+3/20/6/4710	bacteria		caracteristicas
+3/20/7/edeb	bacteria		caracteristicas
+3/20/8/3e3f	bacteria		caracteristicas
+3/20/9/8eb9	bacteria		caracteristicas
+4/5/2/16f6	bacteria		caracteristicas
+4/5/3/f235	bacteria		caracteristicas
+4/10/3/3250	bacteria		caracteristicas
+4/10/4/c704	bacteria		caracteristicas
+4/11/4/928f	bacteria		caracteristicas
+4/17/1/b5c6	bacteria		caracteristicas
+4/17/2/5640	bacteria		caracteristicas
+4/17/4/6dfe	bacteria		caracteristicas
+4/17/5/c916	bacteria		caracteristicas
+4/17/6/41f2	bacteria		caracteristicas
+4/18/3/6acb	bacteria		caracteristicas
+4/19/1/7bfe	bacteria		caracteristicas
+4/19/2/2876	bacteria		caracteristicas
+4/19/3/2994	bacteria		caracteristicas
+4/19/4/f540	bacteria		caracteristicas
+4/19/5/d54e	bacteria		caracteristicas
+5/20/5/b590	bacteria		doencas
+5/21/1/9fc6	bacteria		virulencia
+5/21/2/c08b	bacteria		virulencia
+5/21/3/b568	bacteria		patogenese
+5/22/1/9597	bacteria		doencas
+5/22/2/d4a5	bacteria		doencas
+5/22/3/6df0	bacteria		doencas
+6/24/1/0b05	bacteria		virulencia
+6/24/2/07de	bacteria		virulencia
+6/24/3/e331	bacteria		virulencia
+6/24/4/4ce6	bacteria		virulencia
+6/24/5/21e4	bacteria		virulencia
+6/24/7/69d6	bacteria		virulencia
+6/28/2/84c4	bacteria		doencas
+7/3/3/c648	bacteria		transmissao
+8/26/1/f9b9	bacteria		tratamento
+8/26/2/5776	bacteria		tratamento
+8/29/1/3794	bacteria		tratamento
+8/29/2/2a9b	bacteria		tratamento
+9-10/3/3/1fba	bacteria		caracteristicas
+9-10/3/4/96fe	bacteria		doencas
+9-10/7/1/5ad7	bacteria		habitat
+9-10/7/2/0a6a	bacteria		habitat
+9-10/7/3/44cc	bacteria		caracteristicas
+9-10/7/4/984c	bacteria		caracteristicas
+9-10/7/5/99e2	bacteria		caracteristicas
+9-10/8/1/0b97	bacteria		caracteristicas
+9-10/9/4/71d5	bacteria		virulencia
+9-10/9/5/9dfb	bacteria		virulencia
+9-10/10/1/96fe	bacteria		doencas
+9-10/10/2/6e9d	bacteria		doencas
+9-10/10/3/037c	bacteria		doencas
+9-10/10/5/5fb7	bacteria		doencas
+9-10/12/1/1ecc	bacteria		habitat
+9-10/12/2/6279	bacteria		habitat
+9-10/12/4/b211	bacteria		caracteristicas
+9-10/12/5/fea0	bacteria		doencas
+9-10/13/1/1554	bacteria		caracteristicas
+9-10/13/2/0bcf	bacteria		doencas
+9-10/13/3/9641	bacteria		doencas
+9-10/13/4/7ffe	bacteria		doencas
+9-10/13/5/e194	bacteria		doencas
+9-10/13/6/673f	bacteria		doencas
+9-10/14/1/086d	bacteria		caracteristicas
+9-10/14/2/fda1	bacteria		patogenese
+9-10/14/3/8d9c	bacteria		doencas
+9-10/14/4/d4da	bacteria		patogenese
+9-10/14/5/cb44	bacteria		patogenese
+9-10/14/6/2c46	bacteria		doencas
+9-10/14/7/406d	bacteria		patogenese
+9-10/14/8/8398	bacteria		caracteristicas
+9-10/14/9/696d	bacteria		patogenese
+9-10/14/10/bab9	bacteria		doencas
+9-10/14/11/3177	bacteria		patogenese
+9-10/14/12/5590	bacteria		patogenese
+9-10/14/13/9cc7	bacteria		doencas
+9-10/14/14/b222	bacteria		patogenese
+9-10/14/15/be6d	bacteria		patogenese
+9-10/14/16/1039	bacteria		doencas
+9-10/14/17/5b2f	bacteria		patogenese
+9-10/15/1/7f39	bacteria		patogenese
+9-10/15/2/79a5	bacteria		patogenese
+9-10/15/3/ffa0	bacteria		doencas
+9-10/15/4/63d0	bacteria		doencas
+9-10/16/1/3ff5	bacteria		doencas
+9-10/16/2/6afd	bacteria		doencas
+9-10/16/3/c87f	bacteria		doencas
+9-10/16/4/2bb5	bacteria		doencas
+9-10/16/6/a31f	bacteria		doencas
+9-10/17/1/b91d	bacteria		doencas
+9-10/17/2/6d8f	bacteria		doencas
+9-10/17/3/d6ef	bacteria		doencas
+9-10/18/1/5c42	bacteria		doencas
+9-10/18/2/11db	bacteria		doencas
+9-10/18/3/2a87	bacteria		doencas
+9-10/18/4/55ba	bacteria		doencas
+9-10/19/2/4dc5	bacteria		doencas
+9-10/19/3/c8d4	bacteria		doencas
+9-10/19/4/cd62	bacteria		doencas
+9-10/19/5/f311	bacteria		doencas
+9-10/19/6/280e	bacteria		doencas
+9-10/19/7/5a4e	bacteria		doencas
+9-10/19/8/5908	bacteria		doencas
+9-10/19/9/ebd1	bacteria		doencas
+9-10/20/1/a828	bacteria		patogenese
+9-10/21/4/ad42	bacteria		doencas
+9-10/21/5/ec5b	bacteria		doencas
+9-10/21/6/ea03	bacteria		doencas
+9-10/21/7/8b5c	bacteria		doencas
+9-10/21/8/d77d	bacteria		doencas
+9-10/21/9/aef1	bacteria		doencas
+9-10/21/10/31e5	bacteria		doencas
+9-10/22/1/7485	bacteria		caracteristicas
+9-10/22/2/ac74	bacteria		transmissao
+9-10/22/3/192a	bacteria		doencas
+9-10/22/4/d9ca	bacteria		doencas
+9-10/22/5/6c8f	bacteria		caracteristicas
+9-10/23/1/ca8c	bacteria		doencas
+9-10/23/2/4d9f	bacteria		transmissao
+9-10/23/3/5d0d	bacteria		doencas
+9-10/23/4/a76d	bacteria		doencas
+9-10/23/5/91ea	bacteria		doencas
+9-10/23/6/7fd2	bacteria		transmissao
+9-10/24/1/9b82	bacteria		transmissao
+9-10/25/1/d36c	bacteria		transmissao
+9-10/26/1/a17d	bacteria		patogenese
+9-10/26/2/16b3	bacteria		patogenese
+9-10/26/3/1355	bacteria		patogenese
+9-10/27/1/c311	bacteria		patogenese
+9-10/27/2/b56a	bacteria		doencas
+9-10/27/3/6829	bacteria		doencas
+9-10/27/4/8dcc	bacteria		doencas
+9-10/27/5/26ee	bacteria		habitat
+9-10/28/1/438d	bacteria		diagnostico
+9-10/28/2/370e	bacteria		diagnostico
+9-10/29/1/ed06	bacteria		patogenese
+9-10/30/1/ebae	bacteria		caracteristicas
+9-10/30/2/bae5	bacteria		caracteristicas
+9-10/30/3/b9f2	bacteria		habitat
+9-10/30/4/24cb	bacteria		transmissao
+9-10/30/5/6b98	bacteria		doencas
+9-10/30/6/258e	bacteria		transmissao
+9-10/30/7/e5ff	bacteria		doencas
+9-10/31/1/6491	bacteria		patogenese
+9-10/31/2/9b48	bacteria		patogenese
+9-10/31/3/1ff0	bacteria		doencas
+9-10/31/4/7272	bacteria		doencas
+9-10/32/1/58f6	bacteria		caracteristicas
+9-10/32/2/b248	bacteria		virulencia
+9-10/32/3/9873	bacteria		caracteristicas
+9-10/32/4/98f3	bacteria		tratamento
+9-10/32/5/285e	bacteria		doencas
+9-10/33/1/bc14	bacteria		doencas
+9-10/33/2/1126	bacteria		risco
+9-10/33/3/8c71	bacteria		virulencia
+9-10/33/4/aaa1	bacteria		virulencia
+9-10/33/5/ad05	bacteria		doencas
+9-10/33/6/9e7a	bacteria		transmissao
+9-10/33/7/7ba2	bacteria		tratamento
+9-10/34/1/34ea	bacteria		virulencia
+9-10/34/2/c7d4	bacteria		virulencia
+9-10/35/1/6ff2	bacteria		patogenese
+9-10/36/1/0089	bacteria		caracteristicas
+9-10/36/2/6403	bacteria		caracteristicas
+9-10/36/3/1703	bacteria		caracteristicas
+9-10/36/4/b705	bacteria		caracteristicas
+9-10/36/5/b1dc	bacteria		doencas
+9-10/38/1/c99d	bacteria		virulencia
+9-10/38/2/f14d	bacteria		virulencia
+9-10/40/1/1c68	bacteria		doencas
+9-10/40/2/e0c9	bacteria		doencas
+9-10/40/3/a2ed	bacteria		doencas
+9-10/40/4/e542	bacteria		caracteristicas
+9-10/40/5/7c57	bacteria		caracteristicas
+9-10/40/6/2806	bacteria		caracteristicas
+9-10/41/2/a1d8	bacteria		caracteristicas
+9-10/41/3/8ab9	bacteria		virulencia
+9-10/41/4/ca57	bacteria		transmissao
+9-10/41/5/8ebf	bacteria		doencas
+9-10/41/6/4663	bacteria		patogenese
+9-10/44/1/a72c	bacteria		caracteristicas
+9-10/44/2/2806	bacteria		caracteristicas
+9-10/44/3/620b	bacteria		caracteristicas
+9-10/44/4/ae0d	bacteria		caracteristicas
+9-10/44/5/8fb1	bacteria		habitat
+9-10/44/6/babb	bacteria		habitat
+9-10/44/7/0060	bacteria		habitat
+9-10/44/8/b0ea	bacteria		habitat
+9-10/45/1/2d57	bacteria		caracteristicas
+9-10/45/2/c91b	bacteria		caracteristicas
+9-10/45/3/1be7	bacteria		caracteristicas
+9-10/45/4/b21e	bacteria		caracteristicas
+9-10/45/5/dc1c	bacteria		tratamento
+9-10/46/1/58d0	bacteria		doencas
+9-10/47/1/a4de	bacteria		doencas
+9-10/47/2/3454	bacteria		doencas
+9-10/47/3/bb00	bacteria		doencas
+9-10/47/4/1eed	bacteria		doencas
+9-10/47/5/30f2	bacteria		doencas
+9-10/47/6/1357	bacteria		doencas
+9-10/47/7/c087	bacteria		doencas
+9-10/48/1/1305	bacteria		patogenese
+9-10/78/1/86e1	bacteria		tratamento
+9-10/78/2/7f96	bacteria		tratamento
+9-10/78/4/6b65	bacteria		tratamento
+11-12/2/2/3626	bacteria		caracteristicas
+11-12/2/3/cdc5	bacteria		caracteristicas
+11-12/2/4/45a8	bacteria		caracteristicas
+11-12/3/1/84b2	bacteria		caracteristicas
+11-12/4/1/9995	bacteria		diagnostico
+11-12/5/1/b96a	bacteria		caracteristicas
+11-12/5/2/1795	bacteria		caracteristicas
+11-12/5/3/2e1b	bacteria		caracteristicas
+11-12/5/4/a1d6	bacteria		caracteristicas
+11-12/5/5/343e	bacteria		caracteristicas
+11-12/5/6/fe26	bacteria		caracteristicas
+11-12/5/7/b645	bacteria		caracteristicas
+11-12/5/8/6f2e	bacteria		caracteristicas
+11-12/5/9/3e44	bacteria		diagnostico
+11-12/6/1/645c	bacteria		habitat
+11-12/6/2/9199	bacteria		transmissao
+11-12/6/3/ed11	bacteria		tratamento
+11-12/6/4/1530	bacteria		prevencao
+11-12/6/5/1402	bacteria		prevencao
+11-12/6/6/2d92	bacteria		prevencao
+11-12/7/1/2e94	bacteria		virulencia
+11-12/7/2/b26f	bacteria		virulencia
+11-12/7/3/7681	bacteria		virulencia
+11-12/7/4/6acd	bacteria		virulencia
+11-12/7/5/2252	bacteria		virulencia
+11-12/8/1/1298	bacteria		virulencia
+11-12/8/2/91a0	bacteria		virulencia
+11-12/8/3/23e0	bacteria		virulencia
+11-12/9/1/3c77	bacteria		patogenese
+11-12/9/2/d1ca	bacteria		doencas
+11-12/10/1/d198	bacteria		virulencia
+11-12/11/1/850e	bacteria		virulencia
+11-12/11/2/e5a4	bacteria		virulencia
+11-12/11/3/8eff	bacteria		virulencia
+11-12/11/4/2b2f	bacteria		virulencia
+11-12/12/1/c0d6	bacteria		doencas
+11-12/12/2/c3b1	bacteria		doencas
+11-12/12/3/4ed0	bacteria		doencas
+11-12/13/1/c110	bacteria		doencas
+11-12/13/2/1e49	bacteria		doencas
+11-12/13/3/f11d	bacteria		doencas
+11-12/13/4/00e6	bacteria		doencas
+11-12/14/1/5264	bacteria		doencas
+11-12/14/2/095f	bacteria		doencas
+11-12/15/1/b0ca	bacteria		doencas
+11-12/15/2/132b	bacteria		doencas
+11-12/16/1/9fbd	bacteria		doencas
+11-12/16/2/3f2e	bacteria		transmissao
+11-12/16/3/7aa7	bacteria		transmissao
+11-12/16/4/ee53	bacteria		transmissao
+11-12/16/5/6c01	bacteria		transmissao
+11-12/17/1/e1d1	bacteria		tratamento
+11-12/17/2/39ae	bacteria		tratamento
+11-12/17/3/2f9d	bacteria		tratamento
+11-12/17/4/57dc	bacteria		tratamento
+11-12/18/1/cea5	bacteria		diagnostico
+11-12/18/2/b7f7	bacteria		diagnostico
+11-12/19/1/dc38	bacteria		habitat
+11-12/19/2/50ad	bacteria		virulencia
+11-12/19/3/3f3b	bacteria		virulencia
+11-12/19/4/3a86	bacteria		doencas
+11-12/20/1/0d09	bacteria		patogenese
+11-12/20/2/cdf0	bacteria		virulencia
+11-12/20/3/f18b	bacteria		virulencia
+11-12/20/4/9019	bacteria		virulencia
+11-12/21/1/3e48	bacteria		habitat
+11-12/21/2/6839	bacteria		doencas
+11-12/21/3/0cf2	bacteria		doencas
+11-12/22/1/0605	bacteria		caracteristicas
+11-12/23/1/37fa	bacteria		diagnostico
+11-12/24/1/2de3	bacteria		caracteristicas
+11-12/24/2/64b5	bacteria		caracteristicas
+11-12/24/3/d65b	bacteria		caracteristicas
+11-12/24/4/2e1b	bacteria		caracteristicas
+11-12/24/5/61c9	bacteria		caracteristicas
+11-12/24/6/1c5f	bacteria		caracteristicas
+11-12/24/7/b645	bacteria		caracteristicas
+11-12/24/8/9062	bacteria		caracteristicas
+11-12/24/9/8602	bacteria		habitat
+11-12/24/10/1ae1	bacteria		diagnostico
+11-12/25/3/df44	bacteria		caracteristicas
+11-12/25/4/e46d	bacteria		caracteristicas
+11-12/25/5/d284	bacteria		caracteristicas
+11-12/25/6/f51a	bacteria		caracteristicas
+11-12/27/1/05c6	bacteria		doencas
+11-12/27/2/9b3e	bacteria		virulencia
+11-12/27/3/cdce	bacteria		doencas
+11-12/27/4/8d11	bacteria		virulencia
+11-12/27/5/6365	bacteria		doencas
+11-12/27/6/fe41	bacteria		doencas
+11-12/27/7/63b0	bacteria		virulencia
+11-12/27/8/c70b	bacteria		doencas
+11-12/27/9/f911	bacteria		virulencia
+11-12/27/10/8e8a	bacteria		virulencia
+11-12/28/1/6791	bacteria		caracteristicas
+11-12/28/2/c8ca	bacteria		caracteristicas
+11-12/28/3/fff6	bacteria		virulencia
+11-12/28/4/9b87	bacteria		virulencia
+11-12/28/5/9747	bacteria		virulencia
+11-12/28/6/7d60	bacteria		virulencia
+11-12/28/7/1906	bacteria		virulencia
+11-12/28/8/e45f	bacteria		virulencia
+11-12/28/9/43d7	bacteria		diagnostico
+11-12/29/1/3c8c	bacteria		virulencia
+11-12/31/1/1182	bacteria		doencas
+11-12/31/2/4767	bacteria		doencas
+11-12/31/3/c8ed	bacteria		transmissao
+11-12/31/4/eff6	bacteria		doencas
+11-12/31/5/0165	bacteria		doencas
+11-12/31/6/2120	bacteria		doencas
+11-12/31/7/b017	bacteria		doencas
+11-12/32/1/bb3e	bacteria		patogenese
+11-12/34/1/70d4	bacteria		doencas
+11-12/36/1/5bfe	bacteria		patogenese
+11-12/36/2/f89d	bacteria		patogenese
+11-12/36/3/97ff	bacteria		patogenese
+11-12/36/4/b5a6	bacteria		patogenese
+11-12/37/1/c132	bacteria		patogenese
+11-12/37/2/6fe2	bacteria		patogenese
+11-12/37/3/ea31	bacteria		patogenese
+11-12/37/4/a100	bacteria		patogenese
+11-12/38/1/db25	bacteria		doencas
+11-12/38/2/84fb	bacteria		doencas
+11-12/38/3/d317	bacteria		doencas
+11-12/39/1/d800	bacteria		diagnostico
+11-12/39/2/f0c8	bacteria		diagnostico
+11-12/39/3/3d79	bacteria		diagnostico
+11-12/39/4/175f	bacteria		diagnostico
+11-12/39/5/b0a8	bacteria		diagnostico
+11-12/39/6/765f	bacteria		diagnostico
+11-12/39/7/69a2	bacteria		diagnostico
+11-12/40/1/c749	bacteria		diagnostico
+11-12/40/2/54df	bacteria		diagnostico
+11-12/41/1/f118	bacteria		tratamento
+11-12/41/2/8e46	bacteria		tratamento
+11-12/41/3/a7ea	bacteria		tratamento
+11-12/42/1/99c3	bacteria		caracteristicas
+11-12/42/2/023d	bacteria		caracteristicas
+11-12/42/3/127c	bacteria		habitat
+11-12/42/4/e41e	bacteria		virulencia
+11-12/42/5/7dd2	bacteria		diagnostico
+11-12/42/6/f01b	bacteria		virulencia
+11-12/42/7/8312	bacteria		virulencia
+11-12/42/8/7d60	bacteria		virulencia
+11-12/43/1/bd7f	bacteria		doencas
+11-12/43/2/361e	bacteria		doencas
+11-12/43/3/88ca	bacteria		doencas
+11-12/43/4/10fa	bacteria		doencas
+11-12/43/5/a702	bacteria		doencas
+11-12/43/6/60fb	bacteria		doencas
+11-12/44/1/4f3f	bacteria		risco
+11-12/44/2/44e5	bacteria		risco
+11-12/44/3/38a7	bacteria		risco
+11-12/44/4/e776	bacteria		risco
+11-12/44/5/ee33	bacteria		risco
+11-12/44/6/156e	bacteria		risco
+11-12/44/7/981b	bacteria		risco
+11-12/45/1/cd50	bacteria		patogenese
+11-12/46/1/f44b	bacteria		patogenese
+11-12/47/1/850d	bacteria		diagnostico
+11-12/47/2/f0c8	bacteria		diagnostico
+11-12/47/3/8492	bacteria		diagnostico
+11-12/47/4/f804	bacteria		diagnostico
+11-12/47/5/2aa4	bacteria		diagnostico
+11-12/47/6/51e7	bacteria		diagnostico
+11-12/48/1/3b6c	bacteria		diagnostico
+11-12/48/2/57d0	bacteria		diagnostico
+11-12/49/1/435c	bacteria		tratamento
+11-12/49/2/49b5	bacteria		prevencao
+11-12/49/3/56c4	bacteria		prevencao
+11-12/49/4/e402	bacteria		prevencao
+11-12/50/1/539c	bacteria		caracteristicas
+11-12/50/2/9d1d	bacteria		caracteristicas
+11-12/50/3/4c42	bacteria		caracteristicas
+11-12/50/4/2c6c	bacteria		virulencia
+11-12/50/5/d19d	bacteria		virulencia
+11-12/50/6/6d97	bacteria		habitat
+11-12/51/1/0c9f	bacteria		patogenese
+11-12/52/1/c31a	bacteria		transmissao
+11-12/52/2/f331	bacteria		transmissao
+11-12/52/3/5b62	bacteria		transmissao
+11-12/52/4/0f69	bacteria		transmissao
+11-12/52/5/b1d7	bacteria		transmissao
+11-12/57/1/3951	bacteria		diagnostico
+11-12/58/1/d8a0	bacteria		diagnostico
+11-12/59/1/4bd8	bacteria		diagnostico
+11-12/59/2/e8d2	bacteria		diagnostico
+11-12/60/1/3ba0	bacteria		tratamento
+11-12/60/2/c5ff	bacteria		prevencao
+11-12/60/3/87e0	bacteria		prevencao
+11-12/60/4/96b7	bacteria		prevencao
+11-12/60/5/46a6	bacteria		prevencao
+11-12/61/1/f6b8	bacteria		caracteristicas
+11-12/61/2/83eb	bacteria		habitat
+11-12/61/3/a6a6	bacteria		virulencia
+11-12/61/4/b06e	bacteria		doencas
+11-12/61/5/f0b8	bacteria		caracteristicas
+11-12/62/1/5326	bacteria		doencas
+11-12/64/1/4099	bacteria		caracteristicas
+11-12/64/2/d438	bacteria		habitat
+11-12/64/3/ff07	bacteria		caracteristicas
+11-12/64/4/3ec5	bacteria		doencas
+11-12/64/5/9864	bacteria		caracteristicas
+11-12/65/1/0dab	bacteria		diagnostico
+11-12/65/2/995f	bacteria		diagnostico
+11-12/65/3/48a3	bacteria		diagnostico
+13/2/1/6010	bacteria		caracteristicas
+13/2/2/a11d	bacteria		caracteristicas
+13/3/1/7a02	bacteria		caracteristicas
+13/3/2/0ad1	bacteria		caracteristicas
+13/3/3/4611	bacteria		caracteristicas
+13/3/4/7073	bacteria		caracteristicas
+13/3/5/46ac	bacteria		caracteristicas
+13/3/6/2a0c	bacteria		caracteristicas
+13/4/1/89e8	bacteria		caracteristicas
+13/4/2/247a	bacteria		caracteristicas
+13/4/3/9e12	bacteria		caracteristicas
+13/4/4/265d	bacteria		caracteristicas
+13/4/5/f7bc	bacteria		caracteristicas
+13/4/6/2b85	bacteria		caracteristicas
+13/5/1/4e80	bacteria		habitat
+13/5/2/1c5b	bacteria		habitat
+13/5/3/bac3	bacteria		doencas
+13/5/4/aced	bacteria		doencas
+13/5/5/c6eb	bacteria		doencas
+13/5/6/60f1	bacteria		transmissao
+13/6/4/9f90	bacteria		doencas
+13/6/5/2e39	bacteria		doencas
+13/6/6/dd00	bacteria		doencas
+13/6/7/ab51	bacteria		doencas
+13/6/8/fefa	bacteria		doencas
+13/6/9/3be9	bacteria		doencas
+13/8/1/e10b	bacteria		patogenese
+13/8/2/db0b	bacteria		doencas
+13/9/1/cc78	bacteria		virulencia
+13/9/2/ae4b	bacteria		virulencia
+13/9/3/6479	bacteria		virulencia
+13/9/4/b3c6	bacteria		virulencia
+13/9/5/ffd6	bacteria		virulencia
+13/10/1/12af	bacteria		patogenese
+13/10/2/e455	bacteria		virulencia
+13/10/3/2b1f	bacteria		virulencia
+13/10/4/387d	bacteria		virulencia
+13/10/5/a05d	bacteria		virulencia
+13/12/1/8b55	bacteria		patogenese
+13/13/1/01ce	bacteria		prevencao
+13/13/2/fae6	bacteria		prevencao
+13/13/3/799c	bacteria		prevencao
+13/13/4/cc2f	bacteria		prevencao
+13/14/1/d503	bacteria		diagnostico
+13/14/2/e84a	bacteria		diagnostico
+13/14/3/b6a4	bacteria		diagnostico
+13/14/4/00cd	bacteria		diagnostico
+13/15/1/cfc7	bacteria		diagnostico
+13/15/2/937d	bacteria		diagnostico
+13/15/3/e18d	bacteria		diagnostico
+13/15/4/b531	bacteria		diagnostico
+13/16/1/bfb4	bacteria		tratamento
+13/16/2/1140	bacteria		tratamento
+13/16/3/e19f	bacteria		tratamento
+13/16/4/a1d9	bacteria		prevencao
+13/16/5/1f50	bacteria		tratamento
+13/17/1/aa21	bacteria		doencas
+13/17/2/4e06	bacteria		doencas
+13/17/3/2d8f	bacteria		doencas
+13/17/4/9622	bacteria		doencas
+13/17/5/063a	bacteria		doencas
+13/17/6/4294	bacteria		doencas
+13/17/7/3dcd	bacteria		doencas
+13/17/8/3086	bacteria		transmissao
+13/18/1/3eb9	bacteria		risco
+13/19/1/9d7d	bacteria		doencas
+13/19/2/428a	bacteria		doencas
+13/19/3/74bd	bacteria		doencas
+13/19/4/0cef	bacteria		doencas
+13/19/5/cc3e	bacteria		doencas
+13/19/6/05b4	bacteria		doencas
+13/19/7/dc83	bacteria		doencas
+13/19/8/ceba	bacteria		doencas
+13/19/9/e4e4	bacteria		doencas
+13/21/1/aef6	bacteria		virulencia
+13/21/2/96ce	bacteria		virulencia
+13/21/3/d23f	bacteria		tratamento
+13/21/4/4488	bacteria		virulencia
+13/22/1/fdb5	bacteria		transmissao
+13/22/2/27b6	bacteria		patogenese
+13/22/3/582d	bacteria		patogenese
+13/22/4/f756	bacteria		patogenese
+13/22/5/3367	bacteria		patogenese
+13/23/1/3fc1	bacteria		patogenese
+13/23/2/dbe8	bacteria		patogenese
+13/24/1/a5b4	bacteria		patogenese
+13/24/2/33a1	bacteria		patogenese
+13/24/3/e5f8	bacteria		patogenese
+13/24/4/19ea	bacteria		patogenese
+13/24/5/89c7	bacteria		patogenese
+13/24/6/7040	bacteria		transmissao
+13/25/1/7417	bacteria		diagnostico
+13/25/2/7562	bacteria		diagnostico
+13/25/3/3d43	bacteria		diagnostico
+13/25/4/0608	bacteria		diagnostico
+13/26/1/6a83	bacteria		tratamento
+13/26/2/8646	bacteria		tratamento
+13/26/3/f977	bacteria		tratamento
+13/26/4/d93c	bacteria		tratamento
+13/27/1/6ff6	bacteria		prevencao
+13/27/2/cfd2	bacteria		prevencao
+13/27/3/872e	bacteria		prevencao
+13/27/4/508b	bacteria		prevencao
+13/27/5/4f9e	bacteria		prevencao
+14/7/4/cb3e	bacteria		virulencia
+14/7/5/aacd	bacteria		virulencia
+14/7/8/5b81	bacteria		diagnostico
+14/7/9/9f9b	bacteria		diagnostico
+14/8/2/54c4	bacteria		doencas
+14/8/3/355f	bacteria		doencas
+14/8/4/ca67	bacteria		doencas
+14/8/5/195c	bacteria		doencas
+14/8/6/d58a	bacteria		doencas
+14/14/1/6fc9	bacteria		caracteristicas
+14/14/2/6298	bacteria		caracteristicas
+14/14/3/fcdb	bacteria		caracteristicas
+14/14/4/2b78	bacteria		habitat
+14/14/5/6550	bacteria		doencas
+14/14/6/bb13	bacteria		doencas
+14/15/1/b1ef	bacteria		caracteristicas
+14/15/2/ae15	bacteria		caracteristicas
+14/15/3/720f	bacteria		doencas
+14/15/4/5087	bacteria		doencas
+14/15/5/fae4	bacteria		habitat
+14/16/1/b3c6	bacteria		virulencia
+14/16/2/46e0	bacteria		virulencia
+14/16/3/bc08	bacteria		virulencia
+14/16/4/ac7e	bacteria		virulencia
+14/16/5/85b0	bacteria		virulencia
+14/16/6/cadc	bacteria		diagnostico
+14/17/1/c851	bacteria		caracteristicas
+14/17/2/ce49	bacteria		caracteristicas
+14/17/3/b0a5	bacteria		caracteristicas
+14/17/4/1602	bacteria		caracteristicas
+14/17/5/a862	bacteria		caracteristicas
+14/17/6/2afc	bacteria		caracteristicas
+14/17/7/f542	bacteria		caracteristicas
+14/18/1/407f	bacteria		caracteristicas
+14/18/2/5875	bacteria		caracteristicas
+14/18/3/9dcf	bacteria		caracteristicas
+14/18/4/64e3	bacteria		caracteristicas
+14/18/5/7b5a	bacteria		virulencia
+14/18/6/a49c	bacteria		prevencao
+14/18/7/c92b	bacteria		diagnostico
+14/18/8/07eb	bacteria		doencas
+14/18/9/3279	bacteria		diagnostico
+14/19/1/7748	bacteria		doencas
+14/19/2/d603	bacteria		doencas
+14/19/3/898d	bacteria		doencas
+14/20/1/774e	bacteria		patogenese
+14/20/2/4ff9	bacteria		patogenese
+14/20/3/6b03	bacteria		patogenese
+14/21/1/8f64	bacteria		caracteristicas
+14/21/2/c372	bacteria		caracteristicas
+14/21/3/c1ac	bacteria		caracteristicas
+14/21/4/c7ea	bacteria		virulencia
+14/21/5/4cb1	bacteria		virulencia
+14/21/6/55a7	bacteria		virulencia
+14/21/7/8191	bacteria		virulencia
+14/21/8/ef88	bacteria		virulencia
+14/21/9/4aa6	bacteria		diagnostico
+14/22/1/2efe	bacteria		habitat
+14/22/2/1a7c	bacteria		transmissao
+14/22/3/8723	bacteria		doencas
+14/22/4/e9c7	bacteria		caracteristicas
+14/22/5/158b	bacteria		caracteristicas
+14/22/6/3cf6	bacteria		caracteristicas
+14/22/7/86cd	bacteria		caracteristicas
+14/22/8/340b	bacteria		caracteristicas
+14/22/9/451b	bacteria		diagnostico
+14/23/1/e31d	bacteria		diagnostico
+14/23/2/3a23	bacteria		doencas
+14/23/3/a4a6	bacteria		doencas
+14/23/4/d93a	bacteria		doencas
+14/24/1/5540	bacteria		caracteristicas
+14/24/2/8868	bacteria		caracteristicas
+14/24/3/20eb	bacteria		transmissao
+14/24/4/4482	bacteria		virulencia
+14/24/5/0a9b	bacteria		doencas
+14/24/6/c53b	bacteria		doencas
+14/24/7/2ab3	bacteria		diagnostico
+14/26/1/7d50	bacteria		habitat
+14/26/2/3877	bacteria		doencas
+14/26/3/d7f1	bacteria		patogenese
+14/27/1/f266	bacteria		virulencia
+14/27/2/15f3	bacteria		virulencia
+14/27/3/63ad	bacteria		virulencia
+14/28/1/028a	bacteria		caracteristicas
+14/28/2/c84c	bacteria		patogenese
+14/28/3/9b22	bacteria		transmissao
+14/28/4/11ac	bacteria		doencas
+14/28/5/c02d	bacteria		doencas
+14/28/6/6263	bacteria		risco
+14/29/1/5a93	bacteria		caracteristicas
+14/29/2/7017	bacteria		caracteristicas
+14/29/3/8196	bacteria		caracteristicas
+14/29/4/07f0	bacteria		caracteristicas
+14/29/5/3424	bacteria		caracteristicas
+14/29/6/bd3c	bacteria		caracteristicas
+14/29/7/9cc9	bacteria		caracteristicas
+14/30/1/e017	bacteria		virulencia
+14/30/2/bd66	bacteria		patogenese
+14/31/1/e8af	bacteria		doencas
+14/31/2/d047	bacteria		doencas
+14/31/3/7891	bacteria		doencas
+14/34/2/7f72	bacteria		tratamento
+14/34/3/d966	bacteria		tratamento
+14/35/1/330d	bacteria		doencas
+15/7/1/ef7c	bacteria		tratamento
+15/7/2/dbd0	bacteria		tratamento
+15/7/3/c5b7	bacteria		tratamento
+15/8/1/f0ec	bacteria		habitat
+15/8/2/8a8a	bacteria		risco
+15/8/3/4a93	bacteria		doencas
+15/8/4/ad12	bacteria		tratamento
+15/9/2/428f	bacteria		tratamento
+15/9/3/c5fa	bacteria		tratamento
+15/9/4/5230	bacteria		tratamento
+15/10/1/3cc7	bacteria		virulencia
+15/10/2/e63b	bacteria		virulencia
+15/10/3/bbd9	bacteria		virulencia
+15/11/2/4233	bacteria		virulencia
+15/11/3/d70b	bacteria		virulencia
+15/13/1/2232	bacteria		tratamento
+15/13/3/8e56	bacteria		tratamento
+15/14/1/b2b7	bacteria		caracteristicas
+15/14/2/f8e4	bacteria		caracteristicas
+15/14/3/5a0d	bacteria		habitat
+15/14/4/8aea	bacteria		habitat
+15/14/5/2bcd	bacteria		doencas
+15/14/6/e5d7	bacteria		doencas
+15/15/1/cbf0	bacteria		doencas
+15/16/2/4dba	bacteria		tratamento
+15/17/1/6fed	bacteria		tratamento
+15/17/3/fcd1	bacteria		tratamento
+15/19/2/6ba8	bacteria		tratamento
+16/2/1/a164	bacteria		caracteristicas
+16/2/2/8dcc	bacteria		caracteristicas
+16/2/3/2f2b	bacteria		caracteristicas
+16/2/4/1ac1	bacteria		caracteristicas
+16/2/5/43d6	bacteria		caracteristicas
+16/2/6/b8da	bacteria		caracteristicas
+16/2/7/5f51	bacteria		caracteristicas
+16/3/1/b7e7	bacteria		caracteristicas
+16/3/2/c807	bacteria		caracteristicas
+16/3/3/c255	bacteria		caracteristicas
+16/3/4/e955	bacteria		caracteristicas
+16/3/5/7242	bacteria		caracteristicas
+16/4/1/94bb	bacteria		caracteristicas
+16/4/2/ba03	bacteria		doencas
+16/4/3/add0	bacteria		doencas
+16/4/4/bc87	bacteria		doencas
+16/4/5/cac9	bacteria		doencas
+16/4/6/a60b	bacteria		doencas
+16/5/1/eeda	bacteria		caracteristicas
+16/5/2/d84b	bacteria		caracteristicas
+16/5/3/81be	bacteria		caracteristicas
+16/5/4/6668	bacteria		caracteristicas
+16/5/5/b0cd	bacteria		caracteristicas
+16/6/1/7852	bacteria		caracteristicas
+16/6/2/4b26	bacteria		caracteristicas
+16/7/1/9cb7	bacteria		caracteristicas
+16/7/2/c257	bacteria		caracteristicas
+16/8/1/5bd4	bacteria		caracteristicas
+16/8/2/d72c	bacteria		caracteristicas
+16/8/3/f44f	bacteria		caracteristicas
+16/8/4/da34	bacteria		caracteristicas
+16/8/5/d0b8	bacteria		caracteristicas
+16/8/6/6b76	bacteria		caracteristicas
+16/8/7/5af7	bacteria		caracteristicas
+16/8/8/ce84	bacteria		caracteristicas
+16/9/1/26e8	bacteria		caracteristicas
+16/9/2/cbef	bacteria		caracteristicas
+16/10/1/6e92	bacteria		doencas
+16/10/2/f671	bacteria		transmissao
+16/10/3/6e4f	bacteria		doencas
+16/19/1/13c1	bacteria		risco
+16/19/2/541a	bacteria		risco
+16/19/3/65ab	bacteria		risco
+16/19/4/40cd	bacteria		risco
+16/20/1/4104	bacteria		doencas
+16/21/1/cf47	bacteria		doencas
+16/22/1/bf5a	bacteria		patogenese
+16/22/2/d6fa	bacteria		patogenese
+16/23/1/0e01	bacteria		patogenese
+16/24/1/58f5	bacteria		patogenese
+16/24/2/b7c2	bacteria		patogenese
+16/25/1/53dc	bacteria		patogenese
+16/25/2/998a	bacteria		patogenese
+16/27/1/455b	bacteria		doencas
+16/27/2/7163	bacteria		doencas
+16/27/3/699e	bacteria		doencas
+16/27/4/a953	bacteria		doencas
+16/27/5/4081	bacteria		doencas
+16/27/6/6b1c	bacteria		doencas
+16/27/7/cf3c	bacteria		doencas
+16/27/8/59ac	bacteria		doencas
+16/27/9/c750	bacteria		doencas
+16/27/10/cbd4	bacteria		doencas
+16/27/11/2fce	bacteria		doencas
+16/28/1/6cca	bacteria		doencas
+16/28/2/5229	bacteria		doencas
+16/28/3/0389	bacteria		doencas
+16/28/4/15da	bacteria		doencas
+16/28/5/1a90	bacteria		doencas
+16/28/6/957b	bacteria		doencas
+16/29/1/62e4	bacteria		diagnostico
+16/29/2/8b96	bacteria		diagnostico
+16/29/3/111e	bacteria		diagnostico
+16/29/4/eb99	bacteria		diagnostico
+16/29/5/0f00	bacteria		diagnostico
+16/30/1/994f	bacteria		diagnostico
+16/30/2/4f50	bacteria		diagnostico
+16/31/1/d5f6	bacteria		diagnostico
+16/31/2/893d	bacteria		diagnostico
+16/31/3/dc50	bacteria		diagnostico
+16/31/4/319d	bacteria		diagnostico
+16/32/1/50aa	bacteria		diagnostico
+16/32/2/1c0b	bacteria		diagnostico
+16/33/1/5710	bacteria		diagnostico
+16/33/2/366c	bacteria		diagnostico
+16/33/3/db5c	bacteria		diagnostico
+16/33/4/33bc	bacteria		diagnostico
+16/33/5/a28b	bacteria		diagnostico
+16/34/1/c48c	bacteria		diagnostico
+16/34/2/c0a6	bacteria		diagnostico
+16/34/3/35c2	bacteria		diagnostico
+16/35/1/392b	bacteria		diagnostico
+16/35/2/ba2c	bacteria		diagnostico
+16/35/3/5774	bacteria		diagnostico
+16/35/4/dd9e	bacteria		diagnostico
+16/35/5/3018	bacteria		diagnostico
+16/36/1/7036	bacteria		tratamento
+16/36/2/3296	bacteria		tratamento
+16/36/3/edb6	bacteria		tratamento
+16/36/4/b75c	bacteria		tratamento
+16/36/5/d042	bacteria		prevencao
+16/37/1/d7a7	bacteria		tratamento
+17/3/1/05e6	bacteria		caracteristicas
+17/3/2/7ea6	bacteria		caracteristicas
+17/4/1/479f	bacteria		caracteristicas
+17/4/2/c894	bacteria		doencas
+17/4/3/b321	bacteria		doencas
+17/4/4/4571	bacteria		doencas
+17/4/5/5a4b	bacteria		habitat
+17/5/1/a519	bacteria		doencas
+17/5/2/cf1e	bacteria		caracteristicas
+17/5/3/1dfd	bacteria		caracteristicas
+17/5/4/196f	bacteria		caracteristicas
+17/5/5/1c61	bacteria		caracteristicas
+17/5/6/900b	bacteria		caracteristicas
+17/6/1/a2a8	bacteria		patogenese
+17/7/1/9f65	bacteria		transmissao
+17/7/2/295a	bacteria		transmissao
+17/7/3/45be	bacteria		transmissao
+17/7/4/d4d9	bacteria		transmissao
+17/7/5/b070	bacteria		transmissao
+17/8/1/2cae	bacteria		doencas
+17/8/2/45ab	bacteria		doencas
+17/8/3/3201	bacteria		doencas
+17/8/4/338f	bacteria		doencas
+17/9/1/1e1e	bacteria		doencas
+17/9/2/ecd1	bacteria		doencas
+17/9/3/9212	bacteria		doencas
+17/9/4/402a	bacteria		doencas
+17/9/5/e766	bacteria		doencas
+17/9/6/295d	bacteria		doencas
+17/10/1/5968	bacteria		doencas
+17/11/1/830e	bacteria		doencas
+17/11/2/feab	bacteria		doencas
+17/11/3/97a0	bacteria		doencas
+17/11/4/e4d9	bacteria		doencas
+17/11/5/9bad	bacteria		patogenese
+17/12/1/eb78	bacteria		doencas
+17/12/2/4a4a	bacteria		doencas
+17/13/1/26ac	bacteria		doencas
+17/13/2/72ae	bacteria		doencas
+17/13/3/aa9f	bacteria		doencas
+17/14/1/cbc8	bacteria		doencas
+17/14/2/e58a	bacteria		doencas
+17/14/3/6608	bacteria		doencas
+17/14/4/c4bc	bacteria		doencas
+17/15/1/936b	bacteria		doencas
+17/15/2/b8ea	bacteria		doencas
+17/15/3/7b1e	bacteria		doencas
+17/15/4/1a1b	bacteria		doencas
+17/16/1/c6f0	bacteria		doencas
+17/17/1/2758	bacteria		doencas
+17/17/2/afaf	bacteria		doencas
+17/17/3/dc78	bacteria		diagnostico
+17/18/1/6c63	bacteria		doencas
+17/18/2/3e07	bacteria		doencas
+17/18/3/40cb	bacteria		doencas
+17/18/4/9baa	bacteria		doencas
+17/20/1/5f62	bacteria		doencas
+17/20/2/181a	bacteria		doencas
+17/20/3/6b1d	bacteria		doencas
+17/20/4/615e	bacteria		doencas
+17/21/1/141a	bacteria		doencas
+17/22/1/437f	bacteria		diagnostico
+17/22/2/c744	bacteria		diagnostico
+17/22/3/3a7c	bacteria		diagnostico
+17/23/1/b107	bacteria		diagnostico
+17/23/2/dca9	bacteria		diagnostico
+17/23/3/bfd2	bacteria		diagnostico
+17/23/4/6952	bacteria		diagnostico
+17/24/1/af46	bacteria		diagnostico
+17/24/2/261f	bacteria		diagnostico
+17/25/1/3b05	bacteria		tratamento
+17/25/2/d51b	bacteria		tratamento
+17/25/3/6da8	bacteria		prevencao
+17/25/4/5867	bacteria		prevencao
+17/26/1/d857	bacteria		caracteristicas
+17/26/2/a224	bacteria		doencas
+17/26/3/e7db	bacteria		doencas
+17/26/4/651b	bacteria		caracteristicas
+17/26/5/4070	bacteria		caracteristicas
+17/26/6/4e03	bacteria		caracteristicas
+17/26/7/9c4f	bacteria		caracteristicas
+17/26/8/85f6	bacteria		transmissao
+17/27/1/1728	bacteria		caracteristicas
+17/27/2/dd79	bacteria		caracteristicas
+17/27/3/f371	bacteria		doencas
+17/27/4/80db	bacteria		caracteristicas
+17/28/1/91b9	bacteria		caracteristicas
+17/28/2/ca93	bacteria		caracteristicas
+17/28/3/66d9	bacteria		caracteristicas
+17/28/4/e8aa	bacteria		caracteristicas
+17/28/5/e890	bacteria		caracteristicas
+17/28/6/31a7	bacteria		doencas
+17/28/7/69c9	bacteria		doencas
+17/28/8/7bc3	bacteria		transmissao
+17/28/9/c37c	bacteria		transmissao
+17/29/1/abbf	bacteria		patogenese
+17/29/2/3888	bacteria		patogenese
+17/29/3/de22	bacteria		doencas
+17/29/4/f775	bacteria		doencas
+17/30/1/42c8	bacteria		diagnostico
+17/30/2/153a	bacteria		diagnostico
+17/30/3/61c3	bacteria		diagnostico
+17/30/4/536c	bacteria		tratamento
+17/30/5/554e	bacteria		tratamento
+17/31/1/a0b9	bacteria		caracteristicas
+17/31/2/20a6	bacteria		doencas
+17/31/3/9103	bacteria		doencas
+17/31/4/fb98	bacteria		doencas
+17/31/5/6ea7	bacteria		doencas
+17/31/6/b8d0	bacteria		doencas
+17/31/7/be31	bacteria		doencas
+17/32/1/dfbf	bacteria		transmissao
+17/32/2/473f	bacteria		doencas
+17/32/3/64ce	bacteria		doencas
+17/32/4/2054	bacteria		patogenese
+17/32/5/3366	bacteria		patogenese
+17/33/1/6be3	bacteria		diagnostico
+17/33/2/bc18	bacteria		diagnostico
+17/33/3/14ef	bacteria		diagnostico
+17/33/4/7e0e	bacteria		diagnostico
+17/33/5/5b68	bacteria		diagnostico
+17/33/6/9252	bacteria		diagnostico
+17/33/7/de59	bacteria		tratamento
+17/33/8/bec4	bacteria		tratamento
+17/34/1/5051	bacteria		caracteristicas
+17/34/2/f184	bacteria		caracteristicas
+17/35/1/2222	bacteria		caracteristicas
+17/35/2/e646	bacteria		doencas
+17/36/1/5f15	bacteria		doencas
+17/36/2/504d	bacteria		doencas
+17/36/3/d0af	bacteria		doencas
+17/36/4/59f7	bacteria		doencas
+17/36/5/976a	bacteria		doencas
+17/36/6/f967	bacteria		patogenese
+17/37/1/edfd	bacteria		diagnostico
+17/37/3/58c7	bacteria		caracteristicas
+17/37/4/9e76	bacteria		caracteristicas
+17/37/5/8d12	bacteria		caracteristicas
+17/37/6/1404	bacteria		transmissao
+17/37/7/b1b0	bacteria		transmissao
+17/38/1/93a3	bacteria		virulencia
+17/38/2/fff8	bacteria		virulencia
+17/39/1/1922	bacteria		diagnostico
+17/39/2/45f4	bacteria		diagnostico
+17/39/3/ed5c	bacteria		diagnostico
+17/39/4/959e	bacteria		diagnostico
+17/39/5/b621	bacteria		diagnostico
+17/39/6/2540	bacteria		diagnostico
+17/40/1/c4b0	bacteria		diagnostico
+17/41/1/ad57	bacteria		diagnostico
+17/41/2/b091	bacteria		diagnostico
+17/41/3/5170	bacteria		diagnostico
+17/41/4/077d	bacteria		diagnostico
+17/42/1/d424	bacteria		diagnostico
+17/42/2/2e89	bacteria		diagnostico
+17/42/3/02d6	bacteria		diagnostico
+17/43/1/2d24	bacteria		tratamento
+17/43/2/169a	bacteria		tratamento
+17/45/1/cdd1	bacteria		caracteristicas
+17/45/2/14ec	bacteria		caracteristicas
+17/45/3/c888	bacteria		habitat
+17/45/4/e36a	bacteria		caracteristicas
+17/45/5/fbaf	bacteria		caracteristicas
+17/45/6/9841	bacteria		caracteristicas
+17/45/7/253f	bacteria		caracteristicas
+17/46/1/c6df	bacteria		caracteristicas
+17/46/2/fb16	bacteria		caracteristicas
+17/46/3/80ad	bacteria		caracteristicas
+17/47/1/8f96	bacteria		caracteristicas
+17/47/2/4b4a	bacteria		caracteristicas
+17/48/1/e33f	bacteria		caracteristicas
+17/48/2/48f0	bacteria		caracteristicas
+17/49/1/bf2a	bacteria		caracteristicas
+17/50/1/0ee1	bacteria		caracteristicas
+17/50/2/393d	bacteria		doencas
+17/50/3/f590	bacteria		doencas
+17/50/4/0122	bacteria		doencas
+17/51/1/7501	bacteria		doencas
+17/51/2/2fa1	bacteria		transmissao
+17/52/1/e6fb	bacteria		doencas
+17/52/2/fbf9	bacteria		risco
+17/52/3/8620	bacteria		patogenese
+17/52/4/9720	bacteria		doencas
+17/53/1/dc2b	bacteria		doencas
+17/53/2/fa46	bacteria		transmissao
+17/54/1/9188	bacteria		doencas
+17/54/2/de0d	bacteria		transmissao
+17/54/3/39a6	bacteria		doencas
+17/54/4/5930	bacteria		doencas
+17/55/1/4ff6	bacteria		patogenese
+17/55/2/3a50	bacteria		patogenese
+17/55/3/b860	bacteria		patogenese
+17/55/4/61bd	bacteria		patogenese
+17/55/5/dc3f	bacteria		patogenese
+17/56/1/bbcf	bacteria		doencas
+17/56/2/8034	bacteria		patogenese
+17/56/3/d512	bacteria		patogenese
+17/57/1/3e54	bacteria		transmissao
+17/57/2/4987	bacteria		transmissao
+17/57/3/937e	bacteria		doencas
+17/57/4/b676	bacteria		doencas
+17/57/5/49bf	bacteria		doencas
+17/58/1/4ca5	bacteria		doencas
+17/59/1/b15d	bacteria		transmissao
+17/59/2/71e3	bacteria		doencas
+17/60/1/501e	bacteria		transmissao
+17/60/2/109e	bacteria		doencas
+17/61/1/cfa6	bacteria		diagnostico
+17/61/2/5b5e	bacteria		diagnostico
+17/61/3/e16d	bacteria		diagnostico
+17/61/4/4213	bacteria		diagnostico
+17/61/5/c512	bacteria		diagnostico
+17/61/6/07f6	bacteria		diagnostico
+17/62/1/608b	bacteria		caracteristicas
+17/62/2/725a	bacteria		caracteristicas
+17/63/1/c154	bacteria		tratamento
+17/63/2/dbe3	bacteria		tratamento
+17/63/3/00bb	bacteria		tratamento
+1/3/4/19fb	teoria		
+1/4/4/acde	teoria		
+1/5/1/e357	teoria		
+1/8/6/52ad	teoria		
+1/13/1/1216	teoria		
+1/13/2/5f2c	teoria		
+1/14/1/4fa6	teoria		
+1/14/2/aed2	teoria		
+1/15/1/b8be	teoria		
+1/15/2/b8c2	teoria		
+1/15/3/f13b	teoria		
+1/16/1/ddc0	teoria		
+1/16/2/e248	teoria		
+1/16/3/13fc	teoria		
+1/16/4/6fcb	teoria		
+1/16/5/66ec	teoria		
+1/16/6/bb27	teoria		
+1/16/7/3fda	teoria		
+1/16/8/4e59	teoria		
+1/18/1/b6d5	teoria		
+1/18/2/d0a0	teoria		
+1/20/1/bfc6	teoria		
+1/34/1/e55a	teoria		
+1/34/2/dbf5	teoria		
+1/34/3/8396	teoria		
+1/34/4/a887	teoria		
+2/27/1/e53f	familia	provas	tipo
+6/9/1/b155	teoria		
+8/7/2/6dbe	familia	antimicrobianos	origem
+8/7/4/f993	familia	antimicrobianos	origem
+9-10/59/1/eb6b	familia	provas	tipo
+11-12/25/8/6170	teoria		
+13/3/7/c49b	bacteria		caracteristicas
+15/9/1/3764	bacteria		tratamento
+15/17/2/21eb	bacteria		tratamento
+15/31/1/a043	quadros		
+16/11/1/70f9	bacteria		doencas
+16/11/2/cb89	bacteria		doencas
+16/11/3/36f5	bacteria		doencas
+16/12/1/5be8	bacteria		doencas
+16/12/2/eea5	bacteria		risco
+16/12/3/6b1d	bacteria		doencas
+16/12/4/b7c0	bacteria		diagnostico
+16/13/1/eea0	bacteria		diagnostico
+16/16/1/cabc	teoria		
+16/16/2/0bbe	teoria		
+16/16/3/7c40	teoria		
+16/17/1/c4ed	bacteria		prevencao
+16/18/1/f54a	bacteria		prevencao
+17/37/2/5ced	bacteria		caracteristicas

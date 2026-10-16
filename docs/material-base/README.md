@@ -19,11 +19,11 @@ Em `gerados-ocr/`:
 | uma transcrição por fonte, e uma por documento do livro | o texto da fonte, página por página, com o nome do arquivo dela: a da apresentação tem o nome do `.pptx`, e a do livro, o do documento (`chapter12.md` é o capítulo 12; `fm02.md`, o prefácio) |
 | `extracao.json` | a lista de extração: as fontes que o `extrator.py` transcreve, cada uma com as opções, a numeração das páginas e as correções da leitura, que trazem texto da fonte |
 | a lista dos itens numerados | os itens numerados das transcrições de documentos numerados, como uma norma, com a página e a linha de cada item e os grupos de tópicos do sumário |
-| `CONFERENCIA-*.md` e `imagens/` | os [arquivos de conferência](../../metodologia-de-conteudo.md#7-a-conferência) e as imagens que eles mostram |
+| `CONFERENCIA-*.md` e `imagens/` | os [arquivos de conferência](../../metodologia-de-conteudo.md#7-a-conferência) e as imagens que eles mostram, e o relatório da conferência dos moldes |
 | `pesquisa/` | as [evidências da pesquisa](../../metodologia-de-conteudo.md#a-análise-da-matéria) |
 | `analise/` | a análise de cada aula e dos capítulos 12 a 17, trecho por trecho, as ligações entre as aulas e o registro do trabalho, `REGISTRO.md` |
 | `provas/` | a [prova](../../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho) dos cartões, um arquivo por planilha |
-| `[item]-fontes-externas.md` | a [base de trechos](../../metodologia-de-conteudo.md#o-material-de-fora) de cada item |
+| `[item]-fontes-externas.md` | a [base de trechos](../../metodologia-de-conteudo.md#o-material-de-fora) de cada unidade, com o id dela no lugar de `[item]` |
 
 Os scripts que gravam nesta pasta, e onde, estão no [README dos
 scripts](../../scripts/README.md).

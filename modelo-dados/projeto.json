@@ -7,6 +7,8 @@
   "coluna_subdecks": null,
   "caminhos": {
     "formato": "dados/formato.json",
+    "forma_analise": "dados/forma-analise.json",
+    "lugares_lidos": "dados/lugares-lidos.tsv",
     "extrator": "dados/extrator.json",
     "extracao": "docs/material-base/gerados-ocr/extracao.json",
     "fontes": "dados/fontes.json",
@@ -21,6 +23,7 @@
     "conferencia_referencias": "docs/material-base/gerados-ocr/CONFERENCIA-REFERENCIAS.md",
     "analise": "docs/analise-da-materia.md",
     "pesquisa": "docs/material-base/gerados-ocr/pesquisa",
+    "analises_das_aulas": "docs/material-base/gerados-ocr/analise",
     "material_gerado": "docs/material-gerado",
     "baralhos": "anki-decks",
     "bases": "dados/bases/{item}.json",
@@ -28,6 +31,7 @@
     "conferencia_trechos": "docs/material-base/gerados-ocr/CONFERENCIA-TRECHOS.md",
     "provas": "docs/material-base/gerados-ocr/provas/{planilha}.json",
     "conferencia_cartoes": "docs/material-base/gerados-ocr/CONFERENCIA-CARTOES.md",
+    "conferencia_moldes": "docs/material-base/gerados-ocr/CONFERENCIA-MOLDES.md",
     "imagens": "docs/material-base/gerados-ocr/imagens",
     "estilo_cartao": "dados/estilo-cartao.css"
   }

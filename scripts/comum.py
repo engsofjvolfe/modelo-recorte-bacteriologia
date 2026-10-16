@@ -3,8 +3,9 @@
 
 """
 Funcoes que os outros scripts usam: achar o projeto e as planilhas de pergunta, ler o
-formato da disciplina conferido contra o molde dele, o registro da fonte no topo de um
-documento gerado, a impressao digital de um arquivo, os tiques de um arquivo de
+formato da disciplina conferido contra o molde dele e nas ligacoes de dentro dele, achar
+no formato as unidades de um documento e a grade de cada uma, o registro da fonte no topo
+de um documento gerado, a impressao digital de um arquivo, os tiques de um arquivo de
 conferencia, a imagem de uma pagina de PDF, as paginas de uma fonte em HTML, os slides de
 uma apresentacao em pptx, as marcas da transcricao e o que os transcritores fazem do
 mesmo jeito (o texto de uma linha, o indice e o expoente, a tabela, o texto de dentro de
@@ -57,6 +58,7 @@ from pathlib import Path
 from validar_dados import esquema, le_dados
 
 ARQUIVO_PROJETO = "projeto.json"
+MOLDE_COM_GRADE = "eixos"  # o tipo de molde de documento que tem grade (esquemas/formato.schema.json)
 PASTA_NORMAS = Path(__file__).resolve().parent / "normas"  # as tabelas que vem de normas, como a ISO 639
 LINHA_FONTE = re.compile(r"^fonte (?P<chave>\S+): (?P<caminho>.+?) \| sha256: (?P<hash>[0-9a-f]{64})$")
 MARCA_PARTE = re.compile(r"^<!-- parte: ([^|]+)\|([^|]+)\|([0-9a-f]+) -->$")
@@ -164,14 +166,135 @@ def acha_projeto(arquivo=None):
 
 def le_formato(projeto):
     """(formato, erros): o formato da disciplina (no projeto.json, "formato"), lido pela
-    leitura de todo arquivo de dados (validar_dados.le_dados), contra o molde dele. E a
+    leitura de todo arquivo de dados (validar_dados.le_dados), contra o molde dele, e com as
+    ligacoes de dentro dele conferidas (erros_das_ligacoes), quando ele segue o molde. E a
     unica leitura do formato: todo script que usa o formato le por aqui. Com qualquer erro
-    -- texto fora do UTF-8, JSON invalido ou fora do molde --, o formato vem None e os
-    erros vem cada um com o nome do arquivo na frente, pra quem chama mostrar com ERRO e
-    nao usar o formato. Nao confere se o arquivo existe: o script que precisa dele diz o
-    que fazer quando ele falta, e o que funciona sem ele so chama esta funcao quando ele
-    existe."""
-    return le_dados(projeto.caminho("formato"), esquema("formato"))
+    -- texto fora do UTF-8, JSON invalido, fora do molde ou ligacao que nao fecha --, o
+    formato vem None e os erros vem cada um com o nome do arquivo na frente, pra quem chama
+    mostrar com ERRO e nao usar o formato. Nao confere se o arquivo existe: o script que
+    precisa dele diz o que fazer quando ele falta, e o que funciona sem ele so chama esta
+    funcao quando ele existe."""
+    arquivo = projeto.caminho("formato")
+    formato, erros = le_dados(arquivo, esquema("formato"))
+    if not erros:
+        erros = [f"{arquivo.name}: {e}" for e in erros_das_ligacoes(formato)]
+    return (None if erros else formato), erros
+
+
+# ---------- o que se acha dentro do formato ----------
+
+def unidades(documento):
+    """As unidades do documento, na ordem do formato; nenhuma, quando ele nao as lista."""
+    return documento.get("unidades", [])
+
+
+def acha_unidade(formato, id_unidade):
+    """(documento, unidade) da unidade com o id dado, ou (None, None) quando nenhum documento
+    a tem. O id de uma unidade e um so entre todos os documentos (erros_das_ligacoes)."""
+    return next(((d, u) for d in formato["documentos"] for u in unidades(d) if u["id"] == id_unidade),
+                (None, None))
+
+
+def grade(documento, unidade=None):
+    """Os eixos da ficha de uma unidade do documento: os da propria unidade, quando ela tem os
+    seus; senao, os do documento, que sao tambem a grade sem unidade. Nenhum, quando nao ha."""
+    return (unidade or {}).get("eixos") or documento.get("eixos", [])
+
+
+def linhas_do_eixo(eixo):
+    """As linhas da grade que um eixo da: os subtopicos dele, ou ele mesmo, quando nao se divide."""
+    return eixo.get("subtopicos") or [eixo]
+
+
+def tipos_do_formato(formato):
+    """Os tipos de conhecimento que o formato nomeia: os das partes da sequencia, os que se
+    ensinam junto de outro trecho, os das regras de fora e os das formas de pergunta."""
+    return ({t for p in formato["partes_por_tipo"] for t in p["tipos"]} | set(formato["tipos_junto"])
+            | {t for r in formato["fora"] for t in r["tipos"]}
+            | {t for d in formato["documentos"] for f in d.get("formas", []) for t in f["tipos"]})
+
+
+# ---------- as ligacoes de dentro do formato ----------
+
+def repetidos(pares):
+    """[(valor, [lugares])] dos valores que aparecem em mais de um lugar, na ordem em que cada
+    um aparece primeiro; pares e uma lista de (valor, lugar)."""
+    lugares = {}
+    for valor, lugar in pares:
+        lugares.setdefault(valor, []).append(lugar)
+    return [(v, ls) for v, ls in lugares.items() if len(ls) > 1]
+
+
+def onde(documento, unidade=None):
+    """O lugar de um documento, ou de uma unidade dele, numa frase de erro."""
+    return f"documento {documento['id']!r}" + (f", unidade {unidade['id']!r}" if unidade else "")
+
+
+def partes_da_ficha(documento, eixos):
+    """[(id, o que e)] das partes de uma ficha do documento: as aberturas dele, os eixos e os
+    subtopicos de cada eixo."""
+    return ([(a["id"], "abertura") for a in documento.get("abertura", [])] + [(e["id"], "eixo") for e in eixos]
+            + [(s["id"], f"subtópico do eixo {e['id']!r}") for e in eixos for s in e.get("subtopicos", [])])
+
+
+def erros_das_fichas(documento):
+    """As ligacoes da ficha de um documento: id repetido entre as partes de uma ficha (a do
+    documento e a de cada unidade com eixos proprios), elo com eixo que o documento nao tem
+    e, no molde que pede grade, documento ou unidade sem grade."""
+    fichas = ([(onde(documento), grade(documento))] if documento.get("eixos") else []) + [
+        (onde(documento, u), u["eixos"]) for u in unidades(documento) if u.get("eixos")]
+    erros = [f"{lugar}: o id {i!r} se repete entre as partes da ficha: {', '.join(ls)}"
+             for lugar, eixos in fichas for i, ls in repetidos(partes_da_ficha(documento, eixos))]
+    eixos_do_documento = {e["id"] for e in documento.get("eixos", [])}
+    erros += [f"{onde(documento)}: o elo {elo['id']!r} usa o eixo {e!r}, que o documento não tem"
+              for elo in documento.get("elos", []) for e in elo["eixos"] if e not in eixos_do_documento]
+    if documento["molde"] == MOLDE_COM_GRADE:
+        if not documento.get("eixos") and not unidades(documento):
+            erros.append(f"{onde(documento)}: o molde {documento['molde']!r} pede uma grade, e o documento não "
+                         "tem eixos nem unidades")
+        erros += [f"{onde(documento, u)}: sem grade: a unidade não tem eixos, e o documento também não"
+                  for u in unidades(documento) if not grade(documento, u)]
+    return erros
+
+
+def erros_dos_tipos(formato):
+    """As ligacoes dos tipos: tipo em mais de uma parte da sequencia, ou em mais de uma forma
+    de pergunta do mesmo documento; tipo ou documento de onde_se_ensina que o formato nao
+    tem."""
+    erros = [f"o tipo {t!r} está em mais de uma parte da sequência: {', '.join(ls)}"
+             for t, ls in repetidos((t, f"parte {p['id']!r}") for p in formato["partes_por_tipo"] for t in p["tipos"])]
+    for d in formato["documentos"]:
+        formas = enumerate(d.get("formas", []), 1)
+        erros += [f"{onde(d)}: o tipo {t!r} está em mais de uma forma de pergunta: {', '.join(ls)}"
+                  for t, ls in repetidos((t, f"forma {n} ({f['verbo']})") for n, f in formas for t in f["tipos"])]
+    tipos, documentos = tipos_do_formato(formato), {d["id"] for d in formato["documentos"]}
+    for tipo, lista in formato["onde_se_ensina"].items():
+        if tipo not in tipos:
+            erros.append(f"onde_se_ensina: o tipo {tipo!r} não está em nenhuma parte da sequência, nos tipos que vão "
+                         "junto, em fora nem nas formas de pergunta")
+        erros += [f"onde_se_ensina, tipo {tipo!r}: o documento {d!r} não existe" for d in lista if d not in documentos]
+    return erros
+
+
+def erros_das_ligacoes(formato):
+    """As ligacoes de dentro do formato que nao fecham, cada uma numa frase que diz o lugar:
+    unidade em mais de um documento; as da ficha de cada documento (erros_das_fichas); grupo
+    de um documento que o formato nao tem; as dos tipos (erros_dos_tipos); id repetido entre
+    as regras de fora e as marcas, que dizem a classe do trecho; documento que nao recebe
+    nenhum trecho, sem grupo, sem caminho e sem receber todos."""
+    documentos, grupos = formato["documentos"], {g["id"] for g in formato["grupos"]}
+    erros = [f"a unidade {u!r} está em mais de um documento: {', '.join(ls)}"
+             for u, ls in repetidos((u["id"], onde(d)) for d in documentos for u in unidades(d))]
+    erros += [e for d in documentos for e in erros_das_fichas(d)]
+    erros += [f"{onde(d)}: o grupo {g!r} não está nos grupos do formato"
+              for d in documentos for g in d.get("grupos", []) if g not in grupos]
+    erros += erros_dos_tipos(formato)
+    erros += [f"o id {i!r} se repete entre fora e marcas: {', '.join(ls)}"
+              for i, ls in repetidos([(r["id"], "fora") for r in formato["fora"]]
+                                     + [(m["id"], "marcas") for m in formato["marcas"]])]
+    erros += [f"{onde(d)}: não recebe nenhum trecho: não tem grupo, nem caminho, nem recebe todos"
+              for d in documentos if not (d.get("todos") or d.get("grupos") or d.get("caminhos"))]
+    return erros
 
 
 def lingua(codigo):

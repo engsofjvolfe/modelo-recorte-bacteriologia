@@ -1,11 +1,15 @@
 {
   "versao_schema": 1,
-  "curso": "",
+  "cursos": [],
   "disciplina": "",
   "nivel": "",
   "idioma": "pt-BR",
-  "itens": [],
-  "elos": [],
-  "eixos": [],
-  "colunas_extras": []
+  "ultima_aula": "",
+  "grupos": [],
+  "partes_por_tipo": [],
+  "tipos_junto": [],
+  "fora": [],
+  "marcas": [],
+  "onde_se_ensina": {},
+  "documentos": []
 }

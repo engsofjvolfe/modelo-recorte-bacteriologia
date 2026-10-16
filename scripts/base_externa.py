@@ -17,9 +17,11 @@ O script recolhe, a IA julga na curadoria, a pessoa julga na aceitacao:
   3. a IA classifica cada frase no arquivo de dados, numa lista fechada: "usa" (com o
      subtopico e se a fonte afirma ou trata como possibilidade), "outro-item",
      "repetida" (com a frase que ela repete), "fora-do-recorte" ou "nao-e-conteudo";
-  4. cada subtopico da grade do formato da disciplina fica marcado como "aula", "fonte"
-     ou "lacuna". A grade junta os subtopicos de todos os eixos e os eixos sem
-     subtopicos, pelo id: cada id aparece nela uma vez so;
+  4. cada subtopico da grade da unidade do item fica marcado como "aula", "fonte" ou
+     "lacuna". O item e o id de uma unidade de um documento do formato da disciplina, e a
+     grade dela sao os eixos da propria unidade ou, quando ela nao tem os seus, os do
+     documento (comum.grade). A grade junta os subtopicos de todos os eixos e os eixos sem
+     subtopicos, pelo id;
   5. sem nenhum erro nos dados do item, o script grava a base do item (so as frases
      "usa", literais, com a citacao e a pagina, e o registro das fontes no topo); com
      erro, a base fica so com o aviso de que nao foi gerada. E grava a conferencia dos
@@ -27,10 +29,11 @@ O script recolhe, a IA julga na curadoria, a pessoa julga na aceitacao:
      (ou documento, quando nao ha paginas), com a imagem quando e PDF, as frases e a
      classe de cada uma, e as caixas de tique "IA" e "pessoa".
 
-O script nao julga nada; so recusa o que falta ou contradiz os dados: frase sem classe,
-classe para frase que nao existe, subtopico da grade sem marca, subtopico "fonte" sem
-nenhuma frase, frase usada num subtopico que a aula cobre ou que e lacuna, id que se
-repete na grade do formato da disciplina. A separacao em frases e mecanica (ponto final
+O script nao julga nada; so recusa o que falta ou contradiz os dados: unidade que nao esta
+no formato, ou cujo documento nao tem grade, frase sem classe, classe para frase que nao
+existe, subtopico da grade sem marca, subtopico "fonte" sem nenhuma frase, frase usada num
+subtopico que a aula cobre ou que e lacuna. Um id que se repete na grade e erro do proprio
+formato, que a leitura dele recusa. A separacao em frases e mecanica (ponto final
 seguido de maiuscula, ou marcador de lista); quando ela parte uma frase em duas, o campo
 "juntar" do arquivo de dados as une.
 
@@ -42,12 +45,13 @@ como esta.
 Depois de gravar, roda as referencias (referencias.py), porque a base registra as
 fontes que usa. Os caminhos vem do projeto.json: "bases", "base_externa",
 "conferencia_trechos", "formato" e "imagens", e a resolucao das imagens, de
-"resolucao_imagens". O formato da disciplina e o arquivo de dados de cada item sao lidos
-pela leitura de todo arquivo de dados (validar_dados.le_dados), cada um contra o molde dele
-(formato.schema.json e base.schema.json), com o texto fora do UTF-8, o JSON invalido e o
-que esta fora do molde como erro: com erro no formato, cada erro aparece com ERRO e nada e
-gerado; com erro nos dados de um item, cada erro aparece com ERRO, o item nao e gerado e a
-conferencia nao e refeita. Precisa dos comandos pdftotext e pdftoppm (Poppler) quando
+"resolucao_imagens". O formato da disciplina e lido pela leitura dele (comum.le_formato),
+contra o molde (formato.schema.json) e nas ligacoes de dentro dele, e o arquivo de dados de
+cada item, pela leitura de todo arquivo de dados (validar_dados.le_dados), contra o molde
+dele (base.schema.json); o texto fora do UTF-8, o JSON invalido, o que esta fora do molde
+e a ligacao que nao fecha sao erro: com erro no formato, cada erro aparece com ERRO e nada
+e gerado; com erro nos dados de um item, cada erro aparece com ERRO, o item nao e gerado e
+a conferencia nao e refeita. Precisa dos comandos pdftotext e pdftoppm (Poppler) quando
 alguma fonte e PDF.
 
 Roda sempre todos os itens que tem arquivo de dados: a conferencia e um arquivo so, e os
@@ -75,8 +79,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from comum import (acha_projeto, ancora, assinatura, caixas, comando, dentro, imagem, impressao,  # noqa: E402
-                   le_formato, leva_para, link, marca, tiques_anteriores, tiques_da_parte)
+from comum import (acha_projeto, acha_unidade, ancora, assinatura, caixas, comando, dentro, grade,  # noqa: E402
+                   imagem, impressao, le_formato, leva_para, linhas_do_eixo, link, marca, tiques_anteriores,
+                   tiques_da_parte)
 from validar_dados import esquema, le_dados  # noqa: E402
 
 # descricao em portugues dos valores das listas fechadas do molde (base.schema.json); o
@@ -177,27 +182,23 @@ def junta(partes, grupos, erros):
 
 # ---------- dados ----------
 
-def unidades_da_grade(formato):
-    """({id: (rotulo, eixo)}, erros): os subtopicos de cada eixo, ou o proprio eixo quando
-    nao tem subtopicos. Os ids de todos eles formam uma grade so, entao um id que aparece
-    nela mais de uma vez -- em eixos diferentes, ou num subtopico e num eixo sem
-    subtopicos -- e erro: a cobertura e as classes nao teriam como dizer de qual falam."""
-    out, onde = {}, {}
-    for eixo in formato["eixos"]:
-        for sub in eixo["subtopicos"] or [eixo]:
-            out[sub["id"]] = (f"{sub['id']} {sub['nome']}", eixo)
-            onde.setdefault(sub["id"], []).append(f"subtópico {sub['nome']}, do eixo {eixo['id']}"
-                                                 if eixo["subtopicos"] else f"eixo {eixo['nome']}, sem subtópicos")
-    erros = [f"id repetido na grade do formato da disciplina: {u} ({'; '.join(lugares)})"
-             for u, lugares in onde.items() if len(lugares) > 1]
-    return out, erros
+def grade_da_unidade(formato, item):
+    """(unidade, eixos, erros): a unidade do item no formato e os eixos da grade dela (os da
+    propria unidade ou, quando ela nao tem os seus, os do documento dela); o erro, quando
+    nenhum documento tem a unidade ou quando o documento dela nao tem grade."""
+    documento, unidade = acha_unidade(formato, item)
+    if unidade is None:
+        return None, [], [f"a unidade {item!r} não está em nenhum documento do formato da disciplina"]
+    eixos = grade(documento, unidade)
+    return unidade, eixos, ([] if eixos else [f"a unidade {item!r} é do documento {documento['id']!r}, "
+                                              "que não tem grade"])
 
 
-def confere(dados, grade, partes, item_ok):
-    """Erros de dados: tudo o que falta ou se contradiz. Nao julga conteudo."""
+def confere(dados, ids_da_grade, partes):
+    """Erros de dados: tudo o que falta ou se contradiz. Nao julga conteudo. Os ids da grade
+    sao os dos subtopicos, na ordem; sem nenhum (a unidade nao tem grade, o que ja e erro),
+    so as frases e as classes se conferem."""
     erros = []
-    if not item_ok:
-        erros.append(f"o item {dados['item']!r} não está nos itens do formato da disciplina")
     codigos = {c for _, _, fs in partes for c, _ in fs}
     classes, cobertura = dados["classes"], dados["cobertura"]
     for c in sorted(set(classes) - codigos):
@@ -205,24 +206,26 @@ def confere(dados, grade, partes, item_ok):
     sem_classe = [c for _, _, fs in partes for c, _ in fs if c not in classes]
     if sem_classe:
         erros.append(f"{len(sem_classe)} frase(s) sem classe: {', '.join(sem_classe)}")
-    for u in grade:
+    erros += [f"{c}: repete uma frase que não existe: {cl['de']}" for c, cl in classes.items()
+              if cl["classe"] == "repetida" and cl["de"] not in codigos]
+    if not ids_da_grade:
+        return erros
+    for u in ids_da_grade:
         if u not in cobertura:
             erros.append(f"subtópico {u} da grade sem marca de cobertura")
-    for u in sorted(set(cobertura) - set(grade)):
+    for u in sorted(set(cobertura) - set(ids_da_grade)):
         erros.append(f"cobertura para subtópico que não está na grade: {u}")
     usadas = {}
     for c, cl in classes.items():
         if cl["classe"] == "usa":
             sub = cl["subtopico"]
             usadas.setdefault(sub, []).append(c)
-            if sub not in grade:
+            if sub not in ids_da_grade:
                 erros.append(f"{c}: subtópico {sub} não está na grade")
             elif cobertura.get(sub) in ("aula", "lacuna"):
                 erros.append(f"{c}: usada no subtópico {sub}, que está marcado como {cobertura[sub]}")
-        if cl["classe"] == "repetida" and cl["de"] not in codigos:
-            erros.append(f"{c}: repete uma frase que não existe: {cl['de']}")
     for u, marca_ in cobertura.items():
-        if marca_ == "fonte" and u in grade and not usadas.get(u):
+        if marca_ == "fonte" and u in ids_da_grade and not usadas.get(u):
             erros.append(f"subtópico {u} marcado como fonte, sem nenhuma frase usada")
     return erros
 
@@ -246,11 +249,13 @@ def descricao(classe):
     return texto
 
 
-def grava_base(dados, formato, grade, partes, lugares, raiz, saida, com_erro):
-    item = next((i for i in formato["itens"] if i["id"] == dados["item"]), {"nome": dados["item"]})
+def grava_base(dados, unidade, eixos, partes, lugares, raiz, saida, com_erro):
+    """Grava a base do item, com um titulo por eixo da grade da unidade dele e um por
+    subtopico do eixo que se divide; com erro, so o aviso de que ela nao foi gerada."""
+    nome = unidade["nome"] if unidade else dados["item"]
     if com_erro:
         saida.parent.mkdir(parents=True, exist_ok=True)
-        saida.write_text(f"# Base de trechos do material de fora — {item['nome']}\n\nBase não gerada: os dados do "
+        saida.write_text(f"# Base de trechos do material de fora — {nome}\n\nBase não gerada: os dados do "
                          "item ou o formato da disciplina têm erro. Resolva cada ERRO e rode o base_externa.py de "
                          "novo.\n", encoding="utf-8")
         return
@@ -262,11 +267,11 @@ def grava_base(dados, formato, grade, partes, lugares, raiz, saida, com_erro):
             registro.append(f"fonte {lugar['fonte']}: {lugar['arquivo']} | sha256: {impressao(arquivo)}")
     por_codigo = {c: (parte, p, f) for parte, p, fs in partes for c, f in fs}
     lugar_da_fonte = {l["fonte"]: l for l in lugares}
-    corpo = ["---"] + registro + ["---", "", f"# Base de trechos do material de fora — {item['nome']}"]
-    for eixo in formato["eixos"]:
+    corpo = ["---"] + registro + ["---", "", f"# Base de trechos do material de fora — {nome}"]
+    for eixo in eixos:
         corpo += ["", f"## {eixo['id']}. {eixo['nome']}"]
-        for sub in eixo["subtopicos"] or [eixo]:
-            if eixo["subtopicos"]:
+        for sub in linhas_do_eixo(eixo):
+            if sub is not eixo:  # o eixo que se divide ganha um titulo para cada subtopico
                 corpo += ["", f"### {sub['id']} {sub['nome']}"]
             marca_ = dados["cobertura"].get(sub["id"])
             corpo += ["", f"Cobertura: {'sem marca' if marca_ is None else descreve(COBERTURA, marca_)}"]
@@ -366,10 +371,11 @@ def processa(projeto, arquivo_dados, formato, anteriores, sem_perguntar):
     if erros:
         return None, [f"{arquivo_dados.name}: {e}" for e in erros]
     partes = junta([pt for l in lugares for pt in partes_do_lugar(l, raiz)], dados.get("juntar", []), erros)
-    grade, erros_da_grade = unidades_da_grade(formato)
-    erros += erros_da_grade + confere(dados, grade, partes, any(i["id"] == dados["item"] for i in formato["itens"]))
+    unidade, eixos, erros_da_unidade = grade_da_unidade(formato, dados["item"])
+    ids_da_grade = [sub["id"] for eixo in eixos for sub in linhas_do_eixo(eixo)]
+    erros += erros_da_unidade + confere(dados, ids_da_grade, partes)
     base = projeto.caminho_com("base_externa", dados["item"])
-    grava_base(dados, formato, grade, partes, lugares, raiz, base, bool(erros))
+    grava_base(dados, unidade, eixos, partes, lugares, raiz, base, bool(erros))
     saida = projeto.caminho("conferencia_trechos")
     bloco, cont = bloco_do_item(dados, arquivo_dados, base, partes, lugares, raiz, saida, anteriores,
                                 projeto.pasta_de_imagens(saida), projeto.valor("resolucao_imagens"))
@@ -388,7 +394,7 @@ def main(argv=None):
                          "grave nele o formato da disciplina; o README dos scripts diz o que vai em cada campo")
     formato, erros = le_formato(projeto)
     if erros:
-        # a grade, os itens e os titulos da base saem do formato: com erro nele, nada e
+        # a grade, as unidades e os titulos da base saem do formato: com erro nele, nada e
         # gerado, e a base e a conferencia de antes ficam como estavam
         for e in erros:
             print("ERRO:", e)

@@ -1,0 +1,172 @@
+{
+  "versao_schema": 1,
+  "cursos": ["Enfermagem", "Educação Física", "Nutrição", "Fisioterapia"],
+  "disciplina": "Microbiologia",
+  "nivel": "entender e aplicar",
+  "idioma": "pt-BR",
+  "ultima_aula": "13",
+  "grupos": [
+    {"id": "1", "nome": "Organismos"},
+    {"id": "2", "nome": "Fundamentos"},
+    {"id": "3", "nome": "Famílias de itens"},
+    {"id": "4", "nome": "Prática em saúde"},
+    {"id": "5", "nome": "Marcos históricos", "pelo_assunto": true}
+  ],
+  "partes_por_tipo": [
+    {"id": "conceitos", "nome": "Conceitos e vocabulário", "tipos": ["Conceito e vocabulário"], "ordem": "dada"},
+    {"id": "classificacoes", "nome": "Classificações", "tipos": ["Classificação"], "ordem": "proposta"},
+    {"id": "relacoes", "nome": "Relações nos dois sentidos", "tipos": ["Relação nos dois sentidos"],
+     "ordem": "proposta"},
+    {"id": "itens", "nome": "Itens com os mesmos fatos", "tipos": ["Item com os mesmos tipos de fato"],
+     "ordem": "proposta"},
+    {"id": "partes", "nome": "Partes e funções", "tipos": ["Parte e função"], "ordem": "proposta"},
+    {"id": "processos", "nome": "Processos em ordem", "tipos": ["Processo em ordem"], "ordem": "proposta"},
+    {"id": "numeros", "nome": "Números com sentido", "tipos": ["Número com sentido"], "ordem": "proposta"},
+    {"id": "marcos", "nome": "Marcos históricos", "tipos": ["Marco histórico"], "ordem": "proposta"},
+    {"id": "porques", "nome": "Por quê", "tipos": ["Causa e efeito", "História em cadeia"], "ordem": "dada"},
+    {"id": "comparacoes", "nome": "Comparações", "tipos": ["Contraste"], "ordem": "dada"},
+    {"id": "pratica", "nome": "Na prática", "tipos": ["Aplicação na prática"], "ordem": "dada"}
+  ],
+  "tipos_junto": ["Exceção", "Exemplo recorrente", "Figura e esquema", "Analogia e história"],
+  "fora": [
+    {"id": "nao-conteudo", "nome": "não é conteúdo de estudo", "tipos": ["Não é conteúdo de estudo"]}
+  ],
+  "marcas": [
+    {"id": "virus", "nome": "fala de vírus", "texto": "vírus fora do foco", "papeis": ["grupo", "destino"]},
+    {"id": "fungo", "nome": "fala de fungo", "texto": "fungo — comparação", "papeis": ["destino"]}
+  ],
+  "onde_se_ensina": {
+    "Item com os mesmos tipos de fato": ["bacteria", "familia"],
+    "Classificação": ["teoria", "familia"],
+    "Relação nos dois sentidos": ["bacteria", "quadros"],
+    "Conceito e vocabulário": ["teoria", "bacteria"],
+    "Causa e efeito": ["bacteria", "teoria"],
+    "Parte e função": ["familia", "bacteria"],
+    "Aplicação na prática": ["quadros"],
+    "Marco histórico": ["teoria", "bacteria"],
+    "História em cadeia": ["bacteria"]
+  },
+  "documentos": [
+    {
+      "id": "teoria", "nome": "Teoria fundamental", "unidade": "tema", "molde": "partes_por_tipo",
+      "grupos": ["2"], "caminhos": []
+    },
+    {
+      "id": "bacteria", "nome": "Ficha e dicionário de cada bactéria", "unidade": "bactéria", "molde": "eixos",
+      "grupos": ["1"], "caminhos": ["bactéria→doença"],
+      "abertura": [
+        {"id": "palavras-chave", "nome": "Três a cinco palavras-chave", "ordem": "dada", "recebe_trechos": false}
+      ],
+      "eixos": [
+        {"id": "caracteristicas", "nome": "Características gerais", "ordem": "dada"},
+        {"id": "habitat", "nome": "Habitat", "ordem": "dada"},
+        {"id": "transmissao", "nome": "Transmissão", "ordem": "dada"},
+        {"id": "risco", "nome": "Fatores de risco", "ordem": "proposta"},
+        {"id": "virulencia", "nome": "Fatores de virulência", "ordem": "dada"},
+        {"id": "patogenese", "nome": "Patogênese em sequência", "ordem": "dada"},
+        {"id": "doencas", "nome": "Doenças e formas clínicas", "ordem": "dada"},
+        {"id": "diagnostico", "nome": "Diagnóstico", "ordem": "dada"},
+        {"id": "tratamento", "nome": "Tratamento", "ordem": "dada"},
+        {"id": "prevencao", "nome": "Prevenção", "ordem": "dada"}
+      ],
+      "elos": [
+        {"id": "1", "nome": "Quem é e onde vive", "eixos": ["caracteristicas", "habitat"], "ordem": "proposta"},
+        {"id": "2", "nome": "Como chega ao hospedeiro", "eixos": ["transmissao", "risco"], "ordem": "proposta"},
+        {"id": "3", "nome": "Como se instala", "eixos": ["virulencia", "patogenese"], "ordem": "proposta"},
+        {"id": "4", "nome": "Como avança no corpo", "eixos": ["patogenese"], "ordem": "proposta"},
+        {"id": "5", "nome": "Como causa dano", "eixos": ["virulencia", "patogenese"], "ordem": "proposta"},
+        {"id": "6", "nome": "Que doença resulta", "eixos": ["doencas"], "ordem": "proposta"},
+        {"id": "7", "nome": "Como se reconhece, se trata e se evita",
+         "eixos": ["diagnostico", "tratamento", "prevencao"], "ordem": "proposta"}
+      ]
+    },
+    {
+      "id": "familia", "nome": "Ficha de cada família", "unidade": "família", "molde": "eixos",
+      "grupos": ["3"], "caminhos": [],
+      "abertura": [
+        {"id": "familia", "nome": "A família: o que reúne os itens e como eles se dividem", "ordem": "proposta",
+         "recebe_trechos": true}
+      ],
+      "unidades": [
+        {"id": "estruturas", "nome": "Estruturas da célula bacteriana", "eixos": [
+          {"id": "definicao", "nome": "O que é", "ordem": "proposta"},
+          {"id": "composicao", "nome": "Composição", "ordem": "proposta"},
+          {"id": "funcao", "nome": "Função", "ordem": "proposta"},
+          {"id": "tipos", "nome": "Tipos", "ordem": "proposta"},
+          {"id": "presenca", "nome": "Em que bactérias aparece e como é nelas", "ordem": "proposta"},
+          {"id": "alvo", "nome": "O que age sobre ela", "ordem": "proposta"}
+        ]},
+        {"id": "antimicrobianos", "nome": "Antimicrobianos", "eixos": [
+          {"id": "classe", "nome": "Classe e membros", "ordem": "proposta"},
+          {"id": "origem", "nome": "Origem", "ordem": "proposta"},
+          {"id": "mecanismo", "nome": "Alvo e mecanismo de ação", "ordem": "proposta"},
+          {"id": "efeito", "nome": "Bactericida ou bacteriostático", "ordem": "proposta"},
+          {"id": "espectro", "nome": "Espectro", "ordem": "proposta"},
+          {"id": "uso", "nome": "Uso clínico", "ordem": "proposta"},
+          {"id": "farmacocinetica", "nome": "Meia-vida e absorção", "ordem": "proposta"},
+          {"id": "resistencia", "nome": "Resistência", "ordem": "proposta"}
+        ]},
+        {"id": "controle", "nome": "Métodos e agentes de controle", "eixos": [
+          {"id": "categoria", "nome": "Categoria e exemplos", "ordem": "proposta"},
+          {"id": "mecanismo", "nome": "Mecanismo de ação", "ordem": "proposta"},
+          {"id": "condicoes", "nome": "Condições de uso", "ordem": "proposta"},
+          {"id": "uso", "nome": "Uso preferencial", "ordem": "proposta"},
+          {"id": "espectro", "nome": "Espectro e efetividade", "ordem": "proposta"},
+          {"id": "limitacoes", "nome": "Limitações e cuidados", "ordem": "proposta"}
+        ]},
+        {"id": "provas", "nome": "Provas de identificação", "eixos": [
+          {"id": "tipo", "nome": "Tipo de prova", "ordem": "proposta"},
+          {"id": "principio", "nome": "O que detecta", "ordem": "proposta"},
+          {"id": "amostra", "nome": "Amostra e situação de uso", "ordem": "proposta"},
+          {"id": "tecnica", "nome": "Como se faz", "ordem": "proposta"},
+          {"id": "leitura", "nome": "Como se lê o resultado", "ordem": "proposta"},
+          {"id": "indica", "nome": "Que bactéria o resultado indica", "ordem": "proposta"}
+        ]},
+        {"id": "microbiota", "nome": "Microbiota de cada local do corpo", "eixos": [
+          {"id": "estado", "nome": "Estéril ou colonizado", "ordem": "proposta"},
+          {"id": "microrganismos", "nome": "Microrganismos do local", "ordem": "proposta"},
+          {"id": "gram", "nome": "Gram que predomina", "ordem": "proposta"}
+        ]}
+      ]
+    },
+    {
+      "id": "quadros", "nome": "Quadros e casos", "unidade": "quadro", "molde": "partes_por_tipo",
+      "grupos": ["4"], "caminhos": ["quadro→bactérias"],
+      "casos": [
+        {"id": "cenario", "nome": "Cenário: o paciente, onde e quando, o que apresenta", "ordem": "proposta"},
+        {"id": "pergunta", "nome": "Pergunta", "ordem": "proposta"},
+        {"id": "resposta", "nome": "Resposta-modelo", "ordem": "proposta"},
+        {"id": "citacoes", "nome": "Citações", "ordem": "proposta"}
+      ]
+    },
+    {
+      "id": "perguntas", "nome": "Perguntas de prova", "unidade": "aula", "molde": "formas", "todos": true,
+      "pergunta": [
+        {"id": "pergunta", "nome": "Pergunta", "ordem": "dada"},
+        {"id": "resposta", "nome": "Resposta-modelo", "ordem": "dada"},
+        {"id": "citacoes", "nome": "Citações", "ordem": "dada"}
+      ],
+      "formas": [
+        {"verbo": "cite e explique", "tipos": ["Conceito e vocabulário", "Classificação", "Relação nos dois sentidos",
+          "Item com os mesmos tipos de fato", "Número com sentido", "Marco histórico", "Exemplo recorrente", "Exceção",
+          "Analogia e história"], "ordem": "proposta"},
+        {"verbo": "descreva", "tipos": ["Parte e função", "Processo em ordem", "Figura e esquema"],
+         "ordem": "proposta"},
+        {"verbo": "cite e explique", "tipos": ["Causa e efeito", "História em cadeia"], "ordem": "dada"},
+        {"verbo": "diferencie", "tipos": ["Contraste"], "ordem": "dada"},
+        {"verbo": "aplique a uma situação", "tipos": ["Aplicação na prática"], "ordem": "dada"}
+      ]
+    },
+    {
+      "id": "cartoes", "nome": "Cartões", "unidade": "fato", "molde": "colunas", "todos": true,
+      "colunas": [
+        {"id": "pergunta", "lado": "frente", "ordem": "dada"},
+        {"id": "imagem_frente", "lado": "frente", "ordem": "dada"},
+        {"id": "resposta", "lado": "verso", "ordem": "dada"},
+        {"id": "porque", "lado": "verso", "ordem": "dada"},
+        {"id": "fonte", "lado": "verso", "ordem": "dada"},
+        {"id": "imagem_verso", "lado": "verso", "ordem": "dada"}
+      ]
+    }
+  ]
+}

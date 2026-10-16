@@ -9,8 +9,10 @@ Aqui fica tambem a leitura de todo arquivo de dados que tem molde em esquemas/ (
 todo script que le um desses arquivos le por ela, e este tambem. Ela le o arquivo e o
 confere contra o molde dele; o texto fora do UTF-8, o JSON invalido (com a linha e a
 coluna) e o que esta fora do molde viram erro, cada um com o nome do arquivo na frente,
-e os dados nao vem. Ela fica neste arquivo porque ele nao depende de nenhum outro script
-nem do projeto.json: roda sozinho, e os outros o importam sem importacao circular.
+e os dados nao vem. A leitura do texto do arquivo (le_texto), que diz quando ele nao esta
+em UTF-8, serve tambem ao arquivo de dados que nao e JSON, como uma tabela. As duas ficam
+neste arquivo porque ele nao depende de nenhum outro script nem do projeto.json: roda
+sozinho, e os outros o importam sem importacao circular.
 
 O schema e achado pelo nome do arquivo de dados: "formato.json" ->
 "scripts/esquemas/formato.schema.json". Da para indicar outro com --schema.
@@ -133,13 +135,23 @@ def esquema(nome):
     return PASTA_ESQUEMAS / f"{nome}.schema.json"
 
 
-def le_json(arquivo, nome):
-    """(conteudo, erros) de um arquivo JSON. Com o texto fora do UTF-8 ou JSON invalido, o
-    conteudo vem None e o erro diz o que houve, com o nome dado na frente."""
+def le_texto(arquivo, nome):
+    """(texto, erros) de um arquivo de texto. Com o texto fora do UTF-8, o texto vem None e o
+    erro diz o que houve, com o nome dado na frente."""
     try:
-        return json.loads(Path(arquivo).read_text(encoding="utf-8")), []
+        return Path(arquivo).read_text(encoding="utf-8"), []
     except UnicodeDecodeError:
         return None, [f"{nome}: o texto não está em UTF-8; grave o arquivo de novo em UTF-8"]
+
+
+def le_json(arquivo, nome):
+    """(conteudo, erros) de um arquivo JSON. Com o texto fora do UTF-8 (le_texto) ou JSON
+    invalido, o conteudo vem None e o erro diz o que houve, com o nome dado na frente."""
+    texto, erros = le_texto(arquivo, nome)
+    if erros:
+        return None, erros
+    try:
+        return json.loads(texto), []
     except json.JSONDecodeError as e:
         return None, [f"{nome}: JSON inválido na linha {e.lineno}, coluna {e.colno}: {e.msg}"]
 

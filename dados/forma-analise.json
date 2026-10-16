@@ -1,0 +1,20 @@
+{
+  "versao_schema": 1,
+  "arquivos": "aula-*.md",
+  "prefixo_arquivo": "aula-",
+  "prefixo_titulo": "#",
+  "prefixo_slide": "## slide ",
+  "marca_item": "- ",
+  "separador_texto": " — ",
+  "separador_campos": "; ",
+  "vazio": "—",
+  "nota_sem_campos": "não é conteúdo de estudo",
+  "campos": [
+    {"nome": "tipo", "forma": "lista", "separadores": [";", ",", "+"], "papel": "tipo"},
+    {"nome": "grupo", "forma": "lista", "separadores": [",", " e ", "+", ";"], "papel": "grupo"},
+    {"nome": "caminho", "forma": "presenca", "valores": ["bactéria→doença", "quadro→bactérias"], "papel": "caminho"},
+    {"nome": "vai para", "forma": "texto", "papel": "destino"},
+    {"nome": "livro", "forma": "texto"},
+    {"nome": "elo", "forma": "texto"}
+  ]
+}

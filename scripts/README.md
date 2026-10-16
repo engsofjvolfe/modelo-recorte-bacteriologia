@@ -54,7 +54,8 @@ alguma coisa e diz o quê.
 | Assim que uma transcrição é criada | `registrar_fonte.py`, que roda o `referencias.py` |
 | Sempre que o arquivo de fontes muda | `referencias.py` |
 | Sempre que uma transcrição muda, e antes de escrever o material | `conferencia.py` |
-| Quando nem a aula nem o livro-texto chegam a um subtópico de um item | `base_externa.py`, que roda o `referencias.py` |
+| Sempre que o arquivo de formato, a tabela da leitura ou a análise de uma aula muda, e antes de escrever o material | `confere_moldes.py` |
+| Quando nem a aula nem o livro-texto chegam a um subtópico de uma unidade | `base_externa.py`, que roda o `referencias.py` |
 | Com as planilhas de pergunta e as provas dos cartões prontas | `confere_cartoes.py` |
 | Com as planilhas conferidas, e sempre que uma delas muda | `montar_deck.py` |
 | Sempre que um documento define um termo novo, ou deixa de definir | `glossario.py` |
@@ -83,78 +84,140 @@ protegida, que nunca muda. Fora dos caminhos:
 
 O [arquivo de formato](../metodologia-de-conteudo.md#onde-o-formato-fica-gravado),
 `dados/formato.json`, guarda as decisões do formato que os scripts usam, só como nomes e
-listas, sem explicação:
+listas, sem explicação. Ele nasce de uma cópia do modelo em branco,
+[`modelo-dados/formato.json`](../modelo-dados/formato.json).
 
 | Informação | O que guarda |
 | --- | --- |
 | `versao_schema` | a versão do molde que o arquivo segue |
-| `curso`, `disciplina` e `nivel` | para quem é o material |
+| `cursos`, `disciplina` e `nivel` | para quem é o material: a lista dos cursos, o nome da disciplina, que é também o da pasta de cima no Anki, e o nível |
 | `idioma` | o idioma do material, como `pt-BR`, o português do Brasil |
-| `itens` | os itens que se estudam um por um; lista vazia, se não houver |
-| `eixos` e os `subtopicos` de cada eixo | as linhas da ficha e as partes menores de cada uma; lista vazia de subtópicos, se o eixo não se divide |
-| `elos` | as partes do dicionário; lista vazia, se não houver |
-| `colunas_extras` | as colunas do cartão além de `pergunta`, `resposta` e `fonte` |
+| `ultima_aula` | a última aula que tem material, pela chave com que as análises das aulas a escrevem |
+| `grupos` | os grupos da matéria; `pelo_assunto: true` marca o grupo cujo trecho vai para o documento do assunto dele, que a tabela da leitura diz |
+| `partes_por_tipo` | a sequência das partes de um texto, cada parte com os `tipos` de conhecimento que ela recebe |
+| `tipos_junto` | os tipos sem parte própria, que ficam junto do assunto que acompanham |
+| `fora` | as regras que tiram um trecho do material: sai o trecho cujos tipos são todos de uma regra |
+| `marcas` | as marcas, que só dizem do que um trecho fala: cada uma com o `texto` que as análises escrevem e os `papeis`, os campos da análise onde ele se procura |
+| `onde_se_ensina` | para cada tipo, os documentos onde ele se ensina |
+| `documentos` | os documentos do material, cada um com o `molde` dele e de onde vêm os trechos dele: os `grupos`, os `caminhos` ou `todos: true` |
 
-Cada item, elo, eixo e subtópico entra na lista dele entre chaves, `{ }`, com um `id`, um
-código curto, e um `nome`; o eixo tem também a lista `subtopicos`. O id vai entre aspas,
-mesmo quando é número. Os elos e os eixos são numerados na ordem, `"1"`, `"2"`...; o
-subtópico leva o número do eixo, um ponto e o dele, `"1.1"`, `"1.2"`. Assim nenhum id se
-repete na grade, e é pelo id que a base de cada item marca a cobertura de cada subtópico.
-O id do item aparece no nome dos arquivos dele. Cada coluna extra é só o nome dela, entre
-aspas. Os scripts ignoram uma informação que não conhecem.
+Cada grupo, parte, regra, marca, documento e unidade entra na lista dele entre chaves,
+`{ }`, com um `id`, um código curto, e um `nome`; o id vai entre aspas, mesmo quando é
+número. Num documento, `unidade` é o nome do que ganha material nele, como "bactéria" ou
+"tema", e `unidades`, quando ele as lista, são as unidades dele. O `molde` diz como o
+documento se divide:
 
-Um exemplo inventado, com um item, um elo e dois eixos, o primeiro dividido em dois
-subtópicos e o segundo sem divisão:
+- `partes_por_tipo`: o texto de cada unidade segue a sequência das partes; `casos`, se o
+  documento tem, são as partes de cada caso;
+- `eixos`: a ficha, uma tabela com uma linha para cada eixo. `abertura` são as partes que
+  vêm antes dos eixos, cada uma com `recebe_trechos`, que diz se trechos das aulas vão
+  para ela; `eixos` é a grade do documento, e cada eixo pode ter `subtopicos`; a unidade
+  que tem os seus `eixos` usa esses, e a que não tem usa os do documento; `elos` são as
+  partes do dicionário, cada uma com os `eixos` que a alimentam;
+- `formas`: as perguntas de prova; `pergunta` são as partes de cada pergunta, e `formas`,
+  as formas de pergunta, cada uma com o `verbo` e os `tipos` que ela pede;
+- `colunas`: os cartões, cada coluna com o `lado` dela, `frente` ou `verso`.
+
+A `ordem` de cada parte diz de onde vem o lugar dela: `dada`, quando a análise da matéria
+o dá, ou `proposta`, quando a análise o deixava aberto e o projeto o propôs.
+
+A leitura do formato é a mesma em todo script que o usa: ela confere o arquivo contra o
+molde dele, `scripts/esquemas/formato.schema.json`, e as ligações de dentro dele — por
+exemplo, que cada grupo, tipo, documento e eixo que o arquivo cita existe, que cada
+documento tem as partes que o molde dele pede e que nenhum id se repete onde precisa ser
+único. Cada problema sai numa linha `ERRO`, com o lugar, e o script não usa o formato.
+
+Um exemplo inventado, com três documentos: um de temas, que segue a sequência das partes;
+uma ficha com uma abertura, um eixo dividido em dois subtópicos, outro sem divisão, um elo
+e uma unidade; e os cartões:
 
 ```json
 {
   "versao_schema": 1,
-  "curso": "Curso de Exemplo",
+  "cursos": ["Curso de Exemplo"],
   "disciplina": "Disciplina de Exemplo",
-  "nivel": "revisão para a prova",
+  "nivel": "entender e aplicar",
   "idioma": "pt-BR",
-  "itens": [
-    { "id": "A1", "nome": "Primeiro item" }
+  "ultima_aula": "4",
+  "grupos": [
+    { "id": "1", "nome": "Seres" },
+    { "id": "2", "nome": "Ideias gerais" }
   ],
-  "elos": [
-    { "id": "1", "nome": "Primeiro elo" }
+  "partes_por_tipo": [
+    { "id": "conceitos", "nome": "Conceitos", "tipos": ["Conceito e vocabulário"], "ordem": "dada" },
+    { "id": "porques", "nome": "Por quê", "tipos": ["Causa e efeito"], "ordem": "proposta" }
   ],
-  "eixos": [
+  "tipos_junto": ["Exemplo recorrente"],
+  "fora": [
+    { "id": "enfeite", "nome": "não é conteúdo", "tipos": ["Não é conteúdo de estudo"] }
+  ],
+  "marcas": [
+    { "id": "outro", "nome": "fala de outro assunto", "texto": "outro assunto", "papeis": ["destino"] }
+  ],
+  "onde_se_ensina": {
+    "Conceito e vocabulário": ["ideias"],
+    "Causa e efeito": ["ideias", "fichas"]
+  },
+  "documentos": [
     {
-      "id": "1",
-      "nome": "Primeiro eixo",
-      "subtopicos": [
-        { "id": "1.1", "nome": "Primeira parte do primeiro eixo" },
-        { "id": "1.2", "nome": "Segunda parte do primeiro eixo" }
+      "id": "ideias", "nome": "Ideias gerais", "unidade": "tema", "molde": "partes_por_tipo",
+      "grupos": ["2"]
+    },
+    {
+      "id": "fichas", "nome": "Ficha de cada ser", "unidade": "ser", "molde": "eixos",
+      "grupos": ["1"],
+      "abertura": [
+        { "id": "chaves", "nome": "Palavras-chave", "ordem": "dada", "recebe_trechos": false }
+      ],
+      "eixos": [
+        {
+          "id": "1", "nome": "Primeiro eixo", "ordem": "dada",
+          "subtopicos": [
+            { "id": "1.1", "nome": "Primeira parte do primeiro eixo" },
+            { "id": "1.2", "nome": "Segunda parte do primeiro eixo" }
+          ]
+        },
+        { "id": "2", "nome": "Segundo eixo", "ordem": "dada" }
+      ],
+      "elos": [
+        { "id": "1", "nome": "Primeiro elo", "eixos": ["1", "2"], "ordem": "proposta" }
+      ],
+      "unidades": [
+        { "id": "A1", "nome": "Primeiro ser" }
       ]
     },
-    { "id": "2", "nome": "Segundo eixo", "subtopicos": [] }
-  ],
-  "colunas_extras": ["item", "tipo_pergunta"]
+    {
+      "id": "cartoes", "nome": "Cartões", "unidade": "fato", "molde": "colunas", "todos": true,
+      "colunas": [
+        { "id": "pergunta", "lado": "frente", "ordem": "dada" },
+        { "id": "resposta", "lado": "verso", "ordem": "dada" }
+      ]
+    }
+  ]
 }
 ```
 
 ## `validar_dados.py` — confere um arquivo de dados
 
 **O que faz.** Cada arquivo de dados — como o `projeto.json`, o arquivo de formato, o de
-fontes, a base de cada item e a prova de cada planilha — tem uma forma certa, descrita num
-molde, o <dfn>schema</dfn>, em `scripts/esquemas/`. O script confere se o arquivo segue o
-molde: se não falta campo obrigatório, se nada está no tipo errado, se nenhum código (id ou
-chave) se repete.
+fontes, a base de cada unidade e a prova de cada planilha — tem uma forma certa, descrita
+num molde, o <dfn>schema</dfn>, em `scripts/esquemas/`. O script confere se o arquivo segue
+o molde: se não falta campo obrigatório, se nada está no tipo errado, se nenhum código (id
+ou chave) se repete.
 
 **Como rodar.** O caminho do arquivo depois do nome do script:
 
     python scripts/validar_dados.py dados/formato.json
 
 O molde se acha pelo nome do arquivo (o de `formato.json` é `formato.schema.json`). A base
-de um item tem o nome do item, e a prova, o da planilha; para elas, `--schema` diz o molde
-(`base.schema.json` ou `prova.schema.json`):
+de uma unidade tem o id dela no nome, e a prova, o nome da planilha; para elas, `--schema`
+diz o molde (`base.schema.json` ou `prova.schema.json`):
 
     python scripts/validar_dados.py dados/bases/[item].json --schema scripts/esquemas/base.schema.json
 
 **O que mostra.** `0 erro(s)`, quando está tudo na forma certa. Senão, cada linha `ERRO`
-diz onde está o problema: `$.itens[2].id: deve ser string` quer dizer que, no terceiro item
-da lista `itens`, o `id` tem de ser um texto (a contagem começa do zero).
+diz onde está o problema: `$.grupos[2].id: deve ser string` quer dizer que, no terceiro
+grupo da lista `grupos`, o `id` tem de ser um texto (a contagem começa do zero).
 
 ## `transcrever_html.py` — transcreve uma fonte em HTML, como um livro digital
 
@@ -337,11 +400,12 @@ não pode ser nos dados, como uma data com mês numa fonte sem `idioma`; com `ER
 gravado. `FALTA REFERÊNCIA` lista a fonte registrada sem dados no arquivo de fontes, e
 `CONFERIR`, as referências sem o tique da pessoa.
 
-Se o arquivo de formato existe, o script o confere antes contra o molde dele e, com algum
-problema, mostra cada um numa linha `ERRO` e não grava nada. Vale também para os scripts
-que rodam o `referencias.py`: o `confere_cartoes.py` não grava a conferência dos cartões, e
-o `registrar_fonte.py`, que já gravou o registro da fonte, não grava as referências nem a
-conferência delas. O `base_externa.py` precisa do formato e o confere logo no começo.
+Se o arquivo de formato existe, o script o lê antes, como diz [O arquivo de
+formato](#o-arquivo-de-formato), e, com algum problema nele, mostra cada um numa linha
+`ERRO` e não grava nada. Vale também para os scripts que rodam o `referencias.py`: o
+`confere_cartoes.py` não grava a conferência dos cartões, e o `registrar_fonte.py`, que já
+gravou o registro da fonte, não grava as referências nem a conferência delas. O
+`base_externa.py` precisa do formato e o lê logo no começo.
 
 ## `conferencia.py` — monta a conferência das transcrições
 
@@ -392,20 +456,69 @@ impede a conferência ou que não bate — o registro da fonte, o texto, o títu
 imagens de uma página —, com o motivo e, quando é o texto, o trecho onde começa a
 diferença. O arquivo fica melhor de ler na visualização do VSCode (`Ctrl+Shift+V`).
 
+## `confere_moldes.py` — confere os moldes contra as análises das aulas
+
+**O que faz.** A análise de cada aula, na pasta protegida, tem uma linha para cada [trecho
+das aulas](../docs/analise-da-materia.md#2-as-aulas-slide-por-slide): o texto dele e os
+campos que dizem o tipo de conhecimento, o grupo, o caminho e para onde ele vai. O script
+põe cada trecho no lugar dele em cada documento do [arquivo de
+formato](#o-arquivo-de-formato) — pelo grupo, pelo caminho ou porque o documento recebe
+todos — e, dentro do documento, na parte do molde dele: a parte da sequência de cada tipo
+do trecho, um eixo da ficha, a forma de pergunta, o cartão. Confere que todo trecho tem
+lugar e que nenhuma parte de molde fica sem trecho, e grava o relatório,
+`CONFERENCIA-MOLDES.md`, em `docs/material-base/gerados-ocr/`: quantos trechos há em cada
+classe — com lugar, fora do material, marcados à espera de lugar — e, em cada documento,
+quantos trechos cada parte do molde recebe, de que aulas e se a ordem dela é dada ou
+proposta.
+
+**A forma das análises.** O arquivo `dados/forma-analise.json` diz como se lê uma análise:
+o nome dos arquivos, as linhas que abrem um slide e as de título, a marca de cada trecho,
+os separadores e os campos, em ordem, cada um com a forma do valor e, se tem, o papel
+dele — `tipo`, `grupo`, `caminho` ou `destino`, o texto que diz para onde o trecho vai. O
+molde dele é `scripts/esquemas/forma-analise.schema.json`. Cada trecho tem um código,
+`aula/slide/posição/hash`: a posição conta os trechos do slide, e o hash, tirado do texto
+do trecho, muda quando o texto muda; assim, uma decisão guardada pelo código não passa para
+um texto que mudou.
+
+**A tabela da leitura.** O que as regras do formato não dizem sozinhas sai de uma leitura
+dos trechos, gravada em `dados/lugares-lidos.tsv`: o eixo de cada trecho numa ficha e a
+unidade dele, o documento do trecho que as regras deixam em aberto — o de um grupo que vai
+pelo assunto, o de um trecho marcado — e o trecho que a leitura pôs fora do material. É um
+arquivo de texto com quatro colunas separadas por tabulação, `id`, `documento`, `unidade`
+e `parte`, e uma linha para cada lugar, porque um trecho pode ter mais de um. A `unidade`
+é uma das unidades do documento, ou fica vazia quando ele não as lista; a `parte` é um
+eixo da grade da unidade ou uma abertura que recebe trechos, e fica vazia num documento
+sem grade. Na linha com o documento `fora`, a unidade é o id de uma regra de `fora` do
+formato.
+
+**Como rodar.**
+
+    python scripts/confere_moldes.py
+
+**O que mostra.** Cada problema numa linha, na tela e no fim do relatório, com o código do
+trecho ou o lugar: `FALTA` para o trecho marcado sem lugar, que espera o lugar dele;
+`ERRO` para o resto que não fecha entre as análises, a tabela da leitura e o formato. O
+relatório é gravado mesmo com eles, e o script sai com código 1 quando há algum. Com erro
+numa entrada — um arquivo que falta, que não se lê, que não segue o molde dele ou que não
+fecha com as outras —, cada um sai numa linha `ERRO` e nada é gravado. No fim, quantos
+trechos há, quantos têm lugar e quantas linhas `ERRO` e `FALTA`.
+
 ## `base_externa.py` — monta a base do material de fora
 
 **O que faz.** Monta a [base de trechos](../metodologia-de-conteudo.md#o-material-de-fora)
-de cada item a partir das cópias do material de fora: o script recolhe todo o texto das
-páginas declaradas, a IA decide o que cada frase é, e a pessoa confere. Ninguém copia
-trecho à mão.
+de cada unidade com grade a partir das cópias do material de fora: o script recolhe todo o
+texto das páginas declaradas, a IA decide o que cada frase é, e a pessoa confere. Ninguém
+copia trecho à mão.
 
-**Os dados de cada item.** O arquivo `dados/bases/[item].json` nasce de uma cópia do
-modelo em branco, [`modelo-dados/base.json`](../modelo-dados/base.json), em que aspas
-vazias, `""`, esperam um texto; colchetes vazios, `[]`, uma lista; e chaves vazias, `{}`,
-pares de um nome e um valor, como `"1.1": "aula"`, separados por vírgula. O
-`versao_schema` fica como está. O resto:
+**Os dados de cada unidade.** O arquivo `dados/bases/[item].json`, com o id da unidade no
+lugar de `[item]`, nasce de uma cópia do modelo em branco,
+[`modelo-dados/base.json`](../modelo-dados/base.json), em que aspas vazias, `""`, esperam
+um texto; colchetes vazios, `[]`, uma lista; e chaves vazias, `{}`, pares de um nome e um
+valor, como `"1.1": "aula"`, separados por vírgula. O `versao_schema` fica como está. O
+resto:
 
-- em `item`, o id do item no arquivo de formato;
+- em `item`, o id da unidade no arquivo de formato, de um documento cujo molde tem grade
+  (`eixos`);
 - em `lugares`, uma entrada para cada fonte lida, entre chaves, com: em `fonte`, a chave
   da referência dela; em `arquivo`, o caminho da cópia, a partir da pasta principal do
   projeto, em `docs/material-base/fontes-externas/`; e, se a cópia for PDF, em `paginas`,
@@ -415,13 +528,15 @@ pares de um nome e um valor, como `"1.1": "aula"`, separados por vírgula. O
   arquivo para chegar ao número impresso — se a página 47 do arquivo tem impresso "45", é
   `-2`; se são iguais, `0`. Se a diferença muda de uma página para outra, `impressas` dá o
   número impresso de cada página do arquivo: `{"47": "45", "48": "xii"}`;
-- em `cobertura`, cada subtópico da grade do formato, pelo id, com a marca dele: `aula`
-  (a aula cobre), `fonte` (vem do material de fora) ou `lacuna` (nenhuma fonte cobre). Um
-  eixo sem subtópicos é marcado pelo id do próprio eixo;
+- em `cobertura`, cada subtópico da grade da unidade — os eixos dela ou, quando ela não
+  tem os seus, os do documento —, pelo id, com a marca dele: `aula` (a aula cobre),
+  `fonte` (vem do material de fora) ou `lacuna` (nenhuma fonte cobre). Um eixo sem
+  subtópicos é marcado pelo id do próprio eixo;
 - `classes` e `juntar` começam vazios; são preenchidos depois da primeira rodada.
 
-Um exemplo inventado, de um item lido nas páginas 47 e 48 de uma fonte em PDF, numa grade
-com um eixo 1 dividido nos subtópicos 1.1 e 1.2 e um eixo 2 sem subtópicos:
+Um exemplo inventado, da unidade `A1` do exemplo do [arquivo de
+formato](#o-arquivo-de-formato), cuja grade tem o eixo 1 dividido nos subtópicos 1.1 e 1.2
+e o eixo 2 sem subtópicos, lida nas páginas 47 e 48 de uma fonte em PDF:
 
 ```json
 {
@@ -457,8 +572,8 @@ Cada frase recebe, em `classes`, pelo código, uma destas classes:
 
 - `usa`, com o `subtopico` e a `afirmacao`: `categorica` se a fonte afirma,
   `possibilidade` se ela trata como possível ou provável;
-- `outro-item`, `repetida` (com `de`: o código da frase que ela repete),
-  `fora-do-recorte` ou `nao-e-conteudo` (referência, cabeçalho, legenda solta).
+- `outro-item` (de outra unidade), `repetida` (com `de`: o código da frase que ela
+  repete), `fora-do-recorte` ou `nao-e-conteudo` (referência, cabeçalho, legenda solta).
 
 A separação em frases é mecânica: quando ela parte uma frase em duas, os códigos se
 juntam em `juntar`, uma lista com os códigos das frases que formam uma só, na ordem, e a
@@ -477,7 +592,7 @@ classe vale para o pedaço inteiro. Um exemplo inventado, na mesma grade:
 ]
 ```
 
-Com tudo classificado, a rodada seguinte grava a base do item, e a conferência,
+Com tudo classificado, a rodada seguinte grava a base da unidade, e a conferência,
 `CONFERENCIA-TRECHOS.md`, em `docs/material-base/gerados-ocr/`, mostra cada página com as
 frases e a classe de cada uma, com os tiques da IA e da pessoa.
 
@@ -485,21 +600,20 @@ frases e a classe de cada uma, com os tiques da IA e da pessoa.
 
     python scripts/base_externa.py
 
-Ele refaz sempre todos os itens de uma vez: a conferência é um arquivo só, e é assim que
-os tiques de todos os itens continuam nela.
+Ele refaz sempre todas as unidades de uma vez: a conferência é um arquivo só, e é assim
+que os tiques de todas continuam nela.
 
-**O que mostra.** Antes de tudo, o script confere o arquivo de formato contra o molde
-dele: com algum problema, cada um aparece numa linha `ERRO`, nenhuma base é gravada e a
-conferência não é refeita. Depois, uma linha `ERRO` para tudo o que falta ou se
-contradiz: frase sem classe, subtópico sem marca, subtópico marcado como `fonte` sem
+**O que mostra.** Antes de tudo, o script lê o arquivo de formato, como diz [O arquivo de
+formato](#o-arquivo-de-formato): com algum problema nele, cada um aparece numa linha
+`ERRO`, nenhuma base é gravada e a conferência não é refeita. Depois, uma linha `ERRO`
+para tudo o que falta ou se contradiz: unidade que o formato não tem, ou cujo documento
+não tem grade, frase sem classe, subtópico sem marca, subtópico marcado como `fonte` sem
 nenhuma frase usada, frase usada num subtópico que a aula já cobre ou que está marcado
-como `lacuna`, um id que aparece mais de uma vez na grade do formato (dois subtópicos com
-o mesmo id, mesmo em eixos diferentes, ou um subtópico com o id de um eixo sem
-subtópicos). Com `ERRO`, a base do item não é gravada: o arquivo dela fica só com esse
-aviso. Se um item nem pode ser lido — por exemplo, porque uma fonte dele ficou fora da
-pasta protegida —, a conferência não é refeita, para não perder os tiques dele. Quando a
-conferência é refeita, logo depois aparece o resultado das referências, porque a base
-registra as fontes que usa.
+como `lacuna`. Com `ERRO`, a base da unidade não é gravada: o arquivo dela fica só com
+esse aviso. Se uma unidade nem pode ser lida — por exemplo, porque uma fonte dela ficou
+fora da pasta protegida —, a conferência não é refeita, para não perder os tiques dela.
+Quando a conferência é refeita, logo depois aparece o resultado das referências, porque a
+base registra as fontes que usa.
 
 ## `protege_fontes.py` — confere que nenhuma fonte pode ser publicada
 
@@ -614,9 +728,10 @@ Com uma parte do nome de uma planilha depois do nome do script, só essa planilh
 
 **O que mostra.** Cada baralho gerado, com as pastas e quantos cartões tem. Uma planilha
 sem a coluna `pergunta` ou `resposta` aparece com `ERRO` e fica sem baralho. Antes de gerar
-qualquer baralho, o script confere o arquivo de formato contra o molde dele: se faltar
-alguma coisa — o nome da disciplina, por exemplo, que é o nome da pasta de cima no Anki —,
-cada problema aparece numa linha `ERRO` e nenhum baralho é gerado.
+qualquer baralho, o script lê o arquivo de formato, como diz [O arquivo de
+formato](#o-arquivo-de-formato): com algum problema nele — sem o nome da disciplina, por
+exemplo, que é o nome da pasta de cima no Anki —, cada um aparece numa linha `ERRO` e
+nenhum baralho é gerado.
 
 ## `confere_indice.py` — confere que cada documento está no índice
 
@@ -665,12 +780,16 @@ definem. Sem o git, o script diz isso numa linha `ERRO` e para, como o
 ## `comum.py`
 
 Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json` e as
-planilhas de pergunta, ler o arquivo de formato e conferi-lo contra o molde dele, ler o
-registro da fonte, guardar os tiques, ler as páginas de um documento HTML e os slides de
-uma apresentação, e o que os transcritores fazem do mesmo jeito). O `extrator_comum.py` e
-os `leitor_<tipo>.py` também não se rodam: são as partes do `extrator.py`. O
-`extrator_comum.py` serve também ao `itens.py` e ao `conferencia.py`, que leem as
-transcrições do mesmo jeito que o extrator as escreve.
+planilhas de pergunta, ler o arquivo de formato, conferido contra o molde dele e nas
+ligações de dentro dele, e achar nele as unidades de um documento e a grade de cada uma,
+ler o registro da fonte, guardar os tiques, ler as páginas de um documento HTML e os
+slides de uma apresentação, e o que os transcritores fazem do mesmo jeito). O
+`extrator_comum.py` e os `leitor_<tipo>.py` também não se rodam: são as partes do
+`extrator.py`. O `extrator_comum.py` serve também ao `itens.py` e ao `conferencia.py`, que
+leem as transcrições do mesmo jeito que o extrator as escreve. Do mesmo modo, o
+`analises.py`, o `lugares.py`, o `relatorio.py` e o `lidos.py` são as partes do
+`confere_moldes.py`: leem as análises das aulas pela forma delas, dizem onde cada trecho
+cai pelas regras do formato, fazem as tabelas do relatório e leem a tabela da leitura.
 
 ---
 

@@ -27,9 +27,11 @@
                    "licenca_conteudo", "material_base", "fontes_externas", "gerados", "conferencia_imagens", "conferencia_referencias",
                    "analise", "pesquisa", "material_gerado", "baralhos",
                    "bases", "base_externa", "conferencia_trechos", "provas", "conferencia_cartoes", "imagens",
-                   "estilo_cartao"],
+                   "estilo_cartao", "forma_analise", "lugares_lidos", "analises_das_aulas", "conferencia_moldes"],
       "properties": {
         "formato": { "$ref": "#/$defs/texto" },
+        "forma_analise": { "$ref": "#/$defs/texto" },
+        "lugares_lidos": { "$ref": "#/$defs/texto" },
         "extrator": { "$ref": "#/$defs/texto" },
         "extracao": { "$ref": "#/$defs/texto" },
         "fontes": { "$ref": "#/$defs/texto" },
@@ -44,6 +46,7 @@
         "conferencia_referencias": { "$ref": "#/$defs/protegido" },
         "analise": { "$ref": "#/$defs/texto" },
         "pesquisa": { "$ref": "#/$defs/protegido" },
+        "analises_das_aulas": { "$ref": "#/$defs/protegido" },
         "material_gerado": { "$ref": "#/$defs/texto" },
         "baralhos": { "$ref": "#/$defs/texto" },
         "bases": { "$ref": "#/$defs/modelo_por_item" },
@@ -51,6 +54,7 @@
         "conferencia_trechos": { "$ref": "#/$defs/protegido" },
         "provas": { "allOf": [ { "$ref": "#/$defs/protegido" }, { "type": "string", "pattern": "\\{planilha\\}" } ] },
         "conferencia_cartoes": { "$ref": "#/$defs/protegido" },
+        "conferencia_moldes": { "$ref": "#/$defs/protegido" },
         "imagens": { "$ref": "#/$defs/protegido" },
         "estilo_cartao": { "$ref": "#/$defs/texto" }
       }

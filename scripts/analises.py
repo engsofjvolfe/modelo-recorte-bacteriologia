@@ -1,0 +1,220 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright do codigo sob GPL-3.0 -- ver LICENSE e NOTICE.md na raiz do projeto.
+
+"""
+Le as analises por aula escritas numa forma declarada num arquivo de dados: a forma das
+analises, com o molde em esquemas/forma-analise.schema.json.
+
+A forma diz o padrao dos nomes dos arquivos e o que vem antes da chave da aula no nome; o
+comeco de uma linha de titulo, que fecha o slide, e o de uma linha que abre um slide, com o
+numero dele; a marca de cada item; o separador entre o texto do trecho e os campos, e o que
+separa um campo do seguinte; o valor que quer dizer "nenhum" num campo em lista; o comeco
+de um item sem campos, que e uma nota e nao um trecho; e os campos, em ordem, cada um com a
+forma do valor e, se tiver, o papel. Nada da materia fica no codigo: tipos, grupos e
+caminhos sao os que os arquivos trazem.
+
+Formas de campo: "lista" (os itens entre os separadores dados; o que esta entre parenteses
+nao conta), "presenca" (quais dos valores dados aparecem no campo, na ordem deles) e
+"texto" (o campo inteiro). Papeis: "tipo", "grupo" e "caminho" dizem onde o trecho cai e
+pedem um valor em lista; "destino" e o texto que diz para onde ele vai. Cada papel fica em
+um campo so.
+
+Cada trecho sai com o texto dele, o texto e o valor de cada campo e de cada papel, e um id
+estavel, "aula/slide/posicao/hash": a posicao conta os trechos do slide, a partir de 1, e o
+hash sao os quatro primeiros digitos do SHA-1 do texto do trecho em NFC. Se o texto mudar,
+o id muda, e quem guardou decisoes pelo id ve a diferenca.
+"""
+import collections
+import hashlib
+import re
+import unicodedata
+from pathlib import Path
+
+PAPEIS = ("tipo", "grupo", "caminho", "destino")  # o que um campo pode fazer, como o molde da forma declara
+PAPEIS_EM_LISTA = ("tipo", "grupo", "caminho")  # os papeis que pedem um valor em lista
+
+
+class ErroDeForma(ValueError):
+    """Forma, arquivo ou linha fora do que a forma declara; a mensagem diz o que e onde."""
+
+
+def nfc(texto):
+    return unicodedata.normalize("NFC", texto)
+
+
+def sem_parenteses(texto):
+    anterior = None
+    while anterior != texto:
+        anterior, texto = texto, re.sub(r"\s*\([^()]*\)", "", texto)
+    return texto
+
+
+def ordem_natural(chave):
+    """A chave em pedacos de texto e numero, para 2 vir antes de 10."""
+    return [int(p) if p.isdecimal() else p for p in re.split(r"(\d+)", chave)]
+
+
+def em_lista(bruto, campo, vazio):
+    """Os itens entre os separadores do campo, sem o que esta entre parenteses, sem o valor
+    vazio e sem repetir, na ordem do texto."""
+    padrao = "|".join(re.escape(s) for s in sorted(campo["separadores"], key=len, reverse=True))
+    itens = []
+    for parte in re.split(padrao, sem_parenteses(bruto)):
+        parte = parte.strip()
+        if parte and parte != vazio and parte not in itens:
+            itens.append(parte)
+    return itens
+
+
+def presentes(bruto, campo, vazio):
+    """Os valores do campo que aparecem no texto, na ordem da forma."""
+    return [v for v in campo["valores"] if v in bruto]
+
+
+def inteiro(bruto, campo, vazio):
+    return bruto.strip()
+
+
+FORMAS = {  # cada forma de campo: a lista de textos que ela pede, se o valor e uma lista e como se le
+    "lista": {"pede": "separadores", "em_lista": True, "le": em_lista},
+    "presenca": {"pede": "valores", "em_lista": True, "le": presentes},
+    "texto": {"pede": None, "em_lista": False, "le": inteiro},
+}
+
+
+def textos(lista):
+    """Se e uma lista com pelo menos um texto, e nenhum texto vazio."""
+    return isinstance(lista, list) and bool(lista) and all(isinstance(t, str) and t for t in lista)
+
+
+def erros_da_forma(forma):
+    """Os problemas da forma que a leitura nao pode deixar passar, cada um numa frase: nenhum
+    campo; nome de campo repetido; forma de campo desconhecida, ou sem a lista de textos que
+    ela pede; papel desconhecido, em mais de um campo, em nenhum, ou num campo cujo valor nao
+    e lista quando o papel pede lista."""
+    campos = forma["campos"]
+    if not campos:
+        return ["a forma não tem campo nenhum"]
+    nomes = [c["nome"] for c in campos]
+    erros = [f"o campo {n!r} aparece mais de uma vez" for n in sorted({n for n in nomes if nomes.count(n) > 1})]
+    donos = {p: [] for p in PAPEIS}
+    for c in campos:
+        papel = c.get("papel")
+        if papel is not None and papel not in donos:
+            erros.append(f"campo {c['nome']!r}: papel desconhecido {papel!r}")
+        elif papel is not None:
+            donos[papel].append(c["nome"])
+        como = FORMAS.get(c["forma"])
+        if como is None:
+            erros.append(f"campo {c['nome']!r}: forma desconhecida {c['forma']!r}")
+            continue
+        if como["pede"] and not textos(c.get(como["pede"])):
+            erros.append(f"campo {c['nome']!r}: a forma {c['forma']!r} pede {como['pede']!r}, "
+                         "uma lista de textos sem texto vazio")
+        if papel in PAPEIS_EM_LISTA and not como["em_lista"]:
+            erros.append(f"campo {c['nome']!r}: o papel {papel!r} pede um valor em lista, "
+                         f"e a forma {c['forma']!r} não dá lista")
+    for papel, donos_do_papel in donos.items():
+        if not donos_do_papel:
+            erros.append(f"nenhum campo tem o papel {papel!r}")
+        elif len(donos_do_papel) > 1:
+            erros.append(f"o papel {papel!r} está em mais de um campo: {', '.join(donos_do_papel)}")
+    return erros
+
+
+def separar_campos(resto, forma, onde):
+    """{nome: texto} dos campos de um trecho, de 'resto' (o que vem depois do separador do
+    texto): o primeiro campo comeca pelo nome e ': ', e cada um dos outros pelo separador de
+    campos, o nome e ': '."""
+    nomes = [c["nome"] for c in forma["campos"]]
+    aberturas = [f"{nomes[0]}: "] + [f"{forma['separador_campos']}{n}: " for n in nomes[1:]]
+    posicoes, inicio = [0], len(aberturas[0])
+    for nome, abertura in zip(nomes[1:], aberturas[1:]):
+        pos = resto.find(abertura, inicio)
+        if pos < 0:
+            raise ErroDeForma(f"{onde}: sem o campo {nome!r}")
+        posicoes.append(pos)
+        inicio = pos + len(abertura)
+    brutos = {}
+    for i, nome in enumerate(nomes):
+        fim = posicoes[i + 1] if i + 1 < len(nomes) else len(resto)
+        brutos[nome] = resto[posicoes[i] + len(aberturas[i]):fim]
+    return brutos
+
+
+def chave_da_aula(caminho, forma):
+    nome = nfc(Path(caminho).stem)
+    if not nome.startswith(forma["prefixo_arquivo"]):
+        raise ErroDeForma(f"{caminho}: nome fora do padrão")
+    return nome[len(forma["prefixo_arquivo"]):]
+
+
+def ler_analise(caminho, forma):
+    """(trechos, notas) de um arquivo, numa forma ja conferida. Cada trecho: id, aula, slide,
+    posicao, texto, brutos (o texto de cada campo), valores (o valor de cada campo, pela forma
+    dele) e papeis ({papel: {"valor", "texto"}}, os do campo que tem o papel)."""
+    aula = chave_da_aula(caminho, forma)
+    campos = forma["campos"]
+    campo_do_papel = {c["papel"]: c["nome"] for c in campos if "papel" in c}
+    abre_campos = forma["separador_texto"] + campos[0]["nome"] + ": "
+    trechos, notas, slide, posicao = [], 0, None, 0
+    for n, linha in enumerate(Path(caminho).read_text(encoding="utf-8").splitlines(), 1):
+        onde = f"{Path(caminho).name}:{n}"
+        if linha.startswith(forma["prefixo_slide"]):
+            numero = linha[len(forma["prefixo_slide"]):].strip()
+            if not numero.isdecimal():
+                raise ErroDeForma(f"{onde}: slide sem número")
+            slide, posicao = int(numero), 0
+            continue
+        if linha.startswith(forma["prefixo_titulo"]):
+            slide = None
+            continue
+        if slide is None or not linha.strip():
+            continue
+        if not linha.startswith(forma["marca_item"]):
+            raise ErroDeForma(f"{onde}: linha fora da forma")
+        corpo = linha[len(forma["marca_item"]):]
+        pos = corpo.find(abre_campos)
+        if pos < 0:
+            if corpo.startswith(forma["nota_sem_campos"]):
+                notas += 1
+                continue
+            raise ErroDeForma(f"{onde}: item sem os campos")
+        texto = corpo[:pos].strip()
+        brutos = separar_campos(corpo[pos + len(forma["separador_texto"]):], forma, onde)
+        valores = {c["nome"]: FORMAS[c["forma"]]["le"](brutos[c["nome"]], c, forma["vazio"]) for c in campos}
+        posicao += 1
+        resumo = hashlib.sha1(nfc(texto).encode("utf-8")).hexdigest()[:4]
+        papeis = {p: {"valor": valores[c], "texto": brutos[c]} for p, c in campo_do_papel.items()}
+        trechos.append({"id": f"{aula}/{slide}/{posicao}/{resumo}", "aula": aula, "slide": slide,
+                        "posicao": posicao, "texto": texto, "brutos": brutos, "valores": valores,
+                        "papeis": papeis})
+    return trechos, notas
+
+
+def ler_analises(pasta, forma):
+    """(trechos, notas por aula, aulas em ordem natural) dos arquivos da pasta que seguem o
+    padrao da forma. ErroDeForma quando a forma tem problema (todos numa mensagem), quando
+    nenhum arquivo segue o padrao, quando dois arquivos dao a mesma aula, numa linha fora da
+    forma e quando um id se repete."""
+    erros = erros_da_forma(forma)
+    if erros:
+        raise ErroDeForma("a forma das análises: " + "; ".join(erros))
+    arquivos = {}
+    for arquivo in sorted(c for c in Path(pasta).glob(forma["arquivos"]) if c.is_file()):
+        aula = chave_da_aula(arquivo, forma)
+        if aula in arquivos:
+            raise ErroDeForma(f"{pasta}: a aula {aula!r} está em dois arquivos, {arquivos[aula].name} e {arquivo.name}")
+        arquivos[aula] = arquivo
+    if not arquivos:
+        raise ErroDeForma(f"{pasta}: nenhum arquivo {forma['arquivos']}")
+    aulas = sorted(arquivos, key=lambda a: (ordem_natural(a), a))
+    trechos, notas = [], {}
+    for aula in aulas:
+        lidos, notas[aula] = ler_analise(arquivos[aula], forma)
+        trechos += lidos
+    contagem = collections.Counter(t["id"] for t in trechos)
+    repetidos = sorted(i for i, n in contagem.items() if n > 1)
+    if repetidos:
+        raise ErroDeForma(f"ids repetidos: {repetidos}")
+    return trechos, notas, aulas

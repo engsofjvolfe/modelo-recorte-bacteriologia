@@ -500,9 +500,10 @@ projeto](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material). As
 das aulas, trecho por trecho, ficam na pasta protegida, junto do texto do professor
 (`docs/material-base/gerados-ocr/analise/`). Aqui ficam as contagens: primeiro, os trechos
 de cada tipo em todas as aulas; depois, para cada aula, os trechos por tipo, por grupo e
-por caminho, e os tipos de cada slide. Os trechos de vírus e de fungo ficam fora das
-contagens: os de vírus estão fora do foco do material, e os de fungo só entram como
-comparação com uma bactéria.
+por caminho, e os tipos de cada slide. Os trechos sem grupo que falam de vírus ou de fungo
+contam à parte: vírus e fungos não são assunto do material, e um trecho que fala deles
+entra como a aula o usa ([metodologia do projeto, seção
+4](../metodologia-de-conteudo.md#4-o-que-entra-no-material)).
 
 ### Os tipos em todas as aulas
 
@@ -531,8 +532,8 @@ Trechos das aulas de cada tipo, por aula. Um trecho conta em cada tipo que tem.
 
 ### Aula 1 — Introdução a Microbiologia
 
-36 slides, 16 deles com trechos das aulas. 51 trechos das aulas; além deles, 10 de vírus
-fora do foco e 21 linhas que não são conteúdo de estudo.
+36 slides, 16 deles com trechos das aulas. 51 trechos das aulas; além deles, 10 que falam
+de vírus e 21 linhas que não são conteúdo de estudo.
 
 | Tipo | Trechos |
 | --- | ---: |
@@ -563,7 +564,7 @@ fora do foco e 21 linhas que não são conteúdo de estudo.
 | ---: | --- | --- | --- |
 | 1 | não é conteúdo de estudo | — | — |
 | 2 | Conceito e vocabulário | 2 Fundamentos | — |
-| 3 | Classificação; Marco histórico | 2 Fundamentos; 5 Marcos históricos; vírus fora do foco | — |
+| 3 | Classificação; Marco histórico | 2 Fundamentos; 5 Marcos históricos; fala de vírus | — |
 | 4 | Conceito e vocabulário; Classificação; Marco histórico | 2 Fundamentos; 5 Marcos históricos | — |
 | 5 | Classificação; Exemplo recorrente; Figura e esquema; Marco histórico | 2 Fundamentos; 5 Marcos históricos | — |
 | 6 | não é conteúdo de estudo | — | — |
@@ -581,13 +582,13 @@ fora do foco e 21 linhas que não são conteúdo de estudo.
 | 18 | Exemplo recorrente; Marco histórico | 5 Marcos históricos | — |
 | 19 | não é conteúdo de estudo | — | — |
 | 20 | Causa e efeito; Marco histórico | 1 Organismos; 5 Marcos históricos | bactéria → doença |
-| 21 | — | vírus fora do foco | — |
-| 22 | Conceito e vocabulário; Exemplo recorrente; Número com sentido | 1 Organismos; 2 Fundamentos; vírus fora do foco | bactéria → doença |
+| 21 | — | fala de vírus | — |
+| 22 | Conceito e vocabulário; Exemplo recorrente; Número com sentido | 1 Organismos; 2 Fundamentos; fala de vírus | bactéria → doença |
 | 23 | não é conteúdo de estudo | — | — |
-| 24 | Conceito e vocabulário; Causa e efeito | 2 Fundamentos; vírus fora do foco | — |
+| 24 | Conceito e vocabulário; Causa e efeito | 2 Fundamentos; fala de vírus | — |
 | 25 | não é conteúdo de estudo | — | — |
-| 26 | — | vírus fora do foco | — |
-| 27 | — | vírus fora do foco | — |
+| 26 | — | fala de vírus | — |
+| 27 | — | fala de vírus | — |
 | 28 | não é conteúdo de estudo | — | — |
 | 29 | não é conteúdo de estudo | — | — |
 | 30 | não é conteúdo de estudo | — | — |
@@ -668,8 +669,8 @@ não são conteúdo de estudo.
 
 ### Aula 3 — Fisiologia Bacteriana
 
-27 slides, 18 deles com trechos das aulas. 67 trechos das aulas; além deles, 1 de fungo,
-só como comparação e 10 linhas que não são conteúdo de estudo.
+27 slides, 18 deles com trechos das aulas. 67 trechos das aulas; além deles, 1 que fala de
+fungo e 10 linhas que não são conteúdo de estudo.
 
 | Tipo | Trechos |
 | --- | ---: |
@@ -721,7 +722,7 @@ só como comparação e 10 linhas que não são conteúdo de estudo.
 | 23 | Conceito e vocabulário; Processo em ordem | 2 Fundamentos | — |
 | 24 | Conceito e vocabulário; Classificação; Processo em ordem; Exemplo recorrente; Número com sentido; Figura e esquema | 2 Fundamentos | — |
 | 25 | Conceito e vocabulário; Exemplo recorrente; Número com sentido; Figura e esquema | 2 Fundamentos | — |
-| 26 | — | fungo, só como comparação | — |
+| 26 | — | fala de fungo | — |
 | 27 | não é conteúdo de estudo | — | — |
 
 ### Aula 4 — Genética Bacteriana
@@ -1042,8 +1043,8 @@ não são conteúdo de estudo.
 
 ### Aula 9-10 — BGN
 
-80 slides, 70 deles com trechos das aulas. 241 trechos das aulas; além deles, 1 de vírus
-fora do foco, 2 de fungo, só como comparação e 30 linhas que não são conteúdo de estudo.
+80 slides, 70 deles com trechos das aulas. 241 trechos das aulas; além deles, 1 que fala
+de vírus, 2 que falam de fungo e 30 linhas que não são conteúdo de estudo.
 
 | Tipo | Trechos |
 | --- | ---: |
@@ -1102,9 +1103,9 @@ fora do foco, 2 de fungo, só como comparação e 30 linhas que não são conte�
 | 16 | Conceito e vocabulário; Causa e efeito; Item com os mesmos tipos de fato; Número com sentido; Relação nos dois sentidos; Aplicação na prática | 1 Organismos; 4 Prática em saúde | bactéria → doença; quadro → bactérias (falha renal aguda em crianças → HUS → O157:H7) |
 | 17 | Processo em ordem; Item com os mesmos tipos de fato; Número com sentido; Figura e esquema | 1 Organismos | bactéria → doença |
 | 18 | Item com os mesmos tipos de fato; Número com sentido; Relação nos dois sentidos | 1 Organismos | bactéria → doença; quadro → bactérias (ITU); quadro → bactérias (meningite por idade) |
-| 19 | Classificação; Contraste; Item com os mesmos tipos de fato; Relação nos dois sentidos; Figura e esquema; Aplicação na prática | 1 Organismos; 4 Prática em saúde; fungo, só como comparação | quadro → bactérias (ITU); bactéria → doença |
+| 19 | Classificação; Contraste; Item com os mesmos tipos de fato; Relação nos dois sentidos; Figura e esquema; Aplicação na prática | 1 Organismos; 4 Prática em saúde; fala de fungo | quadro → bactérias (ITU); bactéria → doença |
 | 20 | Processo em ordem; Causa e efeito; Figura e esquema | 1 Organismos; 4 Prática em saúde | quadro → bactérias (ITU) |
-| 21 | Classificação; Contraste; Número com sentido; Relação nos dois sentidos | 1 Organismos; 2 Fundamentos; vírus fora do foco; fungo, só como comparação | quadro → bactérias (meningite por idade); bactéria → doença |
+| 21 | Classificação; Contraste; Número com sentido; Relação nos dois sentidos | 1 Organismos; 2 Fundamentos; fala de vírus; fala de fungo | quadro → bactérias (meningite por idade); bactéria → doença |
 | 22 | Classificação; Item com os mesmos tipos de fato; Número com sentido; Relação nos dois sentidos | 1 Organismos | bactéria → doença; quadro → bactérias (transmissão por alimento e água) |
 | 23 | Item com os mesmos tipos de fato; Exemplo recorrente; Exceção; Número com sentido; Relação nos dois sentidos | 1 Organismos | bactéria → doença; quadro → bactérias (transmissão por alimento e água) |
 | 24 | Item com os mesmos tipos de fato; Exemplo recorrente; Relação nos dois sentidos | 1 Organismos | bactéria → doença; quadro → bactérias (transmissão por alimento e água) |
@@ -1167,8 +1168,8 @@ fora do foco, 2 de fungo, só como comparação e 30 linhas que não são conte�
 
 ### Aula 11-12 — CGP
 
-67 slides, 62 deles com trechos das aulas. 236 trechos das aulas; além deles, 3 de vírus
-fora do foco e 31 linhas que não são conteúdo de estudo.
+67 slides, 62 deles com trechos das aulas. 236 trechos das aulas; além deles, 3 que falam
+de vírus e 31 linhas que não são conteúdo de estudo.
 
 | Tipo | Trechos |
 | --- | ---: |
@@ -1266,10 +1267,10 @@ fora do foco e 31 linhas que não são conteúdo de estudo.
 | 50 | Classificação; Parte e função; Item com os mesmos tipos de fato; Exemplo recorrente; Número com sentido; Relação nos dois sentidos | 1 Organismos; 3 Famílias de itens | bactéria → doença |
 | 51 | Processo em ordem; Relação nos dois sentidos; Figura e esquema | 1 Organismos | bactéria → doença; quadro → bactérias (meningite) |
 | 52 | Causa e efeito; Figura e esquema | 1 Organismos | bactéria → doença |
-| 53 | Número com sentido; Figura e esquema; Aplicação na prática | 4 Prática em saúde; vírus fora do foco | quadro → bactérias (pneumonia adquirida na comunidade) |
-| 54 | Número com sentido; Figura e esquema | 4 Prática em saúde; vírus fora do foco | quadro → bactérias (pneumonia adquirida na comunidade) |
+| 53 | Número com sentido; Figura e esquema; Aplicação na prática | 4 Prática em saúde; fala de vírus | quadro → bactérias (pneumonia adquirida na comunidade) |
+| 54 | Número com sentido; Figura e esquema | 4 Prática em saúde; fala de vírus | quadro → bactérias (pneumonia adquirida na comunidade) |
 | 55 | Número com sentido; Figura e esquema; Aplicação na prática | 4 Prática em saúde | quadro → bactérias (pneumonia adquirida na comunidade) |
-| 56 | Número com sentido; Figura e esquema | 4 Prática em saúde; vírus fora do foco | quadro → bactérias (pneumonia adquirida na comunidade) |
+| 56 | Número com sentido; Figura e esquema | 4 Prática em saúde; fala de vírus | quadro → bactérias (pneumonia adquirida na comunidade) |
 | 57 | Item com os mesmos tipos de fato | 1 Organismos | bactéria → doença |
 | 58 | Item com os mesmos tipos de fato | 1 Organismos | bactéria → doença |
 | 59 | Contraste; Item com os mesmos tipos de fato; Relação nos dois sentidos; Figura e esquema | 1 Organismos; 3 Famílias de itens | bactéria → doença |
@@ -1284,8 +1285,8 @@ fora do foco e 31 linhas que não são conteúdo de estudo.
 
 ### Aula 13 — Cocos Gram negativos
 
-28 slides, 24 deles com trechos das aulas. 110 trechos das aulas; além deles, 1 de vírus
-fora do foco e 4 linhas que não são conteúdo de estudo.
+28 slides, 24 deles com trechos das aulas. 110 trechos das aulas; além deles, 1 que fala
+de vírus e 4 linhas que não são conteúdo de estudo.
 
 | Tipo | Trechos |
 | --- | ---: |
@@ -1324,7 +1325,7 @@ fora do foco e 4 linhas que não são conteúdo de estudo.
 | 3 | Classificação; Item com os mesmos tipos de fato; Número com sentido; Marco histórico | 1 Organismos; 5 Marcos históricos | bactéria → doença |
 | 4 | Conceito e vocabulário; Classificação; Item com os mesmos tipos de fato; Relação nos dois sentidos | 1 Organismos; 2 Fundamentos; 3 Famílias de itens | bactéria → doença |
 | 5 | Causa e efeito; Item com os mesmos tipos de fato; Número com sentido | 1 Organismos; 3 Famílias de itens; 4 Prática em saúde | bactéria → doença; quadro → bactérias |
-| 6 | Classificação; Contraste; Número com sentido; Relação nos dois sentidos | 1 Organismos; 4 Prática em saúde; vírus fora do foco | quadro → bactérias |
+| 6 | Classificação; Contraste; Número com sentido; Relação nos dois sentidos | 1 Organismos; 4 Prática em saúde; fala de vírus | quadro → bactérias |
 | 7 | Figura e esquema | 4 Prática em saúde | quadro → bactérias |
 | 8 | Causa e efeito; Item com os mesmos tipos de fato; História em cadeia; Figura e esquema | 1 Organismos; 2 Fundamentos | bactéria → doença |
 | 9 | Classificação; Parte e função; Causa e efeito; Item com os mesmos tipos de fato; Número com sentido | 1 Organismos; 3 Famílias de itens | bactéria → doença |
@@ -1424,8 +1425,8 @@ não são conteúdo de estudo.
 
 ### Aula 15 — IRAS
 
-35 slides, 33 deles com trechos das aulas. 134 trechos das aulas; além deles, 3 de vírus
-fora do foco e 7 linhas que não são conteúdo de estudo.
+35 slides, 33 deles com trechos das aulas. 134 trechos das aulas; além deles, 3 que falam
+de vírus e 7 linhas que não são conteúdo de estudo.
 
 | Tipo | Trechos |
 | --- | ---: |
@@ -1490,7 +1491,7 @@ fora do foco e 7 linhas que não são conteúdo de estudo.
 | 27 | Causa e efeito; Exemplo recorrente; Número com sentido; Aplicação na prática | 4 Prática em saúde | — |
 | 28 | Conceito e vocabulário; Classificação; Contraste; Número com sentido; Figura e esquema | 4 Prática em saúde | — |
 | 29 | Conceito e vocabulário | 4 Prática em saúde | — |
-| 30 | Contraste; Número com sentido; Aplicação na prática | 4 Prática em saúde; vírus fora do foco | — |
+| 30 | Contraste; Número com sentido; Aplicação na prática | 4 Prática em saúde; fala de vírus | — |
 | 31 | Analogia e história; Marco histórico | 5 Marcos históricos | — |
 | 32 | Classificação; Contraste; Parte e função; Processo em ordem; Causa e efeito; Aplicação na prática | 3 Famílias de itens | — |
 | 33 | Aplicação na prática | 4 Prática em saúde | — |
@@ -3516,7 +3517,8 @@ síndrome por bactérias diferentes e repete (o mesmo conteúdo outra vez).
 Esta parte divide a matéria. Com todas as aulas lidas, o que se repete entre elas formou
 cinco [grupos](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material), e a
 parte 6 dá a cada grupo a sua abordagem. Cada trecho das aulas está em um grupo ou em mais
-de um. Os trechos de vírus e de fungo ficam fora dos grupos, pelo motivo dito na parte 2.
+de um; os que falam de vírus ou de fungo sem grupo contam à parte, como diz a [parte
+2](#2-as-aulas-slide-por-slide).
 
 Trechos das aulas de cada grupo, por aula. Um trecho conta em cada grupo que tem.
 
@@ -4025,8 +4027,9 @@ projeto.
 Os números são os trechos das aulas (parte 2) que caem em cada parte; um trecho com mais
 de um tipo, ou com lugar em mais de uma ficha, conta em cada uma. Os moldes dão lugar a
 1.874 trechos. O que falta para os 1.875 da parte 2 é o do Cryptococcus (aula 5, slide
-25), que a análise marca como fungo, só como comparação, mas com o grupo 1: como os outros
-trechos de fungo, ele só entra como comparação com uma bactéria ([parte 4](#4-os-grupos)).
+25), um trecho do grupo 1 que fala de fungo. Como todo trecho que fala de vírus ou de
+fungo, ele entra como a aula o usa ([metodologia do projeto, seção
+4](../metodologia-de-conteudo.md#4-o-que-entra-no-material)).
 
 **A <dfn>sequência das partes</dfn>.** Cada tema da teoria e cada quadro é um texto em
 blocos, um para cada tipo de trecho, sempre na mesma ordem. Abre com os nomes e o que eles
@@ -4068,17 +4071,42 @@ ficam junto do assunto deles: 12 na teoria e 4 nos quadros. A ordem vem de quatr
   mede e com o que o marco mudou ([A forma de cada tipo](#a-forma-de-cada-tipo)).
 
 **Ficha e dicionário de cada bactéria.** A ficha abre com as três a cinco palavras-chave
-da bactéria e tem dez eixos, nesta ordem: características gerais (227 trechos), habitat
-(29), transmissão (47), fatores de risco (17), fatores de virulência (92), patogênese em
-sequência (80), doenças e formas clínicas (289), diagnóstico (123), tratamento (63) e
-prevenção (26). A frequência da doença e os lugares onde ela ocorre ficam em doenças e
-formas clínicas; a resistência às drogas, em tratamento. As palavras-chave e os eixos vêm
-da forma de Item com os mesmos tipos de fato, acima, e os nove eixos do grupo 1 seguem a
-ordem da [parte 4](#4-os-grupos). Os fatores de risco vêm logo depois da transmissão, como
-no item da literatura que os põe entre as características de cada agente: agente
-etiológico, reservatório, padrões de transmissão, período de incubação, fatores de risco,
-complicações possíveis e tratamentos (Norman-McKay; ASM MINAH Undergraduate Curriculum
-Guidelines Committee, 2018, supl., p. 2-3).
+da bactéria e tem dez eixos. As palavras-chave e os eixos vêm da forma de Item com os
+mesmos tipos de fato, acima, e os nove eixos do grupo 1 seguem a ordem da [parte
+4](#4-os-grupos). Os fatores de risco vêm logo depois da transmissão, como no item da
+literatura que os põe entre as características de cada agente: agente etiológico,
+reservatório, padrões de transmissão, período de incubação, fatores de risco, complicações
+possíveis e tratamentos (Norman-McKay; ASM MINAH Undergraduate Curriculum Guidelines
+Committee, 2018, supl., p. 2-3).
+
+Cada trecho vai para o eixo do fato principal dele; o título do slide só desempata quando
+o fato cabe em dois eixos. Os eixos, nesta ordem, com os trechos de cada um e o que vai
+nele:
+
+- características gerais (227 trechos): o que a bactéria é — o nome e a origem dele, a
+  classificação e as espécies, a forma, o Gram, o arranjo, o tamanho, a motilidade, os
+  esporos, a relação com o oxigênio e o metabolismo, o cultivo e as colônias, a genética,
+  se ela é comensal, patogênica ou oportunista, e as provas que o slide dá como
+  característica geral;
+- habitat (29): onde ela vive — o reservatório, a microbiota, o ambiente e os portadores;
+- transmissão (47): como ela chega ao hospedeiro — as vias, as fontes, os surtos, o
+  contágio, onde ela se adquire (na comunidade ou no hospital) e a sequência que leva um
+  alimento a ficar contaminado;
+- fatores de risco (17): as condições, as exposições e os grupos de pessoas que a fonte
+  liga a mais chance de adoecer; a simples divisão de quem adoece por idade ou sexo fica
+  em doenças e formas clínicas;
+- fatores de virulência (92): cada fator — a cápsula, as adesinas, as enzimas, as toxinas,
+  a evasão das defesas do corpo — e o que ele faz;
+- patogênese em sequência (80): como a infecção se desenrola no corpo — as etapas, o lugar
+  onde ela age, o mecanismo da lesão e a resposta do hospedeiro;
+- doenças e formas clínicas (289): os quadros, os sintomas, a incubação, a evolução, as
+  complicações, a gravidade, a frequência e os lugares onde a doença ocorre;
+- diagnóstico (123): as amostras, a microscopia, a cultura, as provas, os testes e a
+  sorologia que identificam a bactéria, e a figura que só mostra o microrganismo (o nome,
+  a coloração, a cultura); a figura cujos rótulos ensinam uma estrutura ou um processo vai
+  para o eixo desse conteúdo;
+- tratamento (63): as drogas e a resistência a elas;
+- prevenção (26): as vacinas, a higiene e as outras medidas de prevenção.
 
 O dicionário conta cada bactéria em sete elos, cada um com os fatos de eixos da ficha:
 
@@ -4106,44 +4134,70 @@ tratar um paciente infectado (Murray; Rosenthal; Pfaller, 2022, p. vii).
 os itens e como eles se dividem (18 trechos: estruturas 1, controle 8, provas 2 e
 microbiota 7; nos antimicrobianos, nenhum). Depois vem uma entrada por item, com os eixos
 da família. A abertura vem antes dos itens como na forma de Classificação, acima: primeiro
-o critério, depois o que cai em cada grupo. Os eixos de cada família, com os trechos de
-cada um, e de onde vem a ordem deles:
+o critério, depois o que cai em cada grupo. Cada trecho vai para o eixo do fato principal
+dele, como na ficha da bactéria, e o trecho que a análise põe em duas famílias tem lugar
+em cada uma. Os eixos de cada família, com os trechos de cada um, o que vai nele quando o
+nome não basta e de onde vem a ordem deles:
 
-- **Estruturas da célula bacteriana** (81 trechos): o que é (13), composição (14), função
-  (12), tipos (12), em que bactérias aparece e como é nelas (20) e o que age sobre ela
-  (9). A ordem é a forma de Parte e função, acima: a parte (o que é, composição), o que
-  ela faz (função) e o que isso significa para a bactéria e para a doença (os tipos dela,
-  as bactérias em que aparece e o que age sobre ela).
-- **Antimicrobianos** (115 trechos): classe e membros (30), origem (4), alvo e mecanismo
-  de ação (20), bactericida ou bacteriostático (4), espectro (3), uso clínico (28),
-  meia-vida e absorção (5) e resistência (21). A ordem junta a dos parágrafos das classes
-  no livro-texto: o dos macrolídios começa pela classe, pelos membros e pela origem deles
-  e segue para o mecanismo; o das tetraciclinas põe o efeito e o espectro junto do
-  mecanismo e termina pelo uso, pela absorção e meia-vida e pela resistência (Murray;
-  Rosenthal; Pfaller, 2022, p. 179).
-- **Métodos e agentes de controle** (93 trechos): categoria e exemplos (10), mecanismo de
-  ação (21), condições de uso (14), uso preferencial (21), espectro e efetividade (17) e
-  limitações e cuidados (2). A ordem segue a aula 7: a tabela dos agentes químicos (slides
-  19 e 20) dá, em cada linha, o agente, o mecanismo de ação, o uso preferencial e um
-  comentário, e o slide 23, depois dela, a efetividade contra endósporos e micobactérias;
-  os comentários e o slide 23 dão o espectro, a efetividade e as limitações. As condições
-  de uso (tempo, temperatura, pressão, concentração), que a tabela não traz, vêm logo
-  depois do mecanismo, por escolha do projeto.
-- **Provas de identificação** (89 trechos): tipo de prova (6), o que detecta (6), amostra
-  e situação de uso (7), como se faz (6), como se lê o resultado (12) e que bactéria o
-  resultado indica (50). A prova e o que ela detecta abrem a entrada, no primeiro dos dois
-  sentidos em que as provas se pedem, da prova ao que ela mostra ([parte
-  4](#4-os-grupos)). Os eixos seguintes vão da coleta da amostra ao resultado, como no
-  trabalho que a literatura pede que a enfermagem entenda: os enfermeiros coletam as
-  amostras e devem entender como esse trabalho afeta a exatidão dos testes e o que os
+- **Estruturas da célula bacteriana** (81 trechos). A ordem é a forma de Parte e função,
+  acima: a parte (o que é, composição), o que ela faz (função) e o que isso significa para
+  a bactéria e para a doença (os tipos dela, as bactérias em que aparece e o que age sobre
+  ela).
+  - o que é (13): o que a estrutura é, a forma, o tamanho e onde ela fica;
+  - composição (14);
+  - função (12);
+  - tipos (12);
+  - em que bactérias aparece e como é nelas (20): todo trecho sobre a estrutura numa
+    bactéria nomeada;
+  - o que age sobre ela (9).
+- **Antimicrobianos** (115 trechos). A ordem junta a dos parágrafos das classes no
+  livro-texto: o dos macrolídios começa pela classe, pelos membros e pela origem deles e
+  segue para o mecanismo; o das tetraciclinas põe o efeito e o espectro junto do mecanismo
+  e termina pelo uso, pela absorção e meia-vida e pela resistência (Murray; Rosenthal;
+  Pfaller, 2022, p. 179).
+  - classe e membros (30);
+  - origem (4);
+  - alvo e mecanismo de ação (20);
+  - bactericida ou bacteriostático (4);
+  - espectro (3);
+  - uso clínico (28): contra que bactérias e que infecções a droga se usa;
+  - meia-vida e absorção (5);
+  - resistência (21).
+- **Métodos e agentes de controle** (93 trechos). A ordem segue a aula 7: a tabela dos
+  agentes químicos (slides 19 e 20) dá, em cada linha, o agente, o mecanismo de ação, o
+  uso preferencial e um comentário, e o slide 23, depois dela, a efetividade contra
+  endósporos e micobactérias; os comentários e o slide 23 dão o espectro, a efetividade e
+  as limitações. As condições de uso (tempo, temperatura, pressão, concentração), que a
+  tabela não traz, vêm logo depois do mecanismo, por escolha do projeto.
+  - categoria e exemplos (10);
+  - mecanismo de ação (21);
+  - condições de uso (14): a temperatura, o tempo, a pressão, a concentração e o
+    comprimento de onda em que o método funciona;
+  - uso preferencial (21);
+  - espectro e efetividade (17);
+  - limitações e cuidados (2).
+- **Provas de identificação** (89 trechos). A prova e o que ela detecta abrem a entrada,
+  no primeiro dos dois sentidos em que as provas se pedem, da prova ao que ela mostra
+  ([parte 4](#4-os-grupos)). Os eixos seguintes vão da coleta da amostra ao resultado,
+  como no trabalho que a literatura pede que a enfermagem entenda: os enfermeiros coletam
+  as amostras e devem entender como esse trabalho afeta a exatidão dos testes e o que os
   resultados implicam para o diagnóstico e o tratamento (Norman-McKay; ASM MINAH
   Undergraduate Curriculum Guidelines Committee, 2018, supl., p. 7-8). O último eixo é o
   segundo sentido, do resultado à bactéria.
-- **Microbiota de cada local do corpo** (90 trechos): estéril ou colonizado (6),
-  microrganismos do local (73) e Gram que predomina (4). A ordem é a da aula 5: o slide 3
+  - tipo de prova (6);
+  - o que detecta (6);
+  - amostra e situação de uso (7): em que material e em que situação a prova se usa, e
+    toda "pesquisa direta" ou "exame direto";
+  - como se faz (6): as etapas, a composição e as condições;
+  - como se lê o resultado (12);
+  - que bactéria o resultado indica (50): o resultado que aponta uma bactéria nomeada.
+- **Microbiota de cada local do corpo** (90 trechos). A ordem é a da aula 5: o slide 3
   separa os locais estéreis dos colonizados, e os slides 10 a 16 dão, local por local, os
   microrganismos predominantes e os menos frequentes; a legenda da imagem de quatro deles
   dá o Gram que predomina.
+  - estéril ou colonizado (6);
+  - microrganismos do local (73): os que predominam e os menos frequentes;
+  - Gram que predomina (4).
 
 **Quadros e casos.** Cada quadro tem as partes da sequência acima, com os trechos da
 coluna dos quadros. Assim ele cumpre a forma do caminho do quadro para as bactérias: o

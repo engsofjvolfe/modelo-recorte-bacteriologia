@@ -260,11 +260,18 @@ terceiros: é contra ele que se confere a análise.
 
 O que a análise decide sobre a forma do material está na parte 6 dela. As decisões que os
 scripts usam ficam também no <dfn>arquivo de formato</dfn>, `dados/formato.json`, como
-dados: o curso, a disciplina e o nível; os itens, os eixos da ficha e os
-<dfn>subtópicos</dfn> de cada eixo — as partes menores dele que todo item também tem —;
-os elos do dicionário; e as colunas dos cartões. O que vai em cada campo está no [README
-dos scripts](scripts/README.md#o-arquivo-de-formato). É por esse arquivo que os scripts
-sabem o que cada item precisa ter, o que a aula cobre e onde falta.
+dados: para quem é o material (os cursos, a disciplina e o nível) e em que idioma; a
+última aula que tem material; os grupos da matéria; o que fica fora do material e as
+marcas, que só dizem do que um trecho fala; a sequência das partes de um texto, cada uma
+com os seus tipos de conhecimento, e onde cada tipo se ensina; e os documentos, cada um
+com o molde dele e, se ele as lista, as suas unidades. Uma <dfn>unidade</dfn> é cada
+coisa que ganha material num documento: um tema da teoria, uma bactéria, uma família de
+itens, um quadro, uma aula nas perguntas de prova. Na ficha, a unidade tem os eixos dela
+ou os do documento, e um eixo pode ter <dfn>subtópicos</dfn>, as partes menores dele que
+toda unidade também tem. O que vai em cada campo está no [README dos
+scripts](scripts/README.md#o-arquivo-de-formato). É por esse arquivo que os scripts sabem
+onde cada trecho das aulas cai, o que cada unidade precisa ter, o que a aula cobre e onde
+falta.
 
 ---
 
@@ -275,10 +282,10 @@ trazem os pontos da matéria, não o conteúdo de cada um: entra todo trecho del
 ponto, tudo o que o livro diz sobre ele, lido no capítulo inteiro, nunca por busca de
 palavras. O que o livro diz sobre um assunto que nenhum slide traz fica fora, menos os
 fatores de risco de cada bactéria ([análise da matéria, O que o estudante precisa saber
-fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer)). Os trechos de
-vírus ficam fora do foco do material, e os de fungo só entram como comparação com uma
-bactéria ([análise da matéria, parte
-2](docs/analise-da-materia.md#2-as-aulas-slide-por-slide)). O quão fundo cada ponto vai é
+fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer)). Vírus e fungos
+não são assunto do material. Um trecho das aulas que fala deles entra como a aula o usa:
+como comparação, quando ela o compara com uma bactéria; pelo que ele diz, quando ela fala
+dele por outro motivo, sem comparação que a aula não faz. O quão fundo cada ponto vai é
 o que o livro diz sobre ele, e a forma de estudo vem da análise da matéria. O aviso sobre
 o recorte, para quem usa o material, está no
 [README](README.md#aviso-importante--leia-antes-de-usar).
@@ -301,19 +308,20 @@ regra: o fato tem de estar escrito nele, nunca deduzido. A cópia de cada materi
 fica na pasta protegida, em `docs/material-base/fontes-externas/`, com um nome que começa
 pela entrada e pelo ano da referência dele, para se achar o arquivo a partir da citação.
 
-Do material de fora sai uma base literal, a <dfn>base de trechos</dfn>, item por item, e
-ninguém copia trecho à mão. O arquivo de dados do item (`dados/bases/[item].json`) diz
-quais páginas de quais fontes foram lidas e marca cada subtópico do formato como coberto
-pela aula, pelo material de fora ou como lacuna; o `base_externa.py` recolhe todo o texto
-dessas páginas, em frases; a IA classifica cada frase — usada (com o subtópico e se a
-fonte afirma o fato ou o trata como possibilidade), de outro item, repetida, fora do
-recorte ou não é conteúdo —; e o script grava a base do item, só com as frases usadas,
-letra por letra, com a citação e a página. A base e a conferência dela nunca são
-publicadas; o arquivo de dados, que só tem códigos e decisões, pode ser. É contra essa
-base que se confere cada fato tirado do material de fora, e a frase que a fonte trata como
-possibilidade entra no material com a ressalva escrita, nunca como certeza. O que o script
-confere antes de gravar a base está no [README dos
-scripts](scripts/README.md#base_externapy--monta-a-base-do-material-de-fora).
+Do material de fora sai uma base literal, a <dfn>base de trechos</dfn>, unidade por
+unidade, e ninguém copia trecho à mão. O arquivo de dados de cada unidade
+(`dados/bases/[item].json`, com o id da unidade no lugar de `[item]`) diz quais páginas de
+quais fontes foram lidas e marca cada subtópico da grade da unidade — os eixos dela ou,
+quando ela não tem os seus, os do documento — como coberto pela aula, pelo material de
+fora ou como lacuna; o `base_externa.py` recolhe todo o texto dessas páginas, em frases; a
+IA classifica cada frase — usada (com o subtópico e se a fonte afirma o fato ou o trata
+como possibilidade), de outra unidade, repetida, fora do recorte ou não é conteúdo —; e o
+script grava a base da unidade, só com as frases usadas, letra por letra, com a citação e
+a página. A base e a conferência dela nunca são publicadas; o arquivo de dados, que só tem
+códigos e decisões, pode ser. É contra essa base que se confere cada fato tirado do
+material de fora, e a frase que a fonte trata como possibilidade entra no material com a
+ressalva escrita, nunca como certeza. O que o script confere antes de gravar a base está
+no [README dos scripts](scripts/README.md#base_externapy--monta-a-base-do-material-de-fora).
 
 ---
 
@@ -458,9 +466,10 @@ conferência](scripts/README.md#como-ticar-uma-conferência).
 ### Antes de o material valer
 
 Antes de o material valer, nenhum script deixa linha `ERRO` nem `FALTA`: o
-`validar_dados.py`, em cada arquivo de dados, e o `conferencia.py`, o `referencias.py`, o
-`base_externa.py`, o `confere_cartoes.py`, o `glossario.py --conferir`, o
-`confere_indice.py` e o `protege_fontes.py`. E a pessoa confere:
+`validar_dados.py`, em cada arquivo de dados, e o `conferencia.py`, o `confere_moldes.py`,
+o `referencias.py`, o `base_externa.py`, o `confere_cartoes.py`, o
+`glossario.py --conferir`, o `confere_indice.py` e o `protege_fontes.py`. E a pessoa
+confere:
 
 1. que o título de cada documento cobre tudo o que está dentro dele;
 2. que, em cada item, o dicionário e a ficha mostram os mesmos fatos principais, sem
