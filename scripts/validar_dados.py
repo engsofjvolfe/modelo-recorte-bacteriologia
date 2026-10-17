@@ -19,10 +19,10 @@ O schema e achado pelo nome do arquivo de dados: "formato.json" ->
 
 Usa so a biblioteca padrao do Python, entao entende o subconjunto do JSON Schema que
 os schemas deste projeto usam: type, required, properties, additionalProperties,
-items, minItems, maxItems, const, enum, not, minLength, pattern, allOf, anyOf, if/then/else e $ref
-para "#/$defs/...". Alem disso, uma regra fixa: numa lista de objetos que tem o campo
-"id" ou "chave", nenhum id e nenhuma chave se repete. Campos que o schema nao conhece
-sao aceitos sem conferir (o formato pode crescer).
+items, minItems, maxItems, uniqueItems, const, enum, not, minimum, minLength, pattern,
+allOf, anyOf, if/then/else e $ref para "#/$defs/...". Alem disso, uma regra fixa: numa
+lista de objetos que tem o campo "id" ou "chave", nenhum id e nenhuma chave se repete.
+Campos que o schema nao conhece sao aceitos sem conferir (o formato pode crescer).
 
 Uso (os caminhos de exemplo sao os do modelo; no projeto, valem os do projeto.json):
     python scripts/validar_dados.py dados/formato.json
@@ -62,6 +62,17 @@ def resolve(schema, raiz):
     return schema
 
 
+def valores_repetidos(valores):
+    """Os valores que se repetem na lista, cada um uma vez, em JSON, na ordem em que cada um
+    se repete primeiro."""
+    vistos, repetidos = set(), []
+    for v in (json.dumps(valor, ensure_ascii=False, sort_keys=True) for valor in valores):
+        if v in vistos and v not in repetidos:
+            repetidos.append(v)
+        vistos.add(v)
+    return repetidos
+
+
 def erros_de(valor, schema, raiz, caminho="$"):
     sub = []
     valida(valor, schema, raiz, caminho, sub)
@@ -92,6 +103,8 @@ def valida(valor, schema, raiz, caminho, erros):
         if not any(tipo_confere(valor, t) for t in tipos):
             erros.append(f"{caminho}: deve ser {' ou '.join(tipos)}")
             return
+    if tipo_confere(valor, "number") and "minimum" in schema and valor < schema["minimum"]:
+        erros.append(f"{caminho}: deve ser pelo menos {schema['minimum']}, e {valor!r}")
     if isinstance(valor, str):
         if len(valor) < schema.get("minLength", 0):
             erros.append(f"{caminho}: texto vazio ou curto demais")
@@ -118,15 +131,11 @@ def valida(valor, schema, raiz, caminho, erros):
         if "items" in schema:
             for i, item in enumerate(valor):
                 valida(item, schema["items"], raiz, f"{caminho}[{i}]", erros)
+        if schema.get("uniqueItems"):
+            for r in valores_repetidos(valor):
+                erros.append(f"{caminho}: valor repetido: {r}")
         for campo in ("id", "chave"):
-            vistos, repetidos = set(), []
-            for item in valor:
-                if isinstance(item, dict) and campo in item:
-                    v = json.dumps(item[campo], ensure_ascii=False, sort_keys=True)
-                    if v in vistos and v not in repetidos:
-                        repetidos.append(v)
-                    vistos.add(v)
-            for r in repetidos:
+            for r in valores_repetidos([item[campo] for item in valor if isinstance(item, dict) and campo in item]):
                 erros.append(f"{caminho}: valor repetido no campo {campo!r}: {r}")
 
 

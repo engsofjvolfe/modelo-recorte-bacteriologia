@@ -260,28 +260,34 @@ terceiros: é contra ele que se confere a análise.
 
 O que a análise decide sobre a forma do material está na parte 6 dela. As decisões que os
 scripts usam ficam também no <dfn>arquivo de formato</dfn>, `dados/formato.json`, como
-dados: para quem é o material (os cursos, a disciplina e o nível) e em que idioma; a
-última aula que tem material; os grupos da matéria; o que fica fora do material e as
-marcas, que só dizem do que um trecho fala; a sequência das partes de um texto, cada uma
-com os seus tipos de conhecimento, e onde cada tipo se ensina; e os documentos, cada um
-com o molde dele e, se ele as lista, as suas unidades. Uma <dfn>unidade</dfn> é cada
-coisa que ganha material num documento: um tema da teoria, uma bactéria, uma família de
-itens, um quadro, uma aula nas perguntas de prova. Na ficha, a unidade tem os eixos dela
-ou os do documento, e um eixo pode ter <dfn>subtópicos</dfn>, as partes menores dele que
-toda unidade também tem. O que vai em cada campo está no [README dos
-scripts](scripts/README.md#o-arquivo-de-formato). É por esse arquivo que os scripts sabem
-onde cada trecho das aulas cai, o que cada unidade precisa ter, o que a aula cobre e onde
-falta.
+dados: para quem é o material (os cursos, a disciplina e o nível) e em que idioma; até que
+aula ele vai e a conta que diz de que unidades cada aula trata ([O limite das
+aulas](#o-limite-das-aulas)); de onde vem o documento de cada trecho — do grupo e do
+caminho dele, do lugar que a análise da aula escreve para ele, ou dos dois —; os grupos da
+matéria; o que fica fora do material e as marcas, que só dizem do que um trecho fala; a
+sequência das partes de um texto, cada uma com os seus tipos de conhecimento, e onde cada
+tipo se ensina; e os documentos, cada um com o molde dele e, se ele as lista, as suas
+unidades. Uma <dfn>unidade</dfn> é cada coisa que ganha material num documento: um tema da
+teoria, uma bactéria, uma família de itens, um quadro, uma aula nas perguntas de prova. Na
+ficha, a unidade tem os eixos dela ou os do documento, e um eixo pode ter
+<dfn>subtópicos</dfn>, as partes menores dele que toda unidade também tem. A ficha de uma
+família lista também os itens dela, cada um com os eixos da família. Um documento pode
+juntar unidades, ou itens, num conjunto que a análise de uma aula nomeia de uma vez, como
+um gênero de bactérias: o fato do conjunto vai para cada membro dele. O que vai em cada
+campo está no [README dos scripts](scripts/README.md#o-arquivo-de-formato). É por esse
+arquivo que os scripts sabem onde cada trecho das aulas cai, o que cada unidade precisa
+ter, o que a aula cobre e onde falta.
 
 ---
 
 ## 4. O que entra no material
 
 O recorte deste projeto é o que as aulas trazem, completado pelo livro-texto. As aulas
-trazem os pontos da matéria, não o conteúdo de cada um: entra todo trecho delas e, de cada
-ponto, tudo o que o livro diz sobre ele, lido no capítulo inteiro, nunca por busca de
-palavras. O que o livro diz sobre um assunto que nenhum slide traz fica fora, menos os
-fatores de risco de cada bactéria ([análise da matéria, O que o estudante precisa saber
+trazem os pontos da matéria, não o conteúdo de cada um: entra todo trecho delas, até onde
+o [limite das aulas](#o-limite-das-aulas) diz, e, de cada ponto, tudo o que o livro diz
+sobre ele, lido no capítulo inteiro, nunca por busca de palavras. O que o livro diz sobre
+um assunto que nenhum slide traz fica fora, menos os fatores de risco de cada bactéria
+([análise da matéria, O que o estudante precisa saber
 fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer)). Vírus e fungos
 não são assunto do material. Um trecho das aulas que fala deles entra como a aula o usa:
 como comparação, quando ela o compara com uma bactéria; pelo que ele diz, quando ela fala
@@ -290,15 +296,37 @@ o que o livro diz sobre ele, e a forma de estudo vem da análise da matéria. O 
 o recorte, para quem usa o material, está no
 [README](README.md#aviso-importante--leia-antes-de-usar).
 
-Todo fato das aulas aparece em algum documento de estudo; só fica de fora o que é puro
-enfeite, como piadas, mascotes e créditos de imagem. Nenhum fato fica sem documento, e
-dois documentos nunca mostram o mesmo fato de formas contraditórias — nenhuma das duas
-coisas se justifica pelo recorte. Partes diferentes têm densidades diferentes: o número de
+Todo fato das aulas até a última aparece em algum documento de estudo, e também o de uma
+aula depois dela que o limite deixa entrar; só fica de fora o que é puro enfeite, como
+piadas, mascotes e créditos de imagem. Nenhum desses fatos fica sem documento, e dois
+documentos nunca mostram o mesmo fato de formas contraditórias — nenhuma das duas coisas
+se justifica pelo recorte. Partes diferentes têm densidades diferentes: o número de
 cartões de cada item, conceito ou caso segue os fatos que ele tem, com a mesma regra para
 todos.
 
 Os nomes e os termos seguem a grafia do livro-texto. Quando uma aula e o livro discordam,
 vale o livro, e o documento anota a diferença.
+
+### O limite das aulas
+
+O material vai até uma aula, a última que o arquivo de formato diz, e ganham material as
+unidades de que essas aulas tratam. Uma aula <dfn>trata</dfn> de uma unidade quando os
+trechos dela ali ocupam pelo menos o número de partes do molde que o arquivo de formato
+pede — como o habitat e as doenças, na ficha de uma bactéria —, ou quando o arquivo de
+formato diz que ela trata; com menos, a aula só a <dfn>menciona</dfn>. Numa família de
+itens, a aula trata da família quando trata de algum item dela.
+
+O que uma aula depois da última diz de algo de que essas aulas tratam — uma unidade ou um
+item — entra no material dele. A unidade que essas aulas só mencionam não ganha material
+próprio: o que elas dizem dela fica onde elas o dizem — a bactéria que uma aula só põe na
+lista de quem vive num lugar do corpo fica nessa lista, sem ficha —, e o que só uma aula
+depois da última diz dela fica fora. O trecho dessas aulas que fica sem lugar, porque
+todos os lugares dele são de unidades só mencionadas ou porque a análise da aula não lhe
+dá documento, ganha outro no material da própria aula, onde ela fala do fato. As perguntas
+de prova de cada aula até a última recebem os trechos dela e o que as aulas depois da
+última dizem das unidades de que ela trata. Como o `confere_moldes.py` aplica o limite
+está no [README dos
+scripts](scripts/README.md#confere_moldespy--confere-os-moldes-contra-as-análises-das-aulas).
 
 ### O material de fora
 
@@ -478,7 +506,8 @@ confere:
    nome em algum documento desse item;
 4. que cada documento de estudo é de um dos tipos da [seção 5](#5-os-documentos-de-estudo);
 5. que os documentos do projeto dizem o mesmo que os documentos de estudo;
-6. que todo fato das aulas aparece em algum documento de estudo;
+6. que todo fato das aulas até a última, e o que o [limite](#o-limite-das-aulas) deixa
+   entrar das aulas depois dela, aparece em algum documento de estudo;
 7. cada planilha, linha por linha, contra o documento de origem — nenhum fato inventado,
    nenhum fato que devia ter cartão e ficou sem —, e que cada cartão tem prova, sem erro e
    com o tique da pessoa na conferência dos cartões;

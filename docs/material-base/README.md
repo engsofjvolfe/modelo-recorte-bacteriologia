@@ -21,7 +21,8 @@ Em `gerados-ocr/`:
 | a lista dos itens numerados | os itens numerados das transcrições de documentos numerados, como uma norma, com a página e a linha de cada item e os grupos de tópicos do sumário |
 | `CONFERENCIA-*.md` e `imagens/` | os [arquivos de conferência](../../metodologia-de-conteudo.md#7-a-conferência) e as imagens que eles mostram, e o relatório da conferência dos moldes |
 | `pesquisa/` | as [evidências da pesquisa](../../metodologia-de-conteudo.md#a-análise-da-matéria) |
-| `analise/` | a análise de cada aula e dos capítulos 12 a 17, trecho por trecho, as ligações entre as aulas e o registro do trabalho, `REGISTRO.md` |
+| `analise/` | a análise de cada aula e dos capítulos 12 a 17, trecho por trecho, as ligações entre as aulas, como as análises foram feitas (`como-as-analises-foram-feitas.md`) e o registro do que as notas de trabalho da IA deixaram de usar (`REGISTRO.md`) |
+| `destinos.tsv` | a tabela dos destinos, que diz o que nomeia cada pedaço do texto em que a análise de uma aula diz para onde vai cada trecho, e copia esse texto |
 | `provas/` | a [prova](../../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho) dos cartões, um arquivo por planilha |
 | `[item]-fontes-externas.md` | a [base de trechos](../../metodologia-de-conteudo.md#o-material-de-fora) de cada unidade, com o id dela no lugar de `[item]` |
 

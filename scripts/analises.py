@@ -14,10 +14,13 @@ forma do valor e, se tiver, o papel. Nada da materia fica no codigo: tipos, grup
 caminhos sao os que os arquivos trazem.
 
 Formas de campo: "lista" (os itens entre os separadores dados; o que esta entre parenteses
-nao conta), "presenca" (quais dos valores dados aparecem no campo, na ordem deles) e
-"texto" (o campo inteiro). Papeis: "tipo", "grupo" e "caminho" dizem onde o trecho cai e
-pedem um valor em lista; "destino" e o texto que diz para onde ele vai. Cada papel fica em
-um campo so.
+nao conta), "pedacos" (os pedacos entre os separadores dados que ficam fora dos
+parenteses, cada um inteiro, com o que esta entre parenteses; parentese que nao fecha, ou
+que fecha sem abrir, e erro), "presenca" (quais dos valores dados aparecem no campo, na
+ordem deles) e "texto" (o campo inteiro). Nas formas em lista, o valor vazio fica fora e
+nada se repete. Papeis: "tipo", "grupo" e "caminho" dizem onde o trecho cai e pedem um
+valor em lista; "destino" e o texto que diz para onde ele vai. Cada papel fica em um campo
+so.
 
 Cada trecho sai com o texto dele, o texto e o valor de cada campo e de cada papel, e um id
 estavel, "aula/slide/posicao/hash": a posicao conta os trechos do slide, a partir de 1, e o
@@ -32,6 +35,8 @@ from pathlib import Path
 
 PAPEIS = ("tipo", "grupo", "caminho", "destino")  # o que um campo pode fazer, como o molde da forma declara
 PAPEIS_EM_LISTA = ("tipo", "grupo", "caminho")  # os papeis que pedem um valor em lista
+ABRE, FECHA = "(", ")"  # o que abre e o que fecha o texto entre parenteses, que as formas em lista tratam a parte
+ENTRE_PARENTESES = re.compile(rf"\s*{re.escape(ABRE)}[^{re.escape(ABRE + FECHA)}]*{re.escape(FECHA)}")
 
 
 class ErroDeForma(ValueError):
@@ -42,10 +47,15 @@ def nfc(texto):
     return unicodedata.normalize("NFC", texto)
 
 
+def unicos(itens):
+    """Os itens sem repetir, na ordem em que vem."""
+    return list(dict.fromkeys(itens))
+
+
 def sem_parenteses(texto):
     anterior = None
     while anterior != texto:
-        anterior, texto = texto, re.sub(r"\s*\([^()]*\)", "", texto)
+        anterior, texto = texto, ENTRE_PARENTESES.sub("", texto)
     return texto
 
 
@@ -54,16 +64,49 @@ def ordem_natural(chave):
     return [int(p) if p.isdecimal() else p for p in re.split(r"(\d+)", chave)]
 
 
-def em_lista(bruto, campo, vazio):
-    """Os itens entre os separadores do campo, sem o que esta entre parenteses, sem o valor
-    vazio e sem repetir, na ordem do texto."""
-    padrao = "|".join(re.escape(s) for s in sorted(campo["separadores"], key=len, reverse=True))
+def mais_longos_primeiro(separadores):
+    """Os separadores, do mais longo ao mais curto, para que um separador que comeca por
+    outro seja achado inteiro."""
+    return sorted(separadores, key=len, reverse=True)
+
+
+def sem_vazio(partes, vazio):
+    """As partes sem os espacos das pontas, sem a parte em branco, sem o valor vazio e sem
+    repetir, na ordem em que vem."""
     itens = []
-    for parte in re.split(padrao, sem_parenteses(bruto)):
+    for parte in partes:
         parte = parte.strip()
         if parte and parte != vazio and parte not in itens:
             itens.append(parte)
     return itens
+
+
+def em_lista(bruto, campo, vazio):
+    """Os itens entre os separadores do campo, sem o que esta entre parenteses, sem o valor
+    vazio e sem repetir, na ordem do texto."""
+    padrao = "|".join(re.escape(s) for s in mais_longos_primeiro(campo["separadores"]))
+    return sem_vazio(re.split(padrao, sem_parenteses(bruto)), vazio)
+
+
+def em_pedacos(bruto, campo, vazio):
+    """Os pedacos entre os separadores do campo que ficam fora dos parenteses, cada um
+    inteiro, com o que esta entre parenteses; sem o valor vazio e sem repetir, na ordem do
+    texto. ErroDeForma, que diz o campo, quando um parentese fecha sem abrir ou nao fecha."""
+    separadores = mais_longos_primeiro(campo["separadores"])
+    pedacos, inicio, nivel, i = [], 0, 0, 0
+    while i < len(bruto):
+        separador = next((s for s in separadores if bruto.startswith(s, i)), None) if nivel == 0 else None
+        if separador is not None:
+            pedacos.append(bruto[inicio:i])
+            i = inicio = i + len(separador)
+            continue
+        nivel += (bruto[i] == ABRE) - (bruto[i] == FECHA)
+        if nivel < 0:
+            raise ErroDeForma(f"campo {campo['nome']!r}: parêntese que fecha sem abrir")
+        i += 1
+    if nivel:
+        raise ErroDeForma(f"campo {campo['nome']!r}: parêntese que não fecha")
+    return sem_vazio(pedacos + [bruto[inicio:]], vazio)
 
 
 def presentes(bruto, campo, vazio):
@@ -77,6 +120,7 @@ def inteiro(bruto, campo, vazio):
 
 FORMAS = {  # cada forma de campo: a lista de textos que ela pede, se o valor e uma lista e como se le
     "lista": {"pede": "separadores", "em_lista": True, "le": em_lista},
+    "pedacos": {"pede": "separadores", "em_lista": True, "le": em_pedacos},
     "presenca": {"pede": "valores", "em_lista": True, "le": presentes},
     "texto": {"pede": None, "em_lista": False, "le": inteiro},
 }
@@ -182,7 +226,10 @@ def ler_analise(caminho, forma):
             raise ErroDeForma(f"{onde}: item sem os campos")
         texto = corpo[:pos].strip()
         brutos = separar_campos(corpo[pos + len(forma["separador_texto"]):], forma, onde)
-        valores = {c["nome"]: FORMAS[c["forma"]]["le"](brutos[c["nome"]], c, forma["vazio"]) for c in campos}
+        try:
+            valores = {c["nome"]: FORMAS[c["forma"]]["le"](brutos[c["nome"]], c, forma["vazio"]) for c in campos}
+        except ErroDeForma as e:
+            raise ErroDeForma(f"{onde}: {e}") from None
         posicao += 1
         resumo = hashlib.sha1(nfc(texto).encode("utf-8")).hexdigest()[:4]
         papeis = {p: {"valor": valores[c], "texto": brutos[c]} for p, c in campo_do_papel.items()}

@@ -4,12 +4,13 @@
 """
 Funcoes que os outros scripts usam: achar o projeto e as planilhas de pergunta, ler o
 formato da disciplina conferido contra o molde dele e nas ligacoes de dentro dele, achar
-no formato as unidades de um documento e a grade de cada uma, o registro da fonte no topo
-de um documento gerado, a impressao digital de um arquivo, os tiques de um arquivo de
-conferencia, a imagem de uma pagina de PDF, as paginas de uma fonte em HTML, os slides de
-uma apresentacao em pptx, as marcas da transcricao e o que os transcritores fazem do
-mesmo jeito (o texto de uma linha, o indice e o expoente, a tabela, o texto de dentro de
-uma imagem, a gravacao da transcricao). Nao e para rodar sozinho.
+no formato as unidades e os conjuntos de um documento, os itens e a grade de cada unidade
+e o que cada id quer dizer, o registro da fonte no topo de um documento gerado, a
+impressao digital de um arquivo, os tiques de um arquivo de conferencia, a imagem de uma
+pagina de PDF, as paginas de uma fonte em HTML, os slides de uma apresentacao em pptx, as
+marcas da transcricao e o que os transcritores fazem do mesmo jeito (o texto de uma linha,
+o indice e o expoente, a tabela, o texto de dentro de uma imagem, a gravacao da
+transcricao). Nao e para rodar sozinho.
 
 Nenhum caminho fica no codigo. O projeto e achado pelo arquivo "projeto.json", subindo
 de pasta em pasta a partir de onde o script e chamado (ou pelo arquivo indicado com
@@ -183,15 +184,54 @@ def le_formato(projeto):
 
 # ---------- o que se acha dentro do formato ----------
 
+Entrada = namedtuple("Entrada", "documento unidade item direto")  # uma coisa que um id quer dizer (o_que_e)
+
+
 def unidades(documento):
     """As unidades do documento, na ordem do formato; nenhuma, quando ele nao as lista."""
     return documento.get("unidades", [])
 
 
+def itens(unidade):
+    """Os itens da unidade, na ordem do formato; nenhum, quando ela nao os lista."""
+    return unidade.get("itens", [])
+
+
+def conjuntos(documento):
+    """Os conjuntos do documento, na ordem do formato; nenhum, quando ele nao os lista."""
+    return documento.get("conjuntos", [])
+
+
+def entradas_do_documento(documento):
+    """{id: Entrada} de cada unidade do documento e de cada item delas, como lugar direto: a
+    entrada de uma unidade tem o item None; a de um item, a unidade dele."""
+    saida = {}
+    for u in unidades(documento):
+        saida[u["id"]] = Entrada(documento, u, None, True)
+        saida.update((i["id"], Entrada(documento, u, i, True)) for i in itens(u))
+    return saida
+
+
+def o_que_e(formato, id_):
+    """[Entrada] do que um id do formato quer dizer, cada uma com o documento, a unidade, o
+    item (None, na de uma unidade) e se o lugar e direto: a unidade ou o item com esse id,
+    como lugar direto; ou cada membro do conjunto com esse id, na ordem dele, como lugar
+    indireto. Nenhuma, quando o formato nao tem o id. Cada id e um so em todo o formato, e
+    cada membro de um conjunto e unidade ou item do documento dele (erros_das_ligacoes)."""
+    for d in formato["documentos"]:
+        entradas = entradas_do_documento(d)
+        if id_ in entradas:
+            return [entradas[id_]]
+        for c in conjuntos(d):
+            if c["id"] == id_:
+                return [entradas[m]._replace(direto=False) for m in c["membros"]]
+    return []
+
+
 def acha_unidade(formato, id_unidade):
-    """(documento, unidade) da unidade com o id dado, ou (None, None) quando nenhum documento
-    a tem. O id de uma unidade e um so entre todos os documentos (erros_das_ligacoes)."""
-    return next(((d, u) for d in formato["documentos"] for u in unidades(d) if u["id"] == id_unidade),
+    """(documento, unidade) da unidade com o id dado, ou (None, None) quando o id nao e de
+    nenhuma unidade (o_que_e)."""
+    return next(((e.documento, e.unidade) for e in o_que_e(formato, id_unidade) if e.direto and e.item is None),
                 (None, None))
 
 
@@ -225,9 +265,30 @@ def repetidos(pares):
     return [(v, ls) for v, ls in lugares.items() if len(ls) > 1]
 
 
-def onde(documento, unidade=None):
-    """O lugar de um documento, ou de uma unidade dele, numa frase de erro."""
-    return f"documento {documento['id']!r}" + (f", unidade {unidade['id']!r}" if unidade else "")
+def onde(documento, unidade=None, item=None):
+    """O lugar de um documento, ou de uma unidade dele, ou de um item dela, numa frase de erro."""
+    return (f"documento {documento['id']!r}" + (f", unidade {unidade['id']!r}" if unidade else "")
+            + (f", item {item['id']!r}" if item else ""))
+
+
+def onde_do_conjunto(documento, conjunto):
+    return f"{onde(documento)}, conjunto {conjunto['id']!r}"
+
+
+def ids_do_documento(documento):
+    """[(id, lugar)] de cada unidade, item e conjunto do documento, na ordem do formato."""
+    return ([(u["id"], onde(documento, u)) for u in unidades(documento)]
+            + [(i["id"], onde(documento, u, i)) for u in unidades(documento) for i in itens(u)]
+            + [(c["id"], onde_do_conjunto(documento, c)) for c in conjuntos(documento)])
+
+
+def erros_dos_conjuntos(documento):
+    """Os membros dos conjuntos do documento que nao sao unidade nem item dele: um conjunto so
+    reune unidades e itens do proprio documento, nunca outro conjunto."""
+    entradas = entradas_do_documento(documento)
+    return [f"{onde_do_conjunto(documento, c)}: o membro {m!r} não é unidade nem item do documento; um conjunto só "
+            "reúne unidades e itens do próprio documento" for c in conjuntos(documento) for m in c["membros"]
+            if m not in entradas]
 
 
 def partes_da_ficha(documento, eixos):
@@ -278,13 +339,15 @@ def erros_dos_tipos(formato):
 
 def erros_das_ligacoes(formato):
     """As ligacoes de dentro do formato que nao fecham, cada uma numa frase que diz o lugar:
-    unidade em mais de um documento; as da ficha de cada documento (erros_das_fichas); grupo
-    de um documento que o formato nao tem; as dos tipos (erros_dos_tipos); id repetido entre
-    as regras de fora e as marcas, que dizem a classe do trecho; documento que nao recebe
-    nenhum trecho, sem grupo, sem caminho e sem receber todos."""
+    id de unidade, de item ou de conjunto que se repete em todo o formato; os membros de
+    cada conjunto (erros_dos_conjuntos); as da ficha de cada documento (erros_das_fichas);
+    grupo de um documento que o formato nao tem; as dos tipos (erros_dos_tipos); id repetido
+    entre as regras de fora e as marcas, que dizem a classe do trecho; documento que nao
+    recebe nenhum trecho, sem grupo, sem caminho e sem receber todos."""
     documentos, grupos = formato["documentos"], {g["id"] for g in formato["grupos"]}
-    erros = [f"a unidade {u!r} está em mais de um documento: {', '.join(ls)}"
-             for u, ls in repetidos((u["id"], onde(d)) for d in documentos for u in unidades(d))]
+    erros = [f"o id {i!r} é de mais de uma unidade, item ou conjunto: {'; '.join(ls)}"
+             for i, ls in repetidos(par for d in documentos for par in ids_do_documento(d))]
+    erros += [e for d in documentos for e in erros_dos_conjuntos(d)]
     erros += [e for d in documentos for e in erros_das_fichas(d)]
     erros += [f"{onde(d)}: o grupo {g!r} não está nos grupos do formato"
               for d in documentos for g in d.get("grupos", []) if g not in grupos]

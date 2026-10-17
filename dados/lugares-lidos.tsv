@@ -286,10 +286,24 @@ id	documento	unidade	parte
 8/32/7/7b3a	familia	antimicrobianos	resistencia
 8/32/9/0404	familia	antimicrobianos	resistencia
 9-10/6/2/cd58	familia	provas	leitura
+9-10/7/2/0a6a	familia	microbiota	microrganismos
+9-10/8/1/0b97	familia	provas	indica
 9-10/8/2/680e	familia	provas	indica
 9-10/8/4/53ac	familia	provas	leitura
+9-10/9/2/6646	familia	estruturas	composicao
+9-10/9/3/bd3b	familia	estruturas	composicao
+9-10/9/6/a054	familia	estruturas	composicao
+9-10/12/1/1ecc	familia	microbiota	microrganismos
+9-10/32/2/b248	familia	estruturas	presenca
+9-10/32/3/9873	familia	provas	indica
 9-10/33/7/7ba2	familia	antimicrobianos	resistencia
+9-10/36/2/6403	familia	provas	indica
+9-10/36/3/1703	familia	provas	indica
+9-10/36/4/b705	familia	estruturas	presenca
 9-10/41/1/b7cb	familia	provas	indica
+9-10/44/3/620b	familia	provas	indica
+9-10/45/2/c91b	familia	controle	familia
+9-10/45/3/1be7	familia	provas	indica
 9-10/53/1/7300	familia	provas	tipo
 9-10/53/2/97e3	familia	provas	leitura
 9-10/54/1/11ec	familia	provas	indica
@@ -319,8 +333,19 @@ id	documento	unidade	parte
 9-10/72/6/9699	familia	provas	indica
 9-10/73/1/7f10	familia	provas	indica
 9-10/73/2/9445	familia	provas	indica
-9-10/77/1/6f81	familia	antimicrobianos	uso
-9-10/78/3/e0be	familia	antimicrobianos	uso
+9-10/77/1/6f81	familia	antimicrobianos-penicilinas	uso
+9-10/77/1/6f81	familia	antimicrobianos-cefalosporinas	uso
+9-10/77/1/6f81	familia	antimicrobianos-carbapenemicos	uso
+9-10/77/1/6f81	familia	antimicrobianos-monobactamicos	uso
+9-10/77/1/6f81	familia	antimicrobianos-aminoglicosideos	uso
+9-10/77/1/6f81	familia	antimicrobianos-quinolonas	uso
+9-10/78/3/e0be	familia	antimicrobianos-penicilinas	uso
+9-10/78/3/e0be	familia	antimicrobianos-cefalosporinas	uso
+9-10/78/3/e0be	familia	antimicrobianos-aminoglicosideos	uso
+9-10/78/3/e0be	familia	antimicrobianos-tetraciclinas	uso
+9-10/78/3/e0be	familia	antimicrobianos-cloranfenicol	uso
+9-10/78/3/e0be	familia	antimicrobianos-quinolonas	uso
+9-10/78/3/e0be	familia	antimicrobianos-polimixinas	uso
 11-12/2/5/561e	familia	provas	indica
 11-12/5/4/a1d6	familia	provas	indica
 11-12/6/1/645c	familia	microbiota	microrganismos
@@ -334,7 +359,7 @@ id	documento	unidade	parte
 11-12/18/2/b7f7	familia	provas	indica
 11-12/19/1/dc38	familia	microbiota	microrganismos
 11-12/21/1/3e48	familia	microbiota	microrganismos
-11-12/24/9/8602	familia	microbiota	microrganismos
+11-12/24/9/8602	familia	microbiota	familia
 11-12/25/1/c67b	familia	provas	leitura
 11-12/26/1/0a40	familia	provas	leitura
 11-12/28/3/fff6	familia	estruturas	presenca
@@ -390,17 +415,34 @@ id	documento	unidade	parte
 13/21/3/d23f	familia	antimicrobianos	resistencia
 13/25/2/7562	familia	provas	amostra
 13/25/4/0608	familia	provas	indica
-13/26/2/8646	familia	antimicrobianos	resistencia
+13/26/2/8646	familia	antimicrobianos-sulfonamidas	resistencia
+13/26/2/8646	familia	antimicrobianos-penicilinas	resistencia
+13/26/2/8646	familia	antimicrobianos-tetraciclinas	resistencia
+13/26/2/8646	familia	antimicrobianos-quinolonas	resistencia
+13/26/2/8646	familia	antimicrobianos-cefalosporinas	resistencia
 14/9/1/7c6c	familia	microbiota	microrganismos
 14/9/2/a885	familia	microbiota	microrganismos
 14/9/3/2af1	familia	microbiota	microrganismos
 14/9/4/c266	familia	microbiota	microrganismos
 14/9/5/ff41	familia	microbiota	microrganismos
+14/14/4/2b78	familia	microbiota-trato-respiratorio-superior	microrganismos
+14/14/4/2b78	familia	microbiota-uretra-e-vagina	microrganismos
+14/14/4/2b78	familia	microbiota-trato-gastrointestinal	microrganismos
+14/15/5/fae4	familia	microbiota-intestino-grosso	microrganismos
+14/15/5/fae4	familia	microbiota-uretra-e-vagina	microrganismos
+14/17/4/1602	familia	estruturas	presenca
+14/17/5/a862	familia	estruturas	presenca
+14/17/7/f542	familia	provas	indica
+14/22/9/451b	familia	provas	indica
+14/29/4/07f0	familia	estruturas	presenca
+14/29/5/3424	familia	estruturas	presenca
+14/29/7/9cc9	familia	provas	indica
 14/29/8/00e7	familia	estruturas	composicao
 14/34/1/a57f	familia	antimicrobianos	uso
 15/7/4/3386	familia	antimicrobianos	resistencia
 15/8/5/4624	familia	antimicrobianos	classe
 15/13/2/5a9a	familia	antimicrobianos	mecanismo
+15/14/3/5a0d	familia	microbiota	microrganismos
 15/16/1/702a	familia	antimicrobianos	mecanismo
 15/18/1/eb31	familia	antimicrobianos	resistencia
 15/18/2/2f7f	familia	antimicrobianos	resistencia
@@ -438,8 +480,12 @@ id	documento	unidade	parte
 16/36/2/3296	familia	antimicrobianos	uso
 16/36/3/edb6	familia	antimicrobianos	uso
 16/36/4/b75c	familia	antimicrobianos	uso
-16/37/1/d7a7	familia	antimicrobianos	uso
-16/37/2/bdb6	familia	antimicrobianos	mecanismo
+16/37/1/d7a7	familia	antimicrobianos-carbapenemicos	uso
+16/37/1/d7a7	familia	antimicrobianos-etambutol	uso
+16/37/1/d7a7	familia	antimicrobianos-isoniazida	uso
+16/37/1/d7a7	familia	antimicrobianos-aminoglicosideos	uso
+16/37/1/d7a7	familia	antimicrobianos-quinolonas	uso
+16/37/2/bdb6	familia	antimicrobianos	familia
 17/23/2/dca9	familia	provas	indica
 17/23/3/bfd2	familia	provas	amostra
 17/25/1/3b05	familia	antimicrobianos	uso
@@ -475,6 +521,11 @@ id	documento	unidade	parte
 3/4/2/8fe5	bacteria		caracteristicas
 3/4/3/9b9f	bacteria		caracteristicas
 3/4/4/cb0c	bacteria		caracteristicas
+3/18/2/fef3	bacteria		caracteristicas
+3/18/3/70ef	bacteria		caracteristicas
+3/18/4/e27d	bacteria		caracteristicas
+3/18/5/441d	bacteria		caracteristicas
+3/18/6/fa65	bacteria		caracteristicas
 3/20/6/4710	bacteria		caracteristicas
 3/20/7/edeb	bacteria		caracteristicas
 3/20/8/3e3f	bacteria		caracteristicas
@@ -495,6 +546,60 @@ id	documento	unidade	parte
 4/19/3/2994	bacteria		caracteristicas
 4/19/4/f540	bacteria		caracteristicas
 4/19/5/d54e	bacteria		caracteristicas
+5/10/1/e74c	bacteria		habitat
+5/10/2/f9d0	bacteria		habitat
+5/10/3/d750	bacteria		habitat
+5/10/4/ad1a	bacteria		habitat
+5/10/5/705a	bacteria		habitat
+5/10/6/56a1	bacteria		habitat
+5/11/1/b8ae	bacteria		habitat
+5/11/2/c3c6	bacteria		habitat
+5/11/3/d086	bacteria		habitat
+5/12/1/af81	bacteria		habitat
+5/12/2/7389	bacteria		habitat
+5/12/3/10a8	bacteria		habitat
+5/13/1/1129	bacteria		habitat
+5/13/2/d057	bacteria		habitat
+5/13/3/33d2	bacteria		habitat
+5/13/4/5f21	bacteria		habitat
+5/13/5/0a59	bacteria		habitat
+5/13/6/d98f	bacteria		habitat
+5/13/7/27b1	bacteria		habitat
+5/13/8/14ba	bacteria		habitat
+5/13/9/8a00	bacteria		habitat
+5/13/10/c311	bacteria		habitat
+5/13/11/49ed	bacteria		habitat
+5/13/12/6388	bacteria		habitat
+5/13/13/3142	bacteria		habitat
+5/13/14/5131	bacteria		habitat
+5/13/15/5935	bacteria		habitat
+5/14/1/ed36	bacteria		habitat
+5/14/2/41fc	bacteria		habitat
+5/14/3/aa8c	bacteria		habitat
+5/14/4/9794	bacteria		habitat
+5/14/5/f4a7	bacteria		habitat
+5/14/6/5fd3	bacteria		habitat
+5/14/7/04f9	bacteria		habitat
+5/14/8/2c0e	bacteria		habitat
+5/15/1/42ab	bacteria		habitat
+5/15/2/02a3	bacteria		habitat
+5/15/3/c67b	bacteria		habitat
+5/15/4/c066	bacteria		habitat
+5/15/5/2875	bacteria		habitat
+5/15/6/a724	bacteria		habitat
+5/15/7/0c1f	bacteria		habitat
+5/15/8/5364	bacteria		habitat
+5/15/9/7a4b	bacteria		habitat
+5/15/10/246d	bacteria		habitat
+5/15/11/5fad	bacteria		habitat
+5/15/12/c5b9	bacteria		habitat
+5/15/13/4488	bacteria		habitat
+5/16/1/7793	bacteria		habitat
+5/16/2/e087	bacteria		habitat
+5/16/3/5b20	bacteria		habitat
+5/16/4/1882	bacteria		habitat
+5/16/5/a285	bacteria		habitat
+5/16/6/7426	bacteria		habitat
 5/20/5/b590	bacteria		doencas
 5/21/1/9fc6	bacteria		virulencia
 5/21/2/c08b	bacteria		virulencia
@@ -514,6 +619,8 @@ id	documento	unidade	parte
 8/26/2/5776	bacteria		tratamento
 8/29/1/3794	bacteria		tratamento
 8/29/2/2a9b	bacteria		tratamento
+9-10/3/1/b20a	bacteria		caracteristicas
+9-10/3/2/9d83	bacteria		caracteristicas
 9-10/3/3/1fba	bacteria		caracteristicas
 9-10/3/4/96fe	bacteria		doencas
 9-10/7/1/5ad7	bacteria		habitat
@@ -522,6 +629,7 @@ id	documento	unidade	parte
 9-10/7/4/984c	bacteria		caracteristicas
 9-10/7/5/99e2	bacteria		caracteristicas
 9-10/8/1/0b97	bacteria		caracteristicas
+9-10/8/2/680e	bacteria		caracteristicas
 9-10/9/4/71d5	bacteria		virulencia
 9-10/9/5/9dfb	bacteria		virulencia
 9-10/10/1/96fe	bacteria		doencas
@@ -563,6 +671,7 @@ id	documento	unidade	parte
 9-10/16/2/6afd	bacteria		doencas
 9-10/16/3/c87f	bacteria		doencas
 9-10/16/4/2bb5	bacteria		doencas
+9-10/16/5/07f0	bacteria		risco
 9-10/16/6/a31f	bacteria		doencas
 9-10/17/1/b91d	bacteria		doencas
 9-10/17/2/6d8f	bacteria		doencas
@@ -578,7 +687,6 @@ id	documento	unidade	parte
 9-10/19/6/280e	bacteria		doencas
 9-10/19/7/5a4e	bacteria		doencas
 9-10/19/8/5908	bacteria		doencas
-9-10/19/9/ebd1	bacteria		doencas
 9-10/20/1/a828	bacteria		patogenese
 9-10/21/4/ad42	bacteria		doencas
 9-10/21/5/ec5b	bacteria		doencas
@@ -586,7 +694,6 @@ id	documento	unidade	parte
 9-10/21/7/8b5c	bacteria		doencas
 9-10/21/8/d77d	bacteria		doencas
 9-10/21/9/aef1	bacteria		doencas
-9-10/21/10/31e5	bacteria		doencas
 9-10/22/1/7485	bacteria		caracteristicas
 9-10/22/2/ac74	bacteria		transmissao
 9-10/22/3/192a	bacteria		doencas
@@ -650,6 +757,7 @@ id	documento	unidade	parte
 9-10/40/4/e542	bacteria		caracteristicas
 9-10/40/5/7c57	bacteria		caracteristicas
 9-10/40/6/2806	bacteria		caracteristicas
+9-10/41/1/b7cb	bacteria		diagnostico
 9-10/41/2/a1d8	bacteria		caracteristicas
 9-10/41/3/8ab9	bacteria		virulencia
 9-10/41/4/ca57	bacteria		transmissao
@@ -677,8 +785,15 @@ id	documento	unidade	parte
 9-10/47/6/1357	bacteria		doencas
 9-10/47/7/c087	bacteria		doencas
 9-10/48/1/1305	bacteria		patogenese
+9-10/61/3/150a	bacteria		diagnostico
+9-10/63/1/0bce	bacteria		caracteristicas
+9-10/63/2/dcd8	bacteria		caracteristicas
+9-10/63/3/1a54	bacteria		caracteristicas
+9-10/66/3/4a1d	bacteria		diagnostico
+9-10/72/1/6f72	bacteria		diagnostico
 9-10/78/1/86e1	bacteria		tratamento
 9-10/78/2/7f96	bacteria		tratamento
+9-10/78/3/e0be	bacteria		tratamento
 9-10/78/4/6b65	bacteria		tratamento
 11-12/2/2/3626	bacteria		caracteristicas
 11-12/2/3/cdc5	bacteria		caracteristicas
@@ -990,6 +1105,18 @@ id	documento	unidade	parte
 13/27/3/872e	bacteria		prevencao
 13/27/4/508b	bacteria		prevencao
 13/27/5/4f9e	bacteria		prevencao
+14/3/1/b4b3	bacteria		caracteristicas
+14/3/2/f798	bacteria		caracteristicas
+14/3/3/12ff	bacteria		caracteristicas
+14/3/4/2534	bacteria		caracteristicas
+14/3/5/348d	bacteria		caracteristicas
+14/5/1/30ac	bacteria		caracteristicas
+14/5/2/6669	bacteria		caracteristicas
+14/5/3/2c32	bacteria		caracteristicas
+14/5/4/35a0	bacteria		caracteristicas
+14/5/5/9fae	bacteria		caracteristicas
+14/6/2/1925	bacteria		habitat
+14/6/3/b203	bacteria		habitat
 14/7/4/cb3e	bacteria		virulencia
 14/7/5/aacd	bacteria		virulencia
 14/7/8/5b81	bacteria		diagnostico
@@ -999,6 +1126,8 @@ id	documento	unidade	parte
 14/8/4/ca67	bacteria		doencas
 14/8/5/195c	bacteria		doencas
 14/8/6/d58a	bacteria		doencas
+14/8/7/e2e7	bacteria		doencas
+14/10/3/c4b6	bacteria		doencas
 14/14/1/6fc9	bacteria		caracteristicas
 14/14/2/6298	bacteria		caracteristicas
 14/14/3/fcdb	bacteria		caracteristicas
@@ -1086,6 +1215,7 @@ id	documento	unidade	parte
 14/29/5/3424	bacteria		caracteristicas
 14/29/6/bd3c	bacteria		caracteristicas
 14/29/7/9cc9	bacteria		caracteristicas
+14/29/8/00e7	bacteria		caracteristicas
 14/30/1/e017	bacteria		virulencia
 14/30/2/bd66	bacteria		patogenese
 14/31/1/e8af	bacteria		doencas
@@ -1094,6 +1224,14 @@ id	documento	unidade	parte
 14/34/2/7f72	bacteria		tratamento
 14/34/3/d966	bacteria		tratamento
 14/35/1/330d	bacteria		doencas
+15/6/1/10b9	bacteria		doencas
+15/6/2/28e1	bacteria		doencas
+15/6/3/2bc4	bacteria		doencas
+15/6/4/fbb1	bacteria		doencas
+15/6/5/3313	bacteria		doencas
+15/6/6/bd0b	bacteria		doencas
+15/6/7/c4be	bacteria		doencas
+15/6/8/9298	bacteria		doencas
 15/7/1/ef7c	bacteria		tratamento
 15/7/2/dbd0	bacteria		tratamento
 15/7/3/c5b7	bacteria		tratamento
@@ -1121,7 +1259,16 @@ id	documento	unidade	parte
 15/16/2/4dba	bacteria		tratamento
 15/17/1/6fed	bacteria		tratamento
 15/17/3/fcd1	bacteria		tratamento
+15/18/3/09e0	bacteria		tratamento
 15/19/2/6ba8	bacteria		tratamento
+15/20/2/235f	bacteria		tratamento
+15/30/1/396f	bacteria		habitat
+15/30/2/0005	bacteria		habitat
+15/30/3/f469	bacteria		habitat
+15/30/4/9d82	bacteria		habitat
+15/30/5/a779	bacteria		habitat
+15/30/6/2da7	bacteria		habitat
+15/30/7/b426	bacteria		habitat
 16/2/1/a164	bacteria		caracteristicas
 16/2/2/8dcc	bacteria		caracteristicas
 16/2/3/2f2b	bacteria		caracteristicas
@@ -1442,53 +1589,84 @@ id	documento	unidade	parte
 17/63/1/c154	bacteria		tratamento
 17/63/2/dbe3	bacteria		tratamento
 17/63/3/00bb	bacteria		tratamento
-1/3/4/19fb	teoria		
-1/4/4/acde	teoria		
-1/5/1/e357	teoria		
-1/8/6/52ad	teoria		
-1/13/1/1216	teoria		
-1/13/2/5f2c	teoria		
-1/14/1/4fa6	teoria		
-1/14/2/aed2	teoria		
-1/15/1/b8be	teoria		
-1/15/2/b8c2	teoria		
-1/15/3/f13b	teoria		
-1/16/1/ddc0	teoria		
-1/16/2/e248	teoria		
-1/16/3/13fc	teoria		
-1/16/4/6fcb	teoria		
-1/16/5/66ec	teoria		
-1/16/6/bb27	teoria		
-1/16/7/3fda	teoria		
-1/16/8/4e59	teoria		
-1/18/1/b6d5	teoria		
-1/18/2/d0a0	teoria		
-1/20/1/bfc6	teoria		
-1/34/1/e55a	teoria		
-1/34/2/dbf5	teoria		
-1/34/3/8396	teoria		
-1/34/4/a887	teoria		
-2/27/1/e53f	familia	provas	tipo
-6/9/1/b155	teoria		
-8/7/2/6dbe	familia	antimicrobianos	origem
-8/7/4/f993	familia	antimicrobianos	origem
-9-10/59/1/eb6b	familia	provas	tipo
-11-12/25/8/6170	teoria		
-13/3/7/c49b	bacteria		caracteristicas
-15/9/1/3764	bacteria		tratamento
-15/17/2/21eb	bacteria		tratamento
-15/31/1/a043	quadros		
-16/11/1/70f9	bacteria		doencas
-16/11/2/cb89	bacteria		doencas
-16/11/3/36f5	bacteria		doencas
-16/12/1/5be8	bacteria		doencas
-16/12/2/eea5	bacteria		risco
-16/12/3/6b1d	bacteria		doencas
-16/12/4/b7c0	bacteria		diagnostico
-16/13/1/eea0	bacteria		diagnostico
-16/16/1/cabc	teoria		
-16/16/2/0bbe	teoria		
-16/16/3/7c40	teoria		
-16/17/1/c4ed	bacteria		prevencao
-16/18/1/f54a	bacteria		prevencao
-17/37/2/5ced	bacteria		caracteristicas
+1/3/3/0403	teoria	tema-classificacao-dos-seres-vivos
+1/3/4/19fb	teoria	tema-classificacao-dos-seres-vivos
+1/4/4/acde	teoria	tema-classificacao-dos-seres-vivos
+1/5/1/e357	teoria	tema-classificacao-dos-seres-vivos
+1/8/6/52ad	teoria	tema-microbiota-residente
+1/13/1/1216	teoria	tema-historia-da-microbiologia
+1/13/2/5f2c	teoria	tema-historia-da-microbiologia
+1/14/1/4fa6	teoria	tema-historia-da-microbiologia
+1/14/2/aed2	teoria	tema-historia-da-microbiologia
+1/15/1/b8be	teoria	tema-historia-da-microbiologia
+1/15/2/b8c2	teoria	tema-historia-da-microbiologia
+1/15/3/f13b	teoria	tema-historia-da-microbiologia
+1/16/1/ddc0	teoria	tema-historia-da-microbiologia
+1/16/2/e248	teoria	tema-historia-da-microbiologia
+1/16/3/13fc	teoria	tema-historia-da-microbiologia
+1/16/4/6fcb	teoria	tema-historia-da-microbiologia
+1/16/5/66ec	teoria	tema-historia-da-microbiologia
+1/16/6/bb27	teoria	tema-historia-da-microbiologia
+1/16/7/3fda	teoria	tema-historia-da-microbiologia
+1/16/8/4e59	teoria	tema-historia-da-microbiologia
+1/18/1/b6d5	teoria	tema-historia-da-microbiologia
+1/18/2/d0a0	teoria	tema-historia-da-microbiologia
+1/20/1/bfc6	teoria	tema-historia-da-microbiologia
+1/20/2/a6c7	teoria	tema-historia-da-microbiologia
+1/21/1/4ba3	teoria	tema-historia-da-microbiologia
+1/21/2/6701	teoria	tema-historia-da-microbiologia
+1/22/1/a1f9	teoria	tema-problemas-atuais
+1/22/2/ed69	teoria	tema-problemas-atuais
+1/22/4/5937	teoria	tema-resistencia-aos-antimicrobianos
+1/24/1/b894	teoria	tema-problemas-atuais
+1/24/2/011c	teoria	tema-problemas-atuais
+1/26/1/df07	teoria	tema-problemas-atuais
+1/26/2/3ee6	teoria	tema-problemas-atuais
+1/27/1/d405	teoria	tema-problemas-atuais
+1/34/1/e55a	teoria	tema-historia-da-microbiologia
+1/34/2/dbf5	teoria	tema-historia-da-microbiologia
+1/34/3/8396	teoria	tema-historia-da-microbiologia
+1/34/4/a887	teoria	tema-historia-da-microbiologia
+2/9/2/ce61	teoria	tema-formas-e-arranjos
+2/9/3/51c7	teoria	tema-formas-e-arranjos
+2/11/2/543b	teoria	tema-formas-e-arranjos
+2/27/1/e53f	familia	provas-coloracao-de-gram	tipo
+3/26/1/4030	teoria	tema-condicoes-fisicas-do-crescimento
+4/2/6/8826	teoria	tema-genoma-bacteriano
+4/4/1/fb30	teoria	tema-genoma-bacteriano
+5/25/1/78d7	teoria	tema-infeccoes-oportunistas
+6/9/1/b155	teoria	tema-relacao-parasita-hospedeiro
+8/7/2/6dbe	familia	antimicrobianos-penicilinas	origem
+8/7/4/f993	familia	antimicrobianos-penicilinas	origem
+9-10/10/4/47e5	bacteria	salmonella	risco
+9-10/10/4/47e5	bacteria	escherichia-coli	risco
+9-10/10/4/47e5	bacteria	shigella	risco
+9-10/10/4/47e5	bacteria	klebsiella	risco
+9-10/10/4/47e5	bacteria	proteus	risco
+9-10/19/10/30b7	quadros	quadro-itu
+9-10/21/2/6685	teoria	tema-meningites
+9-10/21/3/e74d	teoria	tema-meningites
+9-10/59/1/eb6b	familia	provas-coloracao-de-gram	tipo
+11-12/25/8/6170	teoria	tema-classificacao-dos-estreptococos
+11-12/53/6/c6cb	quadros	quadro-pneumonia-comunitaria
+11-12/54/2/a961	quadros	quadro-pneumonia-comunitaria
+11-12/56/2/4a64	quadros	quadro-pneumonia-comunitaria
+13/3/7/c49b	bacteria	neisseria	caracteristicas
+13/6/2/368b	quadros	quadro-meningite
+15/9/1/3764	bacteria	staphylococcus-aureus	tratamento
+15/17/2/21eb	bacteria	klebsiella	tratamento
+15/31/1/a043	quadros	quadro-higiene-das-maos
+16/11/1/70f9	bacteria	mycobacterium-tuberculosis	doencas
+16/11/2/cb89	bacteria	mycobacterium-tuberculosis	doencas
+16/11/3/36f5	bacteria	mycobacterium-tuberculosis	doencas
+16/12/1/5be8	bacteria	mycobacterium-tuberculosis	doencas
+16/12/2/eea5	bacteria	mycobacterium-tuberculosis	risco
+16/12/3/6b1d	bacteria	mycobacterium-tuberculosis	doencas
+16/12/4/b7c0	bacteria	mycobacterium-tuberculosis	diagnostico
+16/13/1/eea0	bacteria	mycobacterium-tuberculosis	diagnostico
+16/16/1/cabc	teoria	tema-historia-da-microbiologia
+16/16/2/0bbe	teoria	tema-historia-da-microbiologia
+16/16/3/7c40	teoria	tema-historia-da-microbiologia
+16/17/1/c4ed	bacteria	mycobacterium-tuberculosis	prevencao
+16/18/1/f54a	bacteria	mycobacterium-tuberculosis	prevencao
+17/37/2/5ced	bacteria	helicobacter-pylori	caracteristicas

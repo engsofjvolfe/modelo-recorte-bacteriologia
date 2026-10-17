@@ -8,11 +8,15 @@ from analises import ordem_natural
 ROTULOS = {  # o rotulo de cada classe de trecho; {} e o nome da regra de fora ou da marca, ou o problema
     "estudo": "de estudo, com lugar nos documentos",
     "assunto": "de estudo, à espera do assunto",
+    "unidade": "de estudo, à espera de unidade",
+    "limite": "até a última aula, sem lugar depois do limite",
+    "depois": "depois da última aula, sem lugar",
     "fora": "fora: {}",
     "lido": "fora pela leitura: {}",
     "marca": "marcados, à espera de lugar: {}",
     "problema": "problema: {}",
 }
+SO_COM_TRECHO = ("assunto", "unidade", "limite", "depois")  # as classes sem regra nem marca, que so saem com trecho
 
 
 def celula(valor):
@@ -40,12 +44,15 @@ def por_chave(contagem):
 
 def tabela_das_classes(classes, regras):
     """A tabela de quantos trechos ha em cada classe, a ultima linha com o total. As classes
-    sao as do lugares.py e ("lido", id de uma regra de fora), a do trecho que uma leitura pos
-    fora. Saem sempre a de estudo com lugar, cada regra de fora e cada marca; as outras, so
+    sao as do lugares.py; ("lido", id de uma regra de fora), a do trecho que uma leitura pos
+    fora; e as de quem aplica as unidades e o limite (limite.py): ("unidade",), o trecho de
+    estudo que espera a unidade dele, ("limite",), o trecho de uma aula ate a ultima que
+    perdeu o lugar no limite, e ("depois",), o de uma aula depois da ultima que ficou sem
+    lugar. Saem sempre a de estudo com lugar, cada regra de fora e cada marca; as outras, so
     quando ha trecho nelas. Classe desconhecida e erro (ValueError)."""
     nomes = {(k, r["id"]): r["nome"] for k in ("fora", "lido") for r in regras["fora"]}
     nomes.update({("marca", m["id"]): m["nome"] for m in regras["marcas"]})
-    possiveis = [(("estudo",), True), (("assunto",), False)]
+    possiveis = [(("estudo",), True)] + [((k,), False) for k in SO_COM_TRECHO]
     possiveis += [(("fora", r["id"]), True) for r in regras["fora"]]
     possiveis += [(("lido", r["id"]), False) for r in regras["fora"]]
     possiveis += [(("marca", m["id"]), True) for m in regras["marcas"]]

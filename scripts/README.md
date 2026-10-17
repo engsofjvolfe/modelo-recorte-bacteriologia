@@ -54,7 +54,7 @@ alguma coisa e diz o quê.
 | Assim que uma transcrição é criada | `registrar_fonte.py`, que roda o `referencias.py` |
 | Sempre que o arquivo de fontes muda | `referencias.py` |
 | Sempre que uma transcrição muda, e antes de escrever o material | `conferencia.py` |
-| Sempre que o arquivo de formato, a tabela da leitura ou a análise de uma aula muda, e antes de escrever o material | `confere_moldes.py` |
+| Sempre que o arquivo de formato, a tabela da leitura, a tabela dos destinos ou a análise de uma aula muda, e antes de escrever o material | `confere_moldes.py` |
 | Quando nem a aula nem o livro-texto chegam a um subtópico de uma unidade | `base_externa.py`, que roda o `referencias.py` |
 | Com as planilhas de pergunta e as provas dos cartões prontas | `confere_cartoes.py` |
 | Com as planilhas conferidas, e sempre que uma delas muda | `montar_deck.py` |
@@ -93,19 +93,26 @@ listas, sem explicação. Ele nasce de uma cópia do modelo em branco,
 | `cursos`, `disciplina` e `nivel` | para quem é o material: a lista dos cursos, o nome da disciplina, que é também o da pasta de cima no Anki, e o nível |
 | `idioma` | o idioma do material, como `pt-BR`, o português do Brasil |
 | `ultima_aula` | a última aula que tem material, pela chave com que as análises das aulas a escrevem |
+| `partes_para_tratar` | quantas partes do molde de uma unidade os trechos de uma aula ocupam, pelo menos, para que a aula [trate](../metodologia-de-conteudo.md#o-limite-das-aulas) dela |
+| `documentos_vem_de` | de onde vêm os documentos de cada trecho: `regras`, os do grupo e do caminho dele; `destino`, os das unidades que o destino dele nomeia ([`confere_moldes.py`](#confere_moldespy--confere-os-moldes-contra-as-análises-das-aulas)); uma das duas, ou as duas |
 | `grupos` | os grupos da matéria; `pelo_assunto: true` marca o grupo cujo trecho vai para o documento do assunto dele, que a tabela da leitura diz |
 | `partes_por_tipo` | a sequência das partes de um texto, cada parte com os `tipos` de conhecimento que ela recebe |
 | `tipos_junto` | os tipos sem parte própria, que ficam junto do assunto que acompanham |
 | `fora` | as regras que tiram um trecho do material: sai o trecho cujos tipos são todos de uma regra |
 | `marcas` | as marcas, que só dizem do que um trecho fala: cada uma com o `texto` que as análises escrevem e os `papeis`, os campos da análise onde ele se procura |
 | `onde_se_ensina` | para cada tipo, os documentos onde ele se ensina |
-| `documentos` | os documentos do material, cada um com o `molde` dele e de onde vêm os trechos dele: os `grupos`, os `caminhos` ou `todos: true` |
+| `documentos` | os documentos do material, cada um com o `molde` dele e, para as fontes dos documentos, os `grupos` e os `caminhos` cujos trechos ele recebe pelas regras, ou `todos: true`, quando recebe todos os trechos |
 
 Cada grupo, parte, regra, marca, documento e unidade entra na lista dele entre chaves,
 `{ }`, com um `id`, um código curto, e um `nome`; o id vai entre aspas, mesmo quando é
 número. Num documento, `unidade` é o nome do que ganha material nele, como "bactéria" ou
-"tema", e `unidades`, quando ele as lista, são as unidades dele. O `molde` diz como o
-documento se divide:
+"tema", e `unidades`, quando ele as lista, são as unidades dele. Numa ficha, uma unidade
+pode ter `itens`, cada um com `id` e `nome`: as coisas que ela reúne, cada uma com os
+eixos da grade dela. Cada um dos `conjuntos` de um documento junta unidades ou itens dele,
+os `membros`, que o destino de um trecho nomeia de uma vez: o trecho que nomeia um
+conjunto vai para cada membro dele. `tratada_em`, numa unidade sem itens ou num item, diz
+as aulas que tratam dele, no lugar da conta do limite. O `molde` diz como o documento se
+divide:
 
 - `partes_por_tipo`: o texto de cada unidade segue a sequência das partes; `casos`, se o
   documento tem, são as partes de cada caso;
@@ -124,12 +131,14 @@ o dá, ou `proposta`, quando a análise o deixava aberto e o projeto o propôs.
 A leitura do formato é a mesma em todo script que o usa: ela confere o arquivo contra o
 molde dele, `scripts/esquemas/formato.schema.json`, e as ligações de dentro dele — por
 exemplo, que cada grupo, tipo, documento e eixo que o arquivo cita existe, que cada
-documento tem as partes que o molde dele pede e que nenhum id se repete onde precisa ser
-único. Cada problema sai numa linha `ERRO`, com o lugar, e o script não usa o formato.
+documento tem as partes que o molde dele pede, que nenhum id se repete onde precisa ser
+único e que cada membro de um conjunto é uma unidade ou um item do documento dele. Cada
+problema sai numa linha `ERRO`, com o lugar, e o script não usa o formato.
 
-Um exemplo inventado, com três documentos: um de temas, que segue a sequência das partes;
-uma ficha com uma abertura, um eixo dividido em dois subtópicos, outro sem divisão, um elo
-e uma unidade; e os cartões:
+Um exemplo inventado, com três documentos: um de temas, que segue a sequência das partes,
+com dois temas, um deles com as aulas que tratam dele; uma ficha com uma abertura, um eixo
+dividido em dois subtópicos, outro sem divisão, um elo, duas unidades, uma delas com dois
+itens, e um conjunto das duas; e os cartões:
 
 ```json
 {
@@ -139,6 +148,8 @@ e uma unidade; e os cartões:
   "nivel": "entender e aplicar",
   "idioma": "pt-BR",
   "ultima_aula": "4",
+  "partes_para_tratar": 2,
+  "documentos_vem_de": ["destino"],
   "grupos": [
     { "id": "1", "nome": "Seres" },
     { "id": "2", "nome": "Ideias gerais" }
@@ -161,7 +172,11 @@ e uma unidade; e os cartões:
   "documentos": [
     {
       "id": "ideias", "nome": "Ideias gerais", "unidade": "tema", "molde": "partes_por_tipo",
-      "grupos": ["2"]
+      "grupos": ["2"],
+      "unidades": [
+        { "id": "T1", "nome": "Primeiro tema" },
+        { "id": "T2", "nome": "Segundo tema", "tratada_em": ["3"] }
+      ]
     },
     {
       "id": "fichas", "nome": "Ficha de cada ser", "unidade": "ser", "molde": "eixos",
@@ -183,7 +198,17 @@ e uma unidade; e os cartões:
         { "id": "1", "nome": "Primeiro elo", "eixos": ["1", "2"], "ordem": "proposta" }
       ],
       "unidades": [
-        { "id": "A1", "nome": "Primeiro ser" }
+        { "id": "A1", "nome": "Primeiro ser" },
+        {
+          "id": "A2", "nome": "Segundo ser",
+          "itens": [
+            { "id": "A2a", "nome": "Primeira forma do segundo ser" },
+            { "id": "A2b", "nome": "Segunda forma do segundo ser" }
+          ]
+        }
+      ],
+      "conjuntos": [
+        { "id": "seres", "nome": "Todos os seres", "membros": ["A1", "A2"] }
       ]
     },
     {
@@ -202,8 +227,9 @@ e uma unidade; e os cartões:
 **O que faz.** Cada arquivo de dados — como o `projeto.json`, o arquivo de formato, o de
 fontes, a base de cada unidade e a prova de cada planilha — tem uma forma certa, descrita
 num molde, o <dfn>schema</dfn>, em `scripts/esquemas/`. O script confere se o arquivo segue
-o molde: se não falta campo obrigatório, se nada está no tipo errado, se nenhum código (id
-ou chave) se repete.
+o molde: se não falta campo obrigatório, se nada está no tipo errado ou abaixo do mínimo
+que o molde pede, se nenhuma lista repete um valor que não pode repetir, se nenhum código
+(id ou chave) se repete.
 
 **Como rodar.** O caminho do arquivo depois do nome do script:
 
@@ -460,48 +486,86 @@ diferença. O arquivo fica melhor de ler na visualização do VSCode (`Ctrl+Shif
 
 **O que faz.** A análise de cada aula, na pasta protegida, tem uma linha para cada [trecho
 das aulas](../docs/analise-da-materia.md#2-as-aulas-slide-por-slide): o texto dele e os
-campos que dizem o tipo de conhecimento, o grupo, o caminho e para onde ele vai. O script
-põe cada trecho no lugar dele em cada documento do [arquivo de
-formato](#o-arquivo-de-formato) — pelo grupo, pelo caminho ou porque o documento recebe
-todos — e, dentro do documento, na parte do molde dele: a parte da sequência de cada tipo
-do trecho, um eixo da ficha, a forma de pergunta, o cartão. Confere que todo trecho tem
-lugar e que nenhuma parte de molde fica sem trecho, e grava o relatório,
+campos que dizem o tipo de conhecimento, o grupo, o caminho e o destino, o texto que diz
+para onde ele vai. O script põe cada trecho no lugar dele em cada documento do [arquivo de
+formato](#o-arquivo-de-formato). Os documentos do trecho vêm das fontes que o formato diz
+em `documentos_vem_de` — as regras, pelo grupo e pelo caminho dele, e o destino, pelas
+unidades que ele nomeia —, e o trecho com lugar vai também para cada documento que recebe
+todos. Dentro do documento, o lugar é a unidade ou o item de que o trecho fala — o próprio
+documento, quando ele não lista unidades — e a parte do molde: a parte da sequência de
+cada tipo do trecho, um eixo da ficha, a forma de pergunta, o cartão. O trecho que o
+destino põe numa unidade com itens, fora da abertura dela, vai para os itens dela que o
+destino nomeia. Depois, o script aplica o limite das aulas (abaixo). Confere que todo
+trecho tem lugar e que nenhuma parte de molde fica sem trecho, e grava o relatório,
 `CONFERENCIA-MOLDES.md`, em `docs/material-base/gerados-ocr/`: quantos trechos há em cada
-classe — com lugar, fora do material, marcados à espera de lugar — e, em cada documento,
-quantos trechos cada parte do molde recebe, de que aulas e se a ordem dela é dada ou
-proposta.
+classe — com lugar, sem lugar depois do limite, fora do material, marcados à espera de
+lugar —; em cada documento, quantos trechos cada parte do molde recebe, de que aulas e se
+a ordem dela é dada ou proposta; em cada documento que lista unidades, as aulas que tratam
+de cada unidade e de cada item, com as partes, as que só os mencionam e quantos trechos de
+depois da última aula ficam ali, e os conjuntos; as unidades só mencionadas; onde as
+fontes do documento discordam, em cada sentido; os pedaços do destino sem linha na tabela
+dos destinos; e os trechos até a última aula sem lugar depois do limite, com os lugares
+que perderam.
 
 **A forma das análises.** O arquivo `dados/forma-analise.json` diz como se lê uma análise:
 o nome dos arquivos, as linhas que abrem um slide e as de título, a marca de cada trecho,
 os separadores e os campos, em ordem, cada um com a forma do valor e, se tem, o papel
-dele — `tipo`, `grupo`, `caminho` ou `destino`, o texto que diz para onde o trecho vai. O
-molde dele é `scripts/esquemas/forma-analise.schema.json`. Cada trecho tem um código,
+dele — `tipo`, `grupo`, `caminho` ou `destino`. O destino se lê em pedaços (a forma
+`pedacos`): o texto entre os separadores que a forma dá, fora dos parênteses, cada pedaço
+inteiro, com o que está entre parênteses dele. O molde da forma é
+`scripts/esquemas/forma-analise.schema.json`. Cada trecho tem um código,
 `aula/slide/posição/hash`: a posição conta os trechos do slide, e o hash, tirado do texto
 do trecho, muda quando o texto muda; assim, uma decisão guardada pelo código não passa para
 um texto que mudou.
 
-**A tabela da leitura.** O que as regras do formato não dizem sozinhas sai de uma leitura
-dos trechos, gravada em `dados/lugares-lidos.tsv`: o eixo de cada trecho numa ficha e a
-unidade dele, o documento do trecho que as regras deixam em aberto — o de um grupo que vai
-pelo assunto, o de um trecho marcado — e o trecho que a leitura pôs fora do material. É um
-arquivo de texto com quatro colunas separadas por tabulação, `id`, `documento`, `unidade`
-e `parte`, e uma linha para cada lugar, porque um trecho pode ter mais de um. A `unidade`
-é uma das unidades do documento, ou fica vazia quando ele não as lista; a `parte` é um
-eixo da grade da unidade ou uma abertura que recebe trechos, e fica vazia num documento
-sem grade. Na linha com o documento `fora`, a unidade é o id de uma regra de `fora` do
-formato.
+**A tabela dos destinos.** O destino é escrito à mão, e a mesma coisa aparece escrita de
+jeitos diferentes. A tabela dos destinos, `docs/material-base/gerados-ocr/destinos.tsv`,
+diz o que cada pedaço do destino nomeia: um arquivo de texto com duas colunas separadas por
+tabulação, `destino` e `unidade`, e uma linha para cada id que o pedaço nomeia — o de uma
+unidade, de um item ou de um conjunto do formato; a linha com a unidade vazia diz que o
+pedaço não nomeia nenhum. As análises não mudam: a tabela só junta os jeitos de escrever o
+mesmo nome. Ela fica na pasta protegida porque copia o texto das análises.
+
+**A tabela da leitura.** O que as regras do formato e o destino não dizem sozinhos sai de
+uma leitura dos trechos, gravada em `dados/lugares-lidos.tsv`: o eixo de cada trecho numa
+ficha; a unidade dele, quando o destino não a nomeia; o documento do trecho que as fontes
+deixam em aberto — o de um grupo que vai pelo assunto, o de um trecho marcado —; o lugar
+novo do trecho que fica sem lugar (abaixo); e o trecho que a leitura pôs fora do material.
+É um arquivo de texto com quatro colunas separadas por tabulação, `id`, `documento`,
+`unidade` e `parte`, e uma linha para cada lugar, porque um trecho pode ter mais de um. A
+`unidade` é o id de uma unidade, de um item ou de um conjunto do documento, ou fica vazia
+quando o lugar vem do destino ou o documento não lista unidades; a `parte` é um eixo da
+grade da unidade ou uma abertura que recebe trechos, e fica vazia num documento sem grade.
+Na linha com o documento `fora`, a unidade é o id de uma regra de `fora` do formato.
+
+Nas duas tabelas, a primeira linha é o cabeçalho, com os nomes das colunas; a linha em
+branco não conta, e a linha sem as colunas vazias do fim vale como se as tivesse, porque o
+editor que tira os espaços do fim da linha tira também essas tabulações.
+
+**O limite das aulas.** O script aplica o
+[limite](../metodologia-de-conteudo.md#o-limite-das-aulas) com a `ultima_aula` e o
+`partes_para_tratar` do formato. Em cada unidade sem itens e em cada item, ele conta as
+partes distintas do molde que os trechos de cada aula ocupam ali, só nos lugares diretos —
+os do trecho que nomeia a unidade ou o item, não os que vêm de um conjunto —, e
+`tratada_em`, quando existe, diz as aulas que tratam, no lugar da conta. O
+lugar novo do trecho de uma aula até a última que fica sem lugar — porque o limite tirou
+todos os dele, ou porque as fontes não lhe dão documento — é uma linha da tabela da
+leitura num documento que as fontes não dão a ele, numa unidade com material, e não entra
+na conta.
 
 **Como rodar.**
 
     python scripts/confere_moldes.py
 
 **O que mostra.** Cada problema numa linha, na tela e no fim do relatório, com o código do
-trecho ou o lugar: `FALTA` para o trecho marcado sem lugar, que espera o lugar dele;
-`ERRO` para o resto que não fecha entre as análises, a tabela da leitura e o formato. O
-relatório é gravado mesmo com eles, e o script sai com código 1 quando há algum. Com erro
-numa entrada — um arquivo que falta, que não se lê, que não segue o molde dele ou que não
-fecha com as outras —, cada um sai numa linha `ERRO` e nada é gravado. No fim, quantos
-trechos há, quantos têm lugar e quantas linhas `ERRO` e `FALTA`.
+trecho ou o lugar: `FALTA` para o que espera uma leitura ou uma decisão, como o pedaço do
+destino sem linha na tabela dos destinos ou o trecho que espera um lugar; `ERRO` para o
+que se contradiz entre as análises, as duas tabelas e o formato, como o id da tabela dos
+destinos que o formato não tem. O relatório é gravado mesmo com eles, e o script sai com
+código 1 quando há algum. Com erro numa entrada — um arquivo que falta, que não se lê, que
+não segue o molde dele ou que não fecha com as outras —, cada um sai numa linha `ERRO` e
+nada é gravado. No fim, quantos trechos há, quantos têm lugar e quantas linhas `ERRO` e
+`FALTA`.
 
 ## `base_externa.py` — monta a base do material de fora
 
@@ -781,15 +845,17 @@ definem. Sem o git, o script diz isso numa linha `ERRO` e para, como o
 
 Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json` e as
 planilhas de pergunta, ler o arquivo de formato, conferido contra o molde dele e nas
-ligações de dentro dele, e achar nele as unidades de um documento e a grade de cada uma,
-ler o registro da fonte, guardar os tiques, ler as páginas de um documento HTML e os
-slides de uma apresentação, e o que os transcritores fazem do mesmo jeito). O
-`extrator_comum.py` e os `leitor_<tipo>.py` também não se rodam: são as partes do
-`extrator.py`. O `extrator_comum.py` serve também ao `itens.py` e ao `conferencia.py`, que
-leem as transcrições do mesmo jeito que o extrator as escreve. Do mesmo modo, o
-`analises.py`, o `lugares.py`, o `relatorio.py` e o `lidos.py` são as partes do
-`confere_moldes.py`: leem as análises das aulas pela forma delas, dizem onde cada trecho
-cai pelas regras do formato, fazem as tabelas do relatório e leem a tabela da leitura.
+ligações de dentro dele, e achar nele as unidades, os itens e os conjuntos de um
+documento, a grade de cada unidade e o que cada id quer dizer, ler o registro da fonte,
+guardar os tiques, ler as páginas de um documento HTML e os slides de uma apresentação, e
+o que os transcritores fazem do mesmo jeito). O `extrator_comum.py` e os `leitor_<tipo>.py`
+também não se rodam: são as partes do `extrator.py`. O `extrator_comum.py` serve também ao
+`itens.py` e ao `conferencia.py`, que leem as transcrições do mesmo jeito que o extrator as
+escreve. Do mesmo modo, o `analises.py`, o `lugares.py`, o `tabela.py`, o `destinos.py`, o
+`lidos.py`, o `limite.py` e o `relatorio.py` são as partes do `confere_moldes.py`: leem as
+análises das aulas pela forma delas, dizem onde cada trecho cai pelas regras do formato,
+leem as tabelas em texto, dão a cada trecho o que o destino dele nomeia, leem a tabela da
+leitura, aplicam o limite das aulas e fazem as tabelas do relatório.
 
 ---
 

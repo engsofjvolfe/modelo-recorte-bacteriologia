@@ -494,8 +494,9 @@ Trechos: `docs/material-base/gerados-ocr/pesquisa/fonte-e-autores.md`.
 Esta parte é a segunda base do formato: o que as aulas trazem. Cada aula foi lida inteira,
 e cada fato de cada slide (uma frase, um item de lista, uma linha de tabela, o texto de
 uma figura) virou uma linha da análise da aula, com o tipo de conhecimento dele, o
-[grupo](#4-os-grupos) e o [caminho](#5-os-caminhos). Cada uma dessas linhas é um
-<dfn>trecho das aulas</dfn>. Os tipos são os da [metodologia do
+[grupo](#4-os-grupos), o [caminho](#5-os-caminhos) e o lugar dele no material: os
+documentos e, em cada um, o tema, a bactéria, a família ou o quadro de que ele fala. Cada
+uma dessas linhas é um <dfn>trecho das aulas</dfn>. Os tipos são os da [metodologia do
 projeto](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material). As análises
 das aulas, trecho por trecho, ficam na pasta protegida, junto do texto do professor
 (`docs/material-base/gerados-ocr/analise/`). Aqui ficam as contagens: primeiro, os trechos
@@ -3712,11 +3713,14 @@ de memorização (Anki) ele gera e de onde veio essa decisão. Os tipos vêm do 
 trechos para o que tem menos.
 
 Cada tipo se ensina e se treina do mesmo jeito em todos os documentos. Cada trecho das
-aulas vai para o documento de cada grupo e de cada caminho que tem ([Os
-documentos](#os-documentos)) e, dentro dele, para a parte do seu tipo ou, nas fichas, para
-o eixo do fato que dá ([Os moldes](#os-moldes)). Um marco histórico só do grupo 5 vai para
-o documento do assunto dele. Exceção, Exemplo recorrente, Figura e esquema e Analogia e
-história não têm parte própria: ficam junto do trecho ou do assunto que acompanham.
+aulas vai para o lugar que a análise da aula escreve para ele: os documentos ([Os
+documentos](#os-documentos)) e, em cada um, o tema, a bactéria, a família, o item da
+família ou o quadro de que o trecho fala; o trecho que fala de um gênero ou de uma família
+de bactérias vai para a ficha de cada espécie dela. Ali, ele vai para a parte do seu tipo
+ou, nas fichas, para o eixo do fato que dá ([Os moldes](#os-moldes)). Um marco histórico
+só do grupo 5 vai para o documento do assunto dele. Exceção, Exemplo recorrente, Figura e
+esquema e Analogia e história não têm parte própria: ficam junto do trecho ou do assunto
+que acompanham.
 
 - **[Item com os mesmos tipos de
   fato](../metodologia-de-conteudo.md#a-análise-de-cada-parte-do-material)** (787 trechos
@@ -4024,12 +4028,14 @@ projeto fixa os eixos da ficha e os elos do dicionário ([seções
 documentos, para que todo o material se estude com a mesma consistência, é escolha do
 projeto.
 
-Os números são os trechos das aulas (parte 2) que caem em cada parte; um trecho com mais
-de um tipo, ou com lugar em mais de uma ficha, conta em cada uma. Os moldes dão lugar a
-1.874 trechos. O que falta para os 1.875 da parte 2 é o do Cryptococcus (aula 5, slide
-25), um trecho do grupo 1 que fala de fungo. Como todo trecho que fala de vírus ou de
-fungo, ele entra como a aula o usa ([metodologia do projeto, seção
-4](../metodologia-de-conteudo.md#4-o-que-entra-no-material)).
+Os números são os trechos de todas as aulas que caem em cada parte, sem o [limite das
+aulas](../metodologia-de-conteudo.md#o-limite-das-aulas); um trecho com mais de um tipo,
+ou com lugar em mais de uma ficha, conta em cada uma. Os moldes dão lugar a 1.893 trechos:
+os 1.875 da parte 2 e 18 dos 21 que ela conta à parte por falarem de vírus ou de fungo.
+Como todo trecho que fala de vírus ou de fungo, eles entram como a aula os usa
+([metodologia do projeto, seção
+4](../metodologia-de-conteudo.md#4-o-que-entra-no-material)). Os outros três falam de
+vírus na aula 15 (slide 30), que vem depois da última aula do material, e ficam fora dele.
 
 **A <dfn>sequência das partes</dfn>.** Cada tema da teoria e cada quadro é um texto em
 blocos, um para cada tipo de trecho, sempre na mesma ordem. Abre com os nomes e o que eles
@@ -4042,20 +4048,20 @@ cada aula e para os cartões novos.
 
 | Parte | Tipo | Teoria | Quadros |
 | --- | --- | ---: | ---: |
-| 1. Conceitos e vocabulário | Conceito e vocabulário | 167 | 13 |
-| 2. Classificações | Classificação | 167 | 56 |
-| 3. Relações nos dois sentidos | Relação nos dois sentidos | 28 | 146 |
-| 4. Itens com os mesmos fatos, numa tabela | Item com os mesmos tipos de fato | 15 | 114 |
-| 5. Partes e funções | Parte e função | 35 | 4 |
+| 1. Conceitos e vocabulário | Conceito e vocabulário | 181 | 7 |
+| 2. Classificações | Classificação | 185 | 31 |
+| 3. Relações nos dois sentidos | Relação nos dois sentidos | 48 | 85 |
+| 4. Itens com os mesmos fatos, numa tabela | Item com os mesmos tipos de fato | 19 | 100 |
+| 5. Partes e funções | Parte e função | 37 | 2 |
 | 6. Processos em ordem | Processo em ordem | 39 | 12 |
-| 7. Números com sentido | Número com sentido | 29 | 77 |
-| 8. Marcos históricos | Marco histórico | 29 | 1 |
-| 9. Por quê | Causa e efeito; História em cadeia | 78 | 38 |
-| 10. Comparações | Contraste | 77 | 18 |
-| 11. Na prática | Aplicação na prática | 3 | 102 |
+| 7. Números com sentido | Número com sentido | 37 | 78 |
+| 8. Marcos históricos | Marco histórico | 36 | 1 |
+| 9. Por quê | Causa e efeito; História em cadeia | 78 | 29 |
+| 10. Comparações | Contraste | 77 | 14 |
+| 11. Na prática | Aplicação na prática | 3 | 99 |
 
 Os trechos só de Exceção, Exemplo recorrente, Figura e esquema ou Analogia e história
-ficam junto do assunto deles: 12 na teoria e 4 nos quadros. A ordem vem de quatro bases:
+ficam junto do assunto deles: 13 na teoria e 5 nos quadros. A ordem vem de quatro bases:
 
 - Os conceitos abrem porque o básico vem antes do que depende dele; o porquê, as
   comparações e a prática fecham, nessa ordem, porque o que pede explicar, comparar ou
@@ -4083,42 +4089,42 @@ Cada trecho vai para o eixo do fato principal dele; o título do slide só desem
 o fato cabe em dois eixos. Os eixos, nesta ordem, com os trechos de cada um e o que vai
 nele:
 
-- características gerais (227 trechos): o que a bactéria é — o nome e a origem dele, a
+- características gerais (249 trechos): o que a bactéria é — o nome e a origem dele, a
   classificação e as espécies, a forma, o Gram, o arranjo, o tamanho, a motilidade, os
   esporos, a relação com o oxigênio e o metabolismo, o cultivo e as colônias, a genética,
   se ela é comensal, patogênica ou oportunista, e as provas que o slide dá como
   característica geral;
-- habitat (29): onde ela vive — o reservatório, a microbiota, o ambiente e os portadores;
+- habitat (92): onde ela vive — o reservatório, a microbiota, o ambiente e os portadores;
 - transmissão (47): como ela chega ao hospedeiro — as vias, as fontes, os surtos, o
   contágio, onde ela se adquire (na comunidade ou no hospital) e a sequência que leva um
   alimento a ficar contaminado;
-- fatores de risco (17): as condições, as exposições e os grupos de pessoas que a fonte
+- fatores de risco (19): as condições, as exposições e os grupos de pessoas que a fonte
   liga a mais chance de adoecer; a simples divisão de quem adoece por idade ou sexo fica
   em doenças e formas clínicas;
 - fatores de virulência (92): cada fator — a cápsula, as adesinas, as enzimas, as toxinas,
   a evasão das defesas do corpo — e o que ele faz;
 - patogênese em sequência (80): como a infecção se desenrola no corpo — as etapas, o lugar
   onde ela age, o mecanismo da lesão e a resposta do hospedeiro;
-- doenças e formas clínicas (289): os quadros, os sintomas, a incubação, a evolução, as
+- doenças e formas clínicas (297): os quadros, os sintomas, a incubação, a evolução, as
   complicações, a gravidade, a frequência e os lugares onde a doença ocorre;
-- diagnóstico (123): as amostras, a microscopia, a cultura, as provas, os testes e a
+- diagnóstico (127): as amostras, a microscopia, a cultura, as provas, os testes e a
   sorologia que identificam a bactéria, e a figura que só mostra o microrganismo (o nome,
   a coloração, a cultura); a figura cujos rótulos ensinam uma estrutura ou um processo vai
   para o eixo desse conteúdo;
-- tratamento (63): as drogas e a resistência a elas;
+- tratamento (66): as drogas e a resistência a elas;
 - prevenção (26): as vacinas, a higiene e as outras medidas de prevenção.
 
 O dicionário conta cada bactéria em sete elos, cada um com os fatos de eixos da ficha:
 
 | Elo | Eixos da ficha | Trechos desses eixos |
 | --- | --- | ---: |
-| 1. Quem é e onde vive | características gerais; habitat | 256 |
-| 2. Como chega ao hospedeiro | transmissão; fatores de risco | 64 |
+| 1. Quem é e onde vive | características gerais; habitat | 341 |
+| 2. Como chega ao hospedeiro | transmissão; fatores de risco | 66 |
 | 3. Como se instala | fatores de virulência; patogênese em sequência | 172 |
 | 4. Como avança no corpo | patogênese em sequência | 80 |
 | 5. Como causa dano | fatores de virulência; patogênese em sequência | 172 |
-| 6. Que doença resulta | doenças e formas clínicas | 289 |
-| 7. Como se reconhece, se trata e se evita | diagnóstico; tratamento; prevenção | 212 |
+| 6. Que doença resulta | doenças e formas clínicas | 297 |
+| 7. Como se reconhece, se trata e se evita | diagnóstico; tratamento; prevenção | 219 |
 
 Os elos 2 a 6 são os passos que se repetem nas cadeias dos slides, da entrada no
 hospedeiro à instalação, ao avanço, ao dano e à doença: no gonococo (aula 13, slides 22 a
@@ -4131,23 +4137,23 @@ vilão, e os microrganismos se estabelecem num nicho do corpo (Murray; Rosenthal
 tratar um paciente infectado (Murray; Rosenthal; Pfaller, 2022, p. vii).
 
 **Ficha de cada família.** A ficha de cada família abre com a própria família, o que reúne
-os itens e como eles se dividem (18 trechos: estruturas 1, controle 8, provas 2 e
-microbiota 7; nos antimicrobianos, nenhum). Depois vem uma entrada por item, com os eixos
-da família. A abertura vem antes dos itens como na forma de Classificação, acima: primeiro
-o critério, depois o que cai em cada grupo. Cada trecho vai para o eixo do fato principal
-dele, como na ficha da bactéria, e o trecho que a análise põe em duas famílias tem lugar
-em cada uma. Os eixos de cada família, com os trechos de cada um, o que vai nele quando o
-nome não basta e de onde vem a ordem deles:
+os itens e como eles se dividem (21 trechos: estruturas 1, antimicrobianos 1, controle 9,
+provas 2 e microbiota 8). Depois vem uma entrada por item, com os eixos da família. A
+abertura vem antes dos itens como na forma de Classificação, acima: primeiro o critério,
+depois o que cai em cada grupo. Cada trecho vai para o eixo do fato principal dele, como
+na ficha da bactéria, e o trecho que a análise põe em duas famílias tem lugar em cada uma.
+Os eixos de cada família, com os trechos de cada um, o que vai nele quando o nome não
+basta e de onde vem a ordem deles:
 
-- **Estruturas da célula bacteriana** (81 trechos). A ordem é a forma de Parte e função,
+- **Estruturas da célula bacteriana** (90 trechos). A ordem é a forma de Parte e função,
   acima: a parte (o que é, composição), o que ela faz (função) e o que isso significa para
   a bactéria e para a doença (os tipos dela, as bactérias em que aparece e o que age sobre
   ela).
   - o que é (13): o que a estrutura é, a forma, o tamanho e onde ela fica;
-  - composição (14);
+  - composição (17);
   - função (12);
   - tipos (12);
-  - em que bactérias aparece e como é nelas (20): todo trecho sobre a estrutura numa
+  - em que bactérias aparece e como é nelas (26): todo trecho sobre a estrutura numa
     bactéria nomeada;
   - o que age sobre ela (9).
 - **Antimicrobianos** (115 trechos). A ordem junta a dos parágrafos das classes no
@@ -4157,13 +4163,13 @@ nome não basta e de onde vem a ordem deles:
   Pfaller, 2022, p. 179).
   - classe e membros (30);
   - origem (4);
-  - alvo e mecanismo de ação (20);
+  - alvo e mecanismo de ação (19);
   - bactericida ou bacteriostático (4);
   - espectro (3);
   - uso clínico (28): contra que bactérias e que infecções a droga se usa;
   - meia-vida e absorção (5);
   - resistência (21).
-- **Métodos e agentes de controle** (93 trechos). A ordem segue a aula 7: a tabela dos
+- **Métodos e agentes de controle** (94 trechos). A ordem segue a aula 7: a tabela dos
   agentes químicos (slides 19 e 20) dá, em cada linha, o agente, o mecanismo de ação, o
   uso preferencial e um comentário, e o slide 23, depois dela, a efetividade contra
   endósporos e micobactérias; os comentários e o slide 23 dão o espectro, a efetividade e
@@ -4176,7 +4182,7 @@ nome não basta e de onde vem a ordem deles:
   - uso preferencial (21);
   - espectro e efetividade (17);
   - limitações e cuidados (2).
-- **Provas de identificação** (89 trechos). A prova e o que ela detecta abrem a entrada,
+- **Provas de identificação** (98 trechos). A prova e o que ela detecta abrem a entrada,
   no primeiro dos dois sentidos em que as provas se pedem, da prova ao que ela mostra
   ([parte 4](#4-os-grupos)). Os eixos seguintes vão da coleta da amostra ao resultado,
   como no trabalho que a literatura pede que a enfermagem entenda: os enfermeiros coletam
@@ -4190,13 +4196,13 @@ nome não basta e de onde vem a ordem deles:
     toda "pesquisa direta" ou "exame direto";
   - como se faz (6): as etapas, a composição e as condições;
   - como se lê o resultado (12);
-  - que bactéria o resultado indica (50): o resultado que aponta uma bactéria nomeada.
-- **Microbiota de cada local do corpo** (90 trechos). A ordem é a da aula 5: o slide 3
+  - que bactéria o resultado indica (59): o resultado que aponta uma bactéria nomeada.
+- **Microbiota de cada local do corpo** (95 trechos). A ordem é a da aula 5: o slide 3
   separa os locais estéreis dos colonizados, e os slides 10 a 16 dão, local por local, os
   microrganismos predominantes e os menos frequentes; a legenda da imagem de quatro deles
   dá o Gram que predomina.
   - estéril ou colonizado (6);
-  - microrganismos do local (73): os que predominam e os menos frequentes;
+  - microrganismos do local (77): os que predominam e os menos frequentes;
   - Gram que predomina (4).
 
 **Quadros e casos.** Cada quadro tem as partes da sequência acima, com os trechos da
@@ -4220,10 +4226,10 @@ seus tipos:
 
 - **cite e explique**, para Conceito e vocabulário, Classificação, Relação nos dois
   sentidos, Item com os mesmos tipos de fato, Número com sentido, Marco histórico, Exemplo
-  recorrente, Exceção e Analogia e história (1.575 trechos): o estudante precisa saber o
+  recorrente, Exceção e Analogia e história (1.593 trechos): o estudante precisa saber o
   conteúdo de cada trecho e o porquê dele e escrevê-lo com as próprias palavras ([O que o
   estudante precisa saber fazer](#o-que-o-estudante-precisa-saber-fazer)).
-- **descreva**, para Parte e função, Processo em ordem e Figura e esquema (376 trechos): a
+- **descreva**, para Parte e função, Processo em ordem e Figura e esquema (378 trechos): a
   forma desses tipos é descrever a parte e o que ela faz, as etapas em ordem e o que está
   onde.
 - **cite e explique**, para Causa e efeito e História em cadeia (225 trechos): a forma
@@ -4237,7 +4243,7 @@ a fonte e outro campo de imagem. A pergunta, a resposta e a fonte são as coluna
 metodologia do projeto pede ([seção
 6](../metodologia-de-conteudo.md#6-os-cartões-e-o-baralho)), o porquê é o do verso
 ([Ensinar primeiro, treinar depois](#ensinar-primeiro-treinar-depois)), e os campos de
-imagem são os de Figura e esquema, acima. Cada um dos 1.874 trechos gera ao menos um
+imagem são os de Figura e esquema, acima. Cada um dos 1.893 trechos gera ao menos um
 cartão, como diz a forma do tipo dele, e os cartões novos entram no baralho na ordem da
 sequência das partes.
 

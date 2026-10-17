@@ -2,10 +2,7 @@
 
 O diário do projeto: os passos gerais que ele percorreu, com a ajuda de uma IA, na ordem em
 que aconteceram. Não é regra — como o conteúdo se faz está na
-[metodologia](metodologia-de-conteudo.md). O detalhe de cada passo (números, decisões,
-ferramentas) fica no registro do trabalho, `REGISTRO.md`, junto das análises das aulas, na
-[pasta protegida](metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição), que não se
-publica.
+[metodologia](metodologia-de-conteudo.md).
 
 A IA trabalhou dentro do editor, lendo e escrevendo os arquivos do projeto e rodando os
 scripts; em alguns passos, dividiu o trabalho entre agentes, um de cada vez. Em todos, ela

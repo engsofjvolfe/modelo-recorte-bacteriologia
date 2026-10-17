@@ -21,6 +21,8 @@ tambem o que elas nao usam.
 """
 import analises
 
+SEM_DOCUMENTO = "sem documento de conteúdo"  # o problema do trecho de estudo que nao cai em documento de conteudo
+
 
 class ErroDeRegras(ValueError):
     """Regras que nao combinam com a forma das analises; a mensagem diz cada problema."""
@@ -76,23 +78,28 @@ def pelo_assunto(trecho, regras):
     return [g for g in valor(trecho, "grupo") if g in marcados]
 
 
+def sem_documento(trecho, regras):
+    """A classe do trecho de estudo que nao cai em documento de conteudo: ("assunto",) quando
+    tem grupo cujo documento vem do assunto; senao ("marca", id da primeira marca dele, na
+    ordem das regras); senao ("problema", SEM_DOCUMENTO)."""
+    if pelo_assunto(trecho, regras):
+        return ("assunto",)
+    suas = marcas(trecho, regras)
+    return ("marca", suas[0]) if suas else ("problema", SEM_DOCUMENTO)
+
+
 def lugar(trecho, regras):
     """(classe, documentos) do trecho so pelas regras. A classe de um trecho de estudo diz se
-    ele tem lugar: ("estudo",) quando cai num documento de conteudo; senao ("assunto",)
-    quando tem grupo cujo documento vem do assunto; senao ("marca", id da primeira marca
-    dele, na ordem das regras); senao ("problema", "sem documento de conteúdo"). Os
-    documentos sao todos aqueles em que o trecho cai, os que recebem todos inclusive; nenhum
-    para o trecho de fora ou com problema na classe."""
+    ele tem lugar: ("estudo",) quando cai num documento de conteudo; senao, a do
+    sem_documento. Os documentos sao todos aqueles em que o trecho cai, os que recebem todos
+    inclusive; nenhum para o trecho de fora ou com problema na classe."""
     c = classe(trecho, regras)
     if c != ("estudo",):
         return c, []
     caidos = documentos(trecho, regras)
     if set(caidos) & set(documentos_de_conteudo(regras)):
         return c, caidos
-    if pelo_assunto(trecho, regras):
-        return ("assunto",), caidos
-    suas = marcas(trecho, regras)
-    return (("marca", suas[0]) if suas else ("problema", "sem documento de conteúdo")), caidos
+    return sem_documento(trecho, regras), caidos
 
 
 def erros_das_regras(regras, forma):

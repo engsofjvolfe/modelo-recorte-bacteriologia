@@ -28,13 +28,14 @@
       "additionalProperties": false,
       "properties": {
         "nome": { "type": "string", "minLength": 1 },
-        "forma": { "enum": ["lista", "presenca", "texto"] },
+        "forma": { "enum": ["lista", "pedacos", "presenca", "texto"] },
         "separadores": { "$ref": "#/$defs/textos" },
         "valores": { "$ref": "#/$defs/textos" },
         "papel": { "enum": ["tipo", "grupo", "caminho", "destino"] }
       },
       "allOf": [
         { "if": { "properties": { "forma": { "const": "lista" } } }, "then": { "required": ["separadores"] } },
+        { "if": { "properties": { "forma": { "const": "pedacos" } } }, "then": { "required": ["separadores"] } },
         { "if": { "properties": { "forma": { "const": "presenca" } } }, "then": { "required": ["valores"] } }
       ]
     }

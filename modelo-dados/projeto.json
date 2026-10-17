@@ -9,6 +9,7 @@
     "formato": "dados/formato.json",
     "forma_analise": "dados/forma-analise.json",
     "lugares_lidos": "dados/lugares-lidos.tsv",
+    "destinos": "docs/material-base/gerados-ocr/destinos.tsv",
     "extrator": "dados/extrator.json",
     "extracao": "docs/material-base/gerados-ocr/extracao.json",
     "fontes": "dados/fontes.json",

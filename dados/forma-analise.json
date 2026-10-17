@@ -13,7 +13,7 @@
     {"nome": "tipo", "forma": "lista", "separadores": [";", ",", "+"], "papel": "tipo"},
     {"nome": "grupo", "forma": "lista", "separadores": [",", " e ", "+", ";"], "papel": "grupo"},
     {"nome": "caminho", "forma": "presenca", "valores": ["bactéria→doença", "quadro→bactérias"], "papel": "caminho"},
-    {"nome": "vai para", "forma": "texto", "papel": "destino"},
+    {"nome": "vai para", "forma": "pedacos", "separadores": [" + ", "; "], "papel": "destino"},
     {"nome": "livro", "forma": "texto"},
     {"nome": "elo", "forma": "texto"}
   ]
