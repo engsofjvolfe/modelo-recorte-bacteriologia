@@ -22,17 +22,19 @@ inteiro, cada um com o que ele é.
 7. [Regras da ABNT para citar e referenciar](regras-abnt.md) — como citar uma fonte no
    texto e montar a referência dela.
 8. [Scripts](scripts/README.md) — o que faz cada programa do projeto e como rodar.
-9. [Conferência das mensagens e proteção das fontes](.githooks/README.md) — o que é
-   conferido antes de cada versão gravada no git, e por que a IA não aparece como
-   coautora.
+9. [Testes dos scripts](scripts/testes/README.md) — o que cada teste dos scripts confere,
+   como rodar e como provar que ele pega os defeitos.
+10. [Conferência das mensagens e proteção das fontes](.githooks/README.md) — o que é
+    conferido antes de cada versão gravada no git, e por que a IA não aparece como
+    coautora.
 
 ## As fontes e a matéria
 
-10. [Material de base](docs/material-base/README.md) — a pasta das aulas e do livro, que
+11. [Material de base](docs/material-base/README.md) — a pasta das aulas e do livro, que
     nunca é publicada.
-11. [Texto das figuras](docs/texto-das-figuras.md) — as regras do texto de dentro das
+12. [Texto das figuras](docs/texto-das-figuras.md) — as regras do texto de dentro das
     figuras dos capítulos 12 a 17 do livro, na transcrição.
-12. [Análise da matéria](docs/analise-da-materia.md) — a pesquisa sobre como os cursos
+13. [Análise da matéria](docs/analise-da-materia.md) — a pesquisa sobre como os cursos
     pedem a matéria, a análise de cada aula e a forma de estudo de cada tipo de
     conhecimento.
 

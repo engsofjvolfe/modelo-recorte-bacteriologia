@@ -1,0 +1,419 @@
+{
+ "versao_schema": 1,
+ "estragos": [
+  {
+   "nome": "campo-sem-maiuscula",
+   "arquivo": "montar_deck.py",
+   "de": "return \"\".join(p.capitalize() for p in palavras(nome_coluna))",
+   "para": "return \"\".join(palavras(nome_coluna))"
+  },
+  {
+   "nome": "oculta-na-frente",
+   "arquivo": "montar_deck.py",
+   "de": "frente = \"\".join(bloco(c) for c in colunas if c.lado == FRENTE)",
+   "para": "frente = \"\".join(bloco(c) for c in colunas if c.lado == FRENTE) + \"\".join(\"{{\" + campo_anki(o) + \"}}\" for o in ocultas)"
+  },
+  {
+   "nome": "bloco-sem-condicao",
+   "arquivo": "montar_deck.py",
+   "de": "return f'{{{{#{coluna.campo}}}}}<div class=\"{coluna.id}\">{{{{{coluna.campo}}}}}</div>{{{{/{coluna.campo}}}}}'",
+   "para": "return f'<div class=\"{coluna.id}\">{{{{{coluna.campo}}}}}</div>'"
+  },
+  {
+   "nome": "bloco-sem-classe",
+   "arquivo": "montar_deck.py",
+   "de": "<div class=\"{coluna.id}\">",
+   "para": "<div>"
+  },
+  {
+   "nome": "verso-sem-frente",
+   "arquivo": "montar_deck.py",
+   "de": "verso = f\"{{{{{FRENTE_NO_VERSO}}}}}{SEPARADOR}\" + ",
+   "para": "verso = SEPARADOR + "
+  },
+  {
+   "nome": "verso-sem-separador",
+   "arquivo": "montar_deck.py",
+   "de": "verso = f\"{{{{{FRENTE_NO_VERSO}}}}}{SEPARADOR}\" + ",
+   "para": "verso = f\"{{{{{FRENTE_NO_VERSO}}}}}\" + "
+  },
+  {
+   "nome": "verso-com-o-lado-da-frente",
+   "arquivo": "montar_deck.py",
+   "de": "\"\".join(bloco(c) for c in colunas if c.lado == VERSO)",
+   "para": "\"\".join(bloco(c) for c in colunas if c.lado == FRENTE)"
+  },
+  {
+   "nome": "ordena-por-outro-campo",
+   "arquivo": "montar_deck.py",
+   "de": "sort_field_index=campos.index(campo_anki(COLUNA_PERGUNTA))",
+   "para": "sort_field_index=len(campos) - 1"
+  },
+  {
+   "nome": "modelo-sem-estilo",
+   "arquivo": "montar_deck.py",
+   "de": "\"afmt\": verso}], css=estilo,",
+   "para": "\"afmt\": verso}], css=\"\","
+  },
+  {
+   "nome": "valor-com-os-espacos-das-pontas",
+   "arquivo": "montar_deck.py",
+   "de": "return (linha.get(coluna) or \"\").strip()",
+   "para": "return linha.get(coluna) or \"\""
+  },
+  {
+   "nome": "imagem-sem-marca",
+   "arquivo": "montar_deck.py",
+   "de": "                texto = f'<img src=\"{html.escape(texto)}\">'\n",
+   "para": ""
+  },
+  {
+   "nome": "imagem-sem-escape",
+   "arquivo": "montar_deck.py",
+   "de": "html.escape(texto)",
+   "para": "texto"
+  },
+  {
+   "nome": "pacote-sem-midia",
+   "arquivo": "montar_deck.py",
+   "de": "media_files=[str(a) for a in sorted(imagens)]",
+   "para": "media_files=[]"
+  },
+  {
+   "nome": "temporario-do-genanki-fica",
+   "arquivo": "montar_deck.py",
+   "de": "antes, tempfile.tempdir = tempfile.tempdir, propria",
+   "para": "antes = tempfile.tempdir"
+  },
+  {
+   "nome": "imagem-que-falta-passa",
+   "arquivo": "montar_deck.py",
+   "de": "    if not arquivo.is_file():\n        return None, f\"a imagem",
+   "para": "    if False:\n        return None, f\"a imagem"
+  },
+  {
+   "nome": "imagem-com-pasta-passa",
+   "arquivo": "montar_deck.py",
+   "de": "if Path(nome).name != nome or nome in (\".\", \"..\") or \"\\\\\" in nome:",
+   "para": "if \"\\\\\" in nome:"
+  },
+  {
+   "nome": "imagem-com-barra-invertida-passa",
+   "arquivo": "montar_deck.py",
+   "de": " or \"\\\\\" in nome:",
+   "para": ":"
+  },
+  {
+   "nome": "codigo-pela-resposta",
+   "arquivo": "montar_deck.py",
+   "de": "guid=genanki.guid_for(caminho.stem, pergunta)",
+   "para": "guid=genanki.guid_for(caminho.stem, *campos)"
+  },
+  {
+   "nome": "codigo-sem-planilha",
+   "arquivo": "montar_deck.py",
+   "de": "guid=genanki.guid_for(caminho.stem, pergunta)",
+   "para": "guid=genanki.guid_for(pergunta)"
+  },
+  {
+   "nome": "codigo-com-os-espacos",
+   "arquivo": "montar_deck.py",
+   "de": "pergunta = junta([valor_de(linha, COLUNA_PERGUNTA)])",
+   "para": "pergunta = valor_de(linha, COLUNA_PERGUNTA)"
+  },
+  {
+   "nome": "posicao-zero",
+   "arquivo": "montar_deck.py",
+   "de": ", due=k)",
+   "para": ", due=0)"
+  },
+  {
+   "nome": "baralho-sem-divisao",
+   "arquivo": "montar_deck.py",
+   "de": "meio = [f\"{rotulo_da_coluna(cfg.coluna_subdecks)} {valor}\"] if cfg.coluna_subdecks else []",
+   "para": "meio = []"
+  },
+  {
+   "nome": "pacote-sempre-nos-baralhos",
+   "arquivo": "montar_deck.py",
+   "de": "pasta, outra = (cfg.com_imagens, cfg.baralhos) if imagens else (cfg.baralhos, cfg.com_imagens)",
+   "para": "pasta, outra = (cfg.baralhos, cfg.com_imagens)"
+  },
+  {
+   "nome": "pacote-fica-na-outra-pasta",
+   "arquivo": "montar_deck.py",
+   "de": "        velho.unlink()\n",
+   "para": "        pass\n"
+  },
+  {
+   "nome": "coluna-que-falta-passa",
+   "arquivo": "montar_deck.py",
+   "de": "for c in do_molde if c not in cabecalho]",
+   "para": "for c in do_molde if False]"
+  },
+  {
+   "nome": "coluna-estranha-passa",
+   "arquivo": "montar_deck.py",
+   "de": "               if c not in do_molde + cfg.ocultas]",
+   "para": "               if False]"
+  },
+  {
+   "nome": "coluna-repetida-passa",
+   "arquivo": "montar_deck.py",
+   "de": "for c, _ in repetidos((c, c) for c in cabecalho)]",
+   "para": "for c, _ in []]"
+  },
+  {
+   "nome": "cartao-sem-pergunta-passa",
+   "arquivo": "montar_deck.py",
+   "de": "        if not pergunta:\n            erros.append(f\"o cartão {k} não tem pergunta\")",
+   "para": "        if False:\n            erros.append(f\"o cartão {k} não tem pergunta\")"
+  },
+  {
+   "nome": "pergunta-repetida-passa",
+   "arquivo": "montar_deck.py",
+   "de": "elif pergunta in perguntas:",
+   "para": "elif False:"
+  },
+  {
+   "nome": "sem-valor-que-divide-passa",
+   "arquivo": "montar_deck.py",
+   "de": "if cfg.coluna_subdecks and not valor_do_deck:",
+   "para": "if False:"
+  },
+  {
+   "nome": "mesmo-nome-no-anki-passa",
+   "arquivo": "montar_deck.py",
+   "de": "        if caminho in mesmo_nome:",
+   "para": "        if False:"
+  },
+  {
+   "nome": "mesmo-nome-so-das-que-o-trecho-deixa",
+   "arquivo": "montar_deck.py",
+   "de": "for c in planilhas(projeto))",
+   "para": "for c in csvs)"
+  },
+  {
+   "nome": "dois-documentos-dos-cartoes-passam",
+   "arquivo": "montar_deck.py",
+   "de": "if len(docs) != 1:",
+   "para": "if not docs:"
+  },
+  {
+   "nome": "molde-sem-pergunta-passa",
+   "arquivo": "montar_deck.py",
+   "de": "erros = [] if any(c.id == COLUNA_PERGUNTA for c in colunas) else [",
+   "para": "erros = [] if True else ["
+  },
+  {
+   "nome": "molde-sem-frente-passa",
+   "arquivo": "montar_deck.py",
+   "de": "    if not any(c.lado == FRENTE for c in colunas):",
+   "para": "    if False:"
+  },
+  {
+   "nome": "coluna-que-divide-de-fora-passa",
+   "arquivo": "montar_deck.py",
+   "de": "if coluna_subdecks and coluna_subdecks not in do_molde + ocultas:",
+   "para": "if False:"
+  },
+  {
+   "nome": "campo-do-anki-passa",
+   "arquivo": "montar_deck.py",
+   "de": "    if campo in CAMPOS_DO_ANKI:",
+   "para": "    if False:"
+  },
+  {
+   "nome": "nome-que-o-anki-muda-passa",
+   "arquivo": "montar_deck.py",
+   "de": "if any(c in FORA_DO_NOME for c in campo) or campo[0] in FORA_DO_COMECO:",
+   "para": "if False:"
+  },
+  {
+   "nome": "comeco-que-o-anki-tira-passa",
+   "arquivo": "montar_deck.py",
+   "de": " or campo[0] in FORA_DO_COMECO:",
+   "para": ":"
+  },
+  {
+   "nome": "coluna-sem-palavra-passa",
+   "arquivo": "montar_deck.py",
+   "de": "    if not campo:\n",
+   "para": "    if False:\n"
+  },
+  {
+   "nome": "mesmo-campo-com-maiuscula-passa",
+   "arquivo": "montar_deck.py",
+   "de": "repetidos((campo_anki(c).casefold(), c)",
+   "para": "repetidos((campo_anki(c), c)"
+  },
+  {
+   "nome": "estilo-fora-do-utf8-passa",
+   "arquivo": "montar_deck.py",
+   "de": "estilo, erros_do_estilo = le_texto(arquivo_estilo, arquivo_estilo.name)",
+   "para": "estilo, erros_do_estilo = arquivo_estilo.read_text(encoding=\"latin-1\"), []"
+  },
+  {
+   "nome": "planilha-fora-do-utf8-passa",
+   "arquivo": "comum.py",
+   "de": "texto, erros = le_texto(caminho, nome)",
+   "para": "texto, erros = Path(caminho).read_text(encoding=\"latin-1\"), []"
+  },
+  {
+   "nome": "valores-a-mais-passam",
+   "arquivo": "comum.py",
+   "de": "erros = [f\"{nome}: o cartão {k} tem mais valores que colunas\" for k, c in enumerate(cartoes, 1) if None in c]",
+   "para": "erros = []"
+  },
+  {
+   "nome": "valores-a-mais-ficam-no-cartao",
+   "arquivo": "comum.py",
+   "de": "[{k: v for k, v in c.items() if k is not None} for c in cartoes]",
+   "para": "cartoes"
+  },
+  {
+   "nome": "trecho-do-nome-com-maiuscula",
+   "arquivo": "comum.py",
+   "de": "return [c for c in todas if filtro.lower() in c.name.lower()] if filtro else todas",
+   "para": "return [c for c in todas if filtro in c.name] if filtro else todas"
+  },
+  {
+   "nome": "chamadas-sem-molde",
+   "arquivo": "confere_cartoes.py",
+   "de": "dados, erros = le_dados(arquivo, esquema(\"chamadas\"))",
+   "para": "dados, erros = json.loads(arquivo.read_text(encoding=\"utf-8\")), []"
+  },
+  {
+   "nome": "chamada-de-duas-fontes-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "        if nucleo in nucleos:",
+   "para": "        if False:"
+  },
+  {
+   "nome": "sem-arquivo-de-chamadas-quebra",
+   "arquivo": "confere_cartoes.py",
+   "de": "    if not arquivo.exists():\n        return {}, [f\"{arquivo.name}: o arquivo de chamadas",
+   "para": "    if False:\n        return {}, [f\"{arquivo.name}: o arquivo de chamadas"
+  },
+  {
+   "nome": "chamadas-com-erro-nao-param",
+   "arquivo": "confere_cartoes.py",
+   "de": "    nucleos, erros = le_chamadas(projeto)\n    if erros:",
+   "para": "    nucleos, erros = le_chamadas(projeto)\n    if False:"
+  },
+  {
+   "nome": "compara-com-as-marcas-de-destaque",
+   "arquivo": "confere_cartoes.py",
+   "de": "texto = re.sub(r\"</?(?:i|em|b|strong)>|\\*\", \"\", unicodedata.normalize(\"NFC\", texto))",
+   "para": "texto = unicodedata.normalize(\"NFC\", texto)"
+  },
+  {
+   "nome": "compara-com-os-espacos",
+   "arquivo": "confere_cartoes.py",
+   "de": "return re.sub(r\"\\s+\", \" \", texto).strip()",
+   "para": "return texto.strip()"
+  },
+  {
+   "nome": "texto-antes-da-chamada-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "    if sobra:",
+   "para": "    if False:"
+  },
+  {
+   "nome": "trecho-que-nao-esta-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "        if not onde:\n",
+   "para": "        if False:\n"
+  },
+  {
+   "nome": "lugar-sem-trecho-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "if not any(c == chave and l == lugar for _, onde in achados for c, l, *_ in onde):",
+   "para": "if False:"
+  },
+  {
+   "nome": "possibilidade-da-base-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "if prova[\"afirmacao\"] == CATEGORICA and any(",
+   "para": "if False and any("
+  },
+  {
+   "nome": "trecho-vazio-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "        if not simples(trecho):",
+   "para": "        if False:"
+  },
+  {
+   "nome": "cartao-sem-prova-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "        erros.append(\"cartão sem prova: a pergunta não está no arquivo de prova da planilha\")\n",
+   "para": ""
+  },
+  {
+   "nome": "prova-sem-cartao-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "erros += [f\"prova sem cartão: {curto(k)!r}\" for k in provas if k not in perguntas]",
+   "para": "erros += []"
+  },
+  {
+   "nome": "pergunta-repetida-na-planilha-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "if k and perguntas.count(k) > 1]",
+   "para": "if False]"
+  },
+  {
+   "nome": "pergunta-repetida-na-prova-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "        if k in provas:",
+   "para": "        if False:"
+  },
+  {
+   "nome": "colunas-que-faltam-passam",
+   "arquivo": "confere_cartoes.py",
+   "de": "faltam = [c for c in COLUNAS if c not in colunas] if colunas is not None else []",
+   "para": "faltam = []"
+  },
+  {
+   "nome": "erros-da-leitura-calados",
+   "arquivo": "confere_cartoes.py",
+   "de": "erros = da_leitura + [f\"{nome}: {e}\" for e in erros]",
+   "para": "erros = [f\"{nome}: {e}\" for e in erros]"
+  },
+  {
+   "nome": "tique-sempre-volta",
+   "arquivo": "confere_cartoes.py",
+   "de": "sig = assinatura(json.dumps(linha,",
+   "para": "sig = assinatura(k) if True else assinatura(json.dumps(linha,"
+  },
+  {
+   "nome": "tique-sem-o-cartao",
+   "arquivo": "confere_cartoes.py",
+   "de": "assinatura(json.dumps(linha, ensure_ascii=False, sort_keys=True),",
+   "para": "assinatura("
+  },
+  {
+   "nome": "tique-sem-a-prova",
+   "arquivo": "confere_cartoes.py",
+   "de": "                         json.dumps(prova, ensure_ascii=False, sort_keys=True),\n",
+   "para": ""
+  },
+  {
+   "nome": "tique-sem-o-lugar-citado",
+   "arquivo": "confere_cartoes.py",
+   "de": ",\n                         *[t for _, _, textos in citados for _, _, t, _ in textos])",
+   "para": ")"
+  },
+  {
+   "nome": "base-sem-a-afirmacao",
+   "arquivo": "confere_cartoes.py",
+   "de": "DE_AFIRMACAO.get(m[\"afirmacao\"], m[\"afirmacao\"])",
+   "para": "m[\"afirmacao\"]"
+  },
+  {
+   "nome": "base-com-a-pagina-do-arquivo",
+   "arquivo": "confere_cartoes.py",
+   "de": "lugar = ARQUIVO_NO_LOCAL.sub(\"\", m[\"local\"])",
+   "para": "lugar = m[\"local\"]"
+  }
+ ]
+}

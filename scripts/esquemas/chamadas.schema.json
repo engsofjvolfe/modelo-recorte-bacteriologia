@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chamadas.schema.json",
+  "type": "object",
+  "required": ["versao_schema", "chamadas"],
+  "additionalProperties": false,
+  "properties": {
+    "versao_schema": { "const": 1 },
+    "chamadas": { "type": "array", "items": { "$ref": "#/$defs/chamada" } }
+  },
+  "$defs": {
+    "chamada": {
+      "type": "object",
+      "required": ["chave", "chamada"],
+      "additionalProperties": false,
+      "properties": {
+        "chave": { "type": "string", "pattern": "^\\S+$" },
+        "chamada": { "type": "string", "pattern": "^\\([^()]+, [^()]+\\)$" }
+      }
+    }
+  }
+}

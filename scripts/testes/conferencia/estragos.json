@@ -1,0 +1,71 @@
+{
+ "versao_schema": 1,
+ "estragos": [
+  {
+   "nome": "conf-corrigida-sem-tique",
+   "arquivo": "conferencia.py",
+   "de": "\"a_ticar\": (n in lidas and lido is None) or bool(correcoes)}",
+   "para": "\"a_ticar\": (n in lidas and lido is None)}"
+  },
+  {
+   "nome": "conf-refaz-ocr",
+   "arquivo": "conferencia.py",
+   "de": "le_documento(doc, config, raiz, pular_ocr=True)",
+   "para": "le_documento(doc, config, raiz)"
+  },
+  {
+   "nome": "conf-sem-comparar",
+   "arquivo": "conferencia.py",
+   "de": "if lido is not None and lido != conteudo:",
+   "para": "if False:"
+  },
+  {
+   "nome": "conf-sem-rotulo",
+   "arquivo": "conferencia.py",
+   "de": "if rotulo != rotulo_lido:",
+   "para": "if False:"
+  },
+  {
+   "nome": "conf-sem-caminho-do-extrator",
+   "arquivo": "conferencia.py",
+   "de": "        if arq.resolve() in documentos:\n            ps = partes_extraidas",
+   "para": "        if False:\n            ps = partes_extraidas"
+  },
+  {
+   "nome": "conf-assinatura-sem-texto",
+   "arquivo": "conferencia.py",
+   "de": "assinatura(hash_fonte, n, rotulo, conteudo)",
+   "para": "assinatura(hash_fonte, n, rotulo)"
+  },
+  {
+   "nome": "conf-leva-texto-extraido",
+   "arquivo": "conferencia.py",
+   "de": "        if arq.resolve() in documentos:\n            paginas = paginas_transcritas",
+   "para": "        if False:\n            paginas = paginas_transcritas"
+  },
+  {
+   "nome": "conf-sem-imagem",
+   "arquivo": "conferencia.py",
+   "de": "imagem(fonte, n, pasta_img, nome, resolucao) if em_pdf and n <= total else None",
+   "para": "None"
+  },
+  {
+   "nome": "conf-sem-fonte-calada",
+   "arquivo": "conferencia.py",
+   "de": "erros_da_fonte = [] if com_fonte else [f\"a fonte registrada: {SITUACAO[situacao]}; o texto não foi conferido\"]",
+   "para": "erros_da_fonte = []"
+  },
+  {
+   "nome": "conf-lista-sem-molde",
+   "arquivo": "conferencia.py",
+   "de": "extracao, erros = le_dados(lista, esquema(\"extracao\"))",
+   "para": "extracao, erros = json.loads(lista.read_text(encoding=\"utf-8\")), []"
+  },
+  {
+   "nome": "conf-configuracao-sem-molde",
+   "arquivo": "conferencia.py",
+   "de": "configuracao, erros_da_configuracao = le_dados(projeto.caminho(\"extrator\"), esquema(\"extrator\"))",
+   "para": "configuracao, erros_da_configuracao = json.loads(projeto.caminho(\"extrator\").read_text(encoding=\"utf-8\")), []"
+  }
+ ]
+}

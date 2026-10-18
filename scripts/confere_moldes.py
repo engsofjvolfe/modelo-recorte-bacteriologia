@@ -54,6 +54,18 @@ ultima aula ficam ali, e os conjuntos; as unidades so mencionadas; onde as fonte
 documento discordam; os pedacos do destino sem linha na tabela dos destinos; e os trechos
 ate a ultima aula sem lugar depois do limite, com os lugares que perderam.
 
+Quem importa este script tem a conferencia sem o relatorio (confere) e, depois dela, os
+textos do material (textos): o de cada unidade com material de um documento de conteudo (o
+do documento inteiro, quando ele nao lista unidades) e o de cada entrada com trecho de um
+documento que recebe todos os trechos e que e texto -- nas perguntas de prova, cada aula --,
+cada um com as partes na ordem do molde, as que nao recebem trechos tambem, e os trechos de
+cada uma, com os que entram nela por um conjunto (o lugar indireto). No "partes_por_tipo",
+as partes da sequencia e, depois delas, a dos casos (PARTE_DOS_CASOS), com os trechos que
+vao junto do assunto a parte; no molde com grade, a abertura e, em cada item com trecho da
+unidade com itens (ou na propria unidade, sem eles), os eixos da grade e, quando a grade e a
+do documento, os elos; nas "formas", cada forma de pergunta, pelo numero dela. Os cartoes
+nao sao texto.
+
 Os caminhos vem do projeto.json: "formato", "forma_analise", "analises_das_aulas",
 "lugares_lidos", "destinos" e "conferencia_moldes". O formato e lido pela leitura dele
 (comum.le_formato); a forma das analises, pela leitura de todo arquivo de dados
@@ -99,6 +111,17 @@ NENHUM_DOCUMENTO = Falta(None, None)  # o que falta ao trecho de estudo que nao 
 Fonte = collections.namedtuple("Fonte", "documentos sozinha")
 # uma fonte dos documentos do trecho: documentos(trecho, c) -> ids dos documentos de conteudo que ela da, na ordem
 # do formato; sozinha, o titulo da lista dos documentos que so ela da
+Parte = collections.namedtuple("Parte", "item id nome trechos recebe por_conjunto")
+# uma parte de um texto do material, na ordem do molde: o item em que ela fica (None, na da propria unidade), o id
+# dela, o nome, os ids dos trechos que ela recebe, na ordem da leitura, se ela recebe trechos e, entre os trechos
+# dela, os que entram ali por um conjunto, na ordem da leitura
+Texto = collections.namedtuple("Texto", "documento chave codigo nome aula partes junto junto_por_conjunto")
+# um texto do material: o documento; a chave da unidade, como no limite (None, numa entrada de um documento que
+# recebe todos os trechos); o codigo do texto -- o id da unidade, o do documento que nao lista unidades ou a entrada
+# do documento que recebe todos --; o nome; a aula em que ele se escreve (None, quando a entrada nao e uma aula); as
+# partes, na ordem do molde; os ids dos trechos que vao junto do assunto, em qualquer parte que recebe trechos; e,
+# entre eles, os que entram no texto por um conjunto
+PARTE_DOS_CASOS = "casos"  # o id da parte dos casos, depois dos fatos, onde fica cada caso: o nome do campo do formato
 
 
 class Conferencia:
@@ -111,11 +134,13 @@ class Conferencia:
     tabela dos destinos (faltam: {pedaco: ids}). Depois do
     limite (limite.Limite): os trechos de cada lugar de cada documento, no material (cheio:
     {documento: {(entrada, parte): ids}}, a entrada pelo id dela -- vazio no documento que
-    nao lista unidades, e a aula nas perguntas de prova); os tipos dos trechos postos em cada
-    documento de conteudo (tipos: {documento: {tipo: ids}}); e os postos que cada trecho de
-    uma aula ate a ultima perdeu sem ganhar outro (perdidos: {id: [Posto]}). E a classe de
-    cada trecho, a aula de cada um e os avisos, (ERRO ou FALTA, id do trecho ou "", o que
-    houve), na ordem em que se acham."""
+    nao lista unidades, e a aula nas perguntas de prova); entre eles, os que estao num lugar
+    de um documento de conteudo por um conjunto, como lugar indireto (por_conjunto, na forma
+    de cheio); os tipos dos trechos postos em cada documento de conteudo (tipos: {documento:
+    {tipo: ids}}); e os postos que cada trecho de uma aula ate a ultima perdeu sem ganhar
+    outro (perdidos: {id: [Posto]}). E a classe de
+    cada trecho, a aula de cada um, na ordem da leitura, e os avisos, (ERRO ou FALTA, id do
+    trecho ou "", o que houve), na ordem em que se acham."""
 
     def __init__(self, formato, aulas):
         self.formato = formato
@@ -134,6 +159,7 @@ class Conferencia:
         self.limite, self.ficam = None, set()
         self.classes = collections.Counter()
         self.cheio = collections.defaultdict(lambda: collections.defaultdict(set))
+        self.por_conjunto = collections.defaultdict(lambda: collections.defaultdict(set))
         self.tipos = collections.defaultdict(lambda: collections.defaultdict(set))
         self.perdidos = {}
         self.aula_de = {}
@@ -401,17 +427,57 @@ def secao_cartoes(documento, formato, cheio, aula_de):
     return [f"{len(trechos_em(cheio))} trechos viram cartão.", ""] + tabela(["Coluna", "Lado", "Ordem"], linhas) + [""]
 
 
-Molde = collections.namedtuple("Molde", "partes falta por_aula vazias secao")
+# ---------- as partes de um texto, na ordem do molde: ([Parte], ids dos trechos que vao junto do assunto, ids dos que,
+# entre eles, entram no texto por um conjunto) ----------
+# cada uma recebe o documento, a unidade (None, no documento que nao lista unidades e na entrada de um documento que
+# recebe todos os trechos), o id da entrada, o formato, trechos(entrada, parte) -> ids dos trechos ali, em ordem, e
+# por_conjunto(entrada, parte) -> ids dos que, entre eles, estao ali por um conjunto, em ordem
+
+def texto_das_partes(documento, unidade, entrada, formato, trechos, por_conjunto):
+    """As partes da sequencia, cada uma com os trechos dela, e, no documento com casos, a dos casos, que vem depois
+    dos fatos e nao recebe trechos; e os trechos que vao junto do assunto."""
+    partes = [Parte(None, p["id"], p["nome"], trechos(entrada, p["id"]), True, por_conjunto(entrada, p["id"]))
+              for p in formato["partes_por_tipo"]]
+    if documento.get("casos"):
+        partes.append(Parte(None, PARTE_DOS_CASOS, "; ".join(x["nome"] for x in documento["casos"]), [], False, []))
+    return partes, trechos(entrada, JUNTO), por_conjunto(entrada, JUNTO)
+
+
+def texto_da_grade(documento, unidade, entrada, formato, trechos, por_conjunto):
+    """As partes da abertura do documento, com os trechos da que os recebe; e, na unidade sem itens ou no documento
+    que nao lista unidades, cada eixo da grade, com os trechos dele, e, quando a grade e a do documento, cada elo,
+    que nao recebe trechos; na unidade com itens, o mesmo em cada item que tem trecho, na ordem do formato."""
+    partes = [Parte(None, a["id"], a["nome"], trechos(entrada, a["id"]) if a["recebe_trechos"] else [],
+                    a["recebe_trechos"], por_conjunto(entrada, a["id"])) for a in documento.get("abertura", [])]
+    eixos, dela = grade(documento, unidade), unidade or {}
+    elos = [] if dela.get("eixos") else documento.get("elos", [])
+    coisas = ([(i, i["id"]) for i in itens(dela) if any(trechos(i["id"], e["id"]) for e in eixos)] if itens(dela)
+              else [(None, entrada)])
+    for item, chave_ in coisas:
+        partes += [Parte(item, e["id"], e["nome"], trechos(chave_, e["id"]), True, por_conjunto(chave_, e["id"]))
+                   for e in eixos]
+        partes += [Parte(item, elo["id"], elo["nome"], [], False, []) for elo in elos]
+    return partes, [], []
+
+
+def texto_das_formas(documento, unidade, entrada, formato, trechos, por_conjunto):
+    """As formas de pergunta, cada uma pelo numero dela, com os trechos dela."""
+    return [Parte(None, str(n), f["verbo"], trechos(entrada, n), True, por_conjunto(entrada, n))
+            for n, f in enumerate(documento["formas"], 1)], [], []
+
+
+Molde = collections.namedtuple("Molde", "partes falta por_aula vazias secao texto")
 # o que o script faz com cada tipo de molde de documento (esquemas/formato.schema.json): partes(trecho, documento,
 # linha da tabela da leitura do trecho no documento ou None, formato) -> ([parte], erros); falta, o nome do que falta
 # quando partes nao da nenhuma (None, quando o molde sempre da uma ou os erros dizem por que); por_aula, se a entrada
 # do lugar, num documento que recebe todos os trechos, e a aula das perguntas de prova do trecho; vazias(documento,
-# cheio) -> erros; secao(documento, formato, cheio, aula de cada trecho) -> linhas
+# cheio) -> erros; secao(documento, formato, cheio, aula de cada trecho) -> linhas; texto, as partes de um texto do
+# documento, na ordem do molde (None, quando o documento nao e um texto, como os cartoes)
 MOLDES = {
-    "partes_por_tipo": Molde(pelo_tipo, None, False, sem_vazias, secao_partes),
-    MOLDE_COM_GRADE: Molde(pela_tabela, "eixo", False, vazias_da_grade, secao_eixos),
-    "formas": Molde(pela_forma, None, True, vazias_das_formas, secao_perguntas),
-    "colunas": Molde(no_cartao, None, False, sem_vazias, secao_cartoes),
+    "partes_por_tipo": Molde(pelo_tipo, None, False, sem_vazias, secao_partes, texto_das_partes),
+    MOLDE_COM_GRADE: Molde(pela_tabela, "eixo", False, vazias_da_grade, secao_eixos, texto_da_grade),
+    "formas": Molde(pela_forma, None, True, vazias_das_formas, secao_perguntas, texto_das_formas),
+    "colunas": Molde(no_cartao, None, False, sem_vazias, secao_cartoes, None),
 }
 
 
@@ -562,11 +628,15 @@ def lugares_novos(trecho, pendentes, linhas, c):
 
 
 def guarda(trecho, postos, c):
-    """Poe o trecho no material: nos postos dele, com os tipos dele; e em cada documento que
-    recebe todos os trechos, pelo molde dele -- nas perguntas de prova, na aula do trecho,
-    quando ela vai ate a ultima, ou nas aulas que tratam das entradas em que ele ficou."""
+    """Poe o trecho no material: nos postos dele, com os tipos dele, e, no posto indireto,
+    entre os que estao ali por um conjunto; e em cada documento que recebe todos os trechos,
+    pelo molde dele -- nas perguntas de prova, na aula do trecho, quando ela vai ate a ultima,
+    ou nas aulas que tratam das entradas em que ele ficou."""
     for p in postos_sem_repetir(postos):
-        c.cheio[p.documento][(chave(p.entrada)[1], p.parte)].add(trecho["id"])
+        lugar = (chave(p.entrada)[1], p.parte)
+        c.cheio[p.documento][lugar].add(trecho["id"])
+        if not p.entrada.direto:
+            c.por_conjunto[p.documento][lugar].add(trecho["id"])
         for tipo in lugares.valor(trecho, "tipo"):
             c.tipos[p.documento][tipo].add(trecho["id"])
     das_perguntas = ([trecho["aula"]] if trecho["aula"] in c.ate_a_ultima
@@ -639,6 +709,45 @@ def colocar(trechos, linhas, nomeia, c):
     for d in f["documentos"]:
         for e in MOLDES[d["molde"]].vazias(d, c.cheio[d["id"]]):
             c.avisa(ERRO, None, e)
+
+
+# ---------- os textos do material ----------
+
+def textos(c):
+    """[Texto] do material, depois de colocar os trechos (colocar), documento por documento, na ordem do formato: num
+    documento de conteudo, o de cada unidade com material, na ordem dele, ou o do documento inteiro, quando ele nao
+    lista unidades; num documento que recebe todos os trechos e que e texto, o de cada entrada com trecho -- a de
+    cada aula, na ordem das aulas, quando a entrada e a aula. As partes vem do molde do documento, com os trechos de
+    cada uma na ordem da leitura e, entre eles, os que estao ali por um conjunto. A aula do texto de uma unidade e a
+    primeira, ate a ultima, que trata dela."""
+    ordem, com_material, saida = {i: k for k, i in enumerate(c.aula_de)}, set(c.limite.com_material), []
+    for d in c.formato["documentos"]:
+        molde, cheio, indiretos = MOLDES[d["molde"]], c.cheio[d["id"]], c.por_conjunto[d["id"]]
+        if molde.texto is None:
+            continue
+
+        def trechos(entrada, parte, lugares=cheio):
+            return sorted(lugares.get((entrada, parte), ()), key=ordem.__getitem__)
+
+        def por_conjunto(entrada, parte):
+            return trechos(entrada, parte, indiretos)
+        if d.get("todos"):
+            com_trecho = {e for e, _ in cheio}
+            entradas = [a for a in c.aulas if a in com_trecho] if molde.por_aula else [""] if com_trecho else []
+            for e in entradas:
+                partes, junto, junto_por_conjunto = molde.texto(d, None, e, c.formato, trechos, por_conjunto)
+                nome = f"{d['unidade']} {e}" if e else d["nome"]
+                saida.append(Texto(d, None, e or d["id"], nome, e if molde.por_aula else None, partes, junto,
+                                   junto_por_conjunto))
+            continue
+        for u in unidades(d) or [None]:
+            chave_ = (d["id"], u["id"] if u else "")
+            if chave_ in com_material:
+                partes, junto, junto_por_conjunto = molde.texto(d, u, chave_[1], c.formato, trechos, por_conjunto)
+                aula = next(a for a in c.limite.tratam[chave_] if a in c.ate_a_ultima)
+                saida.append(Texto(d, chave_, chave_[1] or d["id"], (u or d)["nome"], aula, partes, junto,
+                                   junto_por_conjunto))
+    return saida
 
 
 # ---------- o relatorio ----------
@@ -837,14 +946,12 @@ def nada_gravado(erros):
     return 1
 
 
-def main(argv=None):
-    p = argparse.ArgumentParser(description="Confere os moldes do material contra as análises das aulas.")
-    p.add_argument("--projeto", type=Path, help="projeto.json (padrao: o primeiro achado subindo a partir daqui)")
-    a = p.parse_args(argv)
-    projeto = acha_projeto(a.projeto)
+def confere(projeto):
+    """((Conferencia, trechos, notas por aula), []) do projeto, com cada trecho no lugar dele e o limite aplicado,
+    sem gravar nada; ou (None, erros), com erro numa entrada, ou com o limite ou o destino que se contradizem."""
     entradas, erros = le_entradas(projeto)
     if erros:
-        return nada_gravado(erros)
+        return None, erros
     formato, trechos, notas, aulas_, linhas, nomeia = entradas
     c = Conferencia(formato, aulas_)
     validas, erros_da_tabela = lidos.conferidas(linhas, {t["id"] for t in trechos}, formato)
@@ -857,9 +964,21 @@ def main(argv=None):
     try:
         colocar(trechos, validas, nomeia, c)
     except limite.ErroDeLimite as e:
-        return nada_gravado([f"{projeto.caminho('formato').name}: {e}"])
+        return None, [f"{projeto.caminho('formato').name}: {e}"]
     except destinos.ErroDeDestinos as e:
-        return nada_gravado([f"{projeto.caminho('forma_analise').name}: {e}"])
+        return None, [f"{projeto.caminho('forma_analise').name}: {e}"]
+    return (c, trechos, notas), []
+
+
+def main(argv=None):
+    p = argparse.ArgumentParser(description="Confere os moldes do material contra as análises das aulas.")
+    p.add_argument("--projeto", type=Path, help="projeto.json (padrao: o primeiro achado subindo a partir daqui)")
+    a = p.parse_args(argv)
+    projeto = acha_projeto(a.projeto)
+    conferido, erros = confere(projeto)
+    if erros:
+        return nada_gravado(erros)
+    c, trechos, notas = conferido
     saida = projeto.caminho("conferencia_moldes")
     saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text(texto_do_relatorio(trechos, notas, c), encoding="utf-8")

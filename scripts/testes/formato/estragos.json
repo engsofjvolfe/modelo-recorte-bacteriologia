@@ -1,0 +1,1757 @@
+{
+ "versao_schema": 1,
+ "estragos": [
+  {
+   "nome": "comum-sem-ligacoes",
+   "arquivo": "comum.py",
+   "de": "erros = [f\"{arquivo.name}: {e}\" for e in erros_das_ligacoes(formato)]",
+   "para": "erros = []"
+  },
+  {
+   "nome": "comum-ids-sem-repetidos",
+   "arquivo": "comum.py",
+   "de": "for i, ls in repetidos(par for d in documentos for par in ids_do_documento(d))]",
+   "para": "for i, ls in []]"
+  },
+  {
+   "nome": "comum-ids-sem-unidades",
+   "arquivo": "comum.py",
+   "de": "[(u[\"id\"], onde(documento, u)) for u in unidades(documento)]",
+   "para": "[]"
+  },
+  {
+   "nome": "comum-ids-sem-itens",
+   "arquivo": "comum.py",
+   "de": "+ [(i[\"id\"], onde(documento, u, i)) for u in unidades(documento) for i in itens(u)]",
+   "para": "+ []"
+  },
+  {
+   "nome": "comum-ids-sem-conjuntos",
+   "arquivo": "comum.py",
+   "de": "+ [(c[\"id\"], onde_do_conjunto(documento, c)) for c in conjuntos(documento)])",
+   "para": "+ [])"
+  },
+  {
+   "nome": "comum-conjuntos-sem-conferir",
+   "arquivo": "comum.py",
+   "de": "    erros += [e for d in documentos for e in erros_dos_conjuntos(d)]\n",
+   "para": ""
+  },
+  {
+   "nome": "comum-membro-calado",
+   "arquivo": "comum.py",
+   "de": "            if m not in entradas]",
+   "para": "            if False]"
+  },
+  {
+   "nome": "comum-itens-nenhum",
+   "arquivo": "comum.py",
+   "de": "return unidade.get(\"itens\", [])",
+   "para": "return []"
+  },
+  {
+   "nome": "comum-conjuntos-nenhum",
+   "arquivo": "comum.py",
+   "de": "return documento.get(\"conjuntos\", [])",
+   "para": "return []"
+  },
+  {
+   "nome": "comum-item-como-unidade",
+   "arquivo": "comum.py",
+   "de": "Entrada(documento, u, i, True)",
+   "para": "Entrada(documento, u, None, True)"
+  },
+  {
+   "nome": "comum-item-sem-unidade",
+   "arquivo": "comum.py",
+   "de": "Entrada(documento, u, i, True)",
+   "para": "Entrada(documento, None, i, True)"
+  },
+  {
+   "nome": "comum-o-que-e-sempre-o-primeiro",
+   "arquivo": "comum.py",
+   "de": "return [entradas[id_]]",
+   "para": "return [next(iter(entradas.values()))]"
+  },
+  {
+   "nome": "comum-conjunto-direto",
+   "arquivo": "comum.py",
+   "de": "._replace(direto=False)",
+   "para": ""
+  },
+  {
+   "nome": "comum-conjunto-fora-de-ordem",
+   "arquivo": "comum.py",
+   "de": "for m in c[\"membros\"]]\n    return []",
+   "para": "for m in reversed(c[\"membros\"])]\n    return []"
+  },
+  {
+   "nome": "comum-ficha-sem-repetidos",
+   "arquivo": "comum.py",
+   "de": "for i, ls in repetidos(partes_da_ficha(documento, eixos))]",
+   "para": "for i, ls in []]"
+  },
+  {
+   "nome": "comum-ficha-sem-abertura",
+   "arquivo": "comum.py",
+   "de": "[(a[\"id\"], \"abertura\") for a in documento.get(\"abertura\", [])] + ",
+   "para": ""
+  },
+  {
+   "nome": "comum-ficha-sem-subtopicos",
+   "arquivo": "comum.py",
+   "de": "+ [(s[\"id\"], f\"subtópico do eixo {e['id']!r}\") for e in eixos for s in e.get(\"subtopicos\", [])])",
+   "para": "+ [])"
+  },
+  {
+   "nome": "comum-ficha-so-do-documento",
+   "arquivo": "comum.py",
+   "de": "u[\"eixos\"]) for u in unidades(documento) if u.get(\"eixos\")]",
+   "para": "u[\"eixos\"]) for u in unidades(documento) if False]"
+  },
+  {
+   "nome": "comum-elo-sem-conferir",
+   "arquivo": "comum.py",
+   "de": "if e not in eixos_do_documento]",
+   "para": "if False]"
+  },
+  {
+   "nome": "comum-documento-sem-grade-calado",
+   "arquivo": "comum.py",
+   "de": "if not documento.get(\"eixos\") and not unidades(documento):",
+   "para": "if False:"
+  },
+  {
+   "nome": "comum-unidade-sem-grade-calada",
+   "arquivo": "comum.py",
+   "de": "for u in unidades(documento) if not grade(documento, u)]",
+   "para": "for u in unidades(documento) if False]"
+  },
+  {
+   "nome": "comum-molde-com-grade-errado",
+   "arquivo": "comum.py",
+   "de": "MOLDE_COM_GRADE = \"eixos\"",
+   "para": "MOLDE_COM_GRADE = \"colunas\""
+  },
+  {
+   "nome": "comum-grupo-sem-conferir",
+   "arquivo": "comum.py",
+   "de": "if g not in grupos]",
+   "para": "if False]"
+  },
+  {
+   "nome": "comum-tipo-em-duas-partes",
+   "arquivo": "comum.py",
+   "de": "repetidos((t, f\"parte {p['id']!r}\") for p in formato[\"partes_por_tipo\"] for t in p[\"tipos\"])]",
+   "para": "[]]"
+  },
+  {
+   "nome": "comum-tipo-em-duas-formas",
+   "arquivo": "comum.py",
+   "de": "repetidos((t, f\"forma {n} ({f['verbo']})\") for n, f in formas for t in f[\"tipos\"])]",
+   "para": "[]]"
+  },
+  {
+   "nome": "comum-onde-tipo-calado",
+   "arquivo": "comum.py",
+   "de": "if tipo not in tipos:",
+   "para": "if False:"
+  },
+  {
+   "nome": "comum-onde-documento-calado",
+   "arquivo": "comum.py",
+   "de": "for d in lista if d not in documentos]",
+   "para": "for d in lista if False]"
+  },
+  {
+   "nome": "comum-tipos-sem-formas",
+   "arquivo": "comum.py",
+   "de": "| {t for d in formato[\"documentos\"] for f in d.get(\"formas\", []) for t in f[\"tipos\"]})",
+   "para": ")"
+  },
+  {
+   "nome": "comum-tipos-sem-junto",
+   "arquivo": "comum.py",
+   "de": " | set(formato[\"tipos_junto\"])",
+   "para": ""
+  },
+  {
+   "nome": "comum-tipos-sem-fora",
+   "arquivo": "comum.py",
+   "de": "| {t for r in formato[\"fora\"] for t in r[\"tipos\"]}",
+   "para": ""
+  },
+  {
+   "nome": "comum-tipos-sem-sequencia",
+   "arquivo": "comum.py",
+   "de": "{t for p in formato[\"partes_por_tipo\"] for t in p[\"tipos\"]} | ",
+   "para": ""
+  },
+  {
+   "nome": "comum-fora-e-marcas",
+   "arquivo": "comum.py",
+   "de": "+ [(m[\"id\"], \"marcas\") for m in formato[\"marcas\"]])]",
+   "para": ")]"
+  },
+  {
+   "nome": "comum-documento-sem-trecho",
+   "arquivo": "comum.py",
+   "de": "for d in documentos if not (d.get(\"todos\") or d.get(\"grupos\") or d.get(\"caminhos\"))]",
+   "para": "for d in documentos if False]"
+  },
+  {
+   "nome": "comum-grade-sem-unidade",
+   "arquivo": "comum.py",
+   "de": "return (unidade or {}).get(\"eixos\") or documento.get(\"eixos\", [])",
+   "para": "return documento.get(\"eixos\", [])"
+  },
+  {
+   "nome": "comum-grade-documento-primeiro",
+   "arquivo": "comum.py",
+   "de": "return (unidade or {}).get(\"eixos\") or documento.get(\"eixos\", [])",
+   "para": "return documento.get(\"eixos\") or (unidade or {}).get(\"eixos\", [])"
+  },
+  {
+   "nome": "comum-acha-unidade-acha-item",
+   "arquivo": "comum.py",
+   "de": "if e.direto and e.item is None)",
+   "para": "if e.direto)"
+  },
+  {
+   "nome": "comum-acha-unidade-acha-conjunto",
+   "arquivo": "comum.py",
+   "de": "if e.direto and e.item is None)",
+   "para": "if e.item is None)"
+  },
+  {
+   "nome": "comum-eixo-sem-subtopicos",
+   "arquivo": "comum.py",
+   "de": "return eixo.get(\"subtopicos\") or [eixo]",
+   "para": "return [eixo]"
+  },
+  {
+   "nome": "base-unidade-que-nao-existe-calada",
+   "arquivo": "base_externa.py",
+   "de": "return None, [], [f\"a unidade {item!r} não está em nenhum documento do formato da disciplina\"]",
+   "para": "return None, [], []"
+  },
+  {
+   "nome": "base-sem-grade-calado",
+   "arquivo": "base_externa.py",
+   "de": "([] if eixos else [f\"a unidade",
+   "para": "([] if True else [f\"a unidade"
+  },
+  {
+   "nome": "base-grade-do-documento",
+   "arquivo": "base_externa.py",
+   "de": "eixos = grade(documento, unidade)",
+   "para": "eixos = grade(documento)"
+  },
+  {
+   "nome": "base-ids-sem-subtopicos",
+   "arquivo": "base_externa.py",
+   "de": "ids_da_grade = [sub[\"id\"] for eixo in eixos for sub in linhas_do_eixo(eixo)]",
+   "para": "ids_da_grade = [eixo[\"id\"] for eixo in eixos]"
+  },
+  {
+   "nome": "base-sem-titulo-de-subtopico",
+   "arquivo": "base_externa.py",
+   "de": "if sub is not eixo:",
+   "para": "if False:"
+  },
+  {
+   "nome": "base-cobertura-de-outra-grade-calada",
+   "arquivo": "base_externa.py",
+   "de": "for u in sorted(set(cobertura) - set(ids_da_grade)):",
+   "para": "for u in []:"
+  },
+  {
+   "nome": "molde-topo-aberto",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"additionalProperties\": false,\n  \"properties\": {\n    \"versao_schema\": { \"const\": 1 },",
+   "para": "\"additionalProperties\": true,\n  \"properties\": {\n    \"versao_schema\": { \"const\": 1 },"
+  },
+  {
+   "nome": "molde-documento-aberto",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"required\": [\"id\", \"nome\", \"unidade\", \"molde\"],\n      \"additionalProperties\": false,",
+   "para": "\"required\": [\"id\", \"nome\", \"unidade\", \"molde\"],\n      \"additionalProperties\": true,"
+  },
+  {
+   "nome": "molde-nao-cabe-aberto",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"nao_cabe\": { \"not\": {} },",
+   "para": "\"nao_cabe\": {},"
+  },
+  {
+   "nome": "molde-partes-sem-minimo",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"partes_para_tratar\": { \"type\": \"integer\", \"minimum\": 1 },",
+   "para": "\"partes_para_tratar\": { \"type\": \"integer\" },"
+  },
+  {
+   "nome": "molde-partes-minimo-zero",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"partes_para_tratar\": { \"type\": \"integer\", \"minimum\": 1 },",
+   "para": "\"partes_para_tratar\": { \"type\": \"integer\", \"minimum\": 0 },"
+  },
+  {
+   "nome": "molde-partes-fracionario",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"partes_para_tratar\": { \"type\": \"integer\", \"minimum\": 1 },",
+   "para": "\"partes_para_tratar\": { \"type\": \"number\", \"minimum\": 1 },"
+  },
+  {
+   "nome": "molde-partes-nao-obrigatorio",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"ultima_aula\", \"partes_para_tratar\",",
+   "para": "\"ultima_aula\","
+  },
+  {
+   "nome": "molde-fontes-nao-obrigatorio",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"documentos_vem_de\", \"grupos\", \"partes_por_tipo\"",
+   "para": "\"grupos\", \"partes_por_tipo\""
+  },
+  {
+   "nome": "molde-fontes-livres",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"items\": { \"enum\": [\"regras\", \"destino\"] }",
+   "para": "\"items\": { \"$ref\": \"#/$defs/texto\" }"
+  },
+  {
+   "nome": "molde-fontes-sem-minimo",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"type\": \"array\", \"minItems\": 1, \"uniqueItems\": true, \"items\": { \"enum\"",
+   "para": "\"type\": \"array\", \"uniqueItems\": true, \"items\": { \"enum\""
+  },
+  {
+   "nome": "molde-fontes-repetidas",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"type\": \"array\", \"minItems\": 1, \"uniqueItems\": true, \"items\": { \"enum\"",
+   "para": "\"type\": \"array\", \"minItems\": 1, \"items\": { \"enum\""
+  },
+  {
+   "nome": "molde-aulas-repetidas",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"aulas\": { \"type\": \"array\", \"uniqueItems\": true,",
+   "para": "\"aulas\": { \"type\": \"array\","
+  },
+  {
+   "nome": "molde-tratada-com-itens",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"then\": { \"properties\": { \"tratada_em\": { \"$ref\": \"#/$defs/nao_cabe\" } } }",
+   "para": "\"then\": {}"
+  },
+  {
+   "nome": "molde-itens-na-unidade-sem-grade",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"tratada_em\": { \"$ref\": \"#/$defs/aulas\" }\n      }\n    },\n    \"unidade_com_grade\"",
+   "para": "\"tratada_em\": { \"$ref\": \"#/$defs/aulas\" },\n        \"itens\": { \"type\": \"array\" }\n      }\n    },\n    \"unidade_com_grade\""
+  },
+  {
+   "nome": "molde-membros-sem-minimo",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"membros\": { \"type\": \"array\", \"minItems\": 1, \"uniqueItems\": true,",
+   "para": "\"membros\": { \"type\": \"array\", \"uniqueItems\": true,"
+  },
+  {
+   "nome": "molde-membros-repetidos",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"membros\": { \"type\": \"array\", \"minItems\": 1, \"uniqueItems\": true,",
+   "para": "\"membros\": { \"type\": \"array\", \"minItems\": 1,"
+  },
+  {
+   "nome": "molde-unidade-com-grade-sem-grade",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"#/$defs/unidade\" } },\n              \"abertura\"",
+   "para": "\"#/$defs/unidade_com_grade\" } },\n              \"abertura\""
+  },
+  {
+   "nome": "molde-formas-sem-obrigatorios",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"required\": [\"pergunta\", \"formas\"],",
+   "para": "\"required\": [],"
+  },
+  {
+   "nome": "molde-cursos-sem-tipo",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"cursos\": { \"$ref\": \"#/$defs/textos\" },",
+   "para": "\"cursos\": {},"
+  },
+  {
+   "nome": "molde-tipo-de-molde-livre",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"molde\": { \"enum\": [\"partes_por_tipo\", \"eixos\", \"formas\", \"colunas\"] },",
+   "para": "\"molde\": { \"type\": \"string\" },"
+  },
+  {
+   "nome": "molde-texto-vazio",
+   "arquivo": "esquemas/formato.schema.json",
+   "de": "\"texto\": { \"type\": \"string\", \"minLength\": 1 },",
+   "para": "\"texto\": { \"type\": \"string\" },"
+  },
+  {
+   "nome": "moldes-id-desconhecido-dos-destinos-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "for pedaco, i in destinos.desconhecidos(nomeia, do_formato):",
+   "para": "for pedaco, i in []:"
+  },
+  {
+   "nome": "tabela-linha-curta-vira-erro",
+   "arquivo": "tabela.py",
+   "de": "if len(valores) > len(colunas):",
+   "para": "if len(valores) != len(colunas):"
+  },
+  {
+   "nome": "moldes-entrada-que-falta-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "for n in ENTRADAS if not projeto.caminho(n).is_file()]",
+   "para": "for n in ENTRADAS if False]"
+  },
+  {
+   "nome": "moldes-molde-desconhecido-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "for d in formato[\"documentos\"] if d[\"molde\"] not in MOLDES]",
+   "para": "for d in formato[\"documentos\"] if False]"
+  },
+  {
+   "nome": "moldes-fonte-desconhecida-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "for f in formato[\"documentos_vem_de\"] if f not in FONTES]",
+   "para": "for f in formato[\"documentos_vem_de\"] if False]"
+  },
+  {
+   "nome": "moldes-regras-sem-o-arquivo",
+   "arquivo": "confere_moldes.py",
+   "de": "erros.append(f\"{nome}: {e}\")",
+   "para": "erros.append(str(e))"
+  },
+  {
+   "nome": "moldes-tabela-que-nao-se-le-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "            lidas[chave_] = texto_de(projeto.caminho(chave_), ler)\n        except ValueError as e:\n            erros.append(str(e))",
+   "para": "            lidas[chave_] = texto_de(projeto.caminho(chave_), ler)\n        except ValueError:\n            lidas[chave_] = []"
+  },
+  {
+   "nome": "moldes-limite-das-entradas-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "    if \"analises\" in lidas:\n        erros += [",
+   "para": "    if False:\n        erros += ["
+  },
+  {
+   "nome": "moldes-utf8-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "    texto, erros = le_texto(caminho, caminho.name)\n    if erros:\n        raise ValueError(erros[0])",
+   "para": "    texto, erros = le_texto(caminho, caminho.name)\n    if False:\n        raise ValueError(erros[0])"
+  },
+  {
+   "nome": "moldes-tabela-nao-conferida",
+   "arquivo": "confere_moldes.py",
+   "de": "validas, erros_da_tabela = lidos.conferidas(linhas, {t[\"id\"] for t in trechos}, formato)",
+   "para": "validas, erros_da_tabela = [linha for _, linha in linhas], []"
+  },
+  {
+   "nome": "moldes-erro-de-limite-sem-tratar",
+   "arquivo": "confere_moldes.py",
+   "de": "    except limite.ErroDeLimite as e:",
+   "para": "    except ZeroDivisionError as e:"
+  },
+  {
+   "nome": "moldes-erro-de-destinos-sem-tratar",
+   "arquivo": "confere_moldes.py",
+   "de": "    except destinos.ErroDeDestinos as e:",
+   "para": "    except ZeroDivisionError as e:"
+  },
+  {
+   "nome": "moldes-decisoes-caladas",
+   "arquivo": "confere_moldes.py",
+   "de": "self.decisoes = {chave(e): coisa(e)[\"tratada_em\"] for e in entradas if \"tratada_em\" in coisa(e)}",
+   "para": "self.decisoes = {}"
+  },
+  {
+   "nome": "moldes-itens-sem-unidade",
+   "arquivo": "confere_moldes.py",
+   "de": "self.unidade_de = {chave(e): chave(e._replace(item=None)) for e in entradas if e.item is not None}",
+   "para": "self.unidade_de = {}"
+  },
+  {
+   "nome": "moldes-item-sem-a-unidade",
+   "arquivo": "confere_moldes.py",
+   "de": "return f\"{entrada.unidade['nome']} › {entrada.item['nome']}\"",
+   "para": "return entrada.item[\"nome\"]"
+  },
+  {
+   "nome": "moldes-entrada-da-linha-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "    if unidade:\n        base = lidos.entradas_da_linha(documento, unidade, c.formato)",
+   "para": "    if False:\n        base = lidos.entradas_da_linha(documento, unidade, c.formato)"
+  },
+  {
+   "nome": "moldes-documento-sem-unidades-sem-entrada",
+   "arquivo": "confere_moldes.py",
+   "de": "base = no_documento if unidades(documento) else [lidos.do_documento(documento)]",
+   "para": "base = no_documento"
+  },
+  {
+   "nome": "moldes-item-da-abertura-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "and parte not in lidos.aberturas(documento):",
+   "para": "and False:"
+  },
+  {
+   "nome": "moldes-abertura-vai-para-o-item",
+   "arquivo": "confere_moldes.py",
+   "de": " and parte not in lidos.aberturas(documento):",
+   "para": ":"
+  },
+  {
+   "nome": "moldes-regras-caladas",
+   "arquivo": "confere_moldes.py",
+   "de": "return [d for d in c.de_conteudo if d in caidos]",
+   "para": "return []"
+  },
+  {
+   "nome": "moldes-destino-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "nomeados = {e.documento[\"id\"] for e in c.nomeadas.get(trecho[\"id\"], [])}",
+   "para": "nomeados = set()"
+  },
+  {
+   "nome": "moldes-fontes-todas",
+   "arquivo": "confere_moldes.py",
+   "de": "usados = {d for nome in c.formato[\"documentos_vem_de\"] for d in por_fonte[nome]}",
+   "para": "usados = {d for nome in FONTES for d in por_fonte[nome]}"
+  },
+  {
+   "nome": "moldes-discordancias-trocadas",
+   "arquivo": "confere_moldes.py",
+   "de": "            if d not in dos_outros:",
+   "para": "            if d in dos_outros:"
+  },
+  {
+   "nome": "moldes-junto-perdido",
+   "arquivo": "confere_moldes.py",
+   "de": "or [JUNTO], []",
+   "para": "or [], []"
+  },
+  {
+   "nome": "moldes-forma-de-todo-tipo",
+   "arquivo": "confere_moldes.py",
+   "de": "achados = [n for n, f in formas if set(tipos) & set(f[\"tipos\"])]",
+   "para": "achados = [n for n, f in formas]"
+  },
+  {
+   "nome": "moldes-tipo-sem-forma-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "for t in tipos if not any(t in f[\"tipos\"] for _, f in formas)]",
+   "para": "for t in tipos if False]"
+  },
+  {
+   "nome": "moldes-grade-do-documento-so-sem-unidade",
+   "arquivo": "confere_moldes.py",
+   "de": "return {\"\"}.union(*(ids_da_unidade(u) for u in unidades(documento) if not u.get(\"eixos\")))",
+   "para": "return {\"\"}"
+  },
+  {
+   "nome": "moldes-grade-do-documento-sem-itens",
+   "arquivo": "confere_moldes.py",
+   "de": "ids_da_unidade(u) for u in unidades(documento) if not u.get(\"eixos\")",
+   "para": "{u[\"id\"]} for u in unidades(documento) if not u.get(\"eixos\")"
+  },
+  {
+   "nome": "moldes-eixo-do-documento-vazio-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "for e in documento.get(\"eixos\", []) if not trechos_em(cheio, {e[\"id\"]}, usam)]",
+   "para": "for e in documento.get(\"eixos\", []) if False]"
+  },
+  {
+   "nome": "moldes-elo-vazio-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "for elo in documento.get(\"elos\", []) if not trechos_em(cheio, set(elo[\"eixos\"]), usam)]",
+   "para": "for elo in documento.get(\"elos\", []) if False]"
+  },
+  {
+   "nome": "moldes-unidade-sem-trecho-com-eixo-vazio",
+   "arquivo": "confere_moldes.py",
+   "de": "if u.get(\"eixos\") and trechos_em(cheio, None, suas):",
+   "para": "if u.get(\"eixos\"):"
+  },
+  {
+   "nome": "moldes-eixo-da-unidade-vazio-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "for e in u[\"eixos\"] if not trechos_em(cheio, {e[\"id\"]}, suas)]",
+   "para": "for e in u[\"eixos\"] if False]"
+  },
+  {
+   "nome": "moldes-abertura-vazia-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "if a[\"recebe_trechos\"] and not trechos_em(cheio, {a[\"id\"]})]",
+   "para": "if False]"
+  },
+  {
+   "nome": "moldes-forma-vazia-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "for n, f in enumerate(documento[\"formas\"], 1) if not trechos_em(cheio, {n})]",
+   "para": "for n, f in enumerate(documento[\"formas\"], 1) if False]"
+  },
+  {
+   "nome": "moldes-parte-conta-errada",
+   "arquivo": "confere_moldes.py",
+   "de": "linhas.append((p[\"nome\"], \"; \".join(p[\"tipos\"]), len(ids), aulas(ids, aula_de), p[\"ordem\"]))",
+   "para": "linhas.append((p[\"nome\"], \"; \".join(p[\"tipos\"]), len(ids) + 1, aulas(ids, aula_de), p[\"ordem\"]))"
+  },
+  {
+   "nome": "moldes-parte-com-todas-as-aulas",
+   "arquivo": "confere_moldes.py",
+   "de": "aulas(ids, aula_de), p[\"ordem\"]))",
+   "para": "aulas(set(aula_de), aula_de), p[\"ordem\"]))"
+  },
+  {
+   "nome": "moldes-junto-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "    if junto:\n",
+   "para": "    if False:\n"
+  },
+  {
+   "nome": "moldes-casos-calados",
+   "arquivo": "confere_moldes.py",
+   "de": "    if documento.get(\"casos\"):\n        saida += [",
+   "para": "    if False:\n        saida += ["
+  },
+  {
+   "nome": "moldes-abertura-sem-as-unidades",
+   "arquivo": "confere_moldes.py",
+   "de": "+ (f\" ({por_unidade})\" if por_unidade else \"\")",
+   "para": "+ \"\""
+  },
+  {
+   "nome": "moldes-eixo-conta-errada",
+   "arquivo": "confere_moldes.py",
+   "de": "usam)), e[\"ordem\"])",
+   "para": "usam)) + 1, e[\"ordem\"])"
+  },
+  {
+   "nome": "moldes-elo-conta-errada",
+   "arquivo": "confere_moldes.py",
+   "de": "len(trechos_em(cheio, set(elo[\"eixos\"]), usam)), elo[\"ordem\"])",
+   "para": "len(trechos_em(cheio, set(elo[\"eixos\"]), usam)) + 1, elo[\"ordem\"])"
+  },
+  {
+   "nome": "moldes-eixo-da-unidade-conta-errada",
+   "arquivo": "confere_moldes.py",
+   "de": "len(trechos_em(cheio, {e[\"id\"]}, suas)), e[\"ordem\"])",
+   "para": "len(trechos_em(cheio, {e[\"id\"]}, suas)) + 1, e[\"ordem\"])"
+  },
+  {
+   "nome": "moldes-unidade-total-sem-os-itens",
+   "arquivo": "confere_moldes.py",
+   "de": "({len(trechos_em(cheio, None, suas))} trechos)",
+   "para": "({len(trechos_em(cheio, None, {u['id']}))} trechos)"
+  },
+  {
+   "nome": "moldes-forma-conta-errada",
+   "arquivo": "confere_moldes.py",
+   "de": "linhas = [(f[\"verbo\"], \"; \".join(f[\"tipos\"]), len(trechos_em(cheio, {n})), f[\"ordem\"])",
+   "para": "linhas = [(f[\"verbo\"], \"; \".join(f[\"tipos\"]), len(trechos_em(cheio, {n})) + 1, f[\"ordem\"])"
+  },
+  {
+   "nome": "moldes-por-entrada-errado",
+   "arquivo": "confere_moldes.py",
+   "de": "por_entrada = collections.Counter({e: len(trechos_em(cheio, None, {e})) for e, _ in cheio})",
+   "para": "por_entrada = collections.Counter({e: 1 for e, _ in cheio})"
+  },
+  {
+   "nome": "moldes-cartoes-conta-errada",
+   "arquivo": "confere_moldes.py",
+   "de": "{len(trechos_em(cheio))} trechos viram cartão",
+   "para": "{len(cheio)} trechos viram cartão"
+  },
+  {
+   "nome": "moldes-sem-eixo-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "        if molde.falta and not partes:\n            faltas.append(Falta(molde.falta, d))",
+   "para": "        if False:\n            faltas.append(Falta(molde.falta, d))"
+  },
+  {
+   "nome": "moldes-sem-entrada-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "            if not entradas:\n                faltas.append(Falta(ENTRADA, d))",
+   "para": "            if False:\n                faltas.append(Falta(ENTRADA, d))"
+  },
+  {
+   "nome": "moldes-parte-de-outra-entrada-aceita",
+   "arquivo": "confere_moldes.py",
+   "de": "if documento[\"molde\"] == MOLDE_COM_GRADE and parte not in lidos.partes_da_entrada(e):",
+   "para": "if False:"
+  },
+  {
+   "nome": "moldes-marcado-de-depois-com-falta",
+   "arquivo": "confere_moldes.py",
+   "de": "if marcas and not (falta == NENHUM_DOCUMENTO and trecho[\"aula\"] not in c.ate_a_ultima):",
+   "para": "if marcas:"
+  },
+  {
+   "nome": "moldes-marcado-falta-vira-erro",
+   "arquivo": "confere_moldes.py",
+   "de": "c.avisa(FALTA, trecho, f\"marcado ({nomes}), {texto_da_falta(falta)}\")",
+   "para": "c.avisa(ERRO, trecho, f\"marcado ({nomes}), {texto_da_falta(falta)}\")"
+  },
+  {
+   "nome": "moldes-falta-vira-erro",
+   "arquivo": "confere_moldes.py",
+   "de": "c.avisa(ERRO if falta == NENHUM_DOCUMENTO else FALTA, trecho, texto_da_falta(falta))",
+   "para": "c.avisa(ERRO, trecho, texto_da_falta(falta))"
+  },
+  {
+   "nome": "moldes-erro-vira-falta",
+   "arquivo": "confere_moldes.py",
+   "de": "c.avisa(ERRO if falta == NENHUM_DOCUMENTO else FALTA, trecho, texto_da_falta(falta))",
+   "para": "c.avisa(FALTA, trecho, texto_da_falta(falta))"
+  },
+  {
+   "nome": "moldes-marcado-de-depois-a-espera",
+   "arquivo": "confere_moldes.py",
+   "de": "return (\"depois\",) if not documentos and trecho[\"aula\"] not in c.ate_a_ultima else (\"marca\", marcas[0])",
+   "para": "return (\"marca\", marcas[0])"
+  },
+  {
+   "nome": "moldes-marcado-sem-lugar-de-estudo",
+   "arquivo": "confere_moldes.py",
+   "de": "else (\"marca\", marcas[0])",
+   "para": "else (\"estudo\",)"
+  },
+  {
+   "nome": "moldes-assunto-sem-lugar",
+   "arquivo": "confere_moldes.py",
+   "de": "    if not documentos:\n        return (\"assunto\",)",
+   "para": "    if False:\n        return (\"assunto\",)"
+  },
+  {
+   "nome": "moldes-sem-entrada-sem-lugar",
+   "arquivo": "confere_moldes.py",
+   "de": "return (\"unidade\",) if any(f.coisa == ENTRADA for f in faltas) else (\"problema\", SEM_LUGAR)",
+   "para": "return (\"problema\", SEM_LUGAR)"
+  },
+  {
+   "nome": "moldes-sem-lugar-de-estudo",
+   "arquivo": "confere_moldes.py",
+   "de": "return (\"unidade\",) if any(f.coisa == ENTRADA for f in faltas) else (\"problema\", SEM_LUGAR)",
+   "para": "return (\"estudo\",)"
+  },
+  {
+   "nome": "moldes-posto-fora-ignorado",
+   "arquivo": "confere_moldes.py",
+   "de": "fora = [linha for linha in linhas if linha[\"documento\"] == lidos.FORA]",
+   "para": "fora = []"
+  },
+  {
+   "nome": "moldes-fora-e-com-lugar-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "if len(fora) < len(linhas):",
+   "para": "if False:"
+  },
+  {
+   "nome": "moldes-de-fora-com-lugar-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "        if linhas:\n            c.avisa(ERRO, trecho, \"trecho de fora com lugar na tabela da leitura\")",
+   "para": "        if False:\n            c.avisa(ERRO, trecho, \"trecho de fora com lugar na tabela da leitura\")"
+  },
+  {
+   "nome": "moldes-grupo-desconhecido-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "for g in lugares.grupos_desconhecidos(trecho, c.formato):",
+   "para": "for g in []:"
+  },
+  {
+   "nome": "moldes-tipo-sem-lugar-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "    if sem_parte:\n",
+   "para": "    if False:\n"
+  },
+  {
+   "nome": "moldes-marcado-com-linha-pelas-fontes",
+   "arquivo": "confere_moldes.py",
+   "de": "if das_fontes and not (marcas and na_tabela):",
+   "para": "if das_fontes:"
+  },
+  {
+   "nome": "moldes-pendentes-com-os-das-fontes",
+   "arquivo": "confere_moldes.py",
+   "de": "[d for d in na_tabela if d not in das_fontes]",
+   "para": "[d for d in na_tabela]"
+  },
+  {
+   "nome": "moldes-sem-documento-sem-problema",
+   "arquivo": "confere_moldes.py",
+   "de": "if not das_fontes and sem[0] == \"problema\":",
+   "para": "if False:"
+  },
+  {
+   "nome": "moldes-sem-documento-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "postos, faltas = [], ([] if documentos else [NENHUM_DOCUMENTO])",
+   "para": "postos, faltas = [], []"
+  },
+  {
+   "nome": "moldes-postos-nao-guardados",
+   "arquivo": "confere_moldes.py",
+   "de": "    if postos:\n        c.postos[trecho[\"id\"]] = postos",
+   "para": "    if False:\n        c.postos[trecho[\"id\"]] = postos"
+  },
+  {
+   "nome": "moldes-indireto-conta",
+   "arquivo": "confere_moldes.py",
+   "de": "chave(p.entrada), p.parte, p.entrada.direto)",
+   "para": "chave(p.entrada), p.parte, True)"
+  },
+  {
+   "nome": "moldes-lugar-novo-sem-material-aceito",
+   "arquivo": "confere_moldes.py",
+   "de": "            if c.unidade_de.get(k, k) in c.limite.com_material:",
+   "para": "            if True:"
+  },
+  {
+   "nome": "moldes-perguntas-de-depois-na-aula",
+   "arquivo": "confere_moldes.py",
+   "de": "    das_perguntas = ([trecho[\"aula\"]] if trecho[\"aula\"] in c.ate_a_ultima",
+   "para": "    das_perguntas = ([trecho[\"aula\"]] if True"
+  },
+  {
+   "nome": "moldes-perguntas-de-depois-caladas",
+   "arquivo": "confere_moldes.py",
+   "de": "                     else c.limite.perguntas.get(trecho[\"id\"], []))",
+   "para": "                     else [])"
+  },
+  {
+   "nome": "moldes-todos-sem-trecho",
+   "arquivo": "confere_moldes.py",
+   "de": "    for d in c.todos:\n",
+   "para": "    for d in []:\n"
+  },
+  {
+   "nome": "moldes-o-que-fica-tudo",
+   "arquivo": "confere_moldes.py",
+   "de": "postos = [p for p in c.postos.get(i, []) if (i, chave(p.entrada), p.parte) in c.ficam]",
+   "para": "postos = list(c.postos.get(i, []))"
+  },
+  {
+   "nome": "moldes-lugar-novo-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "    if not postos and (i in c.limite.sem_lugar_ate or i in c.sem_fonte) and pendentes:",
+   "para": "    if False:"
+  },
+  {
+   "nome": "moldes-sem-fonte-sem-lugar-novo",
+   "arquivo": "confere_moldes.py",
+   "de": "            if not (na_tabela and trecho[\"aula\"] in c.ate_a_ultima):",
+   "para": "            if True:"
+  },
+  {
+   "nome": "moldes-sem-fonte-de-depois-com-lugar-novo",
+   "arquivo": "confere_moldes.py",
+   "de": "na_tabela and trecho[\"aula\"] in c.ate_a_ultima",
+   "para": "na_tabela"
+  },
+  {
+   "nome": "moldes-sem-fonte-fora-do-lugar-novo",
+   "arquivo": "confere_moldes.py",
+   "de": "(i in c.limite.sem_lugar_ate or i in c.sem_fonte) and pendentes",
+   "para": "i in c.limite.sem_lugar_ate and pendentes"
+  },
+  {
+   "nome": "moldes-sem-fonte-sem-erro",
+   "arquivo": "confere_moldes.py",
+   "de": "        return com_erro(trecho, c.sem_fonte[i], c)",
+   "para": "        return c.sem_fonte[i]"
+  },
+  {
+   "nome": "moldes-sem-fonte-de-estudo",
+   "arquivo": "confere_moldes.py",
+   "de": "        return com_erro(trecho, c.sem_fonte[i], c)",
+   "para": "        com_erro(trecho, c.sem_fonte[i], c)\n        return (\"estudo\",)"
+  },
+  {
+   "nome": "moldes-problema-sem-erro",
+   "arquivo": "confere_moldes.py",
+   "de": "    c.avisa(ERRO, trecho, classe[1])\n    return classe",
+   "para": "    return classe"
+  },
+  {
+   "nome": "moldes-documento-em-que-nao-cai-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "        for d in pendentes:\n            c.avisa(ERRO",
+   "para": "        for d in []:\n            c.avisa(ERRO"
+  },
+  {
+   "nome": "moldes-depois-como-limite",
+   "arquivo": "confere_moldes.py",
+   "de": "    if i in c.limite.sem_lugar_ate:\n        c.perdidos[i]",
+   "para": "    if True:\n        c.perdidos[i]"
+  },
+  {
+   "nome": "moldes-perdidos-calados",
+   "arquivo": "confere_moldes.py",
+   "de": "        c.perdidos[i] = c.postos[i]\n",
+   "para": ""
+  },
+  {
+   "nome": "moldes-falta-do-limite-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "        c.avisa(FALTA, trecho, \"sem lugar depois do limite: espera um lugar novo\")\n",
+   "para": ""
+  },
+  {
+   "nome": "moldes-considerados-com-os-de-fora",
+   "arquivo": "confere_moldes.py",
+   "de": "considerados = [t for t in trechos if lugares.classe(t, c.formato)[0] != \"fora\"",
+   "para": "considerados = [t for t in trechos if True"
+  },
+  {
+   "nome": "moldes-considerados-com-os-lidos",
+   "arquivo": "confere_moldes.py",
+   "de": "and not any(linha[\"documento\"] == lidos.FORA for linha in da_tabela.get(t[\"id\"], []))]",
+   "para": "and True]"
+  },
+  {
+   "nome": "moldes-sem-linha-calada",
+   "arquivo": "confere_moldes.py",
+   "de": "        c.avisa(FALTA, None, f\"destino sem linha na tabela dos destinos: {pedaco!r}\")",
+   "para": "        pass"
+  },
+  {
+   "nome": "moldes-aviso-sem-o-trecho",
+   "arquivo": "confere_moldes.py",
+   "de": "return [f\"{tipo}: {f'{i}: ' if i else ''}{mensagem}\" for tipo, i, mensagem in avisos]",
+   "para": "return [f\"{tipo}: {mensagem}\" for tipo, i, mensagem in avisos]"
+  },
+  {
+   "nome": "moldes-onde-sem-os-outros-documentos",
+   "arquivo": "confere_moldes.py",
+   "de": "for d in nomes if d not in docs and tipos[d].get(tipo))",
+   "para": "for d in nomes if False)"
+  },
+  {
+   "nome": "moldes-onde-pelo-id",
+   "arquivo": "confere_moldes.py",
+   "de": "\"; \".join(nomes[d] for d in docs)",
+   "para": "\"; \".join(docs)"
+  },
+  {
+   "nome": "moldes-partes-fora-de-ordem",
+   "arquivo": "confere_moldes.py",
+   "de": "key=lambda p: ordem.index(p) if p in ordem else len(ordem))",
+   "para": "key=lambda p: -ordem.index(p) if p in ordem else len(ordem))"
+  },
+  {
+   "nome": "moldes-tratam-sem-partes",
+   "arquivo": "confere_moldes.py",
+   "de": "        return f\"{aula} ({'; '.join(nomes.get(p, str(p)) for p in suas)})\" if suas else aula",
+   "para": "        return aula"
+  },
+  {
+   "nome": "moldes-decisao-sem-aviso",
+   "arquivo": "confere_moldes.py",
+   "de": "(\"decisão do formato: \" if k in c.decisoes else \"\")",
+   "para": "(\"\")"
+  },
+  {
+   "nome": "moldes-trechos-de-depois-todos",
+   "arquivo": "confere_moldes.py",
+   "de": "        if lugar.aula not in c.ate_a_ultima:\n            de_depois",
+   "para": "        if True:\n            de_depois"
+  },
+  {
+   "nome": "moldes-mencionam-calado",
+   "arquivo": "confere_moldes.py",
+   "de": "\", \".join(c.limite.mencionam.get(chave(e), [])) or NENHUM",
+   "para": "NENHUM"
+  },
+  {
+   "nome": "moldes-conjuntos-calados",
+   "arquivo": "confere_moldes.py",
+   "de": "[(cj[\"nome\"], \"; \".join(nomes[m] for m in cj[\"membros\"])) for cj in conjuntos(d)],",
+   "para": "[],"
+  },
+  {
+   "nome": "moldes-so-mencionadas-com-as-tratadas",
+   "arquivo": "confere_moldes.py",
+   "de": "if e.item is None and chave(e) not in tratadas and c.ate_a_ultima & set(mencionam):",
+   "para": "if e.item is None and c.ate_a_ultima & set(mencionam):"
+  },
+  {
+   "nome": "moldes-discordancia-da-outra-fonte",
+   "arquivo": "confere_moldes.py",
+   "de": "so_dela = c.discordam[nome]",
+   "para": "so_dela = c.discordam[next(x for x in FONTES if x != nome)]"
+  },
+  {
+   "nome": "moldes-discordancia-sem-a-fonte",
+   "arquivo": "confere_moldes.py",
+   "de": "Só a fonte {nome!r} dá o documento",
+   "para": "Só a fonte dá o documento"
+  },
+  {
+   "nome": "moldes-sem-linha-fora-do-relatorio",
+   "arquivo": "confere_moldes.py",
+   "de": "linhas = [(pedaco, len(ids), aulas(ids, c.aula_de), ids[0]) for pedaco, ids in c.faltam.items()]",
+   "para": "linhas = []"
+  },
+  {
+   "nome": "moldes-perdido-sem-a-parte",
+   "arquivo": "confere_moldes.py",
+   "de": "return f\"{posto.documento}: {nome_da_entrada(posto.entrada)} ({parte})\"",
+   "para": "return f\"{posto.documento}: {nome_da_entrada(posto.entrada)}\""
+  },
+  {
+   "nome": "moldes-classes-fora-do-relatorio",
+   "arquivo": "confere_moldes.py",
+   "de": "saida += tabela_das_classes(c.classes, formato) + [\"\"]",
+   "para": "saida += [\"\"]"
+  },
+  {
+   "nome": "moldes-avisos-fora-do-relatorio",
+   "arquivo": "confere_moldes.py",
+   "de": "([f\"- {linha}\" for linha in linhas_dos_avisos(c.avisos)] or [\"Nenhum.\"])",
+   "para": "[\"Nenhum.\"]"
+  },
+  {
+   "nome": "moldes-avisos-fora-da-tela",
+   "arquivo": "confere_moldes.py",
+   "de": "for linha in linhas_dos_avisos(c.avisos):\n        print(linha)",
+   "para": "for linha in []:\n        print(linha)"
+  },
+  {
+   "nome": "moldes-codigo-zero",
+   "arquivo": "confere_moldes.py",
+   "de": "return 1 if c.avisos else 0",
+   "para": "return 0"
+  },
+  {
+   "nome": "lidos-repetida-calada",
+   "arquivo": "lidos.py",
+   "de": "\"repete uma linha de antes\" if chave in vistas",
+   "para": "\"repete uma linha de antes\" if False"
+  },
+  {
+   "nome": "lidos-id-calado",
+   "arquivo": "lidos.py",
+   "de": "if linha[\"id\"] not in ids_dos_trechos:",
+   "para": "if False:"
+  },
+  {
+   "nome": "lidos-regra-de-fora-calada",
+   "arquivo": "lidos.py",
+   "de": "if unidade not in {r[\"id\"] for r in formato[\"fora\"]}:",
+   "para": "if False:"
+  },
+  {
+   "nome": "lidos-fora-com-parte-calada",
+   "arquivo": "lidos.py",
+   "de": "return f\"linha de fora com a parte {parte!r}\" if parte else None",
+   "para": "return None"
+  },
+  {
+   "nome": "lidos-documento-de-conteudo-calado",
+   "arquivo": "lidos.py",
+   "de": "if documento not in lugares.documentos_de_conteudo(formato):",
+   "para": "if False:"
+  },
+  {
+   "nome": "lidos-unidade-calada",
+   "arquivo": "lidos.py",
+   "de": "    if not entradas:\n        return None",
+   "para": "    if False:\n        return None"
+  },
+  {
+   "nome": "lidos-unidade-de-outro-documento",
+   "arquivo": "lidos.py",
+   "de": "return [e for e in o_que_e(formato, unidade) if e.documento[\"id\"] == documento[\"id\"]]",
+   "para": "return o_que_e(formato, unidade)"
+  },
+  {
+   "nome": "lidos-documento-sem-unidades-sem-entrada",
+   "arquivo": "lidos.py",
+   "de": "return list(entradas_do_documento(documento).values()) or [do_documento(documento)]",
+   "para": "return list(entradas_do_documento(documento).values())"
+  },
+  {
+   "nome": "lidos-grade-do-documento",
+   "arquivo": "lidos.py",
+   "de": "return [e[\"id\"] for e in grade(documento, unidade)]",
+   "para": "return [e[\"id\"] for e in grade(documento)]"
+  },
+  {
+   "nome": "lidos-abertura-que-nao-recebe",
+   "arquivo": "lidos.py",
+   "de": "return [a[\"id\"] for a in documento.get(\"abertura\", []) if a[\"recebe_trechos\"]]",
+   "para": "return [a[\"id\"] for a in documento.get(\"abertura\", [])]"
+  },
+  {
+   "nome": "lidos-item-com-abertura",
+   "arquivo": "lidos.py",
+   "de": "    if entrada.item is not None:\n        return eixos(documento, unidade)",
+   "para": "    if entrada.item is not None:\n        return eixos_e_aberturas(documento, unidade)"
+  },
+  {
+   "nome": "lidos-unidade-com-itens-com-eixos",
+   "arquivo": "lidos.py",
+   "de": "    if unidade is not None and itens(unidade):\n        return aberturas(documento)",
+   "para": "    if unidade is not None and itens(unidade):\n        return eixos(documento, unidade)"
+  },
+  {
+   "nome": "lidos-unidade-sem-abertura",
+   "arquivo": "lidos.py",
+   "de": "    return eixos_e_aberturas(documento, unidade)\n",
+   "para": "    return eixos(documento, unidade)\n"
+  },
+  {
+   "nome": "lidos-linha-da-unidade-com-itens-sem-eixos",
+   "arquivo": "lidos.py",
+   "de": "    if entrada.item is None and entrada.unidade is not None:\n        return eixos_e_aberturas",
+   "para": "    if False:\n        return eixos_e_aberturas"
+  },
+  {
+   "nome": "lidos-linha-da-unidade-sem-abertura",
+   "arquivo": "lidos.py",
+   "de": "        return eixos_e_aberturas(entrada.documento, entrada.unidade)",
+   "para": "        return eixos(entrada.documento, entrada.unidade)"
+  },
+  {
+   "nome": "lidos-conjunto-pela-uniao",
+   "arquivo": "lidos.py",
+   "de": "        return [p for p in listas[0] if all(p in outra for outra in listas[1:])]",
+   "para": "        return list(dict.fromkeys(p for lista in listas for p in lista))"
+  },
+  {
+   "nome": "lidos-sem-id-so-a-primeira-entrada",
+   "arquivo": "lidos.py",
+   "de": "    return list(dict.fromkeys(p for lista in listas for p in lista))",
+   "para": "    return listas[0]"
+  },
+  {
+   "nome": "lidos-sem-grade-sem-parte-vazia",
+   "arquivo": "lidos.py",
+   "de": "if documento[\"molde\"] != MOLDE_COM_GRADE:\n        return [\"\"]",
+   "para": "if False:\n        return [\"\"]"
+  },
+  {
+   "nome": "lidos-documento-fora-calado",
+   "arquivo": "lidos.py",
+   "de": "if any(d[\"id\"] == FORA for d in formato[\"documentos\"]):",
+   "para": "if False:"
+  },
+  {
+   "nome": "validar-utf8-sem-o-arquivo",
+   "arquivo": "validar_dados.py",
+   "de": "return None, [f\"{nome}: o texto não está em UTF-8; grave o arquivo de novo em UTF-8\"]",
+   "para": "return None, [\"o texto não está em UTF-8\"]"
+  },
+  {
+   "nome": "validar-minimo-calado",
+   "arquivo": "validar_dados.py",
+   "de": "and valor < schema[\"minimum\"]:",
+   "para": "and False:"
+  },
+  {
+   "nome": "validar-itens-repetidos-calados",
+   "arquivo": "validar_dados.py",
+   "de": "if schema.get(\"uniqueItems\"):",
+   "para": "if False:"
+  },
+  {
+   "nome": "validar-repetidos-nenhum",
+   "arquivo": "validar_dados.py",
+   "de": "if v in vistos and v not in repetidos:",
+   "para": "if False:"
+  },
+  {
+   "nome": "projeto-analises-sem-protecao",
+   "arquivo": "esquemas/projeto.schema.json",
+   "de": "\"analises_das_aulas\": { \"$ref\": \"#/$defs/protegido\" },",
+   "para": "\"analises_das_aulas\": { \"$ref\": \"#/$defs/texto\" },"
+  },
+  {
+   "nome": "projeto-conferencia-dos-moldes-sem-protecao",
+   "arquivo": "esquemas/projeto.schema.json",
+   "de": "\"conferencia_moldes\": { \"$ref\": \"#/$defs/protegido\" },",
+   "para": "\"conferencia_moldes\": { \"$ref\": \"#/$defs/texto\" },"
+  },
+  {
+   "nome": "projeto-destinos-sem-protecao",
+   "arquivo": "esquemas/projeto.schema.json",
+   "de": "\"destinos\": { \"$ref\": \"#/$defs/protegido\" },",
+   "para": "\"destinos\": { \"$ref\": \"#/$defs/texto\" },"
+  },
+  {
+   "nome": "forma-molde-aberto",
+   "arquivo": "esquemas/forma-analise.schema.json",
+   "de": "\"additionalProperties\": false,\n  \"properties\": {\n    \"versao_schema\"",
+   "para": "\"additionalProperties\": true,\n  \"properties\": {\n    \"versao_schema\""
+  },
+  {
+   "nome": "forma-sem-pedacos",
+   "arquivo": "esquemas/forma-analise.schema.json",
+   "de": "\"forma\": { \"enum\": [\"lista\", \"pedacos\", \"presenca\", \"texto\"] },",
+   "para": "\"forma\": { \"enum\": [\"lista\", \"presenca\", \"texto\"] },"
+  },
+  {
+   "nome": "comum-planilha-sem-prefixo",
+   "arquivo": "comum.py",
+   "de": "/ f\"{projeto.valor('prefixo_planilhas')}{nome}{EXTENSAO_PLANILHA}\"",
+   "para": "/ f\"{nome}{EXTENSAO_PLANILHA}\""
+  },
+  {
+   "nome": "comum-planilha-de-outra-extensao",
+   "arquivo": "comum.py",
+   "de": "EXTENSAO_PLANILHA = \".csv\"",
+   "para": "EXTENSAO_PLANILHA = \".tsv\""
+  },
+  {
+   "nome": "moldes-texto-sem-casos",
+   "arquivo": "confere_moldes.py",
+   "de": "    if documento.get(\"casos\"):\n        partes.append(Parte(None, PARTE_DOS_CASOS",
+   "para": "    if False:\n        partes.append(Parte(None, PARTE_DOS_CASOS"
+  },
+  {
+   "nome": "moldes-texto-sem-junto",
+   "arquivo": "confere_moldes.py",
+   "de": "    return partes, trechos(entrada, JUNTO)",
+   "para": "    return partes, []"
+  },
+  {
+   "nome": "moldes-texto-sem-elos",
+   "arquivo": "confere_moldes.py",
+   "de": "    elos = [] if dela.get(\"eixos\") else documento.get(\"elos\", [])",
+   "para": "    elos = []"
+  },
+  {
+   "nome": "moldes-texto-sem-itens",
+   "arquivo": "confere_moldes.py",
+   "de": "([(i, i[\"id\"]) for i in itens(dela) if any(trechos(i[\"id\"], e[\"id\"]) for e in eixos)] if itens(dela)",
+   "para": "([] if itens(dela)"
+  },
+  {
+   "nome": "moldes-texto-abertura-sem-trechos",
+   "arquivo": "confere_moldes.py",
+   "de": "trechos(entrada, a[\"id\"]) if a[\"recebe_trechos\"] else []",
+   "para": "[]"
+  },
+  {
+   "nome": "moldes-texto-formas-de-zero",
+   "arquivo": "confere_moldes.py",
+   "de": "Parte(None, str(n), f[\"verbo\"]",
+   "para": "Parte(None, str(n - 1), f[\"verbo\"]"
+  },
+  {
+   "nome": "moldes-textos-sem-os-de-todos",
+   "arquivo": "confere_moldes.py",
+   "de": "entradas = [a for a in c.aulas if a in com_trecho] if molde.por_aula else [\"\"] if com_trecho else []",
+   "para": "entradas = []"
+  },
+  {
+   "nome": "moldes-textos-na-ultima-aula",
+   "arquivo": "confere_moldes.py",
+   "de": "aula = next(a for a in c.limite.tratam[chave_] if a in c.ate_a_ultima)",
+   "para": "aula = [a for a in c.limite.tratam[chave_] if a in c.ate_a_ultima][-1]"
+  },
+  {
+   "nome": "moldes-textos-das-aulas-sem-nome",
+   "arquivo": "confere_moldes.py",
+   "de": "nome = f\"{d['unidade']} {e}\" if e else d[\"nome\"]",
+   "para": "nome = d[\"nome\"]"
+  },
+  {
+   "nome": "moldes-textos-sem-codigo-do-documento",
+   "arquivo": "confere_moldes.py",
+   "de": "saida.append(Texto(d, chave_, chave_[1] or d[\"id\"]",
+   "para": "saida.append(Texto(d, chave_, chave_[1]"
+  },
+  {
+   "nome": "material-codigo-na-linha-lido",
+   "arquivo": "confere_material.py",
+   "de": "linhas = [(n, sem_codigo_na_linha(linha)) for n, linha in linhas_fora_de_codigo(texto)]",
+   "para": "linhas = [(n, linha) for n, linha in linhas_fora_de_codigo(texto)]"
+  },
+  {
+   "nome": "material-blocos-de-codigo-lidos",
+   "arquivo": "confere_material.py",
+   "de": "for n, linha in linhas_fora_de_codigo(texto)]",
+   "para": "for n, linha in enumerate(texto.splitlines(), 1)]"
+  },
+  {
+   "nome": "material-sem-subpastas",
+   "arquivo": "confere_material.py",
+   "de": ".rglob(f\"*{EXTENSAO_DOCUMENTO}\")",
+   "para": ".glob(f\"*{EXTENSAO_DOCUMENTO}\")"
+  },
+  {
+   "nome": "material-texto-fora-do-utf8-calado",
+   "arquivo": "confere_material.py",
+   "de": "avisos += [aviso(\"fora-do-utf8\", None, None, None, None, e) for e in erros]",
+   "para": "avisos += []"
+  },
+  {
+   "nome": "material-moldes-com-aviso-seguem",
+   "arquivo": "confere_material.py",
+   "de": "    if c.avisos:\n        return None, [",
+   "para": "    if False:\n        return None, ["
+  },
+  {
+   "nome": "material-codigo-repetido-calado",
+   "arquivo": "confere_material.py",
+   "de": "repetidos = sorted(k for k, n in codigos.items() if n > 1)",
+   "para": "repetidos = []"
+  },
+  {
+   "nome": "material-pedido-desconhecido-calado",
+   "arquivo": "confere_material.py",
+   "de": "if pedido is not None and pedido not in codigos:",
+   "para": "if False:"
+  },
+  {
+   "nome": "material-erro-das-marcas-sem-tratar",
+   "arquivo": "confere_material.py",
+   "de": "    except marcas.ErroDeMarcas as e:",
+   "para": "    except ZeroDivisionError as e:"
+  },
+  {
+   "nome": "material-existem-nenhum",
+   "arquivo": "confere_material.py",
+   "de": "existem = {marcas.nfc(i) for i in c.aula_de}",
+   "para": "existem = set()"
+  },
+  {
+   "nome": "material-junto-perdido",
+   "arquivo": "confere_material.py",
+   "de": "p.recebe) for p in t.partes], t.junto) for t in textos}",
+   "para": "p.recebe) for p in t.partes], []) for t in textos}"
+  },
+  {
+   "nome": "material-sem-o-item",
+   "arquivo": "confere_material.py",
+   "de": "p.item[\"id\"] if p.item else None",
+   "para": "None"
+  },
+  {
+   "nome": "material-unidades-abertas-nenhuma",
+   "arquivo": "confere_material.py",
+   "de": "{m.codigo for m in todas if m.nivel == UNIDADE and m.codigo}",
+   "para": "set()"
+  },
+  {
+   "nome": "material-avisos-sem-o-texto",
+   "arquivo": "confere_material.py",
+   "de": "(seus[x.unidade] if x.unidade in codigos else soltos).append(x)",
+   "para": "soltos.append(x)"
+  },
+  {
+   "nome": "material-sem-texto-calado",
+   "arquivo": "confere_material.py",
+   "de": "        if t.codigo not in abertas:\n            seus[t.codigo].append(aviso(\"sem-texto\"",
+   "para": "        if False:\n            seus[t.codigo].append(aviso(\"sem-texto\""
+  },
+  {
+   "nome": "material-pedido-sem-texto-sem-falta",
+   "arquivo": "confere_material.py",
+   "de": " and not com_planilha and t.codigo != pedido:",
+   "para": " and not com_planilha:"
+  },
+  {
+   "nome": "material-sem-planilha-calada",
+   "arquivo": "confere_material.py",
+   "de": "        return False, [aviso(\"sem-planilha\", nome, None, texto.codigo, None, \"falta a planilha dos cartões da unidade\")]",
+   "para": "        return False, []"
+  },
+  {
+   "nome": "material-planilha-fora-do-utf8-calada",
+   "arquivo": "confere_material.py",
+   "de": "        return [aviso(\"fora-do-utf8\", None, None, texto.codigo, None, e) for e in erros]",
+   "para": "        return []"
+  },
+  {
+   "nome": "material-coluna-que-falta-calada",
+   "arquivo": "confere_material.py",
+   "de": "faltam = [c for c in colunas if c and c not in (leitor.fieldnames or [])]",
+   "para": "faltam = []"
+  },
+  {
+   "nome": "material-cartao-sem-trecho-aceito",
+   "arquivo": "confere_material.py",
+   "de": "        if not codigos:\n            avisos.append(aviso(\"cartao-sem-trecho\"",
+   "para": "        if False:\n            avisos.append(aviso(\"cartao-sem-trecho\""
+  },
+  {
+   "nome": "material-cartao-de-outra-unidade-aceito",
+   "arquivo": "confere_material.py",
+   "de": "            elif codigo not in seus:",
+   "para": "            elif False:"
+  },
+  {
+   "nome": "material-aula-do-cartao-calada",
+   "arquivo": "confere_material.py",
+   "de": "        if aula != texto.aula:",
+   "para": "        if False:"
+  },
+  {
+   "nome": "material-trecho-sem-cartao-calado",
+   "arquivo": "confere_material.py",
+   "de": "for i in seus if i not in com_cartao]",
+   "para": "for i in seus if False]"
+  },
+  {
+   "nome": "material-estado-sempre-pronto",
+   "arquivo": "confere_material.py",
+   "de": "    return ERRO if ERRO in tipos else FALTA if FALTA in tipos else PRONTA",
+   "para": "    return PRONTA"
+  },
+  {
+   "nome": "material-erro-como-falta",
+   "arquivo": "confere_material.py",
+   "de": "return ERRO if ERRO in tipos else FALTA",
+   "para": "return FALTA if ERRO in tipos else FALTA"
+  },
+  {
+   "nome": "material-ordem-sem-a-aula",
+   "arquivo": "confere_material.py",
+   "de": "das_unidades = sorted((t for t in textos if t.chave is not None), key=lambda t: aulas.index(t.aula))",
+   "para": "das_unidades = [t for t in textos if t.chave is not None]"
+  },
+  {
+   "nome": "material-perguntas-no-fim",
+   "arquivo": "confere_material.py",
+   "de": "depois[deps[-1] if deps else len(das_unidades) - 1]",
+   "para": "depois[len(das_unidades) - 1]"
+  },
+  {
+   "nome": "material-sem-dependencias",
+   "arquivo": "confere_material.py",
+   "de": "[das_unidades[k] for k in deps]",
+   "para": "[]"
+  },
+  {
+   "nome": "material-proxima-a-ultima",
+   "arquivo": "confere_material.py",
+   "de": "proxima = next((t for t, _ in lista if estados[t.codigo] != PRONTA), None)",
+   "para": "proxima = next((t for t, _ in reversed(lista) if estados[t.codigo] != PRONTA), None)"
+  },
+  {
+   "nome": "material-pode-sem-as-dependencias",
+   "arquivo": "confere_material.py",
+   "de": " and all(estados[d.codigo] == PRONTA for d in deps):",
+   "para": ":"
+  },
+  {
+   "nome": "material-pede-todas",
+   "arquivo": "confere_material.py",
+   "de": "for d in deps if estados[d.codigo] != PRONTA)",
+   "para": "for d in deps)"
+  },
+  {
+   "nome": "material-codigo-sempre-zero",
+   "arquivo": "confere_material.py",
+   "de": "    return 1 if linhas else 0",
+   "para": "    return 0"
+  },
+  {
+   "nome": "material-marca-trocada",
+   "arquivo": "confere_material.py",
+   "de": "return f\"{marcas.ABRE} {nivel} {codigo} {marcas.FECHA}\"",
+   "para": "return f\"{marcas.ABRE} {codigo} {nivel} {marcas.FECHA}\""
+  },
+  {
+   "nome": "comum-prova-com-a-extensao",
+   "arquivo": "comum.py",
+   "de": "return projeto.caminho_com(\"provas\", Path(planilha_).stem)",
+   "para": "return projeto.caminho_com(\"provas\", Path(planilha_).name)"
+  },
+  {
+   "nome": "projeto-listas-sem-protecao",
+   "arquivo": "esquemas/projeto.schema.json",
+   "de": "\"allOf\": [ { \"$ref\": \"#/$defs/protegido\" }, { \"$ref\": \"#/$defs/modelo_por_unidade\" } ]",
+   "para": "\"allOf\": [ { \"$ref\": \"#/$defs/modelo_por_unidade\" } ]"
+  },
+  {
+   "nome": "forma-sem-fonte",
+   "arquivo": "esquemas/forma-analise.schema.json",
+   "de": "\"papel\": { \"enum\": [\"tipo\", \"grupo\", \"caminho\", \"destino\"] },\n        \"fonte\": { \"type\": \"string\", \"minLength\": 1 }",
+   "para": "\"papel\": { \"enum\": [\"tipo\", \"grupo\", \"caminho\", \"destino\"] }"
+  },
+  {
+   "nome": "moldes-por-conjunto-nenhum",
+   "arquivo": "confere_moldes.py",
+   "de": "        if not p.entrada.direto:\n            c.por_conjunto",
+   "para": "        if False:\n            c.por_conjunto"
+  },
+  {
+   "nome": "moldes-por-conjunto-todos",
+   "arquivo": "confere_moldes.py",
+   "de": "        if not p.entrada.direto:\n            c.por_conjunto",
+   "para": "        if True:\n            c.por_conjunto"
+  },
+  {
+   "nome": "moldes-texto-partes-sem-por-conjunto",
+   "arquivo": "confere_moldes.py",
+   "de": "trechos(entrada, p[\"id\"]), True, por_conjunto(entrada, p[\"id\"]))",
+   "para": "trechos(entrada, p[\"id\"]), True, [])"
+  },
+  {
+   "nome": "moldes-texto-junto-sem-por-conjunto",
+   "arquivo": "confere_moldes.py",
+   "de": "    return partes, trechos(entrada, JUNTO), por_conjunto(entrada, JUNTO)",
+   "para": "    return partes, trechos(entrada, JUNTO), []"
+  },
+  {
+   "nome": "moldes-texto-grade-sem-por-conjunto",
+   "arquivo": "confere_moldes.py",
+   "de": "trechos(chave_, e[\"id\"]), True, por_conjunto(chave_, e[\"id\"]))",
+   "para": "trechos(chave_, e[\"id\"]), True, [])"
+  },
+  {
+   "nome": "moldes-texto-abertura-sem-por-conjunto",
+   "arquivo": "confere_moldes.py",
+   "de": "a[\"recebe_trechos\"], por_conjunto(entrada, a[\"id\"])) for a in",
+   "para": "a[\"recebe_trechos\"], []) for a in"
+  },
+  {
+   "nome": "moldes-textos-por-conjunto-de-todos",
+   "arquivo": "confere_moldes.py",
+   "de": "            return trechos(entrada, parte, indiretos)",
+   "para": "            return trechos(entrada, parte)"
+  },
+  {
+   "nome": "lista-destino-mostrado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "        if campo.get(\"papel\") == DESTINO:\n            continue",
+   "para": "        if False:\n            continue"
+  },
+  {
+   "nome": "lista-papel-pelo-texto",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "valor = (\", \".join(trecho[\"valores\"][nome]) or forma[\"vazio\"]) if \"papel\" in campo else trecho[\"brutos\"][nome]",
+   "para": "valor = trecho[\"brutos\"][nome]"
+  },
+  {
+   "nome": "lista-sem-o-vazio",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "(\", \".join(trecho[\"valores\"][nome]) or forma[\"vazio\"])",
+   "para": "(\", \".join(trecho[\"valores\"][nome]))"
+  },
+  {
+   "nome": "lista-marcas-caladas",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if suas:\n        saida.append(f\"  - {MARCAS}: \"",
+   "para": "    if False:\n        saida.append(f\"  - {MARCAS}: \""
+  },
+  {
+   "nome": "lista-por-conjunto-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if por_conjunto:\n",
+   "para": "    if False:\n"
+  },
+  {
+   "nome": "lista-depois-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if trecho[\"aula\"] not in ctx.c.ate_a_ultima:",
+   "para": "    if False:"
+  },
+  {
+   "nome": "lista-ensinado-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "ctx.onde.get(nfc(trecho[\"id\"]), [])",
+   "para": "[]"
+  },
+  {
+   "nome": "lista-ensinado-em-qualquer-unidade",
+   "arquivo": "lista_de_trabalho.py",
+   "de": " and caminho[0] in codigos:",
+   "para": ":"
+  },
+  {
+   "nome": "lista-sem-o-item",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "            if p.item[\"id\"] != aberto:",
+   "para": "            if False:"
+  },
+  {
+   "nome": "lista-nao-recebe-como-sem-trecho",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "NAO_RECEBE if not p.recebe else SEM_TRECHO",
+   "para": "SEM_TRECHO"
+  },
+  {
+   "nome": "lista-sem-trecho-como-nao-recebe",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "NAO_RECEBE if not p.recebe else SEM_TRECHO",
+   "para": "NAO_RECEBE"
+  },
+  {
+   "nome": "lista-junto-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if texto.junto:\n",
+   "para": "    if False:\n"
+  },
+  {
+   "nome": "lista-junto-por-conjunto-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "i in texto.junto_por_conjunto",
+   "para": "False"
+  },
+  {
+   "nome": "lista-parte-por-conjunto-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "i in p.por_conjunto",
+   "para": "False"
+  },
+  {
+   "nome": "lista-abre-com-a-parte",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "ABRE.format(f\"`{cm.marca(cm.UNIDADE, texto.codigo)}`\")",
+   "para": "ABRE.format(f\"`{cm.marca(cm.PARTE, texto.codigo)}`\")"
+  },
+  {
+   "nome": "lista-rotulo-sem-borda-antes",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "rf\"(?<!\\w){re.escape(nfc(rotulo))}(?!\\w)\"",
+   "para": "rf\"{re.escape(nfc(rotulo))}(?!\\w)\""
+  },
+  {
+   "nome": "lista-rotulo-sem-borda-depois",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "rf\"(?<!\\w){re.escape(nfc(rotulo))}(?!\\w)\"",
+   "para": "rf\"(?<!\\w){re.escape(nfc(rotulo))}\""
+  },
+  {
+   "nome": "lista-transcricoes-de-outra-fonte",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "        if chave in achadas:\n            achadas[chave].append(",
+   "para": "        if chave is not None and fontes:\n            achadas[fontes[0]].append("
+  },
+  {
+   "nome": "lista-ordem-do-texto",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "key=lambda x: (ordem_natural(x[0].name), x[0].name)",
+   "para": "key=lambda x: x[0].name"
+  },
+  {
+   "nome": "lista-sem-pagina-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "                if not suas:\n",
+   "para": "                if False:\n"
+  },
+  {
+   "nome": "lista-pedacos-com-o-vazio",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "return [nfc(p) for p in brutos if p and p != vazio]",
+   "para": "return [nfc(p) for p in brutos if p]"
+  },
+  {
+   "nome": "lista-pedacos-letra-a-letra",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "(valor if isinstance(valor, list) else [valor])",
+   "para": "valor"
+  },
+  {
+   "nome": "lista-capitulos-sem-o-aviso",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if not achados:\n        return saida + [NENHUM_CAMPO, \"\"], 0, 0",
+   "para": "    if False:\n        return saida + [NENHUM_CAMPO, \"\"], 0, 0"
+  },
+  {
+   "nome": "lista-duvidas-todas-as-aulas",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "        if aula is not None and aula not in suas:\n            continue",
+   "para": "        if False:\n            continue"
+  },
+  {
+   "nome": "lista-duvidas-sem-as-de-fora",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "        if aula is not None and aula not in suas:\n            continue",
+   "para": "        if aula is None or aula not in suas:\n            continue"
+  },
+  {
+   "nome": "lista-duvidas-sem-descer",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "corpo = [NIVEL + linha if fora and linha.startswith(NIVEL) else linha for linha, fora in linhas]",
+   "para": "corpo = [linha for linha, fora in linhas]"
+  },
+  {
+   "nome": "lista-duvidas-codigo-como-titulo",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "        if n in fora and linha.startswith(SECAO):",
+   "para": "        if linha.startswith(SECAO):"
+  },
+  {
+   "nome": "lista-duvidas-titulo-inteiro",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "das_aulas.get(nfc(titulo.split()[0]))",
+   "para": "das_aulas.get(nfc(titulo))"
+  },
+  {
+   "nome": "lista-dependencias-aceitas",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if faltam:\n        return None, [f\"o texto {pedido}",
+   "para": "    if False:\n        return None, [f\"o texto {pedido}"
+  },
+  {
+   "nome": "lista-duvidas-que-faltam-caladas",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if not arquivo_das_duvidas.is_file():",
+   "para": "    if False:"
+  },
+  {
+   "nome": "lista-utf8-calado",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if erros or erros_da_forma:",
+   "para": "    if erros_da_forma:"
+  },
+  {
+   "nome": "lista-documento-pelo-id",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "f\"- {DOCUMENTO}: {texto.documento['nome']}\"",
+   "para": "f\"- {DOCUMENTO}: {texto.documento['id']}\""
+  },
+  {
+   "nome": "lista-sem-a-aula",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "f\"- {AULA}: {texto.aula or NENHUM}\"",
+   "para": "f\"- {AULA}: {NENHUM}\""
+  },
+  {
+   "nome": "lista-planilha-sem-a-coluna-dos-trechos",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "        colunas = [CODIGOS_NA_COLUNA.format(x) for x in [projeto.valor(\"coluna_trechos\")] if x]",
+   "para": "        colunas = []"
+  },
+  {
+   "nome": "lista-planilha-sem-a-coluna-da-aula",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "        colunas += [AULA_NA_COLUNA.format(texto.aula, x) for x in [projeto.valor(\"coluna_subdecks\")] if x]",
+   "para": "        colunas += []"
+  },
+  {
+   "nome": "lista-tratam-como-mencionam",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "{', '.join(c.limite.tratam.get(texto.chave, [])) or NENHUM}",
+   "para": "{', '.join(c.limite.mencionam.get(texto.chave, [])) or NENHUM}"
+  },
+  {
+   "nome": "lista-prova-como-planilha",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "arquivo_da_prova(projeto, arquivo)",
+   "para": "arquivo"
+  },
+  {
+   "nome": "lista-dependencias-caladas",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    if deps:\n        saida.append(f\"- {DEPENDE}: \"",
+   "para": "    if False:\n        saida.append(f\"- {DEPENDE}: \""
+  },
+  {
+   "nome": "lista-nome-sem-o-documento",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "f\"{texto.documento['id']}-{texto.codigo}\"",
+   "para": "texto.codigo"
+  }
+ ]
+}

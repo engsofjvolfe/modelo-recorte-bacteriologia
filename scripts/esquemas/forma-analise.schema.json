@@ -31,7 +31,8 @@
         "forma": { "enum": ["lista", "pedacos", "presenca", "texto"] },
         "separadores": { "$ref": "#/$defs/textos" },
         "valores": { "$ref": "#/$defs/textos" },
-        "papel": { "enum": ["tipo", "grupo", "caminho", "destino"] }
+        "papel": { "enum": ["tipo", "grupo", "caminho", "destino"] },
+        "fonte": { "type": "string", "minLength": 1 }
       },
       "allOf": [
         { "if": { "properties": { "forma": { "const": "lista" } } }, "then": { "required": ["separadores"] } },

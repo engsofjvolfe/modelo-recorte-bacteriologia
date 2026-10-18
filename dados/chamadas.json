@@ -1,0 +1,21 @@
+{
+  "versao_schema": 1,
+  "chamadas": [
+    { "chave": "MURRAY-2022", "chamada": "(Murray; Rosenthal; Pfaller, 2022)" },
+    { "chave": "AULA-1", "chamada": "(Paim, [2026])" },
+    { "chave": "AULA-2", "chamada": "(Paim, [2019]a)" },
+    { "chave": "AULA-3", "chamada": "(Paim, [2020]e)" },
+    { "chave": "AULA-4", "chamada": "(Paim, [2020]f)" },
+    { "chave": "AULA-5", "chamada": "(Paim, [2022]b)" },
+    { "chave": "AULA-6", "chamada": "(Paim, [2022]c)" },
+    { "chave": "AULA-7", "chamada": "(Paim, [2020]d)" },
+    { "chave": "AULA-8", "chamada": "(Paim, [2020]h)" },
+    { "chave": "AULA-9-10", "chamada": "(Paim, [2020]b)" },
+    { "chave": "AULA-11-12", "chamada": "(Paim, [2025])" },
+    { "chave": "AULA-13", "chamada": "(Paim, [2020]c)" },
+    { "chave": "AULA-14", "chamada": "(Paim, [2020]a)" },
+    { "chave": "AULA-15", "chamada": "(Paim, [2020]g)" },
+    { "chave": "AULA-16", "chamada": "(Paim, [2019]b)" },
+    { "chave": "AULA-17", "chamada": "(Paim, [2022]a)" }
+  ]
+}

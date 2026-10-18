@@ -1,0 +1,91 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright do codigo sob GPL-3.0 -- ver LICENSE e NOTICE.md na raiz do projeto.
+
+"""
+Prova que o teste de uma peca pega os defeitos: para cada estrago da lista, copia a peca
+para uma pasta nova, troca nela um texto de um arquivo pelo texto estragado e roda o teste
+contra a copia. O estrago e pego quando o teste falha (sai com codigo diferente de 0).
+
+A lista e um JSON com o molde esquemas/estragos.schema.json: cada estrago com o "nome", o
+"arquivo" (o caminho dentro da peca), o texto "de", que tem de aparecer uma vez so no
+arquivo, e o texto "para". Campo que o molde nao conhece, ou que falta, e erro. Precisa
+do extrator_comum.py, do extrator, na pasta irma "extrator" ou na mesma pasta.
+
+O teste recebe a pasta da copia, os argumentos de --antes, se houver, e uma pasta de
+trabalho nova, nessa ordem. Com --irma, essa pasta e copiada ao lado da copia da peca, com
+o mesmo nome, sem a pasta testes/ dela: e para a peca que acha outra na pasta irma. A peca
+original nunca e mudada.
+
+Mostra uma linha por estrago (pego, nao pego ou o erro) e, no fim, quantos foram pegos.
+Sai com codigo 0 so quando todos sao pegos.
+
+Uso:
+    python3 -I estraga.py <peca> <teste.py> <lista.json> <pasta de trabalho nova> [--irma <pasta>] [--antes <arg>]...
+"""
+
+import argparse
+import json
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+PASTA = Path(__file__).resolve().parent
+for pasta in (PASTA.parent / "extrator", PASTA):  # na prateleira, o extrator fica na pasta irma
+    sys.path.insert(0, str(pasta))
+from extrator_comum import ErroDeDados, le_conferido  # noqa: E402
+
+MOLDE = PASTA / "esquemas" / "estragos.schema.json"  # o molde da lista
+
+
+def roda(estrago, a, trabalho):
+    """(pego: True, False ou None, quando o estrago nao se aplica; o que mostrar)."""
+    pasta = trabalho / estrago["nome"]
+    copia = pasta / "peca"
+    shutil.copytree(a.peca, copia, ignore=shutil.ignore_patterns("__pycache__"))
+    if a.irma:
+        shutil.copytree(a.irma, pasta / Path(a.irma).name, ignore=shutil.ignore_patterns("__pycache__", "testes"))
+    alvo = copia / estrago["arquivo"]
+    texto = alvo.read_text(encoding="utf-8")
+    if texto.count(estrago["de"]) != 1:
+        return None, f"ERRO: o texto a estragar aparece {texto.count(estrago['de'])} vez(es) em {estrago['arquivo']}"
+    alvo.write_text(texto.replace(estrago["de"], estrago["para"]), encoding="utf-8")
+    r = subprocess.run([sys.executable, "-I", "-B", a.teste, str(copia), *a.antes, str(pasta / "t")],
+                       capture_output=True, text=True)
+    ultima = ((r.stdout + r.stderr).strip().split("\n") or [""])[-1][:200]
+    pego = r.returncode != 0
+    return pego, f"{'pego' if pego else 'NÃO PEGO'} (o teste saiu com {r.returncode}: {ultima})"
+
+
+def main(argv=None):
+    p = argparse.ArgumentParser(description="Prova que o teste de uma peça pega os defeitos de uma lista.")
+    p.add_argument("peca", type=Path)
+    p.add_argument("teste")
+    p.add_argument("lista", type=Path)
+    p.add_argument("trabalho", type=Path)
+    p.add_argument("--irma", type=Path, help="pasta copiada ao lado da cópia da peça")
+    p.add_argument("--antes", action="append", default=[], help="argumento do teste antes da pasta de trabalho")
+    a = p.parse_args(argv)
+    try:
+        estragos = le_conferido(a.lista, MOLDE)["estragos"]
+        obrigatorios = json.loads(MOLDE.read_text(encoding="utf-8"))["$defs"]["estrago"]["required"]
+        faltam = [f"{k}/{c}" for k, e in enumerate(estragos) for c in obrigatorios if c not in e]
+        if faltam:
+            raise ErroDeDados(f"{a.lista}: campo(s) que faltam: {faltam}")
+    except (ErroDeDados, KeyError) as e:
+        print(f"ERRO: falta a informação {e}" if isinstance(e, KeyError) else f"ERRO: {e}")
+        return 1
+    if a.trabalho.exists() and any(a.trabalho.iterdir()):
+        print(f"ERRO: a pasta de trabalho precisa estar vazia: {a.trabalho}")
+        return 1
+    pegos = 0
+    for estrago in estragos:
+        pego, texto = roda(estrago, a, a.trabalho)
+        pegos += bool(pego)
+        print(f"{estrago['nome']}: {texto}", flush=True)
+    print(f"{pegos} de {len(estragos)} estrago(s) pego(s)")
+    return 0 if pegos == len(estragos) else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

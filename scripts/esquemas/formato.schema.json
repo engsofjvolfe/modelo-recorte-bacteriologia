@@ -142,9 +142,10 @@
       "required": ["id", "lado", "ordem"],
       "additionalProperties": false,
       "properties": {
-        "id": { "$ref": "#/$defs/texto" },
+        "id": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_-]*$" },
         "lado": { "enum": ["frente", "verso"] },
-        "ordem": { "$ref": "#/$defs/ordem" }
+        "ordem": { "$ref": "#/$defs/ordem" },
+        "imagem": { "type": "boolean" }
       }
     },
     "item": {

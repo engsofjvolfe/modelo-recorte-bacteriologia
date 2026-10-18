@@ -16,7 +16,8 @@ O manual está organizado em níveis, do mais simples ao mais detalhado.
 2. Importe os arquivos de `anki-decks/` — são arquivos <dfn>.apkg</dfn>, o formato que o
    Anki usa para empacotar um baralho pronto. Arraste o arquivo pra dentro da janela do
    Anki, ou use o menu Arquivo > Importar dentro do Anki.
-3. No Anki, os cartões aparecem numa pasta com o nome da disciplina.
+3. No Anki, os cartões aparecem numa pasta com o nome da disciplina, com uma pasta para
+   cada aula dentro dela.
 
 O Anki decide quando cada cartão volta: basta estudar os cartões que ele mostra a cada
 dia. Antes de virar um cartão, tente lembrar a resposta.
@@ -38,7 +39,15 @@ editor gratuito, onde se abre a pasta do projeto). Depois de mudar:
 3. Os arquivos `.apkg` dentro de `anki-decks/` são substituídos pelos novos; basta
    importar de novo no Anki para ver as mudanças.
 
-O que o script faz e o que ele mostra estão no [README dos
+Uma imagem entra num cartão pela planilha: o arquivo dela vai para a pasta
+`docs/material-base/imagens-dos-cartoes/`, e o nome do arquivo, na coluna de imagem do
+lado do cartão em que ela deve aparecer, a frente ou o verso. O baralho de uma planilha
+com imagem fica em `docs/material-base/baralhos-com-imagens/`, e não em `anki-decks/`,
+porque a imagem de um slide ou do livro é material de outras pessoas e nunca é publicada
+([NOTICE](NOTICE.md)); é de lá que ele se importa.
+
+O que o script faz e o que ele mostra — entre eles, que mudança na planilha mantém o
+histórico de revisão de um cartão — estão no [README dos
 scripts](scripts/README.md#montar_deckpy--das-planilhas-de-pergunta-ao-baralho-do-anki). Se
 travar, peça ajuda a uma IA: diga o que você fez e o que apareceu na tela.
 

@@ -5,6 +5,7 @@
   "nome_licenca_conteudo": "CC BY-NC-SA 4.0",
   "colunas_ocultas": ["ordem"],
   "coluna_subdecks": null,
+  "coluna_trechos": null,
   "caminhos": {
     "formato": "dados/formato.json",
     "forma_analise": "dados/forma-analise.json",
@@ -33,7 +34,11 @@
     "provas": "docs/material-base/gerados-ocr/provas/{planilha}.json",
     "conferencia_cartoes": "docs/material-base/gerados-ocr/CONFERENCIA-CARTOES.md",
     "conferencia_moldes": "docs/material-base/gerados-ocr/CONFERENCIA-MOLDES.md",
+    "listas_de_trabalho": "docs/material-base/gerados-ocr/listas/{unidade}.md",
     "imagens": "docs/material-base/gerados-ocr/imagens",
-    "estilo_cartao": "dados/estilo-cartao.css"
+    "estilo_cartao": "dados/estilo-cartao.css",
+    "imagens_cartoes": "docs/material-base/imagens-dos-cartoes",
+    "baralhos_com_imagens": "docs/material-base/baralhos-com-imagens",
+    "chamadas": "dados/chamadas.json"
   }
 }

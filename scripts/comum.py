@@ -2,15 +2,15 @@
 # Copyright do codigo sob GPL-3.0 -- ver LICENSE e NOTICE.md na raiz do projeto.
 
 """
-Funcoes que os outros scripts usam: achar o projeto e as planilhas de pergunta, ler o
-formato da disciplina conferido contra o molde dele e nas ligacoes de dentro dele, achar
-no formato as unidades e os conjuntos de um documento, os itens e a grade de cada unidade
-e o que cada id quer dizer, o registro da fonte no topo de um documento gerado, a
-impressao digital de um arquivo, os tiques de um arquivo de conferencia, a imagem de uma
-pagina de PDF, as paginas de uma fonte em HTML, os slides de uma apresentacao em pptx, as
-marcas da transcricao e o que os transcritores fazem do mesmo jeito (o texto de uma linha,
-o indice e o expoente, a tabela, o texto de dentro de uma imagem, a gravacao da
-transcricao). Nao e para rodar sozinho.
+Funcoes que os outros scripts usam: achar o projeto, as planilhas de pergunta, os cartoes e
+a prova de cada uma, ler o formato da disciplina conferido contra o molde dele e nas ligacoes de
+dentro dele, achar no formato as unidades e os conjuntos de um documento, os itens e a
+grade de cada unidade e o que cada id quer dizer, o registro da fonte no topo de um
+documento gerado, a impressao digital de um arquivo, os tiques de um arquivo de
+conferencia, a imagem de uma pagina de PDF, as paginas de uma fonte em HTML, os slides de
+uma apresentacao em pptx, as marcas da transcricao e o que os transcritores fazem do mesmo
+jeito (o texto de uma linha, o indice e o expoente, a tabela, o texto de dentro de uma
+imagem, a gravacao da transcricao). Nao e para rodar sozinho.
 
 Nenhum caminho fica no codigo. O projeto e achado pelo arquivo "projeto.json", subindo
 de pasta em pasta a partir de onde o script e chamado (ou pelo arquivo indicado com
@@ -40,7 +40,9 @@ e quem confere leem os slides pela mesma leitura (Apresentacao), e por isso tem 
 texto.
 """
 
+import csv
 import hashlib
+import io
 import os
 import posixpath
 import re
@@ -56,18 +58,23 @@ from functools import lru_cache
 from html.parser import HTMLParser
 from pathlib import Path
 
-from validar_dados import esquema, le_dados
+from validar_dados import esquema, le_dados, le_texto
 
 ARQUIVO_PROJETO = "projeto.json"
 MOLDE_COM_GRADE = "eixos"  # o tipo de molde de documento que tem grade (esquemas/formato.schema.json)
+MOLDE_DOS_CARTOES = "colunas"  # o tipo de molde de documento dos cartoes, com as colunas deles (idem)
+# a coluna da pergunta numa planilha de pergunta (esquemas/projeto.schema.json): e por ela que o cartao acha a prova
+# dele, e ela, com o nome da planilha, da o codigo do cartao no Anki
+COLUNA_PERGUNTA = "pergunta"
 PASTA_NORMAS = Path(__file__).resolve().parent / "normas"  # as tabelas que vem de normas, como a ISO 639
 LINHA_FONTE = re.compile(r"^fonte (?P<chave>\S+): (?P<caminho>.+?) \| sha256: (?P<hash>[0-9a-f]{64})$")
 MARCA_PARTE = re.compile(r"^<!-- parte: ([^|]+)\|([^|]+)\|([0-9a-f]+) -->$")
 TIQUE = re.compile(r"^- \[([ xX])\] (IA|pessoa)\s*$")
 VARIAVEL = re.compile(r"\{[^{}]+\}")
 
-# documentos do projeto, em Markdown
+# documentos do projeto, em Markdown, e planilhas de pergunta, em CSV
 EXTENSAO_DOCUMENTO = ".md"
+EXTENSAO_PLANILHA = ".csv"
 CERCA = re.compile(r"^ {0,3}(`{3,}|~{3,})")  # abre ou fecha um bloco de codigo
 CODIGO_NA_LINHA = re.compile(r"(`+).+?\1")
 
@@ -365,13 +372,38 @@ def lingua(codigo):
     return codigo.split("-")[0].lower() if codigo else None
 
 
+def planilha(projeto, nome):
+    """A planilha de pergunta do nome dado: o CSV direto na pasta do material gerado, com o
+    prefixo do projeto antes do nome."""
+    return projeto.caminho("material_gerado") / f"{projeto.valor('prefixo_planilhas')}{nome}{EXTENSAO_PLANILHA}"
+
+
 def planilhas(projeto, filtro=None):
     """As planilhas de pergunta: os CSVs direto na pasta do material gerado (sem entrar em
     subpastas) cujo nome comeca com o prefixo do projeto; com filtro, so as que tem o
     trecho no nome, sem diferenca entre maiuscula e minuscula."""
-    pasta, prefixo = projeto.caminho("material_gerado"), projeto.valor("prefixo_planilhas")
-    todas = sorted(pasta.glob(f"{prefixo}*.csv"))
+    todas = sorted(projeto.caminho("material_gerado").glob(planilha(projeto, "*").name))
     return [c for c in todas if filtro.lower() in c.name.lower()] if filtro else todas
+
+
+def le_planilha(caminho, nome):
+    """(colunas, cartoes, erros) de uma planilha de pergunta: as colunas e os cartoes, na ordem
+    das linhas, cada um como {coluna: valor}. Com o texto fora do UTF-8 (validar_dados.le_texto),
+    as colunas vem None, sem cartoes; o cartao com mais valores que colunas e erro, e os valores
+    a mais ficam de fora dele. Cada erro vem com o nome dado na frente."""
+    texto, erros = le_texto(caminho, nome)
+    if erros:
+        return None, [], erros
+    leitor = csv.DictReader(io.StringIO(texto, newline=""))
+    cartoes = list(leitor)
+    erros = [f"{nome}: o cartão {k} tem mais valores que colunas" for k, c in enumerate(cartoes, 1) if None in c]
+    return list(leitor.fieldnames or []), [{k: v for k, v in c.items() if k is not None} for c in cartoes], erros
+
+
+def arquivo_da_prova(projeto, planilha_):
+    """O arquivo de prova de uma planilha de pergunta: o caminho "provas" do projeto.json, com
+    o nome da planilha, sem a extensao, no lugar da variavel."""
+    return projeto.caminho_com("provas", Path(planilha_).stem)
 
 
 def impressao_de(dados):
@@ -873,6 +905,11 @@ def grava_transcricao(saida, registro, texto):
     """Grava a transcricao, com o registro da fonte no topo, se ele existe."""
     saida.parent.mkdir(parents=True, exist_ok=True)
     saida.write_text("\n".join(["---"] + registro + ["---", "", ""] if registro else []) + texto, encoding="utf-8")
+
+
+def no_projeto(caminho, projeto):
+    """O caminho a partir da pasta do projeto, com barras, como as mensagens o mostram."""
+    return Path(os.path.relpath(Path(caminho).resolve(), projeto.raiz)).as_posix()
 
 
 def lembra_registro(projeto, transcricao, fonte):

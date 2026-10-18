@@ -22,12 +22,12 @@ protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição),
 | Programa | Para quê |
 | --- | --- |
 | O <dfn>Python</dfn> 3 ([python.org](https://www.python.org/downloads/)) | roda todos os scripts; num computador em que ele se chama `python3`, é esse o nome no começo dos comandos |
-| A biblioteca <dfn>genanki</dfn> (`pip install genanki`) | monta o arquivo do Anki, no `montar_deck.py` |
-| O <dfn>Tesseract</dfn> ([tesseract-ocr](https://github.com/tesseract-ocr/tesseract)), com os dados de cada idioma do texto das figuras (`por`, o português) | faz o [OCR](../metodologia-de-conteudo.md#o-texto-das-figuras) do texto das figuras, no `transcrever_html.py` e no `transcrever_pptx.py`, e das páginas de PDF que o `extrator.py` lê pelo OCR |
-| O <dfn>LibreOffice</dfn> ([libreoffice.org](https://www.libreoffice.org/download/)) | faz o PDF de cada aula, de onde sai a imagem de cada slide na conferência das transcrições, e converte as imagens que o Tesseract ou o GraphicsMagick não leem (EMF, WMF, SVG) |
-| O <dfn>Poppler</dfn> ([poppler.freedesktop.org](https://poppler.freedesktop.org/)) | lê PDF: faz a imagem de cada slide, do PDF da aula, lê as fontes em PDF do material de fora, no `base_externa.py` e na conferência das referências, e tira o texto, o negrito e o itálico das fontes em PDF, no `extrator.py` |
-| O <dfn>GraphicsMagick</dfn> ([graphicsmagick.org](http://www.graphicsmagick.org/download.html)) | faz a cópia em PNG de cada imagem que não está em PNG, na conferência das transcrições |
-| O [git](../.githooks/README.md) | diz o que vai com o projeto, no `protege_fontes.py`, no `confere_indice.py` e no `glossario.py` |
+| A biblioteca <dfn>genanki</dfn> (`pip install genanki`) | monta o arquivo do Anki, no `montar_deck.py` e no teste dele |
+| O <dfn>Tesseract</dfn> ([tesseract-ocr](https://github.com/tesseract-ocr/tesseract)), com os dados de cada idioma do texto das figuras (`por`, o português) e os do inglês (`eng`), que os testes usam | faz o [OCR](../metodologia-de-conteudo.md#o-texto-das-figuras) do texto das figuras, no `transcrever_html.py` e no `transcrever_pptx.py`, e das páginas de PDF que o `extrator.py` lê pelo OCR; e nos [testes](testes/README.md) do extrator, da conferência e das aulas em pptx |
+| O <dfn>LibreOffice</dfn> ([libreoffice.org](https://www.libreoffice.org/download/)) | faz o PDF de cada aula, de onde sai a imagem de cada slide na conferência das transcrições, e converte as imagens que o Tesseract ou o GraphicsMagick não leem (EMF, WMF, SVG); e no teste das aulas em pptx |
+| O <dfn>Poppler</dfn> ([poppler.freedesktop.org](https://poppler.freedesktop.org/)) | lê PDF: faz a imagem de cada slide, do PDF da aula, lê as fontes em PDF do material de fora, no `base_externa.py` e na conferência das referências, e tira o texto, o negrito e o itálico das fontes em PDF, no `extrator.py`; e nos testes do extrator, da conferência e das aulas em pptx |
+| O <dfn>GraphicsMagick</dfn> ([graphicsmagick.org](http://www.graphicsmagick.org/download.html)) | faz a cópia em PNG de cada imagem que não está em PNG, na conferência das transcrições; e no teste das aulas em pptx |
+| O [git](../.githooks/README.md) | diz o que vai com o projeto, no `protege_fontes.py`, no `confere_indice.py` e no `glossario.py`; e nos testes destes dois |
 
 ## Como rodar
 
@@ -55,12 +55,15 @@ alguma coisa e diz o quê.
 | Sempre que o arquivo de fontes muda | `referencias.py` |
 | Sempre que uma transcrição muda, e antes de escrever o material | `conferencia.py` |
 | Sempre que o arquivo de formato, a tabela da leitura, a tabela dos destinos ou a análise de uma aula muda, e antes de escrever o material | `confere_moldes.py` |
+| Para saber qual unidade escrever, e depois de escrever ou mudar o texto ou os cartões de uma unidade | `confere_material.py` |
+| Antes de escrever uma unidade, para saber o que escrever nela e o que ler | `lista_de_trabalho.py` |
 | Quando nem a aula nem o livro-texto chegam a um subtópico de uma unidade | `base_externa.py`, que roda o `referencias.py` |
 | Com as planilhas de pergunta e as provas dos cartões prontas | `confere_cartoes.py` |
 | Com as planilhas conferidas, e sempre que uma delas muda | `montar_deck.py` |
 | Sempre que um documento define um termo novo, ou deixa de definir | `glossario.py` |
 | Sempre que um documento entra no projeto, sai dele ou muda de lugar | `confere_indice.py` |
 | Antes de publicar | `protege_fontes.py` |
+| Depois de mudar um script que tem teste | o teste dele e os estragos dele ([Os testes](#os-testes)) |
 
 O `protege_fontes.py`, o `glossario.py` e o `confere_indice.py` rodam também sozinhos antes
 de cada commit ([Conferência das mensagens e proteção das fontes](../.githooks/README.md)).
@@ -79,6 +82,7 @@ protegida, que nunca muda. Fora dos caminhos:
 | `resolucao_imagens` | a resolução das imagens das conferências, em pontos por polegada |
 | `nome_licenca_conteudo` | o nome da licença do conteúdo, que sai no rodapé da lista de referências |
 | `colunas_ocultas` e `coluna_subdecks` | as colunas que o baralho guarda sem mostrar e a que o divide ([`montar_deck.py`](#montar_deckpy--das-planilhas-de-pergunta-ao-baralho-do-anki)) |
+| `coluna_trechos` | a coluna das planilhas de pergunta com os códigos dos trechos de cada cartão, ou `null` ([`confere_material.py`](#confere_materialpy--confere-o-texto-e-os-cartões-de-cada-unidade)) |
 
 ## O arquivo de formato
 
@@ -101,7 +105,7 @@ listas, sem explicação. Ele nasce de uma cópia do modelo em branco,
 | `fora` | as regras que tiram um trecho do material: sai o trecho cujos tipos são todos de uma regra |
 | `marcas` | as marcas, que só dizem do que um trecho fala: cada uma com o `texto` que as análises escrevem e os `papeis`, os campos da análise onde ele se procura |
 | `onde_se_ensina` | para cada tipo, os documentos onde ele se ensina |
-| `documentos` | os documentos do material, cada um com o `molde` dele e, para as fontes dos documentos, os `grupos` e os `caminhos` cujos trechos ele recebe pelas regras, ou `todos: true`, quando recebe todos os trechos |
+| `documentos` | os documentos do material, na ordem em que se escrevem em cada aula, cada um com o `molde` dele e, para as fontes dos documentos, os `grupos` e os `caminhos` cujos trechos ele recebe pelas regras, ou `todos: true`, quando recebe todos os trechos |
 
 Cada grupo, parte, regra, marca, documento e unidade entra na lista dele entre chaves,
 `{ }`, com um `id`, um código curto, e um `nome`; o id vai entre aspas, mesmo quando é
@@ -123,7 +127,11 @@ divide:
   partes do dicionário, cada uma com os `eixos` que a alimentam;
 - `formas`: as perguntas de prova; `pergunta` são as partes de cada pergunta, e `formas`,
   as formas de pergunta, cada uma com o `verbo` e os `tipos` que ela pede;
-- `colunas`: os cartões, cada coluna com o `lado` dela, `frente` ou `verso`.
+- `colunas`: os cartões, cada coluna com o `lado` dela, `frente` ou `verso`, e `imagem:
+  true` na coluna que traz o nome de um arquivo de imagem. O `id` da coluna é também a
+  classe dela no estilo dos cartões e dá o nome do campo dela no Anki
+  ([`montar_deck.py`](#montar_deckpy--das-planilhas-de-pergunta-ao-baralho-do-anki)); por
+  isso, só tem letras sem acento, algarismos, `_` e `-`, e começa com uma letra.
 
 A `ordem` de cada parte diz de onde vem o lugar dela: `dada`, quando a análise da matéria
 o dá, ou `proposta`, quando a análise o deixava aberto e o projeto o propôs.
@@ -138,7 +146,7 @@ problema sai numa linha `ERRO`, com o lugar, e o script não usa o formato.
 Um exemplo inventado, com três documentos: um de temas, que segue a sequência das partes,
 com dois temas, um deles com as aulas que tratam dele; uma ficha com uma abertura, um eixo
 dividido em dois subtópicos, outro sem divisão, um elo, duas unidades, uma delas com dois
-itens, e um conjunto das duas; e os cartões:
+itens, e um conjunto das duas; e os cartões, com uma coluna de imagem:
 
 ```json
 {
@@ -215,7 +223,8 @@ itens, e um conjunto das duas; e os cartões:
       "id": "cartoes", "nome": "Cartões", "unidade": "fato", "molde": "colunas", "todos": true,
       "colunas": [
         { "id": "pergunta", "lado": "frente", "ordem": "dada" },
-        { "id": "resposta", "lado": "verso", "ordem": "dada" }
+        { "id": "resposta", "lado": "verso", "ordem": "dada" },
+        { "id": "esquema", "lado": "verso", "ordem": "proposta", "imagem": true }
       ]
     }
   ]
@@ -428,10 +437,9 @@ gravado. `FALTA REFERÊNCIA` lista a fonte registrada sem dados no arquivo de fo
 
 Se o arquivo de formato existe, o script o lê antes, como diz [O arquivo de
 formato](#o-arquivo-de-formato), e, com algum problema nele, mostra cada um numa linha
-`ERRO` e não grava nada. Vale também para os scripts que rodam o `referencias.py`: o
-`confere_cartoes.py` não grava a conferência dos cartões, e o `registrar_fonte.py`, que já
-gravou o registro da fonte, não grava as referências nem a conferência delas. O
-`base_externa.py` precisa do formato e o lê logo no começo.
+`ERRO` e não grava nada. Vale também para o `registrar_fonte.py`, que roda o
+`referencias.py` no fim: ele já gravou o registro da fonte, e não grava as referências nem
+a conferência delas. O `base_externa.py` precisa do formato e o lê logo no começo.
 
 ## `conferencia.py` — monta a conferência das transcrições
 
@@ -510,9 +518,10 @@ que perderam.
 **A forma das análises.** O arquivo `dados/forma-analise.json` diz como se lê uma análise:
 o nome dos arquivos, as linhas que abrem um slide e as de título, a marca de cada trecho,
 os separadores e os campos, em ordem, cada um com a forma do valor e, se tem, o papel
-dele — `tipo`, `grupo`, `caminho` ou `destino`. O destino se lê em pedaços (a forma
-`pedacos`): o texto entre os separadores que a forma dá, fora dos parênteses, cada pedaço
-inteiro, com o que está entre parênteses dele. O molde da forma é
+dele — `tipo`, `grupo`, `caminho` ou `destino` — e a `fonte` cujas páginas ele cita, pela
+chave dela, como o campo do lugar no livro-texto. O destino e o lugar no livro se leem em
+pedaços (a forma `pedacos`): o texto entre os separadores que a forma dá, fora dos
+parênteses, cada pedaço inteiro, com o que está entre parênteses dele. O molde da forma é
 `scripts/esquemas/forma-analise.schema.json`. Cada trecho tem um código,
 `aula/slide/posição/hash`: a posição conta os trechos do slide, e o hash, tirado do texto
 do trecho, muda quando o texto muda; assim, uma decisão guardada pelo código não passa para
@@ -566,6 +575,125 @@ código 1 quando há algum. Com erro numa entrada — um arquivo que falta, que 
 não segue o molde dele ou que não fecha com as outras —, cada um sai numa linha `ERRO` e
 nada é gravado. No fim, quantos trechos há, quantos têm lugar e quantas linhas `ERRO` e
 `FALTA`.
+
+## `confere_material.py` — confere o texto e os cartões de cada unidade
+
+**O que faz.** O material de estudo se escreve em arquivos `.md`, em `docs/material-gerado/`
+e nas subpastas dela, um texto para cada unidade. O script confere se cada trecho das aulas
+que a [conferência dos moldes](#confere_moldespy--confere-os-moldes-contra-as-análises-das-aulas)
+põe numa unidade está no texto dela, na parte do molde em que ele cai, e se tem cartão. Diz
+também o estado de cada texto e qual é o próximo a escrever. Não grava nada.
+
+**Os textos.** Há um texto para cada unidade com material de um documento de conteúdo, como
+a ficha de uma bactéria ou um tema da teoria (o do documento inteiro, quando ele não lista
+unidades), e um para cada aula com trecho, nas perguntas de prova. As partes de cada texto
+são as do molde do documento, na ordem dele: as da sequência e, no documento com casos, a
+dos casos, depois dos fatos; numa ficha, a abertura e, em cada item que tem trecho (ou na
+unidade, sem itens), os eixos da grade e, quando a grade é a do documento, os elos; nas
+perguntas de prova, as formas de pergunta. A parte sem trecho pode ficar fora do texto. O
+trecho que vai junto do assunto pode ficar em qualquer parte que recebe trechos; nas que não
+recebem — a abertura que não recebe, como as palavras-chave, os elos e os casos —, nenhum.
+
+**Os códigos escondidos.** O texto se liga aos trechos por comentários do Markdown, que a
+visualização não mostra:
+
+| Código | O que marca |
+| --- | --- |
+| `<!-- unidade X -->` | o começo do texto de código `X`: o id da unidade no arquivo de formato; o do documento, quando ele não lista unidades; a aula, nas perguntas de prova |
+| `<!-- item X -->` | o começo do item de id `X` da unidade |
+| `<!-- parte X -->` | o começo da parte de id `X`; a forma de pergunta vai pelo número dela, a partir de 1, e a parte dos casos é `casos` |
+| `<!-- trecho X -->` | o trecho de código `X`, o que a análise da aula dá a ele, dentro da parte que o explica |
+
+Abrir um nível fecha os de dentro dele: a marca de uma parte fecha a parte de antes, e a de
+um item fecha também o item de antes. O que está num bloco de código, ou em código dentro da
+linha, não conta. Um exemplo inventado, o começo da ficha da unidade `A1` do exemplo do
+[arquivo de formato](#o-arquivo-de-formato), com o primeiro eixo:
+
+```markdown
+<!-- unidade A1 -->
+# Primeiro ser
+
+<!-- parte chaves -->
+**Palavras-chave:** ...
+
+<!-- parte 1 -->
+O texto do primeiro eixo, que explica o trecho.
+<!-- trecho 2/5/1/3f2a -->
+```
+
+**Os cartões.** O texto de uma unidade de documento de conteúdo tem a planilha de pergunta
+dela, `perguntas-X.csv`: o prefixo das planilhas, do `projeto.json`, e o código do texto. Cada
+cartão leva, na coluna que `coluna_trechos` diz, os códigos dos trechos de que trata,
+separados por espaço, e, na que `coluna_subdecks` diz, a aula do texto. As perguntas de prova
+não têm planilha: os trechos delas têm cartão nas unidades em que se explicam. Com
+`coluna_trechos` em `null`, os cartões não se conferem; com `coluna_subdecks` em `null`, a
+aula deles também não.
+
+**A ordem de escrita.** Os textos das unidades vêm pela aula de cada um — a primeira aula,
+até a última, que trata da unidade — e, na mesma aula, na ordem dos documentos e das
+unidades no arquivo de formato. As perguntas de prova de uma aula vêm logo depois do último
+texto de unidade com trecho dela, e só podem ser escritas com todos esses prontos.
+
+**Como rodar.**
+
+    python scripts/confere_material.py
+    python scripts/confere_material.py --unidade [código]
+
+**O que mostra.** Cada problema numa linha, com o arquivo e a linha quando os tem: `FALTA`
+para o que ainda não está escrito, como um trecho sem o código dele no texto ou sem cartão;
+`ERRO` para o que está fora do lugar ou não existe, como o código de um trecho numa parte
+que não é a dele ou uma parte fora da ordem do molde. Depois, uma tabela com a aula, o
+documento, a unidade, o código e o estado de cada texto, na ordem de escrita — `sem texto`,
+quando nem o texto nem a planilha dele existem, `FALTA`, `ERRO` ou `pronta` —, a próxima a
+escrever e as perguntas de prova que já podem ser escritas. O texto que não começou não dá
+aviso. Com `--unidade`, só o texto do código dado: sem texto, ele é `FALTA`, e, nas perguntas
+de prova, uma linha diz as unidades com trechos delas que ainda não estão prontas. Com aviso
+na conferência dos moldes, ou com o mesmo código em dois textos, o script diz isso numa
+linha `ERRO` e não confere nada. Sai com código 1 quando há `FALTA` ou `ERRO`.
+
+## `lista_de_trabalho.py` — o que escrever e o que ler em cada unidade
+
+**O que faz.** Antes de escrever o texto de uma unidade, o script grava a lista de trabalho
+dele: tudo o que o texto tem de explicar, na ordem do molde, e o que ler antes de escrever.
+Os textos, as partes de cada um e os trechos de cada parte são os do
+[`confere_material.py`](#confere_materialpy--confere-o-texto-e-os-cartões-de-cada-unidade).
+A lista fica na pasta protegida, porque copia o texto das aulas, em
+`docs/material-base/gerados-ocr/listas/`, com o id do documento e o código do texto no nome,
+como `bacteria-neisseria-meningitidis.md`.
+
+**O que a lista tem.**
+
+- O texto: a unidade, o documento e a aula em que ele se escreve; numa unidade, as aulas
+  que tratam dela e as que só a mencionam, a planilha dos cartões, com as colunas dos
+  códigos dos trechos e da aula, e a prova dos cartões.
+- Os códigos escondidos, na ordem do molde, e os trechos de cada parte. De cada trecho: o
+  código, a aula, o slide, o texto, cada campo da análise menos o destino, as marcas e,
+  quando é assim, que ele está ali por um conjunto (o destino nomeia um grupo de que a
+  unidade faz parte, como o gênero de uma bactéria) ou que é de uma aula depois da última.
+  A parte que não recebe trechos, ou que não tem nenhum, diz isso.
+- Os capítulos a ler inteiros: as transcrições da fonte que um campo da análise cita, como
+  o lugar no livro-texto, que têm uma página citada por um trecho da unidade, na ordem dos
+  nomes delas; e os pedaços do campo em que nenhuma página aparece, cada um com os trechos
+  que o têm. A página se acha pelo título dela na transcrição, como `p. 248`, inteiro.
+- As dúvidas abertas: do arquivo das dúvidas, a seção de cada aula com trecho na unidade e,
+  inteiras, as que não são de nenhuma aula.
+
+Nas perguntas de prova de uma aula, a lista só sai com todas as unidades com trechos dela
+prontas no conferidor, e cada trecho diz também onde foi explicado: o arquivo, a linha e a
+parte.
+
+**O arquivo das dúvidas.** Um arquivo Markdown com uma seção por título de segundo nível,
+`## `; a seção de uma aula começa pelo nome do arquivo da análise dela, sem a extensão, como
+`## aula-13`.
+
+**Como rodar.**
+
+    python scripts/lista_de_trabalho.py --unidade [código] --duvidas [arquivo das dúvidas]
+
+**O que mostra.** O arquivo gravado e quantas partes, trechos, transcrições a ler, pedaços
+sem página e seções das dúvidas a lista tem. Com algum problema — como o código que nenhum
+texto tem ou a conferência dos moldes com aviso —, cada um sai numa linha `ERRO`, com o
+motivo, e nada é gravado.
 
 ## `base_externa.py` — monta a base do material de fora
 
@@ -748,54 +876,102 @@ Um exemplo inventado, com a prova de um cartão:
 }
 ```
 
-Na coluna `fonte` da planilha vão só as chamadas, cada uma com o lugar: `(Silva, 2020, p.
-12)`, ou, com duas fontes, `(Silva, 2020, p. 12; Souza, 2019, slide 3)`. O nome e o ano
-de cada fonte são os que a conferência das referências mostra; o lugar é o título da
-página na transcrição (`p. 12`, `slide 3`) ou a página da frase na base. Fonte sem
-páginas, como uma página da internet, vai sem lugar.
+**As chamadas.** Na coluna `fonte` da planilha vão só as chamadas, cada uma com o lugar:
+`(Silva, 2020, p. 12)`, ou, com duas fontes, `(Silva, 2020, p. 12; Souza, 2019, slide 3)`.
+O lugar é o título da página na transcrição (`p. 12`, `slide 3`) ou a página da frase na
+base; fonte sem páginas, como uma página da internet, vai sem lugar. O script reconhece
+cada chamada pelo arquivo de chamadas, `dados/chamadas.json`, escrito à mão pelas [Regras
+da ABNT](../regras-abnt.md#citação-no-texto-nbr-105202023): uma entrada para cada fonte,
+entre chaves, com a `chave` dela — a mesma do registro da fonte na transcrição e na base —
+e a `chamada`, entre parênteses, sem o lugar. Ele nasce de uma cópia do modelo em branco,
+[`modelo-dados/chamadas.json`](../modelo-dados/chamadas.json), e o molde dele é
+`scripts/esquemas/chamadas.schema.json`. Um exemplo inventado:
+
+```json
+{
+  "versao_schema": 1,
+  "chamadas": [
+    { "chave": "SILVA-2020", "chamada": "(Silva, 2020)" },
+    { "chave": "SOUZA-2019", "chamada": "(Souza, 2019)" }
+  ]
+}
+```
 
 **Como rodar.**
 
     python scripts/confere_cartoes.py
 
-**O que mostra.** Uma linha `ERRO` para cada coisa que não bate: cartão sem prova, prova
-sem cartão (a pergunta mudou só de um lado), chamada que não é de nenhuma fonte, lugar
-que a fonte não tem, trecho que não está no lugar citado, lugar citado sem trecho, prova
-que diz que a fonte afirma quando a base marca o trecho como possibilidade. Na comparação,
-a quantidade de espaços, as quebras de linha e as marcas de destaque (itálico, negrito) não
-contam; as letras e a pontuação contam. No fim, quantos cartões há, quantos têm erro e
-quantos estão sem o tique da pessoa. A conferência mostra cada cartão com a pergunta, a
-resposta, a fonte, os trechos e onde cada um foi achado; se o cartão, a prova ou o texto da
-fonte mudam depois do tique, o tique sai.
+**O que mostra.** Uma linha `ERRO` para cada coisa que não bate: a planilha fora do UTF-8,
+sem as colunas `pergunta`, `resposta` e `fonte` ou com um cartão com mais valores que
+colunas; cartão sem pergunta, cartão sem prova, prova sem cartão (a pergunta mudou só de
+um lado), pergunta repetida; chamada que não é de nenhuma fonte, lugar que a fonte não
+tem, trecho que não está no lugar citado, lugar citado sem trecho, prova que diz que a
+fonte afirma quando a base marca o trecho como possibilidade. Na comparação, a quantidade
+de espaços, as quebras de linha e as marcas de destaque (itálico, negrito) não contam; as
+letras e a pontuação contam. No fim, quantos cartões há, quantos têm erro e quantos estão
+sem o tique da pessoa. A conferência mostra cada cartão com a pergunta, a resposta, a
+fonte, os trechos e onde cada um foi achado; se o cartão, a prova ou o texto da fonte
+mudam depois do tique, o tique sai. Sem o arquivo de chamadas, com ele fora do molde ou
+com duas fontes com a mesma chamada, que não diria de qual delas é o trecho, cada problema
+sai numa linha `ERRO` e nada é gravado.
 
 ## `montar_deck.py` — das planilhas de pergunta ao baralho do Anki
 
 **O que faz.** Transforma cada planilha de pergunta (os arquivos `perguntas-*.csv` de
-`docs/material-gerado/`) num baralho pronto para importar no Anki, um arquivo `.apkg` em
-`anki-decks/`. No Anki, os cartões ficam numa pasta com o nome da disciplina, que vem do
-arquivo de formato, e dentro dela uma pasta para cada planilha. As colunas `pergunta` e
-`resposta` são obrigatórias; qualquer outra vira campo do cartão, com o nome da coluna sem
-o sublinhado e com cada palavra em maiúscula (`tipo_pergunta` vira `TipoPergunta`), e a
-`fonte`, com a citação do fato, aparece atrás do cartão, embaixo da resposta. No
-`projeto.json`, `colunas_ocultas` diz as colunas que ficam guardadas no cartão sem
-aparecer, e `coluna_subdecks`, uma coluna que separa os cartões de cada planilha em pastas
-menores, uma para cada valor que aparece nela — ou `null`, escrito assim, sem aspas, para
-não separar. A aparência dos cartões (cores, tamanho da letra) vem de
-`dados/estilo-cartao.css`.
+`docs/material-gerado/`) num baralho pronto para importar no Anki, um arquivo `.apkg`. As
+colunas do cartão são as do documento de molde `colunas` do [arquivo de
+formato](#o-arquivo-de-formato), na ordem dele: cada uma vira um campo do cartão, no lado
+dela, com o nome da coluna sem o sublinhado e com cada palavra em maiúscula
+(`tipo_pergunta` vira `TipoPergunta`), e o campo vazio não aparece. A coluna de imagem
+traz o nome de um arquivo da pasta das imagens dos cartões,
+`docs/material-base/imagens-dos-cartoes/`: o cartão mostra a imagem, e o arquivo vai junto
+no pacote. No `projeto.json`, `colunas_ocultas` diz as colunas que ficam guardadas no
+cartão sem aparecer, e `coluna_subdecks`, a coluna que divide o baralho — ou `null`,
+escrito assim, sem aspas, para não dividir. A aparência dos cartões (cores, tamanho da
+letra) vem de `dados/estilo-cartao.css`, em que cada coluna tem a classe do id dela, como
+`.pergunta`.
+
+**No Anki.** Os cartões ficam numa pasta com o nome da disciplina, que vem do arquivo de
+formato; dentro dela, uma pasta para cada valor da coluna que divide, com o nome da coluna
+e o valor (`Aula 13`, na coluna `aula` com o valor `13`); e, dentro dessa, uma para cada
+planilha. O cartão novo entra na posição da linha dele na planilha. O código de cada
+cartão no Anki sai do nome da planilha e da pergunta, sem contar os espaços: corrigir a
+resposta ou pôr uma imagem atualiza o mesmo cartão, com o histórico de revisão, e mudar a
+pergunta faz um cartão novo.
+
+**Onde fica o pacote.** O da planilha com alguma imagem fica em
+`docs/material-base/baralhos-com-imagens/`, na pasta protegida, porque a imagem de um slide
+ou do livro é material de outras pessoas, que nunca se publica ([`NOTICE.md`](../NOTICE.md));
+o da planilha sem imagem, em `anki-decks/`, que vai com o projeto. O pacote da mesma
+planilha que estiver na outra pasta sai.
 
 **Como rodar.**
 
     python scripts/montar_deck.py
 
-Com uma parte do nome de uma planilha depois do nome do script, só essa planilha; com
-`--listar`, só a lista das planilhas que seriam usadas, sem gerar nada.
+Com uma parte do nome de uma planilha depois do nome do script, só as planilhas que a têm
+no nome; com `--listar`, só a lista das planilhas que seriam usadas, sem gerar nada.
 
-**O que mostra.** Cada baralho gerado, com as pastas e quantos cartões tem. Uma planilha
-sem a coluna `pergunta` ou `resposta` aparece com `ERRO` e fica sem baralho. Antes de gerar
-qualquer baralho, o script lê o arquivo de formato, como diz [O arquivo de
-formato](#o-arquivo-de-formato): com algum problema nele — sem o nome da disciplina, por
-exemplo, que é o nome da pasta de cima no Anki —, cada um aparece numa linha `ERRO` e
-nenhum baralho é gerado.
+**O que mostra.** Cada baralho gerado, com as pastas e quantos cartões e imagens tem. Uma
+linha `ERRO` diz cada problema de uma planilha, que fica sem baralho: uma coluna do molde
+que falta, uma coluna que não é do molde nem oculta, uma coluna repetida, o texto fora do
+UTF-8, um cartão com mais valores que colunas, sem pergunta, com a pergunta de outro (sem
+contar os espaços) ou sem valor na coluna que divide, uma imagem que não é só o nome de um
+arquivo ou que não está na pasta das imagens; e duas planilhas com o mesmo nome no Anki
+ficam as duas sem baralho. Antes de gerar qualquer baralho, o script lê o arquivo de
+formato, como diz [O arquivo de formato](#o-arquivo-de-formato), e confere as colunas: com
+algum problema — sem o documento dos cartões, sem a coluna `pergunta` ou sem coluna na
+frente, uma coluna oculta que é do molde, uma coluna que divide que não é do molde nem
+oculta, uma coluna que dá o nome de um campo que o próprio Anki preenche, como `Tags`, ou
+que o Anki muda ao importar, duas colunas que dão o mesmo campo —, cada um aparece numa
+linha `ERRO` e nenhum baralho é gerado.
+
+## Os testes
+
+Os testes dos scripts ficam em `scripts/testes/`, uma pasta para cada parte, e o [README
+dos testes](testes/README.md) diz o que cada um confere e como rodar. O `estraga.py` prova
+que um teste pega os defeitos: roda o teste contra cópias da pasta `scripts/`, cada uma
+com um defeito posto de propósito, um estrago da lista do teste.
 
 ## `confere_indice.py` — confere que cada documento está no índice
 
@@ -843,19 +1019,22 @@ definem. Sem o git, o script diz isso numa linha `ERRO` e para, como o
 
 ## `comum.py`
 
-Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json` e as
-planilhas de pergunta, ler o arquivo de formato, conferido contra o molde dele e nas
-ligações de dentro dele, e achar nele as unidades, os itens e os conjuntos de um
-documento, a grade de cada unidade e o que cada id quer dizer, ler o registro da fonte,
-guardar os tiques, ler as páginas de um documento HTML e os slides de uma apresentação, e
-o que os transcritores fazem do mesmo jeito). O `extrator_comum.py` e os `leitor_<tipo>.py`
-também não se rodam: são as partes do `extrator.py`. O `extrator_comum.py` serve também ao
-`itens.py` e ao `conferencia.py`, que leem as transcrições do mesmo jeito que o extrator as
-escreve. Do mesmo modo, o `analises.py`, o `lugares.py`, o `tabela.py`, o `destinos.py`, o
-`lidos.py`, o `limite.py` e o `relatorio.py` são as partes do `confere_moldes.py`: leem as
-análises das aulas pela forma delas, dizem onde cada trecho cai pelas regras do formato,
-leem as tabelas em texto, dão a cada trecho o que o destino dele nomeia, leem a tabela da
-leitura, aplicam o limite das aulas e fazem as tabelas do relatório.
+Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json`, as
+planilhas de pergunta, os cartões e a prova de cada uma, ler o arquivo de formato, conferido contra o
+molde dele e nas ligações de dentro dele, e achar nele as unidades, os itens e os
+conjuntos de um documento, a grade de cada unidade e o que cada id quer dizer, ler o
+registro da fonte, guardar os tiques, ler as páginas de um documento HTML e os slides de
+uma apresentação, e o que os transcritores fazem do mesmo jeito). O `extrator_comum.py` e
+os `leitor_<tipo>.py` também não se rodam: são as partes do `extrator.py`. O
+`extrator_comum.py` serve também ao `itens.py` e ao `conferencia.py`, que leem as
+transcrições do mesmo jeito que o extrator as escreve. Do mesmo modo, o `analises.py`, o
+`lugares.py`, o `tabela.py`, o `destinos.py`, o `lidos.py`, o `limite.py` e o
+`relatorio.py` são as partes do `confere_moldes.py`: leem as análises das aulas pela forma
+delas, dizem onde cada trecho cai pelas regras do formato, leem as tabelas em texto, dão a
+cada trecho o que o destino dele nomeia, leem a tabela da leitura, aplicam o limite das
+aulas e fazem as tabelas do relatório. O `marcas.py` é a parte do `confere_material.py` que
+lê os códigos escondidos de um texto e confere cada um contra o lugar em que ele deveria
+estar.
 
 ---
 

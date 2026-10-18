@@ -20,7 +20,8 @@ governo e de instituições, e páginas da internet.
 Cada regra diz também quem cuida dela:
 
 - **o script**: o `referencias.py` faz sozinho, a partir dos dados;
-- **os dados**: quem preenche o arquivo de fontes (explicado no fim deste documento)
+- **os dados**: quem preenche o arquivo de fontes (explicado no fim deste documento), ou o
+  [de chamadas](scripts/README.md#confere_cartoespy--confere-cada-cartão-contra-a-prova-dele),
   escreve do jeito certo, e o script usa como está;
 - **o texto**: quem escreve o material segue a regra ao citar.
 
@@ -38,28 +39,26 @@ Tudo nesta seção vem da NBR 10520 (Associação Brasileira de Normas Técnicas
   fonte e o ano. Um trabalho usa um sistema só, do começo ao fim (6). *O texto.*
 - Notas de rodapé não são usadas pra citar: a citação vai no próprio texto (8). *O texto.*
 - A citação tem de levar à referência certa na lista: ela começa pela mesma entrada da
-  referência (5.1). A conferência das referências mostra a chamada de cada fonte já
-  pronta, montada dos mesmos dados que a referência. *O script.*
+  referência (5.1). A chamada de cada fonte se escreve com essa entrada, no arquivo de
+  chamadas ([seção 2 da
+  metodologia](metodologia-de-conteudo.md#2-as-citações-e-as-referências)). *Os dados.*
 
 ### Quem aparece na chamada
 
 - **Pessoa:** o sobrenome, com maiúscula só na primeira letra: (Silva, 2020) (6.1.1.1).
-  *O script.*
+  *Os dados.*
 - **Instituição:** o nome completo ou a sigla, com as maiúsculas que o nome tem; sigla vai
   toda em maiúsculas: (Instituto Nacional de Exemplo, 2020) ou (INE, 2020) (6.1.1.2). A
-  chamada usa a forma que estiver na entrada da referência. *O script, a partir dos
-  dados.*
+  chamada usa a forma que estiver na entrada da referência. *Os dados.*
 - **Órgão de governo:** o nome da jurisdição a que ele pertence, como o país ou o
-  estado: (Brasil, 2019) (6.1.1.3). *O script, a partir dos dados.*
+  estado: (Brasil, 2019) (6.1.1.3). *Os dados.*
 - **Sem autoria:** o começo do título. Título de uma palavra só: essa palavra. Senão, a
   primeira palavra e [...]; se o título começa por artigo (o, a, um, uma...) ou por
   palavra de uma sílaba, essa palavra, a seguinte e [...]: (O manual [...], 2018)
-  (6.1.1.4). O script usa as palavras do começo do título que estão em maiúsculas nos
-  dados, e é por isso que elas vão em maiúsculas lá (ver [Autoria](#autoria), mais
-  abaixo). *O script, a partir dos dados.*
+  (6.1.1.4). *Os dados.*
 - **Dois ou três autores:** dentro dos parênteses, separados por ponto e vírgula —
   (Silva; Souza, 2020); na frase, com vírgula e "e" — Silva e Souza (2020) (6.1.3,
-  6.1.4). *O script.*
+  6.1.4). *Os dados; na frase, o texto.*
 - **Quatro autores ou mais:** pode-se citar só o primeiro, seguido de *et al.* em
   itálico — (Silva *et al.*, 2020) —, mesmo que a referência traga todos; o que for
   escolhido vale pra todas as citações (6.1.2). No projeto, a escolha é uma só, no campo
@@ -80,7 +79,8 @@ Tudo nesta seção vem da NBR 10520 (Associação Brasileira de Normas Técnicas
 
 - **Mesma entrada, mesmo ano:** uma letra minúscula logo depois do ano, na ordem em que as
   fontes aparecem na lista de referências, (Brasil, 2019a) e (Brasil, 2019b), e a
-  referência leva a mesma letra (6.1.6). *O script.*
+  referência leva a mesma letra (6.1.6). Com o ano entre colchetes, a letra vem logo
+  depois deles: [2019]a. *Os dados.*
 
 ### Várias fontes na mesma chamada
 
@@ -174,11 +174,17 @@ substituiu a edição de 2018.
 
 ### Data
 
-- Sempre há uma data (8.6), com o ano em algarismos (8.6.1). Sem ano de publicação, o de
-  copyright, com um "c" colado: c2015 (8.6.1.1). Sem nenhum ano no documento, um ano
-  entre colchetes: [2015?] provável, [ca. 2015] aproximado, [201-] década certa, [20--]
-  século certo, [2014 ou 2015] um ou outro (8.6.1.3). *Os dados: escritos como a norma
-  escreve, e o script mantém.*
+- Sempre há uma data (8.6), com o ano em algarismos (8.6.1). Sem ano de publicação, outro
+  ano do documento: o de copyright, com um "c" colado, c2015, o da distribuição ou o da
+  impressão (8.6.1.1). Sem nenhum ano no documento, um ano entre colchetes: [2015] certo,
+  mas que o documento não traz, [2015?] provável, [ca. 2015] aproximado, [201-] década
+  certa, [20--] século certo, [2014 ou 2015] um ou outro (8.6.1.3). *Os dados: escritos
+  como a norma escreve, e o script mantém.*
+- **Arquivo que não traz ano**, como uma apresentação de slides sem ano em nenhum slide: o
+  ano é o da versão que o projeto tem, o ano em que o autor gravou o arquivo pela última
+  vez, que o próprio arquivo registra nas propriedades dele, como o ano de uma impressão
+  (8.6.1.1). Esse ano não está escrito no documento e por isso vai entre colchetes, como
+  ano certo: [2015] (8.6.1.3). É assim que se datam as aulas. *Os dados.*
 - **Dia e mês:** nos dados, `AAAA-MM-DD` ou `AAAA-MM`; o script põe o dia antes do mês e o
   mês abreviado no idioma da publicação, pela tabela da norma (8.6.2, 8.6.3, Anexo A):
   "2020-09-04" sai "4 set. 2020" numa publicação em português e "4 Sept. 2020" numa em

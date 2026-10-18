@@ -1,0 +1,59 @@
+{
+ "versao_schema": 1,
+ "estragos": [
+  {
+   "nome": "falha-vira-pego",
+   "arquivo": "estraga.py",
+   "de": "pego = r.returncode != 0",
+   "para": "pego = r.returncode == 0"
+  },
+  {
+   "nome": "sem-antes",
+   "arquivo": "estraga.py",
+   "de": "str(copia), *a.antes, str(pasta / \"t\")",
+   "para": "str(copia), str(pasta / \"t\")"
+  },
+  {
+   "nome": "sem-irma",
+   "arquivo": "estraga.py",
+   "de": "    if a.irma:\n",
+   "para": "    if False:\n"
+  },
+  {
+   "nome": "irma-com-testes",
+   "arquivo": "estraga.py",
+   "de": "ignore_patterns(\"__pycache__\", \"testes\")",
+   "para": "ignore_patterns(\"__pycache__\")"
+  },
+  {
+   "nome": "troca-sem-contar",
+   "arquivo": "estraga.py",
+   "de": "if texto.count(estrago[\"de\"]) != 1:",
+   "para": "if False:"
+  },
+  {
+   "nome": "sem-molde",
+   "arquivo": "estraga.py",
+   "de": "estragos = le_conferido(a.lista, MOLDE)[\"estragos\"]",
+   "para": "estragos = json.loads(a.lista.read_text(encoding=\"utf-8\"))[\"estragos\"]"
+  },
+  {
+   "nome": "sem-faltam",
+   "arquivo": "estraga.py",
+   "de": "        if faltam:\n",
+   "para": "        if False:\n"
+  },
+  {
+   "nome": "codigo-sempre-zero",
+   "arquivo": "estraga.py",
+   "de": "return 0 if pegos == len(estragos) else 1",
+   "para": "return 0"
+  },
+  {
+   "nome": "estraga-a-original",
+   "arquivo": "estraga.py",
+   "de": "    copia = pasta / \"peca\"\n    shutil.copytree(a.peca, copia, ignore=shutil.ignore_patterns(\"__pycache__\"))\n",
+   "para": "    copia = a.peca\n    pasta.mkdir(parents=True)\n"
+  }
+ ]
+}

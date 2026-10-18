@@ -14,7 +14,7 @@
     {"nome": "grupo", "forma": "lista", "separadores": [",", " e ", "+", ";"], "papel": "grupo"},
     {"nome": "caminho", "forma": "presenca", "valores": ["bactéria→doença", "quadro→bactérias"], "papel": "caminho"},
     {"nome": "vai para", "forma": "pedacos", "separadores": [" + ", "; "], "papel": "destino"},
-    {"nome": "livro", "forma": "texto"},
+    {"nome": "livro", "forma": "pedacos", "separadores": [" + ", "; "], "fonte": "MURRAY-2022"},
     {"nome": "elo", "forma": "texto"}
   ]
 }

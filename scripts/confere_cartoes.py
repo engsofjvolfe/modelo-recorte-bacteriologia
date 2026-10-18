@@ -14,11 +14,13 @@ ligam pelo texto da pergunta.
 
 O lugar de cada trecho nao fica na prova: sai da coluna "fonte" do cartao, a citacao
 que aparece no verso. Cada chamada dela, como "(Silva, 2020, p. 12)", e reconhecida
-pelas chamadas que o referencias.py monta a partir das fontes, o que da a chave da
-fonte; o lugar ("p. 12", "slide 3") e o titulo de pagina da transcricao registrada com
-essa chave, ou a pagina de uma frase dela na base do material de fora.
+pelas chamadas do arquivo de chamadas, escritas a mao, cada uma com a chave da fonte; o
+lugar ("p. 12", "slide 3") e o titulo de pagina da transcricao registrada com essa chave,
+ou a pagina de uma frase dela na base do material de fora.
 
-O script nao julga se a resposta esta certa. Recusa so o que falta ou nao bate: cartao
+O script nao julga se a resposta esta certa. Recusa so o que falta ou nao bate: planilha
+com o texto fora do UTF-8 ou com um cartao com mais valores que colunas (comum.le_planilha),
+planilha sem as colunas da pergunta, da resposta e da fonte; cartao sem pergunta, cartao
 sem prova, prova sem cartao, pergunta repetida; coluna fonte sem chamada, texto nela que
 nao e chamada de nenhuma fonte, chamada sem lugar, lugar que a fonte nao tem; trecho que
 nao esta, letra por letra, em nenhum dos lugares citados, e lugar citado sem nenhum
@@ -33,15 +35,16 @@ a prova ou o texto dos lugares citados mudarem depois do tique, o tique e retira
 
 Os caminhos vem do projeto.json: as planilhas, de "material_gerado" e
 "prefixo_planilhas"; as provas, de "provas" (com {planilha} no lugar do nome da
-planilha, sem o .csv); as transcricoes, de "gerados"; as bases do material de fora, de
-"base_externa"; e o arquivo gerado, de "conferencia_cartoes".
+planilha, sem o .csv); as chamadas, de "chamadas"; as transcricoes, de "gerados"; as
+bases do material de fora, de "base_externa"; e o arquivo gerado, de
+"conferencia_cartoes".
 
 A prova de cada planilha e lida pela leitura de todo arquivo de dados
 (validar_dados.le_dados), contra o molde dela (prova.schema.json): com o texto fora do
 UTF-8, JSON invalido ou fora do molde, cada erro aparece com ERRO e a prova nao e usada,
-entao os cartoes da planilha ficam sem prova. As chamadas vem do referencias.py, que le
-do mesmo jeito o arquivo de fontes, a tabela dos meses e o formato da disciplina: com erro
-em qualquer um, cada erro aparece com ERRO e nada e gravado.
+entao os cartoes da planilha ficam sem prova. O arquivo de chamadas e lido do mesmo
+jeito, contra o molde dele (chamadas.schema.json): com erro nele, quando ele falta ou
+quando duas fontes tem a mesma chamada, cada erro aparece com ERRO e nada e gravado.
 
 Uso (de qualquer pasta dentro do projeto):
     python scripts/confere_cartoes.py
@@ -49,7 +52,6 @@ Uso (de qualquer pasta dentro do projeto):
 """
 
 import argparse
-import csv
 import json
 import re
 import sys
@@ -57,14 +59,17 @@ import unicodedata
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import referencias  # noqa: E402
 from base_externa import AFIRMACAO, TEXTO_INTEIRO, descreve  # noqa: E402
-from comum import (acha_projeto, ancora, assinatura, caixas, link, marca, planilhas, tiques_anteriores,  # noqa: E402
-                   tiques_da_parte)
+from comum import (COLUNA_PERGUNTA, EXTENSAO_PLANILHA, acha_projeto, ancora, arquivo_da_prova,  # noqa: E402
+                   assinatura, caixas, le_planilha, link, marca, planilhas, tiques_anteriores, tiques_da_parte)
 from conferencia import fonte_da_transcricao, secoes, transcricoes_da_pasta  # noqa: E402
 from validar_dados import esquema, le_dados  # noqa: E402
 
-COLUNAS = ("pergunta", "resposta", "fonte")
+COLUNA_RESPOSTA, COLUNA_FONTE = "resposta", "fonte"  # as colunas da resposta e da citacao das fontes
+COLUNAS = (COLUNA_PERGUNTA, COLUNA_RESPOSTA, COLUNA_FONTE)  # as colunas que o script le de cada cartao
+# o que a prova, e a base do material de fora, dizem do trecho: a fonte afirma ou trata como possibilidade
+# (esquemas/prova.schema.json e base.schema.json)
+CATEGORICA, POSSIBILIDADE = "categorica", "possibilidade"
 FRASE_DA_BASE = re.compile(r"^\*\*(?P<chave>\S+), (?P<local>.+?) — (?P<codigo>\S+) — (?P<afirmacao>.+)\*\*$")
 ARQUIVO_NO_LOCAL = re.compile(r" \(arquivo p\. \d+\)$")
 # a base escreve a afirmacao pela descricao em portugues, ou pelo proprio valor, se ele nao
@@ -108,6 +113,26 @@ def lugares_das_fontes(projeto):
     return indice
 
 
+def le_chamadas(projeto):
+    """({nucleo: chave da fonte}, erros): as chamadas do arquivo de chamadas, lido contra o molde dele; o nucleo e o
+    que fica dentro dos parenteses da chamada, como "Silva, 2020". Sem o arquivo, ou com duas fontes com a mesma
+    chamada, que nao diria de qual delas e o trecho, so os erros."""
+    arquivo = projeto.caminho("chamadas")
+    if not arquivo.exists():
+        return {}, [f"{arquivo.name}: o arquivo de chamadas não existe -- copie modelo-dados/chamadas.json"]
+    dados, erros = le_dados(arquivo, esquema("chamadas"))
+    if erros:
+        return {}, erros
+    nucleos = {}
+    for c in dados["chamadas"]:
+        nucleo = simples(c["chamada"][1:-1])
+        if nucleo in nucleos:
+            erros.append(f"{arquivo.name}: a chamada {c['chamada']!r} é de duas fontes, {nucleos[nucleo]} e "
+                         f"{c['chave']}")
+        nucleos.setdefault(nucleo, c["chave"])
+    return ({} if erros else nucleos), erros
+
+
 def chamadas_da_fonte(fonte, nucleos):
     """([(chave, lugar)], sobra): cada chamada da coluna fonte, reconhecida pelo nucleo
     dela (nomes e ano), com o lugar que vem logo depois; e o texto de antes da primeira
@@ -129,9 +154,9 @@ def confere_cartao(linha, prova, nucleos, indice):
     """(erros, citados, achados): citados = [(chave, lugar, textos)]; achados =
     [(trecho, [(chave, lugar, arquivo, onde, afirmacao)])]."""
     erros, citados, achados = [], [], []
-    citadas, sobra = chamadas_da_fonte(linha.get("fonte") or "", nucleos)
+    citadas, sobra = chamadas_da_fonte(linha.get(COLUNA_FONTE) or "", nucleos)
     if not citadas:
-        erros.append("a coluna fonte não tem a chamada de nenhuma fonte do arquivo de fontes")
+        erros.append("a coluna fonte não tem a chamada de nenhuma fonte do arquivo de chamadas")
     if sobra:
         erros.append(f"texto na coluna fonte que não é chamada de nenhuma fonte: {sobra!r}")
     for chave, lugar in citadas:
@@ -158,17 +183,17 @@ def confere_cartao(linha, prova, nucleos, indice):
     for chave, lugar, _ in citados:
         if not any(c == chave and l == lugar for _, onde in achados for c, l, *_ in onde):
             erros.append(f"lugar citado sem nenhum trecho da prova: {chave}, {lugar or TEXTO_INTEIRO}")
-    if prova["afirmacao"] == "categorica" and any(o[4] == "possibilidade" for _, onde in achados for o in onde):
+    if prova["afirmacao"] == CATEGORICA and any(o[4] == POSSIBILIDADE for _, onde in achados for o in onde):
         erros.append("a prova diz que a fonte afirma, mas a base do material de fora marca o trecho como possibilidade")
     return erros, citados, achados
 
 
 def bloco_do_cartao(titulo, linha, prova, erros, achados, marca_, tiques, retirado, saida):
     out = ["", f"### {titulo}", "", marca_, "",
-           f"**Pergunta:** {linha.get('pergunta') or ''}", "", f"**Resposta:** {linha.get('resposta') or ''}", "",
-           f"**Fonte:** {linha.get('fonte') or ''}", ""]
+           f"**Pergunta:** {linha.get(COLUNA_PERGUNTA) or ''}", "",
+           f"**Resposta:** {linha.get(COLUNA_RESPOSTA) or ''}", "", f"**Fonte:** {linha.get(COLUNA_FONTE) or ''}", ""]
     if prova:
-        aviso = " — a resposta tem de dizer isso" if prova["afirmacao"] == "possibilidade" else ""
+        aviso = " — a resposta tem de dizer isso" if prova["afirmacao"] == POSSIBILIDADE else ""
         out += [f"**Afirmação:** {descreve(AFIRMACAO, prova['afirmacao'])}{aviso}", ""]
         for trecho, onde in achados:
             out += [f"> {l}" for l in trecho.split("\n")]
@@ -202,24 +227,22 @@ def processa(planilha, projeto, nucleos, indice, anteriores, saida):
     """(bloco, contagem, erros) de uma planilha. Contagem: cartoes, com erro, tique da IA,
     tique da pessoa."""
     nome = planilha.stem
-    with open(planilha, encoding="utf-8", newline="") as f:
-        leitor = csv.DictReader(f)
-        colunas, linhas = leitor.fieldnames or [], list(leitor)
+    colunas, linhas, da_leitura = le_planilha(planilha, planilha.name)
     corpo, cont, erros = ["", "---", "", f"## {nome}", "", f"Planilha: `{link(planilha, saida)}`"], [0, 0, 0, 0], []
-    faltam = [c for c in COLUNAS if c not in colunas]
+    faltam = [c for c in COLUNAS if c not in colunas] if colunas is not None else []
     if faltam:
         erros.append(f"faltam as colunas {', '.join(faltam)}")
-    else:
-        arquivo_prova = projeto.caminho_com("provas", nome)
+    elif colunas is not None:
+        arquivo_prova = arquivo_da_prova(projeto, planilha)
         provas, erros = le_provas(arquivo_prova)
         corpo.append(f"Prova: `{link(arquivo_prova, saida)}`")
-        perguntas = [simples(l.get("pergunta") or "") for l in linhas]
+        perguntas = [simples(l.get(COLUNA_PERGUNTA) or "") for l in linhas]
         erros += [f"pergunta repetida na planilha: {curto(k)!r}" for k in sorted(set(perguntas))
                   if k and perguntas.count(k) > 1]
         erros += [f"prova sem cartão: {curto(k)!r}" for k in provas if k not in perguntas]
-    corpo += [""] + [f"**ERRO:** {e}" for e in erros]
-    erros = [f"{nome}: {e}" for e in erros]
-    if faltam:
+    corpo += [""] + [f"**ERRO:** {e}" for e in da_leitura + erros]
+    erros = da_leitura + [f"{nome}: {e}" for e in erros]
+    if colunas is None or faltam:
         return corpo, cont, erros
     for i, (linha, k) in enumerate(zip(linhas, perguntas), 1):
         prova = provas.get(k)
@@ -245,14 +268,13 @@ def main(argv=None):
     projeto = acha_projeto(a.projeto)
     todas = planilhas(projeto)
     if not todas:
-        raise SystemExit(f"nenhuma planilha '{projeto.valor('prefixo_planilhas')}*.csv' em "
+        raise SystemExit(f"nenhuma planilha '{projeto.valor('prefixo_planilhas')}*{EXTENSAO_PLANILHA}' em "
                          f"{projeto.caminho('material_gerado')}")
-    _, _, chamadas, erros = referencias.monta(projeto)
+    nucleos, erros = le_chamadas(projeto)
     if erros:
         for e in erros:
             print(f"ERRO em {e}")
         return 1
-    nucleos = {simples(dentro[1:-1]): chave for chave, (dentro, _) in chamadas.items()}
     indice = lugares_das_fontes(projeto)
     saida = projeto.caminho("conferencia_cartoes")
     anteriores = tiques_anteriores(saida)

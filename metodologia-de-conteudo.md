@@ -20,12 +20,13 @@ coisa é o <dfn>mapa do projeto</dfn>, o arquivo `projeto.json`, na pasta princi
 que os scripts tiram os caminhos.
 
 O <dfn>material de terceiros</dfn> é o material de outras pessoas descrito no
-[NOTICE](NOTICE.md): a cópia de cada fonte — as aulas, o livro-texto e as outras fontes
-que o projeto cita — e tudo o que traz texto dela: a transcrição, as correções da
-leitura, as evidências da pesquisa, a base de trechos do material de fora e a prova dos
-cartões. Ele nunca é publicado; <dfn>publicar</dfn> é pôr o projeto onde outras pessoas o
-vejam — no <dfn>GitHub</dfn>, um site que guarda projetos na internet e o histórico de
-cada mudança deles, ou em qualquer outro lugar. O resto do projeto pode ser publicado.
+[NOTICE](NOTICE.md#como-o-projeto-trata-esse-material): a cópia de cada fonte — as aulas,
+o livro-texto e as outras fontes que o projeto cita — e tudo o que traz texto ou imagem
+dela, como a transcrição, a prova dos cartões e a imagem posta num cartão. Ele nunca é
+publicado; <dfn>publicar</dfn> é pôr o projeto onde outras
+pessoas o vejam — no <dfn>GitHub</dfn>, um site que guarda projetos na internet e o
+histórico de cada mudança deles, ou em qualquer outro lugar. O resto do projeto pode ser
+publicado.
 
 ---
 
@@ -130,9 +131,10 @@ sistema autor-data da norma de citações da ABNT (NBR 10520): a mesma entrada d
 página impressa ou, num slide, a posição dele no arquivo. O fato é dito com palavras
 próprias; o que se copia da fonte vai entre aspas, num trecho curto. Na planilha, a
 citação vai numa coluna `fonte`, que aparece no cartão. A <dfn>chamada</dfn> de cada fonte
-— o nome e o ano, já com o *et al.* e as letras de desempate quando a norma pede — sai
-pronta na conferência das referências. O que cada norma pede, item por item, e o que cabe
-ao script, aos dados e a quem escreve está nas [Regras da ABNT](regras-abnt.md).
+— o nome e o ano, já com o *et al.* e as letras de desempate quando a norma pede — fica
+escrita à mão no arquivo de chamadas, `dados/chamadas.json`, e é por ele que a conferência
+dos cartões reconhece a citação de cada cartão. O que cada norma pede, item por item, e o
+que cabe ao script, aos dados e a quem escreve está nas [Regras da ABNT](regras-abnt.md).
 
 As referências completas de todas as fontes citadas — as aulas, o livro-texto, as fontes
 da pesquisa e o material de fora — ficam num documento só, `docs/REFERENCIAS.md`, como a
@@ -266,11 +268,12 @@ aulas](#o-limite-das-aulas)); de onde vem o documento de cada trecho — do grup
 caminho dele, do lugar que a análise da aula escreve para ele, ou dos dois —; os grupos da
 matéria; o que fica fora do material e as marcas, que só dizem do que um trecho fala; a
 sequência das partes de um texto, cada uma com os seus tipos de conhecimento, e onde cada
-tipo se ensina; e os documentos, cada um com o molde dele e, se ele as lista, as suas
-unidades. Uma <dfn>unidade</dfn> é cada coisa que ganha material num documento: um tema da
-teoria, uma bactéria, uma família de itens, um quadro, uma aula nas perguntas de prova. Na
-ficha, a unidade tem os eixos dela ou os do documento, e um eixo pode ter
-<dfn>subtópicos</dfn>, as partes menores dele que toda unidade também tem. A ficha de uma
+tipo se ensina; e os documentos, na ordem em que se escrevem em cada aula, cada um com o
+molde dele e, se ele as lista, as suas unidades. Uma <dfn>unidade</dfn> é cada coisa que
+ganha material num documento: um tema da teoria, uma bactéria, uma família de itens, um
+quadro, uma aula nas perguntas de prova. Na ficha, a unidade tem os eixos dela ou os do
+documento, e um eixo pode ter <dfn>subtópicos</dfn>, as partes menores dele que toda
+unidade também tem. A ficha de uma
 família lista também os itens dela, cada um com os eixos da família. Um documento pode
 juntar unidades, ou itens, num conjunto que a análise de uma aula nomeia de uma vez, como
 um gênero de bactérias: o fato do conjunto vai para cada membro dele. O que vai em cada
@@ -362,6 +365,27 @@ perguntas de prova, uma por aula ([análise da matéria, Os
 documentos](docs/analise-da-materia.md#os-documentos)). Cada documento segue o molde dele
 ([Os moldes](docs/analise-da-materia.md#os-moldes)).
 
+Cada documento se escreve em textos: um para cada unidade que tem material e, nas
+perguntas de prova, um para cada aula. Cada unidade tem um texto só, escrito inteiro na
+primeira aula que trata dela. Os textos se escrevem aula por aula, até a última, e, em
+cada aula, na ordem dos documentos no arquivo de formato, que põe o básico antes do que
+depende dele, como a teoria fundamental antes das bactérias que usam o que ela ensina. As
+perguntas de prova de uma aula vêm depois de todos os textos com trechos dela, porque a
+resposta-modelo usa só o que os documentos ensinam.
+
+Antes de um texto ser escrito, a <dfn>lista de trabalho</dfn> dele diz o que ele explica e
+o que ler: os trechos das aulas que vão para cada parte do molde, cada um com o lugar dele
+no livro-texto; os capítulos que esses lugares citam, para ler inteiros; e as dúvidas
+abertas das análises das aulas. A lista fica na pasta protegida, porque copia o texto das
+aulas, e o que ela traz está no [README dos
+scripts](scripts/README.md#lista_de_trabalhopy--o-que-escrever-e-o-que-ler-em-cada-unidade).
+O texto se liga a cada trecho que explica por códigos escondidos, que a visualização não
+mostra: o começo da unidade, o de cada parte e, dentro da parte, o código do trecho. Com
+eles, o
+[`confere_material.py`](scripts/README.md#confere_materialpy--confere-o-texto-e-os-cartões-de-cada-unidade)
+confere que cada trecho está no texto, na parte em que cai, e tem cartão, e diz qual é o
+próximo texto a escrever.
+
 Quem escreve lê inteiras as transcrições e as bases conferidas antes de escrever, sem
 ferramenta que corte ou resuma o texto, e nunca inventa nem deduz um fato que não esteja
 escrito na fonte: um dado que parece faltar ou é ambíguo vira pergunta, não palpite.
@@ -433,16 +457,20 @@ que os cartões novos entram no baralho estão em [Os
 moldes](docs/analise-da-materia.md#os-moldes), no parágrafo dos cartões.
 
 Os cartões saem dos documentos de estudo, nunca direto da fonte, e ficam em planilhas
-CSV, uma pergunta por linha, cada planilha com um nome que começa pelo prefixo que o mapa
-do projeto dá. Cada cartão pergunta um fato só, com uma resposta curta, escrita com
-palavras próprias, clara e sem jargão solto. Todo fato dos documentos ganha pelo menos um
-cartão, porque os documentos só têm o que as aulas trazem e o que o livro-texto e o
-material de fora dizem dos pontos delas, e tudo isso pode ser cobrado. Um fato pode dar
+CSV, uma pergunta por linha. Cada texto tem a sua planilha, com um nome que começa pelo
+prefixo que o mapa do projeto dá, menos os das perguntas de prova: os trechos delas ganham
+cartão nos textos que os explicam. Cada cartão pergunta um fato só, com uma resposta
+curta, escrita com palavras próprias, clara e sem jargão solto. Todo fato dos documentos
+ganha pelo menos um cartão, porque os documentos só têm o que as aulas trazem e o que o
+livro-texto e o material de fora dizem dos pontos delas, e tudo isso pode ser cobrado. Um
+fato pode dar
 mais de um cartão: uma associação pedida nos dois sentidos ganha um cartão em cada
 sentido, e uma lista vira cartões menores — um por elemento, ou um por posição quando a
 ordem importa —, em vez de um cartão que pede a lista inteira. A coluna `fonte` traz só as
 chamadas, cada uma com a página ou o slide, e nenhum cartão traz fato que não esteja nos
-documentos.
+documentos. Cada cartão leva também, em colunas que ele não mostra, os códigos dos trechos
+de que trata e a aula do texto dele, e é por eles que o `confere_material.py` confere que
+todo trecho do texto tem cartão.
 
 A <dfn>prova</dfn> de um cartão é o trecho da fonte que diz o fato dele, copiado letra
 por letra da transcrição ou da base do material de fora, junto da pergunta, igual à da
@@ -454,11 +482,14 @@ fonte não afirma. O `confere_cartoes.py` confere cada cartão contra a prova de
 conferência dos cartões.
 
 O baralho do Anki sai das planilhas pelo `montar_deck.py`, usado sem editar: sempre que
-uma planilha muda, o baralho inteiro se refaz em segundos. É a planilha que precisa estar
-certa, porque o que se muda direto no Anki se perde quando o baralho é refeito ([MANUAL,
-Atualizando o
+uma planilha muda, o baralho inteiro se refaz em segundos. Ele se divide em baralhos
+menores, um para cada aula, com os cartões dos textos escritos nela, para que o primeiro
+contato com cada cartão venha depois da leitura do texto dele; daí em diante, o Anki
+decide quando o cartão volta. É a planilha que precisa estar certa, porque o que se muda
+direto no Anki se perde quando o baralho é refeito ([MANUAL, Atualizando o
 baralho](MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas)). Como as colunas
-da planilha viram campos do cartão está no [README dos
+da planilha viram campos do cartão, como o baralho se divide, onde fica o pacote que tem
+imagem e o que mantém o histórico de revisão de um cartão estão no [README dos
 scripts](scripts/README.md#montar_deckpy--das-planilhas-de-pergunta-ao-baralho-do-anki).
 
 ---
@@ -495,9 +526,9 @@ conferência](scripts/README.md#como-ticar-uma-conferência).
 
 Antes de o material valer, nenhum script deixa linha `ERRO` nem `FALTA`: o
 `validar_dados.py`, em cada arquivo de dados, e o `conferencia.py`, o `confere_moldes.py`,
-o `referencias.py`, o `base_externa.py`, o `confere_cartoes.py`, o
-`glossario.py --conferir`, o `confere_indice.py` e o `protege_fontes.py`. E a pessoa
-confere:
+o `confere_material.py`, o `referencias.py`, o `base_externa.py`, o `confere_cartoes.py`,
+o `montar_deck.py`, o `glossario.py --conferir`, o `confere_indice.py` e o
+`protege_fontes.py`. E a pessoa confere:
 
 1. que o título de cada documento cobre tudo o que está dentro dele;
 2. que, em cada item, o dicionário e a ficha mostram os mesmos fatos principais, sem

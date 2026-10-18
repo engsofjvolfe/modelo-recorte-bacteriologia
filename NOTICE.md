@@ -22,18 +22,19 @@ fonte está em `docs/REFERENCIAS.md`.
 
 ## Como o projeto trata esse material
 
-- A cópia de cada fonte, e tudo o que traz texto dela — a transcrição, as correções da
-  leitura, as evidências da pesquisa, a base de trechos do material de fora e a prova de
-  cada cartão —, fica em [`docs/material-base/`](docs/material-base/). Nada disso está sob
-  as licenças deste projeto.
+- A cópia de cada fonte, e tudo o que traz texto ou imagem dela — a transcrição, as
+  correções da leitura, as evidências da pesquisa, a base de trechos do material de fora,
+  a lista de trabalho de cada texto de estudo, a prova de cada cartão, a imagem posta num
+  cartão e o baralho que a leva —, fica em [`docs/material-base/`](docs/material-base/).
+  Nada disso está sob as licenças deste projeto.
 - Esse material nunca é publicado nem repassado. Se o projeto é guardado no GitHub, a
   <dfn>lista do que nunca vai pro GitHub</dfn> (o arquivo [.gitignore](.gitignore)) deixa
   essa pasta de fora.
 - Quem receber uma cópia deste projeto com essa pasta preenchida deve tratá-la como
   material pessoal de estudo, não como parte do que se pode repassar.
 - O material de estudo diz cada fato com palavras próprias e cita a fonte junto dele.
-  Nenhuma figura das aulas ou do livro é copiada para ele: o que uma figura mostra é
-  ensinado em palavras.
+  Nenhuma figura das aulas ou do livro é copiada para os documentos nem para os cartões
+  que vão com o projeto: o que uma figura mostra é ensinado em palavras.
 - A referência de uma fonte não é cópia dela: a lista de referências é conteúdo deste
   projeto e segue a licença do conteúdo.
 
