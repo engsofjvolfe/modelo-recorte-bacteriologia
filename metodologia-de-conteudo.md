@@ -288,8 +288,10 @@ ter, o que a aula cobre e onde falta.
 O recorte deste projeto é o que as aulas trazem, completado pelo livro-texto. As aulas
 trazem os pontos da matéria, não o conteúdo de cada um: entra todo trecho delas, até onde
 o [limite das aulas](#o-limite-das-aulas) diz, e, de cada ponto, tudo o que o livro diz
-sobre ele, lido no capítulo inteiro, nunca por busca de palavras. O que o livro diz sobre
-um assunto que nenhum slide traz fica fora, menos os fatores de risco de cada bactéria
+sobre ele, lido no capítulo inteiro, nunca por busca de palavras; o que o livro diz de um
+item que tem unidade própria fica no documento dele ([O item citado pelo
+nome](#o-item-citado-pelo-nome)). O que o livro diz sobre um assunto que nenhum slide traz
+fica fora, menos os fatores de risco de cada bactéria
 ([análise da matéria, O que o estudante precisa saber
 fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer)). Vírus e fungos
 não são assunto do material. Um trecho das aulas que fala deles entra como a aula o usa:
@@ -307,8 +309,13 @@ se justifica pelo recorte. Partes diferentes têm densidades diferentes: o núme
 cartões de cada item, conceito ou caso segue os fatos que ele tem, com a mesma regra para
 todos.
 
-Os nomes e os termos seguem a grafia do livro-texto. Quando uma aula e o livro discordam,
-vale o livro, e o documento anota a diferença.
+Os nomes e os termos seguem a grafia e a forma com que o livro-texto os imprime. Quando
+uma aula e o livro discordam, vale o livro, e o documento anota a diferença como a outra
+forma do nome, onde ele aparece pela primeira vez, sem falar da fonte, que fica só na
+citação. Quando o livro imprime mais de uma forma, vale a do lugar dele que trata do
+ponto; um nome que o livro não traz segue a aula; e, nos dois casos, as outras formas se
+anotam do mesmo modo. O título de cada texto segue essas formas, mesmo quando o nome da
+unidade no arquivo de formato é outro.
 
 ### O limite das aulas
 
@@ -333,8 +340,10 @@ scripts](scripts/README.md#confere_moldespy--confere-os-moldes-contra-as-anális
 
 ### O material de fora
 
-Onde nem as aulas nem o livro-texto chegam, entra material de fora — de preferência um
-documento oficial ou de referência da área. Ele completa, nunca substitui, e vale a mesma
+Onde nem as aulas nem o livro-texto chegam, o ponto se explica com um aposto de IA, marcado
+para ser verificado ([seção 5](#5-os-documentos-de-estudo)), até alguém achar a fonte dele.
+A fonte achada é <dfn>material de fora</dfn> — de preferência um documento oficial ou de
+referência da área. Ele completa, nunca substitui, e vale a mesma
 regra: o fato tem de estar escrito nele, nunca deduzido. A cópia de cada material de fora
 fica na pasta protegida, em `docs/material-base/fontes-externas/`, com um nome que começa
 pela entrada e pelo ano da referência dele, para se achar o arquivo a partir da citação.
@@ -387,12 +396,26 @@ confere que cada trecho está no texto, na parte em que cai, e tem cartão, e di
 próximo texto a escrever.
 
 Quem escreve lê inteiras as transcrições e as bases conferidas antes de escrever, sem
-ferramenta que corte ou resuma o texto, e nunca inventa nem deduz um fato que não esteja
-escrito na fonte: um dado que parece faltar ou é ambíguo vira pergunta, não palpite.
+ferramenta que corte ou resuma o texto, e nunca inventa um fato nem traz um de fora das
+fontes: um dado que parece faltar ou é ambíguo vira pergunta, não palpite. Para explicar o
+que a fonte afirma sem explicar, o texto pode ligar fatos que ela dá e tirar deles a
+conclusão, desde que cada fato de que a ligação parte esteja escrito na fonte, com a
+citação. Um ponto que nem assim se explica ganha, onde aparece, um <dfn>aposto de IA</dfn>:
+um aposto curto, escrito por IA e sem fonte, entre as marcas de IA do `projeto.json`
+(`ia`), como `[IA: o meio de cultura padronizado para esse teste]`, com a marca inteira numa
+linha. Ele diz só o que o texto precisa para ser entendido, nunca um assunto novo, e vira
+cartão como qualquer fato, com a marca de fonte de IA no lugar da citação e a prova tirada
+da marca. A [lista dos trechos escritos por IA](docs/material-gerado/trechos-de-ia.md), que
+o [`trechos_de_ia.py`](scripts/README.md#trechos_de_iapy--monta-a-lista-dos-trechos-escritos-por-ia)
+gera das marcas, leva a cada aposto. Quem achar a fonte de um aposto escreve o trecho com
+ela e com a citação e tira a marca: o trecho sai da lista, e o cartão dele dá erro no
+`confere_cartoes.py` até ganhar a chamada e a prova da fonte nova.
 
 O texto ensina, como quem ensina a matéria a alguém que nunca a viu: cada fato se apoia no
 que o leitor já sabe ou no que o documento ensinou antes, o nome técnico chega depois do
-que ele nomeia, e o básico vem antes do que depende dele. Ensinar não é mostrar: nenhum
+que ele nomeia, e o básico vem antes do que depende dele. Quando o molde põe um termo
+antes daquilo de que o uso dele depende, a parte do termo diz o que ele é, e o uso dele
+entra onde o texto explica aquilo. Ensinar não é mostrar: nenhum
 fato fica só listado ou apontado numa figura, numa página ou numa fonte — o que a figura
 mostra é escrito e explicado no documento. Tudo é dito com palavras próprias, claro e sem
 jargão solto, nunca num texto que se lê como o livro de onde o fato veio. Um termo técnico
@@ -446,6 +469,15 @@ cada item, a teoria fundamental define tudo o que os itens usam, e quem esqueceu
 categoria significa tem um caminho direto até ela. Um conceito da teoria usado num item
 sem ser citado pelo nome em nenhum documento dele é uma lacuna.
 
+### O item citado pelo nome
+
+Um documento que nomeia um item que tem unidade própria no arquivo de formato o cita pelo
+nome e pela categoria que o define, com o link para o documento dele, e não conta de novo
+o que o livro diz do item na parte do livro que trata dele: isso fica no documento do
+item. O que o livro diz do item ao tratar do ponto do próprio documento entra nele, como
+todo o resto do que o livro diz desse ponto. Assim nenhum fato fica sem documento e
+nenhum é contado duas vezes.
+
 ---
 
 ## 6. Os cartões e o baralho
@@ -478,8 +510,10 @@ planilha, e da marca de se a fonte afirma o fato ou o trata como possibilidade. 
 de cada planilha ficam num arquivo, em `docs/material-base/gerados-ocr/provas/`, e, como
 têm texto de terceiros, nunca são publicadas. Quando a fonte trata o fato como
 possibilidade, a resposta do cartão diz isso: nenhum cartão apresenta como certo o que a
-fonte não afirma. O `confere_cartoes.py` confere cada cartão contra a prova dele e grava a
-conferência dos cartões.
+fonte não afirma. O cartão de um aposto de IA ([seção 5](#5-os-documentos-de-estudo)) leva
+na coluna `fonte` a marca de fonte de IA do `projeto.json`, e a prova dele é o texto da
+marca, copiado letra por letra do texto do material. O `confere_cartoes.py` confere cada
+cartão contra a prova dele e grava a conferência dos cartões.
 
 O baralho do Anki sai das planilhas pelo `montar_deck.py`, usado sem editar: sempre que
 uma planilha muda, o baralho inteiro se refaz em segundos. Ele se divide em baralhos

@@ -414,6 +414,36 @@
    "arquivo": "confere_cartoes.py",
    "de": "lugar = ARQUIVO_NO_LOCAL.sub(\"\", m[\"local\"])",
    "para": "lugar = m[\"local\"]"
+  },
+  {
+   "nome": "ia-fonte-ignorada",
+   "arquivo": "confere_cartoes.py",
+   "de": "return ia is not None and simples(",
+   "para": "return False and simples("
+  },
+  {
+   "nome": "ia-sem-conferir-a-marca",
+   "arquivo": "confere_cartoes.py",
+   "de": "erros, achados = acha(prova, lugares, \"nenhuma marca de IA do material\")",
+   "para": "erros, achados = [], [(t, []) for t in prova[\"trechos\"]]"
+  },
+  {
+   "nome": "ia-sem-aviso",
+   "arquivo": "confere_cartoes.py",
+   "de": "out += [AVISO_IA, \"\"] if ia else []",
+   "para": "out += []"
+  },
+  {
+   "nome": "ia-tique-sem-o-texto-da-marca",
+   "arquivo": "confere_cartoes.py",
+   "de": "citados = [(None, None, [(arq, de, texto, af) for _, _, arq, de, texto, af in lugares if (arq, de) in usadas])]",
+   "para": "citados = []"
+  },
+  {
+   "nome": "ia-marca-quebrada-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "if erros or erros_ia:",
+   "para": "if erros:"
   }
  ]
 }

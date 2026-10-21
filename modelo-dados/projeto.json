@@ -6,6 +6,7 @@
   "colunas_ocultas": ["ordem"],
   "coluna_subdecks": null,
   "coluna_trechos": null,
+  "ia": null,
   "caminhos": {
     "formato": "dados/formato.json",
     "forma_analise": "dados/forma-analise.json",
@@ -39,6 +40,7 @@
     "estilo_cartao": "dados/estilo-cartao.css",
     "imagens_cartoes": "docs/material-base/imagens-dos-cartoes",
     "baralhos_com_imagens": "docs/material-base/baralhos-com-imagens",
-    "chamadas": "dados/chamadas.json"
+    "chamadas": "dados/chamadas.json",
+    "trechos_de_ia": "docs/material-gerado/trechos-de-ia.md"
   }
 }

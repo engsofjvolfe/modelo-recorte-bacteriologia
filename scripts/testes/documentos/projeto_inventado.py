@@ -31,13 +31,14 @@ class Bancada:
     def git(self, pasta, *args):
         subprocess.run(["git", "-C", str(pasta), *args], check=True, capture_output=True, env=self.ambiente)
 
-    def projeto(self, nome, arquivos, caminhos=None, usa_git=True, versionados=None):
+    def projeto(self, nome, arquivos, caminhos=None, usa_git=True, versionados=None, valores=None):
         """Monta o projeto: {caminho: texto}, com os caminhos do projeto.json trocados pelos
-        dados. Com git, os versionados (padrao: todos) vao pro git com add; os outros ficam so
-        na pasta."""
+        dados e os valores dados no lugar dos do topo dele. Com git, os versionados (padrao:
+        todos) vao pro git com add; os outros ficam so na pasta."""
         raiz = self.trabalho / nome
         raiz.mkdir(parents=True)
         dados = self.dados_do_modelo()
+        dados.update(valores or {})
         dados["caminhos"].update(caminhos or {})
         (raiz / "projeto.json").write_text(json.dumps(dados, ensure_ascii=False), encoding="utf-8")
         for caminho, texto in arquivos.items():

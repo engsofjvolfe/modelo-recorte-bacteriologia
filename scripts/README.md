@@ -61,12 +61,14 @@ alguma coisa e diz o quê.
 | Com as planilhas de pergunta e as provas dos cartões prontas | `confere_cartoes.py` |
 | Com as planilhas conferidas, e sempre que uma delas muda | `montar_deck.py` |
 | Sempre que um documento define um termo novo, ou deixa de definir | `glossario.py` |
+| Sempre que um texto do material ganha ou perde uma marca de IA, ou muda de linhas | `trechos_de_ia.py` |
 | Sempre que um documento entra no projeto, sai dele ou muda de lugar | `confere_indice.py` |
 | Antes de publicar | `protege_fontes.py` |
 | Depois de mudar um script que tem teste | o teste dele e os estragos dele ([Os testes](#os-testes)) |
 
-O `protege_fontes.py`, o `glossario.py` e o `confere_indice.py` rodam também sozinhos antes
-de cada commit ([Conferência das mensagens e proteção das fontes](../.githooks/README.md)).
+O `protege_fontes.py`, o `glossario.py`, o `trechos_de_ia.py` e o `confere_indice.py` rodam
+também sozinhos antes de cada commit ([Conferência das mensagens e proteção das
+fontes](../.githooks/README.md)).
 
 ## O mapa do projeto
 
@@ -83,6 +85,7 @@ protegida, que nunca muda. Fora dos caminhos:
 | `nome_licenca_conteudo` | o nome da licença do conteúdo, que sai no rodapé da lista de referências |
 | `colunas_ocultas` e `coluna_subdecks` | as colunas que o baralho guarda sem mostrar e a que o divide ([`montar_deck.py`](#montar_deckpy--das-planilhas-de-pergunta-ao-baralho-do-anki)) |
 | `coluna_trechos` | a coluna das planilhas de pergunta com os códigos dos trechos de cada cartão, ou `null` ([`confere_material.py`](#confere_materialpy--confere-o-texto-e-os-cartões-de-cada-unidade)) |
+| `ia` | as marcas do que uma IA escreveu, sem fonte: `abre` e `fecha`, em volta do trecho no texto, e `fonte`, na coluna fonte do cartão; ou `null`, sem marcas ([`trechos_de_ia.py`](#trechos_de_iapy--monta-a-lista-dos-trechos-escritos-por-ia)) |
 
 ## O arquivo de formato
 
@@ -879,9 +882,12 @@ Um exemplo inventado, com a prova de um cartão:
 **As chamadas.** Na coluna `fonte` da planilha vão só as chamadas, cada uma com o lugar:
 `(Silva, 2020, p. 12)`, ou, com duas fontes, `(Silva, 2020, p. 12; Souza, 2019, slide 3)`.
 O lugar é o título da página na transcrição (`p. 12`, `slide 3`) ou a página da frase na
-base; fonte sem páginas, como uma página da internet, vai sem lugar. O script reconhece
-cada chamada pelo arquivo de chamadas, `dados/chamadas.json`, escrito à mão pelas [Regras
-da ABNT](../regras-abnt.md#citação-no-texto-nbr-105202023): uma entrada para cada fonte,
+base; fonte sem páginas, como uma página da internet, vai sem lugar. Cada chamada tem um
+lugar só, porque o script lê como lugar tudo o que vem depois dela: a mesma fonte em dois
+lugares vem em duas chamadas, `(Silva, 2020, p. 12; Silva, 2020, p. 14)`, e não como
+`p. 12-14` ou `p. 12, 14`. O script reconhece cada chamada pelo arquivo de chamadas,
+`dados/chamadas.json`, escrito à mão pelas [Regras da
+ABNT](../regras-abnt.md#citação-no-texto-nbr-105202023): uma entrada para cada fonte,
 entre chaves, com a `chave` dela — a mesma do registro da fonte na transcrição e na base —
 e a `chamada`, entre parênteses, sem o lugar. Ele nasce de uma cópia do modelo em branco,
 [`modelo-dados/chamadas.json`](../modelo-dados/chamadas.json), e o molde dele é
@@ -896,6 +902,14 @@ e a `chamada`, entre parênteses, sem o lugar. Ele nasce de uma cópia do modelo
   ]
 }
 ```
+
+**O cartão escrito por IA.** O fato que uma IA escreveu num texto, entre as marcas de `ia`
+do `projeto.json` ([`trechos_de_ia.py`](#trechos_de_iapy--monta-a-lista-dos-trechos-escritos-por-ia)),
+também vira cartão. Na coluna `fonte` dele vai só a marca de fonte de IA (`ia`, `fonte`), e
+a prova traz, nos `trechos`, o texto da marca, copiado letra por letra do texto do material.
+O script procura cada trecho dentro das marcas de IA dos textos e mostra o cartão com o
+aviso de que ele precisa ser verificado. Quando alguém acha a fonte e tira a marca do texto,
+o cartão vira `ERRO` até ganhar a chamada da fonte nova e a prova dela, como qualquer outro.
 
 **Como rodar.**
 
@@ -913,7 +927,8 @@ sem o tique da pessoa. A conferência mostra cada cartão com a pergunta, a resp
 fonte, os trechos e onde cada um foi achado; se o cartão, a prova ou o texto da fonte
 mudam depois do tique, o tique sai. Sem o arquivo de chamadas, com ele fora do molde ou
 com duas fontes com a mesma chamada, que não diria de qual delas é o trecho, cada problema
-sai numa linha `ERRO` e nada é gravado.
+sai numa linha `ERRO` e nada é gravado; o mesmo vale para a marca de IA quebrada num texto
+do material. O cartão de IA cujo trecho não está em nenhuma marca de IA é `ERRO`.
 
 ## `montar_deck.py` — das planilhas de pergunta ao baralho do Anki
 
@@ -1016,6 +1031,32 @@ termo definido em mais de um lugar (sem contar maiúsculas), com cada lugar, e p
 vazia. Com `--conferir`, `FALTA` quando o glossário gravado não é o que os documentos
 definem. Sem o git, o script diz isso numa linha `ERRO` e para, como o
 `confere_indice.py`.
+
+## `trechos_de_ia.py` — monta a lista dos trechos escritos por IA
+
+**O que faz.** Um texto do material marca o que uma IA escreveu, sem fonte, com as marcas
+de `ia` do `projeto.json` em volta do trecho, como `[IA: o meio de cultura padronizado]`,
+com a marca inteira numa linha só ([metodologia, seção
+5](../metodologia-de-conteudo.md#5-os-documentos-de-estudo)). O script lê os textos da pasta
+do material gerado (`material_gerado`) e das subpastas dela, fora dos trechos de código, e
+grava a lista (`trechos_de_ia`, nos caminhos): cada marca num item numerado, na ordem dos
+arquivos e das linhas, com o título do documento, o link para a linha da marca e o texto
+marcado. Quando alguém acha a fonte de um trecho e o escreve com ela, tirando a marca, o
+item sai da lista na rodada seguinte, e os outros se renumeram; a lista não guarda o que
+saiu. As mesmas marcas, nas mesmas linhas, dão sempre a mesma lista. A função que acha as
+marcas é a mesma que o `confere_cartoes.py` usa para os cartões de IA.
+
+**Como rodar.**
+
+    python scripts/trechos_de_ia.py
+    python scripts/trechos_de_ia.py --conferir
+
+O `--conferir` não grava nada: só diz se a lista gravada está em dia.
+
+**O que mostra.** Quantos trechos foram gravados. Uma linha `ERRO`, e nada gravado, para a
+marca que abre e não fecha na mesma linha, para a marca vazia e para o texto fora do UTF-8.
+Com `--conferir`, `FALTA` quando a lista gravada não é a que as marcas dão. Com `ia` em
+`null`, o script diz que não há lista a montar.
 
 ## `comum.py`
 

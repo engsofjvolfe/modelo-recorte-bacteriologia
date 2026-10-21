@@ -45,7 +45,11 @@ verso, as imagens, o baralho de cada cartão, o código e a posição dos cartõ
 cada pacote; e que cada erro de uma planilha a deixa sem pacote, e cada erro do formato,
 das colunas ou do estilo deixa todas. Da conferência, que cada cartão certo passa, que
 cada erro aparece no cartão ou na planilha dele, que os tiques voltam e saem, e que, com
-erro no arquivo de chamadas, nada é gravado.
+erro no arquivo de chamadas, nada é gravado. Do cartão escrito por IA, com marcas de IA
+inventadas e um texto do material com uma delas: que ele passa com a prova tirada da marca,
+com o aviso de IA; que o tique dele sai quando o texto da marca muda; que ele é erro quando
+a marca sai do texto e quando o projeto não tem marcas de IA; e que, com uma marca quebrada
+no texto, nada é gravado.
 
 Precisa do genanki ([O que precisa estar
 instalado](../README.md#o-que-precisa-estar-instalado)): o teste roda com o Python que o
@@ -90,10 +94,11 @@ E os estragos do próprio `estraga.py`:
 
     python scripts/estraga.py scripts scripts/testes/copias-estragadas/teste_estraga.py scripts/testes/copias-estragadas/estragos.json [pasta de trabalho nova]
 
-## `documentos/` — o índice, o glossário e os links que os scripts escrevem
+## `documentos/` — o índice, o glossário, a lista dos trechos de IA e os links que os scripts escrevem
 
-Os testes do [`confere_indice.py`](../README.md#confere_indicepy--confere-que-cada-documento-está-no-índice)
-e do [`glossario.py`](../README.md#glossariopy--monta-o-glossário). Cada caso é um projeto
+Os testes do [`confere_indice.py`](../README.md#confere_indicepy--confere-que-cada-documento-está-no-índice),
+do [`glossario.py`](../README.md#glossariopy--monta-o-glossário) e do
+[`trechos_de_ia.py`](../README.md#trechos_de_iapy--monta-a-lista-dos-trechos-escritos-por-ia). Cada caso é um projeto
 inventado, montado pelo `projeto_inventado.py`, que não se roda: o `projeto.json` do
 modelo em branco, com o índice ou o glossário numa subpasta e com outro nome, e documentos
 inventados, com git ou sem ele. Do índice, o teste confere o projeto certo, rodando de uma
@@ -103,20 +108,26 @@ o link dentro de código; e o projeto sem índice, sem git e sem `projeto.json`.
 glossário, a ordem dos termos, sem contar acentos nem maiúsculas, e o link de cada um para
 a seção dele, com a marca partida em duas linhas, com atributo, em maiúsculas e dentro de
 código; o `--conferir`; o termo definido em dois lugares e a marca vazia, sem gravar nada;
-e o projeto sem marca, sem git e sem `projeto.json`. Os dois comparam as linhas que o
-script mostra, e o glossário que ele grava, com o texto que esperam, e mostram, para cada
-caso que falhou, o que saiu e o que se esperava.
+e o projeto sem marca, sem git e sem `projeto.json`. Da lista dos trechos de IA, com marcas
+de IA inventadas, o material e a lista em outros lugares: a ordem dos arquivos e das
+linhas, duas marcas na mesma linha, o documento sem título, o caminho com espaço, a marca
+dentro de código e a de fora do material; o `--conferir`; a marca que sai do texto, que
+tira o item e renumera os outros; a marca que não fecha, a vazia e o texto fora do UTF-8,
+sem gravar nada; e o projeto sem marca e sem marcas de IA. Os três comparam as linhas que
+o script mostra, e o que ele grava, com o texto que esperam, e mostram, para cada caso que
+falhou, o que saiu e o que se esperava.
 
 O `teste_alvos_dos_links.py` lê o código dos scripts, sem rodar nada: confere que nenhum
 deles escreve o caminho de um link do Markdown sem passar pelo `alvo_markdown` do
 `comum.py`, que põe entre `<>` o caminho com espaço (sem isso, a imagem ou o link não
 aparece). Mostra cada linha fora da regra.
 
-Os dois primeiros precisam do git e recebem a pasta principal do projeto, a que tem
-`scripts/` e `modelo-dados/`:
+Os três primeiros recebem a pasta principal do projeto, a que tem `scripts/` e
+`modelo-dados/`; o do índice e o do glossário precisam também do git:
 
     python scripts/testes/documentos/teste_confere_indice.py . [pasta de trabalho nova]
     python scripts/testes/documentos/teste_glossario.py . [pasta de trabalho nova]
+    python scripts/testes/documentos/teste_trechos_de_ia.py . [pasta de trabalho nova]
     python scripts/testes/documentos/teste_alvos_dos_links.py scripts
 
 ## `extrator/` — as transcrições de PDF, HTML, XML e JSON

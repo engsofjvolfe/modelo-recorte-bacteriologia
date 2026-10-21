@@ -13,6 +13,21 @@
     "colunas_ocultas": { "type": "array", "items": { "$ref": "#/$defs/coluna" } },
     "coluna_subdecks": { "anyOf": [ { "type": "null" }, { "$ref": "#/$defs/coluna" } ] },
     "coluna_trechos": { "anyOf": [ { "type": "null" }, { "$ref": "#/$defs/coluna" } ] },
+    "ia": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["abre", "fecha", "fonte"],
+          "additionalProperties": false,
+          "properties": {
+            "abre": { "$ref": "#/$defs/texto" },
+            "fecha": { "$ref": "#/$defs/texto" },
+            "fonte": { "$ref": "#/$defs/texto" }
+          }
+        }
+      ]
+    },
     "caminhos": {
       "type": "object",
       "additionalProperties": true,
@@ -57,7 +72,8 @@
         "estilo_cartao": { "$ref": "#/$defs/texto" },
         "imagens_cartoes": { "$ref": "#/$defs/protegido" },
         "baralhos_com_imagens": { "$ref": "#/$defs/protegido" },
-        "chamadas": { "$ref": "#/$defs/texto" }
+        "chamadas": { "$ref": "#/$defs/texto" },
+        "trechos_de_ia": { "$ref": "#/$defs/texto" }
       }
     }
   },

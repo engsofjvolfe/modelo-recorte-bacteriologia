@@ -38,6 +38,16 @@ inteiro, cada um com o que ele é.
     pedem a matéria, a análise de cada aula e a forma de estudo de cada tipo de
     conhecimento.
 
+## O material
+
+14. [Propostas](docs/material-gerado/propostas/README.md) — o primeiro texto de cada tipo
+    de documento do material, para aprovar a forma do tipo, e o que olhar em cada um.
+15. [Testes de suscetibilidade antimicrobiana](docs/material-gerado/propostas/teoria-tema-testes-de-sensibilidade.md)
+    — o primeiro tema da teoria fundamental, da aula 9-10.
+16. [Trechos escritos por IA](docs/material-gerado/trechos-de-ia.md) — os apostos que uma
+    IA escreveu nos textos, sem fonte, cada um com o documento e o link para a linha, para
+    quem revisar o material procurar a fonte; a lista se refaz das marcas nos textos.
+
 ---
 
 *Este documento está licenciado sob [CC BY-NC-SA 4.0](LICENSE-CONTENT.txt).*

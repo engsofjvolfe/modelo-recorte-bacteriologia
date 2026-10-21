@@ -89,7 +89,13 @@ O teste confere regras, nunca uma frase pronta:
     cartao; a pergunta repetida na planilha e na prova; o cartao com mais valores que colunas;
   - sem o arquivo de chamadas, com ele fora do molde (campo desconhecido numa chamada e no topo,
     chamada sem parenteses, chave repetida) ou com duas fontes com a mesma chamada sem contar os
-    espacos, e ERRO, e nada e gravado.
+    espacos, e ERRO, e nada e gravado;
+  - o cartao escrito por IA, com a marca de fonte de IA do projeto.json, inventada, e a prova
+    tirada de uma marca de IA de um texto do material, com outros espacos, sai sem erro, e so
+    ele tem o aviso de IA; o tique dele volta quando nada mudou e sai quando muda o texto da
+    marca; e ERRO, no bloco dele e em nenhum outro, quando a marca sai do texto e quando o
+    projeto nao tem marcas de IA; a marca de IA que abre e nao fecha, e a vazia, sao ERRO, e
+    nada e gravado.
 Precisa do genanki: roda com o Python que o tem. Uso:
     python3 -I teste_cartoes.py <pasta scripts do projeto> <projeto.json modelo> <pasta de trabalho nova> [--semente N]
 Diz "0 falha(s)" quando passa; senao, uma linha FALHA para cada conferencia que nao passou, e
@@ -1268,6 +1274,62 @@ for descricao, mudanca in (
                    "chamada": f"({NUCLEOS[T2].replace(', ', ',  ', 1)})"}})):
     grava_json(ARQUIVO_CHAMADAS, chamadas_com(**mudanca))
     erro_das_chamadas(f"o arquivo de chamadas com {descricao}")
+
+
+# ---------- o cartao escrito por IA ----------
+IA = {"abre": f"[{palavra()}: ", "fecha": "]", "fonte": f"[{palavra()}]"}  # as marcas de IA, inventadas
+TEXTO_DE_IA = PROJETO.caminho("material_gerado") / f"{palavra()}{comum.EXTENSAO_DOCUMENTO}"
+MARCADO = sentenca()  # o que a IA escreveu
+
+
+def texto_com(marcado):
+    """Grava o texto do material com uma marca de IA em volta do texto dado."""
+    TEXTO_DE_IA.parent.mkdir(parents=True, exist_ok=True)
+    TEXTO_DE_IA.write_text(f"# {frase()}\n\n{frase()} {IA['abre']}{marcado}{IA['fecha']} {frase()}.\n",
+                           encoding="utf-8")
+
+
+def com_ia(p, k):
+    """Grava o projeto com as marcas de IA, o texto do material com a marca e o cartao k de p como cartao de IA, com
+    a prova tirada da marca, com outros espacos."""
+    grava_json(ARQUIVO_PROJETO, projeto_com(ia=IA))
+    texto_com(MARCADO)
+    grava(p, cartoes=com_cartao(p, k, **{FONTE: nas_pontas(IA["fonte"])}))
+    grava_provas(p, com_prova(p, k, trechos=[espacos(MARCADO)], afirmacao=AFIRMA))
+
+
+p = uma_planilha()
+k = um_cartao(p)
+com_ia(p, k)
+cod, out = conferir()
+dela = blocos().get(p["arquivo"].stem, [])
+confere(cod == 0 and not erros(out) and len(dela) == len(p["cartoes"]) and not any(b["erro"] for b in dela),
+        f"o cartão de IA, com a prova tirada de uma marca de IA do material, sai sem erro: {erros(out) or out}")
+confere(SAIDA.read_text(encoding="utf-8").count(confere_cartoes.AVISO_IA) == 1,
+        "o cartão de IA, e só ele, tem o aviso de que precisa ser verificado")
+tica(p, k)
+conferir()
+if confere(ticado(p, k), "o tique do cartão de IA volta quando nada mudou"):
+    texto_com(f"{MARCADO} {palavra()}")
+    conferir()
+    confere(not ticado(p, k), "o tique do cartão de IA sai quando muda o texto da marca")
+TEXTO_DE_IA.write_text(f"# {frase()}\n\n{frase()} {MARCADO} {frase()}.\n", encoding="utf-8")
+erro_do_cartao("o cartão de IA cuja marca saiu do texto", p, k)
+
+p = uma_planilha()
+k = um_cartao(p)
+com_ia(p, k)
+grava_json(ARQUIVO_PROJETO, projeto_com())
+erro_do_cartao("o cartão com a marca de fonte de IA, num projeto sem marcas de IA", p, k)
+
+for quebrada in (f"{frase()} {IA['abre']}{frase()}", f"{IA['abre']} {IA['fecha']}"):
+    p = uma_planilha()
+    k = um_cartao(p)
+    com_ia(p, k)
+    conferir()
+    TEXTO_DE_IA.write_text(f"# {frase()}\n\n{quebrada}\n", encoding="utf-8")
+    erro_das_chamadas(f"a marca de IA quebrada no texto: {quebrada!r}")
+TEXTO_DE_IA.unlink()
 
 for f in FALHAS:
     print("FALHA:", f)

@@ -7,11 +7,12 @@ programas que o git roda sozinho na hora de gravar um commit.
 
 ## O que é conferido
 
-- **`pre-commit`**, antes de aceitar o commit, roda três scripts e barra o commit quando
+- **`pre-commit`**, antes de aceitar o commit, roda quatro scripts e barra o commit quando
   algum aponta um problema: o `protege_fontes.py --versao`, para que nenhum arquivo da
   pasta protegida nem cópia de uma fonte vá no commit; o `glossario.py --conferir`, para
-  que o glossário seja o que os documentos definem; e o `confere_indice.py`, para que cada
-  documento esteja no índice uma vez só. O que cada um confere está na seção dele no
+  que o glossário seja o que os documentos definem; o `trechos_de_ia.py --conferir`, para
+  que a lista dos trechos escritos por IA seja a que as marcas de IA dos textos dão; e o
+  `confere_indice.py`, para que cada documento esteja no índice uma vez só. O que cada um confere está na seção dele no
   [README dos scripts](../scripts/README.md).
 - **`commit-msg`** confere a forma da mensagem, nunca o sentido dela. Recusa a mensagem
   que:

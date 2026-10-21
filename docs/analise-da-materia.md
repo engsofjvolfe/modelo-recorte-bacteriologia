@@ -3733,7 +3733,8 @@ que acompanham.
   - **Como os textos ensinam:** numa ficha, uma tabela com as mesmas linhas, os eixos,
     para todos os itens. A ficha da bactéria começa por 3 a 5 palavras-chave que a
     distinguem, tiradas dos slides. As linhas são as do grupo 1 (parte 4) mais os fatores
-    de risco; onde os slides não respondem a uma linha, o livro-texto completa.
+    de risco; uma linha que os slides não respondem fica fora da ficha, menos a dos
+    fatores de risco, que vem do livro-texto.
   - **Que cartões gera:** um para cada fato de cada linha, como "Onde vive o
     Staphylococcus epidermidis?".
   - **De onde veio:** as pesquisas da ciência da aprendizagem não tratam deste tipo. O

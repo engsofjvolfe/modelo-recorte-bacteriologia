@@ -33,6 +33,15 @@ cada um foi achado, e as caixas de tique "IA" e "pessoa"; o cartao que a fonte t
 como possibilidade aparece com o aviso de que a resposta tem de dizer isso. Se o cartao,
 a prova ou o texto dos lugares citados mudarem depois do tique, o tique e retirado.
 
+O cartao escrito por uma IA, sem fonte, leva na coluna fonte so a marca de fonte de IA do
+projeto.json ("ia": "fonte"), e a prova dele traz o texto de uma marca de IA dos textos do
+material (as do trechos_de_ia.py), copiado letra por letra: cada trecho tem de estar dentro
+de uma marca de IA. Quando a marca sai do texto, porque alguem achou a fonte, o cartao da
+ERRO ate ganhar a fonte nova e a prova dela. A conferencia mostra o cartao de IA com o
+aviso de que ele precisa ser verificado, e o tique sai quando o texto da marca muda. Sem
+"ia" no projeto.json, ou com ele null, a marca de fonte de IA e texto como outro qualquer na
+coluna fonte; uma marca de IA quebrada nos textos e ERRO, e nada e gravado.
+
 Os caminhos vem do projeto.json: as planilhas, de "material_gerado" e
 "prefixo_planilhas"; as provas, de "provas" (com {planilha} no lugar do nome da
 planilha, sem o .csv); as chamadas, de "chamadas"; as transcricoes, de "gerados"; as
@@ -52,6 +61,7 @@ Uso (de qualquer pasta dentro do projeto):
 """
 
 import argparse
+import collections
 import json
 import re
 import sys
@@ -63,10 +73,15 @@ from base_externa import AFIRMACAO, TEXTO_INTEIRO, descreve  # noqa: E402
 from comum import (COLUNA_PERGUNTA, EXTENSAO_PLANILHA, acha_projeto, ancora, arquivo_da_prova,  # noqa: E402
                    assinatura, caixas, le_planilha, link, marca, planilhas, tiques_anteriores, tiques_da_parte)
 from conferencia import fonte_da_transcricao, secoes, transcricoes_da_pasta  # noqa: E402
+from trechos_de_ia import CHAVE_IA, marcas_de_ia  # noqa: E402
 from validar_dados import esquema, le_dados  # noqa: E402
 
 COLUNA_RESPOSTA, COLUNA_FONTE = "resposta", "fonte"  # as colunas da resposta e da citacao das fontes
 COLUNAS = (COLUNA_PERGUNTA, COLUNA_RESPOSTA, COLUNA_FONTE)  # as colunas que o script le de cada cartao
+Ia = collections.namedtuple("Ia", "fonte marcas")  # a marca de fonte de IA do projeto e as marcas de IA do material
+AVISO_IA = "**Escrito por IA, sem fonte: a verificar.**"  # a linha do bloco de um cartao de IA
+SEM_PROVA = "cartão sem prova: a pergunta não está no arquivo de prova da planilha"
+TRECHO_VAZIO = "trecho vazio na prova"
 # o que a prova, e a base do material de fora, dizem do trecho: a fonte afirma ou trata como possibilidade
 # (esquemas/prova.schema.json e base.schema.json)
 CATEGORICA, POSSIBILIDADE = "categorica", "possibilidade"
@@ -150,10 +165,44 @@ def chamadas_da_fonte(fonte, nucleos):
 
 # ---------- um cartao ----------
 
-def confere_cartao(linha, prova, nucleos, indice):
+def acha(prova, lugares, nenhum):
+    """(erros, achados) dos trechos da prova nos lugares dados, [(chave, lugar, arquivo, onde, texto, afirmacao)]:
+    cada trecho tem de estar, letra por letra, em algum; nenhum diz, no erro, onde ele nao esta."""
+    erros, achados = [], []
+    for trecho in prova["trechos"]:
+        if not simples(trecho):
+            erros.append(TRECHO_VAZIO)
+            continue
+        onde = [(c, l, arq, de, af) for c, l, arq, de, texto, af in lugares if simples(trecho) in simples(texto)]
+        if not onde:
+            erros.append(f"trecho que não está, letra por letra, em {nenhum}: {curto(trecho)!r}")
+        achados.append((trecho, onde))
+    return erros, achados
+
+
+def de_ia(linha, ia):
+    """Se o cartao e escrito por IA: a coluna fonte dele e a marca de fonte de IA do projeto (ia None: nenhum e)."""
+    return ia is not None and simples(linha.get(COLUNA_FONTE) or "") == simples(ia.fonte)
+
+
+def confere_cartao_de_ia(prova, marcas):
+    """(erros, citados, achados) do cartao escrito por IA: cada trecho da prova tem de estar numa marca de IA do
+    material; as marcas em que algum esta sao os lugares citados."""
+    if prova is None:
+        return [SEM_PROVA], [], []
+    lugares = [(None, None, m.arquivo, f"linha {m.linha}", m.texto, None) for m in marcas]
+    erros, achados = acha(prova, lugares, "nenhuma marca de IA do material")
+    usadas = {(arq, de) for _, onde in achados for _, _, arq, de, _ in onde}
+    citados = [(None, None, [(arq, de, texto, af) for _, _, arq, de, texto, af in lugares if (arq, de) in usadas])]
+    return erros, citados, achados
+
+
+def confere_cartao(linha, prova, nucleos, indice, ia=None):
     """(erros, citados, achados): citados = [(chave, lugar, textos)]; achados =
-    [(trecho, [(chave, lugar, arquivo, onde, afirmacao)])]."""
-    erros, citados, achados = [], [], []
+    [(trecho, [(chave, lugar, arquivo, onde, afirmacao)])]. O cartao de IA se confere contra as marcas de IA."""
+    if de_ia(linha, ia):
+        return confere_cartao_de_ia(prova, ia.marcas)
+    erros, citados = [], []
     citadas, sobra = chamadas_da_fonte(linha.get(COLUNA_FONTE) or "", nucleos)
     if not citadas:
         erros.append("a coluna fonte não tem a chamada de nenhuma fonte do arquivo de chamadas")
@@ -169,17 +218,10 @@ def confere_cartao(linha, prova, nucleos, indice):
             erros.append(f"{chave} não tem o lugar {lugar!r}: nenhuma transcrição registrada com essa chave "
                          f"tem esse título de página, e nenhuma base tem frase dela nesse lugar")
     if prova is None:
-        erros.append("cartão sem prova: a pergunta não está no arquivo de prova da planilha")
-        return erros, citados, achados
-    for trecho in prova["trechos"]:
-        if not simples(trecho):
-            erros.append("trecho vazio na prova")
-            continue
-        onde = [(chave, lugar, arq, de, af) for chave, lugar, textos in citados
-                for arq, de, texto, af in textos if simples(trecho) in simples(texto)]
-        if not onde:
-            erros.append(f"trecho que não está, letra por letra, em nenhum dos lugares citados: {curto(trecho)!r}")
-        achados.append((trecho, onde))
+        return erros + [SEM_PROVA], citados, []
+    lugares = [(chave, lugar, arq, de, texto, af) for chave, lugar, textos in citados for arq, de, texto, af in textos]
+    dos_trechos, achados = acha(prova, lugares, "nenhum dos lugares citados")
+    erros += dos_trechos
     for chave, lugar, _ in citados:
         if not any(c == chave and l == lugar for _, onde in achados for c, l, *_ in onde):
             erros.append(f"lugar citado sem nenhum trecho da prova: {chave}, {lugar or TEXTO_INTEIRO}")
@@ -188,10 +230,11 @@ def confere_cartao(linha, prova, nucleos, indice):
     return erros, citados, achados
 
 
-def bloco_do_cartao(titulo, linha, prova, erros, achados, marca_, tiques, retirado, saida):
+def bloco_do_cartao(titulo, linha, prova, erros, achados, marca_, tiques, retirado, saida, ia=False):
     out = ["", f"### {titulo}", "", marca_, "",
            f"**Pergunta:** {linha.get(COLUNA_PERGUNTA) or ''}", "",
            f"**Resposta:** {linha.get(COLUNA_RESPOSTA) or ''}", "", f"**Fonte:** {linha.get(COLUNA_FONTE) or ''}", ""]
+    out += [AVISO_IA, ""] if ia else []
     if prova:
         aviso = " — a resposta tem de dizer isso" if prova["afirmacao"] == POSSIBILIDADE else ""
         out += [f"**Afirmação:** {descreve(AFIRMACAO, prova['afirmacao'])}{aviso}", ""]
@@ -223,9 +266,9 @@ def le_provas(arquivo):
     return provas, erros
 
 
-def processa(planilha, projeto, nucleos, indice, anteriores, saida):
+def processa(planilha, projeto, nucleos, indice, anteriores, saida, ia=None):
     """(bloco, contagem, erros) de uma planilha. Contagem: cartoes, com erro, tique da IA,
-    tique da pessoa."""
+    tique da pessoa. ia: a marca de fonte de IA e as marcas de IA do material (Ia), ou None."""
     nome = planilha.stem
     colunas, linhas, da_leitura = le_planilha(planilha, planilha.name)
     corpo, cont, erros = ["", "---", "", f"## {nome}", "", f"Planilha: `{link(planilha, saida)}`"], [0, 0, 0, 0], []
@@ -246,7 +289,7 @@ def processa(planilha, projeto, nucleos, indice, anteriores, saida):
         return corpo, cont, erros
     for i, (linha, k) in enumerate(zip(linhas, perguntas), 1):
         prova = provas.get(k)
-        erros_cartao, citados, achados = confere_cartao(linha, prova, nucleos, indice)
+        erros_cartao, citados, achados = confere_cartao(linha, prova, nucleos, indice, ia)
         if not k:
             erros_cartao.insert(0, "cartão sem pergunta")
         sig = assinatura(json.dumps(linha, ensure_ascii=False, sort_keys=True),
@@ -255,7 +298,7 @@ def processa(planilha, projeto, nucleos, indice, anteriores, saida):
         parte = assinatura(k)
         tiques, retirado = tiques_da_parte(anteriores, nome, parte, sig)
         corpo += bloco_do_cartao(f"{nome} — cartão {i}", linha, prova, erros_cartao, achados,
-                                 marca(nome, parte, sig), tiques, retirado, saida)
+                                 marca(nome, parte, sig), tiques, retirado, saida, de_ia(linha, ia))
         cont = [cont[0] + 1, cont[1] + bool(erros_cartao), cont[2] + tiques["IA"], cont[3] + tiques["pessoa"]]
         erros += [f"{nome}, cartão {i}: {e}" for e in erros_cartao]
     return corpo, cont, erros
@@ -271,16 +314,20 @@ def main(argv=None):
         raise SystemExit(f"nenhuma planilha '{projeto.valor('prefixo_planilhas')}*{EXTENSAO_PLANILHA}' em "
                          f"{projeto.caminho('material_gerado')}")
     nucleos, erros = le_chamadas(projeto)
-    if erros:
+    marcas, erros_ia = marcas_de_ia(projeto)
+    if erros or erros_ia:
         for e in erros:
             print(f"ERRO em {e}")
+        for e in erros_ia:
+            print(f"ERRO: {e}")
         return 1
+    ia = None if marcas is None else Ia(projeto.valor(CHAVE_IA)["fonte"], marcas)
     indice = lugares_das_fontes(projeto)
     saida = projeto.caminho("conferencia_cartoes")
     anteriores = tiques_anteriores(saida)
     resumo, corpo, todos_erros, totais = [], [], [], [0, 0, 0, 0]
     for planilha in todas:
-        bloco, cont, erros = processa(planilha, projeto, nucleos, indice, anteriores, saida)
+        bloco, cont, erros = processa(planilha, projeto, nucleos, indice, anteriores, saida, ia)
         corpo += bloco
         todos_erros += erros
         totais = [x + y for x, y in zip(totais, cont)]

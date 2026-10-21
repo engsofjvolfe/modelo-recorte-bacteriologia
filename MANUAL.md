@@ -71,7 +71,11 @@ matéria, Os documentos](docs/analise-da-materia.md#os-documentos)):
   resposta e depois compare com a resposta-modelo. Use quando quiser.
 
 Todo fato, nos documentos e nos cartões, traz a citação da fonte de onde veio; as
-referências completas estão em `docs/REFERENCIAS.md`.
+referências completas estão em `docs/REFERENCIAS.md`. A exceção é o que uma IA explicou
+onde nenhuma fonte lida explica: no texto, ele vem entre `[IA:` e `]`, como em "ágar Mueller
+Hinton [IA: o meio de cultura padronizado para esse teste]", e o cartão dele traz `[IA]` no
+lugar da fonte. Esse trecho ainda não foi conferido numa fonte: leia-o com essa ressalva. A
+lista de todos eles está em [Trechos escritos por IA](docs/material-gerado/trechos-de-ia.md).
 
 ## Nível 3 — Quero achar um item específico rápido
 
