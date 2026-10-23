@@ -62,13 +62,14 @@ alguma coisa e diz o quê.
 | Com as planilhas conferidas, e sempre que uma delas muda | `montar_deck.py` |
 | Sempre que um documento define um termo novo, ou deixa de definir | `glossario.py` |
 | Sempre que um texto do material ganha ou perde uma marca de IA, ou muda de linhas | `trechos_de_ia.py` |
+| Sempre que o arquivo das divergências muda, e sempre que um texto do material ou uma planilha de pergunta muda | `divergencias.py` |
 | Sempre que um documento entra no projeto, sai dele ou muda de lugar | `confere_indice.py` |
 | Antes de publicar | `protege_fontes.py` |
 | Depois de mudar um script que tem teste | o teste dele e os estragos dele ([Os testes](#os-testes)) |
 
-O `protege_fontes.py`, o `glossario.py`, o `trechos_de_ia.py` e o `confere_indice.py` rodam
-também sozinhos antes de cada commit ([Conferência das mensagens e proteção das
-fontes](../.githooks/README.md)).
+O `protege_fontes.py`, o `glossario.py`, o `trechos_de_ia.py`, o `divergencias.py` e o
+`confere_indice.py` rodam também sozinhos antes de cada commit ([Conferência das mensagens e
+proteção das fontes](../.githooks/README.md)).
 
 ## O mapa do projeto
 
@@ -609,8 +610,10 @@ visualização não mostra:
 
 Abrir um nível fecha os de dentro dele: a marca de uma parte fecha a parte de antes, e a de
 um item fecha também o item de antes. O que está num bloco de código, ou em código dentro da
-linha, não conta. Um exemplo inventado, o começo da ficha da unidade `A1` do exemplo do
-[arquivo de formato](#o-arquivo-de-formato), com o primeiro eixo:
+linha, não conta. Numa tabela, como a da ficha, as marcas de uma linha ficam dentro dela, e
+uma linha pode ter várias, que contam na ordem em que aparecem. Um exemplo inventado, o
+começo da ficha da unidade `A1` do exemplo do [arquivo de formato](#o-arquivo-de-formato),
+com o primeiro eixo:
 
 ```markdown
 <!-- unidade A1 -->
@@ -619,9 +622,9 @@ linha, não conta. Um exemplo inventado, o começo da ficha da unidade `A1` do e
 <!-- parte chaves -->
 **Palavras-chave:** ...
 
-<!-- parte 1 -->
-O texto do primeiro eixo, que explica o trecho.
-<!-- trecho 2/5/1/3f2a -->
+| Eixo | O que diz |
+| --- | --- |
+| <!-- parte 1 -->Primeiro eixo | O texto do primeiro eixo, que explica o trecho. <!-- trecho 2/5/1/3f2a --> |
 ```
 
 **Os cartões.** O texto de uma unidade de documento de conteúdo tem a planilha de pergunta
@@ -672,8 +675,11 @@ como `bacteria-neisseria-meningitidis.md`.
 - Os códigos escondidos, na ordem do molde, e os trechos de cada parte. De cada trecho: o
   código, a aula, o slide, o texto, cada campo da análise menos o destino, as marcas e,
   quando é assim, que ele está ali por um conjunto (o destino nomeia um grupo de que a
-  unidade faz parte, como o gênero de uma bactéria) ou que é de uma aula depois da última.
-  A parte que não recebe trechos, ou que não tem nenhum, diz isso.
+  unidade faz parte, como o gênero de uma bactéria), que é de uma aula depois da última e
+  cada divergência do arquivo das divergências que tem o código dele, numa linha: o fato,
+  a forma que o material ensina e as outras, com as citações
+  ([`divergencias.py`](#divergenciaspy--monta-o-documento-das-divergências)). A parte que
+  não recebe trechos, ou que não tem nenhum, diz isso.
 - Os capítulos a ler inteiros: as transcrições da fonte que um campo da análise cita, como
   o lugar no livro-texto, que têm uma página citada por um trecho da unidade, na ordem dos
   nomes delas; e os pedaços do campo em que nenhuma página aparece, cada um com os trechos
@@ -695,8 +701,8 @@ parte.
 
 **O que mostra.** O arquivo gravado e quantas partes, trechos, transcrições a ler, pedaços
 sem página e seções das dúvidas a lista tem. Com algum problema — como o código que nenhum
-texto tem ou a conferência dos moldes com aviso —, cada um sai numa linha `ERRO`, com o
-motivo, e nada é gravado.
+texto tem, a conferência dos moldes com aviso ou o arquivo das divergências que falta ou
+está fora do molde —, cada um sai numa linha `ERRO`, com o motivo, e nada é gravado.
 
 ## `base_externa.py` — monta a base do material de fora
 
@@ -1057,6 +1063,74 @@ O `--conferir` não grava nada: só diz se a lista gravada está em dia.
 marca que abre e não fecha na mesma linha, para a marca vazia e para o texto fora do UTF-8.
 Com `--conferir`, `FALTA` quando a lista gravada não é a que as marcas dão. Com `ia` em
 `null`, o script diz que não há lista a montar.
+
+## `divergencias.py` — monta o documento das divergências
+
+**O que faz.** Uma
+[divergência](../metodologia-de-conteudo.md#4-o-que-entra-no-material) é um fato que as
+fontes dizem de formas diferentes, como uma aula e o livro-texto. O arquivo das
+divergências (`divergencias`, nos caminhos do `projeto.json`) guarda cada uma, e o script
+grava, a partir dele, o documento das divergências (`documento_das_divergencias`, nos
+caminhos): para cada fato, na ordem do arquivo, a forma que o material ensina e as outras,
+cada uma com a citação, e as partes do material que tratam dele — cada linha de um texto
+com o código escondido de um dos trechos do fato, com o título do texto, o item e a parte
+e o link para a linha, e cada cartão com um desses códigos na coluna dos trechos, com a
+planilha, o número do cartão e a pergunta. Ninguém escreve essas referências à mão: elas
+saem dos códigos que os textos e os cartões já levam. A [lista de
+trabalho](#lista_de_trabalhopy--o-que-escrever-e-o-que-ler-em-cada-unidade) mostra as
+divergências de cada trecho. As mesmas entradas dão sempre o mesmo documento.
+
+**O arquivo das divergências.** Ele nasce de uma cópia do modelo em branco,
+[`modelo-dados/divergencias.json`](../modelo-dados/divergencias.json), com a lista
+`divergencias` vazia, e o molde dele é `scripts/esquemas/divergencias.schema.json`. Cada
+divergência entra na lista entre chaves, `{ }`, com quatro coisas:
+
+- o `fato`: o nome do fato, que vira o título dele no documento;
+- os `trechos`: os códigos dos trechos das análises que trazem o fato, como a lista de
+  trabalho os mostra;
+- a forma `ensinada`, a que o material ensina: o que ela diz, em poucas palavras (`diz`), e
+  a citação das fontes que a dão (`fonte`), escrita como a coluna `fonte` dos cartões
+  ([`confere_cartoes.py`](#confere_cartoespy--confere-cada-cartão-contra-a-prova-dele)),
+  com as chamadas e o lugar de cada uma;
+- as `outras` formas, uma ou mais, cada uma também com o `diz` e a `fonte`.
+
+Um exemplo inventado:
+
+```json
+{
+  "versao_schema": 1,
+  "divergencias": [
+    {
+      "fato": "A cor do teste de exemplo",
+      "trechos": ["3/12/1/a1b2"],
+      "ensinada": { "diz": "azul", "fonte": "(Silva, 2020, p. 12)" },
+      "outras": [{ "diz": "verde", "fonte": "(Souza, 2019, slide 3)" }]
+    }
+  ]
+}
+```
+
+O código de um trecho muda quando o texto dele muda
+([`confere_moldes.py`](#confere_moldespy--confere-os-moldes-contra-as-análises-das-aulas)):
+o código que não existe mais pede que a divergência seja vista de novo.
+
+**Como rodar.**
+
+    python scripts/divergencias.py
+    python scripts/divergencias.py --conferir
+
+O `--conferir` não grava nada: só diz se o documento gravado está em dia.
+
+**O que mostra.** Quantas divergências foram gravadas. Uma linha `ERRO`, e nada gravado,
+para o arquivo das divergências que falta, fora do UTF-8 ou fora do molde; o fato
+repetido, sem contar maiúsculas nem espaços; o código de trecho que não existe nas
+análises; a citação sem chamada, com texto que não é chamada, com chamada sem lugar ou com
+lugar que a fonte não tem; o arquivo de chamadas com erro; a planilha que não se lê; e o
+que para o
+[`confere_material.py`](#confere_materialpy--confere-o-texto-e-os-cartões-de-cada-unidade),
+como a conferência dos moldes com aviso. Com `--conferir`, `FALTA` quando o documento
+gravado não é o que as divergências e o material dão. Sem a coluna dos trechos no
+`projeto.json`, os cartões não entram.
 
 ## `comum.py`
 

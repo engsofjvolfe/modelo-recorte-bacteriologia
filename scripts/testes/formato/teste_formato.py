@@ -9,7 +9,9 @@ id); a leitura de todo arquivo de dados, no validar_dados.py, nas partes do mold
 formato usa; a base do material de fora, no base_externa.py, que usa a grade da unidade de
 cada base; a conferencia dos moldes, no confere_moldes.py, com a tabela da leitura (no
 lidos.py), a tabela dos destinos e o limite das aulas; a conferencia do material escrito,
-no confere_material.py; e a lista de trabalho de cada texto, no lista_de_trabalho.py.
+no confere_material.py; a lista de trabalho de cada texto, no lista_de_trabalho.py; e o
+documento das divergencias, no divergencias.py, com a citacao das fontes do
+confere_cartoes.py.
 
 Monta, na pasta de trabalho, um projeto pequeno com a pasta de scripts dada e um
 projeto.json feito do modelo dado, com os caminhos dele. Tudo e sorteado, sempre igual,
@@ -73,7 +75,13 @@ textos ou em nenhum; e a planilha de cada texto de unidade, com os codigos dos t
 cartoes e a aula, nas colunas de nomes sorteados de um projeto.json a mais. O arquivo das
 duvidas, fora do projeto, tem uma secao para cada aula das analises menos uma, uma de uma
 aula que elas nao tem e outras de aula nenhuma, as vezes com um subtitulo e com um bloco de
-codigo com uma linha que comeca como o titulo de uma secao.
+codigo com uma linha que comeca como o titulo de uma secao. O arquivo de chamadas da uma
+chamada inventada a cada fonte registrada nas transcricoes, e o arquivo das divergencias tem,
+numa ordem sorteada, uma divergencia com dois trechos de um texto, uma com um deles e um de
+outro texto e uma com um trecho que nenhum texto tem, cada uma com uma ou duas outras formas,
+e cada forma com uma ou duas chamadas e paginas das transcricoes; no documento, as planilhas
+ganham a coluna da pergunta, com um cartao sem pergunta, e um cartao com os dois trechos da
+primeira.
 
 O teste confere regras, nunca uma frase pronta:
   - os moldes declaram os tipos de molde, os papeis, as formas de campo, a fonte das paginas
@@ -167,16 +175,34 @@ O teste confere regras, nunca uma frase pronta:
     depende de outros, esses), os codigos escondidos das regioes na ordem do molde, os
     trechos de cada regiao e os que vao junto, cada um com o texto, cada campo da forma menos
     o do destino, as marcas e, so quando e assim, que ele esta ali por um conjunto, que e de
-    uma aula depois da ultima e onde ele esta nos textos de que o texto depende (nunca na
+    uma aula depois da ultima, cada divergencia com o codigo dele, na ordem do arquivo, com o
+    fato e o que cada forma diz e a citacao dela, a ensinada primeiro, e onde ele esta nos
+    textos de que o texto depende (nunca na
     unidade que nenhum texto tem), o aviso da regiao que nao recebe trechos e da que nao tem
     nenhum, as transcricoes a ler, na ordem natural dos nomes, os pedacos sem pagina, com os
     trechos, e as secoes das duvidas da aula de cada trecho e as de aula nenhuma, com os
     titulos fora do codigo um nivel abaixo; duas rodadas, a mesma lista;
   - o texto que depende de outros, um deles sem texto, o codigo que nenhum texto tem, o
-    arquivo das duvidas que falta ou fora do UTF-8 e a conferencia dos moldes com aviso sao
-    ERRO, e nenhuma lista e gravada; a lista do texto que nao comecou e gravada; na forma
+    arquivo das duvidas que falta ou fora do UTF-8, o arquivo das divergencias que falta,
+    fora do molde ou fora do UTF-8 e a conferencia dos moldes com aviso sao ERRO, e nenhuma
+    lista e gravada; a lista do texto que nao comecou e gravada; na forma
     sem a fonte das paginas, a lista diz que nenhum campo a tem; e, com o campo das paginas
-    na forma de texto, o campo inteiro de cada trecho e um pedaco.
+    na forma de texto, o campo inteiro de cada trecho e um pedaco;
+  - o documento das divergencias sai com codigo 0 e tem um titulo de segundo nivel para cada
+    divergencia, na ordem do arquivo, com a forma ensinada e as outras, na ordem, cada uma
+    com o que diz e a citacao, e, so quando ha, uma linha para cada parte do material que
+    trata do fato: cada linha de texto com a marca de um trecho dele, uma vez so, com o link
+    para a linha, o titulo do arquivo e os nomes do item e da parte, e, depois, cada cartao
+    com um trecho dele, uma vez so, com o link para a planilha, o numero e a pergunta, cada
+    grupo na ordem dos caminhos e das linhas ou dos cartoes; duas rodadas, o mesmo
+    documento; o --conferir, com o documento em dia, codigo 0 e, com uma linha a mais antes
+    de uma parte que trata de um fato, FALTA, codigo 1, e nada gravado;
+  - o arquivo das divergencias que falta, fora do molde ou fora do UTF-8, o fato repetido
+    com outras maiusculas e outros espacos, o codigo de trecho que nao existe, a citacao
+    com texto que nao e chamada, a chamada sem lugar, o lugar que a fonte nao tem, o arquivo
+    de chamadas que falta, a planilha fora do UTF-8 e a conferencia dos moldes com aviso sao
+    ERRO, que diz o que, e nada e gravado; sem divergencia, o documento sai sem titulo de
+    divergencia; e, sem a coluna dos trechos, as partes do material sao so as dos textos.
 O codigo de saida da rodada certa do base_externa.py nao se confere: no fim, ele roda as
 referencias, que este teste nao monta. Uso:
     python3 -I teste_formato.py <pasta scripts do projeto> <projeto.json modelo> <pasta de trabalho nova> [--semente N]
@@ -189,6 +215,7 @@ import copy
 import csv
 import itertools
 import json
+import os
 import random
 import re
 import shutil
@@ -220,6 +247,7 @@ import comum  # noqa: E402
 import confere_material  # noqa: E402
 import confere_moldes  # noqa: E402
 import destinos  # noqa: E402
+import divergencias  # noqa: E402
 import lidos  # noqa: E402
 import limite  # noqa: E402
 import lista_de_trabalho  # noqa: E402
@@ -240,6 +268,11 @@ MOLDE_FORMA = json.loads(validar_dados.esquema("forma-analise").read_text(encodi
 RELATORIO = PROJETO.caminho("conferencia_moldes")
 MATERIAL = PROJETO.caminho("material_gerado")  # a pasta dos textos e das planilhas que o conferidor do material le
 DUVIDAS = TRABALHO / "duvidas.md"  # o arquivo das duvidas abertas, fora do projeto pequeno
+DIVERGENCIAS, DOCUMENTO = PROJETO.caminho("divergencias"), PROJETO.caminho("documento_das_divergencias")
+VERSAO_DIVERGENCIAS = json.loads(validar_dados.esquema("divergencias").read_text(encoding="utf-8"))["properties"][
+    "versao_schema"]["const"]
+VERSAO_CHAMADAS = json.loads(validar_dados.esquema("chamadas").read_text(encoding="utf-8"))["properties"][
+    "versao_schema"]["const"]
 
 # os tipos de molde de documento que o teste monta
 TIPOS_DE_MOLDE = (PARTES, GRADE, FORMAS, COLUNAS) = ("partes_por_tipo", "eixos", "formas", "colunas")
@@ -3179,11 +3212,38 @@ def valor_esperado(caso, campo, v):
     return ", ".join(valores) or forma["vazio"]
 
 
-def confere_bloco(b, t, v, e, onde, rotulo):
+def em_ordem_no(texto, pedacos_):
+    """Se cada pedaco esta no texto, cada um depois do anterior."""
+    k = 0
+    for p in pedacos_:
+        k = texto.find(p, k)
+        if k < 0:
+            return False
+        k += len(p)
+    return True
+
+
+def formas_da(d):
+    """As formas da divergencia d, a ensinada primeiro."""
+    return [d["ensinada"]] + d["outras"]
+
+
+def diz_a_divergencia(linha, d):
+    """Se a linha tem o fato da divergencia d e, na ordem, o que cada forma diz e a citacao dela, a ensinada
+    primeiro."""
+    return em_ordem_no(linha, [d["fato"]] + [x for f in formas_da(d) for x in (f["diz"], f["fonte"])])
+
+
+def confere_bloco(b, t, v, e, onde, divs, rotulo):
     """As linhas de um trecho na lista: o texto; cada campo da forma, menos o do destino, com o valor dele; as marcas do
-    caso, so quando ele tem; e, so quando e assim, que ele esta ali por um conjunto, que e de uma aula depois da ultima
-    e onde ele esta no material de que o texto depende."""
+    caso, so quando ele tem; e, so quando e assim, que ele esta ali por um conjunto, que e de uma aula depois da ultima,
+    cada divergencia de divs com o codigo dele, na ordem do arquivo, e onde ele esta no material de que o texto
+    depende."""
     lt, caso, forma = lista_de_trabalho, e["caso"][b.trecho], v["forma"]
+    suas = [d for d in divs if b.trecho in d["trechos"]]
+    da_lista = [x for x in b.linhas if x.startswith(f"  - {lt.DIVERGENCIA}: ")]
+    confere(len(da_lista) == len(suas) and all(diz_a_divergencia(x, d) for x, d in zip(da_lista, suas)),
+            f"{rotulo}: as divergências do trecho {b.trecho}, na ordem do arquivo: {da_lista} ({suas})")
     confere(b.linhas[:1] == [f"  - {caso['texto']}"], f"{rotulo}: o texto do trecho {b.trecho}: {b.linhas[:1]}")
     for campo in forma["campos"]:
         do_campo = [x for x in b.linhas if x.startswith(f"  - {campo['nome']}:")]
@@ -3291,7 +3351,7 @@ def confere_lista(t, deps, ctx, secoes_, onde, rotulo):
     certos += [(None, JUNTO, i) for i in t.junto]
     confere([(b.item, b.parte, b.trecho) for b in blocos] == certos, f"{rotulo}: os trechos de cada região, na ordem")
     for b in blocos:
-        confere_bloco(b, t, v, e, onde, rotulo)
+        confere_bloco(b, t, v, e, onde, ctx["divergencias"], rotulo)
     for item_, parte, trechos, recebe in t.regioes:
         aviso_ = [] if trechos else [lt.NAO_RECEBE if not recebe else lt.SEM_TRECHO]
         confere(textos_.get((item_, parte), []) == aviso_, f"{rotulo}: o aviso da região {parte}: "
@@ -3311,6 +3371,160 @@ def sem_brancas_no_fim(linhas_):
     while linhas_ and not linhas_[-1].strip():
         linhas_.pop()
     return linhas_
+
+
+# ---------- as divergencias: as chamadas, o arquivo delas e o documento ----------
+
+def sorteia_chamadas(v):
+    """{chave: nucleo} de cada fonte registrada nas transcricoes do mundo v, com uma chamada inventada, gravadas no
+    arquivo de chamadas."""
+    nucleos = {c: f"{palavra().capitalize()}, {SORTEIO.randint(1900, 2099)}"
+               for c in sorted({t.chave for t in v["paginas"] if t.chave})}
+    escreve(PROJETO.caminho("chamadas"), {"versao_schema": VERSAO_CHAMADAS,
+                                          "chamadas": [{"chave": c, "chamada": f"({n})"} for c, n in nucleos.items()]})
+    return nucleos
+
+
+def citacao_inventada(v, nucleos):
+    """Uma citacao das fontes do mundo v, como a coluna fonte: uma ou duas chamadas, cada uma com uma pagina que uma
+    transcricao registrada com a fonte dela tem."""
+    lugares_ = [(t.chave, r) for t in v["paginas"] if t.chave for r in t.rotulos]
+    return "(" + "; ".join(f"{nucleos[c]}, {r}" for c, r in SORTEIO.sample(lugares_, SORTEIO.randint(1, 2))) + ")"
+
+
+def divergencia_inventada(codigos_, v, nucleos, fonte_da_outra=None):
+    """Uma divergencia dos trechos de codigos dados: o fato, a forma ensinada e uma ou duas outras, cada uma com uma
+    citacao das fontes do mundo v; com fonte_da_outra, uma outra so, com essa citacao."""
+    def forma(fonte=None):
+        return {"diz": nome(), "fonte": fonte or citacao_inventada(v, nucleos)}
+    outras = [forma(fonte_da_outra)] if fonte_da_outra else [forma() for _ in range(SORTEIO.randint(1, 2))]
+    return {"fato": frase(), "trechos": list(codigos_), "ensinada": forma(), "outras": outras}
+
+
+def grava_divergencias(lista):
+    escreve(DIVERGENCIAS, {"versao_schema": VERSAO_DIVERGENCIAS, "divergencias": lista})
+
+
+def sorteia_divergencias(ctx, nucleos):
+    """Grava as divergencias do mundo, numa ordem sorteada: uma com dois trechos de um texto, guardados em
+    ctx["dois_do_cartao"] para um cartao que tenha os dois; uma com um deles e um trecho de outro texto, para que um
+    trecho fique em duas; e uma com um trecho que nenhum texto tem. Guarda a lista em ctx["divergencias"]."""
+    v, textos = ctx["mundo"], ctx["textos"]
+    um = SORTEIO.choice([t for t in textos if len(trechos_do(t)) > 1] or textos)
+    dois = SORTEIO.sample(trechos_do(um), min(2, len(trechos_do(um))))
+    outro = SORTEIO.choice(trechos_do(SORTEIO.choice([t for t in textos if t is not um] or textos)))
+    nos_textos_ = {i for t in textos for i in trechos_do(t)}
+    soltos = [i for i in v["ordem"] if i not in nos_textos_]
+    confere(soltos, "o mundo tem trecho que nenhum texto tem")
+    lista = [divergencia_inventada(dois, v, nucleos),
+             divergencia_inventada(dict.fromkeys([dois[0], outro]), v, nucleos)]
+    lista += [divergencia_inventada([SORTEIO.choice(soltos)], v, nucleos) for _ in soltos[:1]]
+    SORTEIO.shuffle(lista)
+    grava_divergencias(lista)
+    ctx["divergencias"], ctx["dois_do_cartao"] = lista, dois
+
+
+def com_perguntas(mat, dois, coluna):
+    """Uma copia do material com a coluna da pergunta em cada planilha e uma pergunta em cada cartao, menos num
+    sorteado, e um cartao a mais com os dois codigos dados, numa planilha sorteada."""
+    copia = copy.deepcopy(mat)
+    for cabecalho, cartoes in copia["planilhas"].values():
+        cabecalho.append(comum.COLUNA_PERGUNTA)
+        for c in cartoes:
+            c[comum.COLUNA_PERGUNTA] = frase()
+    _, cartoes = copia["planilhas"][SORTEIO.choice(sorted(copia["planilhas"]))]
+    cartoes.append({coluna: " ".join(dois), comum.COLUNA_PERGUNTA: frase()})
+    SORTEIO.choice([c for _, cs in copia["planilhas"].values() for c in cs])[comum.COLUNA_PERGUNTA] = ""
+    return copia
+
+
+def roda_divergencias(projeto, *args):
+    """(codigo de saida, linhas da tela) do documento das divergencias, com o projeto.json dado."""
+    return roda_tela("divergencias.py", "--projeto", str(projeto), *args)
+
+
+def documento_gravado():
+    return DOCUMENTO.read_bytes() if DOCUMENTO.is_file() else None
+
+
+def regioes_esperadas(ctx):
+    """{(unidade, item, parte): [nome do item, nome da parte]} de cada regiao dos textos do material, como o conferidor
+    do material as da; o item fica de fora na parte que nao esta num item."""
+    conferido, erros = confere_material.confere(comum.acha_projeto(ctx["projeto"]))
+    confere(not erros, f"o conferidor do material dá as regiões dos textos: {erros}")
+    if erros:
+        return {}
+    return {(t.codigo, p.item["id"] if p.item else None, p.id): ([p.item["nome"]] if p.item else []) + [p.nome]
+            for t, _ in conferido.lista for p in t.partes}
+
+
+Uso = collections.namedtuple("Uso", "arquivo posicao nomes")
+# uma parte do material que o documento tem de mostrar: o arquivo; a linha, num texto, ou o numero do cartao; e os nomes
+# que a linha dela tem de ter (o titulo do arquivo e os da regiao, ou a pergunta do cartao)
+
+
+def usos_esperados(d, mat, regioes, ctx, com_cartoes=True):
+    """([Uso] dos textos, [Uso] dos cartoes) que o documento tem de mostrar para a divergencia d no material mat: cada
+    linha de texto com a marca de um trecho dela, sem repetir, na ordem dos caminhos e das linhas; e, com os cartoes,
+    cada cartao com um trecho dela na coluna dos trechos, na ordem das planilhas e dos cartoes."""
+    lugares_, vistos, textos = lugares_no_material(mat, ctx["mundo"]["ordem"]), set(), []
+    for c in d["trechos"]:
+        for arq, n, unidade_, item_, parte in lugares_.get(c, []):
+            if (arq, n) not in vistos:
+                vistos.add((arq, n))
+                titulo = mat["cabecas"][(PROJ / arq).relative_to(MATERIAL).as_posix()][0].lstrip("# ")
+                textos.append(Uso(PROJ / arq, n, [titulo] + regioes.get((unidade_, item_, parte), [])))
+    coluna, cartoes = ctx["colunas"][0], []
+    for codigo, (_, cartoes_) in mat["planilhas"].items() if com_cartoes else []:
+        cartoes += [Uso(planilha_do(codigo), k, [c.get(comum.COLUNA_PERGUNTA) or ""])
+                    for k, c in enumerate(cartoes_, 1) if set(c[coluna].split()) & set(d["trechos"])]
+    return (sorted(textos, key=lambda u: (u.arquivo, u.posicao)), sorted(cartoes, key=lambda u: (u.arquivo, u.posicao)))
+
+
+def linha_do_uso(linhas_, uso, texto):
+    """O indice da unica linha das partes do material que mostra o uso, ou None: num texto, o link para a linha e os
+    nomes; num cartao, o link para a planilha, o numero do cartao e a pergunta."""
+    alvo = Path(os.path.relpath(uso.arquivo, DOCUMENTO.parent)).as_posix()
+    if texto:
+        achadas = [k for k, x in enumerate(linhas_)
+                   if f"]({alvo}#L{uso.posicao})" in x and all(n in x for n in uso.nomes)]
+    else:
+        rotulo = re.compile(rf"{re.escape(divergencias.CARTAO.format(uso.posicao))}(?!\d)")
+        achadas = [k for k, x in enumerate(linhas_) if f"]({alvo})" in x and rotulo.search(x)
+                   and all(n in x for n in uso.nomes)]
+    return achadas[0] if len(achadas) == 1 else None
+
+
+def confere_documento(lista, mat, ctx, regioes, rotulo, com_cartoes=True):
+    """O documento gravado: um titulo de segundo nivel para cada divergencia, na ordem do arquivo; em cada um, a forma
+    ensinada e as outras, na ordem, cada uma com o que diz e a citacao; e, so quando ha, as partes do material que
+    tratam do fato, uma linha cada: as linhas dos textos, com o link e os nomes, e, depois, os cartoes, com a planilha,
+    o numero e a pergunta, cada grupo em ordem."""
+    texto = DOCUMENTO.read_text(encoding="utf-8") if DOCUMENTO.is_file() else ""
+    titulos_ = [x[3:] for x in texto.splitlines() if x.startswith("## ")]
+    confere(titulos_ == [d["fato"] for d in lista],
+            f"{rotulo}: um título para cada divergência, na ordem do arquivo: {titulos_}")
+    for d in lista:
+        linhas_ = secao(texto, d["fato"])
+        formas_ = [x for x in linhas_ if x.startswith("- ") and not x.startswith(f"- {divergencias.TRATAM}")]
+        confere(len(formas_) == len(formas_da(d))
+                and all(em_ordem_no(x, [f["diz"], f["fonte"]]) for x, f in zip(formas_, formas_da(d))),
+                f"{rotulo}: as formas de {d['fato']!r}, a ensinada primeiro: {formas_}")
+        textos, cartoes = usos_esperados(d, mat, regioes, ctx, com_cartoes)
+        usos_ = [x for x in linhas_ if x.startswith("  - ")]
+        posicoes = [linha_do_uso(usos_, u, True) for u in textos] + [linha_do_uso(usos_, u, False) for u in cartoes]
+        confere((f"- {divergencias.TRATAM}:" in linhas_) == bool(posicoes) and len(usos_) == len(posicoes)
+                and None not in posicoes and posicoes == sorted(posicoes),
+                f"{rotulo}: as partes do material que tratam de {d['fato']!r}, só quando há, uma linha cada, na ordem: "
+                f"{usos_} ({textos}; {cartoes})")
+
+
+def divergencias_que_param(ctx, rotulo, palavras, projeto=None):
+    """O documento das divergencias sai com codigo 1, com uma linha ERRO que diz as palavras, e nada e gravado."""
+    antes = documento_gravado()
+    codigo, tela = roda_divergencias(projeto or ctx["projeto"])
+    confere(codigo == 1 and any(x.startswith(f"{ERRO}:") and all(p in x for p in palavras) for x in tela)
+            and documento_gravado() == antes, f"{rotulo}: ERRO que diz {palavras}, e nada é gravado: {tela}")
 
 
 # ---------- os testes ----------
@@ -3826,6 +4040,14 @@ def teste_listas_que_param(ctx, mat, base):
     fora_do_utf8_ = TRABALHO / f"{ident()}.md"
     fora_do_utf8_.write_bytes(DUVIDAS.read_bytes() + "çã".encode("latin-1"))
     lista_que_para(ctx, "o arquivo das dúvidas fora do UTF-8", [fora_do_utf8_.name], t.codigo, fora_do_utf8_)
+    guardado = DIVERGENCIAS.read_bytes()
+    DIVERGENCIAS.unlink()
+    lista_que_para(ctx, "o arquivo das divergências que falta", [DIVERGENCIAS.name], t.codigo)
+    grava_divergencias([{k: x for k, x in d.items() if k != "outras"} for d in ctx["divergencias"]])
+    lista_que_para(ctx, "o arquivo das divergências fora do molde", [DIVERGENCIAS.name], t.codigo)
+    DIVERGENCIAS.write_bytes(guardado + "çã".encode("latin-1"))
+    lista_que_para(ctx, "o arquivo das divergências fora do UTF-8", [DIVERGENCIAS.name], t.codigo)
+    DIVERGENCIAS.write_bytes(guardado)
     escreve_mundo(base)
     lista_que_para(ctx, "a conferência dos moldes com aviso", [], t.codigo)
     escreve_mundo(v)
@@ -3858,13 +4080,118 @@ def teste_listas_das_formas(ctx, secoes_):
 
 
 def teste_listas(ctx, mat, base):
-    """A lista de trabalho de cada texto (teste_listas_certas), o que para a lista (teste_listas_que_param) e as formas
-    das analises sem a fonte das paginas e com o campo das paginas inteiro (teste_listas_das_formas)."""
+    """Com as divergencias do mundo gravadas, a lista de trabalho de cada texto (teste_listas_certas), o que para a
+    lista (teste_listas_que_param) e as formas das analises sem a fonte das paginas e com o campo das paginas inteiro
+    (teste_listas_das_formas)."""
     secoes_ = sorteia_duvidas(ctx["mundo"])
     escreve_mundo(ctx["mundo"])
+    sorteia_divergencias(ctx, ctx["nucleos"])
     teste_listas_certas(ctx, mat, secoes_)
     teste_listas_que_param(ctx, mat, base)
     teste_listas_das_formas(ctx, secoes_)
+
+
+def teste_documento_certo(ctx, mat):
+    """No material com a coluna da pergunta e um cartao com dois trechos da mesma divergencia: codigo 0, sem ERRO, e o
+    documento com o que ele tem de ter; duas rodadas, o mesmo documento; o --conferir, em dia, codigo 0 e, com uma linha
+    a mais antes de uma parte que trata de um fato, FALTA, codigo 1 e nada gravado. Devolve o material."""
+    lista, coluna = ctx["divergencias"], ctx["colunas"][0]
+    certo = com_perguntas(mat, ctx["dois_do_cartao"], coluna)
+    escreve_material(certo)
+    regioes = regioes_esperadas(ctx)
+    codigo, tela = roda_divergencias(ctx["projeto"])
+    confere(codigo == 0 and DOCUMENTO.is_file() and not [x for x in tela if x.startswith(ERRO)],
+            f"o documento das divergências: código 0, sem ERRO, e gravado: {tela}")
+    confere_documento(lista, certo, ctx, regioes, "o documento das divergências")
+    gravado = documento_gravado()
+    roda_divergencias(ctx["projeto"])
+    confere(documento_gravado() == gravado, "o documento das divergências: duas rodadas, o mesmo documento")
+    codigo, tela = roda_divergencias(ctx["projeto"], "--conferir")
+    confere(codigo == 0 and not avisos_da_tela(tela) and documento_gravado() == gravado,
+            f"--conferir com o documento em dia: código 0, sem aviso, e nada gravado: {tela}")
+    usados = [u.arquivo for d in lista for u in usos_esperados(d, certo, regioes, ctx)[0]]
+    mudado = copy.deepcopy(certo)
+    mudado["cabecas"][SORTEIO.choice(usados).relative_to(MATERIAL).as_posix()].append(frase())
+    escreve_material(mudado)
+    DOCUMENTO.parent.mkdir(parents=True, exist_ok=True)
+    DOCUMENTO.write_bytes(gravado)
+    codigo, tela = roda_divergencias(ctx["projeto"], "--conferir")
+    confere(codigo == 1 and any(x.startswith(f"{FALTA}:") for x in tela) and documento_gravado() == gravado,
+            f"--conferir com uma linha a mais antes de uma parte que trata de um fato: FALTA, código 1, e nada "
+            f"gravado: {tela}")
+    escreve_material(certo)
+    roda_divergencias(ctx["projeto"])
+    return certo
+
+
+def teste_documento_que_para(ctx, certo, base):
+    """O arquivo das divergencias que falta, fora do molde ou fora do UTF-8, o fato repetido com outras maiusculas e
+    outros espacos, o codigo de trecho que nao existe, a citacao com texto que nao e chamada, a chamada sem lugar, o
+    lugar que a fonte nao tem, o arquivo de chamadas que falta, a planilha fora do UTF-8 e a conferencia dos moldes com
+    aviso sao ERRO, que diz o que, e nada e gravado."""
+    v, lista, nucleos = ctx["mundo"], ctx["divergencias"], ctx["nucleos"]
+    guardado = DIVERGENCIAS.read_bytes()
+    DIVERGENCIAS.unlink()
+    divergencias_que_param(ctx, "o arquivo das divergências que falta", [DIVERGENCIAS.name])
+    grava_divergencias([{k: x for k, x in d.items() if k != "ensinada"} for d in lista])
+    divergencias_que_param(ctx, "o arquivo das divergências fora do molde", [DIVERGENCIAS.name])
+    DIVERGENCIAS.write_bytes(guardado + "çã".encode("latin-1"))
+    divergencias_que_param(ctx, "o arquivo das divergências fora do UTF-8", [DIVERGENCIAS.name])
+    d = SORTEIO.choice(lista)
+    repetida = {**copy.deepcopy(d), "fato": " " + "  ".join(d["fato"].upper().split()) + " "}
+    grava_divergencias(lista + [repetida])
+    divergencias_que_param(ctx, "o fato repetido, com outras maiúsculas e outros espaços", [repetida["fato"]])
+    estranho = ident()
+    grava_divergencias(lista + [divergencia_inventada([estranho], v, nucleos)])
+    divergencias_que_param(ctx, "o código de trecho que não existe", [estranho])
+    chave, nucleo = SORTEIO.choice(sorted(nucleos.items()))
+    sobra, lugar = palavra(), f"{comum.ROTULO_PAGINA.format(ident())}"
+    erradas = [("a citação com texto que não é chamada", f"{sobra} {citacao_inventada(v, nucleos)}", [sobra]),
+               ("a chamada sem lugar", f"({nucleo})", [chave]),
+               ("o lugar que a fonte não tem", f"({nucleo}, {lugar})", [chave, lugar])]
+    for rotulo, fonte, palavras in erradas:
+        grava_divergencias(lista + [divergencia_inventada(d["trechos"], v, nucleos, fonte)])
+        divergencias_que_param(ctx, rotulo, palavras)
+    DIVERGENCIAS.write_bytes(guardado)
+    chamadas = PROJETO.caminho("chamadas")
+    das_chamadas = chamadas.read_bytes()
+    chamadas.unlink()
+    divergencias_que_param(ctx, "o arquivo de chamadas que falta", [chamadas.name])
+    chamadas.write_bytes(das_chamadas)
+    planilha = planilha_do(SORTEIO.choice(sorted(certo["planilhas"])))
+    da_planilha = planilha.read_bytes()
+    planilha.write_bytes(da_planilha + "çã".encode("latin-1"))
+    divergencias_que_param(ctx, "a planilha fora do UTF-8", [planilha.name])
+    planilha.write_bytes(da_planilha)
+    escreve_mundo(base)
+    divergencias_que_param(ctx, "a conferência dos moldes com aviso", [])
+    escreve_mundo(v)
+
+
+def teste_documento_sem(ctx, certo):
+    """Sem divergencia, o documento sai so com o titulo e a abertura, sem titulo de divergencia; e, sem a coluna dos
+    trechos no projeto.json, as partes do material sao so as dos textos."""
+    grava_divergencias([])
+    codigo, tela = roda_divergencias(ctx["projeto"])
+    texto = DOCUMENTO.read_text(encoding="utf-8") if DOCUMENTO.is_file() else ""
+    confere(codigo == 0 and DOCUMENTO.is_file() and not [x for x in texto.splitlines() if x.startswith("## ")],
+            f"sem divergência, o documento sai sem título de divergência, e o código é 0: {tela}")
+    grava_divergencias(ctx["divergencias"])
+    projeto = projeto_com(coluna_trechos=None, coluna_subdecks=None)
+    codigo, tela = roda_divergencias(projeto)
+    confere(codigo == 0, f"sem a coluna dos trechos, o documento das divergências: código 0: {tela}")
+    confere_documento(ctx["divergencias"], certo, ctx, regioes_esperadas(ctx), "sem a coluna dos trechos",
+                      com_cartoes=False)
+    projeto.unlink()
+
+
+def teste_documento(ctx, mat, base):
+    """O documento das divergencias certo (teste_documento_certo), o que para o documento (teste_documento_que_para) e o
+    documento sem divergencia e sem a coluna dos trechos (teste_documento_sem)."""
+    certo = teste_documento_certo(ctx, mat)
+    teste_documento_que_para(ctx, certo, base)
+    teste_documento_sem(ctx, certo)
+    escreve_material(mat)
 
 
 def teste_material(base):
@@ -3874,13 +4201,15 @@ def teste_material(base):
     escreve_mundo(v)
     colunas, e = (ident(), ident()), esperado(v)
     ctx = {"textos": textos_esperados(v, e), "colunas": colunas, "aulas": v["ids"]["aulas"], "mundo": v,
-           "esperado": e, "projeto": projeto_com(coluna_trechos=colunas[0], coluna_subdecks=colunas[1])}
+           "esperado": e, "projeto": projeto_com(coluna_trechos=colunas[0], coluna_subdecks=colunas[1]),
+           "nucleos": sorteia_chamadas(v)}
     mat = teste_material_certo(ctx)
     teste_ordem_de_escrita(ctx, mat)
     teste_material_errado(ctx, mat)
     teste_o_que_para_o_conferidor(ctx, v, base, mat)
     teste_sem_cartoes(ctx, mat)
     teste_listas(ctx, mat, base)
+    teste_documento(ctx, mat, base)
     ctx["projeto"].unlink()
 
 

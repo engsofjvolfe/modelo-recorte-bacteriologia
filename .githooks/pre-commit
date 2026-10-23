@@ -5,8 +5,9 @@
 # Antes de cada versao gravada pelo git, confere que nenhuma fonte vai junto (ver
 # scripts/protege_fontes.py), que o glossario e o que os documentos definem (ver
 # scripts/glossario.py), que a lista dos trechos de IA e a que as marcas de IA dao (ver
-# scripts/trechos_de_ia.py) e que cada documento esta no indice uma vez so (ver
-# scripts/confere_indice.py). O git roda este arquivo na pasta principal do projeto.
+# scripts/trechos_de_ia.py), que o documento das divergencias e o que as divergencias e o
+# material dao (ver scripts/divergencias.py) e que cada documento esta no indice uma vez so
+# (ver scripts/confere_indice.py). O git roda este arquivo na pasta principal do projeto.
 
 if command -v python3 >/dev/null 2>&1; then
     PYTHON=python3
@@ -16,4 +17,5 @@ fi
 "$PYTHON" scripts/protege_fontes.py --versao || exit 1
 "$PYTHON" scripts/glossario.py --conferir || exit 1
 "$PYTHON" scripts/trechos_de_ia.py --conferir || exit 1
+"$PYTHON" scripts/divergencias.py --conferir || exit 1
 exec "$PYTHON" scripts/confere_indice.py

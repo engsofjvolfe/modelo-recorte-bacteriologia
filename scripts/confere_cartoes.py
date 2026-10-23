@@ -55,6 +55,10 @@ entao os cartoes da planilha ficam sem prova. O arquivo de chamadas e lido do me
 jeito, contra o molde dele (chamadas.schema.json): com erro nele, quando ele falta ou
 quando duas fontes tem a mesma chamada, cada erro aparece com ERRO e nada e gravado.
 
+Quem importa este script tem a conferencia de uma citacao das fontes escrita como a coluna
+fonte (citacao), que o divergencias.py usa, com a leitura das chamadas (le_chamadas) e dos
+lugares das fontes (lugares_das_fontes).
+
 Uso (de qualquer pasta dentro do projeto):
     python scripts/confere_cartoes.py
     python scripts/confere_cartoes.py --projeto projeto.json
@@ -78,6 +82,7 @@ from validar_dados import esquema, le_dados  # noqa: E402
 
 COLUNA_RESPOSTA, COLUNA_FONTE = "resposta", "fonte"  # as colunas da resposta e da citacao das fontes
 COLUNAS = (COLUNA_PERGUNTA, COLUNA_RESPOSTA, COLUNA_FONTE)  # as colunas que o script le de cada cartao
+ONDE_DA_CITACAO = f"coluna {COLUNA_FONTE}"  # o lugar da citacao no cartao, que os erros dela dizem
 Ia = collections.namedtuple("Ia", "fonte marcas")  # a marca de fonte de IA do projeto e as marcas de IA do material
 AVISO_IA = "**Escrito por IA, sem fonte: a verificar.**"  # a linha do bloco de um cartao de IA
 SEM_PROVA = "cartão sem prova: a pergunta não está no arquivo de prova da planilha"
@@ -197,17 +202,17 @@ def confere_cartao_de_ia(prova, marcas):
     return erros, citados, achados
 
 
-def confere_cartao(linha, prova, nucleos, indice, ia=None):
-    """(erros, citados, achados): citados = [(chave, lugar, textos)]; achados =
-    [(trecho, [(chave, lugar, arquivo, onde, afirmacao)])]. O cartao de IA se confere contra as marcas de IA."""
-    if de_ia(linha, ia):
-        return confere_cartao_de_ia(prova, ia.marcas)
+def citacao(fonte, nucleos, indice, onde=ONDE_DA_CITACAO):
+    """(erros, citados) de uma citacao das fontes, escrita como a coluna fonte: citados = [(chave, lugar, textos)], cada
+    chamada reconhecida pelo nucleo dela, com o lugar que vem depois e os textos desse lugar; erros, a citacao sem
+    chamada, o texto que nao e chamada de nenhuma fonte, a chamada sem lugar e o lugar que a fonte nao tem. onde e o
+    nome do lugar da citacao, que os erros dizem."""
     erros, citados = [], []
-    citadas, sobra = chamadas_da_fonte(linha.get(COLUNA_FONTE) or "", nucleos)
+    citadas, sobra = chamadas_da_fonte(fonte, nucleos)
     if not citadas:
-        erros.append("a coluna fonte não tem a chamada de nenhuma fonte do arquivo de chamadas")
+        erros.append(f"a {onde} não tem a chamada de nenhuma fonte do arquivo de chamadas")
     if sobra:
-        erros.append(f"texto na coluna fonte que não é chamada de nenhuma fonte: {sobra!r}")
+        erros.append(f"texto na {onde} que não é chamada de nenhuma fonte: {sobra!r}")
     for chave, lugar in citadas:
         textos = indice.get((chave, lugar or TEXTO_INTEIRO))
         if textos:
@@ -217,6 +222,15 @@ def confere_cartao(linha, prova, nucleos, indice, ia=None):
         else:
             erros.append(f"{chave} não tem o lugar {lugar!r}: nenhuma transcrição registrada com essa chave "
                          f"tem esse título de página, e nenhuma base tem frase dela nesse lugar")
+    return erros, citados
+
+
+def confere_cartao(linha, prova, nucleos, indice, ia=None):
+    """(erros, citados, achados): citados = [(chave, lugar, textos)]; achados =
+    [(trecho, [(chave, lugar, arquivo, onde, afirmacao)])]. O cartao de IA se confere contra as marcas de IA."""
+    if de_ia(linha, ia):
+        return confere_cartao_de_ia(prova, ia.marcas)
+    erros, citados = citacao(linha.get(COLUNA_FONTE) or "", nucleos, indice)
     if prova is None:
         return erros + [SEM_PROVA], citados, []
     lugares = [(chave, lugar, arq, de, texto, af) for chave, lugar, textos in citados for arq, de, texto, af in textos]

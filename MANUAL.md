@@ -77,6 +77,10 @@ Hinton [IA: o meio de cultura padronizado para esse teste]", e o cartão dele tr
 lugar da fonte. Esse trecho ainda não foi conferido numa fonte: leia-o com essa ressalva. A
 lista de todos eles está em [Trechos escritos por IA](docs/material-gerado/trechos-de-ia.md).
 
+Quando uma aula e o livro dizem um fato de formas diferentes, o material ensina o que o
+livro diz. O que a aula diz, com o lugar exato de cada um, está em [Divergências entre as
+fontes](docs/material-gerado/divergencias.md).
+
 ## Nível 3 — Quero achar um item específico rápido
 
 O [`INDICE.md`](INDICE.md) tem um link pra cada documento. Abra o dicionário ou a ficha

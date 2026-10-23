@@ -48,8 +48,8 @@ cada erro aparece no cartão ou na planilha dele, que os tiques voltam e saem, e
 erro no arquivo de chamadas, nada é gravado. Do cartão escrito por IA, com marcas de IA
 inventadas e um texto do material com uma delas: que ele passa com a prova tirada da marca,
 com o aviso de IA; que o tique dele sai quando o texto da marca muda; que ele é erro quando
-a marca sai do texto e quando o projeto não tem marcas de IA; e que, com uma marca quebrada
-no texto, nada é gravado.
+não tem prova, quando a marca sai do texto e quando o projeto não tem marcas de IA; e que,
+com uma marca quebrada no texto, nada é gravado.
 
 Precisa do genanki ([O que precisa estar
 instalado](../README.md#o-que-precisa-estar-instalado)): o teste roda com o Python que o
@@ -154,16 +154,18 @@ Precisa do Poppler e do Tesseract com o idioma `eng`.
 O teste dos scripts que leem o [arquivo de formato](../README.md#o-arquivo-de-formato): a
 leitura dele no `comum.py` e o que se acha nele, o `validar_dados.py`, o `base_externa.py`,
 o `confere_moldes.py`, com a tabela da leitura, a tabela dos destinos e o limite das aulas,
-o `confere_material.py` e o `lista_de_trabalho.py`. O projeto pequeno tem um formato
-sorteado, com documentos dos quatro tipos de molde, as bases de três unidades, as análises
-de três a cinco aulas numa forma sorteada, as duas tabelas, transcrições inventadas, o
-material escrito, com as planilhas, e um arquivo de dúvidas. O teste confere que o formato
-certo passa, e cada erro dele é um erro só, que diz o lugar; que o modelo em branco do
-formato falha só onde espera um valor; que cada trecho cai nos documentos, nas entradas e
-nas partes que o caso dele diz, com cada aviso esperado, e só ele; as regras do limite; que
-cada entrada errada é `ERRO` e nada é gravado; que o conferidor do material e a lista de
-trabalho dão, no material certo e em cada estrago dele, o que o caso diz; e que duas
-rodadas dão o mesmo.
+o `confere_material.py`, o `lista_de_trabalho.py` e o `divergencias.py`, com a citação das
+fontes do `confere_cartoes.py`. O projeto pequeno tem um formato sorteado, com documentos
+dos quatro tipos de molde, as bases de três unidades, as análises de três a cinco aulas
+numa forma sorteada, as duas tabelas, transcrições inventadas, o material escrito, com as
+planilhas, um arquivo de dúvidas, um de chamadas e um de divergências. O teste confere que
+o formato certo passa, e cada erro dele é um erro só, que diz o lugar; que o modelo em
+branco do formato falha só onde espera um valor; que cada trecho cai nos documentos, nas
+entradas e nas partes que o caso dele diz, com cada aviso esperado, e só ele; as regras do
+limite; que cada entrada errada é `ERRO` e nada é gravado; que o conferidor do material e a
+lista de trabalho dão, no material certo e em cada estrago dele, o que o caso diz; que o
+documento das divergências mostra cada uma, com as partes do material que tratam dela; e
+que duas rodadas dão o mesmo.
 
 Lê o modelo em branco do formato, o arquivo com o nome do formato na pasta do
 `projeto.json` modelo.

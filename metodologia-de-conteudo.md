@@ -99,7 +99,9 @@ tipo da figura se reconhece olhando a imagem, na hora de escrever.
 
 Um fato que só o desenho mostra, sem texto, não está na transcrição. Quando ele entra no
 material, a prova dele é a própria imagem, conferida por uma pessoa, ou uma fonte que o
-diga por escrito.
+diga por escrito. Enquanto ninguém o escreve a partir da imagem, ele entra como aposto de
+IA, como todo ponto que nenhuma fonte escrita alcança ([O material de
+fora](#o-material-de-fora)).
 
 ### A conferência da transcrição
 
@@ -317,6 +319,17 @@ ponto; um nome que o livro não traz segue a aula; e, nos dois casos, as outras 
 anotam do mesmo modo. O título de cada texto segue essas formas, mesmo quando o nome da
 unidade no arquivo de formato é outro.
 
+Um fato que uma aula e o livro dizem de formas diferentes é uma <dfn>divergência</dfn>, e
+nela também vale o livro: o material ensina o que o livro diz. Cada divergência fica no
+arquivo das divergências, `dados/divergencias.json`, com os códigos dos trechos das aulas
+que trazem o fato, a forma que o material ensina, as outras e a citação de cada uma, com o
+lugar exato; quem escreve um texto e acha uma divergência que o arquivo não tem a põe nele.
+A lista de trabalho de cada texto mostra, junto de cada trecho, as divergências dele, e o
+[documento das divergências](docs/material-gerado/divergencias.md) mostra cada uma com as
+partes do material que tratam do fato. Como o arquivo se escreve e o que o
+[`divergencias.py`](scripts/README.md#divergenciaspy--monta-o-documento-das-divergências)
+confere estão no README dos scripts.
+
 ### O limite das aulas
 
 O material vai até uma aula, a última que o arquivo de formato diz, e ganham material as
@@ -413,17 +426,22 @@ ela e com a citação e tira a marca: o trecho sai da lista, e o cartão dele d�
 
 O texto ensina, como quem ensina a matéria a alguém que nunca a viu: cada fato se apoia no
 que o leitor já sabe ou no que o documento ensinou antes, o nome técnico chega depois do
-que ele nomeia, e o básico vem antes do que depende dele. Quando o molde põe um termo
-antes daquilo de que o uso dele depende, a parte do termo diz o que ele é, e o uso dele
-entra onde o texto explica aquilo. Ensinar não é mostrar: nenhum
-fato fica só listado ou apontado numa figura, numa página ou numa fonte — o que a figura
-mostra é escrito e explicado no documento. Tudo é dito com palavras próprias, claro e sem
-jargão solto, nunca num texto que se lê como o livro de onde o fato veio. Um termo técnico
-vem explicado onde aparece pela primeira vez, ou citado pela categoria que o define
+que ele nomeia, e o básico vem antes do que depende dele. A aula diz o que estudar, e o
+livro diz o que aquilo é: o texto ensina cada ponto da aula como o livro o ensina, primeiro
+o que vale em geral e depois o caso da aula, como exemplo, nunca só o caso, que o leitor
+tomaria pela regra. Quando o molde põe um termo antes daquilo de que o uso dele depende, a
+parte do termo diz o que ele é, e o uso dele entra onde o texto explica aquilo. Ensinar não
+é mostrar: nenhum fato fica só listado ou apontado numa figura, numa página ou numa fonte —
+o que a figura mostra é escrito e explicado no documento. Tudo é dito com palavras próprias,
+claro e sem jargão solto, nunca num texto que se lê como o livro de onde o fato veio. Um termo
+técnico vem explicado onde aparece pela primeira vez, ou citado pela categoria que o define
 ([abaixo](#a-categoria-citada-pelo-nome)), e onde é explicado leva a marca de definição
 ([seção 8](#8-os-documentos-e-os-arquivos-do-projeto)). O texto é o mais enxuto que dá sem
 perder o tom, a explicação nem o conteúdo, e todo fato tirado de uma fonte leva a citação
-dela ([seção 2](#2-as-citações-e-as-referências)).
+dela ([seção 2](#2-as-citações-e-as-referências)). Cada ideia fica num parágrafo seu, curto,
+separado do seguinte por uma linha em branco, e nunca várias emendadas num bloco, que cansa
+quem lê, por mais bem escrito que esteja; numa célula de tabela, os parágrafos se separam
+com `<br><br>`.
 
 ### A) Teoria fundamental
 
@@ -466,8 +484,11 @@ Quando a teoria fundamental define uma categoria — um grupo, um tipo de proces
 classificação — e um item se encaixa nela, o dicionário e a ficha do item citam a
 categoria pelo nome, em vez de descrevê-la de novo. Assim a explicação não se repete em
 cada item, a teoria fundamental define tudo o que os itens usam, e quem esqueceu o que a
-categoria significa tem um caminho direto até ela. Um conceito da teoria usado num item
-sem ser citado pelo nome em nenhum documento dele é uma lacuna.
+categoria significa tem um caminho direto até ela. O mesmo vale quando a teoria se escreve
+numa aula depois da do item, como num texto escrito inteiro na primeira aula que trata
+dele: o item cita a categoria do mesmo jeito, e o caminho leva até ela também quem ainda não
+a viu. Um conceito da teoria usado num item sem ser citado pelo nome em nenhum documento
+dele é uma lacuna.
 
 ### O item citado pelo nome
 
@@ -561,8 +582,9 @@ conferência](scripts/README.md#como-ticar-uma-conferência).
 Antes de o material valer, nenhum script deixa linha `ERRO` nem `FALTA`: o
 `validar_dados.py`, em cada arquivo de dados, e o `conferencia.py`, o `confere_moldes.py`,
 o `confere_material.py`, o `referencias.py`, o `base_externa.py`, o `confere_cartoes.py`,
-o `montar_deck.py`, o `glossario.py --conferir`, o `confere_indice.py` e o
-`protege_fontes.py`. E a pessoa confere:
+o `montar_deck.py`, o `glossario.py --conferir`, o `trechos_de_ia.py --conferir`, o
+`divergencias.py --conferir`, o `confere_indice.py` e o `protege_fontes.py`. E a pessoa
+confere:
 
 1. que o título de cada documento cobre tudo o que está dentro dele;
 2. que, em cada item, o dicionário e a ficha mostram os mesmos fatos principais, sem

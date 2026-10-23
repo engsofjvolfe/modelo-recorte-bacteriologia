@@ -36,7 +36,8 @@
                    "analise", "pesquisa", "material_gerado", "baralhos",
                    "bases", "base_externa", "conferencia_trechos", "provas", "conferencia_cartoes", "imagens",
                    "estilo_cartao", "forma_analise", "lugares_lidos", "destinos", "analises_das_aulas",
-                   "conferencia_moldes", "listas_de_trabalho", "imagens_cartoes", "baralhos_com_imagens", "chamadas"],
+                   "conferencia_moldes", "listas_de_trabalho", "imagens_cartoes", "baralhos_com_imagens", "chamadas",
+                   "divergencias", "documento_das_divergencias"],
       "properties": {
         "formato": { "$ref": "#/$defs/texto" },
         "forma_analise": { "$ref": "#/$defs/texto" },
@@ -73,7 +74,9 @@
         "imagens_cartoes": { "$ref": "#/$defs/protegido" },
         "baralhos_com_imagens": { "$ref": "#/$defs/protegido" },
         "chamadas": { "$ref": "#/$defs/texto" },
-        "trechos_de_ia": { "$ref": "#/$defs/texto" }
+        "trechos_de_ia": { "$ref": "#/$defs/texto" },
+        "divergencias": { "$ref": "#/$defs/texto" },
+        "documento_das_divergencias": { "$ref": "#/$defs/texto" }
       }
     }
   },

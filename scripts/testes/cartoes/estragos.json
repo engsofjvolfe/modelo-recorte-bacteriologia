@@ -298,8 +298,8 @@
   {
    "nome": "chamadas-com-erro-nao-param",
    "arquivo": "confere_cartoes.py",
-   "de": "    nucleos, erros = le_chamadas(projeto)\n    if erros:",
-   "para": "    nucleos, erros = le_chamadas(projeto)\n    if False:"
+   "de": "if erros or erros_ia:",
+   "para": "if erros_ia:"
   },
   {
    "nome": "compara-com-as-marcas-de-destaque",
@@ -346,8 +346,14 @@
   {
    "nome": "cartao-sem-prova-passa",
    "arquivo": "confere_cartoes.py",
-   "de": "        erros.append(\"cartão sem prova: a pergunta não está no arquivo de prova da planilha\")\n",
-   "para": ""
+   "de": "        return erros + [SEM_PROVA], citados, []",
+   "para": "        return erros, citados, []"
+  },
+  {
+   "nome": "ia-cartao-sem-prova-passa",
+   "arquivo": "confere_cartoes.py",
+   "de": "        return [SEM_PROVA], [], []",
+   "para": "        return [], [], []"
   },
   {
    "nome": "prova-sem-cartao-passa",

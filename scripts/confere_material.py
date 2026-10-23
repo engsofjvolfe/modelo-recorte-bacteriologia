@@ -45,7 +45,9 @@ cada FALTA e cada ERRO, com o arquivo e a linha; os que nao sao de um texto (o c
 de unidade, o comentario que nao fecha, o arquivo fora do UTF-8, a unidade que nenhum texto
 tem) saem sempre. Sai com codigo 1 quando ha FALTA ou ERRO. Quem importa este script tem a
 conferencia sem a tela (confere), com a ordem de escrita e o estado de cada texto, as marcas
-lidas nos textos (marcas_dos_textos) e o texto de um codigo escondido (marca).
+lidas nos textos (marcas_dos_textos), os lugares de cada codigo de trecho nos textos
+(lugares_dos_trechos), os codigos dos trechos de um cartao (codigos_do_cartao) e o texto de
+um codigo escondido (marca).
 
 Uso (de qualquer pasta dentro do projeto):
     python scripts/confere_material.py
@@ -134,6 +136,23 @@ def marcas_dos_textos(projeto):
     return todas, avisos
 
 
+def lugares_dos_trechos(projeto):
+    """{codigo: [(marca, caminho)]} de cada codigo de trecho nos textos do material, na ordem dos arquivos e das linhas:
+    a marca, com o arquivo e a linha, e o caminho das regioes abertas ali (marcas.com_caminho)."""
+    todas, _ = marcas_dos_textos(projeto)
+    saida = {}
+    for m, caminho in marcas.com_caminho(todas, NIVEIS):
+        if m.nivel == TRECHO and m.codigo is not None:
+            saida.setdefault(m.codigo, []).append((m, caminho))
+    return saida
+
+
+def codigos_do_cartao(linha, coluna):
+    """Os codigos dos trechos de um cartao, {coluna: valor}, na coluna dada: separados por espaco, em NFC, sem repetir,
+    na ordem."""
+    return list(dict.fromkeys(marcas.nfc(linha.get(coluna) or "").split()))
+
+
 def trechos_do_texto(texto):
     """Os ids dos trechos do texto, sem repetir: os de cada parte, na ordem do molde, e depois os que vao junto."""
     return list(dict.fromkeys([i for p in texto.partes for i in p.trechos] + list(texto.junto)))
@@ -163,7 +182,7 @@ def avisos_da_planilha(arquivo, nome, texto, colunas, existem):
     dos_trechos, da_aula = colunas
     seus, com_cartao, avisos = trechos_do_texto(texto), set(), []
     for linha in leitor:
-        n, codigos = leitor.line_num, list(dict.fromkeys(marcas.nfc(linha[dos_trechos] or "").split()))
+        n, codigos = leitor.line_num, codigos_do_cartao(linha, dos_trechos)
         if not codigos:
             avisos.append(aviso("cartao-sem-trecho", nome, n, texto.codigo, None,
                                 "cartão sem o código de nenhum trecho"))

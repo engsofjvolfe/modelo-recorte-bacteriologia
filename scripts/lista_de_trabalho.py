@@ -21,9 +21,11 @@ A lista diz, nesta ordem:
     forma das analises, menos o do papel DESTINO (o lugar do trecho e o da propria lista, e
     as marcas dizem do que ele fala) -- o campo com papel pelo valor, o sem papel como a
     analise o escreve --; as marcas do formato que ele tem; e, quando e assim, que ele esta
-    ali por um conjunto, que e de uma aula depois da ultima e, no texto que depende de
-    outros, onde o codigo dele esta nesses textos: o arquivo, a linha e a unidade, o item e
-    a parte. A parte que nao recebe trechos, e a que recebe e nao tem nenhum, dizem isso.
+    ali por um conjunto, que e de uma aula depois da ultima, cada divergencia do arquivo das
+    divergencias que tem o codigo dele (divergencias.em_linha: o fato, a forma que o material
+    ensina e as outras, com as fontes) e, no texto que depende de outros, onde o codigo dele
+    esta nesses textos: o arquivo, a linha e a unidade, o item e a parte. A parte que nao
+    recebe trechos, e a que recebe e nao tem nenhum, dizem isso.
     Depois, os trechos que vao junto do assunto, em qualquer parte que recebe trechos;
   - os capitulos a ler inteiros: para cada campo da forma que diz a fonte das paginas que
     cita ("fonte"), as transcricoes da pasta "gerados" registradas com essa fonte
@@ -46,8 +48,9 @@ que ele depende estao prontos no conferidor.
 
 Com erro, cada um sai numa linha ERRO e nada e gravado: o que o conferidor recusa (a
 conferencia dos moldes com aviso, o codigo que nenhum texto tem), o texto que depende de
-outros que ainda nao estao prontos e o arquivo das duvidas que falta ou que nao esta em
-UTF-8. Sem erro, o script diz o arquivo gravado e quantas partes, trechos, transcricoes a
+outros que ainda nao estao prontos, o arquivo das duvidas que falta ou que nao esta em
+UTF-8 e o arquivo das divergencias que falta, fora do UTF-8 ou fora do molde
+(divergencias.le_divergencias). Sem erro, o script diz o arquivo gravado e quantas partes, trechos, transcricoes a
 ler, pedacos sem pagina e secoes das duvidas a lista tem.
 
 Uso (de qualquer pasta dentro do projeto):
@@ -63,6 +66,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import confere_material  # noqa: E402
+import divergencias  # noqa: E402
 import lugares  # noqa: E402
 import marcas  # noqa: E402
 from analises import nfc, ordem_natural  # noqa: E402
@@ -92,6 +96,7 @@ MARCAS = "marcas"
 POR_CONJUNTO = "está aqui por um conjunto: o destino dele nomeia um grupo do qual esta unidade, ou este item, faz parte"
 DEPOIS = "é de uma aula depois da última ({})"
 ENSINADO_EM = "ensinado em"
+DIVERGENCIA = "divergência"
 NA_LINHA = "`{}`, linha {} ({})"
 CAPITULOS = "Os capítulos a ler inteiros"
 DO_CAMPO = "Campo `{}`, fonte {}"
@@ -99,9 +104,10 @@ SEM_PAGINA = "Pedaços em que nenhum título de página aparece"
 NENHUM_CAMPO = "Nenhum campo da forma das análises diz a fonte das páginas que cita."
 DUVIDAS = "As dúvidas abertas"
 DE_ONDE = "Copiadas de `{}`."
-Contexto = collections.namedtuple("Contexto", "projeto c forma trechos paginas onde")
+Contexto = collections.namedtuple("Contexto", "projeto c forma trechos paginas onde divergencias")
 # o que a lista usa: o projeto; a Conferencia dos moldes; a forma das analises; {id: trecho}; {fonte: [(transcricao,
-# [padrao de cada titulo de pagina])]}; e {id: [onde o codigo do trecho esta nos textos de que o texto depende]}
+# [padrao de cada titulo de pagina])]}; {id: [onde o codigo do trecho esta nos textos de que o texto depende]}; e
+# {id: [divergencia que tem o codigo do trecho]}
 Lista = collections.namedtuple("Lista", "arquivo linhas partes trechos transcricoes sem_pagina secoes")
 # a lista pronta para gravar: o arquivo, as linhas e quantas partes, trechos, transcricoes a ler, pedacos sem pagina
 # e secoes das duvidas ela tem
@@ -112,8 +118,8 @@ Lista = collections.namedtuple("Lista", "arquivo linhas partes trechos transcric
 def linhas_do_trecho(trecho, ctx, por_conjunto):
     """As linhas de um trecho na lista: o codigo escondido, a aula e o slide; o texto; cada campo da forma menos o do
     destino -- o com papel pelo valor, o sem papel como a analise o escreve --; as marcas; e, quando e assim, que ele
-    esta ali por um conjunto, que e de uma aula depois da ultima e onde o codigo dele esta nos textos de que o texto
-    depende."""
+    esta ali por um conjunto, que e de uma aula depois da ultima, cada divergencia que tem o codigo dele e onde o codigo
+    dele esta nos textos de que o texto depende."""
     cm, forma, formato = confere_material, ctx.forma, ctx.c.formato
     saida = [f"- `{cm.marca(cm.TRECHO, trecho['id'])}` — {NA_AULA.format(trecho['aula'], trecho['slide'])}",
              f"  - {trecho['texto']}"]
@@ -130,6 +136,7 @@ def linhas_do_trecho(trecho, ctx, por_conjunto):
         saida.append(f"  - {POR_CONJUNTO}")
     if trecho["aula"] not in ctx.c.ate_a_ultima:
         saida.append(f"  - {DEPOIS.format(formato['ultima_aula'])}")
+    saida += [f"  - {DIVERGENCIA}: {divergencias.em_linha(d)}" for d in ctx.divergencias.get(nfc(trecho["id"]), [])]
     return saida + [f"  - {ENSINADO_EM}: {lugar}" for lugar in ctx.onde.get(nfc(trecho["id"]), [])]
 
 
@@ -167,11 +174,11 @@ def onde_cada_um(projeto, deps):
     cm, codigos, saida = confere_material, {d.codigo for d in deps}, {}
     if not codigos:
         return saida
-    todas, _ = cm.marcas_dos_textos(projeto)
-    for m, caminho in marcas.com_caminho(todas, cm.NIVEIS):
-        if m.nivel == cm.TRECHO and caminho[0] in codigos:
-            lugar = NA_LINHA.format(m.arquivo, m.linha, marcas.mostra(caminho, cm.NIVEIS))
-            saida.setdefault(m.codigo, []).append(lugar)
+    for i, lugares_ in cm.lugares_dos_trechos(projeto).items():
+        nos_deps = [NA_LINHA.format(m.arquivo, m.linha, marcas.mostra(caminho, cm.NIVEIS))
+                    for m, caminho in lugares_ if caminho[0] in codigos]
+        if nos_deps:
+            saida[i] = nos_deps
     return saida
 
 
@@ -307,11 +314,14 @@ def monta(projeto, pedido, arquivo_das_duvidas):
     forma, erros_da_forma = le_dados(projeto.caminho("forma_analise"), esquema("forma-analise"))
     if erros or erros_da_forma:
         return None, erros + erros_da_forma
+    registradas, erros = divergencias.le_divergencias(projeto)
+    if erros:
+        return None, erros
     c, trechos, _ = conferido.moldes
     saida = projeto.caminho_com("listas_de_trabalho", f"{texto.documento['id']}-{texto.codigo}")
     fontes = [campo["fonte"] for campo in forma["campos"] if "fonte" in campo]
     ctx = Contexto(projeto, c, forma, {t["id"]: t for t in trechos}, paginas_das_fontes(projeto, fontes, saida),
-                   onde_cada_um(projeto, deps))
+                   onde_cada_um(projeto, deps), divergencias.por_trecho(registradas))
     dos_capitulos, transcricoes, sem_pagina = linhas_dos_capitulos(texto, ctx)
     das_duvidas, secoes_copiadas = linhas_das_duvidas(arquivo_das_duvidas, conteudo, texto, ctx)
     linhas = identidade(texto, deps, projeto, c) + linhas_das_partes(texto, ctx) + dos_capitulos + das_duvidas

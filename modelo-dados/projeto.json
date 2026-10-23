@@ -41,6 +41,8 @@
     "imagens_cartoes": "docs/material-base/imagens-dos-cartoes",
     "baralhos_com_imagens": "docs/material-base/baralhos-com-imagens",
     "chamadas": "dados/chamadas.json",
-    "trechos_de_ia": "docs/material-gerado/trechos-de-ia.md"
+    "trechos_de_ia": "docs/material-gerado/trechos-de-ia.md",
+    "divergencias": "dados/divergencias.json",
+    "documento_das_divergencias": "docs/material-gerado/divergencias.md"
   }
 }

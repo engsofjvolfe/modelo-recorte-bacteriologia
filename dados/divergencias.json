@@ -1,0 +1,40 @@
+{
+  "versao_schema": 1,
+  "divergencias": [
+    {
+      "fato": "O corante da última etapa da coloração de Gram",
+      "trechos": ["2/28/1/be9e", "9-10/60/1/be9e"],
+      "ensinada": {
+        "diz": "safranina",
+        "fonte": "(Murray; Rosenthal; Pfaller, 2022, p. 116; Murray; Rosenthal; Pfaller, 2022, p. 117; Murray; Rosenthal; Pfaller, 2022, p. 119)"
+      },
+      "outras": [
+        { "diz": "fucsina", "fonte": "(Paim, [2019]a, slide 28; Paim, [2020]b, slide 60)" }
+      ]
+    },
+    {
+      "fato": "A cor das colônias que não fermentam a lactose no ágar MacConkey",
+      "trechos": ["9-10/53/2/97e3"],
+      "ensinada": { "diz": "incolores", "fonte": "(Murray; Rosenthal; Pfaller, 2022, p. 268)" },
+      "outras": [
+        { "diz": "amarelas", "fonte": "(Paim, [2020]b, slide 53)" }
+      ]
+    },
+    {
+      "fato": "A oxidase da Stenotrophomonas",
+      "trechos": ["9-10/72/3/c32d"],
+      "ensinada": { "diz": "negativa", "fonte": "(Murray; Rosenthal; Pfaller, 2022, p. 171)" },
+      "outras": [
+        { "diz": "positiva lenta", "fonte": "(Paim, [2020]b, slide 72)" }
+      ]
+    },
+    {
+      "fato": "O material da cápsula do Streptococcus pneumoniae",
+      "trechos": ["11-12/50/4/2c6c"],
+      "ensinada": { "diz": "polissacarídio", "fonte": "(Murray; Rosenthal; Pfaller, 2022, p. 209)" },
+      "outras": [
+        { "diz": "ácido hialurônico", "fonte": "(Paim, [2025], slide 50)" }
+      ]
+    }
+  ]
+}

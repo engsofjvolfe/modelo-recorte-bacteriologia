@@ -93,9 +93,9 @@ O teste confere regras, nunca uma frase pronta:
   - o cartao escrito por IA, com a marca de fonte de IA do projeto.json, inventada, e a prova
     tirada de uma marca de IA de um texto do material, com outros espacos, sai sem erro, e so
     ele tem o aviso de IA; o tique dele volta quando nada mudou e sai quando muda o texto da
-    marca; e ERRO, no bloco dele e em nenhum outro, quando a marca sai do texto e quando o
-    projeto nao tem marcas de IA; a marca de IA que abre e nao fecha, e a vazia, sao ERRO, e
-    nada e gravado.
+    marca; e ERRO, no bloco dele e em nenhum outro, quando ele nao tem prova, quando a marca
+    sai do texto e quando o projeto nao tem marcas de IA; a marca de IA que abre e nao
+    fecha, e a vazia, sao ERRO, e nada e gravado.
 Precisa do genanki: roda com o Python que o tem. Uso:
     python3 -I teste_cartoes.py <pasta scripts do projeto> <projeto.json modelo> <pasta de trabalho nova> [--semente N]
 Diz "0 falha(s)" quando passa; senao, uma linha FALHA para cada conferencia que nao passou, e
@@ -1143,9 +1143,14 @@ def com_prova(p, k, **valores):
     return provas
 
 
+def sem_prova(p, k):
+    """As provas da planilha, sem a do cartao k."""
+    return [prova for i, prova in enumerate(p["provas"]) if i != k]
+
+
 p = uma_planilha()
 k = um_cartao(p)
-grava_provas(p, [prova for i, prova in enumerate(p["provas"]) if i != k])
+grava_provas(p, sem_prova(p, k))
 erro_do_cartao("o cartão sem prova", p, k)
 p = uma_planilha()
 k = um_cartao(p)
@@ -1221,7 +1226,7 @@ erro_da_planilha("a prova sem cartão", p)
 p = uma_planilha()
 i, j = SORTEIO.sample(range(len(p["cartoes"])), 2)  # o cartao j vira o i, com outros espacos na pergunta
 grava(p, cartoes=com_cartao(p, j, **{**p["cartoes"][i], PERGUNTA: espacos(junta(p["cartoes"][i][PERGUNTA]))}))
-grava_provas(p, [prova for k, prova in enumerate(p["provas"]) if k != j])
+grava_provas(p, sem_prova(p, j))
 erro_da_planilha("a pergunta repetida na planilha", p)
 p = uma_planilha()
 k = um_cartao(p)
@@ -1315,6 +1320,12 @@ if confere(ticado(p, k), "o tique do cartão de IA volta quando nada mudou"):
     confere(not ticado(p, k), "o tique do cartão de IA sai quando muda o texto da marca")
 TEXTO_DE_IA.write_text(f"# {frase()}\n\n{frase()} {MARCADO} {frase()}.\n", encoding="utf-8")
 erro_do_cartao("o cartão de IA cuja marca saiu do texto", p, k)
+
+p = uma_planilha()
+k = um_cartao(p)
+com_ia(p, k)
+grava_provas(p, sem_prova(p, k))
+erro_do_cartao("o cartão de IA sem prova", p, k)
 
 p = uma_planilha()
 k = um_cartao(p)

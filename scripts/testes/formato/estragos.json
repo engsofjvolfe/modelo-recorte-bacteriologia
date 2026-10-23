@@ -1564,8 +1564,8 @@
   {
    "nome": "lista-ensinado-em-qualquer-unidade",
    "arquivo": "lista_de_trabalho.py",
-   "de": " and caminho[0] in codigos:",
-   "para": ":"
+   "de": "for m, caminho in lugares_ if caminho[0] in codigos]",
+   "para": "for m, caminho in lugares_]"
   },
   {
    "nome": "lista-sem-o-item",
@@ -1752,6 +1752,180 @@
    "arquivo": "lista_de_trabalho.py",
    "de": "f\"{texto.documento['id']}-{texto.codigo}\"",
    "para": "texto.codigo"
+  },
+  {
+   "nome": "lista-divergencia-calada",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    saida += [f\"  - {DIVERGENCIA}: {divergencias.em_linha(d)}\" for d in ctx.divergencias.get(nfc(trecho[\"id\"]), [])]",
+   "para": "    saida += []"
+  },
+  {
+   "nome": "lista-divergencia-em-todos-os-trechos",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "ctx.divergencias.get(nfc(trecho[\"id\"]), [])",
+   "para": "[d for ds in ctx.divergencias.values() for d in ds]"
+  },
+  {
+   "nome": "lista-divergencias-com-erro-seguem",
+   "arquivo": "lista_de_trabalho.py",
+   "de": "    registradas, erros = divergencias.le_divergencias(projeto)\n    if erros:",
+   "para": "    registradas, erros = divergencias.le_divergencias(projeto)\n    if False:"
+  },
+  {
+   "nome": "material-lugares-sem-o-caminho",
+   "arquivo": "confere_material.py",
+   "de": "saida.setdefault(m.codigo, []).append((m, caminho))",
+   "para": "saida.setdefault(m.codigo, []).append((m, (None,) * len(caminho)))"
+  },
+  {
+   "nome": "divergencias-sem-a-ensinada",
+   "arquivo": "divergencias.py",
+   "de": "return [(ENSINADA, divergencia[\"ensinada\"])] + [(OUTRA, f) for f in divergencia[\"outras\"]]",
+   "para": "return [(OUTRA, f) for f in divergencia[\"outras\"]]"
+  },
+  {
+   "nome": "divergencias-outras-antes-da-ensinada",
+   "arquivo": "divergencias.py",
+   "de": "return [(ENSINADA, divergencia[\"ensinada\"])] + [(OUTRA, f) for f in divergencia[\"outras\"]]",
+   "para": "return [(OUTRA, f) for f in divergencia[\"outras\"]] + [(ENSINADA, divergencia[\"ensinada\"])]"
+  },
+  {
+   "nome": "divergencias-sem-a-fonte",
+   "arquivo": "divergencias.py",
+   "de": "    return f\"{forma['diz']} {forma['fonte']}\"",
+   "para": "    return forma[\"diz\"]"
+  },
+  {
+   "nome": "divergencias-sem-o-que-diz",
+   "arquivo": "divergencias.py",
+   "de": "    return f\"{forma['diz']} {forma['fonte']}\"",
+   "para": "    return forma[\"fonte\"]"
+  },
+  {
+   "nome": "divergencias-em-linha-sem-as-outras",
+   "arquivo": "divergencias.py",
+   "de": "\"; \".join(f\"{r}: {em_texto(f)}\" for r, f in formas(divergencia))",
+   "para": "f\"{ENSINADA}: {em_texto(divergencia['ensinada'])}\""
+  },
+  {
+   "nome": "divergencias-arquivo-que-falta-quebra",
+   "arquivo": "divergencias.py",
+   "de": "    if not arquivo.is_file():\n        return None, [f\"{nome}: o arquivo das divergências",
+   "para": "    if False:\n        return None, [f\"{nome}: o arquivo das divergências"
+  },
+  {
+   "nome": "divergencias-fato-repetido-passa",
+   "arquivo": "divergencias.py",
+   "de": "        if chave in primeiro:",
+   "para": "        if False:"
+  },
+  {
+   "nome": "divergencias-fato-com-maiusculas",
+   "arquivo": "divergencias.py",
+   "de": "simples(d[\"fato\"]).casefold()",
+   "para": "simples(d[\"fato\"])"
+  },
+  {
+   "nome": "divergencias-fato-com-espacos",
+   "arquivo": "divergencias.py",
+   "de": "simples(d[\"fato\"]).casefold()",
+   "para": "d[\"fato\"].casefold()"
+  },
+  {
+   "nome": "divergencias-codigo-que-nao-existe-passa",
+   "arquivo": "divergencias.py",
+   "de": "for c in codigos(d) if c not in existem]",
+   "para": "for c in codigos(d) if False]"
+  },
+  {
+   "nome": "divergencias-citacao-sem-conferir",
+   "arquivo": "divergencias.py",
+   "de": "erros += [f\"{onde}, {rotulo}: {e}\" for e in citacao(forma[\"fonte\"], nucleos, indice, NA_CITACAO)[0]]",
+   "para": "erros += []"
+  },
+  {
+   "nome": "divergencias-sem-os-textos",
+   "arquivo": "divergencias.py",
+   "de": "        if c not in seus:\n            continue",
+   "para": "        if True:\n            continue"
+  },
+  {
+   "nome": "divergencias-sem-a-regiao",
+   "arquivo": "divergencias.py",
+   "de": "regioes.get(caminho) or [marcas.mostra(caminho, confere_material.NIVEIS)]",
+   "para": "[]"
+  },
+  {
+   "nome": "divergencias-sem-o-titulo",
+   "arquivo": "divergencias.py",
+   "de": "(titulos[arquivo], *regiao)",
+   "para": "tuple(regiao)"
+  },
+  {
+   "nome": "divergencias-sem-os-cartoes",
+   "arquivo": "divergencias.py",
+   "de": "                if c in seus:\n                    saida.setdefault(c, []).append(Uso(arquivo, None, k, nomes))",
+   "para": "                if False:\n                    saida.setdefault(c, []).append(Uso(arquivo, None, k, nomes))"
+  },
+  {
+   "nome": "divergencias-sem-a-pergunta",
+   "arquivo": "divergencias.py",
+   "de": "nomes = (CARTAO.format(k), pergunta) if pergunta else (CARTAO.format(k),)",
+   "para": "nomes = (CARTAO.format(k),)"
+  },
+  {
+   "nome": "divergencias-planilha-ilegivel-passa",
+   "arquivo": "divergencias.py",
+   "de": "        erros += ruins",
+   "para": "        erros += []"
+  },
+  {
+   "nome": "divergencias-usos-repetidos",
+   "arquivo": "divergencias.py",
+   "de": "sorted(set(usos_),",
+   "para": "sorted(list(usos_),"
+  },
+  {
+   "nome": "divergencias-cartoes-antes-dos-textos",
+   "arquivo": "divergencias.py",
+   "de": "    return [em_ordem(u for c in codigos(d) for u in dos_textos.get(c, []))\n            + em_ordem(u for c in codigos(d) for u in dos_cartoes.get(c, [])) for d in divergencias], erros",
+   "para": "    return [em_ordem(u for c in codigos(d) for u in dos_cartoes.get(c, []))\n            + em_ordem(u for c in codigos(d) for u in dos_textos.get(c, [])) for d in divergencias], erros"
+  },
+  {
+   "nome": "divergencias-sem-a-linha",
+   "arquivo": "divergencias.py",
+   "de": "alvo_markdown(ALVO_DA_LINHA.format(alvo, uso.linha))",
+   "para": "alvo_markdown(alvo)"
+  },
+  {
+   "nome": "divergencias-ordem-invertida",
+   "arquivo": "divergencias.py",
+   "de": "    for d, seus in zip(divergencias, usos_):",
+   "para": "    for d, seus in reversed(list(zip(divergencias, usos_))):"
+  },
+  {
+   "nome": "divergencias-moldes-com-aviso-seguem",
+   "arquivo": "divergencias.py",
+   "de": "    conferido, erros = confere_material.confere(projeto)\n    if erros:\n        return None, 0, erros",
+   "para": "    conferido, erros = confere_material.confere(projeto)\n    if False:\n        return None, 0, erros"
+  },
+  {
+   "nome": "divergencias-grava-com-erro",
+   "arquivo": "divergencias.py",
+   "de": "    if erros:\n        return nada_gravado(erros)",
+   "para": "    if False:\n        return nada_gravado(erros)"
+  },
+  {
+   "nome": "divergencias-conferir-sempre-em-dia",
+   "arquivo": "divergencias.py",
+   "de": "        if not saida.is_file() or saida.read_text(encoding=\"utf-8\") != texto:",
+   "para": "        if not saida.is_file():"
+  },
+  {
+   "nome": "divergencias-conferir-grava",
+   "arquivo": "divergencias.py",
+   "de": "    if a.conferir:\n        if not saida.is_file()",
+   "para": "    saida.write_text(texto, encoding=\"utf-8\")\n    if a.conferir:\n        if not saida.is_file()"
   }
  ]
 }

@@ -44,9 +44,15 @@ inteiro, cada um com o que ele é.
     de documento do material, para aprovar a forma do tipo, e o que olhar em cada um.
 15. [Testes de suscetibilidade antimicrobiana](docs/material-gerado/propostas/teoria-tema-testes-de-sensibilidade.md)
     — o primeiro tema da teoria fundamental, da aula 9-10.
-16. [Trechos escritos por IA](docs/material-gerado/trechos-de-ia.md) — os apostos que uma
+16. [Provas de identificação](docs/material-gerado/propostas/familia-provas.md) — a
+    primeira ficha de família, da aula 9-10.
+17. [Trechos escritos por IA](docs/material-gerado/trechos-de-ia.md) — os apostos que uma
     IA escreveu nos textos, sem fonte, cada um com o documento e o link para a linha, para
     quem revisar o material procurar a fonte; a lista se refaz das marcas nos textos.
+18. [Divergências entre as fontes](docs/material-gerado/divergencias.md) — os fatos que uma
+    aula e o livro dizem de formas diferentes, com a forma que o material ensina, a outra,
+    o lugar exato de cada uma e as partes do material que tratam de cada fato; o documento
+    se refaz do arquivo das divergências e dos códigos nos textos e nos cartões.
 
 ---
 
