@@ -287,94 +287,73 @@ ter, o que a aula cobre e onde falta.
 
 ## 4. O que entra no material
 
-O recorte deste projeto é o que as aulas trazem, completado pelo livro-texto. As aulas
-trazem os pontos da matéria, não o conteúdo de cada um: entra todo trecho delas, até onde
-o [limite das aulas](#o-limite-das-aulas) diz, e, de cada ponto, tudo o que o livro diz
-sobre ele, lido no capítulo inteiro, nunca por busca de palavras; o que o livro diz de um
-item que tem unidade própria fica no documento dele ([O item citado pelo
-nome](#o-item-citado-pelo-nome)). O que o livro diz sobre um assunto que nenhum slide traz
-fica fora, menos os fatores de risco de cada bactéria
+O recorte do material, o que entra nele, é o que as aulas trazem, completado pelo
+livro-texto. Os slides dizem quais são os assuntos, e o livro dá o conteúdo de cada um.
+Das aulas, entra todo trecho. Do livro, entra tudo o que se relaciona com os assuntos das
+aulas, mesmo o que nenhum slide mostra, como os fatores de risco de cada bactéria
 ([análise da matéria, O que o estudante precisa saber
-fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer)). Vírus e fungos
-não são assunto do material. Um trecho das aulas que fala deles entra como a aula o usa:
-como comparação, quando ela o compara com uma bactéria; pelo que ele diz, quando ela fala
-dele por outro motivo, sem comparação que a aula não faz. O quão fundo cada ponto vai é
-o que o livro diz sobre ele, e a forma de estudo vem da análise da matéria. O aviso sobre
-o recorte, para quem usa o material, está no
-[README](README.md#aviso-importante--leia-antes-de-usar).
+fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer)). Cada assunto vai
+tão fundo quanto o livro vai nele. O aviso sobre o recorte, para quem usa o material, está
+no [README](README.md#aviso-importante--leia-antes-de-usar).
 
-Todo fato das aulas até a última aparece em algum documento de estudo, e também o de uma
-aula depois dela que o limite deixa entrar; só fica de fora o que é puro enfeite, como
-piadas, mascotes e créditos de imagem. Nenhum desses fatos fica sem documento, e dois
-documentos nunca mostram o mesmo fato de formas contraditórias — nenhuma das duas coisas
-se justifica pelo recorte. Partes diferentes têm densidades diferentes: o número de
-cartões de cada item, conceito ou caso segue os fatos que ele tem, com a mesma regra para
-todos.
+Vírus e fungos não são assunto do material. Mesmo assim, um trecho das aulas que fala
+deles entra, do jeito que a aula o usa. Quando a aula compara o vírus ou o fungo com uma
+bactéria, o trecho entra como comparação. Quando a aula fala dele por outro motivo, o
+trecho entra pelo que diz, e o material não faz uma comparação que a aula não faz.
 
-Os nomes e os termos seguem a grafia e a forma com que o livro-texto os imprime. Quando
-uma aula e o livro discordam, vale o livro, e o documento anota a diferença como a outra
-forma do nome, onde ele aparece pela primeira vez, sem falar da fonte, que fica só na
-citação. Quando o livro imprime mais de uma forma, vale a do lugar dele que trata do
-ponto; um nome que o livro não traz segue a aula; e, nos dois casos, as outras formas se
-anotam do mesmo modo. O título de cada texto segue essas formas, mesmo quando o nome da
-unidade no arquivo de formato é outro.
+Todo fato das aulas aparece em algum documento de estudo, e só fica de fora o que é puro
+enfeite, como piadas, mascotes e créditos de imagem. Dois documentos nunca mostram o mesmo
+fato de formas contraditórias. Nada disso muda por causa do recorte.
 
-Um fato que uma aula e o livro dizem de formas diferentes é uma <dfn>divergência</dfn>, e
-nela também vale o livro: o material ensina o que o livro diz. Cada divergência fica no
-arquivo das divergências, `dados/divergencias.json`, com os códigos dos trechos das aulas
-que trazem o fato, a forma que o material ensina, as outras e a citação de cada uma, com o
-lugar exato; quem escreve um texto e acha uma divergência que o arquivo não tem a põe nele.
-A lista de trabalho de cada texto mostra, junto de cada trecho, as divergências dele, e o
-[documento das divergências](docs/material-gerado/divergencias.md) mostra cada uma com as
-partes do material que tratam do fato. Como o arquivo se escreve e o que o
-[`divergencias.py`](scripts/README.md#divergenciaspy--monta-o-documento-das-divergências)
-confere estão no README dos scripts.
+Partes diferentes do material têm tamanhos diferentes: o número de cartões de cada item,
+conceito ou caso segue quantos fatos ele tem, com a mesma regra para todos.
 
-### O limite das aulas
+Os nomes e os termos seguem a grafia e a forma do livro-texto. Quando uma aula escreve um
+nome de outro jeito, o documento anota essa forma como outra forma do nome, na primeira vez
+que ele aparece, sem dizer de onde ela vem: a fonte fica na citação. Quando o livro traz
+mais de uma forma, vale a do lugar dele que trata do assunto, e um nome que o livro não
+traz segue a aula; as outras formas se anotam do mesmo jeito. O título de cada texto segue
+esses nomes, mesmo quando o [arquivo de formato](#onde-o-formato-fica-gravado) usa outro.
 
-O material vai até uma aula, a última que o arquivo de formato diz, e ganham material as
-unidades de que essas aulas tratam. Uma aula <dfn>trata</dfn> de uma unidade quando os
-trechos dela ali ocupam pelo menos o número de partes do molde que o arquivo de formato
-pede — como o habitat e as doenças, na ficha de uma bactéria —, ou quando o arquivo de
-formato diz que ela trata; com menos, a aula só a <dfn>menciona</dfn>. Numa família de
-itens, a aula trata da família quando trata de algum item dela.
+Quando uma aula e o livro dizem um mesmo fato de formas diferentes, há uma
+<dfn>divergência</dfn>, e vale o livro: o material ensina o que o livro diz. Cada
+divergência fica registrada no arquivo das divergências, com a forma que o material ensina,
+as outras e a citação de cada uma, e quem escreve um texto e acha uma divergência nova a
+acrescenta ali. Como o arquivo funciona está no [README dos
+scripts](scripts/README.md#divergenciaspy--monta-o-documento-das-divergências).
 
-O que uma aula depois da última diz de algo de que essas aulas tratam — uma unidade ou um
-item — entra no material dele. A unidade que essas aulas só mencionam não ganha material
-próprio: o que elas dizem dela fica onde elas o dizem — a bactéria que uma aula só põe na
-lista de quem vive num lugar do corpo fica nessa lista, sem ficha —, e o que só uma aula
-depois da última diz dela fica fora. O trecho dessas aulas que fica sem lugar, porque
-todos os lugares dele são de unidades só mencionadas ou porque a análise da aula não lhe
-dá documento, ganha outro no material da própria aula, onde ela fala do fato. As perguntas
-de prova de cada aula até a última recebem os trechos dela e o que as aulas depois da
-última dizem das unidades de que ela trata. Como o `confere_moldes.py` aplica o limite
-está no [README dos
+<a id="o-limite-das-aulas"></a>
+
+### O que ganha texto próprio
+
+Uma [unidade](#onde-o-formato-fica-gravado), como uma bactéria ou um tema da teoria, ganha
+texto próprio quando uma aula <dfn>trata</dfn> dela, isto é, diz dela o bastante para
+preencher pelo menos o número de partes do [molde](docs/analise-da-materia.md#os-moldes)
+que o arquivo de formato pede. Quando a aula só a <dfn>menciona</dfn>, o que ela diz fica
+onde ela disse, como um nome numa lista.
+
+O texto de cada unidade traz tudo o que as aulas dizem dela. Quando outro documento cita
+uma unidade que tem texto próprio, o que o livro diz dela fica nesse texto ([O item citado
+pelo nome](#o-item-citado-pelo-nome)).
+
+Como o `confere_moldes.py` aplica essas regras está no [README dos
 scripts](scripts/README.md#confere_moldespy--confere-os-moldes-contra-as-análises-das-aulas).
 
 ### O material de fora
 
-Onde nem as aulas nem o livro-texto chegam, o ponto se explica com um aposto de IA, marcado
-para ser verificado ([seção 5](#5-os-documentos-de-estudo)), até alguém achar a fonte dele.
-A fonte achada é <dfn>material de fora</dfn> — de preferência um documento oficial ou de
-referência da área. Ele completa, nunca substitui, e vale a mesma
-regra: o fato tem de estar escrito nele, nunca deduzido. A cópia de cada material de fora
-fica na pasta protegida, em `docs/material-base/fontes-externas/`, com um nome que começa
-pela entrada e pelo ano da referência dele, para se achar o arquivo a partir da citação.
+Quando nem as aulas nem o livro explicam um ponto, ele se explica com um aposto de IA,
+marcado para ser verificado ([seção 5](#5-os-documentos-de-estudo)), até alguém achar uma
+fonte. A fonte achada é o <dfn>material de fora</dfn>, de preferência um documento oficial
+ou de referência da área. Ele completa as aulas e o livro, nunca os substitui, e o fato tem
+de estar escrito nele, nunca deduzido. A cópia dele fica na pasta protegida, com um nome
+que começa pela entrada e pelo ano da referência, para se achar o arquivo pela citação.
 
-Do material de fora sai uma base literal, a <dfn>base de trechos</dfn>, unidade por
-unidade, e ninguém copia trecho à mão. O arquivo de dados de cada unidade
-(`dados/bases/[item].json`, com o id da unidade no lugar de `[item]`) diz quais páginas de
-quais fontes foram lidas e marca cada subtópico da grade da unidade — os eixos dela ou,
-quando ela não tem os seus, os do documento — como coberto pela aula, pelo material de
-fora ou como lacuna; o `base_externa.py` recolhe todo o texto dessas páginas, em frases; a
-IA classifica cada frase — usada (com o subtópico e se a fonte afirma o fato ou o trata
-como possibilidade), de outra unidade, repetida, fora do recorte ou não é conteúdo —; e o
-script grava a base da unidade, só com as frases usadas, letra por letra, com a citação e
-a página. A base e a conferência dela nunca são publicadas; o arquivo de dados, que só tem
-códigos e decisões, pode ser. É contra essa base que se confere cada fato tirado do
-material de fora, e a frase que a fonte trata como possibilidade entra no material com a
-ressalva escrita, nunca como certeza. O que o script confere antes de gravar a base está
-no [README dos scripts](scripts/README.md#base_externapy--monta-a-base-do-material-de-fora).
+Do material de fora sai, para cada unidade, a <dfn>base de trechos</dfn>: as frases dele
+que o material usa, copiadas letra por letra por um script, com a citação e a página.
+Ninguém copia trecho à mão. Cada fato tirado do material de fora se confere contra essa
+base, e o que a fonte trata como possibilidade entra com a ressalva escrita, nunca como
+certeza. Como a base se monta está no [README dos
+scripts](scripts/README.md#base_externapy--monta-a-base-do-material-de-fora).
 
 ---
 
@@ -593,8 +572,7 @@ confere:
    nome em algum documento desse item;
 4. que cada documento de estudo é de um dos tipos da [seção 5](#5-os-documentos-de-estudo);
 5. que os documentos do projeto dizem o mesmo que os documentos de estudo;
-6. que todo fato das aulas até a última, e o que o [limite](#o-limite-das-aulas) deixa
-   entrar das aulas depois dela, aparece em algum documento de estudo;
+6. que todo fato das aulas aparece em algum documento de estudo;
 7. cada planilha, linha por linha, contra o documento de origem — nenhum fato inventado,
    nenhum fato que devia ter cartão e ficou sem —, e que cada cartão tem prova, sem erro e
    com o tique da pessoa na conferência dos cartões;
@@ -604,8 +582,8 @@ confere:
    de cada material de fora está em `docs/material-base/fontes-externas/`;
 9. a base literal: cada parte a ticar da conferência das transcrições — cada figura e
    cada página lida pelo OCR ou corrigida — tem o tique da pessoa, e nenhuma página tem
-   erro do script; o arquivo de base de cada item não deixa frase sem classe nem subtópico
-   sem marca, e cada página da conferência dos trechos tem o tique da pessoa;
+   erro do script; o arquivo de dados da base de cada unidade não deixa frase sem classe
+   nem subtópico sem marca, e cada página da conferência dos trechos tem o tique da pessoa;
 10. a análise da matéria: cada aula está nela, trecho por trecho; cada busca da pesquisa
     está registrada, e cada ponto dela tem a chamada da fonte e o trecho literal que o
     sustenta, nas evidências da pesquisa; e cada forma de estudo escolhida diz por quê.

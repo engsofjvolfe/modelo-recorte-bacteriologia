@@ -3644,9 +3644,9 @@ ela basta, de uma escolha do projeto, dita como tal.
   Undergraduate Curriculum Guidelines Committee, 2018, supl., p. 2-3), e a prova do Enade
   cobra por situações-problema e estudos de caso (Brasil, 2023a, art. 2º, p. 1; Brasil,
   2023b, art. 2º, p. 1). Entender e aplicar pedem o conteúdo e o porquê, não a frase.
-- Tudo o que o livro-texto diz sobre um trecho das aulas entra no material; o que ele diz
-  sobre um assunto que nenhum slide traz fica fora, menos os fatores de risco de cada
-  bactéria (abaixo). De onde veio: os slides dizem quais são os assuntos, não o conteúdo
+- Tudo o que o livro-texto diz que se relaciona com os trechos das aulas entra no
+  material, mesmo o que nenhum slide mostra, como os fatores de risco de cada bactéria
+  (abaixo). De onde veio: os slides dizem quais são os assuntos, não o conteúdo
   de cada um, e o livro-texto completa cada um deles ([metodologia do projeto, seção
   4](../metodologia-de-conteudo.md#4-o-que-entra-no-material)); as pesquisas decidem a
   forma, não acrescentam assunto.
@@ -3733,8 +3733,7 @@ que acompanham.
   - **Como os textos ensinam:** numa ficha, uma tabela com as mesmas linhas, os eixos,
     para todos os itens. A ficha da bactéria começa por 3 a 5 palavras-chave que a
     distinguem, tiradas dos slides. As linhas são as do grupo 1 (parte 4) mais os fatores
-    de risco; uma linha que os slides não respondem fica fora da ficha, menos a dos
-    fatores de risco, que vem do livro-texto.
+    de risco, e o que os slides não respondem numa linha vem do livro-texto.
   - **Que cartões gera:** um para cada fato de cada linha, como "Onde vive o
     Staphylococcus epidermidis?".
   - **De onde veio:** as pesquisas da ciência da aprendizagem não tratam deste tipo. O

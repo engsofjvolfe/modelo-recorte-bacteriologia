@@ -555,16 +555,22 @@ Nas duas tabelas, a primeira linha é o cabeçalho, com os nomes das colunas; a 
 branco não conta, e a linha sem as colunas vazias do fim vale como se as tivesse, porque o
 editor que tira os espaços do fim da linha tira também essas tabulações.
 
-**O limite das aulas.** O script aplica o
-[limite](../metodologia-de-conteudo.md#o-limite-das-aulas) com a `ultima_aula` e o
-`partes_para_tratar` do formato. Em cada unidade sem itens e em cada item, ele conta as
-partes distintas do molde que os trechos de cada aula ocupam ali, só nos lugares diretos —
-os do trecho que nomeia a unidade ou o item, não os que vêm de um conjunto —, e
-`tratada_em`, quando existe, diz as aulas que tratam, no lugar da conta. O
-lugar novo do trecho de uma aula até a última que fica sem lugar — porque o limite tirou
-todos os dele, ou porque as fontes não lhe dão documento — é uma linha da tabela da
-leitura num documento que as fontes não dão a ele, numa unidade com material, e não entra
-na conta.
+**O limite das aulas.** O material é feito das aulas até a `ultima_aula` do formato, e só
+essas aulas decidem o que ganha material: uma unidade ou um item, quando uma delas
+[trata](../metodologia-de-conteudo.md#o-limite-das-aulas) dele; uma família de itens,
+quando uma delas trata de algum item da família. Em cada unidade sem itens e em cada item,
+o script conta as partes distintas do molde que os trechos de cada aula ocupam ali, só nos
+lugares diretos — os do trecho que nomeia a unidade ou o item, não os que vêm de um
+conjunto —, e a aula trata quando ocupa pelo menos `partes_para_tratar` partes;
+`tratada_em`, quando existe, diz as aulas que tratam, no lugar da conta. O que uma aula
+depois da última diz de uma unidade ou de um item que tem material entra nele, para que o
+texto, escrito inteiro de uma vez, não precise ser reaberto quando o material crescer; o
+que ela diz de uma unidade só mencionada fica fora. As perguntas de prova de cada aula até
+a última recebem os trechos dela e o que as aulas depois da última dizem das unidades de
+que ela trata. O lugar novo do trecho de uma aula até a última que fica sem lugar — porque
+o limite tirou todos os dele, ou porque as fontes não lhe dão documento — é uma linha da
+tabela da leitura num documento que as fontes não dão a ele, numa unidade com material, e
+não entra na conta.
 
 **Como rodar.**
 
