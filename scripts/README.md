@@ -1158,6 +1158,78 @@ como a conferência dos moldes com aviso. Com `--conferir`, `FALTA` quando o doc
 gravado não é o que as divergências e o material dão. Sem a coluna dos trechos no
 `projeto.json`, os cartões não entram.
 
+## O dicionário das dúvidas
+
+**Para que serve.** Quem analisa uma aula ou escreve um texto do material às vezes esbarra
+num ponto que as fontes deixam em aberto: um rótulo que o slide não diz a que se liga, um
+nome escrito de dois jeitos, um fato que só a imagem mostra. Isso é uma dúvida. O
+[dicionário das dúvidas](../docs/dicionario-das-duvidas.md) guarda todas: as que esperam
+resposta e as já respondidas, cada uma com as respostas que teve. Antes de perguntar, quem
+tem uma dúvida olha ali. Se ela já foi respondida, segue a resposta; se ainda espera, não a
+escreve de novo. Assim ninguém revê o que já foi visto, e a mesma resposta vale em todo
+texto.
+
+**Como uma dúvida se acha.** Num dicionário comum, acha-se a palavra e lê-se o que ela quer
+dizer. Neste, acha-se o código de um trecho das aulas e leem-se as dúvidas sobre ele. Cada
+trecho tem um código, que a [lista de
+trabalho](#lista_de_trabalhopy--o-que-escrever-e-o-que-ler-em-cada-unidade) mostra ao lado
+dele, como `3/12/1/a1b2`: a aula (`3`), o slide (`12`), a posição do trecho no slide (`1`)
+e uma marca tirada do texto do trecho (`a1b2`), que muda quando o texto muda ([como o
+código se forma](#confere_moldespy--confere-os-moldes-contra-as-análises-das-aulas)). A
+dúvida guarda o código de cada coisa que ela toca, só até onde precisa:
+
+| A dúvida toca | O código que ela guarda | Exemplo |
+| --- | --- | --- |
+| um trecho | o código inteiro do trecho | `3/12/1/a1b2` |
+| um slide | a aula e o slide | `3/12` |
+| uma aula | só a aula | `3` |
+
+Uma dúvida vale para um trecho quando um dos códigos dela é o começo do código do trecho,
+comparando pedaço por pedaço, entre as barras. O código `3/12` vale para os trechos
+`3/12/1/a1b2` e `3/12/2/c3d4`, que são do slide 12, e não para o trecho `3/120/1/e5f6`,
+que é do slide 120. O código `3` vale para todos os trechos da aula 3.
+
+No dicionário, os códigos de cada dúvida ficam no título dela, cada um entre crases, como
+`` `3/12` ``: o código escrito entre crases acha só as dúvidas que o guardam, e não as de
+`` `3/120` `` nem um código escrito no texto de uma dúvida.
+
+**Quando se escreve.** A dúvida entra no dicionário no momento em que aparece, escrita por
+quem a teve, pessoa ou agente, depois de procurar os códigos dela ali e não a achar. A
+resposta entra na mesma dúvida, no dia em que vem, escrita por quem a recebeu. Uma
+resposta que fecha só uma parte da dúvida entra também, e a dúvida continua aberta. A
+dúvida nunca se reescreve, e uma resposta nunca se apaga.
+
+**Como escrever.** Ninguém escolhe como escrever: cada parte vem de um lugar só, para que
+duas pessoas que escrevem a mesma dúvida escrevam o mesmo bloco, letra por letra, como um
+programa escreveria. A dúvida entra no fim do dicionário, num bloco com quatro partes,
+nesta ordem, cada uma separada da seguinte por uma linha em branco, e o bloco separado do
+anterior também por uma:
+
+| Parte | O que guarda | De onde vem |
+| --- | --- | --- |
+| o título | os códigos do que a dúvida toca | `## ` e os códigos, cada um entre crases e separados por um espaço: o código inteiro de cada trecho de que ela fala, quando quem escreve está com ele, como na lista de trabalho; senão, a aula e o slide de cada slide que ela nomeia, da aula dela ou de outra; e só a aula, quando ela fala de algo da aula sem dizer o slide. Sai o código que outro da lista já cobre, e os outros ficam em ordem de aula, de slide e de posição, do menor número para o maior |
+| a dúvida | a dúvida, numa linha só | as palavras de quem a teve, copiadas letra por letra de onde ela foi escrita primeiro, sem o número do item e sem nota que aponte para um documento |
+| o estado | se a dúvida ainda espera resposta | `Aberta.` quando ela entra; `Respondida.` quando uma resposta a fecha inteira |
+| as respostas | as respostas, na ordem em que vieram, uma por linha | nenhuma quando a dúvida entra; cada resposta entra no fim, numa linha com `- `, o dia, como `2026-01-15`, `: ` e as palavras de quem respondeu, copiadas letra por letra |
+
+Um exemplo inventado, com uma dúvida respondida e uma aberta:
+
+```markdown
+## `3/12`
+
+slide 12: a tabela não diz a cor de cada teste.
+
+Respondida.
+
+- 2026-01-15: a cor de cada teste é a do livro
+
+## `3` `5/2`
+
+o nome do meio aparece de um jeito na aula 3 e de outro no slide 2 da aula 5.
+
+Aberta.
+```
+
 ## `comum.py`
 
 Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json`, as

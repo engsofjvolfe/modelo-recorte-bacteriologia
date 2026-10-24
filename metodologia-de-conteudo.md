@@ -322,6 +322,16 @@ as outras e a citação de cada uma, e quem escreve um texto e acha uma divergê
 acrescenta ali. Como o arquivo funciona está no [README dos
 scripts](scripts/README.md#divergenciaspy--monta-o-documento-das-divergências).
 
+Toda dúvida que as fontes deixam, aberta ou já respondida, fica no
+<dfn>dicionário das dúvidas</dfn>, presa aos trechos que ela toca, com as respostas que
+teve, cada uma com as palavras de quem respondeu e o dia. Quem tem uma dúvida, ao analisar
+uma aula ou ao escrever um texto, procura antes os trechos dela no dicionário: segue a
+resposta que já existe, não escreve de novo a que já está lá e escreve ali a que não está,
+no momento em que ela aparece. A resposta vale para todo texto que usa os trechos da
+dúvida. O dicionário é o documento
+[`docs/dicionario-das-duvidas.md`](docs/dicionario-das-duvidas.md), e como ele se escreve e
+se consulta está no [README dos scripts](scripts/README.md#o-dicionário-das-dúvidas).
+
 <a id="o-limite-das-aulas"></a>
 
 ### O que ganha texto próprio
