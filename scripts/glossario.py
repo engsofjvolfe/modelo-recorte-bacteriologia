@@ -36,6 +36,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from comum import (acha_projeto, alvo_markdown, ancora, documentos_do_projeto, link,  # noqa: E402
                    linhas_fora_de_codigo, procura_projeto, rodape_da_licenca, sem_codigo_na_linha)
+from grava_ou_confere import grava_ou_confere, opcao_conferir  # noqa: E402
 
 TITULO_GLOSSARIO = "# Glossário"
 ABERTURA = ("As palavras que os documentos do projeto definem, em ordem alfabética, cada uma com o link para "
@@ -117,8 +118,7 @@ def glossario(projeto, docs):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description="Monta o glossário a partir das definições marcadas nos documentos.")
-    p.add_argument("--conferir", action="store_true",
-                   help="não grava: confere se o glossário gravado é o que o script gravaria agora")
+    opcao_conferir(p, "não grava: confere se o glossário gravado é o que o script gravaria agora")
     p.add_argument("--projeto", type=Path, help="projeto.json (padrao: o primeiro achado subindo a partir daqui)")
     a = p.parse_args(argv)
     if a.projeto is None and procura_projeto() is None:
@@ -138,16 +138,10 @@ def main(argv=None):
         print("O glossário não foi gravado.")
         return 1
     saida = projeto.caminho("glossario")
-    if a.conferir:
-        if not saida.is_file() or saida.read_text(encoding="utf-8") != texto:
-            print(f"FALTA: o glossário {saida} não é o que os documentos definem: rode python scripts/glossario.py")
-            return 1
-        print(f"O glossário está em dia: {n} termo(s).")
-        return 0
-    saida.parent.mkdir(parents=True, exist_ok=True)
-    saida.write_text(texto, encoding="utf-8")
-    print(f"{n} termo(s) gravado(s) em {saida}.")
-    return 0
+    return grava_ou_confere(
+        saida, texto, a.conferir,
+        falta=f"FALTA: o glossário {saida} não é o que os documentos definem: rode python scripts/glossario.py",
+        em_dia=f"O glossário está em dia: {n} termo(s).", gravado=f"{n} termo(s) gravado(s) em {saida}.")
 
 
 if __name__ == "__main__":

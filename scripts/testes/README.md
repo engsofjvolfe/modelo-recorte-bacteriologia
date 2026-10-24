@@ -31,7 +31,10 @@ arquivo da pasta `scripts/`, o texto que se troca e o texto estragado, no molde
 para cada estrago, troca o texto na cópia e roda o teste contra ela. Ele mostra uma linha
 para cada estrago e, no fim, quantos foram pegos, e sai com código 0 só quando todos
 foram. O teste roda inteiro uma vez para cada estrago, por isso a lista leva bem mais
-tempo que o teste.
+tempo que o teste. Para conferir uma mudança só contra os estragos que ela toca, o
+`--so <campo>=<valor>` roda só os estragos com esse valor nesse campo, como
+`--so arquivo=divergencias.py`, para os de um script, ou `--so nome=` com o nome de um
+estrago; pode repetir, e rodam os que batem com qualquer um.
 
 ## `cartoes/` — o baralho e a conferência dos cartões
 
@@ -83,10 +86,12 @@ Precisa do Poppler, do Tesseract com o idioma `eng` e do `pdf_inventado.py`, da 
 
 ## `copias-estragadas/` — o próprio `estraga.py`
 
-O teste do `estraga.py`, com uma peça inventada, uma função que soma, testes inventados
-dela e listas de estragos inventadas: o estrago que quebra o que o teste confere é pego, o
-que não quebra não é, e o que não se aplica é erro; a pasta original não muda; a lista com
-um campo que o molde não conhece é erro, sem rodar nada.
+O teste do `estraga.py`, com uma peça inventada, com uma função que soma e um texto,
+testes inventados dela e listas de estragos inventadas: o estrago que quebra o que o teste
+confere é pego, o que não quebra não é, e o que não se aplica é erro; a pasta original não
+muda; o `--so` roda só os estragos que batem, na ordem da lista; cada pasta de `--irma`
+fica ao lado da cópia; a lista com um campo que o molde não conhece, o `--so` que não bate
+com nenhum estrago e duas pastas de `--irma` com o mesmo nome são erro, sem rodar nada.
 
     python scripts/testes/copias-estragadas/teste_estraga.py scripts [pasta de trabalho nova]
 
@@ -94,7 +99,7 @@ E os estragos do próprio `estraga.py`:
 
     python scripts/estraga.py scripts scripts/testes/copias-estragadas/teste_estraga.py scripts/testes/copias-estragadas/estragos.json [pasta de trabalho nova]
 
-## `documentos/` — o índice, o glossário, a lista dos trechos de IA e os links que os scripts escrevem
+## `documentos/` — o índice, o glossário, a lista dos trechos de IA, os links que os scripts escrevem e os dos documentos
 
 Os testes do [`confere_indice.py`](../README.md#confere_indicepy--confere-que-cada-documento-está-no-índice),
 do [`glossario.py`](../README.md#glossariopy--monta-o-glossário) e do
@@ -129,6 +134,20 @@ Os três primeiros recebem a pasta principal do projeto, a que tem `scripts/` e
     python scripts/testes/documentos/teste_glossario.py . [pasta de trabalho nova]
     python scripts/testes/documentos/teste_trechos_de_ia.py . [pasta de trabalho nova]
     python scripts/testes/documentos/teste_alvos_dos_links.py scripts
+
+O `teste_confere_links.py` roda o
+[`confere_links.py`](../README.md#confere_linkspy--confere-os-links-internos-dos-documentos)
+em repositórios inventados, com git: o link para um arquivo que falta, para um título que
+não existe, para uma linha que o arquivo não tem, para um marcador (o `id` ou o `name` de
+uma tag HTML) que falta ou que está em código ou em comentário, com o texto partido em duas
+linhas, com espaço, dentro de código e para fora do projeto; o título repetido, com código
+e com link; o documento novo, fora do git, e o que o `.gitignore` deixa de fora; e a pasta
+sem git. Dos links para uma linha e dos links para um marcador, confere quais dão erro.
+Recebe a pasta `scripts/`; os estragos dele estão em `estragos-confere-links.json`, nesta
+pasta:
+
+    python scripts/testes/documentos/teste_confere_links.py scripts [pasta de trabalho nova]
+    python scripts/estraga.py scripts scripts/testes/documentos/teste_confere_links.py scripts/testes/documentos/estragos-confere-links.json [pasta de trabalho nova]
 
 ## `extrator/` — as transcrições de PDF, HTML, XML e JSON
 
@@ -175,6 +194,18 @@ Lê o modelo em branco do formato, o arquivo com o nome do formato na pasta do
 Com `--semente` e um número, outro sorteio. Os estragos:
 
     python scripts/estraga.py scripts scripts/testes/formato/teste_formato.py scripts/testes/formato/estragos.json [pasta de trabalho nova] --antes modelo-dados/projeto.json
+
+## `grava-ou-confere/` — gravar ou conferir um documento gerado
+
+O teste do `grava_ou_confere.py`, com arquivos, textos e mensagens inventados, os textos
+sempre com letras de fora do ASCII: sem conferir, o texto vai para o arquivo, em UTF-8, com
+as pastas que faltam, por cima do que houver, com a mensagem de gravado e o código 0;
+conferindo, nada é gravado nem criado, e sai a mensagem de em dia, com 0, ou a de falta,
+com 1, quando o arquivo é outro ou não existe; o arquivo vem como caminho ou como texto; a
+opção `--conferir` liga a conferência, com a ajuda dada; e duas rodadas dão o mesmo.
+
+    python scripts/testes/grava-ou-confere/teste_grava_ou_confere.py scripts [pasta de trabalho nova]
+    python scripts/estraga.py scripts scripts/testes/grava-ou-confere/teste_grava_ou_confere.py scripts/testes/grava-ou-confere/estragos.json [pasta de trabalho nova]
 
 ## `itens-numerados/` — os itens numerados de uma transcrição
 

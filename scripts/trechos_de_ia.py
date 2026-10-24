@@ -40,6 +40,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from comum import (EXTENSAO_DOCUMENTO, acha_projeto, alvo_markdown, link, linhas_fora_de_codigo,  # noqa: E402
                    no_projeto, rodape_da_licenca, sem_codigo_na_linha)
 from glossario import TITULO, texto_puro  # noqa: E402
+from grava_ou_confere import grava_ou_confere, opcao_conferir  # noqa: E402
 from validar_dados import le_texto  # noqa: E402
 
 CHAVE_IA = "ia"  # a chave do projeto.json com as marcas de IA ("abre", "fecha", "fonte"), ou null
@@ -102,8 +103,7 @@ def lista(projeto, marcas):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description="Monta a lista dos trechos que uma IA escreveu no material.")
-    p.add_argument("--conferir", action="store_true",
-                   help="não grava: confere se a lista gravada é a que o script gravaria agora")
+    opcao_conferir(p, "não grava: confere se a lista gravada é a que o script gravaria agora")
     p.add_argument("--projeto", type=Path, help="projeto.json (padrao: o primeiro achado subindo a partir daqui)")
     a = p.parse_args(argv)
     projeto = acha_projeto(a.projeto)
@@ -117,16 +117,11 @@ def main(argv=None):
         print("A lista dos trechos de IA não foi gravada.")
         return 1
     texto, saida = lista(projeto, marcas), projeto.caminho(CAMINHO_LISTA)
-    if a.conferir:
-        if not saida.is_file() or saida.read_text(encoding="utf-8") != texto:
-            print(f"FALTA: a lista {saida} não é a que as marcas de IA dão: rode python scripts/trechos_de_ia.py")
-            return 1
-        print(f"A lista dos trechos de IA está em dia: {len(marcas)} trecho(s).")
-        return 0
-    saida.parent.mkdir(parents=True, exist_ok=True)
-    saida.write_text(texto, encoding="utf-8")
-    print(f"{len(marcas)} trecho(s) de IA gravado(s) em {saida}.")
-    return 0
+    return grava_ou_confere(
+        saida, texto, a.conferir,
+        falta=f"FALTA: a lista {saida} não é a que as marcas de IA dão: rode python scripts/trechos_de_ia.py",
+        em_dia=f"A lista dos trechos de IA está em dia: {len(marcas)} trecho(s).",
+        gravado=f"{len(marcas)} trecho(s) de IA gravado(s) em {saida}.")
 
 
 if __name__ == "__main__":

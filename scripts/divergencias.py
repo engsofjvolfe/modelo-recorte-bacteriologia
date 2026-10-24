@@ -55,6 +55,7 @@ from comum import (COLUNA_PERGUNTA, acha_projeto, alvo_markdown, le_planilha, li
                    planilhas, rodape_da_licenca)
 from confere_cartoes import citacao, le_chamadas, lugares_das_fontes, simples  # noqa: E402
 from confere_moldes import nada_gravado  # noqa: E402
+from grava_ou_confere import grava_ou_confere, opcao_conferir  # noqa: E402
 from trechos_de_ia import ALVO_DA_LINHA, titulo_do_documento  # noqa: E402
 from validar_dados import esquema, le_dados  # noqa: E402
 
@@ -240,8 +241,7 @@ def monta(projeto):
 
 def main(argv=None):
     p = argparse.ArgumentParser(description="Monta o documento das divergências entre as fontes do material.")
-    p.add_argument("--conferir", action="store_true",
-                   help="não grava: confere se o documento gravado é o que o script gravaria agora")
+    opcao_conferir(p, "não grava: confere se o documento gravado é o que o script gravaria agora")
     p.add_argument("--projeto", type=Path, help="projeto.json (padrao: o primeiro achado subindo a partir daqui)")
     a = p.parse_args(argv)
     projeto = acha_projeto(a.projeto)
@@ -249,17 +249,12 @@ def main(argv=None):
     if erros:
         return nada_gravado(erros)
     saida = projeto.caminho(DOCUMENTO)
-    if a.conferir:
-        if not saida.is_file() or saida.read_text(encoding="utf-8") != texto:
-            print(f"FALTA: o documento {no_projeto(saida, projeto)} não é o que as divergências e o material dão: "
-                  "rode python scripts/divergencias.py")
-            return 1
-        print(f"O documento das divergências está em dia: {quantas} divergência(s).")
-        return 0
-    saida.parent.mkdir(parents=True, exist_ok=True)
-    saida.write_text(texto, encoding="utf-8")
-    print(f"{quantas} divergência(s) gravada(s) em {no_projeto(saida, projeto)}.")
-    return 0
+    return grava_ou_confere(
+        saida, texto, a.conferir,
+        falta=f"FALTA: o documento {no_projeto(saida, projeto)} não é o que as divergências e o material dão: "
+              "rode python scripts/divergencias.py",
+        em_dia=f"O documento das divergências está em dia: {quantas} divergência(s).",
+        gravado=f"{quantas} divergência(s) gravada(s) em {no_projeto(saida, projeto)}.")
 
 
 if __name__ == "__main__":

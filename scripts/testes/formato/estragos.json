@@ -1918,14 +1918,14 @@
   {
    "nome": "divergencias-conferir-sempre-em-dia",
    "arquivo": "divergencias.py",
-   "de": "        if not saida.is_file() or saida.read_text(encoding=\"utf-8\") != texto:",
-   "para": "        if not saida.is_file():"
+   "de": "        saida, texto, a.conferir,",
+   "para": "        saida, saida.read_text(encoding=\"utf-8\") if saida.is_file() else texto, a.conferir,"
   },
   {
    "nome": "divergencias-conferir-grava",
    "arquivo": "divergencias.py",
-   "de": "    if a.conferir:\n        if not saida.is_file()",
-   "para": "    saida.write_text(texto, encoding=\"utf-8\")\n    if a.conferir:\n        if not saida.is_file()"
+   "de": "        saida, texto, a.conferir,",
+   "para": "        saida, texto, False,"
   }
  ]
 }

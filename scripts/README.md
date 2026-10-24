@@ -27,7 +27,7 @@ protegida](../metodologia-de-conteudo.md#1-as-fontes-e-a-transcrição),
 | O <dfn>LibreOffice</dfn> ([libreoffice.org](https://www.libreoffice.org/download/)) | faz o PDF de cada aula, de onde sai a imagem de cada slide na conferência das transcrições, e converte as imagens que o Tesseract ou o GraphicsMagick não leem (EMF, WMF, SVG); e no teste das aulas em pptx |
 | O <dfn>Poppler</dfn> ([poppler.freedesktop.org](https://poppler.freedesktop.org/)) | lê PDF: faz a imagem de cada slide, do PDF da aula, lê as fontes em PDF do material de fora, no `base_externa.py` e na conferência das referências, e tira o texto, o negrito e o itálico das fontes em PDF, no `extrator.py`; e nos testes do extrator, da conferência e das aulas em pptx |
 | O <dfn>GraphicsMagick</dfn> ([graphicsmagick.org](http://www.graphicsmagick.org/download.html)) | faz a cópia em PNG de cada imagem que não está em PNG, na conferência das transcrições; e no teste das aulas em pptx |
-| O [git](../.githooks/README.md) | diz o que vai com o projeto, no `protege_fontes.py`, no `confere_indice.py` e no `glossario.py`; e nos testes destes dois |
+| O [git](../.githooks/README.md) | diz o que vai com o projeto, no `protege_fontes.py`, no `confere_indice.py`, no `glossario.py` e no `confere_links.py`; e nos testes destes três |
 
 ## Como rodar
 
@@ -35,9 +35,9 @@ Cada script roda num
 [terminal](../MANUAL.md#atualizando-o-baralho-depois-de-editar-as-planilhas) aberto em
 qualquer pasta do projeto, com o comando que a seção dele mostra: o script sobe de pasta
 em pasta até achar o `projeto.json` e tira todo caminho dali. A exceção são o
-`validar_dados.py`, o `extrator.py` e o `itens.py`, que leem os arquivos pelos caminhos
-digitados, a partir da pasta do terminal; os exemplos deles são para a pasta principal do
-projeto.
+`validar_dados.py`, o `extrator.py`, o `itens.py` e o `confere_links.py`, que leem os
+arquivos pelos caminhos digitados, a partir da pasta do terminal; os exemplos deles são
+para a pasta principal do projeto.
 
 O script sempre diz o que fez. Uma linha que começa com `ERRO`, `FALTA` ou `CONFERIR` pede
 alguma coisa e diz o quê.
@@ -64,6 +64,7 @@ alguma coisa e diz o quê.
 | Sempre que um texto do material ganha ou perde uma marca de IA, ou muda de linhas | `trechos_de_ia.py` |
 | Sempre que o arquivo das divergências muda, e sempre que um texto do material ou uma planilha de pergunta muda | `divergencias.py` |
 | Sempre que um documento entra no projeto, sai dele ou muda de lugar | `confere_indice.py` |
+| Sempre que um link, um título ou o nome de um arquivo muda, e antes de cada commit | `confere_links.py` |
 | Antes de publicar | `protege_fontes.py` |
 | Depois de mudar um script que tem teste | o teste dele e os estragos dele ([Os testes](#os-testes)) |
 
@@ -1020,6 +1021,25 @@ existe, ao próprio índice ou a um arquivo que o `.gitignore` deixa de fora. Se
 script diz isso numa linha `ERRO` e para: sem ele, não há como saber o que vai com o
 projeto.
 
+## `confere_links.py` — confere os links internos dos documentos
+
+**O que faz.** Confere cada link de um documento do projeto para outro arquivo do projeto,
+nos `.md` que vão com o projeto: os do git e os novos que o `.gitignore` não deixa de fora.
+O arquivo do link tem de existir. Quando a parte do link depois de `#` aponta uma seção,
+ela tem de ser a de um título do documento de destino, do jeito que o GitHub a calcula, ou
+a de um marcador posto no texto, como `<a id="nome"></a>` (o `id` ou o `name` de uma tag
+HTML, fora de código e de comentário); quando aponta uma linha (`#L12`, que o GitHub e o
+VS Code abrem na linha), o arquivo tem de ter essa linha. Um link dentro de um trecho de
+código não conta, e um link para fora do projeto, como `https:`, fica de fora.
+
+**Como rodar.** Da pasta principal do projeto, com o caminho dela:
+
+    python scripts/confere_links.py .
+
+**O que mostra.** Quantos links há e quantos apontam uma seção, um marcador ou uma linha,
+e uma linha `ERRO` para cada link quebrado, com o documento, a linha, o link e o motivo.
+Sem o git, o script diz isso numa linha `ERRO` e para.
+
 ## `glossario.py` — monta o glossário
 
 **O que faz.** Um documento que define um termo marca o termo, no lugar da definição, com
@@ -1155,7 +1175,9 @@ delas, dizem onde cada trecho cai pelas regras do formato, leem as tabelas em te
 cada trecho o que o destino dele nomeia, leem a tabela da leitura, aplicam o limite das
 aulas e fazem as tabelas do relatório. O `marcas.py` é a parte do `confere_material.py` que
 lê os códigos escondidos de um texto e confere cada um contra o lugar em que ele deveria
-estar.
+estar. O `grava_ou_confere.py` dá ao `glossario.py`, ao `trechos_de_ia.py` e ao
+`divergencias.py` a opção `--conferir` e o fim de cada um: grava o documento que o script
+montou ou, com `--conferir`, diz se o gravado está em dia, sem gravar nada.
 
 ---
 
