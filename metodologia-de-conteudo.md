@@ -440,6 +440,13 @@ se divide em seções por tema, não por item, e pode citar um item como exemplo
 conceito geral. A teoria geral que vem de uma aula à parte entra como seção dela, não como
 documento próprio.
 
+Cada tema se conta como uma história só, que passa pelas partes do
+[molde](docs/analise-da-materia.md#os-moldes) na ordem delas, sem título de parte à vista:
+cada parte se marca só pelo código escondido dela. O tom é o do texto [Testes de
+suscetibilidade
+antimicrobiana](docs/material-gerado/propostas/teoria-tema-testes-de-sensibilidade.md), da
+pergunta que o abre até o halo de inibição.
+
 ### B) Dicionário de gatilhos
 
 O dicionário conta cada bactéria como uma história contínua, dividida em partes chamadas
@@ -487,6 +494,68 @@ o que o livro diz do item na parte do livro que trata dele: isso fica no documen
 item. O que o livro diz do item ao tratar do ponto do próprio documento entra nele, como
 todo o resto do que o livro diz desse ponto. Assim nenhum fato fica sem documento e
 nenhum é contado duas vezes.
+
+### As regras de cada texto
+
+Cada texto e os cartões dele seguem as regras que esta lista aponta, as de todo texto e as
+do documento dele. Quem escreve o texto lê inteiras as fontes dele — a lista de trabalho,
+os capítulos que ela manda ler inteiros, os slides que ela cita, na transcrição da aula, e
+os textos já escritos que ele usa — e, da documentação, só o que a lista aponta, também
+inteiro. Quem confere lê as mesmas fontes e regras e confere o texto e os cartões contra
+elas.
+
+As regras de todo texto:
+
+- nesta metodologia, [O texto das figuras](#o-texto-das-figuras), as seções
+  [2](#2-as-citações-e-as-referências) e [4](#4-o-que-entra-no-material), os parágrafos da
+  [seção 5](#5-os-documentos-de-estudo) que vêm antes de A) Teoria fundamental, [A
+  categoria citada pelo nome](#a-categoria-citada-pelo-nome), [O item citado pelo
+  nome](#o-item-citado-pelo-nome) e as seções [6](#6-os-cartões-e-o-baralho) e
+  [8](#8-os-documentos-e-os-arquivos-do-projeto);
+- nas Regras da ABNT, [Citação no texto](regras-abnt.md#citação-no-texto-nbr-105202023);
+- na parte 6 da análise da matéria, [O que o estudante precisa saber
+  fazer](docs/analise-da-materia.md#o-que-o-estudante-precisa-saber-fazer), [Ensinar
+  primeiro, treinar depois](docs/analise-da-materia.md#ensinar-primeiro-treinar-depois), a
+  abertura de [A forma de cada tipo](docs/analise-da-materia.md#a-forma-de-cada-tipo) e,
+  ali, o tipo de cada trecho da lista de trabalho; e, em [Os
+  moldes](docs/analise-da-materia.md#os-moldes), a abertura e os parágrafos "A sequência
+  das partes", com a tabela e as bases da ordem, e "Cartões";
+- no README dos scripts, as seções do
+  [`confere_material.py`](scripts/README.md#confere_materialpy--confere-o-texto-e-os-cartões-de-cada-unidade),
+  do
+  [`lista_de_trabalho.py`](scripts/README.md#lista_de_trabalhopy--o-que-escrever-e-o-que-ler-em-cada-unidade),
+  do
+  [`confere_cartoes.py`](scripts/README.md#confere_cartoespy--confere-cada-cartão-contra-a-prova-dele),
+  do
+  [`montar_deck.py`](scripts/README.md#montar_deckpy--das-planilhas-de-pergunta-ao-baralho-do-anki),
+  do
+  [`trechos_de_ia.py`](scripts/README.md#trechos_de_iapy--monta-a-lista-dos-trechos-escritos-por-ia)
+  e do
+  [`divergencias.py`](scripts/README.md#divergenciaspy--monta-o-documento-das-divergências),
+  e [O dicionário das dúvidas](scripts/README.md#o-dicionário-das-dúvidas);
+- os arquivos que essas regras usam: `projeto.json`, `dados/formato.json`,
+  `dados/chamadas.json`, `dados/divergencias.json`, `GLOSSARIO.md`,
+  `modelo-dados/prova.json` e os moldes `scripts/esquemas/prova.schema.json` e
+  `scripts/esquemas/divergencias.schema.json`.
+
+As regras do documento do texto, além dessas:
+
+- num tema da teoria fundamental, [A) Teoria fundamental](#a-teoria-fundamental), com o
+  trecho de texto que ela dá como modelo de tom;
+- na ficha e no dicionário de uma bactéria, [B) Dicionário de
+  gatilhos](#b-dicionário-de-gatilhos), [C) Ficha determinística](#c-ficha-determinística)
+  e [Os mesmos fatos em dois níveis](#os-mesmos-fatos-em-dois-níveis); e, na parte 6, o
+  parágrafo "Ficha e dicionário de cada bactéria", em Os moldes, e "Da bactéria para a
+  doença", em [A forma de cada
+  caminho](docs/analise-da-materia.md#a-forma-de-cada-caminho);
+- na ficha de uma família, [C) Ficha determinística](#c-ficha-determinística), com o tom
+  que ela toma de [B) Dicionário de gatilhos](#b-dicionário-de-gatilhos), e, na parte 6, o
+  parágrafo "Ficha de cada família", em Os moldes;
+- num quadro, na parte 6, o parágrafo "Quadros e casos", em Os moldes, e "Do quadro para as
+  bactérias", em A forma de cada caminho;
+- nas perguntas de prova de uma aula, na parte 6, [As perguntas de
+  prova](docs/analise-da-materia.md#as-perguntas-de-prova) e o parágrafo "Perguntas de
+  prova", em Os moldes.
 
 ---
 
