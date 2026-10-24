@@ -20,7 +20,8 @@ Os testes conferem regras que valem para qualquer forma, nunca uma lista pronta:
     as notas sao contadas, e o que vem depois de um titulo nao e lido; os pedacos sao os
     escritos, inteiros, sem o vazio e sem repetir;
   - o id e aula/slide/posicao/hash, unico; a posicao conta os trechos do slide; o hash e o
-    do texto em NFC; outro texto da outro id;
+    do texto em NFC; outro texto da outro id; o le_codigo le de volta cada id, e cada comeco
+    dele, nas partes dele, e nao le o que nao e id nem comeco de um;
   - o lugar de cada trecho e o do caso dele: a classe, as marcas, os documentos e os grupos
     que as regras nao tem; um mesmo problema sai sempre com a mesma frase, e problemas
     diferentes com frases diferentes;
@@ -160,6 +161,36 @@ def teste_id(mundo):
     confere(ids["outro"] != ids["nfc"], "outro texto dá outro id")
     confere(ids["outro"].rsplit("/", 1)[0] == ids["nfc"].rsplit("/", 1)[0] == "7/3/1",
             "o id começa pela aula, o slide e a posição")
+
+
+def teste_codigo(trechos):
+    """O le_codigo le de volta cada id lido, e cada comeco dele, nas partes dele, e nao le o que nao e id nem comeco de
+    um."""
+    s, digitos = analises.SEPARADOR_DO_ID, analises.DIGITOS_DO_HASH
+    erradas = collections.Counter()
+    for t in trechos:
+        partes = [t["aula"], str(t["slide"]), str(t["posicao"])]
+        resumo = t["id"].rsplit(s, 1)[-1]
+        erradas["o id inteiro"] += analises.le_codigo(t["id"]) != analises.Codigo(t["aula"], t["slide"], t["posicao"],
+                                                                                  resumo)
+        for k, esperado in enumerate([(t["aula"], None, None), (t["aula"], t["slide"], None),
+                                      (t["aula"], t["slide"], t["posicao"])], 1):
+            erradas[f"o começo de {k} parte(s)"] += analises.le_codigo(s.join(partes[:k])) != analises.Codigo(
+                *esperado, None)
+    for nome, n in sorted(erradas.items()):
+        confere(n == 0, f"código: {nome} lido errado em {n} trecho(s)")
+    t = trechos[0]
+    aula, slide, posicao, resumo = t["aula"], str(t["slide"]), str(t["posicao"]), t["id"].rsplit(s, 1)[-1]
+    for descricao, texto in [
+        ("vazio", ""), ("sem a aula", s.join(["", slide])), ("com uma parte a mais", s.join([t["id"], resumo])),
+        ("com espaço na aula", s.join([f"{aula} {aula}", slide])), ("com uma parte vazia", s.join([aula, "", posicao])),
+        ("com o slide zero", s.join([aula, "0"])), ("com zero na frente", s.join([aula, slide, "0" + posicao, resumo])),
+        ("com o slide que não é número", s.join([aula, "x" + slide])),
+        ("com o hash curto", s.join([aula, slide, posicao, resumo[:-1]])),
+        ("com o hash em maiúsculas", s.join([aula, slide, posicao, "A" * digitos])),
+        ("com o hash que não é hexadecimal", s.join([aula, slide, posicao, "g" * digitos])),
+    ]:
+        confere(analises.le_codigo(texto) is None, f"código: o texto {descricao} não é id nem começo de um: {texto!r}")
 
 
 def teste_lugar(mundo, trechos):
@@ -713,6 +744,7 @@ def main():
     teste_fonte(mundo)
     trechos = teste_leitura(mundo)
     teste_id(mundo)
+    teste_codigo(trechos)
     frases = teste_lugar(mundo, trechos)
     teste_tabelas(mundo, frases)
     teste_tsv()

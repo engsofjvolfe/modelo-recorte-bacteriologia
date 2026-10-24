@@ -4,8 +4,74 @@
   {
    "nome": "hash-curto",
    "arquivo": "analises.py",
-   "de": "hexdigest()[:4]",
-   "para": "hexdigest()[:3]"
+   "de": "DIGITOS_DO_HASH = 4",
+   "para": "DIGITOS_DO_HASH = 3"
+  },
+  {
+   "nome": "separador-do-id-trocado",
+   "arquivo": "analises.py",
+   "de": "SEPARADOR_DO_ID = \"/\"",
+   "para": "SEPARADOR_DO_ID = \"-\""
+  },
+  {
+   "nome": "codigo-sem-aula-passa",
+   "arquivo": "analises.py",
+   "de": "    if not aula or any(c.isspace() for c in aula)",
+   "para": "    if any(c.isspace() for c in aula)"
+  },
+  {
+   "nome": "codigo-com-parte-a-mais-passa",
+   "arquivo": "analises.py",
+   "de": " or len(resto) >= len(Codigo._fields):",
+   "para": ":"
+  },
+  {
+   "nome": "aula-com-espaco-passa",
+   "arquivo": "analises.py",
+   "de": " or any(c.isspace() for c in aula)",
+   "para": ""
+  },
+  {
+   "nome": "numero-do-id-com-zero-passa",
+   "arquivo": "analises.py",
+   "de": "NUMERO_DO_ID = re.compile(r\"[1-9][0-9]*\")",
+   "para": "NUMERO_DO_ID = re.compile(r\"[0-9]+\")"
+  },
+  {
+   "nome": "numero-do-id-sem-conferir",
+   "arquivo": "analises.py",
+   "de": "not all(NUMERO_DO_ID.fullmatch(n) for n in numeros) or ",
+   "para": ""
+  },
+  {
+   "nome": "hash-do-id-de-qualquer-tamanho",
+   "arquivo": "analises.py",
+   "de": "HASH_DO_ID = re.compile(f\"[0-9a-f]{{{DIGITOS_DO_HASH}}}\")",
+   "para": "HASH_DO_ID = re.compile(\"[0-9a-f]+\")"
+  },
+  {
+   "nome": "hash-do-id-em-maiusculas-passa",
+   "arquivo": "analises.py",
+   "de": "f\"[0-9a-f]{{",
+   "para": "f\"[0-9a-fA-F]{{"
+  },
+  {
+   "nome": "hash-do-id-sem-conferir",
+   "arquivo": "analises.py",
+   "de": " or not all(HASH_DO_ID.fullmatch(r) for r in resumo)",
+   "para": ""
+  },
+  {
+   "nome": "slide-e-posicao-trocados",
+   "arquivo": "analises.py",
+   "de": "    slide, posicao = (list(map(int, numeros)) + [None, None])[:2]",
+   "para": "    posicao, slide = (list(map(int, numeros)) + [None, None])[:2]"
+  },
+  {
+   "nome": "codigo-sem-o-hash",
+   "arquivo": "analises.py",
+   "de": "resumo[0] if resumo else None",
+   "para": "None"
   },
   {
    "nome": "hash-sem-nfc",

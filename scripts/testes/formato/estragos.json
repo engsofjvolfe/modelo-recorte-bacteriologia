@@ -1658,52 +1658,10 @@
    "para": "    if False:\n        return saida + [NENHUM_CAMPO, \"\"], 0, 0"
   },
   {
-   "nome": "lista-duvidas-todas-as-aulas",
-   "arquivo": "lista_de_trabalho.py",
-   "de": "        if aula is not None and aula not in suas:\n            continue",
-   "para": "        if False:\n            continue"
-  },
-  {
-   "nome": "lista-duvidas-sem-as-de-fora",
-   "arquivo": "lista_de_trabalho.py",
-   "de": "        if aula is not None and aula not in suas:\n            continue",
-   "para": "        if aula is None or aula not in suas:\n            continue"
-  },
-  {
-   "nome": "lista-duvidas-sem-descer",
-   "arquivo": "lista_de_trabalho.py",
-   "de": "corpo = [NIVEL + linha if fora and linha.startswith(NIVEL) else linha for linha, fora in linhas]",
-   "para": "corpo = [linha for linha, fora in linhas]"
-  },
-  {
-   "nome": "lista-duvidas-codigo-como-titulo",
-   "arquivo": "lista_de_trabalho.py",
-   "de": "        if n in fora and linha.startswith(SECAO):",
-   "para": "        if linha.startswith(SECAO):"
-  },
-  {
-   "nome": "lista-duvidas-titulo-inteiro",
-   "arquivo": "lista_de_trabalho.py",
-   "de": "das_aulas.get(nfc(titulo.split()[0]))",
-   "para": "das_aulas.get(nfc(titulo))"
-  },
-  {
    "nome": "lista-dependencias-aceitas",
    "arquivo": "lista_de_trabalho.py",
    "de": "    if faltam:\n        return None, [f\"o texto {pedido}",
    "para": "    if False:\n        return None, [f\"o texto {pedido}"
-  },
-  {
-   "nome": "lista-duvidas-que-faltam-caladas",
-   "arquivo": "lista_de_trabalho.py",
-   "de": "    if not arquivo_das_duvidas.is_file():",
-   "para": "    if False:"
-  },
-  {
-   "nome": "lista-utf8-calado",
-   "arquivo": "lista_de_trabalho.py",
-   "de": "    if erros or erros_da_forma:",
-   "para": "    if erros_da_forma:"
   },
   {
    "nome": "lista-documento-pelo-id",

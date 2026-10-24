@@ -24,8 +24,10 @@ so.
 
 Cada trecho sai com o texto dele, o texto e o valor de cada campo e de cada papel, e um id
 estavel, "aula/slide/posicao/hash": a posicao conta os trechos do slide, a partir de 1, e o
-hash sao os quatro primeiros digitos do SHA-1 do texto do trecho em NFC. Se o texto mudar,
-o id muda, e quem guardou decisoes pelo id ve a diferenca.
+hash sao os primeiros digitos do SHA-1 do texto do trecho em NFC. Se o texto mudar, o id
+muda, e quem guardou decisoes pelo id ve a diferenca. O id se monta por id_do_trecho, e
+quem le um id, ou o comeco dele (a aula; a aula e o slide; a aula, o slide e a posicao), le
+por le_codigo, que le o que id_do_trecho escreve.
 """
 import collections
 import hashlib
@@ -37,6 +39,12 @@ PAPEIS = ("tipo", "grupo", "caminho", "destino")  # o que um campo pode fazer, c
 PAPEIS_EM_LISTA = ("tipo", "grupo", "caminho")  # os papeis que pedem um valor em lista
 ABRE, FECHA = "(", ")"  # o que abre e o que fecha o texto entre parenteses, que as formas em lista tratam a parte
 ENTRE_PARENTESES = re.compile(rf"\s*{re.escape(ABRE)}[^{re.escape(ABRE + FECHA)}]*{re.escape(FECHA)}")
+SEPARADOR_DO_ID = "/"  # o que separa a aula, o slide, a posicao e o hash no id de um trecho
+DIGITOS_DO_HASH = 4  # quantos digitos do SHA-1 do texto do trecho o id leva
+NUMERO_DO_ID = re.compile(r"[1-9][0-9]*")  # o slide e a posicao, como o id os escreve: inteiros de 1 para cima
+HASH_DO_ID = re.compile(f"[0-9a-f]{{{DIGITOS_DO_HASH}}}")  # o hash, como o id o escreve: digitos hexadecimais
+Codigo = collections.namedtuple("Codigo", "aula slide posicao hash")
+# o id de um trecho, ou o comeco dele, em partes, como le_codigo o le, com None no que ele nao tem
 
 
 class ErroDeForma(ValueError):
@@ -45,6 +53,25 @@ class ErroDeForma(ValueError):
 
 def nfc(texto):
     return unicodedata.normalize("NFC", texto)
+
+
+def id_do_trecho(aula, slide, posicao, texto):
+    """O id de um trecho: a aula, o slide, a posicao e o hash do texto em NFC, separados por SEPARADOR_DO_ID."""
+    resumo = hashlib.sha1(nfc(texto).encode("utf-8")).hexdigest()[:DIGITOS_DO_HASH]
+    return SEPARADOR_DO_ID.join([aula, str(slide), str(posicao), resumo])
+
+
+def le_codigo(texto):
+    """O Codigo do id de um trecho, ou do comeco dele -- a aula; a aula e o slide; a aula, o slide e a posicao --, com
+    cada parte como id_do_trecho a escreve; None quando o texto nao e um id nem o comeco de um."""
+    aula, *resto = texto.split(SEPARADOR_DO_ID)
+    numeros, resumo = resto[:2], resto[2:]
+    if not aula or any(c.isspace() for c in aula) or len(resto) >= len(Codigo._fields):
+        return None
+    if not all(NUMERO_DO_ID.fullmatch(n) for n in numeros) or not all(HASH_DO_ID.fullmatch(r) for r in resumo):
+        return None
+    slide, posicao = (list(map(int, numeros)) + [None, None])[:2]
+    return Codigo(aula, slide, posicao, resumo[0] if resumo else None)
 
 
 def unicos(itens):
@@ -231,9 +258,8 @@ def ler_analise(caminho, forma):
         except ErroDeForma as e:
             raise ErroDeForma(f"{onde}: {e}") from None
         posicao += 1
-        resumo = hashlib.sha1(nfc(texto).encode("utf-8")).hexdigest()[:4]
         papeis = {p: {"valor": valores[c], "texto": brutos[c]} for p, c in campo_do_papel.items()}
-        trechos.append({"id": f"{aula}/{slide}/{posicao}/{resumo}", "aula": aula, "slide": slide,
+        trechos.append({"id": id_do_trecho(aula, slide, posicao, texto), "aula": aula, "slide": slide,
                         "posicao": posicao, "texto": texto, "brutos": brutos, "valores": valores,
                         "papeis": papeis})
     return trechos, notas

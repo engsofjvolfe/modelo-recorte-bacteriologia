@@ -72,16 +72,13 @@ documento de formas, com os codigos escondidos de cada parte, de cada item e de 
 em arquivos dentro e fora de subpastas, com blocos de codigo, codigo na linha e comentarios
 que nao sao marca, a parte sem trecho as vezes fora e as que nao recebem trechos em todos os
 textos ou em nenhum; e a planilha de cada texto de unidade, com os codigos dos trechos em
-cartoes e a aula, nas colunas de nomes sorteados de um projeto.json a mais. O arquivo das
-duvidas, fora do projeto, tem uma secao para cada aula das analises menos uma, uma de uma
-aula que elas nao tem e outras de aula nenhuma, as vezes com um subtitulo e com um bloco de
-codigo com uma linha que comeca como o titulo de uma secao. O arquivo de chamadas da uma
-chamada inventada a cada fonte registrada nas transcricoes, e o arquivo das divergencias tem,
-numa ordem sorteada, uma divergencia com dois trechos de um texto, uma com um deles e um de
-outro texto e uma com um trecho que nenhum texto tem, cada uma com uma ou duas outras formas,
-e cada forma com uma ou duas chamadas e paginas das transcricoes; no documento, as planilhas
-ganham a coluna da pergunta, com um cartao sem pergunta, e um cartao com os dois trechos da
-primeira.
+cartoes e a aula, nas colunas de nomes sorteados de um projeto.json a mais. O arquivo de
+chamadas da uma chamada inventada a cada fonte registrada nas transcricoes, e o arquivo das
+divergencias tem, numa ordem sorteada, uma divergencia com dois trechos de um texto, uma com
+um deles e um de outro texto e uma com um trecho que nenhum texto tem, cada uma com uma ou
+duas outras formas, e cada forma com uma ou duas chamadas e paginas das transcricoes; no
+documento, as planilhas ganham a coluna da pergunta, com um cartao sem pergunta, e um cartao
+com os dois trechos da primeira.
 
 O teste confere regras, nunca uma frase pronta:
   - os moldes declaram os tipos de molde, os papeis, as formas de campo, a fonte das paginas
@@ -179,15 +176,13 @@ O teste confere regras, nunca uma frase pronta:
     fato e o que cada forma diz e a citacao dela, a ensinada primeiro, e onde ele esta nos
     textos de que o texto depende (nunca na
     unidade que nenhum texto tem), o aviso da regiao que nao recebe trechos e da que nao tem
-    nenhum, as transcricoes a ler, na ordem natural dos nomes, os pedacos sem pagina, com os
-    trechos, e as secoes das duvidas da aula de cada trecho e as de aula nenhuma, com os
-    titulos fora do codigo um nivel abaixo; duas rodadas, a mesma lista;
+    nenhum, as transcricoes a ler, na ordem natural dos nomes, e os pedacos sem pagina, com os
+    trechos; duas rodadas, a mesma lista;
   - o texto que depende de outros, um deles sem texto, o codigo que nenhum texto tem, o
-    arquivo das duvidas que falta ou fora do UTF-8, o arquivo das divergencias que falta,
-    fora do molde ou fora do UTF-8 e a conferencia dos moldes com aviso sao ERRO, e nenhuma
-    lista e gravada; a lista do texto que nao comecou e gravada; na forma
-    sem a fonte das paginas, a lista diz que nenhum campo a tem; e, com o campo das paginas
-    na forma de texto, o campo inteiro de cada trecho e um pedaco;
+    arquivo das divergencias que falta, fora do molde ou fora do UTF-8 e a conferencia dos
+    moldes com aviso sao ERRO, e nenhuma lista e gravada; a lista do texto que nao comecou e
+    gravada; na forma sem a fonte das paginas, a lista diz que nenhum campo a tem; e, com o
+    campo das paginas na forma de texto, o campo inteiro de cada trecho e um pedaco;
   - o documento das divergencias sai com codigo 0 e tem um titulo de segundo nivel para cada
     divergencia, na ordem do arquivo, com a forma ensinada e as outras, na ordem, cada uma
     com o que diz e a citacao, e, so quando ha, uma linha para cada parte do material que
@@ -267,7 +262,6 @@ MOLDE_BASE = json.loads(validar_dados.esquema("base").read_text(encoding="utf-8"
 MOLDE_FORMA = json.loads(validar_dados.esquema("forma-analise").read_text(encoding="utf-8"))
 RELATORIO = PROJETO.caminho("conferencia_moldes")
 MATERIAL = PROJETO.caminho("material_gerado")  # a pasta dos textos e das planilhas que o conferidor do material le
-DUVIDAS = TRABALHO / "duvidas.md"  # o arquivo das duvidas abertas, fora do projeto pequeno
 DIVERGENCIAS, DOCUMENTO = PROJETO.caminho("divergencias"), PROJETO.caminho("documento_das_divergencias")
 VERSAO_DIVERGENCIAS = json.loads(validar_dados.esquema("divergencias").read_text(encoding="utf-8"))["properties"][
     "versao_schema"]["const"]
@@ -3092,51 +3086,11 @@ CASOS_DAS_PLANILHAS = [p_sem_cartao, p_sem_planilha, p_outra_unidade, p_nao_exis
                        p_sem_coluna_dos_trechos, p_sem_coluna_da_aula, p_planilha_fora_do_utf8]
 
 
-# ---------- a lista de trabalho: as duvidas, o que a lista tem de ter e a leitura dela ----------
+# ---------- a lista de trabalho: o que a lista tem de ter e a leitura dela ----------
 
-Secao = collections.namedtuple("Secao", "aula linhas")
-# uma secao do arquivo das duvidas inventado: a aula dela (None, na que nao e de nenhuma aula das analises) e as
-# linhas, cada uma (texto, se ela esta num bloco de codigo)
 Bloco = collections.namedtuple("Bloco", "item parte trecho linhas")
 # um trecho na lista: o item e a parte abertos ali (JUNTO, depois do titulo dos que vao junto), o codigo e as linhas
 MARCA_ESCONDIDA = re.compile(r"`(<!-- (\S+) (\S+) -->)`")  # um codigo escondido mostrado em codigo na linha, na lista
-
-
-def sorteia_duvidas(v):
-    """Grava o arquivo das duvidas: um titulo, um paragrafo e as secoes, numa ordem sorteada -- a de cada aula das
-    analises menos uma, a de uma aula que as analises nao tem e de uma a tres que nao sao de aula nenhuma --, cada uma
-    com itens numerados e, as vezes, um subtitulo e um bloco de codigo com uma linha que comeca como titulo de secao.
-    Devolve [Secao], na ordem do arquivo."""
-    lt, prefixo, aulas = lista_de_trabalho, v["forma"]["prefixo_arquivo"], v["ids"]["aulas"]
-    sem_secao = SORTEIO.choice(aulas)
-    estranha = str(max(int(n) for a in aulas for n in re.findall(r"\d+", a)) + SORTEIO.randint(2, 5))
-    titulos = [(a, f"{prefixo}{a}") for a in aulas if a != sem_secao] + [(None, f"{prefixo}{estranha}")]
-    titulos += [(None, nome()) for _ in range(SORTEIO.randint(1, 3))]
-    SORTEIO.shuffle(titulos)
-    secoes_ = []
-    for aula, titulo in titulos:
-        linhas_ = [(lt.SECAO + titulo + (f" ({frase()})" if SORTEIO.random() < 0.7 else ""), False)]
-        linhas_ += [(f"{k}. {frase()}", False) for k in range(1, SORTEIO.randint(2, 4))]
-        if SORTEIO.random() < 0.5:
-            linhas_ += [(f"{lt.NIVEL}{lt.SECAO}{nome()}", False), (frase(), False)]
-        if SORTEIO.random() < 0.5:
-            linhas_ += [("```", True), (lt.SECAO + palavra(), True), ("```", True)]
-        secoes_.append(Secao(aula, linhas_))
-    texto = [f"# {nome()}", "", frase(), ""] + [x for s in secoes_ for x in [t for t, _ in s.linhas] + [""]]
-    DUVIDAS.write_text("\n".join(texto), encoding="utf-8")
-    return secoes_
-
-
-def duvidas_esperadas(t, secoes_, e):
-    """As linhas que a lista do texto t tem de copiar das duvidas: a secao de cada aula com trecho no texto e as que nao
-    sao de nenhuma aula das analises, na ordem do arquivo, cada uma com os titulos fora do codigo um nivel abaixo e
-    seguida de uma linha em branco."""
-    lt, suas = lista_de_trabalho, {e["caso"][i]["aula"] for i in trechos_do(t)}
-    saida = []
-    for s in secoes_:
-        if s.aula is None or s.aula in suas:
-            saida += [lt.NIVEL + x if not codigo and x.startswith(lt.NIVEL) else x for x, codigo in s.linhas] + [""]
-    return saida
 
 
 def lugares_no_material(mat, existem):
@@ -3160,14 +3114,12 @@ def lugares_no_material(mat, existem):
 
 
 def le_lista(texto):
-    """(identidade, marcas, blocos, textos das regioes, capitulos, duvidas) da lista gravada: as linhas antes da
-    primeira secao; os codigos escondidos das regioes, em ordem, cada um (nivel, codigo); cada trecho, como Bloco; as
-    linhas de cada regiao que nao sao de trecho, {(item, parte): linhas}; as linhas da secao dos capitulos; e as da
-    secao das duvidas, ate o fim."""
+    """(identidade, marcas, blocos, textos das regioes, capitulos) da lista gravada: as linhas antes da primeira secao;
+    os codigos escondidos das regioes, em ordem, cada um (nivel, codigo); cada trecho, como Bloco; as linhas de cada
+    regiao que nao sao de trecho, {(item, parte): linhas}; e as linhas da secao dos capitulos."""
     lt, cm = lista_de_trabalho, confere_material
     linhas_ = texto.splitlines()
     inicio = next((k for k, x in enumerate(linhas_) if x.startswith("## ")), len(linhas_))
-    das_duvidas = next((k for k, x in enumerate(linhas_) if x == f"## {lt.DUVIDAS}"), len(linhas_))
     marcas_, blocos, textos_, item_, parte = [], [], collections.defaultdict(list), None, None
     for linha in secao(texto, lt.PARTES):
         achadas = [(nivel, codigo) for _, nivel, codigo in MARCA_ESCONDIDA.findall(linha)]
@@ -3186,7 +3138,7 @@ def le_lista(texto):
                     parte = codigo
         elif linha.strip():
             textos_[(item_, parte)].append(linha)
-    return linhas_[:inicio], marcas_, blocos, textos_, secao(texto, lt.CAPITULOS), linhas_[das_duvidas + 1:]
+    return linhas_[:inicio], marcas_, blocos, textos_, secao(texto, lt.CAPITULOS)
 
 
 def marcas_esperadas(t):
@@ -3334,16 +3286,16 @@ def confere_identidade(linhas_, t, deps, e, colunas, rotulo):
             f"{rotulo}: os textos de que ele depende: {depende}")
 
 
-def confere_lista(t, deps, ctx, secoes_, onde, rotulo):
+def confere_lista(t, deps, ctx, onde, rotulo):
     """A lista gravada do texto t: o comeco; os codigos escondidos das regioes, na ordem do molde; os trechos de cada
     regiao, na ordem, e os que vao junto, cada um com as linhas dele; o aviso das regioes que nao recebem trechos e das
-    que recebem e nao tem nenhum; os capitulos; e as duvidas. Devolve o texto da lista."""
+    que recebem e nao tem nenhum; e os capitulos. Devolve o texto da lista."""
     lt, v, e = lista_de_trabalho, ctx["mundo"], ctx["esperado"]
     arquivo = PROJETO.caminho_com("listas_de_trabalho", f"{t.documento['id']}-{t.codigo}")
     if not confere(arquivo.is_file(), f"{rotulo}: a lista é gravada em {arquivo}"):
         return ""
     texto = arquivo.read_text(encoding="utf-8")
-    identidade_, marcas_, blocos, textos_, capitulos_, duvidas_ = le_lista(texto)
+    identidade_, marcas_, blocos, textos_, capitulos_ = le_lista(texto)
     confere_identidade(identidade_, t, deps, e, ctx["colunas"], rotulo)
     confere(marcas_ == marcas_esperadas(t), f"{rotulo}: os códigos escondidos das regiões, na ordem do molde: "
             f"{marcas_} ({marcas_esperadas(t)})")
@@ -3357,20 +3309,7 @@ def confere_lista(t, deps, ctx, secoes_, onde, rotulo):
         confere(textos_.get((item_, parte), []) == aviso_, f"{rotulo}: o aviso da região {parte}: "
                 f"{textos_.get((item_, parte))} ({aviso_})")
     confere_capitulos(capitulos_, t, v, e, rotulo)
-    k = next((j for j, x in enumerate(duvidas_) if x.startswith(lt.DE_ONDE.split("{")[0])), None)
-    copiadas, certas = sem_brancas_no_fim(duvidas_[k + 2:] if k is not None else []), sem_brancas_no_fim(
-        duvidas_esperadas(t, secoes_, e) or [lt.SEM_SECAO])
-    confere(k is not None and str(DUVIDAS.resolve()) in duvidas_[k] and copiadas == certas,
-            f"{rotulo}: as dúvidas copiadas de {DUVIDAS}: {copiadas} ({certas})")
     return texto
-
-
-def sem_brancas_no_fim(linhas_):
-    """As linhas sem as linhas em branco do fim."""
-    linhas_ = list(linhas_)
-    while linhas_ and not linhas_[-1].strip():
-        linhas_.pop()
-    return linhas_
 
 
 # ---------- as divergencias: as chamadas, o arquivo delas e o documento ----------
@@ -3969,10 +3908,9 @@ def teste_sem_cartoes(ctx, mat):
         projeto.unlink()
 
 
-def roda_lista(projeto, codigo, duvidas=DUVIDAS):
-    """(codigo de saida, linhas da tela) da lista de trabalho do texto de codigo dado, com o projeto.json e o arquivo
-    das duvidas dados."""
-    return roda_tela("lista_de_trabalho.py", "--projeto", str(projeto), "--unidade", codigo, "--duvidas", str(duvidas))
+def roda_lista(projeto, codigo):
+    """(codigo de saida, linhas da tela) da lista de trabalho do texto de codigo dado, com o projeto.json dado."""
+    return roda_tela("lista_de_trabalho.py", "--projeto", str(projeto), "--unidade", codigo)
 
 
 def listas_gravadas():
@@ -3985,15 +3923,15 @@ def sem_listas():
         p.unlink()
 
 
-def lista_que_para(ctx, rotulo, palavras, codigo, duvidas=DUVIDAS):
+def lista_que_para(ctx, rotulo, palavras, codigo):
     """A lista do texto de codigo dado sai com codigo 1, com uma linha ERRO que diz as palavras, e nada e gravado."""
     antes = listas_gravadas()
-    codigo_, tela = roda_lista(ctx["projeto"], codigo, duvidas)
+    codigo_, tela = roda_lista(ctx["projeto"], codigo)
     confere(codigo_ == 1 and any(x.startswith(f"{ERRO}:") and all(p in x for p in palavras) for x in tela)
             and listas_gravadas() == antes, f"{rotulo}: ERRO que diz {palavras}, e nada é gravado: {tela}")
 
 
-def teste_listas_certas(ctx, mat, secoes_):
+def teste_listas_certas(ctx, mat):
     """No material certo, com uma unidade que nenhum texto tem e o codigo de um trecho das perguntas de prova nela, a
     lista de cada texto, na ordem de escrita: codigo 0, sem ERRO, e o que ela tem de ter, com onde cada trecho esta nos
     textos de que o texto depende, no que depende de outros; e duas rodadas, a mesma lista."""
@@ -4008,7 +3946,7 @@ def teste_listas_certas(ctx, mat, secoes_):
         codigo, tela = roda_lista(ctx["projeto"], t.codigo)
         confere(codigo == 0 and not [x for x in tela if x.startswith(ERRO)],
                 f"a lista de {t.codigo}: código 0, sem ERRO: {tela}")
-        confere_lista(t, deps, ctx, secoes_, onde, f"a lista de {t.codigo}")
+        confere_lista(t, deps, ctx, onde, f"a lista de {t.codigo}")
     t = um_texto(ctx)
     antes = listas_gravadas()
     roda_lista(ctx["projeto"], t.codigo)
@@ -4017,8 +3955,8 @@ def teste_listas_certas(ctx, mat, secoes_):
 
 def teste_listas_que_param(ctx, mat, base):
     """O texto que depende de outros que ainda nao estao prontos -- um deles sem texto --, o codigo que nenhum texto
-    tem, o arquivo das duvidas que falta ou que nao esta em UTF-8 e a conferencia dos moldes com aviso sao ERRO, e nada
-    e gravado; e a lista do texto que nao comecou e gravada."""
+    tem, o arquivo das divergencias que falta, fora do molde ou fora do UTF-8 e a conferencia dos moldes com aviso sao
+    ERRO, e nada e gravado; e a lista do texto que nao comecou e gravada."""
     v = ctx["mundo"]
     t, deps = SORTEIO.choice([(x, deps) for x, deps in em_ordem_de_escrita(ctx["textos"], ctx["aulas"]) if deps])
     falta = SORTEIO.choice(deps)
@@ -4035,11 +3973,6 @@ def teste_listas_que_param(ctx, mat, base):
     escreve_material(mat)
     desconhecido = ident()
     lista_que_para(ctx, "o texto pedido que não existe", [desconhecido], desconhecido)
-    sem_arquivo = TRABALHO / f"{ident()}.md"
-    lista_que_para(ctx, "o arquivo das dúvidas que falta", [sem_arquivo.name], t.codigo, sem_arquivo)
-    fora_do_utf8_ = TRABALHO / f"{ident()}.md"
-    fora_do_utf8_.write_bytes(DUVIDAS.read_bytes() + "çã".encode("latin-1"))
-    lista_que_para(ctx, "o arquivo das dúvidas fora do UTF-8", [fora_do_utf8_.name], t.codigo, fora_do_utf8_)
     guardado = DIVERGENCIAS.read_bytes()
     DIVERGENCIAS.unlink()
     lista_que_para(ctx, "o arquivo das divergências que falta", [DIVERGENCIAS.name], t.codigo)
@@ -4053,7 +3986,7 @@ def teste_listas_que_param(ctx, mat, base):
     escreve_mundo(v)
 
 
-def teste_listas_das_formas(ctx, secoes_):
+def teste_listas_das_formas(ctx):
     """Na forma das analises sem a fonte das paginas, a lista de cada texto de unidade diz que nenhum campo tem a fonte;
     com o campo das paginas na forma de texto, o campo inteiro de cada trecho e um pedaco."""
     lt, v, e = lista_de_trabalho, ctx["mundo"], ctx["esperado"]
@@ -4083,12 +4016,11 @@ def teste_listas(ctx, mat, base):
     """Com as divergencias do mundo gravadas, a lista de trabalho de cada texto (teste_listas_certas), o que para a
     lista (teste_listas_que_param) e as formas das analises sem a fonte das paginas e com o campo das paginas inteiro
     (teste_listas_das_formas)."""
-    secoes_ = sorteia_duvidas(ctx["mundo"])
     escreve_mundo(ctx["mundo"])
     sorteia_divergencias(ctx, ctx["nucleos"])
-    teste_listas_certas(ctx, mat, secoes_)
+    teste_listas_certas(ctx, mat)
     teste_listas_que_param(ctx, mat, base)
-    teste_listas_das_formas(ctx, secoes_)
+    teste_listas_das_formas(ctx)
 
 
 def teste_documento_certo(ctx, mat):

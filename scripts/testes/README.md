@@ -99,7 +99,7 @@ E os estragos do próprio `estraga.py`:
 
     python scripts/estraga.py scripts scripts/testes/copias-estragadas/teste_estraga.py scripts/testes/copias-estragadas/estragos.json [pasta de trabalho nova]
 
-## `documentos/` — o índice, o glossário, a lista dos trechos de IA, os links que os scripts escrevem e os dos documentos
+## `documentos/` — o índice, o glossário, a lista dos trechos de IA, o dicionário das dúvidas, os links que os scripts escrevem e os dos documentos
 
 Os testes do [`confere_indice.py`](../README.md#confere_indicepy--confere-que-cada-documento-está-no-índice),
 do [`glossario.py`](../README.md#glossariopy--monta-o-glossário) e do
@@ -134,6 +134,27 @@ Os três primeiros recebem a pasta principal do projeto, a que tem `scripts/` e
     python scripts/testes/documentos/teste_glossario.py . [pasta de trabalho nova]
     python scripts/testes/documentos/teste_trechos_de_ia.py . [pasta de trabalho nova]
     python scripts/testes/documentos/teste_alvos_dos_links.py scripts
+
+O `teste_confere_dicionario.py` roda o
+[`confere_dicionario.py`](../README.md#confere_dicionariopy--confere-os-códigos-do-dicionário-das-dúvidas)
+em projetos inventados, montados pelo `projeto_inventado.py`, com o dicionário num lugar e
+com um nome inventados e os códigos montados com o separador e o número de dígitos do hash
+que o `analises.py` dá. Confere que cada título na regra passa e que cada título fora dela
+dá uma linha `ERRO` para cada problema, com a linha dele: sem crases, entre aspas, com
+vírgula, com dois espaços ou um no fim, vazio, com texto solto, com crase dentro ou com
+código vazio; o código de três partes, com zero na frente, com zero, com o slide que não é
+número, com o hash curto ou em maiúsculas, sem a aula; o código que cobre outro, antes ou
+depois dele, ou que se repete; e os códigos fora da ordem natural das aulas, dos slides e
+das posições. Confere também que o título dentro de um bloco de código e o de outro nível
+não contam; que, sem erro, ele sai com 0 e diz quantos títulos conferiu; que o
+`projeto.json` sem o caminho do dicionário, o dicionário que falta e o que não está em
+UTF-8 dão `ERRO`; e que ele roda de uma subpasta do projeto e dá o mesmo em duas rodadas.
+Recebe a pasta `scripts/`, com a `modelo-dados/` ao lado; os estragos dele estão em
+`estragos-confere-dicionario.json`, nesta pasta, e rodam com a `modelo-dados/` ao lado da
+cópia:
+
+    python scripts/testes/documentos/teste_confere_dicionario.py scripts [pasta de trabalho nova]
+    python scripts/estraga.py scripts scripts/testes/documentos/teste_confere_dicionario.py scripts/testes/documentos/estragos-confere-dicionario.json [pasta de trabalho nova] --irma modelo-dados
 
 O `teste_confere_links.py` roda o
 [`confere_links.py`](../README.md#confere_linkspy--confere-os-links-internos-dos-documentos)
@@ -177,7 +198,7 @@ o `confere_material.py`, o `lista_de_trabalho.py` e o `divergencias.py`, com a c
 fontes do `confere_cartoes.py`. O projeto pequeno tem um formato sorteado, com documentos
 dos quatro tipos de molde, as bases de três unidades, as análises de três a cinco aulas
 numa forma sorteada, as duas tabelas, transcrições inventadas, o material escrito, com as
-planilhas, um arquivo de dúvidas, um de chamadas e um de divergências. O teste confere que
+planilhas, um arquivo de chamadas e um de divergências. O teste confere que
 o formato certo passa, e cada erro dele é um erro só, que diz o lugar; que o modelo em
 branco do formato falha só onde espera um valor; que cada trecho cai nos documentos, nas
 entradas e nas partes que o caso dele diz, com cada aviso esperado, e só ele; as regras do
@@ -252,10 +273,11 @@ forma das análises. O `mundo_inventado.py`, que não se roda, sorteia uma forma
 regras com tipos de fora, marcas, grupos e documentos, e aulas com trechos de todos os
 casos; o teste sorteia também tabelas em texto, a tabela dos destinos e lugares para o
 limite. Ele confere que cada trecho é lido de volta, com o texto e cada campo, e tem o
-código certo; que a classe, as marcas, os documentos e os grupos desconhecidos de cada
-trecho são os do caso dele; as tabelas do relatório; a tabela em texto e a dos destinos,
-com os erros delas; as regras do limite; e que a forma, as regras e as análises erradas são
-pegas pela conferência da parte errada.
+código certo; que o código, e cada começo dele, se lê de volta nas partes dele, e o que não
+é código nem começo de um não se lê; que a classe, as marcas, os documentos e os grupos
+desconhecidos de cada trecho são os do caso dele; as tabelas do relatório; a tabela em texto
+e a dos destinos, com os erros delas; as regras do limite; e que a forma, as regras e as
+análises erradas são pegas pela conferência da parte errada.
 
     python scripts/testes/moldes/teste_moldes.py scripts [pasta de trabalho nova]
 

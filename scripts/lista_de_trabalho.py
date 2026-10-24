@@ -34,13 +34,7 @@ A lista diz, nesta ordem:
     de algum trecho do texto, na ordem natural dos nomes delas (9 antes de 10); e, como
     estao, os pedacos em que nenhum rotulo aparece, cada um com os trechos que o tem. Os
     pedacos sao os da forma em lista do campo, ou o campo inteiro, numa forma que nao da
-    lista, sem o valor vazio da forma;
-  - as duvidas abertas: do arquivo das duvidas, a secao de cada aula com trecho no texto e,
-    inteiras, as secoes que nao sao de nenhuma aula das analises, na ordem do arquivo. Cada
-    secao comeca num titulo SECAO, fora do codigo, e vai ate o proximo; ela e de uma aula
-    quando a primeira palavra do titulo e o comeco do nome dos arquivos das analises
-    ("prefixo_arquivo", na forma) com a chave da aula, como "aula-3". Os titulos copiados
-    descem um nivel, para ficar dentro da secao da lista.
+    lista, sem o valor vazio da forma.
 
 O texto que depende de outros -- o de uma entrada de um documento que recebe todos os
 trechos, como as perguntas de prova de uma aula -- so tem lista quando todos os textos de
@@ -48,14 +42,14 @@ que ele depende estao prontos no conferidor.
 
 Com erro, cada um sai numa linha ERRO e nada e gravado: o que o conferidor recusa (a
 conferencia dos moldes com aviso, o codigo que nenhum texto tem), o texto que depende de
-outros que ainda nao estao prontos, o arquivo das duvidas que falta ou que nao esta em
-UTF-8 e o arquivo das divergencias que falta, fora do UTF-8 ou fora do molde
-(divergencias.le_divergencias). Sem erro, o script diz o arquivo gravado e quantas partes, trechos, transcricoes a
-ler, pedacos sem pagina e secoes das duvidas a lista tem.
+outros que ainda nao estao prontos, a forma das analises fora do molde e o arquivo das
+divergencias que falta, fora do UTF-8 ou fora do molde (divergencias.le_divergencias). Sem
+erro, o script diz o arquivo gravado e quantas partes, trechos, transcricoes a ler e pedacos
+sem pagina a lista tem.
 
 Uso (de qualquer pasta dentro do projeto):
-    python scripts/lista_de_trabalho.py --unidade <codigo> --duvidas <arquivo das duvidas>
-    python scripts/lista_de_trabalho.py --unidade <codigo> --duvidas <arquivo> --projeto projeto.json
+    python scripts/lista_de_trabalho.py --unidade <codigo>
+    python scripts/lista_de_trabalho.py --unidade <codigo> --projeto projeto.json
 """
 
 import argparse
@@ -70,16 +64,15 @@ import divergencias  # noqa: E402
 import lugares  # noqa: E402
 import marcas  # noqa: E402
 from analises import nfc, ordem_natural  # noqa: E402
-from comum import acha_projeto, arquivo_da_prova, linhas_fora_de_codigo, no_projeto, planilha  # noqa: E402
+from comum import acha_projeto, arquivo_da_prova, no_projeto, planilha  # noqa: E402
 from conferencia import fonte_da_transcricao, secoes, transcricoes_da_pasta  # noqa: E402
 from confere_moldes import nada_gravado  # noqa: E402
-from validar_dados import esquema, le_dados, le_texto  # noqa: E402
+from validar_dados import esquema, le_dados  # noqa: E402
 
 DESTINO = "destino"  # o papel do campo das analises que a lista nao mostra
-SECAO = "## "  # o comeco do titulo de cada secao do arquivo das duvidas
-NIVEL = "#"  # o que um titulo ganha na frente para descer um nivel: o de uma parte de item e o copiado das duvidas
+NIVEL = "#"  # o que o titulo de uma parte de item ganha na frente para descer um nivel
 NENHUM = confere_material.NENHUM  # o que fica no lugar de um valor que falta
-SEM_TRANSCRICAO, SEM_PEDACO, SEM_SECAO = "Nenhuma transcrição.", "Nenhum pedaço.", "Nenhuma seção."  # as listas vazias
+SEM_TRANSCRICAO, SEM_PEDACO = "Nenhuma transcrição.", "Nenhum pedaço."  # as listas vazias
 # os titulos e os rotulos da lista
 TITULO = "Lista de trabalho"
 UNIDADE, DOCUMENTO, AULA = "Unidade", "Documento", "Aula em que se escreve"
@@ -102,15 +95,13 @@ CAPITULOS = "Os capítulos a ler inteiros"
 DO_CAMPO = "Campo `{}`, fonte {}"
 SEM_PAGINA = "Pedaços em que nenhum título de página aparece"
 NENHUM_CAMPO = "Nenhum campo da forma das análises diz a fonte das páginas que cita."
-DUVIDAS = "As dúvidas abertas"
-DE_ONDE = "Copiadas de `{}`."
 Contexto = collections.namedtuple("Contexto", "projeto c forma trechos paginas onde divergencias")
 # o que a lista usa: o projeto; a Conferencia dos moldes; a forma das analises; {id: trecho}; {fonte: [(transcricao,
 # [padrao de cada titulo de pagina])]}; {id: [onde o codigo do trecho esta nos textos de que o texto depende]}; e
 # {id: [divergencia que tem o codigo do trecho]}
-Lista = collections.namedtuple("Lista", "arquivo linhas partes trechos transcricoes sem_pagina secoes")
-# a lista pronta para gravar: o arquivo, as linhas e quantas partes, trechos, transcricoes a ler, pedacos sem pagina
-# e secoes das duvidas ela tem
+Lista = collections.namedtuple("Lista", "arquivo linhas partes trechos transcricoes sem_pagina")
+# a lista pronta para gravar: o arquivo, as linhas e quantas partes, trechos, transcricoes a ler e pedacos sem pagina
+# ela tem
 
 
 # ---------- os trechos ----------
@@ -244,38 +235,6 @@ def linhas_dos_capitulos(texto, ctx):
     return saida, transcricoes, sem_paginas
 
 
-# ---------- as duvidas ----------
-
-def secoes_das_duvidas(texto):
-    """[(titulo, [(linha, se ela esta fora do codigo)])] das secoes do arquivo das duvidas, na ordem: cada uma comeca
-    num titulo SECAO, fora do codigo, e vai ate o proximo; o que vem antes do primeiro nao e secao."""
-    fora, saida = {n for n, _ in linhas_fora_de_codigo(texto)}, []
-    for n, linha in enumerate(texto.splitlines(), 1):
-        if n in fora and linha.startswith(SECAO):
-            saida.append((linha[len(SECAO):].strip(), []))
-        if saida:
-            saida[-1][1].append((linha, n in fora))
-    return saida
-
-
-def linhas_das_duvidas(arquivo, conteudo, texto, ctx):
-    """(linhas, quantas secoes) das duvidas abertas: a secao de cada aula com trecho no texto e, inteiras, as que nao
-    sao de nenhuma aula das analises, na ordem do arquivo, com os titulos um nivel abaixo."""
-    das_aulas = {nfc(ctx.forma["prefixo_arquivo"] + a): a for a in ctx.c.aulas}
-    suas = {ctx.trechos[i]["aula"] for i in confere_material.trechos_do_texto(texto)}
-    saida, copiadas = [f"## {DUVIDAS}", "", DE_ONDE.format(arquivo.resolve()), ""], 0
-    for titulo, linhas in secoes_das_duvidas(conteudo):
-        aula = das_aulas.get(nfc(titulo.split()[0])) if titulo.split() else None
-        if aula is not None and aula not in suas:
-            continue
-        corpo = [NIVEL + linha if fora and linha.startswith(NIVEL) else linha for linha, fora in linhas]
-        while corpo and not corpo[-1].strip():
-            corpo.pop()
-        saida += corpo + [""]
-        copiadas += 1
-    return (saida if copiadas else saida + [SEM_SECAO, ""]), copiadas
-
-
 # ---------- a lista ----------
 
 def identidade(texto, deps, projeto, c):
@@ -297,9 +256,9 @@ def identidade(texto, deps, projeto, c):
     return saida + [""]
 
 
-def monta(projeto, pedido, arquivo_das_duvidas):
+def monta(projeto, pedido):
     """(Lista, []) do texto de codigo pedido, ou (None, erros): o que o conferidor recusa, o texto que depende de outros
-    que ainda nao estao prontos e o arquivo das duvidas que falta ou que nao esta em UTF-8."""
+    que ainda nao estao prontos, a forma das analises fora do molde e o arquivo das divergencias com erro."""
     conferido, erros = confere_material.confere(projeto, pedido)
     if erros:
         return None, erros
@@ -308,12 +267,9 @@ def monta(projeto, pedido, arquivo_das_duvidas):
     if faltam:
         return None, [f"o texto {pedido} depende de textos que ainda não estão prontos no conferidor: "
                       + ", ".join(faltam)]
-    if not arquivo_das_duvidas.is_file():
-        return None, [f"falta o arquivo das dúvidas: {arquivo_das_duvidas}"]
-    conteudo, erros = le_texto(arquivo_das_duvidas, arquivo_das_duvidas)
-    forma, erros_da_forma = le_dados(projeto.caminho("forma_analise"), esquema("forma-analise"))
-    if erros or erros_da_forma:
-        return None, erros + erros_da_forma
+    forma, erros = le_dados(projeto.caminho("forma_analise"), esquema("forma-analise"))
+    if erros:
+        return None, erros
     registradas, erros = divergencias.le_divergencias(projeto)
     if erros:
         return None, erros
@@ -323,27 +279,25 @@ def monta(projeto, pedido, arquivo_das_duvidas):
     ctx = Contexto(projeto, c, forma, {t["id"]: t for t in trechos}, paginas_das_fontes(projeto, fontes, saida),
                    onde_cada_um(projeto, deps), divergencias.por_trecho(registradas))
     dos_capitulos, transcricoes, sem_pagina = linhas_dos_capitulos(texto, ctx)
-    das_duvidas, secoes_copiadas = linhas_das_duvidas(arquivo_das_duvidas, conteudo, texto, ctx)
-    linhas = identidade(texto, deps, projeto, c) + linhas_das_partes(texto, ctx) + dos_capitulos + das_duvidas
+    linhas = identidade(texto, deps, projeto, c) + linhas_das_partes(texto, ctx) + dos_capitulos
     return Lista(saida, linhas, len(texto.partes), len(confere_material.trechos_do_texto(texto)), transcricoes,
-                 sem_pagina, secoes_copiadas), []
+                 sem_pagina), []
 
 
 def main(argv=None):
     p = argparse.ArgumentParser(description="Grava a lista de trabalho de um texto do material.")
     p.add_argument("--unidade", required=True, help="o código de um texto do material")
-    p.add_argument("--duvidas", type=Path, required=True, help="o arquivo das dúvidas abertas das análises")
     p.add_argument("--projeto", type=Path, help="projeto.json (padrao: o primeiro achado subindo a partir daqui)")
     a = p.parse_args(argv)
     projeto = acha_projeto(a.projeto)
-    lista, erros = monta(projeto, marcas.nfc(a.unidade), a.duvidas)
+    lista, erros = monta(projeto, marcas.nfc(a.unidade))
     if erros:
         return nada_gravado(erros)
     lista.arquivo.parent.mkdir(parents=True, exist_ok=True)
     lista.arquivo.write_text("\n".join(lista.linhas).rstrip("\n") + "\n", encoding="utf-8")
     print(f"lista: {no_projeto(lista.arquivo, projeto)}")
     print(f"{lista.partes} partes, {lista.trechos} trechos, {lista.transcricoes} transcrições a ler inteiras, "
-          f"{lista.sem_pagina} pedaços sem página, {lista.secoes} seções das dúvidas")
+          f"{lista.sem_pagina} pedaços sem página")
     return 0
 
 

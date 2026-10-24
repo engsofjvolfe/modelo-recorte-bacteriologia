@@ -63,6 +63,7 @@ alguma coisa e diz o quê.
 | Sempre que um documento define um termo novo, ou deixa de definir | `glossario.py` |
 | Sempre que um texto do material ganha ou perde uma marca de IA, ou muda de linhas | `trechos_de_ia.py` |
 | Sempre que o arquivo das divergências muda, e sempre que um texto do material ou uma planilha de pergunta muda | `divergencias.py` |
+| Sempre que uma dúvida entra no dicionário das dúvidas | `confere_dicionario.py` |
 | Sempre que um documento entra no projeto, sai dele ou muda de lugar | `confere_indice.py` |
 | Sempre que um link, um título ou o nome de um arquivo muda, e antes de cada commit | `confere_links.py` |
 | Antes de publicar | `protege_fontes.py` |
@@ -691,23 +692,18 @@ como `bacteria-neisseria-meningitidis.md`.
   o lugar no livro-texto, que têm uma página citada por um trecho da unidade, na ordem dos
   nomes delas; e os pedaços do campo em que nenhuma página aparece, cada um com os trechos
   que o têm. A página se acha pelo título dela na transcrição, como `p. 248`, inteiro.
-- As dúvidas abertas: do arquivo das dúvidas, a seção de cada aula com trecho na unidade e,
-  inteiras, as que não são de nenhuma aula.
 
 Nas perguntas de prova de uma aula, a lista só sai com todas as unidades com trechos dela
 prontas no conferidor, e cada trecho diz também onde foi explicado: o arquivo, a linha e a
-parte.
-
-**O arquivo das dúvidas.** Um arquivo Markdown com uma seção por título de segundo nível,
-`## `; a seção de uma aula começa pelo nome do arquivo da análise dela, sem a extensão, como
-`## aula-13`.
+parte. As dúvidas sobre os trechos se acham pelo código de cada um, no [dicionário das
+dúvidas](#o-dicionário-das-dúvidas).
 
 **Como rodar.**
 
-    python scripts/lista_de_trabalho.py --unidade [código] --duvidas [arquivo das dúvidas]
+    python scripts/lista_de_trabalho.py --unidade [código]
 
-**O que mostra.** O arquivo gravado e quantas partes, trechos, transcrições a ler, pedaços
-sem página e seções das dúvidas a lista tem. Com algum problema — como o código que nenhum
+**O que mostra.** O arquivo gravado e quantas partes, trechos, transcrições a ler e pedaços
+sem página a lista tem. Com algum problema — como o código que nenhum
 texto tem, a conferência dos moldes com aviso ou o arquivo das divergências que falta ou
 está fora do molde —, cada um sai numa linha `ERRO`, com o motivo, e nada é gravado.
 
@@ -1193,6 +1189,18 @@ No dicionário, os códigos de cada dúvida ficam no título dela, cada um entre
 `` `3/12` ``: o código escrito entre crases acha só as dúvidas que o guardam, e não as de
 `` `3/120` `` nem um código escrito no texto de uma dúvida.
 
+A busca é uma só, da pasta principal do projeto, com os começos do código de cada trecho que
+se tem — a aula, a aula e o slide, e o código inteiro —, cada um entre crases e entre aspas
+simples, numa opção `-e` cada, e se escreve sempre assim:
+
+    grep -n -e '`3`' -e '`3/12`' -e '`3/12/1/a1b2`' docs/dicionario-das-duvidas.md
+
+Com mais de um trecho, os começos de todos entram na mesma busca, cada um uma vez. As aspas
+são simples porque, entre aspas duplas, o terminal roda como comando o que está entre
+crases. A busca mostra o número da linha de cada título que guarda um dos códigos, e cada
+dúvida achada se lê inteira, do título dela até o título seguinte. Os títulos se conferem
+pelo [`confere_dicionario.py`](#confere_dicionariopy--confere-os-códigos-do-dicionário-das-dúvidas).
+
 **Quando se escreve.** A dúvida entra no dicionário no momento em que aparece, escrita por
 quem a teve, pessoa ou agente, depois de procurar os códigos dela ali e não a achar. A
 resposta entra na mesma dúvida, no dia em que vem, escrita por quem a recebeu. Uma
@@ -1230,6 +1238,25 @@ o nome do meio aparece de um jeito na aula 3 e de outro no slide 2 da aula 5.
 Aberta.
 ```
 
+## `confere_dicionario.py` — confere os códigos do dicionário das dúvidas
+
+**O que faz.** Confere o título de cada dúvida do [dicionário das
+dúvidas](#o-dicionário-das-dúvidas) (o caminho `dicionario_das_duvidas` do `projeto.json`)
+pela regra de como ele se escreve: só códigos, cada um entre crases, separados por um
+espaço; cada código de uma aula, de um slide ou de um trecho inteiro, lido como se lê o
+código de um trecho; nenhum código que é o começo de outro do mesmo título, nem repetido; e
+os códigos em ordem de aula, de slide e de posição. O título dentro de um bloco de código
+não conta. É essa regra que faz a busca pelo código achar a dúvida.
+
+**Como rodar.**
+
+    python scripts/confere_dicionario.py
+
+**O que mostra.** Quantos títulos conferiu. Cada título fora da regra dá uma linha `ERRO`
+para cada problema, com o arquivo, a linha e o motivo, e o script sai com código 1. São
+`ERRO` também o `projeto.json` sem o caminho do dicionário, o dicionário que falta e o que
+não está em UTF-8. O script não grava nada.
+
 ## `comum.py`
 
 Não se roda: é a parte que os outros scripts compartilham (achar o `projeto.json`, as
@@ -1245,11 +1272,13 @@ transcrições do mesmo jeito que o extrator as escreve. Do mesmo modo, o `anali
 `relatorio.py` são as partes do `confere_moldes.py`: leem as análises das aulas pela forma
 delas, dizem onde cada trecho cai pelas regras do formato, leem as tabelas em texto, dão a
 cada trecho o que o destino dele nomeia, leem a tabela da leitura, aplicam o limite das
-aulas e fazem as tabelas do relatório. O `marcas.py` é a parte do `confere_material.py` que
-lê os códigos escondidos de um texto e confere cada um contra o lugar em que ele deveria
-estar. O `grava_ou_confere.py` dá ao `glossario.py`, ao `trechos_de_ia.py` e ao
-`divergencias.py` a opção `--conferir` e o fim de cada um: grava o documento que o script
-montou ou, com `--conferir`, diz se o gravado está em dia, sem gravar nada.
+aulas e fazem as tabelas do relatório; o `analises.py` serve também ao
+`confere_dicionario.py`, que lê os códigos dos trechos como ele os escreve. O `marcas.py` é
+a parte do `confere_material.py` que lê os códigos escondidos de um texto e confere cada um
+contra o lugar em que ele deveria estar. O `grava_ou_confere.py` dá ao `glossario.py`, ao
+`trechos_de_ia.py` e ao `divergencias.py` a opção `--conferir` e o fim de cada um: grava o
+documento que o script montou ou, com `--conferir`, diz se o gravado está em dia, sem gravar
+nada.
 
 ---
 

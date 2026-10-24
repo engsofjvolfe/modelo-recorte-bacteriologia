@@ -3,7 +3,9 @@
 
 """Bancada dos testes dos scripts que leem os documentos de um projeto: monta projetos
 inventados (o projeto.json do modelo, com caminhos trocados, e arquivos inventados), roda
-um script do modelo dentro deles e junta as falhas. Nao e para rodar sozinho.
+um script do modelo dentro deles e junta as falhas. Os scripts sao os da pasta scripts/ do
+modelo ou, quando dada, os de outra pasta, como a copia estragada de um teste. Nao e para
+rodar sozinho.
 """
 import json
 import os
@@ -13,8 +15,9 @@ from pathlib import Path
 
 
 class Bancada:
-    def __init__(self, modelo, trabalho):
+    def __init__(self, modelo, trabalho, scripts=None):
         self.modelo, self.trabalho = Path(modelo).resolve(), Path(trabalho).resolve()
+        self.scripts = Path(scripts).resolve() if scripts else self.modelo / "scripts"
         self.trabalho.mkdir(parents=True, exist_ok=True)
         # o git nao procura repositorio acima da pasta de trabalho
         self.ambiente = {**os.environ, "GIT_CEILING_DIRECTORIES": str(self.trabalho)}
@@ -57,7 +60,7 @@ class Bancada:
 
     def roda(self, script, raiz, *args, pasta=None):
         """(codigo de saida, [linhas da tela]) do script do modelo, rodado na pasta."""
-        r = subprocess.run([sys.executable, "-I", str(self.modelo / "scripts" / script), *args],
+        r = subprocess.run([sys.executable, "-I", str(self.scripts / script), *args],
                            cwd=raiz / (pasta or ""), capture_output=True, text=True, env=self.ambiente)
         return r.returncode, r.stdout.splitlines()
 

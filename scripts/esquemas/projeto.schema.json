@@ -76,7 +76,8 @@
         "chamadas": { "$ref": "#/$defs/texto" },
         "trechos_de_ia": { "$ref": "#/$defs/texto" },
         "divergencias": { "$ref": "#/$defs/texto" },
-        "documento_das_divergencias": { "$ref": "#/$defs/texto" }
+        "documento_das_divergencias": { "$ref": "#/$defs/texto" },
+        "dicionario_das_duvidas": { "$ref": "#/$defs/texto" }
       }
     }
   },

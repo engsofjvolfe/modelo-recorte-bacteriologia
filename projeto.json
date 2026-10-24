@@ -43,6 +43,7 @@
     "chamadas": "dados/chamadas.json",
     "trechos_de_ia": "docs/material-gerado/trechos-de-ia.md",
     "divergencias": "dados/divergencias.json",
-    "documento_das_divergencias": "docs/material-gerado/divergencias.md"
+    "documento_das_divergencias": "docs/material-gerado/divergencias.md",
+    "dicionario_das_duvidas": "docs/dicionario-das-duvidas.md"
   }
 }
