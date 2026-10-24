@@ -94,8 +94,12 @@ conteúdo:
 
 Num ponto de aula que vem de uma figura assim, o conteúdo sai da legenda, se houver, e do
 livro-texto ou de outra fonte, nunca do texto da imagem na transcrição. Essas figuras
-também têm o tique da pessoa, porque ela as viu e decidiu: o tique não as distingue, e o
-tipo da figura se reconhece olhando a imagem, na hora de escrever.
+também têm o tique da pessoa, porque ela as viu e decidiu, e o tique não as distingue. O
+tipo de uma figura se reconhece olhando a imagem uma vez só: ele fica nos [tipos das
+figuras](docs/tipos-das-figuras.md), um documento de achados ([seção
+8](#8-os-documentos-e-os-arquivos-do-projeto)), e quem precisa dele o busca ali, pelo
+endereço da figura. Só a figura que a busca não acha se olha, e o tipo dela entra ali no
+mesmo momento.
 
 Um fato que só o desenho mostra, sem texto, não está na transcrição. Quando ele entra no
 material, a prova dele é a própria imagem, conferida por uma pessoa, ou uma fonte que o
@@ -681,6 +685,19 @@ Os documentos do projeto dizem o que o projeto é e como cada coisa se faz nele,
 presente, sem frase de estado como "ainda não foi feito", e não repetem outro documento:
 apontam para ele. Os passos que o projeto percorreu ficam em [Trabalhar com uma
 IA](trabalhar-com-ia.md).
+
+Um <dfn>documento de achados</dfn> guarda o que alguém achou trabalhando no projeto e que
+serve a outro trabalho, cada achado sob o <dfn>endereço</dfn> daquilo de que ele fala: o
+código pelo qual quem precisa do achado chega a ele, como o de um trecho ou de um slide das
+aulas. Quem precisa de alguma coisa, pessoa ou IA, busca antes no documento de achados
+dela, pelo endereço que já tem, e lê só o que a busca devolve, nunca o documento inteiro:
+o que está lá vale e não se procura de novo. Quando a busca não devolve nada, quem precisa
+investiga, e o que acha, se serve a outro trabalho, entra no documento no mesmo momento,
+sob o endereço. Cada documento de achados diz como se busca nele e como se escreve cada
+achado, de um jeito só, para que dois que escrevem o mesmo achado escrevam a mesma coisa;
+o que entra nele não se reescreve. Um tipo de achado que ainda não tem documento ganha um
+na primeira vez em que aparece. Os documentos de achados são o [dicionário das
+dúvidas](docs/dicionario-das-duvidas.md) e os [tipos das figuras](docs/tipos-das-figuras.md).
 
 Todo documento do projeto que define um termo marca o termo no lugar da definição com
 `<dfn>termo</dfn>`, a <dfn>marca de definição</dfn> do HTML, que quer dizer "aqui este

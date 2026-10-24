@@ -40,19 +40,21 @@ inteiro, cada um com o que ele é.
 14. [Dicionário das dúvidas](docs/dicionario-das-duvidas.md) — as dúvidas que as fontes
     deixam, abertas ou já respondidas, cada uma sob os códigos do que ela toca e com as
     respostas que teve.
+15. [Tipos das figuras](docs/tipos-das-figuras.md) — o tipo de cada figura já olhada, sob
+    o endereço dela: se o texto de dentro dela é fonte de conteúdo.
 
 ## O material
 
-15. [Propostas](docs/material-gerado/propostas/README.md) — o primeiro texto de cada tipo
+16. [Propostas](docs/material-gerado/propostas/README.md) — o primeiro texto de cada tipo
     de documento do material, para aprovar a forma do tipo, e o que olhar em cada um.
-16. [Testes de suscetibilidade antimicrobiana](docs/material-gerado/propostas/teoria-tema-testes-de-sensibilidade.md)
+17. [Testes de suscetibilidade antimicrobiana](docs/material-gerado/propostas/teoria-tema-testes-de-sensibilidade.md)
     — o primeiro tema da teoria fundamental, da aula 9-10.
-17. [Provas de identificação](docs/material-gerado/propostas/familia-provas.md) — a
+18. [Provas de identificação](docs/material-gerado/propostas/familia-provas.md) — a
     primeira ficha de família, da aula 9-10.
-18. [Trechos escritos por IA](docs/material-gerado/trechos-de-ia.md) — os apostos que uma
+19. [Trechos escritos por IA](docs/material-gerado/trechos-de-ia.md) — os apostos que uma
     IA escreveu nos textos, sem fonte, cada um com o documento e o link para a linha, para
     quem revisar o material procurar a fonte; a lista se refaz das marcas nos textos.
-19. [Divergências entre as fontes](docs/material-gerado/divergencias.md) — os fatos que uma
+20. [Divergências entre as fontes](docs/material-gerado/divergencias.md) — os fatos que uma
     aula e o livro dizem de formas diferentes, com a forma que o material ensina, a outra,
     o lugar exato de cada uma e as partes do material que tratam de cada fato; o documento
     se refaz do arquivo das divergências e dos códigos nos textos e nos cartões.
